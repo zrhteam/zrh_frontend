@@ -50,7 +50,8 @@ export default {
       params.append('project_name', this.form.project_name);
       console.log(params)
       dataService.getProjectName( params,function (records) {
-        alert(records.msg)
+        console.log(records)
+        // alert(records.msg)
       })
     },
     onSubmitByArea() {
