@@ -82,7 +82,7 @@ export default {
             margin: 100px auto;
         }
 
-        text {
-            fill: #fff;
-        }
+        /*text {*/
+        /*    fill: #fff;*/
+        /*}*/
 </style>

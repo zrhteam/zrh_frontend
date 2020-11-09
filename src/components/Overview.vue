@@ -34,17 +34,23 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted: function () {
     this.initDate();
     let _this = this
-    dataService.getLocation(function (records){
-        _this.dataset = records
-        console.log(_this.data)
-        for(var i = 0; i < _this.dataset.length; i++) {debugger
-          let marker = L.marker([_this.dataset[i].latitude, _this.dataset[i].longitude]).addTo(_this.map);
-          // marker.bindPopup(_this.dataset[i].city).openPopup(); // openPopup 是自动打开气泡
-        }
-      })
+    let code_set = new Set()
+    dataService.getLocation(function (records) {
+      _this.dataset = records
+      console.log(records.length)
+      for (var i = 0; i < _this.dataset.length; i++) {
+        let marker = L.marker([_this.dataset[i].lat, _this.dataset[i].lng]).addTo(_this.map);
+        // marker.bindPopup(_this.dataset[i].city).openPopup(); // openPopup 是自动打开气泡
+        code_set.add(_this.dataset[i].code)
+      }
+      console.log(code_set)
+    })
+    dataService.getPrjPie(code_set, function (records) {
+
+    })
   },
   methods: {
     initDate() {
@@ -72,9 +78,9 @@ export default {
       //   console.log(e);
       //   alert('纬度：' + e.latlng.lat + '\n经度：' + e.latlng.lng);
       // });
-      //添加marker
+      // 添加marker
       // let marker = L.marker([23.09, 114.23]).addTo(this.map)
-      // //添加marker pp
+      //添加marker pp
       // marker.bindPopup("我是popup").openPopup(); // openPopup 是自动打开气泡
       // axios.post(`http://localhost:5000/api/overview`)
       //           .then((ret) => {

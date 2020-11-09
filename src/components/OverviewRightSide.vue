@@ -103,7 +103,7 @@ export default {
     GetInitData() {
       //页面初始化得到数据时并不向后台传任何参数
       dataService.getInitData(function (records) {
-        alert(records.msg)
+        // alert(records.msg)
       })
     }
   },

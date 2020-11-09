@@ -1,0 +1,66 @@
+<template>
+  <!--  项目层级EHS数据大屏-->
+  <el-container>
+    <el-header>
+      <el-row>
+        <el-col :span="24">
+          <div id="title" class="grid-content bg-purple-dark" style="text-align: left"><span>{{prj_name}}EHS数据大屏</span></div>
+        </el-col>
+      </el-row>
+    </el-header>
+    <el-main>
+      <el-row>
+        <el-col :span="8">
+<!--          把安全指数这一部分另起一个页面
+              页面名称PrjSafetyIndex-->
+        </el-col>
+        <el-col :span="4">
+<!--          整改率另起一个页面 有一个仪表盘-->
+        </el-col>
+        <el-col :span="6">
+          <div class="grid-content bg-purple-light">
+            <div class="text item">
+              <span>历次检查累计发现隐患数量</span>
+            </div>
+            <el-table
+                :data="tableData"
+                border
+                style="width: 100%">
+              <el-table-column
+                  prop="date"
+                  label="风险等级"
+                  width="292">
+              </el-table-column>
+              <el-table-column
+                  prop="name"
+                  label="累计隐患数量">
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div class="grid-content bg-purple">
+            <div style="color: rgb(0, 0, 0); font-family: 'microsoft YaHei'; font-weight: bold; font-style: normal; max-width: 100%; line-height: 16px; font-size: 16px; height: 16px;">
+              <span>历次检查隐患数量变化</span>
+            </div>
+            <div style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 52px;">
+<!--              柱状图-->
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+<!--      <LandHeadquarter2></LandHeadquarter2>-->
+<!--      <LandHeadquarter3></LandHeadquarter3>-->
+    </el-main>
+  </el-container>
+</template>
+
+<script>
+export default {
+name: "PrjEHSDataAnalysis"
+}
+</script>
+
+<style scoped>
+@import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");
+</style>

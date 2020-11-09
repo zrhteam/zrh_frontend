@@ -30,7 +30,7 @@
             <el-row>
               <el-col :span="12">
                 <div class="grid-content bg-purple">
-                  <div>
+                  <div id="fire_pie">
                     <FireHazardIndex></FireHazardIndex>
                   </div>
                   <div class="chart-text-title">
@@ -124,6 +124,8 @@
           <div class="grid-content bg-purple-light"></div>
         </el-col>
       </el-row>
+      <LandHeadquarter2></LandHeadquarter2>
+      <LandHeadquarter3></LandHeadquarter3>
     </el-main>
   </el-container>
 </template>
@@ -131,10 +133,12 @@
 <script>
 import dataService from "@/service/dataService";
 import FireHazardIndex from "@/components/FireHazardIndex.vue";
+import LandHeadquarter3 from "@/components/LandHeadquarter3.vue";
+import LandHeadquarter2 from "@/components/LandHeadquarter2.vue";
 
 export default {
   name: "LandHeadquartersEHSDataScreen",
-  components: {FireHazardIndex},
+  components: {LandHeadquarter3, LandHeadquarter2, FireHazardIndex},
   data() {
     return {
       tableData: []
