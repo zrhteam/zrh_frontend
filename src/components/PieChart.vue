@@ -76,10 +76,10 @@ export default {
 
 <style>
         svg {
-            width: 600px;
-            height: 600px;
+            /*width: 600px;*/
+            /*height: 600px;*/
             display: block;
-            margin: 100px auto;
+            /*margin: 100px auto;*/
         }
 
         /*text {*/

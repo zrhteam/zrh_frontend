@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import 'es6-promise/auto'
+import Vuex from 'vuex'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
@@ -29,6 +31,7 @@ L.Icon.Default.mergeOptions({
 //vue.prototype.$cookies = cookies;
 Vue.use(cookies)
 Vue.use(ElementUI)
+Vue.use(Vuex)
 // new Vue({
 //     router,
 //     render: h => h(App)

@@ -9,7 +9,7 @@
       </el-row>
     </el-header>
     <el-main>
-      <el-row>
+      <el-row style="margin-bottom: 100px">
         <el-col :span="6">
           <div class="grid-content bg-purple">
             <div class="chart-image-icon"></div>

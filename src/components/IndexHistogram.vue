@@ -19,14 +19,14 @@ export default {
     getlist() {
 
       //制作画布
-      let width = 400;//画布宽度
+      let width = 500;//画布宽度
       let height = 400;//画布高度
       let svg = d3.select("#index_histogram")
           .append("svg")
           .attr("width", width)
           .attr("height", height);
       //画布周边的空白
-      let padding = {left: 30, right: 10, top: 20, bottom: 10};
+      let padding = {left: 100, right: 30, top: 20, bottom: 30};
 
       //定义一个数组
       let datas = [20, 10, 30, 60, 33, 24, 12, 5];
@@ -128,9 +128,6 @@ export default {
 </script>
 
 <style scoped>
-svg{
-  margin: 20px 20px;
-}
 text{
   color: #000000;
 }

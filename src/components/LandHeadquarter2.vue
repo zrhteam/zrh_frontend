@@ -1,9 +1,9 @@
 <template>
-  <el-row>
+  <el-row style="margin-bottom: 100px">
     <el-row>
       <el-col :span="12">
-        <div class="grid-content bg-purple">
-          <div>
+        <div class="grid-content bg-purple" >
+          <div style="margin-left: 80px">
             <span>项目综合&专业风险指数排名</span>
           </div>
           <div>
@@ -66,5 +66,7 @@ export default {
 </script>
 
 <style scoped>
-
+.grid-content{
+  text-align: left;
+}
 </style>
