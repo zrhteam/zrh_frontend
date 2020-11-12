@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import store from './store'
 import cookies from 'vue-cookies'
 import './js/leaflet/dist/leaflet.css'
 // 引入Leaflet对象 挂载到Vue上，便于全局使用，也可以单独页面中单独引用
@@ -40,6 +41,7 @@ Vue.use(Vuex)
 new Vue({
     el: '#app',
     router,
+    store,
     render: h => h(App)
     // components: {
     //     App

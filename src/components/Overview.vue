@@ -5,10 +5,13 @@
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
         <span>overview</span>
+        <h1 style="display: none">{{ getLocationData }}</h1>
       </el-header>
 
       <el-main>
-        <div id="map"></div>
+        <div id="map" bordered :dataSource="$store.state.get_locations.data">
+          <svg width="100%" height="100%"></svg>
+        </div>
       </el-main>
     </el-container>
 
@@ -21,6 +24,8 @@
 import dataService from "@/service/dataService";
 import OverviewRightSide from "@/components/OverviewRightSide.vue";
 import OverviewLeftSide from "@/components/OverviewLeftSide.vue";
+import {mapState, mapGetters} from "vuex"
+import * as d3 from "d3";
 
 export default {
   name: "Overview",
@@ -30,30 +35,16 @@ export default {
       map: "",
       dataset: [],
       form: {
-          name: '',
+        name: '',
       }
     }
   },
   mounted: function () {
-    this.initDate();
-    let _this = this
-    let code_set = new Set()
-    dataService.getLocation(function (records) {
-      _this.dataset = records
-      console.log(records.length)
-      for (var i = 0; i < _this.dataset.length; i++) {
-        let marker = L.marker([_this.dataset[i].lat, _this.dataset[i].lng]).addTo(_this.map);
-        // marker.bindPopup(_this.dataset[i].city).openPopup(); // openPopup 是自动打开气泡
-        code_set.add(_this.dataset[i].code)
-      }
-      console.log(code_set)
-    })
-    dataService.getPrjPie(code_set, function (records) {
-
-    })
+    this.loadMap();//加载地图
+    this.drawPie()
   },
   methods: {
-    initDate() {
+    loadMap() {//加载地图
       this.map = L.map("map", {
         center: [22, 107], // 地图中心
         zoom: 5, //缩放比列
@@ -94,40 +85,91 @@ export default {
       //           .catch(function (error) {
       //               console.log(error.response)
       //           })
+    },
+    drawPie() {// 之前的d3版本是"d3": "^3.4.5",
+      document.querySelector('svg').innerHTML = '';
+      // var svg = d3.select('svg');
+      var svg = d3.select(this.map.getPanes().overlayPane).append("svg").attr("class", "leaflet-zoom-hide");
+      //var color = d3.scale.category10();
+      //var color = d3.schemeCategory10;采用自己设置的颜色
+      function getColor(idx) {
+        var color = ['#CEF6F5', '#A9E2F3', '#58D3F7', '#58ACFA', '#2E9AFE', '#0080FF', '#5858FA', '#AC58FA', '#FA58F4']
+        return color[idx % color.length];
+      }
 
-      //多点过滤
-      // var marker = L.marker([31.8963, 117.293]).addTo(this.map);
-      // L.marker([39.94, 116.33]).addTo(this.map);
-      // var someFeatures = [{
-      //   "type": "Feature",
-      //   "properties": {
-      //     "show_on_map": false
-      //   },
-      //   "geometry": {
-      //     "type": "Point",
-      //     "coordinates": [39.94, 116.33]
-      //   }
-      // }, {
-      //   "type": "Feature",
-      //   "properties": {
-      //     "show_on_map": true
-      //   },
-      //   "geometry": {
-      //     "type": "Point",
-      //     "coordinates": [-104.98404, 44.74621]
-      //   }
-      // }];
-      //
-      // L.geoJSON(someFeatures, {
-      //   filter: function (feature, layer) {
-      //     return feature.properties.show_on_map;
-      //   }
-      // }).addTo(this.map);
+      //console.log(color)
 
+      // var dataset = [30, 10, 43, 55, 13];
+      const dataset = [
+        {name: "A计划", value: 20},
+        {name: 'B计划', value: 20},
+        {name: 'C计划', value: 20},
+        {name: 'D计划', value: 20},
+        {name: 'E计划', value: 20},
+        {name: 'F计划', value: 20},
+        {name: 'G计划', value: 20}
+      ];
+      var data
+      // 这样的值是不能直接绘制图形的，例如绘制饼图的一部分，需要知道一段弧度的起始位置和终止角度，这些值都不存在于数组的dataset中，因此需要用到布局
+      // 布局的作用就是：计算出适合于作图的数据
+      var pie = d3.layout.pie()
+          .sort(null)
+          .value(function (d) {
+            return d.value;
+          });
+      var piedata = pie(dataset)
+      console.log(piedata)//5个整数倍转换成了5个对象，每个对象都有：起始角度（startAngle）和终止角度（endAngle），还有原数据（属性名称为 data）。这些都是绘图需要的数据。
+      // 绘制图形
+      // 为了根据转换后的piedata绘图，还需要一样工具：生成器
+      // 弧生成器
+      var outerRadius = 150;
+      var innerRadius = 0;
+      var arc = d3.svg.arc()//弧生成器；
+          .innerRadius(innerRadius)//设置内半径
+          .outerRadius(outerRadius)//设置外半径
+      // 先添加g，再添加path
+      var arcs = svg.selectAll('g')
+          .data(piedata)
+          .enter()
+          .append('g')
+          .attr("transform", "translate(500,200)");
+      // 接下来给每个g添加path
+      arcs.append('path')
+          .attr('fill', function (d, i) {
+            //return color[i]
+            return getColor(i);
+          })
+          .attr('d', function (d) {
+            return arc(d)
+          })
+      // 添加文本
+      arcs.append("text")
+          .attr("transform", function (d) {
+            return "translate(" + arc.centroid(d) + ")";
+          })
+          .attr("text-anchor", "middle")//水平居中；
+          .text(function (d) {
+            return d.data.name;
+          });
     },
     onSubmit() {
       console.log('submit!');
     }
+  },
+  computed: {
+    //得到该地理位置的所有信息，包括地图上显示该位置并显示该位置所对应的风险等级
+    getLocationData() {
+      this.dataset = this.$store.state.get_locations.data
+      console.log(this.dataset)
+      for (var i = 0; i < this.dataset.length; i++) {
+        let marker = L.marker([this.dataset[i].latitude, this.dataset[i].longitude]).addTo(this.map);
+        // marker.bindPopup(_this.dataset[i].city).openPopup(); // openPopup 是自动打开气泡
+      }
+      // return this.$store.state.get_locations.data
+    }
+  },
+  created() {
+    this.$store.dispatch('get_locations/getLocation')
   }
 }
 </script>
