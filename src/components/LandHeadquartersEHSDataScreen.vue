@@ -31,7 +31,7 @@
               <el-col :span="12">
                 <div class="grid-content bg-purple">
                   <div id="fire_pie">
-                    <FireHazardIndex></FireHazardIndex>
+                    <!--                    <FireHazardIndex></FireHazardIndex>-->
                   </div>
                   <div class="chart-text-title">
                     <span>消防危险指数</span>
@@ -74,8 +74,8 @@
               <span>总部整改率</span>
             </div>
             <div
-                style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 52px;">
-              0%
+                style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;">
+              {{ getRectificationRate }}
             </div>
           </div>
         </el-col>
@@ -85,7 +85,7 @@
               <span>所有项目累计发现隐患数量</span>
             </div>
             <el-table
-                :data="tableData"
+                :riskLevelData="$store.state.get_headquarter.risk_level_data"
                 border
                 style="width: 100%">
               <el-table-column
@@ -124,8 +124,8 @@
           <div class="grid-content bg-purple-light"></div>
         </el-col>
       </el-row>
-      <LandHeadquarter2></LandHeadquarter2>
-      <LandHeadquarter3></LandHeadquarter3>
+            <LandHeadquarter2></LandHeadquarter2>
+            <LandHeadquarter3></LandHeadquarter3>
     </el-main>
   </el-container>
 </template>
@@ -135,27 +135,62 @@ import dataService from "@/service/dataService";
 import FireHazardIndex from "@/components/FireHazardIndex.vue";
 import LandHeadquarter3 from "@/components/LandHeadquarter3.vue";
 import LandHeadquarter2 from "@/components/LandHeadquarter2.vue";
+import * as d3 from "d3";
 
 export default {
   name: "LandHeadquartersEHSDataScreen",
   components: {LandHeadquarter3, LandHeadquarter2, FireHazardIndex},
   data() {
     return {
-      tableData: []
+      riskLevelData: []
     }
-  }//,
-  // methods: {
-  //   //提交按项目名称查询的函数
-  //   GetInitPage() {
-  //     dataService.getLandHeadquarters(function (records) {
-  //       alert(records.msg)
-  //     })
-  //   }
-  // },
-  // created() {
-  //   //页面生成时得到各项非查询显示的数据
-  //   this.GetInitPage();
-  // }
+  },
+  computed: {
+    //页面初始化时得到总部整改率
+    // getRectificationRate() {
+    //   return this.$store.state.get_headquarter.rectification;
+    // },
+    // riskLevelData() {
+    // //  风险等级对应情况
+    // //  1：低风险； 2：中风险； 3：高风险
+    //   let obj = {
+    //     risk: '风险',
+    //     num: 0
+    //   }
+    //   let data = this.$store.state.get_headquarter.risk_level_data;
+    //   let dataArray = []
+    //   for(let i in data){
+    //     if(i == 1){
+    //       obj.risk = '低风险'
+    //       obj.num = data[i]
+    //       dataArray.push(obj)
+    //     }else if(i == 2){
+    //       obj.risk = '中风险'
+    //       obj.num = data[i]
+    //       dataArray.push(obj)
+    //     }else if(i == 3){
+    //       obj.risk = '高风险'
+    //       obj.num = data[i]
+    //       dataArray.push(obj)
+    //     }
+    //   }
+    //   obj.risk = ''
+    //   obj.num = data[i]
+    //   dataArray.push(obj)
+    // }
+    // methods: {
+    //   //提交按项目名称查询的函数
+    //   GetInitPage() {
+    //     dataService.getLandHeadquarters(function (records) {
+    //       alert(records.msg)
+    //     })
+    //   }
+    // }
+  },
+  created() {
+    // this.$store.dispatch('get_headquarter/getInitRectification')
+    this.$store.dispatch('get_headquarter/getInitRiskLevelData')
+  }
 }
 </script>
 
