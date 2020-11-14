@@ -1,24 +1,27 @@
 <template>
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="项目名称">
+    <el-form ref="form" :model="form" style="margin-top: 100px">
+      <el-form-item label="根据项目名称查询">
+        <el-button icon="el-icon-search" circle @click="onSubmitByPrj"></el-button>
+      </el-form-item>
+      <el-form-item>
         <el-input v-model="form.project_name"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmitByPrj">查询</el-button>
-      </el-form-item>
     </el-form>
-    <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="区域名称">
+    <el-form ref="form" :model="form" style="margin-top: 100px">
+      <el-form-item label="根据区域名称查询">
+        <el-button icon="el-icon-search" circle @click="onSubmitByArea"></el-button>
+      </el-form-item>
+      <el-form-item>
         <el-input v-model="form.area_name"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmitByArea">查询</el-button>
-      </el-form-item>
     </el-form>
-    <el-form ref="form" :model="form">
-      <el-form-item label="置地总部EHS数据大屏">
-        <el-button icon="el-icon-search" circle></el-button>
+    <el-form ref="form" :model="form" style="margin-top: 100px">
+      <el-form-item label="根据总部名称查询">
+        <el-button icon="el-icon-search" circle @click="onSubmitByHeadquarter"></el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-input v-model="form.headquarter_name"></el-input>
       </el-form-item>
     </el-form>
   </el-aside>
@@ -54,8 +57,8 @@ export default {
     onSubmitByArea() {
       console.log('submit!');
     },
-    onSubmit() {
-      console.log('submit!');
+    onSubmitByHeadquarter() {
+      this.$router.push({path: '/land_headquarters'});
     }
   }
 }
