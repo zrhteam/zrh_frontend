@@ -33,7 +33,7 @@ function getLocation(callback){
     请求每个项目的各风险等级对应的数量
  */
 function getPrjPie(params, callback){
-  const url = `${dataServerUrl}/overview`;
+  const url = `${dataServerUrl}/overview_pie`;
   axios.post(url, params)
        .then(response => {
             callback(response.data)
@@ -553,7 +553,7 @@ function getInitProjectRegionDistribution(param, callback){
 *FunctionName: getInitProjectRiskTop
 * Purpose: 初始化页面展示出现次数排前5的隐患以及所属专业和出现频率
 * Parameter: null
-* Return: 包含在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数的json文件
+* Return: 包含route的json文件
  */
 function getInitProjectRiskTop(callback){
   const url = `${dataServerUrl}/region_project_risk_top`;
@@ -626,7 +626,7 @@ function getInitProjectRiskTop(callback){
 export default{
     getLocation,
     getPrjPie,
-    getInitData,
+    //getInitData,
     getInitIndexData,
     getInitRectification,
     getInitRiskLevelData,

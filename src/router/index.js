@@ -6,7 +6,7 @@ import SearchModule from '../components/SearchModule.vue'
 import PieChart from '../components/PieChart.vue'
 import Overview from '../components/Overview.vue'
 import LandHeadquartersEHSDataScreen from "../components/LandHeadquartersEHSDataScreen.vue";
-import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
+import RegionDepartment from "@/components/RegionDepartment.vue";
 import NotFound from '../components/NotFound.vue'
 //
 // const routerOptions = [
@@ -42,7 +42,7 @@ const routerOptions = [
     {path: '/pie_chart', component: 'PieChart'},
     {path: '/overview', component: 'Overview'},
     {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
-    {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis'},
+    {path: '/region_department', component: 'RegionDepartment'},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {
@@ -62,7 +62,7 @@ const router = new Router({
         {path: '/pie_chart', component: 'PieChart'},
         {path: '/overview', component: 'Overview'},
         {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
-        {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis'},
+        {path: '/region_department', component: 'RegionDepartment'},
         {path: '*', component: 'NotFound'}
     ]
 })

@@ -74,7 +74,7 @@
               <span>总部整改率</span>
             </div>
             <div
-                style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 52px;">
+                style="color: rgb(247,10,10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 52px;">
               0%
             </div>
           </div>
