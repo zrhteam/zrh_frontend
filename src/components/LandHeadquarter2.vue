@@ -44,22 +44,25 @@ export default {
   name: "LandHeadquarter2",
   components: {IndexHistogram, NumberHistogram},
   data() {
+    return{
+
+    }
   },
   created() {
     // this.getlinear();
   },
   methods: {
-      test(d, i) {
-        this.$alert(d, i, {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
-          }
-        });
-      }
+    //   test(d, i) {
+    //     this.$alert(d, i, {
+    //       confirmButtonText: '确定',
+    //       callback: action => {
+    //         this.$message({
+    //           type: 'info',
+    //           message: `action: ${ action }`
+    //         });
+    //       }
+    //     });
+    //   }
     }
 
 }

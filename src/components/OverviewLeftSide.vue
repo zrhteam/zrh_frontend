@@ -45,17 +45,18 @@ export default {
     //提交按项目名称查询的函数
     onSubmitByPrj() {
       console.log('submit!');
-      let params = new URLSearchParams();
-      alert(this.form.project_name)
-      params.append('project_name', this.form.project_name);
-      console.log(params)
-      dataService.getProjectName( params,function (records) {
-        console.log(records)
-        // alert(records.msg)
-      })
+      this.$router.push({path: '/prj_data_analysis'});
+      // let params = new URLSearchParams();
+      // alert(this.form.project_name)
+      // params.append('project_name', this.form.project_name);
+      // console.log(params)
+      // dataService.getProjectName( params,function (records) {
+      //   console.log(records)
+      //   // alert(records.msg)
+      // })
     },
     onSubmitByArea() {
-      console.log('submit!');
+      this.$router.push({path: '/region_department'});
     },
     onSubmitByHeadquarter() {
       this.$router.push({path: '/land_headquarters'});

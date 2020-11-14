@@ -26,7 +26,7 @@ export default {
           .attr("width", width)
           .attr("height", height);
       //画布周边的空白
-      let padding = {left: 100, right: 30, top: 20, bottom: 30};
+      let padding = {left: 110, right: 30, top: 20, bottom: 30};
 
       //定义一个数组
       let datas = [20, 10, 30, 60, 33, 24, 12, 5];

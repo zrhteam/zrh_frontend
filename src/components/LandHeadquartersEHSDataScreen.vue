@@ -75,7 +75,7 @@
             </div>
             <div
                 style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;">
-              {{ getRectificationRate }}
+              <!--              {{ getRectificationRate }}-->
             </div>
           </div>
         </el-col>
@@ -124,8 +124,8 @@
           <div class="grid-content bg-purple-light"></div>
         </el-col>
       </el-row>
-            <LandHeadquarter2></LandHeadquarter2>
-            <LandHeadquarter3></LandHeadquarter3>
+      <LandHeadquarter2></LandHeadquarter2>
+      <LandHeadquarter3></LandHeadquarter3>
     </el-main>
   </el-container>
 </template>
@@ -189,7 +189,11 @@ export default {
   },
   created() {
     // this.$store.dispatch('get_headquarter/getInitRectification')
-    this.$store.dispatch('get_headquarter/getInitRiskLevelData')
+    // this.$store.dispatch('get_headquarter/getInitRiskLevelData')
+    if (location.href.indexOf("#reloaded") == -1) {
+      location.href = location.href + "#reloaded";
+      location.reload();
+    }
   }
 }
 </script>

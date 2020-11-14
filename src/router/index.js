@@ -7,6 +7,7 @@ import PieChart from '../components/PieChart.vue'
 import Overview from '../components/Overview.vue'
 import LandHeadquartersEHSDataScreen from "../components/LandHeadquartersEHSDataScreen.vue";
 import RegionDepartment from "@/components/RegionDepartment.vue";
+import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
 import NotFound from '../components/NotFound.vue'
 //
 // const routerOptions = [
@@ -33,7 +34,7 @@ import NotFound from '../components/NotFound.vue'
 //   routes
 // })
 const routerOptions = [
-    {path: '/', component: 'HelloWorld'},
+    {path: '/', component: 'Overview'},
     {path: '/home', component: 'Home'},
     {path: '/search_module', component: 'SearchModule', meta:{requireAuth:true }},
     {path: '/login', component: 'Login'},
@@ -43,6 +44,7 @@ const routerOptions = [
     {path: '/overview', component: 'Overview'},
     {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
     {path: '/region_department', component: 'RegionDepartment'},
+    {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis'},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {
@@ -53,7 +55,7 @@ const routes = routerOptions.map(route => {
 })
 const router = new Router({
     rous: [
-        {path: '/', component: 'HelloWorld'},
+        {path: '/', component: 'Overview'},
         {path: '/home', component: 'Home'},
         {path: '/search_module', component: 'SearchModule', meta:{requireAuth:true }},//true为这个页面需要登录权限
         {path: '/login', component: 'Login'},
@@ -63,6 +65,7 @@ const router = new Router({
         {path: '/overview', component: 'Overview'},
         {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
         {path: '/region_department', component: 'RegionDepartment'},
+        {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis'},
         {path: '*', component: 'NotFound'}
     ]
 })
