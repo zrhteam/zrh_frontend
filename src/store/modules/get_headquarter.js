@@ -3,46 +3,86 @@ import dataService from '@/service/dataService'
 
 //initial state
 const state = {
-    //总部页面初始化时得到一个总部整改率
+    //向后端发送的参数
+    params: {},
+    //总部整改率
     rectification: null,
     //隐患高中低风险及其对应的累计隐患数量
     risk_level_data: {},
+    //得到所有项目中出现隐患数量排名前10的隐患
+    hidden_danger: {},
+
+
+
+
     data: []
 }
 
 //getters
 const getters = {
-    //承载变化的data
+    //向后端发送的参数
+    renderParams(params) {
+        return state.params;
+    },
+    //承载变化的总部整改率
     renderRectification(state) {
         return state.rectification;
+    },
+    //承载变化的隐患高中低风险及其对应的累计隐患数量
+    renderRiskLevelData(state) {
+        return state.risk_level_data;
+    },
+    //承载变化的所有项目中出现隐患数量排名前10的隐患
+    renderNumberTop(state) {
+        return state.hidden_danger;
     }
+
 }
 
 //actions
 const actions = {
-    //得到该地理位置的所有信息，包括地图上显示该位置并显示该位置所对应的风险等级
+    //得到总部整改率
     getInitRectification(context) {
-        // dataService.getInitRectification(function (response) {
-        //     context.commit('changeRectification', response)
-        // })
+        dataService.getInitRectification(state.params, function (response) {
+            context.commit('changeRectification', response)
+        })
     },
+
+    //得到隐患风险等级高、中、低风险及其对应的累计隐患数量
     getInitRiskLevelData(context) {
-        dataService.getInitRiskLevelData(function (response) {
+        dataService.getInitRiskLevelData(state.params, function (response) {
             console.log(response)
-            context.commit('', response)
+            context.commit('changeRiskLevelData', response)
+        })
+    },
+
+    //得到所有项目中出现隐患数量排名前10的隐患
+    getInitNumberTop(context) {
+        dataService.getInitNumberTop(function (response) {
+            context.commit('changeNumberTop', response)
         })
     }
+
+
 }
 
 //mutations
 const mutations = {
-    //考虑data如何变化
+    //考虑总部整改率变化
     changeRectification(state, data) {
         state.rectification = data.rectification_rate
     },
+
+    // 考虑累计隐患数量变化
     changeRiskLevelData(state, data) {
-        state.rectification = data.rectification_rate
+        state.risk_level_data = data
+    },
+
+    //考虑所有项目中出现隐患数量排名前10的隐患变化
+    changeNumberTop(state, data) {
+        state.hidden_danger = data
     }
+
 }
 
 export default {

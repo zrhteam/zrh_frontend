@@ -33,6 +33,7 @@ export default {
     methods: {
         getInfo () {
             let params = new URLSearchParams();
+            debugger
             params.append('component_name', this.component_name);
             axios.post(`http://localhost:5000/api/search_module`, params)
                 .then((ret) => {

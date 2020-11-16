@@ -75,26 +75,29 @@
             </div>
             <div
                 style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;">
-              <!--              {{ getRectificationRate }}-->
+              {{ getRectificationRate }}
             </div>
           </div>
         </el-col>
         <el-col :span="6">
+          <div style="display: none">
+            {{ getRiskLevelData }}
+          </div>
           <div class="grid-content bg-purple-light">
             <div class="text item">
               <span>所有项目累计发现隐患数量</span>
             </div>
             <el-table
-                :riskLevelData="$store.state.get_headquarter.risk_level_data"
+                :data="riskLevelData"
                 border
                 style="width: 100%">
               <el-table-column
-                  prop="date"
+                  prop="risk"
                   label="隐患风险等级"
                   width="292">
               </el-table-column>
               <el-table-column
-                  prop="name"
+                  prop="num"
                   label="累计发现隐患数量">
               </el-table-column>
             </el-table>
@@ -147,53 +150,61 @@ export default {
   },
   computed: {
     //页面初始化时得到总部整改率
-    // getRectificationRate() {
-    //   return this.$store.state.get_headquarter.rectification;
-    // },
-    // riskLevelData() {
-    // //  风险等级对应情况
-    // //  1：低风险； 2：中风险； 3：高风险
-    //   let obj = {
-    //     risk: '风险',
-    //     num: 0
-    //   }
-    //   let data = this.$store.state.get_headquarter.risk_level_data;
-    //   let dataArray = []
-    //   for(let i in data){
-    //     if(i == 1){
-    //       obj.risk = '低风险'
-    //       obj.num = data[i]
-    //       dataArray.push(obj)
-    //     }else if(i == 2){
-    //       obj.risk = '中风险'
-    //       obj.num = data[i]
-    //       dataArray.push(obj)
-    //     }else if(i == 3){
-    //       obj.risk = '高风险'
-    //       obj.num = data[i]
-    //       dataArray.push(obj)
-    //     }
-    //   }
-    //   obj.risk = ''
-    //   obj.num = data[i]
-    //   dataArray.push(obj)
-    // }
-    // methods: {
-    //   //提交按项目名称查询的函数
-    //   GetInitPage() {
-    //     dataService.getLandHeadquarters(function (records) {
-    //       alert(records.msg)
-    //     })
-    //   }
+    getRectificationRate() {
+      return this.$store.state.get_headquarter.rectification;
+    },
+    //得到累计隐患数量
+    getRiskLevelData() {
+      let data = this.$store.state.get_headquarter.risk_level_data.risk_level;
+      console.log(this.$store.state.get_headquarter.risk_level_data.risk_level)
+      console.log(data)
+      //  风险等级对应情况
+      //  1：低风险； 2：中风险； 3：高风险
+      let dataArray = []
+      for (let i in data) {
+        let obj = {
+          risk: '风险',
+          num: 0
+        }
+        if (i == 1) {
+          obj.risk = '低风险'
+          obj.num = data[i]
+        }
+        if (i == 2) {
+          obj.risk = '中风险'
+          obj.num = data[i]
+        }
+        if (i == 3) {
+          obj.risk = '高风险'
+          obj.num = data[i]
+        }
+        dataArray.push(obj)
+        console.log(dataArray)
+      }
+      let obj = {
+        risk: '风险',
+        num: 0
+      }
+      obj.risk = '列总计'
+      obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
+      dataArray.push(obj)
+      // debugger
+      console.log(dataArray)
+      this.riskLevelData = dataArray
+    }
+  },
+  methods: {
+    //提交按项目名称查询的函数
+    // GetInitPage() {
+    //   dataService.getRectificationRate(function (records) {
+    //     alert(records.msg)
+    //   })
     // }
   },
   created() {
-    // this.$store.dispatch('get_headquarter/getInitRectification')
-    // this.$store.dispatch('get_headquarter/getInitRiskLevelData')
-    if (location.href.indexOf("#reloaded") == -1) {
-      location.href = location.href + "#reloaded";
-      location.reload();
-    }
+    this.$store.dispatch('get_headquarter/getInitRectification')
+    this.$store.dispatch('get_headquarter/getInitRiskLevelData')
+    this.$store.dispatch('get_headquarter/getInitNumberTop')
   }
 }
 </script>
