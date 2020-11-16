@@ -13,7 +13,7 @@
         <el-button icon="el-icon-search" circle @click="onSubmitByArea"></el-button>
       </el-form-item>
       <el-form-item>
-        <el-input v-model="form.area_name"></el-input>
+        <el-input v-model="form.ctr_name"></el-input>
       </el-form-item>
     </el-form>
     <el-form ref="form" :model="form" style="margin-top: 100px">
@@ -36,7 +36,7 @@ export default {
     return {
       form: {
         cust_name: '',
-        area_name: '',
+        ctr_name: '',
         project_name: '',
       }
     }
@@ -55,16 +55,12 @@ export default {
     },
     //提交按项目名称查询的函数
     onSubmitByPrj() {
-      console.log('submit!');
+      alert(this.form.cust_name)
+      let params = new URLSearchParams();
+      // params.append('cust_name', this.form.cust_name)
+      // params.append('ctr_name', this.form.ctr_name)
+      params.append('project_name', this.form.project_name)
       this.$router.push({path: '/prj_data_analysis'});
-      // let params = new URLSearchParams();
-      // alert(this.form.project_name)
-      // params.append('project_name', this.form.project_name);
-      // console.log(params)
-      // dataService.getProjectName( params,function (records) {
-      //   console.log(records)
-      //   // alert(records.msg)
-      // })
     }
 
   },

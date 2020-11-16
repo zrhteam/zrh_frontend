@@ -105,7 +105,8 @@ import PrjCurrentCorrectionRate from "@/components/PrjCurrentCorrectionRate.vue"
 
 export default {
   name: "PrjEHSDataAnalysis",
-  components: {PrjCurrentCorrectionRate, PrjEHSDataAnalysis3, PrjEHSDataAnalysis2}
+  components: {PrjCurrentCorrectionRate, PrjEHSDataAnalysis3, PrjEHSDataAnalysis2},
+
 }
 </script>
 

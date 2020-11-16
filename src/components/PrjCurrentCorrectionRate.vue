@@ -14,10 +14,19 @@
 
 <script>
 export default {
-  name: "PrjCurrentCorrectionRate"
+  name: "PrjCurrentCorrectionRate",
+  data() {
+    return {
+
+    }
+  },
+  computed: {
+    current_correction_rate (){
+      return
+    }
+  }
 }
 </script>
 
 <style scoped>
-
 </style>

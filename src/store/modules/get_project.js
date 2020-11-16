@@ -5,14 +5,8 @@ import dataService from '@/service/dataService'
 const state = {
     //向后端发送的参数
     params: {},
-    //总部整改率
-    rectification: null,
-    //隐患高中低风险及其对应的累计隐患数量
-    risk_level_data: {},
-    //未整改高风险图片
-    images: {},
-    //得到所有项目中出现隐患数量排名前10的隐患
-    hidden_danger: {},
+    //基于项目级展示当前整改率
+
 
 
 
