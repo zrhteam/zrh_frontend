@@ -24,7 +24,7 @@ export default {
         .attr("width", width)
         .attr("height", height);
       //画布周边的空白
-      let padding = {left: 30, right: 10, top: 20, bottom: 30};
+      let padding = {left: 80, right: 10, top: 20, bottom: 30};
 
       //封装柱形图数据
       let datas = [1,2,3,4,5,6,7,8,9];

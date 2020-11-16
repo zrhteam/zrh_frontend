@@ -32,6 +32,7 @@ function getLocation(callback){
     发送所有项目code
     请求每个项目的各风险等级对应的数量
  */
+/*
 function getPrjPie(params, callback){
   const url = `${dataServerUrl}/overview_pie`;
   axios.post(url, params)
@@ -42,31 +43,34 @@ function getPrjPie(params, callback){
             console.log(error)
        })
 }
+*/
 
 
-//overview页面右侧初始化数据加载
-function getInitData(callback){
-  const url = `${dataServerUrl}/overview_right_init`;
-  axios.post(url)
-       .then(response => {
-            callback(response.data)
-       })
-       .catch(error=> {
-            console.log(error)
-       })
-}
+// //overview页面右侧初始化数据加载
+//
+// function getInitData(callback){
+//   const url = `${dataServerUrl}/overview_right_init`;
+//   axios.post(url)
+//        .then(response => {
+//             callback(response.data)
+//        })
+//        .catch(error=> {
+//             console.log(error)
+//        })
+// }
+
 
 //置地总部EHS数据大屏页面
 /*
 *FunctionName: getInitIndexData
 * Purpose: 初始化页面显示不同专业（消防、电梯、电气、燃气）的危险指数
-* Parameter: null
+* Parameter: cust_name
 * Return: 包含消防、电梯、电气、燃气危险指数的json文件
  */
 //初始化页面需要数据：消防危险指数、电梯危险指数、电气危险指数、燃气危险指数
-function getInitIndexData(callback){
+function getInitIndexData(param,callback){
   const url = `${dataServerUrl}/land_ehs_screen_top_left`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -79,12 +83,12 @@ function getInitIndexData(callback){
 /*
 *FunctionName: getInitRectification
 * Purpose: 初始化页面显示总部整改率
-* Parameter: null
+* Parameter: cust_name
 * Return: 包含总部整改率数据的json文件
  */
-function getInitRectification(callback){
+function getInitRectification(param, callback){
   const url = `${dataServerUrl}/land_ehs_screen_rectification`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -97,12 +101,12 @@ function getInitRectification(callback){
 /*
 *FunctionName: getInitRiskLevelData
 * Purpose: 初始化页面显示隐患风险等级高、中、低风险及其对应的累计隐患数量
-* Parameter: null
+* Parameter: cust_name
 * Return: 风险等级及对应的累计隐患数量的json文件
  */
-function getInitRiskLevelData(callback){
+function getInitRiskLevelData(param, callback){
   const url = `${dataServerUrl}/land_ehs_screen_top_right`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
           })
@@ -117,12 +121,12 @@ function getInitRiskLevelData(callback){
 /*
 *FunctionName: getInitRiskIndexData
 * Purpose: 初始化页面显示根据项目综合&专业风险指数排序的结果
-* Parameter: null
+* Parameter: cust_name
 * Return: 根据项目综合&专业风险指数排序后的项目名称的json文件
  */
-function getInitRiskIndexData(callback){
+function getInitRiskIndexData(param, callback){
     const url = `${dataServerUrl}/land_ehs_screen_index_rank`;
-    axios.post(url)
+    axios.post(url, param)
         .then(response => {
             callback(response.data)
             }
@@ -136,12 +140,12 @@ function getInitRiskIndexData(callback){
 /*
 *FunctionName: getInitRiskNumberRank
 * Purpose: 初始化页面得到按照高风险数量排名的项目名称
-* Parameter: null
+* Parameter: cust_name
 * Return: 对高风险数量排序后的项目名称json文件
  */
-function getInitRiskNumberRank(callback){
+function getInitRiskNumberRank(param, callback){
     const url = `${dataServerUrl}/land_ehs_screen_risk_number`;
-    axios.post(url)
+    axios.post(url, param)
         .then(response => {
               callback(response.data)
             }
@@ -155,12 +159,12 @@ function getInitRiskNumberRank(callback){
 /*
 *FunctionName: getInitImage
 * Purpose: 初始化时得到所有项目未整改高风险隐患图片
-* Parameter: null
+* Parameter: cust_name
 * Return: 返回包含未整改高风险图片的json文件
  */
-function getInitImage(callback){
+function getInitImage(param, callback){
     const url = `${dataServerUrl}/land_ehs_screen_image`;
-    axios.post(url)
+    axios.post(url, param)
         .then(response => {
             callback(response.data)
         })
@@ -173,12 +177,12 @@ function getInitImage(callback){
 /*
 *FunctionName: getInitNumberTop
 * Purpose: 初始化页面得到所有项目中出现隐患数量排名前10的隐患
-* Parameter: null
+* Parameter: cust_name
 * Return: 包含在置地总部所有项目中隐患数量排名前10的隐患描述的json文件
  */
-function getInitNumberTop(callback){
+function getInitNumberTop(param, callback){
     const url = `${dataServerUrl}/data_ehs_screen_top10`;
-    axios.post(url)
+    axios.post(url, param)
         .then(response => {
             callback(response.data)
         })
@@ -192,12 +196,12 @@ function getInitNumberTop(callback){
 /*
 *FunctionName: getRegionInitIndex
 * Purpose: 初始化页面显示总的安全指数以及不同专业的安全指数
-* Parameter: null
+* Parameter: ctr_name
 * Return: 包含总体安全指数、消防指数、电梯指数、燃气指数、电气指数的json文件
  */
-function getRegionInitIndex(callback){
+function getRegionInitIndex(param, callback){
     const url = `${dataServerUrl}/region_index`;
-    axios.post(url)
+    axios.post(url, param)
         .then(response => {
             callback(response.data)
         })
@@ -210,12 +214,12 @@ function getRegionInitIndex(callback){
 /*
 *FunctionName: getInitRegionProjectNumber
 * Purpose: 初始化页面展示目前已检查的项目数量
-* Parameter: null
+* Parameter: ctr_name
 * Return: 包含当前已检查项目数量的json文件
  */
-function getInitRegionProjectNumber(callback){
+function getInitRegionProjectNumber(param, callback){
   const url = `${dataServerUrl}/region_project_number`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -229,12 +233,12 @@ function getInitRegionProjectNumber(callback){
 /*
 *FunctionName: getInitRegionRiskLevel
 * Purpose: 初始化页面展示不同风险等级及其对应的累计发现隐患数量
-* Parameter: null
+* Parameter: ctr_name
 * Return: 包含高、中、低风险对应的累计发现隐患数量的json文件
  */
-function getInitRegionRiskLevel(callback){
+function getInitRegionRiskLevel(param, callback){
   const url = `${dataServerUrl}/region_project_risk_level`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -247,12 +251,12 @@ function getInitRegionRiskLevel(callback){
 /*
 *FunctionName: getInitRegionHighRisk
 * Purpose: 初始化页面展示当前未整改高风险隐患描述列表
-* Parameter:null
+* Parameter:ctr_name
 * Return: 包含当前未整改的高风险隐患描述的json文件
  */
-function getInitRegionHighRisk(callback){
+function getInitRegionHighRisk(param, callback){
   const url = `${dataServerUrl}/region_project_high_risk`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -265,12 +269,12 @@ function getInitRegionHighRisk(callback){
 /*
 *FunctionName: getInitRegionImage
 * Purpose: 初始化页面展示当前未整改高风险隐患图片
-* Parameter: null
+* Parameter: ctr_name
 * Return: 包含未整改高风险隐患图片的json文件
  */
-function getInitRegionImage(callback){
+function getInitRegionImage(param, callback){
   const url = `${dataServerUrl}/region_project_Image`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -283,7 +287,7 @@ function getInitRegionImage(callback){
 /*
 *FunctionName: getInitRegionMajor
 * Purpose: 初始化页面展示各个项目发现的不同风险等级隐患在不同专业上的分布
-* Parameter: risk_level(高中低）
+* Parameter: ctr_name
 * Return: 包含按照项目+专业+风险等级聚类结果的json文件
  */
 function getInitRegionMajor(param, callback){
@@ -301,12 +305,12 @@ function getInitRegionMajor(param, callback){
 /*
 *FunctionName: getInitRegionNumberTop
 * Purpose: 初始化页面展示在所有项目中数量排名前10的隐患
-* Parameter: null
+* Parameter: ctr_name
 * Return: 包含隐患数量在当前所有项目中排名前10的隐患描述的json文件
  */
-function getInitRegionNumberTop(callback){
+function getInitRegionNumberTop(param, callback){
   const url = `${dataServerUrl}/region_project_number_top`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -319,12 +323,12 @@ function getInitRegionNumberTop(callback){
 /*
 *FunctionName: getInitRegionSafetyIndex
 * Purpose: 初始化页面展示按照项目安全指数排名的情况
-* Parameter: null
+* Parameter: ctr_name
 * Return: 包含按照项目安全指数排序后的项目名称
  */
-function getInitRegionSafetyIndex(callback){
+function getInitRegionSafetyIndex(param, callback){
   const url = `${dataServerUrl}/region_project_safety_index`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -337,12 +341,12 @@ function getInitRegionSafetyIndex(callback){
 /*
 *FunctionName: getInitRegionRiskRank
 * Purpose: 初始化页面展示按照累计出现高风险数量排名的项目名称
-* Parameter: null
+* Parameter: ctr_name
 * Return: 包含按照累计出现高风险数量排序后的项目名称
  */
-function getInitRegionRiskRank(callback){
+function getInitRegionRiskRank(param, callback){
   const url = `${dataServerUrl}/region_project_risk_rank`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -356,12 +360,12 @@ function getInitRegionRiskRank(callback){
 /*
 *FunctionName: getInitProjectIndex
 * Purpose: 初始化页面展示项目危险指数和不同专业的指数
-* Parameter: null
+* Parameter: project_name
 * Return: 包含项目危险指数、消防指数、电梯指数、燃气指数、电气指数的json文件
  */
-function getInitProjectIndex(callback){
+function getInitProjectIndex(param, callback){
   const url = `${dataServerUrl}/region_project_index`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -375,12 +379,12 @@ function getInitProjectIndex(callback){
 /*
 *FunctionName: getInitProjectRectification
 * Purpose: 初始化页面展示当前整改率
-* Parameter: null
+* Parameter: project_name
 * Return: 包含当前项目整改率的json文件
  */
-function getInitProjectRectification(callback){
+function getInitProjectRectification(param, callback){
   const url = `${dataServerUrl}/region_project_rectification`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -393,12 +397,12 @@ function getInitProjectRectification(callback){
 /*
 *FunctionName: getInitProjectRiskNumber
 * Purpose: 初始化页面展示历次发现的不同风险等级的隐患数量
-* Parameter: null
+* Parameter: project_name
 * Return: 包含不同风险等级及其对应的历次发现的隐患数量的json文件
  */
-function getInitProjectRiskNumber(callback){
+function getInitProjectRiskNumber(param, callback){
   const url = `${dataServerUrl}/region_project_risk_number`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -411,12 +415,12 @@ function getInitProjectRiskNumber(callback){
 /*
 *FunctionName: getInitProjectNumberChange
 * Purpose: 初始化页面展示历次检查隐患数量变化的情况
-* Parameter: null
+* Parameter: project_name
 * Return: 包含历次检查的隐患数量的json文件
  */
-function getInitProjectNumberChange(callback){
+function getInitProjectNumberChange(param, callback){
   const url = `${dataServerUrl}/region_project_number_change`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -429,12 +433,12 @@ function getInitProjectNumberChange(callback){
 /*
 *FunctionName: getInitProjectNearestPerception
 * Purpose: 初始化页面饼图展示最近一次检查不同专业隐患占比情况
-* Parameter: null
+* Parameter: project_name
 * Return: 包含消防、电梯、电气、燃气4个专业在最近一次检查中发现隐患数量的json文件
  */
-function getInitProjectNearestPerception(callback){
+function getInitProjectNearestPerception(param, callback){
   const url = `${dataServerUrl}/region_project_Nearest`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -447,12 +451,12 @@ function getInitProjectNearestPerception(callback){
 /*
 *FunctionName: getInitProjectHistoryPerception
 * Purpose: 初始化页面饼图展示历次检查中不同专业隐患占比情况
-* Parameter: null
+* Parameter: project_name
 * Return: 包含消防、电梯、电气、燃气4个专业在历次检查中发现的隐患数量的json文件
  */
-function getInitProjectHistoryPerception(callback){
+function getInitProjectHistoryPerception(param, callback){
   const url = `${dataServerUrl}/region_project_perception`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -465,12 +469,12 @@ function getInitProjectHistoryPerception(callback){
 /*
 *FunctionName: getInitProjectRisk
 * Purpose: 初始化页面展示当前未整改的高风险隐患列表
-* Parameter: null
+* Parameter: project_name
 * Return: 包含当前未整改的高风险隐患描述的json文件
  */
-function getInitProjectRisk(callback){
+function getInitProjectRisk(param, callback){
   const url = `${dataServerUrl}/region_project_risk`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -483,12 +487,12 @@ function getInitProjectRisk(callback){
 /*
 *FunctionName: getInitProjectImage
 * Purpose: 初始化页面展示当前未整改高风险隐患图片
-* Parameter: null
+* Parameter: project_name
 * Return: 包含当前未整改高风险隐患图片的json文件
  */
-function getInitProjectImage(callback){
+function getInitProjectImage(param, callback){
   const url = `${dataServerUrl}/region_project_image`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })
@@ -501,7 +505,7 @@ function getInitProjectImage(callback){
 /*
 *FunctionName: getInitProjectSystem
 * Purpose: 初始化页面展示不同专业所有隐患子系统占比情况
-* Parameter: major（专业：消防、电梯、电气、燃气，all）
+* Parameter: project_name
 * Return: 包含在不同专业情况下属于不同隐患子系统的隐患数量的json文件
  */
 function getInitProjectSystem(param, callback){
@@ -518,7 +522,7 @@ function getInitProjectSystem(param, callback){
 /*
 *FunctionName: getInitProjectReason
 * Purpose: 初始化页面展示所有隐患在不同专业情况下不同致因阶段的数量
-* Parameter: major（专业：消防、电梯、电气、燃气，all）
+* Parameter: project_name
 * Return: 包含在不同专业情况下的隐患在不同致因（运营、施工等）阶段的数量的json文件
  */
 function getInitProjectReason(param, callback){
@@ -535,7 +539,7 @@ function getInitProjectReason(param, callback){
 /*
 *FunctionName: getInitProjectRegionDistribution
 * Purpose: 初始化页面展示在不同专业情况下隐患区域分布情况
-* Parameter: major（专业：消防、电梯、电气、燃气，all)
+* Parameter: project_name
 * Return: 包含在不同专业情况下不同区域的隐患数量的json文件
  */
 function getInitProjectRegionDistribution(param, callback){
@@ -552,12 +556,12 @@ function getInitProjectRegionDistribution(param, callback){
 /*
 *FunctionName: getInitProjectRiskTop
 * Purpose: 初始化页面展示出现次数排前5的隐患以及所属专业和出现频率
-* Parameter: null
+* Parameter: project_name
 * Return: 包含route的json文件
  */
-function getInitProjectRiskTop(callback){
+function getInitProjectRiskTop(param, callback){
   const url = `${dataServerUrl}/region_project_risk_top`;
-  axios.post(url)
+  axios.post(url, param)
       .then(response => {
           callback(response.data)
       })

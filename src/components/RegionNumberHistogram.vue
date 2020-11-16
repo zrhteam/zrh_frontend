@@ -18,13 +18,13 @@ export default {
     getlist(){
       //制作画布
       let width = 400;
-      let height = 400;
+      let height = 300;
       let svg = d3.select("#region_number_histogram")
           .append("svg")
           .attr("width", width)
-          .attr("heigth", height);
+          .attr("height", height);
       //画布周边的空白
-      let padding = {left: 30, right: 10, top: 20, bottom: 10};
+      let padding = {left: 80, right: 10, top: 20, bottom: 30};
 
       //柱形图数据
       //这里先写死数据
