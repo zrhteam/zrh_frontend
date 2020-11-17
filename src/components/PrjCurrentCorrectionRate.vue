@@ -17,13 +17,15 @@ export default {
   name: "PrjCurrentCorrectionRate",
   data() {
     return {
-
     }
   },
   computed: {
     current_correction_rate (){
-      return
+      return this.$store.state.get_project.prj_rectification;
     }
+  },
+  created() {
+    this.$store.dispatch('get_project/getInitProjectRectification')
   }
 }
 </script>

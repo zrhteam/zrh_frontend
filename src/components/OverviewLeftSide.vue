@@ -44,7 +44,6 @@ export default {
   methods: {
     //提交按置地查询的函数
     onSubmitByHeadquarter() {
-      alert(this.form.cust_name)
       let params = new URLSearchParams();
       params.append('cust_name', this.form.cust_name)
       this.$store.state.get_headquarter.params = params
@@ -60,11 +59,12 @@ export default {
     },
     //提交按项目名称查询的函数
     onSubmitByPrj() {
-      alert(this.form.cust_name)
+      alert(this.form.project_name)
       let params = new URLSearchParams();
       // params.append('cust_name', this.form.cust_name)
       // params.append('ctr_name', this.form.ctr_name)
       params.append('project_name', this.form.project_name)
+      this.$store.state.get_project.params = params
       this.$router.push({path: '/prj_data_analysis'});
     }
 

@@ -14,7 +14,7 @@
       </el-main>
     </el-container>
 
-<!--    <OverviewRightSide></OverviewRightSide>-->
+    <!--    <OverviewRightSide></OverviewRightSide>-->
   </el-container>
 </template>
 
@@ -37,13 +37,26 @@ export default {
       dataset: {},
       form: {
         name: '',
-      }
+      },
+      map_width: 0,
+      map_height: 0,
+      timer: ''
     }
   },
   mounted: function () {
     this.loadMap();//加载地图
+    this.drawSvg();
+    let m = document.getElementById("map")
+    this.map_width = window.getComputedStyle(m).width
+    this.map_height = window.getComputedStyle(m).height
+    debugger
+    // this.timer = setInterval(this.drawPie, 1000);
+
     // this.drawPie()
   },
+  // beforeDestroy() {
+  //   clearInterval(this.timer);
+  // },
   methods: {
     loadMap() {//加载地图
       this.map = L.map("map", {
@@ -183,8 +196,9 @@ export default {
             return d.data.name;
           });
 
-      svg.attr("width", 2841)
-          .attr("height", 909)
+      svg.attr("width", this.map_width)
+          .attr("height", this.map_height)
+          .attr("viewBox", "0 0 1452 860")
           .style("left", 0 + "px")
           .style("top", 0 + "px")
           .style("position", "relative");
@@ -212,7 +226,7 @@ export default {
 
         //console.log(color)
         let dataset = [];
-        for (let j in this.dataset[i].risk_level){
+        for (let j in this.dataset[i].risk_level) {
           dataset.push(this.dataset[i].risk_level[j])
         }
         // console.log(dataset)
