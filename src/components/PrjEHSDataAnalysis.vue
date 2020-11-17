@@ -121,7 +121,6 @@ export default {
     //得到累计隐患数量
     getPrjRiskLevelData() {
       let data = this.$store.state.get_project.prj_risk_data;
-      debugger
       console.log(this.$store.state.get_project.prj_risk_data)
       console.log(data)
       //  风险等级对应情况
@@ -151,16 +150,18 @@ export default {
         risk: '风险',
         num: 0
       }
-      obj.risk = '列总计'
-      obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
-      dataArray.push(obj)
-      // debugger
-      console.log(dataArray)
+      if(dataArray.length == 3) {
+        obj.risk = '列总计'
+        obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
+        dataArray.push(obj)
+        // debugger
+        console.log(dataArray)
+      }
       this.PrjRiskLevelData = dataArray
     }
   },
   created() {
-    debugger
+    // debugger
     this.$store.dispatch('get_project/getInitProjectRiskNumber')
   }
 }

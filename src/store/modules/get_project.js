@@ -11,7 +11,10 @@ const state = {
     prj_risk_data: {},
     //基于项目级展示当前未整改的高风险隐患列表
     prj_risk_list: {},
-
+    //基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
+    prj_risk_top: {},
+    //基于项目级展示当前未整改高风险隐患图片
+    prj_image: [],
 
     data: []
 }
@@ -34,14 +37,14 @@ const getters = {
     renderProjectRiskList(state) {
         return state.prj_risk_list;
     },
-    // //承载变化的未整改高风险图片
-    // renderImages(state) {
-    //     return state.images;
-    // },
-    // //承载变化的所有项目中出现隐患数量排名前10的隐患
-    // renderNumberTop(state) {
-    //     return state.hidden_danger;
-    // }
+    //承载基于项目级展示当前未整改高风险隐患图片
+    renderPrjImages(state) {
+        return state.images;
+    },
+    //承载基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
+    renderPrjRiskTop(state) {
+        return state.prj_risk_top;
+    }
 
 }
 
@@ -61,28 +64,27 @@ const actions = {
         })
     },
 
-    //得到基于项目级展示当前未整改的高风险隐患列表
-    // getInitPrjRisk(context) {
-    //     dataService.getInitProjectRisk(state.params, function (response) {
-    //         context.commit('changePrjRiskLevelList', response)
-    //     })
-    // },
-    //
-    //
-    // //得到未整改高风险图片
-    // getInitImage(context) {
-    //     dataService.getInitImage(state.params, function (response) {
-    //         console.log(response)
-    //         context.commit('changeImage', response)
-    //     })
-    // },
-    //
-    // //得到所有项目中出现隐患数量排名前10的隐患
-    // getInitNumberTop(context) {
-    //     dataService.getInitNumberTop(state.params, function (response) {
-    //         context.commit('changeNumberTop', response)
-    //     })
-    // }
+    // 得到基于项目级展示当前未整改的高风险隐患列表
+    getInitPrjRisk(context) {
+        dataService.getInitProjectRisk(state.params, function (response) {
+            context.commit('changePrjRiskLevelList', response)
+        })
+    },
+
+    //得到基于项目级展示当前未整改高风险隐患图片
+    getInitProjectImage(context) {
+        dataService.getInitProjectImage(state.params, function (response) {
+            console.log(response)
+            context.commit('changePrjImage', response)
+        })
+    },
+
+    //得到基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
+    getInitProjectRiskTop(context) {
+        dataService.getInitProjectRiskTop(state.params, function (response) {
+            context.commit('changePrjRiskTop', response)
+        })
+    }
 
 
 }
@@ -96,20 +98,30 @@ const mutations = {
 
     // 考虑基于项目级展示历次发现的不同风险等级的隐患数量
     changePrjRiskLevelData(state, data) {
-        debugger
         console.log(data)
         state.prj_risk_data = data
     },
-    //
-    // //考虑所有项目中出现隐患数量排名前10的隐患变化
-    // changeNumberTop(state, data) {
-    //     state.hidden_danger = data
-    // },
-    //
-    // //考虑所有项目中出现隐患数量排名前10的隐患变化
-    // changeImage(state, data) {
-    //     state.images = data
-    // }
+
+    //考虑基于项目级展示当前未整改的高风险隐患列表
+    changePrjRiskLevelList(state, data) {
+        state.prj_risk_list = data.note_list
+        console.log(data.note_list)
+    },
+
+    // 考虑基于项目级展示当前未整改高风险隐患图片
+    changePrjImage(state, data) {
+        state.images = data.image_list
+        console.log(state.images)
+        alert("12")
+    },
+
+    //考虑基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
+    changePrjRiskTop(state, data) {
+        console.log(data)
+        state.prj_risk_top = data
+    },
+
+
 }
 
 export default {
