@@ -45,14 +45,12 @@ export default {
   },
   mounted: function () {
     this.loadMap();//加载地图
-    this.drawSvg();
     let m = document.getElementById("map")
     this.map_width = window.getComputedStyle(m).width
     this.map_height = window.getComputedStyle(m).height
-    debugger
     // this.timer = setInterval(this.drawPie, 1000);
 
-    // this.drawPie()
+    this.drawPie()
   },
   // beforeDestroy() {
   //   clearInterval(this.timer);
