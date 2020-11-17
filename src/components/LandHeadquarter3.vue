@@ -99,7 +99,7 @@ export default {
           count++
         }
       }
-      console.log(this.image0)
+      console.log(this.images0)
     },
     //得到所有项目中出现隐患数量排名前10的隐患
     getNumberTop() {

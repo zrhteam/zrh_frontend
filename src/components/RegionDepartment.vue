@@ -94,9 +94,7 @@
           </div>
         </el-col>
         <el-col :span = "6">
-          <div style="display: none; color: rgb(0,0,0);" v-if = 'riskLevelData' >
-            {{getRiskLevelData}}
-          </div>
+
           <div class = "grid-content bg-purple-light">
             <div class = "text item">
               <span>所有项目累计发现隐患数量</span>
@@ -116,10 +114,16 @@
               </el-table-column>
             </el-table>
           </div>
+          <div style = "display: none; color: rgb(0,0,0);" >
+            {{getRiskLevelData}}
+          </div>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span = "6">
+          <div style = 'display: none'>
+            {{getNoRectificationRisk}}
+          </div>
           <div class = "grid-content bg-purple-light">
             <div class = "text list">
               <span>项目当前未整改高风险隐患列表</span>
@@ -127,7 +131,8 @@
           </div>
           <el-table
             :data = "noRectificationNumber"
-            style = "width: 100%">
+            style = "width: 100%"
+            max-height = "400">
             <el-table-column
               prop = "description"
               label = "隐患描述"
@@ -136,13 +141,21 @@
           </el-table>
         </el-col>
         <el-col :span = "6">
+
           <div class = "grid-content bg-purple">
             <div>
               <span>未整改高风险隐患图片</span>
             </div>
           </div>
           <div class = "grid-content bg-purple">
-         <!--   隐患图片         -->
+            <div class = 'demo-image__placeholder'>
+              <div class = 'block'>
+                <img src = 'images' id = 'img' style ='width: 400px; height: 400px'>
+              </div>
+            </div>
+          </div>
+          <div style = "display: none">
+            {{getImage}}
           </div>
         </el-col>
         <el-col :span = "12">
@@ -164,6 +177,9 @@
       </el-row>
       <el-row>
         <el-col :span = "12">
+          <div style="display: none">
+            {{getRiskNumberTop}}
+          </div>
           <div class = "grid-content bg-purple-light">
             <div id = "subtitle1">
               <span>项目累计出现隐患前十条</span>
@@ -229,9 +245,13 @@ name: "RegionDepartment",
   components: {checkbox, RiskDistribution, SafetyIndexHistogram, RegionNumberHistogram},
   data(){
     return {
-      riskLevelData: [],
+      riskLevelData: {
+        risk: " ",
+        num: " "
+      },
       noRectificationNumber: [],
-      riskNumberTop: []
+      riskNumberTop: [],
+      images: ''
 
     }
   },
@@ -241,16 +261,17 @@ name: "RegionDepartment",
       return this.$store.state.get_region.examine_number;
     },
 
+    //得到各等级风险对应的隐患数量
     getRiskLevelData(){
-      let data = this.$store.state.get_region.risk_level_data.risk_level;
-      console.log(this.$store.state.get_region.risk_level_data.risk_level)
+      let data = this.$store.state.get_region.risk_level_data;
+      console.log(this.$store.state.get_region.risk_level_data)
       console.log(data)
       //风险等级对应情况
       //1: 低风险，2：中风险，3：高风险
       let dataArray = []
       for (let i in data) {
         let obj = {
-          risk: '风险',
+          risk: ' ',
           num: 0
         }
         if (i == 1){
@@ -280,18 +301,84 @@ name: "RegionDepartment",
       console.log(dataArray)
       this.riskLevelData = dataArray
 
+    },
+
+    //得到未整改高风险隐患列表
+    getNoRectificationRisk(){
+      let data = this.$store.state.get_region.no_rectification_risk.note_list;
+      console.log(this.$store.state.get_region.no_rectification_risk.note_list)
+      console.log(data)
+
+      let dataArray = []
+      let reg = RegExp(/测试/)
+      for (let i in data) {
+        let obj = {
+          description: ""
+        }
+        if(!data[i].match(reg)){
+          obj.description =data[i]
+          dataArray.push(obj)
+        }
+
+      }//for
+
+      console.log(dataArray)
+      this.noRectificationNumber = dataArray
+    },
+
+    //得到未整改高风险隐患图片
+    getImage(){
+      let data = this.$store.state.get_region.images;
+      let count = 0;
+      // document.getElementById('img').src = 'http://' + data[0][0]
+      for (let i in data) {
+        for (let j in data[i]){
+          if (count >0)
+          {
+            break
+          }
+          if (count ==0) {
+            document.getElementById('img').src = 'http://' + data[i][j]
+            this.images = 'http://' + data[i][j]//存在的问题是，会把所有图片都显示在上面，要改成轮播形式
+          }
+          count ++
+        }
+      }
+      console.log(this.images)
+    },
+
+    //得到排名前十的隐患描述
+    getRiskNumberTop(){
+      let data = this.$store.state.get_region.risk_number_top;
+      console.log(this.$store.state.get_region.risk_number_top)
+      console.log(data)
+
+      let dataArray = []
+      for (let i in data) {
+        let obj = {
+          description: ' '
+        }
+        obj.description = i
+        dataArray.push(obj)
+      }
     }
+
   },
 
   methods: {
-
+    updateTable(){
+      let first = this.noRectificationNumber[0];
+      this.noRectificationNumber.shift();
+      this.noRectificationNumber.push(first);
+    },
   },
 
   created() {
     this.$store.dispatch('get_region/getInitRegionProjectNumber')
     this.$store.dispatch('get_region/getInitRegionRiskLevel')
-    // this.$store.dispatch('get_region/getInitRegionHighRisk')
-    // this.$store.dispatch('get_region/getInitRegionNumberTop')
+    this.$store.dispatch('get_region/getInitRegionHighRisk')
+    this.$store.dispatch('get_region/getInitRegionNumberTop')
+    this.$store.dispatch('get_region/getInitRegionImage')
   }
 }
 </script>

@@ -53,7 +53,7 @@ const getters = {
 
 //actions
 const actions = {
-    //得到已检查项目
+    //得到已检查项目的数量
     getInitRegionProjectNumber(context) {
         dataService.getInitRegionProjectNumber(state.params, function (response) {
             console.log(response)
@@ -99,12 +99,12 @@ const actions = {
 const mutations = {
     //考虑已检查项目数量
     changeExamineNumber(state, data) {
-        state.examine_number = data.examine_number
+        state.examine_number = data.project_num
     },
 
     // 考虑累计隐患数量变化
     changeRiskLevelData(state, data) {
-        state.risk_level_data = data
+        state.risk_level_data = data.risk_level
     },
 
     //考虑当前未整改高风险隐患列表
