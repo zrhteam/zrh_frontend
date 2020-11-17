@@ -33,7 +33,7 @@
                   <div style = "color: rgb(59, 162, 255); font-family: Avenir; font-weight: normal; font-style: normal; font-size: 21.09px;">
                     <span>28.93</span>
                   </div>
-                  <div class = "chart-text-title">
+                  <div class = "chart-text-title" style = 'font-family: "Microsoft YaHei"'>
                     <span>消防指数</span>
                   </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div style = "color: rgb(59, 162, 255); font-family: Avenir; font-weight: normal; font-style: normal; font-size: 21.09px;">
                       <span>76.83</span>
                     </div>
-                    <div class = "chart-text-title">
+                    <div class = "chart-text-title" style = 'font-family: "Microsoft YaHei"'>
                       <span>电梯指数</span>
                     </div>
                   </div>
@@ -60,7 +60,7 @@
                     <div style = "color: rgb(59, 162, 255); font-family: Avenir; font-weight: normal; font-style: normal; font-size: 21.09px;">
                       <span>82.69</span>
                     </div>
-                    <div class = "chart-text-title" style = "left: 35%; bottom: 20%;">
+                    <div class = "chart-text-title" style = "left: 35%; bottom: 20%; font-family: 'Microsoft YaHei'">
                       <span>燃气指数</span>
                     </div>
                   </div>
@@ -73,7 +73,7 @@
                     <div style = "color: rgb(59, 162, 255); font-family: Avenir; font-weight: normal; font-style: normal; font-size: 21.09px;">
                       <span>82.69</span>
                     </div>
-                    <div class = "chart-text-title" style = "left: 45%; bottom: 20%;">
+                    <div class = "chart-text-title" style = "left: 45%; bottom: 20%; font-family: 'Microsoft YaHei'">
                       <span>电气指数</span>
                     </div>
                   </div>
@@ -88,18 +88,21 @@
             <div style= "color: rgb(0, 0, 0); font-family: 'microsoft YaHei'; font-weight: bold; font-style: normal; max-width: 100%; line-height: 16px; font-size: 16px; height: 16px;">
               <span>已检查项目数量</span>
             </div>
-            <div style = "color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;">
-              20
+            <div style = "color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;" >
+              {{getExamineNumber}}
             </div>
           </div>
         </el-col>
         <el-col :span = "6">
+          <div style="display: none; color: rgb(0,0,0);" v-if = 'riskLevelData' >
+            {{getRiskLevelData}}
+          </div>
           <div class = "grid-content bg-purple-light">
             <div class = "text item">
               <span>所有项目累计发现隐患数量</span>
             </div>
             <el-table
-                :data = "tableData_1"
+                :data = "riskLevelData"
                 border
                 style = "width: 100%">
               <el-table-column
@@ -123,7 +126,7 @@
             </div>
           </div>
           <el-table
-            :data = "tableData_2"
+            :data = "noRectificationNumber"
             style = "width: 100%">
             <el-table-column
               prop = "description"
@@ -167,7 +170,7 @@
             </div>
             <div>
               <el-table
-                :data = "tableData_3"
+                :data = "riskNumberTop"
                 stripe
                 style = "width: 100%">
                 <el-table-column
@@ -218,6 +221,7 @@ import checkbox from "@/components/checkbox.vue";
 import SafetyIndexHistogram from "@/components/SafetyIndexHistogram.vue";
 import RegionNumberHistogram from "@/components/RegionNumberHistogram.vue";
 import RiskDistribution from "@/components/RiskDistribution.vue";
+import * as d3 from "d3";
 
 
 export default {
@@ -225,40 +229,69 @@ name: "RegionDepartment",
   components: {checkbox, RiskDistribution, SafetyIndexHistogram, RegionNumberHistogram},
   data(){
     return {
-      tableData_1: [{
-        risk_level: '高风险',
-        number: '247'
-      },
-        {
-          risk_level: '中风险',
-          number: '1905'
-        },
-        {
-          risk_level: '低风险',
-          number: '552'
-        }],
-      tableData_2: [{
-        description: '1台排烟机'
-      },
-        {
-          description: '1台正压送风机'
-        },
-        {
-          description: '2台排烟风机'
-        }],
-      tableData_3: [{
-        description: '防火门顺序器故障',
-        number: '36'
-      },
-      {
-        description: '防火门顺序器故障',
-        number: '26'
-      },
-      {
-        description: '防火门顺序器故障',
-        number: '16'
-      }]
+      riskLevelData: [],
+      noRectificationNumber: [],
+      riskNumberTop: []
+
     }
+  },
+  computed: {
+  //得到已检查项目数量
+    getExamineNumber(){
+      return this.$store.state.get_region.examine_number;
+    },
+
+    getRiskLevelData(){
+      let data = this.$store.state.get_region.risk_level_data.risk_level;
+      console.log(this.$store.state.get_region.risk_level_data.risk_level)
+      console.log(data)
+      //风险等级对应情况
+      //1: 低风险，2：中风险，3：高风险
+      let dataArray = []
+      for (let i in data) {
+        let obj = {
+          risk: '风险',
+          num: 0
+        }
+        if (i == 1){
+          obj.risk = '低风险'
+          obj.num = data[i]
+        }
+        if (i ==2){
+          obj.risk = '中风险'
+          obj.num = data[i]
+        }
+        if (i == 3) {
+          obj.risk = '高风险'
+          obj.num = data[i]
+        }
+        dataArray.push(obj)
+        console.log(dataArray)
+      }//for
+
+      let obj = {
+        risk: '风险',
+        num: 0
+      }
+      obj.risk = '列总计'
+      obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
+      dataArray.push(obj)
+
+      console.log(dataArray)
+      this.riskLevelData = dataArray
+
+    }
+  },
+
+  methods: {
+
+  },
+
+  created() {
+    this.$store.dispatch('get_region/getInitRegionProjectNumber')
+    this.$store.dispatch('get_region/getInitRegionRiskLevel')
+    // this.$store.dispatch('get_region/getInitRegionHighRisk')
+    // this.$store.dispatch('get_region/getInitRegionNumberTop')
   }
 }
 </script>

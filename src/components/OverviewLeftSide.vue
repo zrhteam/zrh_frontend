@@ -50,7 +50,12 @@ export default {
       this.$store.state.get_headquarter.params = params
       this.$router.push({path: '/land_headquarters'});
     },
+    //按部门名称查询的函数
     onSubmitByArea() {
+      alert(this.form.ctr_name)
+      let param = new URLSearchParams();
+      param.append('ctr_name', this.form.ctr_name)
+      this.$store.state.get_region.params = param
       this.$router.push({path: '/region_department'});
     },
     //提交按项目名称查询的函数

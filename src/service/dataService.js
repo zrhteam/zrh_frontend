@@ -629,7 +629,7 @@ function getInitProjectRiskTop(param, callback){
 
 export default{
     getLocation,
-    // getPrjPie,
+    //getPrjPie,
     //getInitData,
     getInitIndexData,
     getInitRectification,
