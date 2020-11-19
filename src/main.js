@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import echarts from 'echarts'
 import 'es6-promise/auto'
 import Vuex from 'vuex'
 import App from './App.vue'
@@ -20,7 +21,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Vue.L = Vue.prototype.$L = L;
-
+Vue.prototype.$echarts = echarts;
 /* leaflet icon */
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -34,6 +35,7 @@ L.Icon.Default.mergeOptions({
 //vue.prototype.$cookies = cookies;
 Vue.use(cookies)
 Vue.use(ElementUI)
+Vue.use(echarts)
 Vue.use(Vuex)
 // new Vue({
 //     router,

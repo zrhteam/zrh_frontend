@@ -141,7 +141,6 @@
           </el-table>
         </el-col>
         <el-col :span = "6">
-
           <div class = "grid-content bg-purple">
             <div>
               <span>未整改高风险隐患图片</span>
@@ -245,15 +244,23 @@ name: "RegionDepartment",
   components: {checkbox, RiskDistribution, SafetyIndexHistogram, RegionNumberHistogram},
   data(){
     return {
-      riskLevelData: {
-        risk: " ",
-        num: " "
-      },
+      riskLevelData: [],
+      // riskLevelData: {
+      //   risk: " ",
+      //   num: " "
+      // },
       noRectificationNumber: [],
       riskNumberTop: [],
-      images: ''
+      images: '',
+      timer: ''
 
     }
+  },
+  mounted() {
+    this.timer = setInterval(this.updateTable, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   computed: {
   //得到已检查项目数量
@@ -294,11 +301,12 @@ name: "RegionDepartment",
         risk: '风险',
         num: 0
       }
-      obj.risk = '列总计'
-      obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
-      dataArray.push(obj)
-
-      console.log(dataArray)
+      if( dataArray.length ==3){
+        obj.risk = '列总计'
+        obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
+        dataArray.push(obj)
+        console.log(dataArray)
+      }
       this.riskLevelData = dataArray
 
     },
@@ -356,20 +364,25 @@ name: "RegionDepartment",
       let dataArray = []
       for (let i in data) {
         let obj = {
-          description: ' '
+          description: ' ',
+          num: 0
         }
-        obj.description = i
+        //console.log(i)
+        obj.description = i;
+        obj.num = data[i]['appear_time']
         dataArray.push(obj)
       }
+      console.log(dataArray)
+      this.riskNumberTop =  dataArray
     }
 
   },
 
   methods: {
     updateTable(){
-      let first = this.noRectificationNumber[0];
-      this.noRectificationNumber.shift();
-      this.noRectificationNumber.push(first);
+      let first = this.riskNumberTop[0];
+      this.riskNumberTop.shift();
+      this.riskNumberTop.push(first);
     },
   },
 
