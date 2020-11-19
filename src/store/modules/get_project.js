@@ -9,6 +9,10 @@ const state = {
     prj_rectification: {},
     //基于项目级展示历次发现的不同风险等级的隐患数量
     prj_risk_data: {},
+    //基于项目级展示最近一次检查不同专业隐患占比情况
+    prj_nearest_perception: {},
+    //基于项目级展示历次检查隐患数量变化的情况
+    prj_number_change: {},
     //基于项目级展示当前未整改的高风险隐患列表
     prj_risk_list: {},
     //基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
@@ -32,6 +36,14 @@ const getters = {
     //承载变化的基于项目级展示历次发现的不同风险等级的隐患数量
     renderPrjRiskLevelData(state) {
         return state.prj_risk_data;
+    },
+    //承载变化的基于项目级展示最近一次检查不同专业隐患占比情况
+    renderPrjNearestPerception(state) {
+        return state.prj_nearest_perception;
+    },
+    //承载变化的基于项目级展示历次检查隐患数量变化的情况
+    renderPrjNumberChange(state) {
+        return state.prj_number_change;
     },
     //承载变化的基于项目级展示当前未整改的高风险隐患列表
     renderProjectRiskList(state) {
@@ -64,7 +76,21 @@ const actions = {
         })
     },
 
-    // 得到基于项目级展示当前未整改的高风险隐患列表
+    //得到基于项目级展示最近一次检查不同专业隐患占比情况
+    getInitProjectNearestPerception(context) {
+        dataService.getInitProjectNearestPerception(state.params, function (response) {
+            context.commit('changePrjNearestPerception', response)
+        })
+    },
+
+    //得到基于项目级展示历次检查隐患数量变化的情况
+    getInitProjectNumberChange(context) {
+        dataService.getInitProjectNumberChange(state.params, function (response) {
+            context.commit('changePrjNumberChange', response)
+        })
+    },
+
+    //得到基于项目级展示当前未整改的高风险隐患列表
     getInitPrjRisk(context) {
         dataService.getInitProjectRisk(state.params, function (response) {
             context.commit('changePrjRiskLevelList', response)
@@ -74,7 +100,7 @@ const actions = {
     //得到基于项目级展示当前未整改高风险隐患图片
     getInitProjectImage(context) {
         dataService.getInitProjectImage(state.params, function (response) {
-            console.log(response)
+            // console.log(response)
             context.commit('changePrjImage', response)
         })
     },
@@ -97,9 +123,21 @@ const mutations = {
     },
 
     // 考虑基于项目级展示历次发现的不同风险等级的隐患数量
+    changePrjNearestPerception(state, data) {
+        console.log(data)
+        state.prj_nearest_perception = data
+    },
+
+    //基于项目级展示最近一次检查不同专业隐患占比情况
     changePrjRiskLevelData(state, data) {
         console.log(data)
         state.prj_risk_data = data
+    },
+
+    //基于项目级展示最近一次检查不同专业隐患占比情况
+    changePrjNumberChange(state, data) {
+        console.log(data)
+        state.prj_number_change = data
     },
 
     //考虑基于项目级展示当前未整改的高风险隐患列表
@@ -110,9 +148,8 @@ const mutations = {
 
     // 考虑基于项目级展示当前未整改高风险隐患图片
     changePrjImage(state, data) {
-        state.images = data.image_list
-        console.log(state.images)
-        alert("12")
+        state.prj_image = data.image_list
+        // console.log(state.prj_image)
     },
 
     //考虑基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数

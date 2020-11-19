@@ -90,11 +90,11 @@ export default {
           }
           if(count == 0){
             document.getElementById('img0').src = 'http://' + data[i][j]
-            this.images0 = 'http://' + data[i][j]
+            // this.images0 = 'http://' + data[i][j]
           }
           if(count == 1){
             document.getElementById('img1').src = 'http://' + data[i][j]
-            this.images1 = 'http://' + data[i][j]
+            // this.images1 = 'http://' + data[i][j]
           }
           count++
         }
