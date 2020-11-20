@@ -94,7 +94,9 @@
           </div>
         </el-col>
         <el-col :span = "6">
-
+          <div style = "display: none; color: rgb(0,0,0);" >
+            {{getRiskLevelData}}
+          </div>
           <div class = "grid-content bg-purple-light">
             <div class = "text item">
               <span>所有项目累计发现隐患数量</span>
@@ -104,19 +106,16 @@
                 border
                 style = "width: 100%">
               <el-table-column
-                prop = "risk_level"
-                label = "隐患风险等级"
-                width = "292">
+                prop = "risk"
+                label = "隐患风险等级">
               </el-table-column>
               <el-table-column
-                prop = "number"
+                prop = "num"
                 label="累计发现隐患数量">
               </el-table-column>
             </el-table>
           </div>
-          <div style = "display: none; color: rgb(0,0,0);" >
-            {{getRiskLevelData}}
-          </div>
+
         </el-col>
       </el-row>
       <el-row>
@@ -136,7 +135,7 @@
             <el-table-column
               prop = "description"
               label = "隐患描述"
-              width = "292">
+              width = "550">
             </el-table-column>
           </el-table>
         </el-col>
@@ -175,7 +174,7 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span = "12">
+        <el-col :span = "8">
           <div style="display: none">
             {{getRiskNumberTop}}
           </div>
@@ -190,19 +189,20 @@
                 style = "width: 100%">
                 <el-table-column
                   prop = "description"
-                  label = "隐患描述">
+                  label = "隐患描述"
+                  width = '550'>
                 </el-table-column>
                 <el-table-column
-                  prop = "number"
+                  prop = "num"
                   label = "出现次数">
                 </el-table-column>
               </el-table>
             </div>
           </div>
         </el-col>
-        <el-col :span = "6">
+        <el-col :span = "8">
           <div class = "grid-content bg-purple">
-            <div style = "text-align: left">
+            <div style = "text-align: center">
               <span>项目安全指数排名</span>
             </div>
             <div>
@@ -213,9 +213,9 @@
             </div>
           </div>
         </el-col>
-        <el-col :span = "6">
+        <el-col :span = "8">
           <div class = "grid-content bg-purple">
-            <div style = "text-align: left">
+            <div style = "text-align: center">
               <span>项目累计高风险数量排名</span>
             </div>
             <div id = "mydiv4" >
@@ -238,6 +238,27 @@ import RegionNumberHistogram from "@/components/RegionNumberHistogram.vue";
 import RiskDistribution from "@/components/RiskDistribution.vue";
 import * as d3 from "d3";
 
+function sortNumber(attr, rev){
+  //默认升序排序
+  if(rev == undefined){
+    rev =1;
+  }
+  else{
+    rev = (rev) ? 1 : -1;
+  }
+
+  return function (a,b){
+    a = a[attr];
+    b = b[attr];
+    if(a < b){
+      return rev * -1;
+    }
+    if(a > b){
+      return rev * 1;
+    }
+    return 0;
+  }
+}
 
 export default {
 name: "RegionDepartment",
@@ -272,7 +293,7 @@ name: "RegionDepartment",
     getRiskLevelData(){
       let data = this.$store.state.get_region.risk_level_data;
       console.log(this.$store.state.get_region.risk_level_data)
-      console.log(data)
+      //console.log(data)
       //风险等级对应情况
       //1: 低风险，2：中风险，3：高风险
       let dataArray = []
@@ -294,7 +315,7 @@ name: "RegionDepartment",
           obj.num = data[i]
         }
         dataArray.push(obj)
-        console.log(dataArray)
+        //console.log(dataArray)
       }//for
 
       let obj = {
@@ -372,6 +393,8 @@ name: "RegionDepartment",
         obj.num = data[i]['appear_time']
         dataArray.push(obj)
       }
+      //按出现次数降序
+      dataArray.sort(sortNumber('num', false))
       console.log(dataArray)
       this.riskNumberTop =  dataArray
     }
@@ -380,9 +403,9 @@ name: "RegionDepartment",
 
   methods: {
     updateTable(){
-      let first = this.riskNumberTop[0];
-      this.riskNumberTop.shift();
-      this.riskNumberTop.push(first);
+      let first = this.noRectificationNumber[0];
+      this.noRectificationNumber.shift();
+      this.noRectificationNumber.push(first);
     },
   },
 
