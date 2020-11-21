@@ -10,7 +10,7 @@
     </el-header>
     <el-main>
       <el-row class="boundary-B">
-        <!--总部一 总部安全指数一-->
+        <!--总部1 总部安全指数一-->
         <el-col :span="6">
           <div class="grid-content bg-purple boundary">
             <div class="chart-image-icon"></div>
@@ -28,35 +28,58 @@
             </div>
           </div>
         </el-col>
-        <!--总部二 专业指数-->
+        <!--总部2 专业指数-->
         <el-col :span="6" class="boundary">
-            <el-row>
-              <el-col :span="12">
-                <IndexView :context="{title:'消防危险指数'}"></IndexView>
-              </el-col>
-              <el-col :span="12">
-                <IndexView :context="{title:'电梯危险指数'}"></IndexView>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="12">
-                <IndexView :context="{title:'电气危险指数'}"></IndexView>
-              </el-col>
-              <el-col :span="12">
-                <IndexView :context="{title:'燃气危险指数'}"></IndexView>
-              </el-col>
-            </el-row>
+          <el-row>
+            <el-col :span="12">
+              <IndexView :context="{title:'消防危险指数'}"></IndexView>
+            </el-col>
+            <el-col :span="12">
+              <IndexView :context="{title:'电梯危险指数'}"></IndexView>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <IndexView :context="{title:'电气危险指数'}"></IndexView>
+            </el-col>
+            <el-col :span="12">
+              <IndexView :context="{title:'燃气危险指数'}"></IndexView>
+            </el-col>
+          </el-row>
         </el-col>
-        <!--总部三 整改率-->
+        <!--总部3 整改率-->
         <el-col :span="6">
           <Rectification></Rectification>
         </el-col>
+        <!--总部4 隐患数量-->
         <el-col :span="6">
           <AccumRisk></AccumRisk>
         </el-col>
       </el-row>
-      <LandHeadquarter2 class="boundary-B" style="margin-top: 20px"></LandHeadquarter2>
-      <LandHeadquarter3 class="boundary-B" style="margin-top: 20px"></LandHeadquarter3>
+
+      <el-row style="margin-bottom: 100px">
+        <el-row>
+          <!--总部5 项目安全指数排名-->
+          <el-col :span="12">
+            <ProjectIndex></ProjectIndex>
+          </el-col>
+          <!--总部6 项目累计好风险数量排名-->
+          <el-col :span="12">
+            <HighProjectRisk></HighProjectRisk>
+          </el-col>
+        </el-row>
+      </el-row>
+      <el-row>
+        <!--总部7 未整改高风险图片-->
+        <el-col :span="12">
+          <HighRiskImages class="boundary-C"></HighRiskImages>
+        </el-col>
+        <!--总部8 项目累计好风险数量排名-->
+        <el-col :span="12">
+          <TopAccumRisk class="boundary-C"></TopAccumRisk>
+        </el-col>
+      </el-row>
+
     </el-main>
   </el-container>
 </template>
@@ -65,12 +88,16 @@
 import * as d3 from "d3";
 import dataService from "@/service/dataService";
 import FireHazardIndex from "@/components/views/functions/FireHazardIndex.vue";
-import LandHeadquarter3 from "@/components/views/HeadQuarters/LandHeadquarter3.vue";
-import LandHeadquarter2 from "@/components/views/HeadQuarters/LandHeadquarter2.vue";
 
 import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
 import Rectification from "@/components/views/HeadQuarters/Rectification.vue";
 import AccumRisk from "@/components/views/HeadQuarters/AccumRisk.vue";
+
+import ProjectIndex from "@/components/views/HeadQuarters/ProjectIndex.vue";
+import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue";
+
+import HighRiskImages from "@/components/views/HeadQuarters/HighRiskImages.vue";
+import TopAccumRisk from "@/components/views/HeadQuarters/TopAccumRisk.vue";
 
 export default {
   name: "LandHeadquartersEHSDataScreen",
@@ -78,9 +105,14 @@ export default {
     AccumRisk,
     Rectification,
     LandHeadquarter3,
-    LandHeadquarter2,
     FireHazardIndex,
-    IndexView
+    IndexView,
+
+    ProjectIndex,
+    HighProjectRisk,
+
+    HighRiskImages,
+    TopAccumRisk
   },
 
   computed: {
@@ -101,6 +133,9 @@ export default {
     this.$store.dispatch('get_headquarter/getInitRectification')
     this.$store.dispatch('get_headquarter/getInitRiskLevelData')
     this.$store.dispatch('get_headquarter/getInitNumberTop')
+
+    this.$store.dispatch('get_headquarter/getInitRiskIndexData')
+    this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
   }
 }
 </script>
