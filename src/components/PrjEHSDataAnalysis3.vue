@@ -5,7 +5,7 @@
         <span>所有隐患子系统占比（可筛选专业）</span>
       </div>
       <div>
-        <!--        所有隐患子系统占比（可筛选专业）饼图-->
+        <!--        所有隐患子系统占比（可筛选专业）柱状图-->
       </div>
     </el-col>
     <el-col :span="4">
@@ -13,7 +13,7 @@
         <span>所有致因阶段占比（可筛选专业）</span>
       </div>
       <div>
-        <!--        所有致因阶段占比（可筛选专业）饼图-->
+        <!--        所有致因阶段占比（可筛选专业）柱状图-->
       </div>
     </el-col>
     <el-col :span="4">
@@ -21,7 +21,7 @@
         <span>所有隐患分布区域占比（可筛选专业）</span>
       </div>
       <div>
-        <!--        所有隐患分布区域占比（可筛选专业）饼图-->
+        <!--        所有隐患分布区域占比（可筛选专业）柱状图-->
       </div>
     </el-col>
     <el-col :span="12">
@@ -94,6 +94,7 @@ export default {
   },
   created() {
     this.$store.dispatch('get_project/getInitProjectRiskTop')
+    this.$store.dispatch('get_project/getInitProjectSystem')
   }
 }
 </script>

@@ -90,7 +90,7 @@ export default {
       this.riskLevelList.push(first);
     },
     drawPie(data) {// 之前的d3版本是"d3": "^3.4.5",
-      document.querySelector('svg').innerHTML = '';
+      // document.querySelector('svg').innerHTML = '';
       var svg = d3.select('svg');
 
       // var color = d3.schemeCategory10;
@@ -119,6 +119,7 @@ export default {
           .innerRadius(innerRadius)//设置内半径
           .outerRadius(outerRadius)//设置外半径
       // 先添加g，再添加path
+      alert(svg.length)
       var arcs = svg.selectAll('g')
           .data(piedata)
           .enter()
@@ -204,7 +205,7 @@ export default {
   created() {
     this.$store.dispatch('get_project/getInitPrjRisk')
     this.$store.dispatch('get_project/getInitProjectNearestPerception')
-    this.$store.dispatch('get_project/getInitProjectNumberChange')
+    // this.$store.dispatch('get_project/getInitProjectNumberChange')  两个参数
     this.$store.dispatch('get_project/getInitProjectImage')
 
   }

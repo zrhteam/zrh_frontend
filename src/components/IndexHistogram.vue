@@ -1,6 +1,7 @@
 <template>
-  <div id="index_histogram">
-  </div>
+<!--  <div id="index_histogram">-->
+<!--  </div>-->
+  <svg></svg>
 </template>
 
 <script>
@@ -11,18 +12,19 @@ export default {
   mounted() {
     this.getlist();
   },
-  created() {
+  created() {debugger
+    this.getlist();
     // this.getlinear();
   },
   methods: {
     // getlinear(){},
     getlist() {
-
       //制作画布
       let width = 500;//画布宽度
       let height = 400;//画布高度
-      let svg = d3.select("#index_histogram")
-          .append("svg")
+      // let svg = d3.select("#index_histogram")
+      let svg = d3.select("svg")
+          // .append("svg")
           .attr("width", width)
           .attr("height", height);
       //画布周边的空白

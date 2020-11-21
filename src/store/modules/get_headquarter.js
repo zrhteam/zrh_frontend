@@ -13,7 +13,8 @@ const state = {
     images: {},
     //得到所有项目中出现隐患数量排名前10的隐患
     hidden_danger: {},
-
+    //得到按照高风险数量排名的项目名称
+    risk_number_rank: {},
 
 
 
@@ -33,6 +34,10 @@ const getters = {
     //承载变化的隐患高中低风险及其对应的累计隐患数量
     renderRiskLevelData(state) {
         return state.risk_level_data;
+    },
+    //得到按照高风险数量排名的项目名称
+    renderRiskNumberRank(state) {
+        return state.risk_number_rank;
     },
     //承载变化的未整改高风险图片
     renderImages(state) {
@@ -59,6 +64,14 @@ const actions = {
         dataService.getInitRiskLevelData(state.params, function (response) {
             console.log(response)
             context.commit('changeRiskLevelData', response)
+        })
+    },
+
+    //得到按照高风险数量排名的项目名称
+    getInitRiskNumberRank(context) {
+        dataService.getInitRiskNumberRank(state.params, function (response) {
+            console.log(response)
+            context.commit('changeRiskNumberRank', response)
         })
     },
 
@@ -92,12 +105,17 @@ const mutations = {
         state.risk_level_data = data
     },
 
+    //得到按照高风险数量排名的项目名称
+    changeRiskNumberRank(state, data) {
+        state.risk_number_rank = data
+    },
+
     //考虑所有项目中出现隐患数量排名前10的隐患变化
     changeNumberTop(state, data) {
         state.hidden_danger = data
     },
 
-    //考虑所有项目中出现隐患数量排名前10的隐患变化
+    //考虑
     changeImage(state, data) {
         state.images = data
     }

@@ -19,6 +19,8 @@ const state = {
     prj_risk_top: {},
     //基于项目级展示当前未整改高风险隐患图片
     prj_image: [],
+    //基于项目级展示不同专业所有隐患子系统占比情况
+    prj_system: {},
 
     data: []
 }
@@ -52,6 +54,10 @@ const getters = {
     //承载基于项目级展示当前未整改高风险隐患图片
     renderPrjImages(state) {
         return state.images;
+    },
+    //基于项目级展示不同专业所有隐患子系统占比情况
+    renderPrjSystem(state) {
+        return state.prj_system;
     },
     //承载基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     renderPrjRiskTop(state) {
@@ -105,6 +111,15 @@ const actions = {
         })
     },
 
+    //基于项目级展示不同专业所有隐患子系统占比情况
+    getInitProjectSystem(context) {
+        dataService.getInitProjectSystem(state.params, function (response) {
+            // console.log(response)
+            debugger
+            context.commit('changePrjSystem', response)
+        })
+    },
+
     //得到基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     getInitProjectRiskTop(context) {
         dataService.getInitProjectRiskTop(state.params, function (response) {
@@ -150,6 +165,13 @@ const mutations = {
     changePrjImage(state, data) {
         state.prj_image = data.image_list
         // console.log(state.prj_image)
+    },
+
+    //基于项目级展示不同专业所有隐患子系统占比情况
+    changePrjSystem(state, data) {
+        state.prj_system = data
+        console.log(state.prj_system)
+        debugger
     },
 
     //考虑基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
