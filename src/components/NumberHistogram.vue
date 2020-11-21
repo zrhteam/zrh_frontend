@@ -13,7 +13,6 @@ export default {
   name: "NumberHistogram",
   data() {
     return {
-      // isRouterAlive: true
     }
   },
   mounted() {
@@ -32,11 +31,10 @@ export default {
       let svg = d3.select(this.$el).select("svg")
           .attr("width", width)
           .attr("height", height);
-      alert(svg.length)
       //画布周边的空白
       let padding = {left: 110, right: 30, top: 20, bottom: 30};
       //定义一个数组
-      debugger
+      // debugger
       let datas = [{
         key: "yi",
         value: 20
@@ -130,7 +128,7 @@ export default {
             return yScale(d);
           })
           .attr("dx", function () {//文字距离矩形左边的距离
-            // return (xScale.bandwidth() - rectPadding * 5) / 2;
+            return (xScale.bandwidth() - rectPadding * 5) / 2;
             return (xScale.rangeBand() - rectPadding * 5) / 2;
           })
           .attr("dy", function (d) {//文字距离矩形顶部的距离
