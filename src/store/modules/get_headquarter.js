@@ -77,7 +77,6 @@ const actions = {
     //显示根据项目综合&专业风险指数排序的结果
     getInitRiskIndexData(context) {
         dataService.getInitRiskIndexData(state.params, function (response) {
-            debugger
             console.log(response)
             context.commit('changeRiskIndexData', response)
         })

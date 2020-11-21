@@ -51,7 +51,6 @@ export default {
     },
     //按部门名称查询的函数
     onSubmitByArea() {
-      alert(this.form.ctr_name)
       let param = new URLSearchParams();
       param.append('ctr_name', this.form.ctr_name)
       this.$store.state.get_region.params = param
@@ -59,7 +58,6 @@ export default {
     },
     //提交按项目名称查询的函数
     onSubmitByPrj() {
-      alert(this.form.project_name)
       let params = new URLSearchParams();
       // params.append('cust_name', this.form.cust_name)
       // params.append('ctr_name', this.form.ctr_name)

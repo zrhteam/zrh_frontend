@@ -189,13 +189,11 @@ export default {
         obj.risk = '列总计'
         obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
         dataArray.push(obj)
-        // debugger
         console.log(dataArray)
       }
       // obj.risk = '列总计'
       // obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
       // dataArray.push(obj)
-      // // debugger
       // console.log(dataArray)
       this.riskLevelData = dataArray
     }

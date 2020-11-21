@@ -106,7 +106,6 @@ export default {
           .value(function (d) {
             return d.value;
           });
-      //debugger
       // var piedata = pie(this.nearest_perception)
       var piedata = pie(data)
       console.log(piedata)//5个整数倍转换成了5个对象，每个对象都有：起始角度（startAngle）和终止角度（endAngle），还有原数据（属性名称为 data）。这些都是绘图需要的数据。
@@ -119,7 +118,6 @@ export default {
           .innerRadius(innerRadius)//设置内半径
           .outerRadius(outerRadius)//设置外半径
       // 先添加g，再添加path
-      alert(svg.length)
       var arcs = svg.selectAll('g')
           .data(piedata)
           .enter()
@@ -172,7 +170,6 @@ export default {
       // this.img_list.push(data);
       //
       // console.log(this.img_list)
-      // alert(this.img_list[0])
 
       for (let i in data) {
         let obj = {
@@ -198,7 +195,6 @@ export default {
     },
     getPrjNumberChange() {
       let data = this.$store.state.get_project.prj_number_change
-      debugger
       console.log(data)
     }
   },
