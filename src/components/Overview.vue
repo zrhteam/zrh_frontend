@@ -14,23 +14,21 @@
       </el-main>
     </el-container>
 
-    <!--    <OverviewRightSide></OverviewRightSide>-->
   </el-container>
 </template>
 
 <script>
 // import axios from "axios";
 import dataService from "@/service/dataService";
-import OverviewRightSide from "@/components/OverviewRightSide.vue";
 import OverviewLeftSide from "@/components/OverviewLeftSide.vue";
 import {mapState, mapGetters} from "vuex"
-import * as d3 from "d3";
+import * as d3 from "d3/dist/d3.js";
 
 //在组件的created中提交dispatch，然后通过action调用一个封装好的axios
 // 然后再触发mutation来提交状态改变state中的数据，然后在组件的计算属性中获取state的数据并渲染在页面上
 export default {
   name: "Overview",
-  components: {OverviewLeftSide, OverviewRightSide},
+  components: {OverviewLeftSide},
   data() {
     return {
       map: "",
@@ -50,7 +48,7 @@ export default {
     this.map_height = window.getComputedStyle(m).height
     // this.timer = setInterval(this.drawPie, 1000);
 
-    this.drawPie()
+    // this.drawPie()
   },
   // beforeDestroy() {
   //   clearInterval(this.timer);

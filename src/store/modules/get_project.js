@@ -9,10 +9,10 @@ const state = {
     prj_rectification: {},
     //基于项目级展示历次发现的不同风险等级的隐患数量
     prj_risk_data: {},
-    //基于项目级展示最近一次检查不同专业隐患占比情况
-    prj_nearest_perception: {},
     //基于项目级展示历次检查隐患数量变化的情况
     prj_number_change: {},
+    //基于项目级展示最近一次检查不同专业隐患占比情况
+    prj_nearest_perception: {},
     //基于项目级展示当前未整改的高风险隐患列表
     prj_risk_list: {},
     //基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
@@ -115,10 +115,15 @@ const actions = {
     getInitProjectSystem(context) {
         dataService.getInitProjectSystem(state.params, function (response) {
             // console.log(response)
-
+// <<<<<<< HEAD
+//
+// =======
+// >>>>>>> f6f7baff9ca7b442fa9930f2a1e2f2fd5c38eeef
             context.commit('changePrjSystem', response)
         })
     },
+
+
 
     //得到基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     getInitProjectRiskTop(context) {
@@ -149,7 +154,7 @@ const mutations = {
         state.prj_risk_data = data
     },
 
-    //基于项目级展示最近一次检查不同专业隐患占比情况
+    //基于项目级展示历次检查隐患数量变化的情况
     changePrjNumberChange(state, data) {
         console.log(data)
         state.prj_number_change = data
@@ -171,7 +176,10 @@ const mutations = {
     changePrjSystem(state, data) {
         state.prj_system = data
         console.log(state.prj_system)
-
+// <<<<<<< HEAD
+//
+// =======
+// >>>>>>> f6f7baff9ca7b442fa9930f2a1e2f2fd5c38eeef
     },
 
     //考虑基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数

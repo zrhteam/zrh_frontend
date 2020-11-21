@@ -68,7 +68,10 @@ export default {
     getIndexHistogram() {
       let data = this.$store.state.get_headquarter.risk_index_data
       console.log(data)
-
+// <<<<<<< HEAD:src/components/views/HeadQuarters/LandHeadquarter2.vue
+//
+// =======
+// >>>>>>> f6f7baff9ca7b442fa9930f2a1e2f2fd5c38eeef:src/components/LandHeadquarter2.vue
       let arr = []
       for (let i in data) {
         let obj = {
@@ -111,7 +114,6 @@ export default {
       //画布周边的空白
       let padding = {left: 110, right: 30, top: 20, bottom: 30};
       //定义一个数组
-      // debugger
       // let datas = [{
       //   key: "yi",
       //   value: 20

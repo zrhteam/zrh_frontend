@@ -1,46 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '../components/HelloWorld.vue'
-import Home from '../components/Home.vue'
-import SearchModule from '../components/SearchModule.vue'
-import PieChart from '../components/PieChart.vue'
 import Overview from '../components/Overview.vue'
 import LandHeadquartersEHSDataScreen from "../components/LandHeadquartersEHSDataScreen.vue";
 import RegionDepartment from "@/components/RegionDepartment.vue";
 import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
 import NotFound from '../components/NotFound.vue'
-//
-// const routerOptions = [
-//   {
-//     path: '/',
-//     name: 'home',
-//     component: 'Home'
-//   },
-//   {
-//     path: '/about',
-//     name: 'about',
-//     //component: () => import(/* webpackChunkName: "about" */ '@/views/About')
-//     component: 'About'
-//    }//,
-//   // {
-//   //   path: '/home',
-//   //   //component: () => import(/* webpackChunkName: "about" */ '../views/About')
-//   //   component: HelloWorld
-//   // }
-// ]
-// const router = createRouter({
-//   history: createWebHashHistory(),
-//   base: process.env.BASE_URL,
-//   routes
-// })
+
 const routerOptions = [
     {path: '/', component: 'Overview'},
-    {path: '/home', component: 'Home'},
-    {path: '/search_module', component: 'SearchModule', meta:{requireAuth:true }},
     {path: '/login', component: 'Login'},
     {path: '/particles', component: 'Particles'},
     {path: '/register', component: 'Register'},
-    {path: '/pie_chart', component: 'PieChart'},
     {path: '/overview', component: 'Overview'},
     {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
     {path: '/region_department', component: 'RegionDepartment'},
@@ -56,12 +26,9 @@ const routes = routerOptions.map(route => {
 const router = new Router({
     rous: [
         {path: '/', component: 'Overview'},
-        {path: '/home', component: 'Home'},
-        {path: '/search_module', component: 'SearchModule', meta:{requireAuth:true }},//true为这个页面需要登录权限
         {path: '/login', component: 'Login'},
         {path: '/particles', component: 'Particles'},
         {path: '/register', component: 'Register'},
-        {path: '/pie_chart', component: 'PieChart'},
         {path: '/overview', component: 'Overview'},
         {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
         {path: '/region_department', component: 'RegionDepartment'},
