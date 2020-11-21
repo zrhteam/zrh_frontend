@@ -68,7 +68,7 @@ export default {
     getIndexHistogram() {
       let data = this.$store.state.get_headquarter.risk_index_data
       console.log(data)
-      debugger
+
       let arr = []
       for (let i in data) {
         let obj = {

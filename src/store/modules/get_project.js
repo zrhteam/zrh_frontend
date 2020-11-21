@@ -115,7 +115,7 @@ const actions = {
     getInitProjectSystem(context) {
         dataService.getInitProjectSystem(state.params, function (response) {
             // console.log(response)
-            debugger
+
             context.commit('changePrjSystem', response)
         })
     },
@@ -171,7 +171,7 @@ const mutations = {
     changePrjSystem(state, data) {
         state.prj_system = data
         console.log(state.prj_system)
-        debugger
+
     },
 
     //考虑基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数

@@ -198,7 +198,7 @@ export default {
     },
     getPrjNumberChange() {
       let data = this.$store.state.get_project.prj_number_change
-      debugger
+
       console.log(data)
     }
   },

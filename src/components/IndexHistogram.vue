@@ -12,7 +12,7 @@ export default {
   mounted() {
     this.getlist();
   },
-  created() {debugger
+  created() {
     this.getlist();
     // this.getlinear();
   },

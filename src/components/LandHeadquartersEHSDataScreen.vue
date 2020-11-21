@@ -136,8 +136,8 @@
 <script>
 import dataService from "@/service/dataService";
 import FireHazardIndex from "@/components/FireHazardIndex.vue";
-import LandHeadquarter3 from "@/components/LandHeadquarter3.vue";
-import LandHeadquarter2 from "@/components/LandHeadquarter2.vue";
+import LandHeadquarter3 from "@/components/views/HeadQuarters/LandHeadquarter3.vue";
+import LandHeadquarter2 from "@/components/views/HeadQuarters/LandHeadquarter2.vue";
 import * as d3 from "d3";
 
 export default {
@@ -239,7 +239,7 @@ i {
 }
 
 .chart-image-icon {
-  background-image: url('../components/svg/card-skin-1.svg');
+  background-image: url('svg/card-skin-1.svg');
   font-family: 'microsoft YaHei';
 
 }

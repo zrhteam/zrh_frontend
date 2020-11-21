@@ -102,9 +102,9 @@
 </template>
 
 <script>
-import PrjEHSDataAnalysis2 from "@/components/PrjEHSDataAnalysis2.vue";
-import PrjEHSDataAnalysis3 from "@/components/PrjEHSDataAnalysis3.vue";
-import PrjCurrentCorrectionRate from "@/components/PrjCurrentCorrectionRate.vue";
+import PrjEHSDataAnalysis2 from "@/components/views/Project/PrjEHSDataAnalysis2.vue";
+import PrjEHSDataAnalysis3 from "@/components/views/Project/PrjEHSDataAnalysis3.vue";
+import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
 
 export default {
   name: "PrjEHSDataAnalysis",

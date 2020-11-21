@@ -48,7 +48,7 @@
                 params.append('username', this.username);
                 params.append('password', this.password);
                 axios.post(`http://localhost:5000/api/login`, params)
-                    .then((response) => {debugger
+                    .then((response) => {
                     var jsonObj = JSON.parse(JSON.stringify(response));
                     console.log(JSON.stringify(jsonObj));
                     console.log(response);
