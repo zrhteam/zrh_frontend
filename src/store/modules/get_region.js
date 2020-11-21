@@ -16,9 +16,6 @@ const state = {
     //得到所有项目中出现隐患数量排名前10的隐患
     risk_number_top: {},
 
-
-
-
     data: []
 }
 

@@ -231,11 +231,11 @@
 
 <script>
 import dataService from "@/service/dataService";
-import FireHazardIndex from "@/components/FireHazardIndex.vue";
-import checkbox from "@/components/checkbox.vue";
-import SafetyIndexHistogram from "@/components/SafetyIndexHistogram.vue";
+import FireHazardIndex from "@/components/views/functions/FireHazardIndex.vue";
+import checkbox from "@/components/views/functions/checkbox.vue";
+import SafetyIndexHistogram from "@/components/views/functions/SafetyIndexHistogram.vue";
 import RegionNumberHistogram from "@/components/views/region/RegionNumberHistogram.vue";
-import RiskDistribution from "@/components/RiskDistribution.vue";
+import RiskDistribution from "@/components/views/functions/RiskDistribution.vue";
 import * as d3 from "d3";
 
 function sortNumber(attr, rev){

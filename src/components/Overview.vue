@@ -20,7 +20,7 @@
 <script>
 // import axios from "axios";
 import dataService from "@/service/dataService";
-import OverviewLeftSide from "@/components/OverviewLeftSide.vue";
+import OverviewLeftSide from "@/components/views/overview/OverviewLeftSide.vue";
 import {mapState, mapGetters} from "vuex"
 import * as d3 from "d3/dist/d3.js";
 

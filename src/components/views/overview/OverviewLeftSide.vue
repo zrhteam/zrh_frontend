@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       form: {
-        cust_name: '',
+        cust_name: '宋城壹号',
         ctr_name: '',
         project_name: '',
       }

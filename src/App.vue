@@ -55,4 +55,19 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.boundary {
+  border: dashed red 1px;
+  border-width: 1px;
+}
+
+.boundary-B {
+  border: dashed #4363ce 1px;
+  border-width: 1px;
+}
+
+.boundary-C {
+  border: dashed #58ce43 1px;
+  border-width: 1px;
+}
 </style>

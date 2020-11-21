@@ -1,65 +1,63 @@
 <template>
   <el-row>
-    <el-row>
-      <el-col :span="12">
-        <div class="grid-content bg-purple">
-          <div>
-            <span>所有项目未整改高风险隐患图片</span>
-            <div style="display: none">
-              {{ getImage }}
-            </div>
+    <el-col :span="12">
+      <div class="grid-content bg-purple">
+        <div>
+          <span>所有项目未整改高风险隐患图片</span>
+          <div style="display: none">
+            {{ getImage }}
           </div>
-          <div>
-            <el-row>
-              <el-col :span="12">
-                <!--                  图片1-->
-                <div class="grid-content bg-purple">
-                  <div class="demo-image__placeholder">
-                    <div class="block">
-                      <img src="images0" id="img0" style="width: 500px; height: 500px"/>
-                    </div>
+        </div>
+        <div>
+          <el-row>
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <div class="demo-image__placeholder">
+                  <div class="block">
+                    <img src="images0" id="img0" style="width: 500px; height: 500px"/>
                   </div>
-<!--                  <div class="login-center-img"><img src="images0"/></div>-->
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div class="grid-content bg-purple-light">
-                  <!--                  图片2-->
-                  <div class="demo-image__placeholder">
-                    <div class="block">
-                      <img src="images1" id="img1" style="width: 500px; height: 500px"/>
-                    </div>
+                <!--                  <div class="login-center-img"><img src="images0"/></div>-->
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="grid-content bg-purple-light">
+                <!--                  图片2-->
+                <div class="demo-image__placeholder">
+                  <div class="block">
+                    <img src="images1" id="img1" style="width: 500px; height: 500px"/>
                   </div>
-<!--                  <div class="login-center-img"><img src="images1" id="img1"/></div>-->
                 </div>
-              </el-col>
-            </el-row>
-          </div>
+                <!--                  <div class="login-center-img"><img src="images1" id="img1"/></div>-->
+              </div>
+            </el-col>
+          </el-row>
         </div>
-      </el-col>
-      <el-col :span="12">
-        <div style="display: none">
-          {{ getNumberTop }}
+      </div>
+    </el-col>
+    <el-col :span="12">
+      <div style="display: none">
+        {{ getNumberTop }}
+      </div>
+      <div class="grid-content bg-purple-light">
+        <div id="subtitle">
+          <span>所有项目累计重复出现隐患前十名</span>
         </div>
-        <div class="grid-content bg-purple-light">
-          <div id="subtitle">
-            <span>所有项目累计重复出现隐患前十名</span>
-          </div>
-          <div>
-            <el-table
-                :data="tableData"
-                stripe
-                style="width: 100%">
-              <el-table-column
-                  prop="description"
-                  label="隐患描述">
-              </el-table-column>
-            </el-table>
-          </div>
+        <div>
+          <el-table
+              :data="tableData"
+              stripe
+              style="width: 100%">
+            <el-table-column
+                prop="description"
+                label="隐患描述">
+            </el-table-column>
+          </el-table>
         </div>
-      </el-col>
-    </el-row>
+      </div>
+    </el-col>
   </el-row>
+
 </template>
 
 <script>
@@ -88,11 +86,11 @@ export default {
           if (count >= 2) {
             break
           }
-          if(count == 0){
+          if (count == 0) {
             document.getElementById('img0').src = 'http://' + data[i][j]
             // this.images0 = 'http://' + data[i][j]
           }
-          if(count == 1){
+          if (count == 1) {
             document.getElementById('img1').src = 'http://' + data[i][j]
             // this.images1 = 'http://' + data[i][j]
           }
