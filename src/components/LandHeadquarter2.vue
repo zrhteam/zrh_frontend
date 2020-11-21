@@ -47,7 +47,7 @@
 <script>
 import IndexHistogram from "@/components/IndexHistogram.vue";
 import NumberHistogram from "@/components/NumberHistogram.vue";
-import * as d3 from "d3";
+import * as d3 from "d3/dist/d3.js";
 import dataService from "@/service/dataService";
 
 export default {

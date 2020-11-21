@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import * as d3 from 'd3'
+import * as d3 from 'd3/dist/d3.js'
 
 export default {
   name: "NumberHistogram",
@@ -17,7 +17,6 @@ export default {
     }
   },
   mounted() {
-    console.log('tvvvv');
     this.getlist();
   },
   created() {
@@ -49,46 +48,52 @@ export default {
       //x轴比例尺
       // let ranges = d3.range(datas.length)//ranges是datas数组下标集合的一个数组
       /*注意:4版本后下面的这种用法好像不可以了*/
-      var xScale1 = d3.scale.ordinal()
+      // var xScale1 = d3.scale.ordinal()
+      //     .domain(datas.map(d => d.key))
+      //     .rangeRoundBands([0, width - padding.left - padding.right])
+      var xScale1 = d3.scaleBand()
           .domain(datas.map(d => d.key))
-          .rangeRoundBands([0, width - padding.left - padding.right])
-      var xScale = d3.scale.ordinal()
-          .domain(d3.range(datas.length))
-          .rangeRoundBands([0, width - padding.left - padding.right]);
+          .range([0, width - padding.left - padding.right])
+      // var xScale = d3.scale.ordinal()
+      //     .domain(d3.range(datas.length))
+      //     .rangeRoundBands([0, width - padding.left - padding.right]);
       // .round(0.05);
 
-      // let xScale = d3.scaleBand()
-      //     .domain(ranges) //这里装的是一个数组
-      //     .range([0, width - padding.left - padding.right])
+      let xScale = d3.scaleBand()
+          .domain(d3.range(datas.length)) //这里装的是一个数组
+          .rangeRound([0, width - padding.left - padding.right])
+          .round(0.05)
 
       //y轴比例尺
       let values = datas.map(d => d.value)
       // let min = d3.min(datas.value);
       // let max = d3.max(datas.value);
       let max = d3.max(values);
-      // let yScale = d3.scaleLinear()
+      let yScale = d3.scaleLinear()
+          .domain([0, max])//值域范围，即y轴的最大最小值
+          .range([height - padding.top - padding.bottom, 0]);
+      // let yScale1 = d3.scale.linear()
       //     .domain([0, max])//值域范围，即y轴的最大最小值
       //     .range([height - padding.top - padding.bottom, 0]);
-      let yScale1 = d3.scale.linear()
+      // let yScale = d3.scale.linear()
+      //     .domain([0, max])//值域范围，即y轴的最大最小值
+      //     .range([height - padding.top - padding.bottom, 0]);
+      let yScale1 = d3.scaleLinear()
           .domain([0, max])//值域范围，即y轴的最大最小值
           .range([height - padding.top - padding.bottom, 0]);
-      let yScale = d3.scale.linear()
-          .domain([0, max])//值域范围，即y轴的最大最小值
-          .range([height - padding.top - padding.bottom, 0]);
-
       //定义坐标轴
-      //X轴
-      // let xAxis = d3.axisBottom(xScale);
-      // //Y轴
-      // let yAxis = d3.axisLeft(yScale);
+      // X轴
+      let xAxis = d3.axisBottom(xScale1);
+      //Y轴
+      let yAxis = d3.axisLeft(yScale1);
       // alert(d3.select('svg').length)
       // if (d3.select('svg').length >= 1) {
-      let xAxis = d3.svg.axis()
-          .scale(xScale1)       //指定比例尺
-          .orient("bottom");    //指定刻度的方向
-      let yAxis = d3.svg.axis()
-          .scale(yScale1)       //指定比例尺
-          .orient("left");    //指定刻度的方向
+      // let xAxis = d3.svg.axis()
+      //     .scale(xScale1)       //指定比例尺
+      //     .orient("bottom");    //指定刻度的方向
+      // let yAxis = d3.svg.axis()
+      //     .scale(yScale1)       //指定比例尺
+      //     .orient("left");    //指定刻度的方向
 
       //矩形之间的空白
       let rectPadding = 4;
@@ -105,8 +110,8 @@ export default {
           .attr("y", function (d) {//生成的矩形距离画布顶部的距离
             return yScale(d);
           })
-          // .attr("width", xScale.bandwidth() - rectPadding)//根据比例尺来计算出矩形的宽度
-          .attr("width", xScale.rangeBand() - rectPadding)
+          .attr("width", xScale.bandwidth() - rectPadding)//根据比例尺来计算出矩形的宽度
+          // .attr("width", xScale.rangeBand() - rectPadding)
           .attr("height", function (d) {
             return height - padding.top - padding.bottom - yScale(d);//画布高度-距离顶部-距离底部-矩形距离顶部的高算出矩形的高度
           })
