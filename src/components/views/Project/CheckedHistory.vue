@@ -18,6 +18,7 @@ export default {
   name: "CheckedHistory",
   computed: {
     getPrjNumberChange() {
+      console.log(this.$store.state.get_project.prj_number_change)
       return this.$store.state.get_project.prj_number_change;
     }
   }

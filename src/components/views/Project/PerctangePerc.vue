@@ -3,16 +3,25 @@
     <div>
       <span>{{ context.title }}</span>
     </div>
-    <div>
-      <!--        所有隐患子系统占比（可筛选专业）柱状图-->
+    <div id="bar_chart">
+      <!--        占比（可筛选专业）柱状图-->
+
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "RiskProjPercentage",
-  props: ['context']
+  props: ['context'],
+  methods: {
+
+  },
+  mounted() {
+    this.getM()
+    // console.log(this.props)
+  }
 }
 </script>
 

@@ -5,11 +5,16 @@
       <el-row>
         <el-col :span="24">
           <div id="title" class="grid-content bg-purple-dark" style="text-align: left">
-            <span>{{ prj_name }}EHS数据大屏</span></div>
+            <span>{{ prj_name }}EHS数据大屏</span>
+          </div>
         </el-col>
       </el-row>
     </el-header>
     <el-main>
+      <el-row class="boundary">
+        <!--            历次粒度-->
+        <Granularity></Granularity>
+      </el-row>
       <el-row class="boundary">
         <el-col class="boundary-B" :span="8">
           <!-- 安全指数部分-->
@@ -52,32 +57,36 @@
         </el-col>
       </el-row>
 
-      <el-row class="boundary" style="margin-top:10px">
+      <el-row class="boundary">
         <el-col class="boundary-C" :span="6">
+          <!--          最近一次检查隐患专业占比-->
           <LastCheckPerc></LastCheckPerc>
         </el-col>
         <el-col class="boundary-C" :span="6">
+          <!--          历次检查累计隐患专业占比-->
           <CheckHistoryPerc></CheckHistoryPerc>
         </el-col>
         <el-col class="boundary-C" :span="6">
+          <!--          当前未整改高风险隐患列表-->
           <UnsolvedList></UnsolvedList>
         </el-col>
         <el-col class="boundary-C" :span="6">
+          <!--          当前未整改高风险隐患图片-->
           <UnsolvedImageList></UnsolvedImageList>
         </el-col>
       </el-row>
-
+      <!--占比-->
       <el-row class="boundary" style="margin-top:10px">
         <el-col :span="4">
-          <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）'}"></PerctangePerc>
+          <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>
         </el-col>
         <el-col :span="4">
-          <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）'}"></PerctangePerc>
+          <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason'}"></PerctangePerc>
         </el-col>
         <el-col :span="4">
-          <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）'}"></PerctangePerc>
+          <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></PerctangePerc>
         </el-col>
-
+        <!--历史重复出现隐患前五名-->
         <el-col :span="12" class="boundary-B">
           <HistoryTopRisk class="boundary-B"></HistoryTopRisk>
         </el-col>
@@ -89,6 +98,7 @@
 
 <script>
 
+import Granularity from "@/components/views/Project/Granularity.vue";
 
 import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
 import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
@@ -106,6 +116,7 @@ import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
 export default {
   name: "PrjEHSDataAnalysis",
   components: {
+    Granularity,
     HistoryTopRisk,
     PerctangePerc,
     LastCheckPerc,
@@ -124,7 +135,6 @@ export default {
       prj_name: '',
       safety_index: '',
       elevator_index: '',
-
     }
   },
   computed: {
@@ -132,15 +142,23 @@ export default {
 
     getNumberChange() {
       let data = this.$store.state.get_project.prj_number_change;
-      debugger
       console.log(this.$store.state.get_project.prj_number_change)
       console.log(data)
     }
   },
   created() {
-    // debugger
     this.$store.dispatch('get_project/getInitProjectRiskNumber')
-    this.$store.dispatch('get_project/getInitProjectNumberChange')
+    // this.$store.dispatch('get_project/getInitProjectNumberChange')
+    this.$store.dispatch('get_project/getInitProjectNearestPerception')
+    // 当前未整改高风险隐患列表
+    this.$store.dispatch('get_project/getInitPrjRisk')
+    // 当前未整改高风险隐患图片
+    this.$store.dispatch('get_project/getInitProjectImage')
+
+    //占比
+
+    //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
+    this.$store.dispatch('get_project/getInitProjectRiskTop')
   }
 }
 </script>

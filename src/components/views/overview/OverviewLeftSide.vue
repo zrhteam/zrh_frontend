@@ -37,7 +37,7 @@ export default {
       form: {
         cust_name: '宋城壹号',
         ctr_name: '宋城壹号',
-        project_name: '宋城壹号',
+        project_name: '宋城壹号01',
       }
     }
   },

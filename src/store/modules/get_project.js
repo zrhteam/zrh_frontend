@@ -5,6 +5,8 @@ import dataService from '@/service/dataService'
 const state = {
     //向后端发送的参数
     params: {},
+    //向后端发送的粒度
+    g_params: {},
     //基于项目级展示当前整改率
     prj_rectification: {},
     //基于项目级展示历次发现的不同风险等级的隐患数量
@@ -21,7 +23,10 @@ const state = {
     prj_image: [],
     //基于项目级展示不同专业所有隐患子系统占比情况
     prj_system: {},
-
+    //致因阶段占比
+    prj_reason: {},
+    //隐患分布区域占比
+    prj_region: {},
     data: []
 }
 
@@ -30,6 +35,10 @@ const getters = {
     //向后端发送的参数
     renderParams(params) {
         return state.params;
+    },
+    //向后端发送的粒度参数
+    renderGParams(params) {
+        return state.g_params;
     },
     //承载变化的项目级整改率
     renderPrjRectification(state) {
@@ -58,6 +67,13 @@ const getters = {
     //基于项目级展示不同专业所有隐患子系统占比情况
     renderPrjSystem(state) {
         return state.prj_system;
+    },
+    //占比
+    renderPrjReason(state) {
+        return state.prj_reason;
+    },
+    renderPrjRegion(state) {
+        return state.prj_region;
     },
     //承载基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     renderPrjRiskTop(state) {
@@ -91,7 +107,7 @@ const actions = {
 
     //得到基于项目级展示历次检查隐患数量变化的情况
     getInitProjectNumberChange(context) {
-        dataService.getInitProjectNumberChange(state.params, function (response) {
+        dataService.getInitProjectNumberChange(state.g_params, function (response) {
             context.commit('changePrjNumberChange', response)
         })
     },
@@ -123,7 +139,17 @@ const actions = {
         })
     },
 
-
+        //占比
+    getInitProjectReason(context) {
+        dataService.getInitProjectReason(state.params, function (response) {
+            context.commit('changePrjReason', response)
+        })
+    },
+    getInitProjectRegionDistribution(context) {
+        dataService.getInitProjectRegionDistribution(state.params, function (response) {
+            context.commit('changePrjRegion', response)
+        })
+    },
 
     //得到基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     getInitProjectRiskTop(context) {
@@ -155,7 +181,7 @@ const mutations = {
     },
 
     //基于项目级展示历次检查隐患数量变化的情况
-    changePrjNumberChange(state, data) {
+    changePrjNumberChange(state, data) {debugger
         console.log(data)
         state.prj_number_change = data
     },
@@ -180,6 +206,17 @@ const mutations = {
 //
 // =======
 // >>>>>>> f6f7baff9ca7b442fa9930f2a1e2f2fd5c38eeef
+    },
+
+    //占比
+    changePrjReason(state, data) {
+        state.prj_reason = data
+        console.log(state.prj_reason)
+    },
+
+    changePrjRegion(state, data) {
+        state.prj_region = data
+        console.log(state.prj_region)
     },
 
     //考虑基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
