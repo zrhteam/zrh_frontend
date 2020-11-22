@@ -36,8 +36,8 @@ export default {
     return {
       form: {
         cust_name: '宋城壹号',
-        ctr_name: '',
-        project_name: '',
+        ctr_name: '宋城壹号',
+        project_name: '宋城壹号',
       }
     }
   },

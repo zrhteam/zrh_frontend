@@ -42,9 +42,9 @@
             <el-col :span="12">
               <IndexView :context="{title:'电气危险指数'}"></IndexView>
             </el-col>
-            <el-col :span="12">
+            <el-colx :span="12">
               <IndexView :context="{title:'燃气危险指数'}"></IndexView>
-            </el-col>
+            </el-colx>
           </el-row>
         </el-col>
         <!--总部3 整改率-->
@@ -79,7 +79,6 @@
           <TopAccumRisk class="boundary-C"></TopAccumRisk>
         </el-col>
       </el-row>
-
     </el-main>
   </el-container>
 </template>
@@ -104,7 +103,6 @@ export default {
   components: {
     AccumRisk,
     Rectification,
-    LandHeadquarter3,
     FireHazardIndex,
     IndexView,
 
@@ -117,7 +115,6 @@ export default {
 
   computed: {
     //页面初始化时得到总部整改率
-
     //得到累计隐患数量
 
   },

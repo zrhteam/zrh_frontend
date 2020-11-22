@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "TopAccumRist",
+  name: "TopAccumRisk",
   data() {
     return {
       images0: '',
