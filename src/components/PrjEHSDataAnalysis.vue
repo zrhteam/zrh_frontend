@@ -78,8 +78,8 @@
           <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）'}"></PerctangePerc>
         </el-col>
 
-        <el-col :span="12">
-          <HistoryTopRisk></HistoryTopRisk>
+        <el-col :span="12" class="boundary-B">
+          <HistoryTopRisk class="boundary-B"></HistoryTopRisk>
         </el-col>
       </el-row>
 

@@ -38,7 +38,9 @@
 export default {
   name: "HistoryTopRisk",
   data() {
-    riskTop:[]
+    return {
+      riskTop:[],
+    }
   },
   methods: {
     getPrjRiskTop() {
