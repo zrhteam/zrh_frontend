@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import RegionNumberHistogram from "@/components/views/Region/RegionNumberHistogram.vue";
+import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
 export default {
   name: "Region3_3",
   components: {RegionNumberHistogram}

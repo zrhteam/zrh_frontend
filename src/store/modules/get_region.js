@@ -85,6 +85,7 @@ const actions = {
     //得到所有项目中出现隐患数量排名前10的隐患
     getInitRegionNumberTop(context) {
         dataService.getInitRegionNumberTop(state.params, function (response) {
+            console.log(response)
             context.commit('changeNumberTop', response)
         })
     }
