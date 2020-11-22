@@ -73,7 +73,6 @@
         <el-col :span="4">
           <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）'}"></PerctangePerc>
         </el-col>
-
         <el-col :span="4">
           <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）'}"></PerctangePerc>
         </el-col>
@@ -92,7 +91,7 @@
 
 <script>
 
-// import PrjEHSDataAnalysis3 from "@/components/views/Project/PrjEHSDataAnalysis3.vue";
+
 import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
 import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
 import CheckedProject from "@/components/views/Project/CheckedProject.vue";
@@ -102,8 +101,9 @@ import LastCheckPerc from "@/components/views/Project/LastCheckPerc.vue";
 import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
 import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
 import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
+
+import HistoryTopRisk from "@/components/views/Project/HistoryTopRisk.vue";
 import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
-import HistoryTopRisk from "@/components/views/Project/HistoryTopRisk";
 
 export default {
   name: "PrjEHSDataAnalysis",
