@@ -52,7 +52,6 @@
         </el-col>
       </el-row>
 
-
       <el-row class="boundary" style="margin-top:10px">
         <el-col class="boundary-C" :span="6">
           <LastCheckPerc></LastCheckPerc>
@@ -67,7 +66,6 @@
           <UnsolvedImageList></UnsolvedImageList>
         </el-col>
       </el-row>
-
 
       <el-row class="boundary" style="margin-top:10px">
         <el-col :span="4">
