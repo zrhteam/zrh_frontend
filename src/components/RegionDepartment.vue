@@ -234,7 +234,7 @@ import dataService from "@/service/dataService";
 import FireHazardIndex from "@/components/views/functions/FireHazardIndex.vue";
 import checkbox from "@/components/views/functions/checkbox.vue";
 import SafetyIndexHistogram from "@/components/views/functions/SafetyIndexHistogram.vue";
-import RegionNumberHistogram from "@/components/views/region/RegionNumberHistogram.vue";
+import RegionNumberHistogram from "@/components/views/Region/RegionNumberHistogram.vue";
 import RiskDistribution from "@/components/views/functions/RiskDistribution.vue";
 import * as d3 from "d3";
 
