@@ -18,9 +18,6 @@ export default {
       }
   },
   created(){
-      //let info = this.$local.fetch("miaov")
-      //this.isLogin = info.login;
-      //this.userName = info.userName
       if(this.$cookies.isKey("status") === true){
          this.isLogin = true
       }

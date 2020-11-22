@@ -32,6 +32,9 @@ const mutations = {
     changeData(state, data) {
         state.data = data
         // console.log(state.data)
+    },
+    getLocation(state, loc){
+        return state.map.latLngToLayerPoint(loc)
     }
 }
 
