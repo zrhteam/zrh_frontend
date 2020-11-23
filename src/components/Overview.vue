@@ -64,20 +64,12 @@ export default {
     this.map_width = window.getComputedStyle(m).width
     this.map_height = window.getComputedStyle(m).height
 
-    let center_position = this.map.latLngToContainerPoint([22, 107])
     this.svg = d3.select(this.$el).select('svg');
-    let circle = this.svg.append('circle')
-        .attr('cx', center_position.x)
-        .attr('cy', center_position.y)
-        .attr('fill', 'yellow')
-        .attr('fill-opacity', 0.5)
-        .attr('r', 5);
-
 
     let _this = this;
     this.map.on('drag', (e) => {
       let center_position = this.map.latLngToContainerPoint([22, 107]);
-      circle.attr('cx', center_position.x).attr('cy', center_position.y)
+
       if (this.locContainers) {
         this.locContainers.each(function (d) {
           let loc = _this.map.latLngToContainerPoint(d.locs)
@@ -88,7 +80,7 @@ export default {
 
     this.map.on('move', (e) => {
       let center_position = this.map.latLngToContainerPoint([22, 107]);
-      circle.attr('cx', center_position.x).attr('cy', center_position.y);
+
       if (this.locContainers) {
         this.locContainers.each(function (d) {
           let loc = _this.map.latLngToContainerPoint(d.locs)
