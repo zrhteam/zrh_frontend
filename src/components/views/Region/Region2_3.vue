@@ -10,7 +10,7 @@
       </div>
       <!--              在这里展示三维图-->
       <div>
-        <RiskDistribution></RiskDistribution>
+<!--        <RiskDistribution></RiskDistribution>-->
       </div>
     </div>
   </div>

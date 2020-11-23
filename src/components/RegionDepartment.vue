@@ -64,15 +64,15 @@
 
       <el-row class="boundary">
 <!--项目累计出现次数前10的隐患及其对应数量-->
-        <el-col :span="8">
+        <el-col :span="12">
           <Region3_1></Region3_1>
         </el-col>
 <!--项目安全指数排名-->
-        <el-col :span="8">
+        <el-col :span="6">
           <Region3_2></Region3_2>
         </el-col>
 <!--项目累计高风险数量排名-->
-        <el-col :span="8">
+        <el-col :span="6">
           <Region3_3></Region3_3>
         </el-col>
 

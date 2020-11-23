@@ -55,12 +55,17 @@ export default {
       riskNumberTop: [],
     }
   },
-  methods: {
+  computed: {
+
     getRiskNumberTop() {
+
+
       let data = this.$store.state.get_region.risk_number_top;
       console.log(this.$store.state.get_region.risk_number_top)
-      console.log(data)
 
+      // let str = '前端接收到的数据'
+      // console.log(str)
+      console.log(data)
       let dataArray = []
       for (let i in data) {
         let obj = {

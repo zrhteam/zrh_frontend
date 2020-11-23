@@ -22,6 +22,11 @@
 <script>
 export default {
   name: "Region2_2",
+  data(){
+    return{
+      images: ''
+    }
+  },
   computed: {
     getImage() {
       let data = this.$store.state.get_region.images;
@@ -34,7 +39,7 @@ export default {
           }
           if (count == 0) {
             document.getElementById('img').src = 'http://' + data[i][j]
-            this.images = 'http://' + data[i][j]//存在的问题是，会把所有图片都显示在上面，要改成轮播形式
+            this.images = 'http://' + data[i][j]//存在的问题是，会把所有图片都显示在上面，要改成轮播形式或者只显示一张图片
           }
           count++
         }
