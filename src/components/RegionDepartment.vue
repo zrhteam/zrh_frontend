@@ -168,7 +168,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/ibdex.css");
+@import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");
 
 #title {
   text-align: left;
