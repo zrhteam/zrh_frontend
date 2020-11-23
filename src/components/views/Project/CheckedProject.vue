@@ -3,13 +3,14 @@
     <div style="display: none">
       {{ getPrjRiskLevelData }}
     </div>
-    <div class="text item">
+    <div class="text item level4">
       <span>历次检查累计发现隐患数量</span>
     </div>
     <el-table
         :data="PrjRiskLevelData"
         border
-        style="width: 100%">
+        style="width: 100%" class="level5"
+        :header-cell-style="{color:'color: #3e78f3;'}">
       <el-table-column
           prop="risk"
           label="隐患风险等级"
@@ -77,5 +78,24 @@ export default {
 </script>
 
 <style scoped>
+/*最外层透明*/
+/deep/ .el-table, /deep/ .el-table__expanded-cell{
 
+  background-color: transparent;
+}
+/* 表格内背景颜色 */
+/deep/ .el-table th,
+/deep/ .el-table tr,
+/deep/ .el-table td {
+
+  background-color: transparent;
+}
+
+.el-table-column {
+  color: #3e78f3;
+}
+
+.el-table td div.cell {
+  color: #f80f07;
+}
 </style>

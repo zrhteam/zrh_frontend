@@ -1,7 +1,6 @@
 <template>
-  <div class="grid-content bg-purple boundary">
-    <div
-        style="color: rgb(0, 0, 0); font-family: 'microsoft YaHei'; font-weight: bold; font-style: normal; max-width: 100%; line-height: 16px; font-size: 16px; height: 16px;">
+  <div class="grid-content bg-purple boundary plus_top">
+    <div class="level13">
       <span>总部整改率</span>
     </div>
     <div
@@ -17,12 +16,22 @@ export default {
   name: "Rectification",
   computed: {
     getRectificationRate() {
-      return this.$store.state.get_headquarter.rectification ;
+      let rate = this.$store.state.get_headquarter.rectification;
+      let val = parseFloat(rate).toFixed(2)
+      return this.current_correction_rate = val + '%';
     },
   }
 }
 </script>
 
 <style scoped>
+.level13 {
+  font-size: 16px;
+  font-family: "Microsoft YaHei";
+  color: #ffffff;
+}
 
+.plus_top {
+
+}
 </style>

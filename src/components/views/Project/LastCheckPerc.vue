@@ -5,7 +5,7 @@
     </div>
     <!--          最近一次检查隐患专业占比 饼图-->
     <div>
-      <div>
+      <div class="level4">
         <span>最近一次检查隐患专业占比</span>
       </div>
       <div id="pie" style="height: 300px; width: 400px"></div>
@@ -37,6 +37,7 @@ export default {
       let option = {
         tooltip: {
         },
+        color: ['#5182e4', '#3fb27e', '#9bcc66', '#f7cb4a', '#00b9ff', '#03a1ea'],
         series: [
           {
             type: 'pie',
