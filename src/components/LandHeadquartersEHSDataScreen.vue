@@ -10,7 +10,7 @@
       </el-row>
     </el-header>
     <el-main>
-      <el-row class="boundary-B">
+      <el-row class="boundary-B part1">
         <!--总部1 总部安全指数一-->
         <el-col :span="6">
           <div class="grid-content bg-purple boundary">
@@ -27,7 +27,7 @@
           </div>
         </el-col>
         <!--总部2 专业指数-->
-        <el-col :span="6" class="boundary">
+        <el-col :span="6" class="boundary part1">
           <el-row>
             <el-col :span="12">
               <IndexView :context="{title:'消防危险指数'}"></IndexView>
@@ -46,11 +46,11 @@
           </el-row>
         </el-col>
         <!--总部3 整改率-->
-        <el-col :span="6">
+        <el-col :span="6" class="part1">
           <Rectification></Rectification>
         </el-col>
         <!--总部4 隐患数量-->
-        <el-col :span="6">
+        <el-col :span="6" class="part1">
           <AccumRisk></AccumRisk>
         </el-col>
       </el-row>
@@ -58,22 +58,22 @@
       <el-row>
         <el-row>
           <!--总部5 项目安全指数排名-->
-          <el-col :span="12">
+          <el-col :span="12" class="part2">
             <ProjectIndex></ProjectIndex>
           </el-col>
           <!--总部6 项目累计好风险数量排名-->
-          <el-col :span="12">
+          <el-col :span="12" class="part2">
             <HighProjectRisk></HighProjectRisk>
           </el-col>
         </el-row>
       </el-row>
       <el-row>
         <!--总部7 未整改高风险图片-->
-        <el-col :span="12">
+        <el-col :span="12" class="part2">
           <HighRiskImages class="boundary-C"></HighRiskImages>
         </el-col>
         <!--总部8 项目累计好风险数量排名-->
-        <el-col :span="12">
+        <el-col :span="12" class="part2">
           <TopAccumRisk class="boundary-C"></TopAccumRisk>
         </el-col>
       </el-row>
@@ -138,6 +138,18 @@ export default {
 <style scoped>
 @import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");
 
+.part1 {
+  background-color: #1b1d32;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.part2 {
+  background-color: #21253c;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
 #title {
   text-align: left;
   font-size: 28px;
@@ -160,7 +172,6 @@ i {
 .chart-image-icon {
   background-image: url('svg/card-skin-1.svg');
   font-family: 'microsoft YaHei';
-
 }
 
 .chart-text-title {

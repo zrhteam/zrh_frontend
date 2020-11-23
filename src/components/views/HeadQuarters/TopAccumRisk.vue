@@ -7,10 +7,9 @@
       <div id="subtitle" class="level4">
         <span>所有项目累计重复出现隐患前十名</span>
       </div>
-      <div>
+      <div><!--            stripe-->
         <el-table
             :data="tableData"
-            stripe
             style="width: 100%">
           <el-table-column
               prop="description"
@@ -107,4 +106,5 @@ export default {
 
   background-color: transparent;
 }
+
 </style>

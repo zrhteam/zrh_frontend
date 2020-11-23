@@ -193,9 +193,13 @@ export default {
   background-color: #1b1d32;
   text-align: left;
   color: #ffffff;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .part2 {
   background-color: #242943;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 </style>

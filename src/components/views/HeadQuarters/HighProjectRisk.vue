@@ -40,8 +40,22 @@ export default {
           dimensions: ['name', 'count'],
           source: arr
         },
-        xAxis: {type: 'category'},
-        yAxis: {},
+        xAxis: {type: 'category',
+          axisLabel: {
+            interval: 0,
+            rotate: 30
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff',
+              fontSize: 8
+            }
+          }},
+        yAxis: {axisLine: {
+            lineStyle: {
+              color: '#ffffff'
+            }
+          }},
         series: [
           {
             type: 'bar',
