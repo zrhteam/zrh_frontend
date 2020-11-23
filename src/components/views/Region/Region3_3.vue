@@ -5,7 +5,7 @@
     </div>
     <div id="mydiv4">
       <!--              这里写累计高风险数量排名的柱状图-->
-<!--      <RegionNumberHistogram></RegionNumberHistogram>-->
+      <RegionNumberHistogram></RegionNumberHistogram>
     </div>
   </div>
 </template>

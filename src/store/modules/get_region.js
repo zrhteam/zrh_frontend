@@ -15,6 +15,10 @@ const state = {
     images: {},
     //得到所有项目中出现隐患数量排名前10的隐患
     risk_number_top: {},
+    //项目安全指数排名
+    safety_index: {},
+    //项目累计高风险数量排名
+    high_risk_number: {},
 
     data: []
 }
@@ -44,7 +48,16 @@ const getters = {
     //承载变化的所有项目中出现隐患数量排名前10的隐患
     renderRiskNumberTop(state) {
         return state.risk_number_top;
+    },
+    //承载变化的项目安全指数排名
+    renderSafetyIndex(state){
+        return state.safety_index;
+    },
+    //承载变化的项目累计高风险数量排名
+    renderHighRiskRank(state){
+        return state.high_risk_rank;
     }
+
 
 }
 
@@ -88,6 +101,22 @@ const actions = {
             console.log(response)
             context.commit('changeNumberTop', response)
         })
+    },
+
+    //得到项目安全指数排名的结果
+    getInitRegionSafetyIndex(context) {
+        dataService.getInitRegionSafetyIndex(state.params, function (response) {
+            console.log(response)
+            context.commit('changeSafetyIndex', response)
+        })
+    },
+
+    //得到项目累计高风险数量排名的结果
+    getInitRegionRiskRank(context) {
+        dataService.getInitRegionRiskRank(state.params, function (response) {
+            console.log(response)
+            context.commit('changeHighRiskRank', response)
+        })
     }
 
 
@@ -118,6 +147,16 @@ const mutations = {
     //考虑所有项目中出现隐患数量排名前10的隐患变化
     changeNumberTop(state, data) {
         state.risk_number_top = data
+    },
+
+    //考虑项目安全指数排名的结果
+    changeSafetyIndex(state, data) {
+        state.safety_index = data
+    },
+
+    //考虑项目中累计高风险数量排名的结果
+    changeHighRiskRank(state, data) {
+        state.high_risk_rank = data
     }
 }
 
