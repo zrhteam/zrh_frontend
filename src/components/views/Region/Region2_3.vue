@@ -1,6 +1,6 @@
 <template>
   <div class="grid-content bg-purple">
-    <div>
+    <div class="level4">
       <span>所有项目累计发现隐患专业分布</span>
     </div>
     <div>

@@ -4,7 +4,7 @@
       {{ getNoRectificationRisk }}
     </div>
     <div class="grid-content bg-purple-light">
-      <div class="text list">
+      <div class="level4">
         <span>项目当前未整改高风险隐患列表</span>
       </div>
     </div>
@@ -56,5 +56,16 @@ export default {
 </script>
 
 <style scoped>
+/*最外层透明*/
+/deep/ .el-table, /deep/ .el-table__expanded-cell{
 
+  background-color: transparent;
+}
+/* 表格内背景颜色 */
+/deep/ .el-table th,
+/deep/ .el-table tr,
+/deep/ .el-table td {
+
+  background-color: transparent;
+}
 </style>

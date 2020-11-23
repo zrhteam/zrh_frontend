@@ -4,7 +4,7 @@
       {{ getRiskNumberTop }}
     </div>
     <div class="grid-content bg-purple-light">
-      <div id="subtitle1">
+      <div id="subtitle1" class="level4">
         <span>项目累计出现隐患前十条</span>
       </div>
       <div>
@@ -87,5 +87,16 @@ export default {
 </script>
 
 <style scoped>
+/*最外层透明*/
+/deep/ .el-table, /deep/ .el-table__expanded-cell{
 
+  background-color: transparent;
+}
+/* 表格内背景颜色 */
+/deep/ .el-table th,
+/deep/ .el-table tr,
+/deep/ .el-table td {
+
+  background-color: transparent;
+}
 </style>

@@ -3,8 +3,7 @@
     <div style="display: none">
       {{ getPrjNumberChange }}
     </div>
-    <div
-        style="color: rgb(0, 0, 0); font-family: 'microsoft YaHei'; font-weight: bold; font-style: normal; max-width: 100%; line-height: 16px; font-size: 16px; height: 16px;">
+    <div class="level4">
       <span>历次检查隐患数量变化</span>
     </div>
     <div id="history_chart" style="height: 400px; width: 350px"> </div>
