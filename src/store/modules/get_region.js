@@ -110,14 +110,14 @@ const mutations = {
         state.no_rectification_risk = data
     },
 
-    //考虑所有项目中出现隐患数量排名前10的隐患变化
-    changeNumberTop(state, data) {
-        state.risk_number_top = data
-    },
-
     //考虑未整改隐患图片
     changeImage(state, data) {
         state.images = data
+    },
+
+    //考虑所有项目中出现隐患数量排名前10的隐患变化
+    changeNumberTop(state, data) {
+        state.risk_number_top = data
     }
 }
 

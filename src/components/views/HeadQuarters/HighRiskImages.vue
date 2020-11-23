@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: "HighRistImages",
+  name: "HighRiskImages",
   data() {
     return {
       images0: '',

@@ -33,7 +33,7 @@ export default {
     getNoRectificationRisk() {
       let data = this.$store.state.get_region.no_rectification_risk.note_list;
       console.log(this.$store.state.get_region.no_rectification_risk.note_list)
-      console.log(data)
+      //console.log(data)
 
       let dataArray = []
       let reg = RegExp(/测试/)
