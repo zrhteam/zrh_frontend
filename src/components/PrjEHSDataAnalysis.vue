@@ -21,9 +21,12 @@
           <el-row>
             <el-col :span="24">
               <div class="safety_index" style="height: 100px">
-                <div class="grid-content bg-purple-dark"
+                <div
                      style="color: rgb(126, 210, 250);font-family: ‘Microsoft YaHei’;font-weight: bold;font-style: normal;line-height: normal;float: left;font-size: 28.38px;margin-left: 150px;margin-top: 30px">
-                  <span>安全指数 {{ safety_index }}</span>
+                  <span>安全指数</span>
+                </div>
+                <div class="level10">
+                  <span>81.50{{ safety_index }}</span>
                 </div>
               </div>
             </el-col>
@@ -139,7 +142,6 @@ export default {
   },
   computed: {
     //得到累计隐患数量
-
     getNumberChange() {
       let data = this.$store.state.get_project.prj_number_change;
       console.log(this.$store.state.get_project.prj_number_change)
@@ -156,6 +158,9 @@ export default {
     this.$store.dispatch('get_project/getInitProjectImage')
 
     //占比
+    this.$store.dispatch('get_project/getInitProjectSystem')
+    this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+    this.$store.dispatch('get_project/getInitProjectReason')
 
     //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     this.$store.dispatch('get_project/getInitProjectRiskTop')
@@ -187,5 +192,14 @@ export default {
 
 .index_box {
   padding-top: 50px;
+}
+
+.level10 {
+  font-size: 39px;
+  font-family: Avenir;
+  color: #ffffff;
+  line-height: normal;
+  margin-left: 300px;
+  margin-top: 30px;
 }
 </style>

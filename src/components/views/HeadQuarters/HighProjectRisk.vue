@@ -56,7 +56,7 @@ export default {
     this.drawBarChart();
   },
   methods: {
-    drawBarChart(option) {
+    drawBarChart() {
       let myChart = this.$echarts.init(document.getElementById('number_histogram'))
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(this.getNumberHistogram);

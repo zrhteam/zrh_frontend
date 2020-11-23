@@ -1,9 +1,12 @@
 <template>
   <div>
+    <div style="display: none">
+      {{ getData }}
+    </div>
     <div>
       <span>{{ context.title }}</span>
     </div>
-    <div id="bar_chart">
+    <div id="bar_chart" style="height: 400px; width: 400px">
       <!--        占比（可筛选专业）柱状图-->
 
     </div>
@@ -15,16 +18,164 @@
 export default {
   name: "RiskProjPercentage",
   props: ['context'],
+  data() {
+    return {
+      type: '',
+      bar_chart: 'xx'
+    }
+  },
   methods: {
-
+    drawBarChart() {
+      let myChart;
+      if (this.type == 'system') {
+        if(document.getElementById('bar_chart')) {
+          document.getElementById('bar_chart').id = 'id_system'
+        }
+        myChart = this.$echarts.init(document.getElementById('id_system'))
+      }else if (this.type == 'reason') {
+        if(document.getElementById('bar_chart')) {
+          document.getElementById('bar_chart').id = 'id_reason'
+        }
+        myChart = this.$echarts.init(document.getElementById('id_reason'))
+      }else if (this.type == 'region') {
+        if(document.getElementById('bar_chart')) {
+          document.getElementById('bar_chart').id = 'id_region'
+        }
+        myChart = this.$echarts.init(document.getElementById('id_region'))
+      }
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(this.getData);
+    }
+  },
+  computed: {
+    getData() {
+      console.log('this.context', this.context);
+      let data;
+      let arr = [];
+      if (this.context.type == 'system') {
+        data = this.$store.state.get_project.prj_system
+        for (let i in data) {
+          for (let j in data[i]) {
+            let obj = {
+              name: '',
+              count: 0
+            }
+            obj.name = j;
+            obj.count = data[i][j];
+            arr.push(obj)
+          }
+        }
+        console.log(arr)
+      } else if (this.context.type == 'reason') {
+        data = this.$store.state.get_project.prj_reason
+        console.log(data)
+        let obj1 = {
+          name: '(空白)',
+          count: 0
+        }
+        let obj2 = {
+          name: '施工',
+          count: 0
+        }
+        let obj3 = {
+          name: '运营',
+          count: 0
+        }
+        for (let i in data) {
+          for (let j in data[i]) {
+            if (j == '施工') {
+              obj2.count += data[i][j];
+            } else if (j == '运营') {
+              obj3.count += data[i][j];
+            } else {
+              obj1.count += data[i][j]
+            }
+          }
+        }
+        arr.push(obj1)
+        arr.push(obj2)
+        arr.push(obj3)
+        console.log(arr)
+      } else if (this.context.type == 'region') {
+        data = this.$store.state.get_project.prj_region
+        console.log(data)
+        let obj1 = {
+          name: '(空白)',
+          count: 0
+        }
+        let obj2 = {
+          name: '公共区域',
+          count: 0
+        }
+        let obj3 = {
+          name: '租户区域',
+          count: 0
+        }
+        for (let i in data) {
+          for (let j in data[i]) {
+            if (j == '公共区域') {
+              obj2.count += data[i][j];
+            } else if (j == '租户区域') {
+              obj3.count += data[i][j];
+            } else {
+              obj1.count += data[i][j]
+            }
+          }
+        }
+        arr.push(obj1)
+        arr.push(obj2)
+        arr.push(obj3)
+        console.log(arr)
+      }
+      // for (let i in data) {
+      //   let obj = {
+      //     name: '',
+      //     count: 0
+      //   }
+      //   obj.name = i;
+      //   obj.count = data[i].high_risk_count;
+      //   arr.push(obj)
+      // }
+      console.log(arr)
+      let option = {
+        tooltip: {},
+        dataset: {
+          dimensions: ['name', 'count'],
+          source: arr
+        },
+        xAxis: {
+          type: 'category',
+          axisLabel: {
+            interval: 0,
+            rotate: 30
+          }
+        },
+        yAxis: {},
+        series: [
+          {type: 'bar'}
+        ]
+      };
+      return option
+    },
+  },
+  updated() {
+    this.drawBarChart()
   },
   mounted() {
-    this.getM()
-    // console.log(this.props)
+    console.log('this.context', this.context.type);
+    this.type = this.context.type
+    // if (this.context.type == system) {
+    //   document.getElementById('bar_chart').id = 'id_system'
+    //   let id = 'id_system'
+    this.drawBarChart();
+    // }
   }
 }
 </script>
 
 <style scoped>
-
+/*#bar_chart {*/
+/*  width: 400px;*/
+/*  height: 400px;*/
+/*}*/
 </style>

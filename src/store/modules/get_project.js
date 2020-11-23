@@ -13,6 +13,8 @@ const state = {
     prj_risk_data: {},
     //基于项目级展示历次检查隐患数量变化的情况
     prj_number_change: {},
+    //基于项目级展示历次检查中不同专业隐患占比情况
+    prj_history_prec: {},
     //基于项目级展示最近一次检查不同专业隐患占比情况
     prj_nearest_perception: {},
     //基于项目级展示当前未整改的高风险隐患列表
@@ -47,6 +49,10 @@ const getters = {
     //承载变化的基于项目级展示历次发现的不同风险等级的隐患数量
     renderPrjRiskLevelData(state) {
         return state.prj_risk_data;
+    },
+    //基于项目级展示历次检查中不同专业隐患占比情况
+    renderPrjHistoryPerception(state) {
+        return state.prj_history_prec;
     },
     //承载变化的基于项目级展示最近一次检查不同专业隐患占比情况
     renderPrjNearestPerception(state) {
@@ -95,6 +101,13 @@ const actions = {
     getInitProjectRiskNumber(context) {
         dataService.getInitProjectRiskNumber(state.params, function (response) {
             context.commit('changePrjRiskLevelData', response)
+        })
+    },
+
+    //基于项目级展示历次检查中不同专业隐患占比情况
+    getInitProjectHistoryPerception(context) {
+        dataService.getInitProjectHistoryPerception(state.params, function (response) {
+            context.commit('changePrjHistoryPerception', response)
         })
     },
 
@@ -174,14 +187,20 @@ const mutations = {
         state.prj_nearest_perception = data
     },
 
-    //基于项目级展示最近一次检查不同专业隐患占比情况
+    //基于项目级展示历次检查中不同专业隐患占比情况
     changePrjRiskLevelData(state, data) {
         console.log(data)
         state.prj_risk_data = data
     },
 
+    //基于项目级展示最近一次检查不同专业隐患占比情况
+    changePrjHistoryPerception(state, data) {
+        console.log(data)
+        state.prj_history_prec = data
+    },
+
     //基于项目级展示历次检查隐患数量变化的情况
-    changePrjNumberChange(state, data) {debugger
+    changePrjNumberChange(state, data) {
         console.log(data)
         state.prj_number_change = data
     },
