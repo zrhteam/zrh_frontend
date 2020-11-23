@@ -1,7 +1,6 @@
 <template>
-  <el-card class="box-card">
-<!--    <div width="300px">-->
-      <el-form style="margin-left:10px;margin-right: 10px" ref="form" :model="form">
+  <el-card class="box-card box">
+      <el-form style="margin-left:20px; margin-right: 20px" ref="form" :model="form">
         <el-form-item label="输入层级">
           <el-radio-group v-model="level">
             <el-radio label="项目层级"></el-radio>
@@ -90,5 +89,9 @@ export default {
 .el-aside {
   color: #333;
   text-align: left;
+}
+.box{
+  box-shadow: 0 2px 4px rgba(80, 30, 30, 0.12), 0 0 6px rgba(123, 31, 31, 0.04);
+
 }
 </style>
