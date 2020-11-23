@@ -1,24 +1,26 @@
 <template>
-  <div width="300px">
-    <el-form style="margin-left:10px;margin-right: 10px" ref="form" :model="form">
-      <el-form-item label="输入层级">
-        <el-radio-group v-model="level">
-          <el-radio label="项目层级"></el-radio>
-          <el-radio label="区域层级"></el-radio>
-          <el-radio label="总部层级"></el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item size="mini" label="输入查询内容"></el-form-item>
-      <el-form-item size="mini" prop="name">
-        <div style="width: 200px; margin-left: 20px">
-          <el-input maxlength="100px" size="mini" v-model="form.search_name"></el-input>
-        </div>
-      </el-form-item>
-      <el-form-item>
-        <el-button round size="mini" @click="onSubmitQuery">确认</el-button>
-      </el-form-item>
-    </el-form>
-  </div>
+  <el-card class="box-card">
+<!--    <div width="300px">-->
+      <el-form style="margin-left:10px;margin-right: 10px" ref="form" :model="form">
+        <el-form-item label="输入层级">
+          <el-radio-group v-model="level">
+            <el-radio label="项目层级"></el-radio>
+            <el-radio label="区域层级"></el-radio>
+            <el-radio label="总部层级"></el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item size="mini" label="输入查询内容"></el-form-item>
+        <el-form-item size="mini" prop="name">
+          <div style="width: 200px; margin-left: 20px">
+            <el-input maxlength="100px" size="mini" v-model="form.search_name"></el-input>
+          </div>
+        </el-form-item>
+        <el-form-item>
+          <el-button round size="mini" @click="onSubmitQuery">确认</el-button>
+        </el-form-item>
+      </el-form>
+<!--    </div>-->
+  </el-card>
 </template>
 
 <script>
@@ -43,14 +45,14 @@ export default {
     }
   },
   methods: {
-    onSubmitQuery(){
-      if(this.level == '总部层级'){
+    onSubmitQuery() {
+      if (this.level == '总部层级') {
         this.form.cust_name = this.form.search_name;
         this.onSubmitByHeadquarter();
-      }else if(this.level == '区域层级'){
+      } else if (this.level == '区域层级') {
         this.form.ctr_name = this.form.search_name;
         this.onSubmitByArea();
-      }else if(this.level == '项目层级'){
+      } else if (this.level == '项目层级') {
         this.form.project_name = this.form.search_name;
         this.onSubmitByPrj()
       }

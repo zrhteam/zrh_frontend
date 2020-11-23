@@ -18,10 +18,10 @@
     <!--        <el-main>-->
 
     <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: #13E8E9">
-      <div id="map" bordered :dataSource="$store.state.get_locations.data"></div>
+      <div id="map" bordered :dataSource="$store.state.get_locations.data" style="pointer-events:inherit"></div>
     </div>
 
-    <svg style="position: absolute; z-index: 999998; width: 100%; height: 100%" pointer-events="none"></svg>
+    <svg style="position: absolute; z-index: 99998; width: 100%; height: 100%" pointer-events="none"></svg>
     <Search class="search-component"
             style="position: absolute; z-index: 99999;  top: 50px; left: 50px; background-color: #00192E">
 
@@ -73,6 +73,7 @@ export default {
         .attr('fill-opacity', 0.5)
         .attr('r', 5);
 
+
     let _this = this;
     this.map.on('drag', (e) => {
       let center_position = this.map.latLngToContainerPoint([22, 107]);
@@ -95,8 +96,6 @@ export default {
         })
       }
     });
-
-
   },
 
   methods: {
@@ -150,15 +149,93 @@ export default {
         list.push(val);
       }
 
+      let level1CountRange = d3.extent(list, d => d.risk_level[1]);
+      let level2CountRange = d3.extent(list, d => d.risk_level[2]);
+      let level3CountRange = d3.extent(list, d => d.risk_level[3]);
+      let minCount = d3.min([level1CountRange, level2CountRange, level3CountRange], d => d[0]);
+      let maxCount = d3.max([level1CountRange, level2CountRange, level3CountRange], d => d[1]);
+
+      console.log('minCount  maxCount', minCount, maxCount);
+      let radiusScale = d3.scaleLinear().domain([minCount, maxCount]).range([0, 20]);
+
+      this.radusScale = radiusScale;
       let locContainers = this.svg.selectAll('.locContainer').data(list).enter().append('g');
-      locContainers.append('circle').attr('class', 'locContainer').attr('fill', 'yellow').attr('r', 5);
+      // locContainers.append('circle').attr('class', 'locContainer').attr('fill', 'yellow').attr('r', 5);
       let _this = this;
       locContainers.each(function (d) {
         let loc = _this.map.latLngToContainerPoint(d.locs)
         d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
+
+        let pieChartContainer = d3.select(this).append('g');
+        let risk_list = [];
+        let countSum = 0;
+        for (let key in d.risk_level) {
+          countSum += d.risk_level[key];
+          risk_list.push({
+            'risk': key,
+            'count': d.risk_level[key]
+          })
+        }
+        risk_list.forEach(d => {
+          d.countRatio = d.count / countSum;
+        })
+
+        let generateArc = function (risk) {
+          let arcData = {
+            'risk': risk['risk'],
+            'count': risk.count
+          };
+          if (risk['risk'] == 1) {
+            arcData['startAngle'] = 0 * 120 / 180 * Math.PI;
+            arcData['endAngle'] = 1 * 120 / 180 * Math.PI;
+          } else if (risk['risk'] == 2) {
+            arcData['startAngle'] = 1 * 120 / 180 * Math.PI;
+            arcData['endAngle'] = 2 * 120 / 180 * Math.PI;
+          } else if (risk['risk'] == 3) {
+            arcData['startAngle'] = 2 * 120 / 180 * Math.PI;
+            arcData['endAngle'] = 3 * 120 / 180 * Math.PI;
+          }
+          let arc = d3.arc()
+              .innerRadius(0)
+              .outerRadius(radiusScale(arcData.count))
+              .cornerRadius(0)
+
+          return arc(arcData)
+        };
+
+
+        let countList = [d.risk_level[1], d.risk_level[2], d.risk_level[3]];
+        var arcs = d3.pie()(countList);
+
+        var arc = d3.arc()
+            .innerRadius(5)
+            .outerRadius(12)
+            .cornerRadius(1)
+
+        let colors =
+            [
+              '#25EAED',
+              '#F19041',
+              '#FA574D'
+            ];
+
+        var background = pieChartContainer.selectAll(".arcPath")
+            .data(arcs)
+            .enter()
+            .append("path").attr('class', 'arcPath')
+            .style("fill", function (d, i) {
+              return colors[i];
+            })
+            .attr("d", arc)
+            .attr('stroke-width', 0.5)
+            .attr('stroke', 'white')
+            .attr('fill-opacity', 0.8)
+            .on('mouseover', d => {
+              console.log('mosueover', d)
+            })
+
       })
       this.locContainers = locContainers;
-
     }
   }
 }
