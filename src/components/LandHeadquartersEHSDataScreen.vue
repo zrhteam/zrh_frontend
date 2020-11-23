@@ -4,7 +4,8 @@
     <el-header>
       <el-row>
         <el-col :span="24">
-          <div id="title" class="grid-content bg-purple-dark" style="text-align: left"><span>置地总部EHS数据大屏</span></div>
+          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left"><span>置地总部EHS数据大屏</span>
+          </div>
         </el-col>
       </el-row>
     </el-header>
@@ -13,17 +14,14 @@
         <!--总部1 总部安全指数一-->
         <el-col :span="6">
           <div class="grid-content bg-purple boundary">
-            <div class="chart-image-icon"></div>
-            <div>
-              <div
-                  style="color: rgb(0, 0, 0); font-family: 'microsoft YaHei'; font-weight: bold;
-                  font-style: normal; max-width: 100%; line-height: normal; font-size: 21.09px;">
-                <span>总部危险指数</span>
-              </div>
-              <div
-                  style="color: rgb(59, 162, 255); font-family: Avenir; font-weight: normal;
-                  font-style: normal; line-height: 75.945px; font-size: 50.63px; height: 75.945px;">
-                <span>23,185</span>
+            <div class="chart-image-icon">
+              <div class="plus_top">
+                <div class="level7">
+                  <span>总部危险指数</span>
+                </div>
+                <div class="level8">
+                  <span>23,185</span>
+                </div>
               </div>
             </div>
           </div>
@@ -57,7 +55,7 @@
         </el-col>
       </el-row>
 
-      <el-row style="margin-bottom: 100px">
+      <el-row>
         <el-row>
           <!--总部5 项目安全指数排名-->
           <el-col :span="12">
@@ -154,8 +152,8 @@ i {
   position: absolute;
   left: 0;
   top: 0;
-  width: 25%;
-  height: 100%;
+  width: 20%;
+  height: 80%;
   background-size: 100% 100%;
 }
 
@@ -171,6 +169,10 @@ i {
   font-style: normal;
   line-height: normal;
   font-size: 12px;
+}
+
+.plus_top{
+  margin-top: 100px;
 }
 
 

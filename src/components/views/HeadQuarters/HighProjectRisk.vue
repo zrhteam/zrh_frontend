@@ -1,6 +1,6 @@
 <template>
   <div class="grid-content bg-purple-light">
-    <div>
+    <div class="level4">
       <span>项目高风险数量排名</span>
     </div>
     <div>
@@ -43,7 +43,35 @@ export default {
         xAxis: {type: 'category'},
         yAxis: {},
         series: [
-          {type: 'bar'}
+          {
+            type: 'bar',
+            itemStyle: {
+              normal: {
+                //柱形图圆角，初始化效果
+                barBorderRadius: [10, 10, 0, 0],
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: '#3477fb'},
+                      {offset: 0.5, color: '#2d55a9'},
+                      {offset: 1, color: '#253054'}
+                    ]
+                )
+              }
+            },
+            emphasis: {
+              itemStyle: {
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: '#2378f7'},
+                      {offset: 0.7, color: '#2378f7'},
+                      {offset: 1, color: '#83bff6'}
+                    ]
+                )
+              }
+            }
+          }
         ]
       };
       return option

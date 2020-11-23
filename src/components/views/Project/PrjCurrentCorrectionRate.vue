@@ -4,11 +4,14 @@
       <div style="display: none">
         {{ getRate }}
       </div>
-      <div>
+      <div class="level4">
         <span>当前整改率</span>
       </div>
-      <div id="current_correction_rate">
+      <div id="current_correction_rate" class="cur_level1">
         <span>{{ current_correction_rate }}</span>
+      </div>
+      <div class="cur_level2">
+        <span>整改率</span>
       </div>
     </el-header>
     <el-main>
@@ -27,8 +30,9 @@ export default {
   },
   computed: {
     getRate() {
-      this.current_correction_rate = this.$store.state.get_project.prj_rectification;
-      let val = parseFloat(this.current_correction_rate).toFixed(2)
+      let rate = this.$store.state.get_project.prj_rectification;
+      let val = parseFloat(rate).toFixed(2)
+      this.current_correction_rate = val + '%'
       let option = {
         series: [
           {
@@ -75,4 +79,16 @@ export default {
 </script>
 
 <style scoped>
+.cur_level1 {
+  font-size: 30px;
+  font-family: Avenir;
+  color: #ffffff;
+
+}
+
+.cur_level2 {
+  font-size: 13px;
+  font-family: "Microsoft YaHei";
+  color: #ffffff;
+}
 </style>

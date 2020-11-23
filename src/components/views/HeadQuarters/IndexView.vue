@@ -1,7 +1,10 @@
 <template>
-  <div class="grid-content bg-purple boundary-C">
-    <div class="chart-text-title">
-      <span>{{context.title}}</span>
+  <div class="grid-content bg-purple index boundary-C">
+    <div class="index_box">
+      <span class="level11">{{context.title}}</span>
+      <div>
+        <span class="level9">23</span>
+      </div>
     </div>
   </div>
 </template>
@@ -26,5 +29,28 @@ export default {
   font-style: normal;
   line-height: normal;
   font-size: 12px;
+}
+
+.index {
+  padding-right: 5px;
+  background-color: #39415e;
+  /*width: 80%;*/
+  height: 200px;
+}
+
+.index_box {
+  padding-top: 50px;
+}
+
+.level11 {
+  font-size: 19px;
+  font-family: "Microsoft YaHei";
+  color: #ffffff;
+}
+
+.level9 {
+  font-size: 29px;
+  font-family: Avenir;
+  color: #ffffff;
 }
 </style>

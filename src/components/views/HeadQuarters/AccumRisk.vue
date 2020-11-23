@@ -4,7 +4,7 @@
       {{ getRiskLevelData }}
     </div>
     <div class="grid-content bg-purple-light boundary">
-      <div class="text item">
+      <div class="text item level4">
         <span>所有项目累计发现隐患数量</span>
       </div>
       <el-table
@@ -82,5 +82,16 @@ export default {
 </script>
 
 <style scoped>
+/*最外层透明*/
+/deep/ .el-table, /deep/ .el-table__expanded-cell{
 
+  background-color: transparent;
+}
+/* 表格内背景颜色 */
+/deep/ .el-table th,
+/deep/ .el-table tr,
+/deep/ .el-table td {
+
+  background-color: transparent;
+}
 </style>
