@@ -4,7 +4,7 @@
     <el-header>
       <el-row>
         <el-col :span="24">
-          <div id="title" class="grid-content bg-purple-dark" style="text-align: left">
+          <div id="title" class="grid-content bg-purple-dark level1">
             <span>商业地产事业部2020年巡检项目EHS大数据分析</span>
           </div>
         </el-col>
@@ -161,6 +161,8 @@ export default {
     this.$store.dispatch('get_region/getInitRegionHighRisk')
     this.$store.dispatch('get_region/getInitRegionNumberTop')
     this.$store.dispatch('get_region/getInitRegionImage')
+    this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+    this.$store.dispatch('get_region/getInitRegionRiskRank')
   }
 }
 </script>

@@ -106,7 +106,7 @@ const actions = {
 
     //基于项目级展示历次检查中不同专业隐患占比情况
     getInitProjectHistoryPerception(context) {
-        dataService.getInitProjectHistoryPerception(state.params, function (response) {
+        dataService.getInitProjectHistoryPerception(state.g_params, function (response) {
             context.commit('changePrjHistoryPerception', response)
         })
     },

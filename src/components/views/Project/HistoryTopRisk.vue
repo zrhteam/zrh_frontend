@@ -3,9 +3,7 @@
     <div style="display: none">
       {{ getPrjRiskTop }}
     </div>
-    <div
-        class="text item"
-        style="color: rgb(0, 0, 0); font-family: 'microsoft YaHei'; font-weight: bold; font-style: normal; max-width: 100%; line-height: 16px; font-size: 16px; height: 16px;">
+    <div class="level4">
       <span>历史重复出现隐患前五名</span>
     </div>
     <div>
@@ -67,5 +65,16 @@ export default {
 </script>
 
 <style scoped>
+/*最外层透明*/
+/deep/ .el-table, /deep/ .el-table__expanded-cell{
 
+  background-color: transparent;
+}
+/* 表格内背景颜色 */
+/deep/ .el-table th,
+/deep/ .el-table tr,
+/deep/ .el-table td {
+
+  background-color: transparent;
+}
 </style>

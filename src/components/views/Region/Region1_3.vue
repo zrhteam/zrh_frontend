@@ -1,11 +1,9 @@
 <template>
   <div class="grid-content bg-purple">
-    <div
-        style="color: rgb(0, 0, 0); font-family: 'microsoft YaHei'; font-weight: bold; font-style: normal; max-width: 100%; line-height: 16px; font-size: 16px; height: 16px;">
+    <div class="level11">
       <span>已检查项目数量</span>
     </div>
-    <div
-        style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;">
+    <div class="level12">
       {{ getExamineNumber }}
     </div>
   </div>
@@ -23,5 +21,9 @@ export default {
 </script>
 
 <style scoped>
-
+.level12 {
+  font-size: 62px;
+  font-family: Avenir;
+  color: #ffffff;
+}
 </style>

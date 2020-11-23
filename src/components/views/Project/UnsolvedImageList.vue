@@ -4,8 +4,7 @@
       {{ getPrjImage }}
     </div>
     <div class="grid-content bg-purple">
-      <div
-          style="color: rgb(0, 0, 0); font-family: 'microsoft YaHei'; font-weight: bold; font-style: normal; max-width: 100%; line-height: 16px; font-size: 16px; height: 16px;">
+      <div class="level4">
         <span>未整改高风险隐患图片</span>
       </div>
       <div

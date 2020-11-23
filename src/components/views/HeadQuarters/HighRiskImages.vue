@@ -1,6 +1,6 @@
 <template>
   <div class="grid-content bg-purple">
-    <div>
+    <div class="level4">
       <span>所有项目未整改高风险隐患图片</span>
       <div style="display: none">
         {{ getImage }}
