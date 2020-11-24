@@ -35,8 +35,11 @@ export default {
       g_params.append('query_level', this.form.query_level)
       g_params.append('cust_name', this.form.cust_name)
       this.$store.state.get_project.g_params = g_params
+      this.$store.dispatch('get_project/getInitProjectRiskNumber')
       this.$store.dispatch('get_project/getInitProjectNumberChange')
+      this.$store.dispatch('get_project/getInitProjectNearestPerception')
       this.$store.dispatch('get_project/getInitProjectHistoryPerception')
+      this.$store.dispatch('get_project/getInitProjectRiskTop')
     },
     //按部门名称查询的函数
     onSubmitByArea() {
@@ -45,8 +48,11 @@ export default {
       g_params.append('query_level', this.form.query_level)
       g_params.append('ctr_name', this.form.ctr_name)
       this.$store.state.get_project.g_params = g_params
+      this.$store.dispatch('get_project/getInitProjectRiskNumber')
       this.$store.dispatch('get_project/getInitProjectNumberChange')
+      this.$store.dispatch('get_project/getInitProjectNearestPerception')
       this.$store.dispatch('get_project/getInitProjectHistoryPerception')
+      this.$store.dispatch('get_project/getInitProjectRiskTop')
     }
   }
 }

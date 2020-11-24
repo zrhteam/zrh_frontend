@@ -13,7 +13,7 @@
     <el-main>
       <el-row class="boundary">
         <!--            历次粒度-->
-<!--        <Granularity></Granularity>-->
+        <Granularity></Granularity>
       </el-row>
       <el-row class="boundary">
         <el-col class="boundary-B" :span="8">
@@ -87,7 +87,7 @@
         <el-col :span="4" class="part2">
           <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></PerctangePerc>
         </el-col>
-        <!--历史重复出现隐患前五名-->
+        <!--历次重复出现隐患前五名-->
         <el-col :span="12" class="boundary-B part2">
           <HistoryTopRisk class="boundary-B"></HistoryTopRisk>
         </el-col>
@@ -147,9 +147,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('get_project/getInitProjectRiskNumber')
     // this.$store.dispatch('get_project/getInitProjectNumberChange')
-    this.$store.dispatch('get_project/getInitProjectNearestPerception')
     // 当前未整改高风险隐患列表
     this.$store.dispatch('get_project/getInitPrjRisk')
     // 当前未整改高风险隐患图片
@@ -161,7 +159,7 @@ export default {
     this.$store.dispatch('get_project/getInitProjectReason')
 
     //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
-    this.$store.dispatch('get_project/getInitProjectRiskTop')
+    // this.$store.dispatch('get_project/getInitProjectRiskTop')
   }
 }
 </script>

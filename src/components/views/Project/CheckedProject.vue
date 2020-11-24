@@ -39,38 +39,43 @@ export default {
       console.log(data)
       //  风险等级对应情况
       //  1：低风险； 2：中风险； 3：高风险
-      let dataArray = []
-      for (let i in data) {
-        let obj = {
-          risk: '风险',
-          num: 0
-        }
-        if (i == 1) {
-          obj.risk = '低风险'
-          obj.num = data[i]
-        }
-        if (i == 2) {
-          obj.risk = '中风险'
-          obj.num = data[i]
-        }
-        if (i == 3) {
-          obj.risk = '高风险'
-          obj.num = data[i]
-        }
-        dataArray.push(obj)
-        console.log(dataArray)
-      }
-      let obj = {
-        risk: '风险',
+      let obj1 = {
+        risk: '低风险',
         num: 0
       }
-      if (dataArray.length == 3) {
-        obj.risk = '列总计'
-        obj.num = dataArray[0].num + dataArray[1].num + dataArray[2].num
-        dataArray.push(obj)
-        // debugger
-        console.log(dataArray)
+      let obj2 = {
+        risk: '中风险',
+        num: 0
       }
+      let obj3 = {
+        risk: '高风险',
+        num: 0
+      }
+      let obj = {
+        risk: '列总计',
+        num: 0
+      }
+      let dataArray = []
+      for (let i in data) {
+        for (let j in data[i]) {
+          if (i == 1) {
+            obj1.num += data[i][j]
+          }
+          if (i == 2) {
+            obj2.num += data[i][j]
+          }
+          if (i == 3) {
+            obj3.num += data[i][j]
+          }
+        }
+      }
+      dataArray.push(obj3)
+      dataArray.push(obj2)
+      dataArray.push(obj1)
+      obj.num = obj1.num + obj2.num + obj3.num
+      dataArray.push(obj)
+      // debugger
+      console.log(dataArray)
       this.PrjRiskLevelData = dataArray
     },
   }
@@ -79,10 +84,11 @@ export default {
 
 <style scoped>
 /*最外层透明*/
-/deep/ .el-table, /deep/ .el-table__expanded-cell{
+/deep/ .el-table, /deep/ .el-table__expanded-cell {
 
   background-color: transparent;
 }
+
 /* 表格内背景颜色 */
 /deep/ .el-table th,
 /deep/ .el-table tr,

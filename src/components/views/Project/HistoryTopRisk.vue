@@ -4,7 +4,7 @@
       {{ getPrjRiskTop }}
     </div>
     <div class="level4">
-      <span>历史重复出现隐患前五名</span>
+      <span>历次重复出现隐患前五名</span>
     </div>
     <div>
       <el-table

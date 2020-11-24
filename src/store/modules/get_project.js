@@ -99,7 +99,7 @@ const actions = {
 
     //得到基于项目级展示历次发现的不同风险等级的隐患数量
     getInitProjectRiskNumber(context) {
-        dataService.getInitProjectRiskNumber(state.params, function (response) {
+        dataService.getInitProjectRiskNumber(state.g_params, function (response) {
             context.commit('changePrjRiskLevelData', response)
         })
     },
@@ -113,7 +113,7 @@ const actions = {
 
     //得到基于项目级展示最近一次检查不同专业隐患占比情况
     getInitProjectNearestPerception(context) {
-        dataService.getInitProjectNearestPerception(state.params, function (response) {
+        dataService.getInitProjectNearestPerception(state.g_params, function (response) {
             context.commit('changePrjNearestPerception', response)
         })
     },
@@ -166,7 +166,7 @@ const actions = {
 
     //得到基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     getInitProjectRiskTop(context) {
-        dataService.getInitProjectRiskTop(state.params, function (response) {
+        dataService.getInitProjectRiskTop(state.g_params, function (response) {
             context.commit('changePrjRiskTop', response)
         })
     }
