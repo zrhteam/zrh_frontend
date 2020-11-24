@@ -61,8 +61,8 @@ export default {
 
 
       let data = this.$store.state.get_region.risk_number_top;
-      console.log('the front end data:', this.$store.state.get_region.risk_number_top)
-      console.log(data)
+      //console.log('the front end data:', this.$store.state.get_region.risk_number_top)
+      //console.log(data)
 
       let dataArray = []
       for (let i in data) {

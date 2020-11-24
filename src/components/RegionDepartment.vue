@@ -161,7 +161,8 @@ export default {
     this.$store.dispatch('get_region/getInitRegionHighRisk')
     this.$store.dispatch('get_region/getInitRegionNumberTop')
     this.$store.dispatch('get_region/getInitRegionImage')
-    this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+    this.$store.dispatch('get_region/getInitRegionMajor')
+    //this.$store.dispatch('get_region/getInitRegionSafetyIndex')
     this.$store.dispatch('get_region/getInitRegionRiskRank')
   }
 }

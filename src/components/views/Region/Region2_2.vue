@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="grid-content bg-purple">
-      <div>
+      <div class = 'level4'>
         <span>未整改高风险隐患图片</span>
       </div>
     </div>
     <div class="grid-content bg-purple">
       <div class='demo-image__placeholder'>
         <div class='block'>
-          <img src='images' id='img' style='width: 400px; height: 400px'>
+          <img src='images' id='img' style='width: 350px; height: 400px'>
         </div>
       </div>
     </div>

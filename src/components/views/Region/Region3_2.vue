@@ -7,7 +7,7 @@
         <div style = "display: none">
           {{getSafetyIndexRank}}
         </div>
-        <div id = "safety" stylex= "height: 400px; width: 300px"> </div>
+        <div id = "safety" style= "height: 400px; width: 300px"> </div>
         <!--                这里是写项目安全指数排名的柱状图-->
 <!--        <SafetyIndexHistogram></SafetyIndexHistogram>-->
     </div>

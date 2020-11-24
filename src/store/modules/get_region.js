@@ -13,10 +13,12 @@ const state = {
     no_rectification_risk: {},
     //未整改高风险图片
     images: {},
+    //所有项目发现的隐患在各专业的分布
+    risk_distribution: {},
     //得到所有项目中出现隐患数量排名前10的隐患
     risk_number_top: {},
     //项目安全指数排名
-    safety_index: {},
+    //safety_index: {},
     //项目累计高风险数量排名
     high_risk_rank: {},
 
@@ -45,14 +47,18 @@ const getters = {
     renderImages(state) {
         return state.images;
     },
+    //承载变化的各隐患在各专业的分布
+    renderRiskDistribution(state) {
+        return state.risk_distribution;
+    },
     //承载变化的所有项目中出现隐患数量排名前10的隐患
     renderRiskNumberTop(state) {
         return state.risk_number_top;
     },
     //承载变化的项目安全指数排名
-    renderSafetyIndex(state){
-        return state.safety_index;
-    },
+    // renderSafetyIndex(state){
+    //     return state.safety_index;
+    // },
     //承载变化的项目累计高风险数量排名
     renderHighRiskRank(state){
         return state.high_risk_rank;
@@ -95,21 +101,29 @@ const actions = {
         })
     },
 
+    //得到所有项目在各专业的隐患分布情况
+    getInitRegionMajor(context) {
+        dataService.getInitRegionMajor(state.params, function (response) {
+            //console.log('distribution', response)
+            context.commit('changeRiskDistribution', response)
+        })
+    },
+
     //得到所有项目中出现隐患数量排名前10的隐患
     getInitRegionNumberTop(context) {
         dataService.getInitRegionNumberTop(state.params, function (response) {
-            console.log(response)
+            //console.log(response)
             context.commit('changeNumberTop', response)
         })
     },
 
     //得到项目安全指数排名的结果
-    getInitRegionSafetyIndex(context) {
-        dataService.getInitRegionSafetyIndex(state.params, function (response) {
-            //console.log(response)
-            context.commit('changeSafetyIndex', response)
-        })
-    },
+    // getInitRegionSafetyIndex(context) {
+    //     dataService.getInitRegionSafetyIndex(state.params, function (response) {
+    //         //console.log(response)
+    //         context.commit('changeSafetyIndex', response)
+    //     })
+    // },
 
     //得到项目累计高风险数量排名的结果
     getInitRegionRiskRank(context) {
@@ -144,16 +158,23 @@ const mutations = {
         state.images = data
     },
 
+    //考虑所有项目中各隐患在各专业上的分布情况
+    changeRiskDistribution(state, data) {
+        state.risk_distribution = data
+        console.log('risk_distribution:', state.risk_distribution)
+    },
+
     //考虑所有项目中出现隐患数量排名前10的隐患变化
     changeNumberTop(state, data) {
         state.risk_number_top = data
+        console.log('risk_top', data)
     },
 
     //考虑项目安全指数排名的结果
-    changeSafetyIndex(state, data) {
-        state.safety_index = data
-        console.log('safety_index:', data)
-    },
+    // changeSafetyIndex(state, data) {
+    //     state.safety_index = data
+    //     console.log('safety_index:', data)
+    // },
 
     //考虑项目中累计高风险数量排名的结果
     changeHighRiskRank(state, data) {
