@@ -10,9 +10,9 @@
       </el-row>
     </el-header>
     <el-main>
-      <el-row class="boundary-B part1">
+      <el-row class="boundary-B part1" type="flex">
         <!--总部1 总部安全指数一-->
-        <el-col :span="6">
+        <el-col :span="6" class="margin">
           <div class="grid-content bg-purple boundary">
             <div class="chart-image-icon">
               <div class="plus_top">
@@ -27,7 +27,7 @@
           </div>
         </el-col>
         <!--总部2 专业指数-->
-        <el-col :span="6" class="boundary part1">
+        <el-col :span="6" class="boundary part1 margin">
           <el-row>
             <el-col :span="12">
               <IndexView :context="{title:'消防危险指数'}"></IndexView>
@@ -46,34 +46,34 @@
           </el-row>
         </el-col>
         <!--总部3 整改率-->
-        <el-col :span="6" class="part1">
+        <el-col :span="6" class="part1 margin">
           <Rectification></Rectification>
         </el-col>
         <!--总部4 隐患数量-->
-        <el-col :span="6" class="part1">
+        <el-col :span="6" class="part1 margin">
           <AccumRisk></AccumRisk>
         </el-col>
       </el-row>
 
-      <el-row>
-        <el-row>
+      <el-row type="flex">
+<!--        <el-row>-->
           <!--总部5 项目安全指数排名-->
-          <el-col :span="12" class="part2">
+          <el-col :span="12" class="part2 margin">
             <ProjectIndex></ProjectIndex>
           </el-col>
           <!--总部6 项目累计好风险数量排名-->
-          <el-col :span="12" class="part2">
+          <el-col :span="12" class="part2 margin">
             <HighProjectRisk></HighProjectRisk>
           </el-col>
-        </el-row>
+<!--        </el-row>-->
       </el-row>
-      <el-row>
+      <el-row type="flex">
         <!--总部7 未整改高风险图片-->
-        <el-col :span="12" class="part2">
+        <el-col :span="12" class="part2 margin">
           <HighRiskImages class="boundary-C"></HighRiskImages>
         </el-col>
         <!--总部8 项目累计好风险数量排名-->
-        <el-col :span="12" class="part2">
+        <el-col :span="12" class="part2 margin">
           <TopAccumRisk class="boundary-C"></TopAccumRisk>
         </el-col>
       </el-row>
@@ -182,7 +182,7 @@ i {
   font-size: 12px;
 }
 
-.plus_top{
+.plus_top {
   margin-top: 100px;
 }
 

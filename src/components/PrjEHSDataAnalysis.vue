@@ -11,14 +11,14 @@
       </el-row>
     </el-header>
     <el-main>
-      <el-row class="boundary">
+      <el-row class="boundary margin">
         <!--            历次粒度-->
         <Granularity></Granularity>
       </el-row>
-      <el-row class="boundary">
-        <el-col class="boundary-B" :span="8">
+      <el-row class="boundary" type="flex">
+        <el-col class="boundary-B margin" :span="8">
           <!-- 指数部分-->
-          <el-row>
+          <el-row class="margin">
             <el-col :span="24">
               <div class="safety_index" style="height: 100px">
                 <div
@@ -29,7 +29,7 @@
               </div>
             </el-col>
           </el-row>
-          <el-row>
+          <el-row class="margin">
             <el-col :span="6">
               <IndexView :context="{title:'消防指数'}"></IndexView>
             </el-col>
@@ -44,51 +44,52 @@
             </el-col>
           </el-row>
         </el-col>
-        <el-col class="boundary-B part1" :span="4">
+
+        <el-col class="boundary-B part1 margin" :span="4">
           <!--当前整改率-->
           <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>
         </el-col>
-        <el-col class="boundary-B part1" :span="6">
+        <el-col class="boundary-B part1 margin" :span="6">
           <!--历次检查累计发现隐患数量-->
           <CheckedProject></CheckedProject>
         </el-col>
-        <el-col class="boundary-B part2" :span="6">
+        <el-col class="boundary-B part2 margin" :span="6">
           <!--历次检查隐患数量变化-->
           <CheckedHistory></CheckedHistory>
         </el-col>
       </el-row>
 
-      <el-row class="boundary">
-        <el-col class="boundary-C part2" :span="6">
+      <el-row class="boundary" type="flex">
+        <el-col class="boundary-C part2 margin" :span="6">
           <!--          最近一次检查隐患专业占比-->
           <LastCheckPerc></LastCheckPerc>
         </el-col>
-        <el-col class="boundary-C part2" :span="6">
+        <el-col class="boundary-C part2 margin" :span="6">
           <!--          历次检查累计隐患专业占比-->
           <CheckHistoryPerc></CheckHistoryPerc>
         </el-col>
-        <el-col class="boundary-C part2" :span="6">
+        <el-col class="boundary-C part2 margin" :span="6">
           <!--          当前未整改高风险隐患列表-->
           <UnsolvedList></UnsolvedList>
         </el-col>
-        <el-col class="boundary-C" :span="6">
+        <el-col class="boundary-C margin" :span="6">
           <!--          当前未整改高风险隐患图片-->
           <UnsolvedImageList></UnsolvedImageList>
         </el-col>
       </el-row>
       <!--占比-->
-      <el-row class="boundary level4" style="margin-top:10px">
-        <el-col :span="4" class="part2">
+      <el-row class="boundary level4" type="flex">
+        <el-col :span="4" class="part2 margin">
           <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>
         </el-col>
-        <el-col :span="4" class="part2">
+        <el-col :span="4" class="part2 margin">
           <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason'}"></PerctangePerc>
         </el-col>
-        <el-col :span="4" class="part2">
+        <el-col :span="4" class="part2 margin">
           <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></PerctangePerc>
         </el-col>
         <!--历次重复出现隐患前五名-->
-        <el-col :span="12" class="boundary-B part2">
+        <el-col :span="12" class="boundary-B part2 margin">
           <HistoryTopRisk class="boundary-B"></HistoryTopRisk>
         </el-col>
       </el-row>
