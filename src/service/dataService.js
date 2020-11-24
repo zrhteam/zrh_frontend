@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-Vue.use(axios);
+// Vue.use(axios);
+Vue.prototype.axios = axios
 
 const dataServerUrl = "http://localhost:5000/api";
 // const dataServerUrl = "/sv-analysis";

@@ -20,12 +20,18 @@
     <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: #13E8E9">
       <div id="map" bordered :dataSource="$store.state.get_locations.data" style="pointer-events:inherit"></div>
     </div>
-
+    <div style="background-color: #003452; opacity: 0.8; margin-top: 20px; color: #ffffff;position: absolute; z-index: 999999; text-align: center; width:100%">
+      <span class = "head" >大型综合体生命系统大数据平台</span>
+    </div>
     <svg style="position: absolute; z-index: 99998; width: 100%; height: 100%" pointer-events="none"></svg>
     <Search class="search-component"
-            style="position: absolute; z-index: 99999;  top: 50px; left: 50px; background-color: #00192E">
+            style="position: absolute; z-index: 99999; top: 150px; left: 20px; background-color: #00192E">
 
     </Search>
+    <Statistics class="search-component"
+                style="background-color: #00192E; position: absolute; z-index: 99999; top: 150px; right: 50px">
+
+    </Statistics>
   </el-container>
 
   <!--  </el-container>-->
@@ -37,13 +43,15 @@ import OverviewLeftSide from "@/components/views/overview/OverviewLeftSide.vue";
 import {mapState, mapGetters} from "vuex"
 import * as d3 from "d3/dist/d3.js";
 import Search from "@/components/views/overview/Search.vue";
+import Statistics from "@/components/views/overview/Statistics.vue";
 //在组件的created中提交dispatch，然后通过action调用一个封装好的axios
 // 然后再触发mutation来提交状态改变state中的数据，然后在组件的计算属性中获取state的数据并渲染在页面上
 export default {
   name: "Overview",
   components: {
     OverviewLeftSide,
-    Search
+    Search,
+    Statistics
   },
   data() {
     return {
@@ -93,7 +101,7 @@ export default {
   methods: {
     loadMap() {//加载地图
       let map = L.map("map", {
-        center: [22, 107], // 地图中心
+        center: [34, 107], // 地图中心
         zoom: 5, //缩放比列
         zoomControl: false, //禁用 + - 按钮
         doubleClickZoom: false, // 禁用双击放大
@@ -238,7 +246,6 @@ export default {
 
 .search-component {
   opacity: 0.1;
-
   border: dashed #0641ad 1px;
 }
 
@@ -284,5 +291,9 @@ export default {
 .el-aside {
   color: #333;
   text-align: left;
+}
+.head{
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 40px;
 }
 </style>
