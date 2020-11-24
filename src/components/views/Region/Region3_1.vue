@@ -15,7 +15,7 @@
           <el-table-column
               prop="description"
               label="隐患描述"
-              width='550'>
+              width='500'>
           </el-table-column>
           <el-table-column
               prop="num"
@@ -61,11 +61,9 @@ export default {
 
 
       let data = this.$store.state.get_region.risk_number_top;
-      console.log(this.$store.state.get_region.risk_number_top)
-
-      // let str = '前端接收到的数据'
-      // console.log(str)
+      console.log('the front end data:', this.$store.state.get_region.risk_number_top)
       console.log(data)
+
       let dataArray = []
       for (let i in data) {
         let obj = {
@@ -76,7 +74,7 @@ export default {
         obj.description = i;
         obj.num = data[i]['appear_time']
         dataArray.push(obj)
-      }
+      }//for
       //按出现次数降序
       dataArray.sort(sortNumber('num', false))
       console.log(dataArray)

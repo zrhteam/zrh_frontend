@@ -30,7 +30,7 @@ export default {
           count: 0
         }
         obj.name = i;
-        obj.count = data[i].high_risk_count;
+        obj.count = data[i]['high_risk_count'];
         arr.push(obj)
       }
       console.log(arr)

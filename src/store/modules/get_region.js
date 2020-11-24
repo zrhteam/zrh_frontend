@@ -18,7 +18,7 @@ const state = {
     //项目安全指数排名
     safety_index: {},
     //项目累计高风险数量排名
-    high_risk_number: {},
+    high_risk_rank: {},
 
     data: []
 }
@@ -106,7 +106,7 @@ const actions = {
     //得到项目安全指数排名的结果
     getInitRegionSafetyIndex(context) {
         dataService.getInitRegionSafetyIndex(state.params, function (response) {
-            console.log(response)
+            //console.log(response)
             context.commit('changeSafetyIndex', response)
         })
     },
@@ -114,7 +114,7 @@ const actions = {
     //得到项目累计高风险数量排名的结果
     getInitRegionRiskRank(context) {
         dataService.getInitRegionRiskRank(state.params, function (response) {
-            console.log(response)
+            //console.log(response)
             context.commit('changeHighRiskRank', response)
         })
     }
@@ -152,6 +152,7 @@ const mutations = {
     //考虑项目安全指数排名的结果
     changeSafetyIndex(state, data) {
         state.safety_index = data
+        console.log('safety_index:', data)
     },
 
     //考虑项目中累计高风险数量排名的结果

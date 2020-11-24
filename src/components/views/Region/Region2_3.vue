@@ -4,8 +4,11 @@
       <span>所有项目累计发现隐患专业分布</span>
     </div>
     <div>
-      <div id="mycheckbox">
+      <div>
         <checkbox></checkbox>
+        <div style="display: none">
+          <div id = ''></div>
+        </div>
 
       </div>
       <!--              在这里展示三维图-->
