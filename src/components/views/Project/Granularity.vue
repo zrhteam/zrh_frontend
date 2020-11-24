@@ -1,11 +1,13 @@
 <template>
   <div>
-    <el-form ref="form" :model="form" :label-position="labelPosition">
-      <el-form-item label="根据总部名称查询">
-        <el-input v-model="form.cust_name" class="prj_input"></el-input>
+    <el-form ref="form" :model="form" :label-position="labelPosition" class="gran">
+      <el-form-item size="mini">
+        <span class="level4"> 根据总部名称查询 </span>
+        <el-input size="mini" v-model="form.cust_name" class="prj_input"></el-input>
         <el-button icon="el-icon-search" circle @click="onSubmitByHeadquarter"></el-button>
       </el-form-item>
-      <el-form-item label="根据区域名称查询">
+      <el-form-item size="mini">
+        <span class="level4"> 根据区域名称查询 </span>
         <el-input v-model="form.ctr_name" class="prj_input"></el-input>
         <el-button icon="el-icon-search" circle @click="onSubmitByArea"></el-button>
       </el-form-item>
@@ -59,7 +61,12 @@ export default {
 </script>
 
 <style scoped>
-.prj_input {
-  width: 30%;
+.gran {
+  text-align: left;
 }
+
+.prj_input {
+  max-width: 200px;
+}
+
 </style>

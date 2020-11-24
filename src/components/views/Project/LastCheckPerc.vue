@@ -8,7 +8,7 @@
       <div class="level4">
         <span>最近一次检查隐患专业占比</span>
       </div>
-      <div id="pie" style="height: 300px; width: 400px"></div>
+      <div id="pie" style="height: 370px; width: 500px"></div>
     </div>
   </div>
 </template>
@@ -23,14 +23,15 @@ export default {
   computed: {
     getPrjNearestPerception() {
       let data = this.$store.state.get_project.prj_nearest_perception;
+      console.log(data)
       let arr = []
-      for (let i in data) {
+      for (let i in data.major_list) {
         let obj = {
           value: 0,
           name: ''
         }
         obj.name = i;
-        obj.value = data[i]
+        obj.value = data.major_list[i]
         arr.push(obj)
       }
       console.log(arr)

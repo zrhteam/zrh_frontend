@@ -58,13 +58,13 @@ export default {
       let dataArray = []
       for (let i in data) {
         for (let j in data[i]) {
-          if (i == 1) {
+          if (j == 1) {
             obj1.num += data[i][j]
           }
-          if (i == 2) {
+          if (j == 2) {
             obj2.num += data[i][j]
           }
-          if (i == 3) {
+          if (j == 3) {
             obj3.num += data[i][j]
           }
         }
@@ -74,7 +74,6 @@ export default {
       dataArray.push(obj1)
       obj.num = obj1.num + obj2.num + obj3.num
       dataArray.push(obj)
-      // debugger
       console.log(dataArray)
       this.PrjRiskLevelData = dataArray
     },

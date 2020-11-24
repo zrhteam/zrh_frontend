@@ -1,103 +1,119 @@
 <template>
   <div class="grid-content bg-purple">
     <div style="display: none">
-      {{ getPrjNumberChange }}
+      {{ getPrjHistory }}
     </div>
     <div class="level4">
       <span>历次检查隐患数量变化</span>
     </div>
-    <div id="history_chart" style="height: 400px; width: 350px"> </div>
+    <div id="history_chart" style="height: 400px; width: 350px"></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "CheckedHistory",
-  // computed: {
-  //   getPrjNumberChange() {
-  //     let data = this.$store.state.get_project.prj_number_change;
-  //     console.log(data)
-  //     let arr = []
-  //     for (let i in data) {
-  //       let obj = {
-  //         value: 0,
-  //         name: ''
-  //       }
-  //       obj.name = i;
-  //       obj.value = data[i].risk_number
-  //       arr.push(obj)
-  //     }
-  //     console.log(arr)
-  //     let option = {
-  //       tooltip: {},
-  //       dataset: {
-  //         dimensions: ['name', 'count'],
-  //         source: arr
-  //       },
-  //       xAxis: {
-  //         type: 'category',
-  //         axisLabel: {
-  //           interval: 0,
-  //           rotate: 30
-  //         },
-  //         axisLine: {
-  //           lineStyle: {
-  //             color: '#ffffff',
-  //             fontSize: 8
-  //           }
-  //         }
-  //       },
-  //       yAxis: {
-  //         axisLine: {
-  //           lineStyle: {
-  //             color: '#ffffff'
-  //           }
-  //         }
-  //       },
-  //       series: [
-  //         {
-  //           type: 'bar',
-  //           itemStyle: {
-  //             color: new echarts.graphic.LinearGradient(
-  //                 0, 0, 0, 1,
-  //                 [
-  //                   {offset: 0, color: '#3477fb'},
-  //                   {offset: 0.5, color: '#2d55a9'},
-  //                   {offset: 1, color: '#253054'}
-  //                 ]
-  //             )
-  //           },
-  //           emphasis: {
-  //             itemStyle: {
-  //               color: new echarts.graphic.LinearGradient(
-  //                   0, 0, 0, 1,
-  //                   [
-  //                     {offset: 0, color: '#2378f7'},
-  //                     {offset: 0.7, color: '#2378f7'},
-  //                     {offset: 1, color: '#83bff6'}
-  //                   ]
-  //               )
-  //             }
-  //           },
-  //         }
-  //       ]
-  //     };
-  //     return option
-  //   }
-  // },
-  // updated() {
-  //   this.drawBarChart()
-  // },
-  // mounted() {
-  //   this.drawBarChart();
-  // },
-  // methods: {
-  //   drawBarChart() {
-  //     let myChart = this.$echarts.init(document.getElementById('history_chart'))
-  //     // 使用刚指定的配置项和数据显示图表。
-  //     myChart.setOption(this.getData);
-  //   }
-  // }
+  computed: {
+    getPrjHistory() {
+      let data = this.$store.state.get_project.prj_number_change;
+      // console.log(data)
+      let arr = []
+      for (let i in data) {
+        if (data[i].time != 'no record') {
+          let flag = false
+          for (let j in arr) {
+            if (arr[j].name == data[i].time) {
+              arr[j].count += data[i].risk_number
+              flag = true
+            }
+          }
+          if (flag == false) {
+            let obj = {
+              count: 0,
+              name: ''
+            }
+            obj.name = data[i].time;
+            obj.count = data[i].risk_number
+            arr.push(obj)
+          }
+        }
+      }
+      console.log(arr)
+      let option = {
+        tooltip: {},
+        dataset: {
+          dimensions: ['name', 'count'],
+          source: arr
+        },
+        xAxis: {
+          type: 'category',
+          axisLabel: {
+            interval: 0
+            // rotate: 30
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff',
+              fontSize: 8
+            }
+          }
+        },
+        yAxis: {
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff'
+            }
+          }
+        },
+        series: [
+          {
+            type: 'bar',
+            itemStyle: {
+              normal: {
+                //柱形图圆角，初始化效果
+                barBorderRadius: [10, 10, 0, 0],
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: '#3477fb'},
+                      {offset: 0.5, color: '#2d55a9'},
+                      {offset: 1, color: '#253054'}
+                    ]
+                )
+              }
+            },
+            emphasis: {
+              itemStyle: {
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: '#2378f7'},
+                      {offset: 0.7, color: '#2378f7'},
+                      {offset: 1, color: '#83bff6'}
+                    ]
+                )
+              }
+            },
+            barWidth: 70
+          }
+        ]
+      };
+      return option
+    }
+  },
+  updated() {
+    this.drawBarChart()
+  },
+  mounted() {
+    this.drawBarChart();
+  },
+  methods: {
+    drawBarChart() {
+      let myChart = this.$echarts.init(document.getElementById('history_chart'))
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(this.getPrjHistory);
+    }
+  }
 }
 </script>
 
