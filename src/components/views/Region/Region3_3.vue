@@ -3,18 +3,96 @@
     <div class="level4">
       <span>项目累计高风险数量排名</span>
     </div>
-    <div id="mydiv4">
-      <!--              这里写累计高风险数量排名的柱状图-->
-      <RegionNumberHistogram></RegionNumberHistogram>
+    <div>
+      <div style = 'display: none'>
+        {{getHighRiskRank}}
+      </div>
+      <div id = 'risk_rank' style="height: 550px; width: 400px"></div>
     </div>
+
   </div>
 </template>
 
 <script>
-import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
+//import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
 export default {
   name: "Region3_3",
-  components: {RegionNumberHistogram}
+  //components: {RegionNumberHistogram}
+  computed: {
+    getHighRiskRank(){
+      let data = this.$store.state.get_region.high_risk_rank
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          count: 0
+        }
+        obj.name = i;
+        obj.count = data[i]['high_risk_count'];
+        arr.push(obj)
+      }//for
+      console.log(arr)
+      let option = {
+        tooltip: {},
+        dataset: {
+          dimensions: ['name', 'count'],
+          source: arr
+        },
+        xAxis: {
+          type: 'category',
+          axisLabel: {
+            interval: 0,
+            rotate: 40
+          }
+        },
+        yAxis: {},
+        series: [
+          {
+            type: 'bar',
+            itemStyle: {
+              normal: {
+                //柱形图圆角，初始化效果
+                barBorderRadius: [10, 10, 0, 0],
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: '#3477fb'},
+                      {offset: 0.5, color: '#2d55a9'},
+                      {offset: 1, color: '#253054'}
+                    ]
+                )
+              }
+            },
+            emphasis: {
+              itemStyle: {
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: '#2378f7'},
+                      {offset: 0.7, color: '#2378f7'},
+                      {offset: 1, color: '#83bff6'}
+                    ]
+                )
+              }
+            }
+          }
+        ]
+      };
+      return option
+    },
+  },
+  updated() {
+    this.drawBarChart();
+  },
+  mounted() {
+    this.drawBarChart();
+  },
+  methods: {
+    drawBarChart() {
+      let myChart = this.$echarts.init(document.getElementById('risk_rank'))
+      myChart.setOption(this.getHighRiskRank)
+    }
+  }
 }
 </script>
 

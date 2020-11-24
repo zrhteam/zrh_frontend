@@ -20,8 +20,8 @@ export default {
   props: ['context'],
   data() {
     return {
-      type: '',
-      bar_chart: 'xx'
+      // type: '',
+      // bar_chart: 'xx'
     }
   },
   methods: {
