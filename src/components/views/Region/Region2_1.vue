@@ -26,13 +26,13 @@ export default {
   name: "Region2_1",
   data() {
     return {
-      noRectificationNumber: [],
+      noRectificationNumber: []
     }
   },
   computed: {
     getNoRectificationRisk() {
       let data = this.$store.state.get_region.no_rectification_risk.note_list;
-      console.log(this.$store.state.get_region.no_rectification_risk.note_list)
+      //console.log(this.$store.state.get_region.no_rectification_risk.note_list)
       //console.log(data)
 
       let dataArray = []
@@ -50,6 +50,19 @@ export default {
 
       console.log(dataArray)
       this.noRectificationNumber = dataArray
+    },
+  },
+  mounted() {
+    this.timer =setInterval(this.updateTable, 1000);
+  },
+  methods: {
+    updateTable(){
+      let first = this.noRectificationNumber[0];
+      this.noRectificationNumber.shift();
+      this.noRectificationNumber.push(first);
+    },
+    beforeDestroy(){
+      clearInterval(this.timer);
     },
   }
 }

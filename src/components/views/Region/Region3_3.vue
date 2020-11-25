@@ -7,7 +7,7 @@
       <div style = 'display: none'>
         {{getHighRiskRank}}
       </div>
-      <div id = 'risk_rank' style="height: 550px; width: 400px"></div>
+      <div id = 'risk_rank' style="height: 550px; width: 600px"></div>
     </div>
 
   </div>

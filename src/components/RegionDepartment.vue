@@ -4,7 +4,7 @@
     <el-header>
       <el-row>
         <el-col :span="24">
-          <div id="title" class="grid-content bg-purple-dark level1">
+          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left">
             <span>商业地产事业部2020年巡检项目EHS大数据分析</span>
           </div>
         </el-col>
@@ -12,67 +12,68 @@
     </el-header>
     <el-main>
 <!--      安全指数-->
-      <el-row class="boundary">
-        <el-col :span="6" class="boundary-B">
-          <Region1_1></Region1_1>
-        </el-col>
-        <el-col :span="6" class="boundary-B">
-          <div class="grid-content bg-purple">
-<!--            各专业安全指数-->
-            <el-row>
-              <el-col :span="6">
-                <ProjectIndexView :context="{title:'消防指数', val:28.93}"></ProjectIndexView>
-              </el-col>
-              <el-col :span="6">
-                <ProjectIndexView :context="{title:'电梯指数', val:76.83}"></ProjectIndexView>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="6">
-                <ProjectIndexView :context="{title:'燃气指数', val:82.69}"></ProjectIndexView>
-              </el-col>
-              <el-col :span="6">
-                <ProjectIndexView :context="{title:'电气指数', val:82.69}"></ProjectIndexView>
-              </el-col>
-            </el-row>
-          </div>
+      <el-row class="boundary" type="flex">
+        <el-col :span="10" class="boundary-B margin">
+          <el-row class="margin">
+            <el-col :span = '24'>
+              <div class = 'safety_index' style="height: 100px">
+                <Region1_1></Region1_1>
+              </div>
+            </el-col>
+          </el-row>
+          <!--            各专业安全指数-->
+          <el-row class="margin">
+            <el-col :span="6">
+              <ProjectIndexView :context="{title:'消防指数', val:28.93}"></ProjectIndexView>
+            </el-col>
+            <el-col :span="6">
+              <ProjectIndexView :context="{title:'电梯指数', val:76.83}"></ProjectIndexView>
+            </el-col>
+            <el-col :span="6">
+              <ProjectIndexView :context="{title:'燃气指数', val:82.69}"></ProjectIndexView>
+            </el-col>
+            <el-col :span="6">
+              <ProjectIndexView :context="{title:'电气指数', val:82.69}"></ProjectIndexView>
+            </el-col>
+          </el-row>
+
         </el-col>
 <!--        已检查的项目数量-->
-        <el-col :span="6">
+        <el-col :span="4" class="boundary-B part1 margin">
           <Region1_3 class="boundary-B"></Region1_3>
         </el-col>
 <!--        各风险等级对应的隐患数量-->
-        <el-col :span="6">
+        <el-col :span="10" class="boundary-B part1 margin">
           <Region1_4 class="boundary-B"></Region1_4>
         </el-col>
       </el-row>
 
-      <el-row style="margin-top: 10px" class="boundary">
+      <el-row class="boundary" tyep="flex">
 <!--        项目当前未整改高风险隐患列表-->
-        <el-col :span="6">
+        <el-col class="boundary-C part2 margin" :span="7">
           <Region2_1></Region2_1>
         </el-col>
 <!--        未整改高风险隐患图片-->
-        <el-col :span="6">
+        <el-col class="boundary-C part2 margin" :span="9">
           <Region2_2></Region2_2>
         </el-col>
 <!--各项目累计发现的隐患在各专业的分布-->
-        <el-col :span="12">
+        <el-col class="boundary-C part2 margin" :span="7">
           <Region2_3></Region2_3>
         </el-col>
       </el-row>
 
-      <el-row class="boundary">
+      <el-row class="boundary" type="flex">
 <!--项目累计出现次数前10的隐患及其对应数量-->
-        <el-col :span="10">
+        <el-col :span="8" class="boundary-B part2 margin">
           <Region3_1></Region3_1>
         </el-col>
 <!--项目安全指数排名-->
-        <el-col :span="7">
+        <el-col :span="8" class="boundary-B part2 margin">
           <Region3_2></Region3_2>
         </el-col>
 <!--项目累计高风险数量排名-->
-        <el-col :span="7">
+        <el-col :span="8" class="boundary-B part2 margin">
           <Region3_3></Region3_3>
         </el-col>
 
@@ -87,7 +88,6 @@
 import SafetyIndexHistogram from "@/components/views/functions/SafetyIndexHistogram.vue";
 import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
 import checkbox from "@/components/views/functions/checkbox.vue";
-import RiskDistribution from "@/components/views/functions/RiskDistribution.vue";
 import Region1_1 from "@/components/views/Region/Region1_1.vue";
 import ProjectIndexView from "@/components/views/Region/ProjectIndexView.vue";
 import Region1_3 from "@/components/views/Region/Region1_3.vue";
@@ -111,23 +111,9 @@ export default {
     Region2_2,
     Region2_1,
     Region1_4,
-    ProjectIndexView, Region1_1, RiskDistribution, SafetyIndexHistogram, RegionNumberHistogram,
+    ProjectIndexView, Region1_1, SafetyIndexHistogram, RegionNumberHistogram,
     Region1_3, checkbox
   },
-  // data() {
-  //   return {
-  //     riskLevelData: [],
-  //     // riskLevelData: {
-  //     //   risk: " ",
-  //     //   num: " "
-  //     // },
-  //
-  //
-  //     images: '',
-  //     timer: ''
-  //
-  //   }
-  // },
 
   computed: {
     //得到已检查项目数量
@@ -148,11 +134,7 @@ export default {
   },
 
   methods: {
-    // updateTable() {
-    //   let first = this.noRectificationNumber[0];
-    //   this.noRectificationNumber.shift();
-    //   this.noRectificationNumber.push(first);
-    // },
+
   },
 
   created() {

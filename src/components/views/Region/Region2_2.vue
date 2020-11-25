@@ -4,12 +4,14 @@
       <div class = 'level4'>
         <span>未整改高风险隐患图片</span>
       </div>
-    </div>
-    <div class="grid-content bg-purple">
-      <div class='demo-image__placeholder'>
-        <div class='block'>
-          <img src='images' id='img' style='width: 350px; height: 400px'>
-        </div>
+<!--      图片走马灯播放-->
+      <div style = "font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 1px">
+        <el-carousel height="400px">
+          <el-carousel-item v-for = 'item in img_list' :key = 'item'>
+<!--            <el-img :src = 'item'></el-img>-->
+            <img :src = 'item' alt/>
+          </el-carousel-item>
+        </el-carousel>
       </div>
     </div>
     <div style="display: none">
@@ -24,27 +26,24 @@ export default {
   name: "Region2_2",
   data(){
     return{
-      images: ''
+      img_list: []
     }
   },
   computed: {
     getImage() {
       let data = this.$store.state.get_region.images;
-      let count = 0;
-      // document.getElementById('img').src = 'http://' + data[0][0]
+      console.log('original',data)
       for (let i in data) {
-        for (let j in data[i]) {
-          if (count > 0) {
-            break
-          }
-          if (count == 0) {
-            document.getElementById('img').src = 'http://' + data[i][j]
-            this.images = 'http://' + data[i][j]//存在的问题是，会把所有图片都显示在上面，要改成轮播形式或者只显示一张图片
-          }
-          count++
+        for (let j in data[i]){
+          // let obj = {
+          //   url: ''
+          // }
+          // obj.url = 'http://' + data[i][j]
+          let obj = 'http://' + data[i][j]
+          this.img_list.push(obj)
         }
       }
-      console.log(this.images)
+      console.log('results',this.img_list)
     },
   }
 }
