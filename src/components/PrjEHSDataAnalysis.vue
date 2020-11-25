@@ -4,16 +4,19 @@
     <el-header>
       <el-row>
         <el-col :span="24">
-          <div id="title" class="grid-content bg-purple-dark" style="text-align: left">
+          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left">
             <span>{{ prj_name }}EHS数据大屏</span>
           </div>
         </el-col>
       </el-row>
     </el-header>
     <el-main>
-      <el-row class="boundary margin">
+      <el-row class="boundary">
         <!--            历次粒度-->
-        <Granularity></Granularity>
+        <el-col class="boundary-B margin">
+          <Granularity></Granularity>
+        </el-col>
+
       </el-row>
       <el-row class="boundary" type="flex">
         <el-col class="boundary-B margin" :span="8">

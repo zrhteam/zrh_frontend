@@ -27,6 +27,18 @@ function getLocation(callback){
        })
 }
 
+//overview页面查询部分
+function getProjectionMap(callback) {
+    const url = `${dataServerUrl}/overview_get_projection_map`;
+    axios.post(url)
+       .then(response => {
+            callback(response.data)
+       })
+       .catch(error=> {
+            console.log(error)
+       })
+}
+
 //overview页面地图部分
 /*
     在得到每个项目的经纬度后
@@ -630,6 +642,7 @@ function getInitProjectRiskTop(param, callback){
 
 export default{
     getLocation,
+    getProjectionMap,
     //getPrjPie,
     //getInitData,
     getInitIndexData,

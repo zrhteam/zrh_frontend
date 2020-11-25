@@ -10,9 +10,9 @@
       </el-row>
     </el-header>
     <el-main>
-      <el-row class="boundary-B part1" type="flex">
+      <el-row class="boundary-B" type="flex">
         <!--总部1 总部安全指数一-->
-        <el-col :span="6" class="margin">
+        <el-col :span="6" class="boundary-C margin">
           <div class="grid-content bg-purple boundary">
             <div class="chart-image-icon">
               <div class="plus_top">
@@ -55,7 +55,7 @@
         </el-col>
       </el-row>
 
-      <el-row type="flex">
+      <el-row class="boundary-B" type="flex">
 <!--        <el-row>-->
           <!--总部5 项目安全指数排名-->
           <el-col :span="12" class="part2 margin">
@@ -67,7 +67,7 @@
           </el-col>
 <!--        </el-row>-->
       </el-row>
-      <el-row type="flex">
+      <el-row class="boundary-B" type="flex">
         <!--总部7 未整改高风险图片-->
         <el-col :span="12" class="part2 margin">
           <HighRiskImages class="boundary-C"></HighRiskImages>
