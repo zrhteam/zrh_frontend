@@ -18,7 +18,7 @@
       <el-form-item size="mini" prop="name">
         <div style="width: 200px; margin-left: 20px">
           <!--          <el-input maxlength="100px" size="mini" v-model="form.search_name"></el-input>-->
-          <el-select v-model="form.search_name" popper-class="select-option">
+          <el-select size="mini" v-model="form.search_name" filterable  popper-class="select-option">
             <el-option
                 v-for="item in name"
                 :value="item"
@@ -46,7 +46,7 @@ export default {
         cust_name: '宋城壹号',
         ctr_name: '宋城壹号',
         project_name: '宋城壹号01',
-        search_name: '宋城壹号01'
+        search_name: ''
       },
       level: '项目层级',
       prj_name: [],
@@ -136,7 +136,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<!--<style scoped>-->
+<style>
 @import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");
 
 .el-aside {

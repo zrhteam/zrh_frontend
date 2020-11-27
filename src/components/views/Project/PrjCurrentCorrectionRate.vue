@@ -38,6 +38,7 @@ export default {
           {
             name: '整改情况',
             type: 'gauge',
+            radius: '100%',
             detail: {
               formatter: '{value}%',
               textStyle: {
