@@ -15,7 +15,7 @@
       <el-table-column
           prop="description"
           label="隐患描述"
-          width="550">
+          width="400px">
       </el-table-column>
     </el-table>
   </div>

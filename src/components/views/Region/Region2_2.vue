@@ -8,7 +8,6 @@
       <div style = "font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 1px">
         <el-carousel height="400px">
           <el-carousel-item v-for = 'item in img_list' :key = 'item'>
-<!--            <el-img :src = 'item'></el-img>-->
             <img :src = 'item' alt/>
           </el-carousel-item>
         </el-carousel>
@@ -35,15 +34,11 @@ export default {
       console.log('original',data)
       for (let i in data) {
         for (let j in data[i]){
-          // let obj = {
-          //   url: ''
-          // }
-          // obj.url = 'http://' + data[i][j]
           let obj = 'http://' + data[i][j]
           this.img_list.push(obj)
         }
       }
-      console.log('results',this.img_list)
+      //console.log('results',this.img_list)
     },
   }
 }

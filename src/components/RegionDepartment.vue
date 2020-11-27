@@ -50,15 +50,15 @@
 
       <el-row class="boundary" tyep="flex">
 <!--        项目当前未整改高风险隐患列表-->
-        <el-col class="boundary-C part2 margin" :span="7">
+        <el-col class="boundary-B part2 margin" :span="7">
           <Region2_1></Region2_1>
         </el-col>
 <!--        未整改高风险隐患图片-->
-        <el-col class="boundary-C part2 margin" :span="9">
+        <el-col class="boundary-B part2 margin" :span="9">
           <Region2_2></Region2_2>
         </el-col>
 <!--各项目累计发现的隐患在各专业的分布-->
-        <el-col class="boundary-C part2 margin" :span="7">
+        <el-col class="boundary-B part2 margin" :span="7">
           <Region2_3></Region2_3>
         </el-col>
       </el-row>
@@ -85,8 +85,8 @@
 <script>
 
 
-import SafetyIndexHistogram from "@/components/views/functions/SafetyIndexHistogram.vue";
-import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
+//import SafetyIndexHistogram from "@/components/views/functions/SafetyIndexHistogram.vue";
+//import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
 import checkbox from "@/components/views/functions/checkbox.vue";
 import Region1_1 from "@/components/views/Region/Region1_1.vue";
 import ProjectIndexView from "@/components/views/Region/ProjectIndexView.vue";
@@ -111,7 +111,7 @@ export default {
     Region2_2,
     Region2_1,
     Region1_4,
-    ProjectIndexView, Region1_1, SafetyIndexHistogram, RegionNumberHistogram,
+    ProjectIndexView, Region1_1,
     Region1_3, checkbox
   },
 
@@ -144,7 +144,7 @@ export default {
     this.$store.dispatch('get_region/getInitRegionNumberTop')
     this.$store.dispatch('get_region/getInitRegionImage')
     this.$store.dispatch('get_region/getInitRegionMajor')
-    //this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+    this.$store.dispatch('get_region/getInitRegionSafetyIndex')
     this.$store.dispatch('get_region/getInitRegionRiskRank')
   }
 }

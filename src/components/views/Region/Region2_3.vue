@@ -10,7 +10,7 @@
       <div style="display: none; text-align: center">
         {{getRiskDistribution}}
       </div>
-      <div id = 'risk_distribution' style = 'height: 400px; width: 400px; text-align: center'></div>
+      <div id = 'risk_distribution' style = 'height: 400px; width: 100%;'></div>
     </div>
 <!--      &lt;!&ndash;              在这里展示三维图&ndash;&gt;-->
 <!--      <div>-->
@@ -33,6 +33,8 @@ export default {
       for( let i in data){
         xdata.push(i)
       }
+      let ydata = [];
+
       let series = [];
       for (let i = 1; i < 4; i++){
         let dataset = this.generateData(data, i);
