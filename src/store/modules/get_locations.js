@@ -6,10 +6,10 @@ const state = {
     //得到一个包含所有经纬度的数组
     data: [],
     //得到所有的项目名、区域名、置地名
-    name: {}
-    // prj_name: {},
-    // region_name: {},
-    // head_name: {}
+    name: {},
+//    得到最新数个项目信息
+    projects: {}
+//    得到高风险排名前几名
 }
 
 //getters
@@ -22,6 +22,8 @@ const getters = {
     renderName(State) {
         return state.name;
     },
+
+
 
     // renderPrjName(State) {
     //     return state.prj_name;

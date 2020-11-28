@@ -39,6 +39,29 @@ function getProjectionMap(callback) {
        })
 }
 
+//overview页面右侧展示
+function getLatestProjection(callback) {
+    const url = `${dataServerUrl}/overview_latest_project`;
+    axios.post(url)
+       .then(response => {
+            callback(response.data)
+       })
+       .catch(error=> {
+            console.log(error)
+       })
+}
+
+function getHighRiskRank(callback) {
+    const url = `${dataServerUrl}/overview_high_risk_rank`;
+    axios.post(url)
+       .then(response => {
+            callback(response.data)
+       })
+       .catch(error=> {
+            console.log(error)
+       })
+}
+
 //overview页面地图部分
 /*
     在得到每个项目的经纬度后
@@ -643,6 +666,8 @@ function getInitProjectRiskTop(param, callback){
 export default{
     getLocation,
     getProjectionMap,
+    getLatestProjection,
+    getHighRiskRank,
     //getPrjPie,
     //getInitData,
     getInitIndexData,

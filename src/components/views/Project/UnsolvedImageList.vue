@@ -12,7 +12,8 @@
         <!--              图片播放-->
 
         <el-carousel indicator-position="outside">
-          <el-carousel-item v-for="item in img_list" :key="item">
+<!--          <el-carousel-item v-for="item in img_list" :key="item">-->
+          <el-carousel-item v-for="item in img_list">
             <img :src="item.url" alt/>
           </el-carousel-item>
         </el-carousel>

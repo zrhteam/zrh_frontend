@@ -82,6 +82,7 @@ const actions = {
     //得到按照高风险数量排名的项目名称
     getInitRiskNumberRank(context) {
         dataService.getInitRiskNumberRank(state.params, function (response) {
+            console.log("in getInitRiskNumberRank")
             console.log(response)
             context.commit('changeRiskNumberRank', response)
         })

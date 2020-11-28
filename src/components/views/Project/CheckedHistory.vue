@@ -48,8 +48,8 @@ export default {
         xAxis: {
           type: 'category',
           axisLabel: {
-            interval: 0
-            // rotate: 30
+            interval: 0,
+            rotate: 30
           },
           axisLine: {
             lineStyle: {
@@ -94,7 +94,7 @@ export default {
                 )
               }
             },
-            barWidth: 70
+            // barWidth: 70
           }
         ]
       };

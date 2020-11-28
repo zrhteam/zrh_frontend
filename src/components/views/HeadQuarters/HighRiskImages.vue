@@ -12,7 +12,7 @@
           <div class="grid-content bg-purple">
             <div class="demo-image__placeholder">
               <div class="block">
-                <img src="images0" id="img0" style="width: 500px; height: 500px"/>
+                <img src="images0" id="img0" style="width: 400px; height: 500px"/>
               </div>
             </div>
             <!--                  <div class="login-center-img"><img src="images0"/></div>-->
@@ -23,7 +23,7 @@
             <!--                  图片2-->
             <div class="demo-image__placeholder">
               <div class="block">
-                <img src="images1" id="img1" style="width: 500px; height: 500px"/>
+                <img src="images1" id="img1" style="width: 400px; height: 500px"/>
               </div>
             </div>
             <!--                  <div class="login-center-img"><img src="images1" id="img1"/></div>-->
