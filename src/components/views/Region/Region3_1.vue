@@ -10,7 +10,6 @@
       <div>
         <el-table
             :data="riskNumberTop"
-            stripe
             style="width: 100%">
           <el-table-column
               prop="description"
@@ -58,8 +57,6 @@ export default {
   computed: {
 
     getRiskNumberTop() {
-
-
       let data = this.$store.state.get_region.risk_number_top;
       //console.log('the front end data:', this.$store.state.get_region.risk_number_top)
       //console.log(data)

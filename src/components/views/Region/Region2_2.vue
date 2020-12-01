@@ -6,7 +6,7 @@
       </div>
 <!--      图片走马灯播放-->
       <div style = "font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 1px">
-        <el-carousel height="400px">
+        <el-carousel indicator-position="none">
           <el-carousel-item v-for = 'item in img_list' :key = 'item'>
             <img :src = 'item' alt/>
           </el-carousel-item>

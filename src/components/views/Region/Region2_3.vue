@@ -33,7 +33,7 @@ export default {
       for( let i in data){
         xdata.push(i)
       }
-      let ydata = [];
+      //let ydata = [];
 
       let series = [];
       for (let i = 1; i < 4; i++){
@@ -133,17 +133,35 @@ export default {
         xAxis3D: {
           type: 'category',
           data: xdata,
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff',
+              fontSize: 8
+            }
+          }
         },
         yAxis3D: {
           type: 'category',
           data: ['消防专业', '电梯专业', '电气专业', '燃气专业', '其他专业','在建专业'],
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff',
+              fontSize: 8
+            }
+          }
         },
         zAxis3D: {
-          type: 'value'
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff',
+              fontSize: 8
+            }
+          }
         },
         grid3D: {
           viewControl: {
-            // autoRotate: true
+            autoRotate: true
           },
           light: {
             main: {

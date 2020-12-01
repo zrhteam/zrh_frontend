@@ -45,12 +45,26 @@ export default {
             axisLabel: {
               interval: 0,
               rotate: 20
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#ffffff',
+                fontSize: 8
+              }
             }
           }
         ],
-        yAxis: [{
-          type: 'value'
-        }],
+        yAxis: [
+            {
+              type: 'value',
+              axisLine: {
+                lineStyle: {
+                  color: '#ffffff',
+                  fontSize: 8
+                }
+              }
+            }
+        ],
         series: [{
           type: 'bar',
           barWidth: '60%',

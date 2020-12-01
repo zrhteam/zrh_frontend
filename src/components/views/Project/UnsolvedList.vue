@@ -9,8 +9,8 @@
     <div class="level5">
       <el-table
           :data="riskLevelList"
-          stripe
-          style="width: 100%">
+          style="width: 100%"
+          max-height = '400'>
         <el-table-column
             prop="description"
             label="隐患描述">

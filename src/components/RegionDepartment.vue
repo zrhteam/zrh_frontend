@@ -54,11 +54,11 @@
           <Region2_1></Region2_1>
         </el-col>
 <!--        未整改高风险隐患图片-->
-        <el-col class="boundary-B part2 margin" :span="9">
+        <el-col class="boundary-B part2 margin" :span="8">
           <Region2_2></Region2_2>
         </el-col>
 <!--各项目累计发现的隐患在各专业的分布-->
-        <el-col class="boundary-B part2 margin" :span="7">
+        <el-col class="boundary-B part2 margin" :span="8">
           <Region2_3></Region2_3>
         </el-col>
       </el-row>
@@ -163,18 +163,18 @@ i {
   font-style: normal;
 }
 
-.chart-image-icon {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 25%;
-  height: 100%;
-  background-size: 100% 100%;
+.part1 {
+  background-color: #1b1d32;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.chart-image-icon {
-  background-image: url('../components/svg/card-skin-1.svg');
-  font-family: 'microsoft YaHei';
+.part2 {
+  background-color: #242943;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 
