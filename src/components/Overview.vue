@@ -23,18 +23,18 @@
     <div style="background-color: #003452; opacity: 0.8; margin-top: 20px; color: #ffffff;position: absolute; z-index: 999999; text-align: center; width:100%">
       <span class = "head" >大型综合体生命系统大数据平台</span>
     </div>
-    <svg style="position: absolute; z-index: 99998; width: 100%; height: 100%" pointer-events="none"></svg>
+    <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>
     <Search class="search-component"
-            style="position: absolute; z-index: 99999; top: 150px; left: 20px; background-color: #00192E">
+            style="position: absolute; z-index: 9; top: 150px; left: 20px; background-color: #00192E">
 
     </Search>
     <Statistics class="search-component"
-                style="background-color: #00192E; position: absolute; z-index: 99999; top: 150px; right: 50px">
+                style="background-color: #00192E; position: absolute; z-index: 9; top: 150px; right: 50px">
 
     </Statistics>
   </el-container>
 
-  <!--  </el-container>-->
+<!--    </el-container>-->
 </template>
 
 <script>
@@ -73,6 +73,7 @@ export default {
     this.map_height = window.getComputedStyle(m).height
 
     this.svg = d3.select(this.$el).select('svg');
+    // this.svg = d3.select(this.map.getPanes().overlayPane).append("svg");
 
     let _this = this;
     this.map.on('drag', (e) => {
@@ -137,6 +138,8 @@ export default {
   },
   created() {
     this.$store.dispatch('get_locations/getLocation')
+    this.$store.dispatch('get_locations/getLatestProjection')
+    this.$store.dispatch('get_locations/getHighRiskRank')
   },
   watch: {
     dataList(valMap) {
@@ -231,7 +234,7 @@ export default {
             .attr('stroke', 'white')
             .attr('fill-opacity', 0.8)
             .on('mouseover', d => {
-              console.log('mosueover', d)
+              console.log('mouseover', d)
             })
 
       })
