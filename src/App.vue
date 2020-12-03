@@ -54,7 +54,7 @@ export default {
 }
 
 .boundary {
-  border: dashed red 1px;
+  border: dashed #00ffc4 1px;
   border-width: 1px;
 }
 
