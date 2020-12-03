@@ -9,26 +9,24 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item size="mini" label="输入查询内容"></el-form-item>
-      <!--        <el-form-item size="mini" prop="name"> -->
+      <!--        <el-form-item size="mini" prop="name">-->
       <!--          <div style="width: 200px; margin-left: 20px">-->
       <!--            <el-input maxlength="100px" size="mini" v-model="form.search_name"></el-input>-->
       <!--          </div>-->
       <!--        </el-form-item>-->
       <!--        尝试写带下拉列表的查询框-->
       <el-form-item size="mini" prop="name">
-        <div style="width: 200px; margin-left: 20px">
+        <div>
           <!--          <el-input maxlength="100px" size="mini" v-model="form.search_name"></el-input>-->
-          <el-select size="mini" v-model="form.search_name" filterable  popper-class="select-option">
+          <el-select size="mini" v-model="form.search_name" filterable popper-class="select-option">
             <el-option
                 v-for="item in name"
                 :value="item"
                 :label="item">
             </el-option>
           </el-select>
+          <el-button round size="mini" @click="onSubmitQuery">确认</el-button>
         </div>
-      </el-form-item>
-      <el-form-item>
-        <el-button round size="mini" @click="onSubmitQuery">确认</el-button>
       </el-form-item>
     </el-form>
     <!--    </div>-->
@@ -147,6 +145,7 @@ export default {
 
 .box {
   box-shadow: 0 2px 4px rgba(80, 30, 30, 0.12), 0 0 6px rgba(123, 31, 31, 0.04);
+  max-width: 500px;
 }
 
 /deep/ .select-option {
