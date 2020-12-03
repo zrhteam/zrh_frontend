@@ -1,23 +1,24 @@
 <template>
   <!--  项目层级EHS数据大屏-->
   <el-container>
-    <el-header>
+    <el-header style="height: 140px">
       <el-row>
-        <el-col :span="24">
+        <el-col :span="6">
           <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left">
             <span>{{ prj_name }}EHS数据大屏</span>
           </div>
         </el-col>
+        <Granularity></Granularity>
       </el-row>
     </el-header>
     <el-main>
-      <el-row class="boundary">
-        <!--            历次粒度 -->
-        <el-col class="boundary-B margin">
-          <Granularity></Granularity>
-        </el-col>
+<!--      <el-row class="boundary">-->
+<!--        &lt;!&ndash;            历次粒度&ndash;&gt;-->
+<!--        <el-col class="boundary-B margin">-->
 
-      </el-row>
+<!--        </el-col>-->
+
+<!--      </el-row>-->
       <el-row class="boundary" type="flex">
         <el-col class="boundary-B margin" :span="8">
           <!-- 指数部分-->
@@ -192,7 +193,7 @@ export default {
 }
 
 .part1 {
-  /*background-color: #1b1d32;*/
+  background-color: #1b1d32;
   text-align: left;
   color: #ffffff;
   padding-left: 10px;
@@ -200,7 +201,7 @@ export default {
 }
 
 .part2 {
-  /*background-color: #242943;*/
+  background-color: #242943;
   padding-left: 10px;
   padding-right: 10px;
 }
