@@ -61,7 +61,7 @@
           <el-col :span="12" class="part2 margin">
             <ProjectIndex></ProjectIndex>
           </el-col>
-          <!--总部6 项目累计好风险数量排名-->
+          <!--总部6 项目累计高风险数量排名-->
           <el-col :span="12" class="part2 margin">
             <HighProjectRisk></HighProjectRisk>
           </el-col>
@@ -72,7 +72,7 @@
         <el-col :span="12" class="part2 margin">
           <HighRiskImages class="boundary-C"></HighRiskImages>
         </el-col>
-        <!--总部8 项目累计好风险数量排名-->
+        <!--总部8 项目累计风险数量前10-->
         <el-col :span="12" class="part2 margin">
           <TopAccumRisk class="boundary-C"></TopAccumRisk>
         </el-col>
@@ -139,13 +139,13 @@ export default {
 @import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");
 
 .part1 {
-  background-color: #1b1d32;
+  /*background-color: #1b1d32;*/
   padding-right: 10px;
   padding-left: 10px;
 }
 
 .part2 {
-  background-color: #21253c;
+  /*background-color: #21253c;*/
   padding-right: 10px;
   padding-left: 10px;
 }

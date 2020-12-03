@@ -10,7 +10,7 @@
       <div><!--            stripe-->
         <el-table
             :data="tableData"
-            style="width: 100%">
+            style="width: 100%; color: #93bce7">
           <el-table-column
               prop="description"
               label="隐患描述">

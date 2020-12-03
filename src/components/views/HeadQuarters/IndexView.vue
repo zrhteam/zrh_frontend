@@ -33,7 +33,7 @@ export default {
 
 .index {
   padding-right: 5px;
-  background-color: #39415e;
+  /*background-color: #39415e;*/
   /*width: 80%;*/
   height: 200px;
 }

@@ -24,7 +24,7 @@ export default {
   computed: {
     getSafetyIndexRank() {
       let option = {
-        color: ['#3371db'],
+        color: ['#4bb4b8'],
         tooltip: {
           trigger: 'axis',
           axisPointer: { type: 'shadow'}

@@ -53,14 +53,14 @@ export default {
               textStyle:{
                 fontsize: 12,
                 borderWidth: 1,
-                color: '#F8F6F6'
+                color: '#900'
               }
             },
             emphasis: {
               label: {
                 textStyle: {
                   fontSize: 16,
-                  color: '#f8f6f6'
+                  color: '#900'
                 }
               }
             }
@@ -109,7 +109,7 @@ export default {
               textStyle:{
                 fontsize: 12,
                 borderWidth: 1,
-                color: '#F8F6F6'
+                color: '#f8f6f8'
               }
             },
             emphasis: {
@@ -128,7 +128,10 @@ export default {
       let option = {
 
         legend: {
-          data: ['低风险', '中风险', '高风险']
+          data: ['低风险', '中风险', '高风险'],
+          textStyle: {
+            color: '#fff'
+          }
         },
         xAxis3D: {
           type: 'category',
@@ -136,7 +139,7 @@ export default {
           axisLine: {
             lineStyle: {
               color: '#ffffff',
-              fontSize: 8
+              fontSize: 6
             }
           }
         },
@@ -146,7 +149,7 @@ export default {
           axisLine: {
             lineStyle: {
               color: '#ffffff',
-              fontSize: 8
+              fontSize: 6
             }
           }
         },

@@ -9,7 +9,7 @@
     <div>
       <el-table
           :data="riskTop"
-          style="width: 100%">
+          style="width: 100%; color: #93bce7">
         <el-table-column
             type="index"
             width="50">

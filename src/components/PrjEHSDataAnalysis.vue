@@ -192,7 +192,7 @@ export default {
 }
 
 .part1 {
-  background-color: #1b1d32;
+  /*background-color: #1b1d32;*/
   text-align: left;
   color: #ffffff;
   padding-left: 10px;
@@ -200,7 +200,7 @@ export default {
 }
 
 .part2 {
-  background-color: #242943;
+  /*background-color: #242943;*/
   padding-left: 10px;
   padding-right: 10px;
 }

@@ -10,7 +10,7 @@
       <el-table
           :data="riskLevelData"
           border
-          style="width: 100%">
+          style="width: 100%; color: #93bce7">
         <el-table-column
             prop="risk"
             label="隐患风险等级">
@@ -90,5 +90,6 @@ export default {
 /deep/ .el-table td {
 
   background-color: transparent;
+
 }
 </style>

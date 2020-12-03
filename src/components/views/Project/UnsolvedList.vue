@@ -9,7 +9,7 @@
     <div class="level5">
       <el-table
           :data="riskLevelList"
-          style="width: 100%"
+          style="width: 100%; color: #93bce7"
           max-height = '400'>
         <el-table-column
             prop="description"

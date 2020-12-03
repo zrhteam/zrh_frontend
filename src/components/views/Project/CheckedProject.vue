@@ -9,7 +9,7 @@
     <el-table
         :data="PrjRiskLevelData"
         border
-        style="width: 100%" class="level5"
+        style="width: 100%; color: #93bce7" class="level5"
         :header-cell-style="{color:'color: #3e78f3;'}">
       <el-table-column
           prop="risk"

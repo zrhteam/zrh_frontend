@@ -40,7 +40,7 @@
         </el-col>
 <!--        已检查的项目数量-->
         <el-col :span="4" class="boundary-B part1 margin">
-          <Region1_3 class="boundary-B"></Region1_3>
+          <Region1_3></Region1_3>
         </el-col>
 <!--        各风险等级对应的隐患数量-->
         <el-col :span="10" class="boundary-B part1 margin">
@@ -164,7 +164,7 @@ i {
 }
 
 .part1 {
-  background-color: #1b1d32;
+  /*background-color: #1b1d32;*/
   text-align: left;
   color: #ffffff;
   padding-left: 10px;
@@ -172,7 +172,7 @@ i {
 }
 
 .part2 {
-  background-color: #242943;
+  /*background-color: #242943;*/
   padding-left: 10px;
   padding-right: 10px;
 }

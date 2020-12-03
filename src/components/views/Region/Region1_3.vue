@@ -3,7 +3,7 @@
     <div class="level11">
       <span>已检查项目数量</span>
     </div>
-    <div class="level12">
+    <div class="level12" style="text-align: center; padding-top: 40px">
       {{ getExamineNumber }}
     </div>
   </div>
