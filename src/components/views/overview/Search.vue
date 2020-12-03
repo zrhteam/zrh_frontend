@@ -9,7 +9,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item size="mini" label="输入查询内容"></el-form-item>
-      <!--        <el-form-item size="mini" prop="name">-->
+      <!--        <el-form-item size="mini" prop="name"> -->
       <!--          <div style="width: 200px; margin-left: 20px">-->
       <!--            <el-input maxlength="100px" size="mini" v-model="form.search_name"></el-input>-->
       <!--          </div>-->

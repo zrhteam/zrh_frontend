@@ -6,7 +6,7 @@
   <!--    </el-header>-->
   <!--    <div id="map" bordered :dataSource="$store.state.get_locations.data"></div>-->
   <!--  </div>-->
-  <!--  <el-container style="height: 100%; width:100%; border: 1px solid #eee">-->
+  <!--  <el-container style="height: 100%; width:100%; border: 1px solid #eee"> -->
   <!--    <OverviewLeftSide></OverviewLeftSide>-->
 
 

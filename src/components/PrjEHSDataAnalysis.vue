@@ -12,7 +12,7 @@
     </el-header>
     <el-main>
       <el-row class="boundary">
-        <!--            历次粒度-->
+        <!--            历次粒度 -->
         <el-col class="boundary-B margin">
           <Granularity></Granularity>
         </el-col>
