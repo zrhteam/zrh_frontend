@@ -15,7 +15,7 @@
       </div>
     </el-header>
     <el-main>
-      <div id="dashboard" style="height: 200px; width: 300px"></div>
+      <div id="dashboard" style="height: 200px; width: 260px"></div>
     </el-main>
   </el-container>
 </template>
