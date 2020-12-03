@@ -66,9 +66,9 @@ export default {
                 color: new echarts.graphic.LinearGradient(
                     0, 0, 0, 1,
                     [
-                      {offset: 0, color: '#3477fb'},
-                      {offset: 0.5, color: '#2d55a9'},
-                      {offset: 1, color: '#253054'}
+                      {offset: 0, color: '#77b5b8'},
+                      // {offset: 0.5, color: '#1f77a0'},
+                      {offset: 1, color: '#107480'}
                     ]
                 )
               }

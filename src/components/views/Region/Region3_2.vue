@@ -24,7 +24,7 @@ export default {
   computed: {
     getSafetyIndexRank() {
       let option = {
-        color: ['#4bb4b8'],
+        // color: ['#77b5b8'],
         tooltip: {
           trigger: 'axis',
           axisPointer: { type: 'shadow'}
@@ -67,6 +67,20 @@ export default {
         ],
         series: [{
           type: 'bar',
+          itemStyle: {
+              normal: {
+                //柱形图圆角，初始化效果
+                barBorderRadius: [10, 10, 0, 0],
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: '#77b5b8'},
+                      // {offset: 0.5, color: '#1f77a0'},
+                      {offset: 1, color: '#107480'}
+                    ]
+                )
+              }
+            },
           barWidth: '60%',
           data: [5, 7, 9, 11, 14, 15]
         }]
