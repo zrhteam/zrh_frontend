@@ -13,7 +13,7 @@
       <el-row class="boundary-B" type="flex">
         <!--总部1 总部安全指数一-->
         <el-col :span="6" class="boundary-C margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 430px">
             <div class="grid-content bg-purple boundary">
               <div class="chart-image-icon">
                 <div class="plus_top">
@@ -31,7 +31,7 @@
         </el-col>
         <!--总部2 专业指数-->
         <el-col :span="6" class="boundary part1 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 430px">
             <el-row>
             <el-col :span="12">
               <IndexView :context="{title:'消防危险指数'}"></IndexView>
@@ -53,13 +53,13 @@
         </el-col>
         <!--总部3 整改率-->
         <el-col :span="6" class="part1 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 430px">
             <Rectification></Rectification>
           </el-card>
         </el-col>
         <!--总部4 隐患数量-->
         <el-col :span="6" class="part1 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 430px">
             <AccumRisk></AccumRisk>
           </el-card>
         </el-col>
@@ -69,13 +69,13 @@
 <!--        <el-row>-->
           <!--总部5 项目安全指数排名-->
           <el-col :span="12" class="part2 margin">
-            <el-card shadow="never" style="background-color: transparent">
+            <el-card shadow="never" style="background-color: transparent; height: 480px">
               <ProjectIndex></ProjectIndex>
             </el-card>
           </el-col>
           <!--总部6 项目累计高风险数量排名-->
           <el-col :span="12" class="part2 margin">
-            <el-card shadow="never" style="background-color: transparent">
+            <el-card shadow="never" style="background-color: transparent; height: 480px">
               <HighProjectRisk></HighProjectRisk>
             </el-card>
           </el-col>
@@ -84,13 +84,13 @@
       <el-row class="boundary-B" type="flex">
         <!--总部7 未整改高风险图片-->
         <el-col :span="12" class="part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 460px">
             <HighRiskImages class="boundary-C"></HighRiskImages>
           </el-card>
         </el-col>
         <!--总部8 项目累计风险数量前10-->
         <el-col :span="12" class="part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 460px">
             <TopAccumRisk class="boundary-C"></TopAccumRisk>
           </el-card>
         </el-col>
