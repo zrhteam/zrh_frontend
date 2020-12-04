@@ -9,7 +9,7 @@
         {{ getNumberHistogram }}
       </div>
       <!--        <svg></svg>-->
-      <div id="number_histogram" style="height: 400px; width: 700px"></div>
+      <div id="number_histogram" style="height: 400px; width: 100%"></div>
       <!--      </div>-->
     </div>
   </div>
@@ -102,6 +102,10 @@ export default {
       let myChart = this.$echarts.init(document.getElementById('number_histogram'))
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(this.getNumberHistogram);
+      myChart.resize();
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      })
     }
   }
 }

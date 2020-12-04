@@ -112,6 +112,10 @@ export default {
       let myChart = this.$echarts.init(document.getElementById('history_chart'))
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(this.getPrjHistory);
+      myChart.resize();
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      })
     }
   }
 }

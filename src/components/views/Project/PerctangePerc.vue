@@ -6,7 +6,7 @@
     <div style="padding-top: 15px">
       <span>{{ context.title }}</span>
     </div>
-    <div id="bar_chart" style="height: 400px; width: 350px">
+    <div id="bar_chart" style="height: 400px; width: 100%">
       <!--        占比（可筛选专业）柱状图-->
 
     </div>
@@ -26,7 +26,8 @@ export default {
   },
   methods: {
     drawBarChart() {
-      let myChart;
+      this.$nextTick(_ =>{
+        let myChart;
       if (this.type == 'system') {
         if (document.getElementById('bar_chart')) {
           document.getElementById('bar_chart').id = 'id_system'
@@ -45,6 +46,12 @@ export default {
       }
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(this.getData);
+      myChart.resize();
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      })
+      })
+
     }
   },
   computed: {

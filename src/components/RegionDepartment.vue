@@ -93,7 +93,7 @@
 <!--项目累计高风险数量排名-->
         <el-col :span="8" class="boundary-B part2 margin">
           <el-card shadow="never" style="background-color: transparent">
-            <Region3_3                                                                            ></Region3_3>
+            <Region3_3 ref="echarts"></Region3_3>
           </el-card>
         </el-col>
 
@@ -153,8 +153,19 @@ export default {
 
   },
 
-  methods: {
+  mounted() {
+    this.selfAdaption();
+  },
 
+  methods: {
+    selfAdaption(){
+      let _this = this;
+      setTimeout(() =>{
+        window.addEventListener('resize', function () {
+          _this.$refs.echarts.resize();
+        })
+      }, 10)
+    }
   },
 
   created() {

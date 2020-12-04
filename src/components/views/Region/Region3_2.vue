@@ -7,7 +7,7 @@
         <div style = "display: none">
           {{getSafetyIndexRank}}
         </div>
-        <div id = "safety" style= "height: 550px; width: 600px"> </div>
+        <div id = "safety" style= "height: 500px; width: 100%" > </div>
         <!--                这里是写项目安全指数排名的柱状图-->
 <!--        <SafetyIndexHistogram></SafetyIndexHistogram>-->
     </div>
@@ -94,11 +94,18 @@ export default {
   methods: {
     myEcharts(){
       //基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById('safety'));
+      this.$nextTick(_ =>{
+        let myChart = this.$echarts.init(document.getElementById('safety'));
 
-      myChart.setOption(this.getSafetyIndexRank);
+        myChart.setOption(this.getSafetyIndexRank);
+        myChart.resize();
+        window.addEventListener('resize', function (){
+          myChart.resize;
+        })
+      })
     }
   },
+
   updated() {
     this.myEcharts();
   }

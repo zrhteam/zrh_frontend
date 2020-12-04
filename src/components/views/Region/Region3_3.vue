@@ -7,7 +7,7 @@
       <div style = 'display: none; text-align: center'>
         {{getHighRiskRank}}
       </div>
-      <div id = 'risk_rank' style="height: 500px; width: 550px; text-align: center"></div>
+      <div id = 'risk_rank' style="height: 500px; width: 100%; text-align: center"></div>
     </div>
 
   </div>
@@ -104,7 +104,11 @@ export default {
   methods: {
     drawBarChart() {
       let myChart = this.$echarts.init(document.getElementById('risk_rank'))
-      myChart.setOption(this.getHighRiskRank)
+      myChart.setOption(this.getHighRiskRank);
+      myChart.resize();
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      })
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {

@@ -10,7 +10,7 @@
       <div style="display: none; text-align: center">
         {{getRiskDistribution}}
       </div>
-      <div id = 'risk_distribution' style = 'height: 400px; width: 500px; padding-bottom: 10px'></div>
+      <div id = 'risk_distribution' style = 'height: 400px; width: 100%; padding-bottom: 10px'></div>
     </div>
 <!--      &lt;!&ndash;              在这里展示三维图&ndash;&gt;-->
 <!--      <div>-->
@@ -183,7 +183,11 @@ export default {
   methods: {
     draw3D() {
       let myChart = this.$echarts.init(document.getElementById('risk_distribution'))
-      myChart.setOption(this.getRiskDistribution)
+      myChart.setOption(this.getRiskDistribution);
+      myChart.resize();
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      })
     },
     generateData(data, level){
       let arr = [];
