@@ -16,7 +16,7 @@
         <el-table-column
             prop="risk"
             label="隐患风险等级"
-            width="280px">
+            min-width="80px">
         </el-table-column>
         <el-table-column
             prop="num"

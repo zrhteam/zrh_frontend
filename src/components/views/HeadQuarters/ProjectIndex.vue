@@ -158,7 +158,8 @@ export default {
   //   },
   // },
   computed: {
-    getNumberHistogram() {
+    // getNumberHistogram() {
+    getIndexHistogram() {
       let data = this.$store.state.get_headquarter.risk_number_rank
       let arr = []
       for (let i in data) {
@@ -171,6 +172,20 @@ export default {
         arr.push(obj)
       }
       console.log(arr)
+      return arr
+    },
+  },
+  updated() {
+    this.drawBarChart()
+  },
+  mounted() {
+    this.drawBarChart();
+  },
+  methods: {
+    drawBarChart() {
+      let myChart = this.$echarts.init(document.getElementById('number_histogram1'))
+      // 使用刚指定的配置项和数据显示图表。
+      let arr = this.getIndexHistogram
       let option = {
         tooltip: {},
         dataset: {
@@ -229,20 +244,7 @@ export default {
           }
         ]
       };
-      return option
-    },
-  },
-  updated() {
-    this.drawBarChart()
-  },
-  mounted() {
-    this.drawBarChart();
-  },
-  methods: {
-    drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('number_histogram1'))
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getNumberHistogram);
+      myChart.setOption(option);
       myChart.resize();
       window.addEventListener('resize', function () {
         myChart.resize();
