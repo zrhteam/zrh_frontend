@@ -33,7 +33,7 @@ export default {
     getPrjImage() {
       let data = this.$store.state.get_project.prj_image;
       // console.log(this.$store.state.get_project.prj_image)
-      console.log(data)
+      console.log("imagedata", data)
       // this.img_list.push(data);
       //
       // console.log(this.img_list)

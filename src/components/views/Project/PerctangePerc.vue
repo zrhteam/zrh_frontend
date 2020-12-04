@@ -26,32 +26,102 @@ export default {
   },
   methods: {
     drawBarChart() {
-      this.$nextTick(_ =>{
+      this.$nextTick(_ => {
         let myChart;
-      if (this.type == 'system') {
-        if (document.getElementById('bar_chart')) {
-          document.getElementById('bar_chart').id = 'id_system'
+        if (this.type == 'system') {
+          if (document.getElementById('bar_chart')) {
+            document.getElementById('bar_chart').id = 'id_system'
+          }
+          myChart = this.$echarts.init(document.getElementById('id_system'))
+        } else if (this.type == 'reason') {
+          if (document.getElementById('bar_chart')) {
+            document.getElementById('bar_chart').id = 'id_reason'
+          }
+          myChart = this.$echarts.init(document.getElementById('id_reason'))
+        } else if (this.type == 'region') {
+          if (document.getElementById('bar_chart')) {
+            document.getElementById('bar_chart').id = 'id_region'
+          }
+          myChart = this.$echarts.init(document.getElementById('id_region'))
         }
-        myChart = this.$echarts.init(document.getElementById('id_system'))
-      } else if (this.type == 'reason') {
-        if (document.getElementById('bar_chart')) {
-          document.getElementById('bar_chart').id = 'id_reason'
+        // 使用刚指定的配置项和数据显示图表。
+        let arr = this.getData
+        console.log("bar_arr", arr)
+        if (arr.length) {
+          let option = {
+            tooltip: {},
+            dataset: {
+              dimensions: ['name', 'count'],
+              source: arr
+            },
+            xAxis: {
+              type: 'category',
+              axisLabel: {
+                interval: 0,
+                rotate: 45,
+                textStyle: {
+                  fontSize: 10
+                }
+              },
+              axisLine: {
+                lineStyle: {
+                  color: '#ffffff',
+                  fontSize: 8
+                }
+              }
+            },
+            yAxis: {
+              axisLine: {
+                lineStyle: {
+                  color: '#ffffff'
+                }
+              },
+              axisLabel: {
+                // textStyle: {
+                //   fontSize: 10
+                // }
+              }
+            },
+            series: [
+              {
+                type: 'bar',
+                itemStyle: {
+                  normal: {
+                    //柱形图圆角，初始化效果
+                    barBorderRadius: [10, 10, 0, 0],
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                          {offset: 0, color: '#77b5b8'},
+                          // {offset: 0.5, color: '#1f77a0'},
+                          {offset: 1, color: '#107480'}
+                        ]
+                    )
+                  }
+                },
+                emphasis: {
+                  itemStyle: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                          {offset: 0, color: '#2378f7'},
+                          {offset: 0.7, color: '#2378f7'},
+                          {offset: 1, color: '#83bff6'}
+                        ]
+                    )
+                  }
+                },
+                barMaxWidth: 40
+              }
+            ]
+          };
+          myChart.setOption(option);
         }
-        myChart = this.$echarts.init(document.getElementById('id_reason'))
-      } else if (this.type == 'region') {
-        if (document.getElementById('bar_chart')) {
-          document.getElementById('bar_chart').id = 'id_region'
-        }
-        myChart = this.$echarts.init(document.getElementById('id_region'))
-      }
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getData);
-      myChart.resize();
-      window.addEventListener('resize', function () {
         myChart.resize();
+        window.addEventListener('resize', function () {
+          myChart.resize();
+        })
       })
-      })
-
     }
   },
   computed: {
@@ -135,74 +205,7 @@ export default {
         console.log(arr)
       }
       console.log(arr)
-      let option = {
-        tooltip: {},
-        dataset: {
-          dimensions: ['name', 'count'],
-          source: arr
-        },
-        xAxis: {
-          type: 'category',
-          axisLabel: {
-            interval: 0,
-            rotate: 45,
-            textStyle: {
-              fontSize: 10
-            }
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#ffffff',
-              fontSize: 8
-            }
-          }
-        },
-        yAxis: {
-          axisLine: {
-            lineStyle: {
-              color: '#ffffff'
-            }
-          },
-          axisLabel: {
-            // textStyle: {
-            //   fontSize: 10
-            // }
-          }
-        },
-        series: [
-          {
-            type: 'bar',
-            itemStyle: {
-              normal: {
-                //柱形图圆角，初始化效果
-                barBorderRadius: [10, 10, 0, 0],
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: '#77b5b8'},
-                      // {offset: 0.5, color: '#1f77a0'},
-                      {offset: 1, color: '#107480'}
-                    ]
-                )
-              }
-            },
-            emphasis: {
-              itemStyle: {
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: '#2378f7'},
-                      {offset: 0.7, color: '#2378f7'},
-                      {offset: 1, color: '#83bff6'}
-                    ]
-                )
-              }
-            },
-            barMaxWidth: 40
-          }
-        ]
-      };
-      return option
+      return arr
     },
   },
   updated() {
