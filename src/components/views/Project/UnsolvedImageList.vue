@@ -4,7 +4,7 @@
       {{ getPrjImage }}
     </div>
     <div class="grid-content bg-purple">
-      <div class="level4" style="padding-top: 15px; padding-bottom: 15px">
+      <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
         <span>未整改高风险隐患图片</span>
       </div>
       <div

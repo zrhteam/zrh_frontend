@@ -6,7 +6,7 @@
     <div style="padding-top: 15px">
       <span>{{ context.title }}</span>
     </div>
-    <div id="bar_chart" style="height: 90%; width: 95%">
+    <div id="bar_chart" style="height: 400px; width: 350px">
       <!--        占比（可筛选专业）柱状图-->
 
     </div>

@@ -6,7 +6,7 @@
     <div class="level4" style="padding-top: 15px">
       <span>历次检查隐患数量变化</span>
     </div>
-    <div id="history_chart" style="height: 90%; width: 100%"></div>
+    <div id="history_chart" style="height: 350px; width: 400px"></div>
   </div>
 </template>
 

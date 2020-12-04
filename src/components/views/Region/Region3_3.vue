@@ -7,7 +7,7 @@
       <div style = 'display: none; text-align: center'>
         {{getHighRiskRank}}
       </div>
-      <div id = 'risk_rank' style="height: 95%; width: 100%; text-align: center"></div>
+      <div id = 'risk_rank' style="height: 500px; width: 550px; text-align: center"></div>
     </div>
 
   </div>
@@ -43,7 +43,7 @@ export default {
           type: 'category',
           axisLabel: {
             interval: 0,
-            rotate: 20
+            rotate: 40
           },
           axisLine: {
             lineStyle: {

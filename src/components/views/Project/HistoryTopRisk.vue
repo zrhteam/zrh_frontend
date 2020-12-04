@@ -3,7 +3,7 @@
     <div style="display: none">
       {{ getPrjRiskTop }}
     </div>
-    <div class="level4" style="padding-top: 15px; padding-bottom: 10px">
+    <div class="level4" style="padding-top: 15px; padding-bottom: 10px; padding-left: 10px">
       <span>历次重复出现隐患前五名</span>
     </div>
     <div>
