@@ -100,7 +100,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('get_headquarter/getInitNumberTop')
+    // this.$store.dispatch('get_headquarter/getInitNumberTop')
     this.$store.dispatch('get_headquarter/getInitImage')
   }
 }
