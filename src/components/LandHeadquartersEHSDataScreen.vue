@@ -20,7 +20,7 @@
                   <div class="level7" style="padding-bottom: 10px">
                     <span>总部危险指数</span>
                   </div>
-                  <div class="level8">
+                  <div class="level8" style="padding-top: 80px">
                     <span>23,185</span>
                   </div>
                 </div>
