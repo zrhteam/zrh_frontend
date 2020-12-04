@@ -16,6 +16,9 @@ export default {
   computed: {
     getPrjHistory() {
       let data = this.$store.state.get_project.prj_number_change;
+      if(!data.length) {
+        // document.getElementById('history_chart').innerHTML = "<div>暂无数据</div>"
+      }
       // console.log(data)
       let arr = []
       for (let i in data) {

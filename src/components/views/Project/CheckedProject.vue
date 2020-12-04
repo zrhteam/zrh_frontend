@@ -38,8 +38,11 @@ export default {
     getPrjRiskLevelData() {
       let data = this.$store.state.get_project.prj_risk_data;
       console.log(this.$store.state.get_project.prj_risk_data)
-      console.log(data)
-      //  风险等级对应情况
+      // if(!data.length) {
+      //   // this.PrjRiskLevelData = []
+      // }
+      // else {
+        //  风险等级对应情况
       //  1：低风险； 2：中风险； 3：高风险
       let obj1 = {
         risk: '低风险',
@@ -78,8 +81,9 @@ export default {
       dataArray.push(obj)
       console.log(dataArray)
       this.PrjRiskLevelData = dataArray
+      }
     },
-  }
+  // }
 }
 </script>
 

@@ -147,6 +147,8 @@ export default {
             // 基于准备好的dom，初始化echarts实例
             let myChart = this.$echarts.init(document.getElementById('number_histogram'));
             myChart.resize();
+            myChart = this.$echarts.init(document.getElementById('number_histogram1'));
+            myChart.resize();
           };
   },
   created() {
