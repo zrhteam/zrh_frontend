@@ -11,7 +11,7 @@
           :data="riskTop"
           :row-style="{height: '20px'}"
           :cell-style="{padding: '5px'}"
-          style="width: 100%; color: #93bce7">
+          style="width: 100%; height: 390px; color: #93bce7">
         <el-table-column
             type="index"
             width="50">

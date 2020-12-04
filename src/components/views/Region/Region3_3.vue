@@ -43,7 +43,7 @@ export default {
           type: 'category',
           axisLabel: {
             interval: 0,
-            rotate: 40
+            rotate: 30
           },
           axisLine: {
             lineStyle: {

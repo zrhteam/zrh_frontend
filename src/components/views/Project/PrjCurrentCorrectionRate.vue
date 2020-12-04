@@ -15,7 +15,7 @@
       </div>
     </el-header>
     <el-main>
-      <div id="dashboard" style="height: 50%; width: 60%; padding-top: 50px"></div>
+      <div id="dashboard" style="height: 180px; width: 100%; padding-top: 50px"></div>
     </el-main>
   </el-container>
 </template>
@@ -71,6 +71,10 @@ export default {
       let myChart = this.$echarts.init(document.getElementById('dashboard'))
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(this.getRate);
+      myChart.resize();
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      })
     }
   },
   created() {

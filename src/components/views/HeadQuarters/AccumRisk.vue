@@ -4,7 +4,7 @@
       {{ getRiskLevelData }}
     </div>
     <div class="grid-content bg-purple-light boundary">
-      <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
+      <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px;">
         <span>所有项目累计发现隐患数量</span>
       </div>
       <el-table
@@ -16,7 +16,7 @@
         <el-table-column
             prop="risk"
             label="隐患风险等级"
-            width="292">
+            width="280px">
         </el-table-column>
         <el-table-column
             prop="num"
