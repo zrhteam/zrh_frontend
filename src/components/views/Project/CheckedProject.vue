@@ -16,7 +16,7 @@
       <el-table-column
           prop="risk"
           label="隐患风险等级"
-          width="292">
+          min-width="80">
       </el-table-column>
       <el-table-column
           prop="num"
@@ -37,52 +37,58 @@ export default {
   computed: {
     getPrjRiskLevelData() {
       let data = this.$store.state.get_project.prj_risk_data;
-      console.log(this.$store.state.get_project.prj_risk_data)
-      // if(!data.length) {
-      //   // this.PrjRiskLevelData = []
-      // }
-      // else {
-        //  风险等级对应情况
+      var data_length = Object.keys(data)
+      if (!data_length.length) {
+        this.PrjRiskLevelData = []
+      }
+          // console.log(this.$store.state.get_project.prj_risk_data)
+          // if(!data.length) {
+          //   // this.PrjRiskLevelData = []
+          // }
+          // else {
+          //  风险等级对应情况
       //  1：低风险； 2：中风险； 3：高风险
-      let obj1 = {
-        risk: '低风险',
-        num: 0
-      }
-      let obj2 = {
-        risk: '中风险',
-        num: 0
-      }
-      let obj3 = {
-        risk: '高风险',
-        num: 0
-      }
-      let obj = {
-        risk: '列总计',
-        num: 0
-      }
-      let dataArray = []
-      for (let i in data) {
-        for (let j in data[i]) {
-          if (j == 1) {
-            obj1.num += data[i][j]
-          }
-          if (j == 2) {
-            obj2.num += data[i][j]
-          }
-          if (j == 3) {
-            obj3.num += data[i][j]
+      else {
+        let obj1 = {
+          risk: '低风险',
+          num: 0
+        }
+        let obj2 = {
+          risk: '中风险',
+          num: 0
+        }
+        let obj3 = {
+          risk: '高风险',
+          num: 0
+        }
+        let obj = {
+          risk: '列总计',
+          num: 0
+        }
+        let dataArray = []
+        for (let i in data) {
+          for (let j in data[i]) {
+            if (j == 1) {
+              obj1.num += data[i][j]
+            }
+            if (j == 2) {
+              obj2.num += data[i][j]
+            }
+            if (j == 3) {
+              obj3.num += data[i][j]
+            }
           }
         }
+        dataArray.push(obj3)
+        dataArray.push(obj2)
+        dataArray.push(obj1)
+        obj.num = obj1.num + obj2.num + obj3.num
+        dataArray.push(obj)
+        console.log(dataArray)
+        this.PrjRiskLevelData = dataArray
       }
-      dataArray.push(obj3)
-      dataArray.push(obj2)
-      dataArray.push(obj1)
-      obj.num = obj1.num + obj2.num + obj3.num
-      dataArray.push(obj)
-      console.log(dataArray)
-      this.PrjRiskLevelData = dataArray
-      }
-    },
+    }
+  },
   // }
 }
 </script>

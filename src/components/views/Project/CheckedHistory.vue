@@ -16,9 +16,6 @@ export default {
   computed: {
     getPrjHistory() {
       let data = this.$store.state.get_project.prj_number_change;
-      if(!data.length) {
-        // document.getElementById('history_chart').innerHTML = "<div>暂无数据</div>"
-      }
       // console.log(data)
       let arr = []
       for (let i in data) {
@@ -42,69 +39,7 @@ export default {
         }
       }
       console.log(arr)
-      let option = {
-        tooltip: {},
-        dataset: {
-          dimensions: ['name', 'count'],
-          source: arr
-        },
-        xAxis: {
-          type: 'category',
-          axisLabel: {
-            interval: 0,
-            rotate: 45,
-            textStyle: {
-              fontSize: 10
-            }
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#ffffff',
-              fontSize: 8
-            }
-          }
-        },
-        yAxis: {
-          axisLine: {
-            lineStyle: {
-              color: '#ffffff'
-            }
-          }
-        },
-        series: [
-          {
-            type: 'bar',
-            itemStyle: {
-              normal: {
-                //柱形图圆角，初始化效果
-                barBorderRadius: [10, 10, 0, 0],
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: '#77b5b8'},
-                      // {offset: 0.5, color: '#1f77a0'},
-                      {offset: 1, color: '#107480'}
-                    ]
-                )
-              }
-            },
-            emphasis: {
-              itemStyle: {
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: '#2378f7'},
-                      {offset: 0.7, color: '#2378f7'},
-                      {offset: 1, color: '#83bff6'}
-                    ]
-                )
-              }
-            },
-            barMaxWidth: 40
-          }
-        ]
-      };
-      return option
+      return arr
     }
   },
   updated() {
@@ -115,9 +50,79 @@ export default {
   },
   methods: {
     drawBarChart() {
+      // document.getElementById('history_chart').innerHTML = ''
       let myChart = this.$echarts.init(document.getElementById('history_chart'))
       // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getPrjHistory);
+      let arr = this.getPrjHistory
+      if(arr.length) {
+        let option = {
+          tooltip: {},
+          dataset: {
+            dimensions: ['name', 'count'],
+            source: arr
+          },
+          xAxis: {
+            type: 'category',
+            axisLabel: {
+              interval: 0,
+              rotate: 45,
+              textStyle: {
+                fontSize: 10
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#ffffff',
+                fontSize: 8
+              }
+            }
+          },
+          yAxis: {
+            axisLine: {
+              lineStyle: {
+                color: '#ffffff'
+              }
+            }
+          },
+          series: [
+            {
+              type: 'bar',
+              itemStyle: {
+                normal: {
+                  //柱形图圆角，初始化效果
+                  barBorderRadius: [10, 10, 0, 0],
+                  color: new echarts.graphic.LinearGradient(
+                      0, 0, 0, 1,
+                      [
+                        {offset: 0, color: '#77b5b8'},
+                        // {offset: 0.5, color: '#1f77a0'},
+                        {offset: 1, color: '#107480'}
+                      ]
+                  )
+                }
+              },
+              emphasis: {
+                itemStyle: {
+                  color: new echarts.graphic.LinearGradient(
+                      0, 0, 0, 1,
+                      [
+                        {offset: 0, color: '#2378f7'},
+                        {offset: 0.7, color: '#2378f7'},
+                        {offset: 1, color: '#83bff6'}
+                      ]
+                  )
+                }
+              },
+              barMaxWidth: 40
+            }
+          ]
+        };
+        myChart.setOption(option);
+      }
+      else {
+        // document.getElementById('history_chart').innerHTML = ''
+        // document.getElementById('history_chart').innerHTML = '<div style="color: #909399; text-align: center; vertical-align: center">暂无数据</div>'
+      }
       myChart.resize();
       window.addEventListener('resize', function () {
         myChart.resize();
