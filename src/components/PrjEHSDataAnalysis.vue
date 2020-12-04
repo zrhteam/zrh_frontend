@@ -16,7 +16,7 @@
       <el-row class="boundary" type="flex" >
         <el-col class="boundary-B margin" :span="8">
           <!-- 指数部分-->
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 400px">
             <el-row class="margin">
             <el-col :span="24">
               <div class="safety_index" style="height: 100px">
@@ -46,7 +46,7 @@
         </el-col>
 
         <el-col class="boundary-B part1 margin" :span="4">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 400px">
              <!--当前整改率-->
             <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>
           </el-card>
@@ -54,13 +54,13 @@
         </el-col>
         <el-col class="boundary-B part1 margin" :span="6">
           <!--历次检查累计发现隐患数量-->
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 400px">
             <CheckedProject></CheckedProject>
           </el-card>
         </el-col>
         <el-col class="boundary-B part2 margin" :span="6">
           <!--历次检查隐患数量变化-->
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 400px">
             <CheckedHistory></CheckedHistory>
           </el-card>
         </el-col>
@@ -69,25 +69,25 @@
       <el-row class="boundary" type="flex">
         <el-col class="boundary-C part2 margin" :span="6">
           <!--          最近一次检查隐患专业占比-->
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 450px">
             <LastCheckPerc></LastCheckPerc>
           </el-card>
         </el-col>
         <el-col class="boundary-C part2 margin" :span="6">
           <!--          历次检查累计隐患专业占比-->
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 450px">
             <CheckHistoryPerc></CheckHistoryPerc>
           </el-card>
         </el-col>
         <el-col class="boundary-C part2 margin" :span="6">
           <!--          当前未整改高风险隐患列表-->
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 450px">
             <UnsolvedList></UnsolvedList>
           </el-card>
         </el-col>
         <el-col class="boundary-C margin" :span="6">
           <!--          当前未整改高风险隐患图片-->
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 450px">
             <UnsolvedImageList></UnsolvedImageList>
           </el-card>
         </el-col>
@@ -95,23 +95,23 @@
       <!--占比-->
       <el-row class="boundary level4" type="flex">
         <el-col :span="4" class="boundary-C part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 470px">
             <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>
           </el-card>
         </el-col>
         <el-col :span="4" class="boundary-C part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 470px">
             <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason'}"></PerctangePerc>
           </el-card>
         </el-col>
         <el-col :span="4" class="boundary-C part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 470px">
             <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></PerctangePerc>
           </el-card>
         </el-col>
         <!--历次重复出现隐患前五名-->
         <el-col :span="12" class="boundary-B part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 470px">
             <HistoryTopRisk class="boundary-B"></HistoryTopRisk>
           </el-card>
         </el-col>
