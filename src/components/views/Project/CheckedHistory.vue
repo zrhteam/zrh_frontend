@@ -3,10 +3,10 @@
     <div style="display: none">
       {{ getPrjHistory }}
     </div>
-    <div class="level4" style="padding-top: 15px">
+    <div class="level4">
       <span>历次检查隐患数量变化</span>
     </div>
-    <div id="history_chart" style="height: 350px; width: 400px"></div>
+    <div id="history_chart" style="height: 400px; width: 100%"></div>
   </div>
 </template>
 
@@ -49,7 +49,10 @@ export default {
           type: 'category',
           axisLabel: {
             interval: 0,
-            rotate: 30
+            rotate: 45,
+            textStyle: {
+              fontSize: 10
+            }
           },
           axisLine: {
             lineStyle: {
@@ -94,7 +97,7 @@ export default {
                 )
               }
             },
-            // barWidth: 70
+            barMaxWidth: 40
           }
         ]
       };

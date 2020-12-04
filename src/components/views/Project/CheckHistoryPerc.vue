@@ -6,7 +6,7 @@
     <div class="level4" style="padding-top: 15px">
       <span>历次检查隐患专业占比</span>
     </div>
-    <div id="pie2" style="height: 370px; width: 500px"></div>
+    <div id="pie2" style="height: 370px; width: 100%"></div>
     <!--          历次检查累计隐患专业占比 饼图-->
   </div>
 </template>
@@ -41,17 +41,19 @@ export default {
       }
       // console.log(arr_major)
       let option = {
-        tooltip: {},
+        tooltip: {
+          formatter: '{b}:{c} ({d}%)'
+        },
         color: ['#5182e4', '#3fb27e', '#9bcc66', '#f7cb4a', '#00b9ff', '#03a1ea'],
         series: [
           {
             type: 'pie',
-            radius: '55%',
+            radius: '50%',
             center: ['50%', '50%'],
             label: {
               normal: {
                 show: true,
-                formatter: '{b}: {c}({d}%)' //自定义显示格式(b:name, c:value, d:百分比)
+                formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
               }
             },
             data: arr_major,
