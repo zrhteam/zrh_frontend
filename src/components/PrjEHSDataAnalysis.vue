@@ -170,6 +170,23 @@ export default {
       console.log(data)
     }
   },
+  mounted() {
+        window.onresize = () => {
+            // 基于准备好的dom，初始化echarts实例
+            let myChart = this.$echarts.init(document.getElementById('id_system'));
+            myChart.resize();
+            myChart = this.$echarts.init(document.getElementById('id_reason'));
+            myChart.resize();
+            myChart = this.$echarts.init(document.getElementById('id_region'));
+            myChart.resize();
+            myChart = this.$echarts.init(document.getElementById('history_chart'));
+            myChart.resize();
+            myChart = this.$echarts.init(document.getElementById('pie'));
+            myChart.resize();
+            myChart = this.$echarts.init(document.getElementById('pie2'));
+            myChart.resize();
+          };
+  },
   created() {
     // this.$store.dispatch('get_project/getInitProjectNumberChange')
     // 当前未整改高风险隐患列表

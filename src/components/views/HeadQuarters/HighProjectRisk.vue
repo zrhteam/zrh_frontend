@@ -43,12 +43,15 @@ export default {
         xAxis: {type: 'category',
           axisLabel: {
             interval: 0,
-            rotate: 30
+            rotate: 45,
+            textStyle: {
+              fontSize: 10
+            }
           },
           axisLine: {
             lineStyle: {
               color: '#ffffff',
-              fontSize: 8
+              fontSize: 6
             }
           }},
         yAxis: {axisLine: {
@@ -84,7 +87,8 @@ export default {
                     ]
                 )
               }
-            }
+            },
+            barMaxWidth: 40
           }
         ]
       };

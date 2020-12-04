@@ -4,7 +4,7 @@
       {{ getData }}
     </div>
     <div style="padding-top: 15px">
-      <span>{{ context.title }}</span>
+      <span class="level4">{{ context.title }}</span>
     </div>
     <div id="bar_chart" style="height: 400px; width: 100%">
       <!--        占比（可筛选专业）柱状图-->
@@ -145,7 +145,10 @@ export default {
           type: 'category',
           axisLabel: {
             interval: 0,
-            rotate: 30
+            rotate: 45,
+            textStyle: {
+              fontSize: 10
+            }
           },
           axisLine: {
             lineStyle: {
@@ -159,6 +162,11 @@ export default {
             lineStyle: {
               color: '#ffffff'
             }
+          },
+          axisLabel: {
+            // textStyle: {
+            //   fontSize: 10
+            // }
           }
         },
         series: [
@@ -190,6 +198,7 @@ export default {
                 )
               }
             },
+            barMaxWidth: 40
           }
         ]
       };
