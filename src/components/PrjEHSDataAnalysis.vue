@@ -1,10 +1,10 @@
 <template>
   <!--  项目层级EHS数据大屏-->
   <el-container>
-    <el-header style="height: 140px">
+    <el-header >
       <el-row>
         <el-col :span="6">
-          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left">
+          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left; padding-top: 20px; padding-bottom: 20px">
             <span>{{ prj_name }}EHS数据大屏</span>
           </div>
         </el-col>
@@ -12,14 +12,8 @@
       </el-row>
     </el-header>
     <el-main>
-<!--      <el-row class="boundary">-->
-<!--        &lt;!&ndash;            历次粒度&ndash;&gt;-->
-<!--        <el-col class="boundary-B margin">-->
 
-<!--        </el-col>-->
-
-<!--      </el-row>-->
-      <el-row class="boundary" type="flex">
+      <el-row class="boundary" type="flex" >
         <el-col class="boundary-B margin" :span="8">
           <!-- 指数部分-->
           <el-row class="margin">
@@ -83,13 +77,13 @@
       </el-row>
       <!--占比-->
       <el-row class="boundary level4" type="flex">
-        <el-col :span="4" class="part2 margin">
+        <el-col :span="4" class="boundary-C part2 margin">
           <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>
         </el-col>
-        <el-col :span="4" class="part2 margin">
+        <el-col :span="4" class="boundary-C part2 margin">
           <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason'}"></PerctangePerc>
         </el-col>
-        <el-col :span="4" class="part2 margin">
+        <el-col :span="4" class="boundary-C part2 margin">
           <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></PerctangePerc>
         </el-col>
         <!--历次重复出现隐患前五名-->

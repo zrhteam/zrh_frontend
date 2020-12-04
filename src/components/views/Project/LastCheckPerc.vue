@@ -5,7 +5,7 @@
     </div>
     <!--          最近一次检查隐患专业占比 饼图-->
     <div>
-      <div class="level4">
+      <div class="level4" style="padding-top: 15px">
         <span>最近一次检查隐患专业占比</span>
       </div>
       <div id="pie" style="height: 370px; width: 500px"></div>

@@ -1,6 +1,6 @@
 <template>
-  <div class="grid-content bg-purple" style = 'text-align: center'>
-    <div class="level4" style = 'text-align: center'>
+  <div class="grid-content bg-purple" >
+    <div class="level4" style = 'text-align: left; padding-top: 15px;'>
       <span>所有项目累计发现隐患专业分布</span>
     </div>
 <!--    <div>-->
@@ -10,7 +10,7 @@
       <div style="display: none; text-align: center">
         {{getRiskDistribution}}
       </div>
-      <div id = 'risk_distribution' style = 'height: 400px; width: 100%;'></div>
+      <div id = 'risk_distribution' style = 'height: 90%; width: 100%; padding-bottom: 10px'></div>
     </div>
 <!--      &lt;!&ndash;              在这里展示三维图&ndash;&gt;-->
 <!--      <div>-->

@@ -1,5 +1,5 @@
 <template>
-  <div class="prj_form">
+  <div class="prj_form" style="padding-top: 20px">
     <!--    <el-form ref="form" :model="form" :label-position="labelPosition" class="gran">-->
     <!--      <el-form-item size="mini">-->
     <!--        <span class="level4"> 根据总部名称查询 </span>-->

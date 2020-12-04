@@ -1,6 +1,6 @@
 <template>
   <div class="grid-content bg-purple-light">
-    <div class="level4">
+    <div class="level4" style="padding-top: 15px">
       <span>项目高风险数量排名</span>
     </div>
     <div>

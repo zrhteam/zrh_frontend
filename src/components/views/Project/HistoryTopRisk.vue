@@ -3,12 +3,14 @@
     <div style="display: none">
       {{ getPrjRiskTop }}
     </div>
-    <div class="level4">
+    <div class="level4" style="padding-top: 15px; padding-bottom: 10px">
       <span>历次重复出现隐患前五名</span>
     </div>
     <div>
       <el-table
           :data="riskTop"
+          :row-style="{height: '20px'}"
+          :cell-style="{padding: '5px'}"
           style="width: 100%; color: #93bce7">
         <el-table-column
             type="index"

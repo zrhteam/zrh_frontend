@@ -4,12 +4,14 @@
       {{ getNumberTop }}
     </div>
     <div class="grid-content bg-purple-light">
-      <div id="subtitle" class="level4">
+      <div id="subtitle" class="level4" style="padding-top: 15px">
         <span>所有项目累计重复出现隐患前十名</span>
       </div>
-      <div><!--            stripe-->
+      <div style="padding-bottom: 10px"><!--            stripe-->
         <el-table
             :data="tableData"
+            :row-style="{height: '20px'}"
+            :cell-style="{padding: '5px'}"
             style="width: 100%; color: #93bce7">
           <el-table-column
               prop="description"

@@ -20,7 +20,7 @@
     <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: #13E8E9">
       <div id="map" bordered :dataSource="$store.state.get_locations.data" style="pointer-events:inherit"></div>
     </div>
-    <div style="background-color: #003452; opacity: 0.8; margin-top: 20px; color: #ffffff;position: absolute; z-index: 999999; text-align: center; width:100%">
+    <div style="background-color: #05283e; opacity: 0.8; margin-top: 20px; color: #1d87d7;position: absolute; z-index: 999999; text-align: center; width:100%">
       <span class = "head" >大型综合体生命系统大数据平台</span>
     </div>
     <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>

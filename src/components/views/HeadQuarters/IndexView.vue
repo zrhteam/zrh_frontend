@@ -1,8 +1,8 @@
 <template>
   <div class="grid-content bg-purple index boundary-C">
-    <div class="index_box">
+    <div class="index_box" >
       <span class="level11">{{context.title}}</span>
-      <div>
+      <div style="padding-top: 10px">
         <span class="level9">23</span>
       </div>
     </div>

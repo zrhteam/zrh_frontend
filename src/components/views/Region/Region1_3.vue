@@ -1,9 +1,9 @@
 <template>
   <div class="grid-content bg-purple">
-    <div class="level11">
+    <div class="level11" style="padding-top: 15px">
       <span>已检查项目数量</span>
     </div>
-    <div class="level12" style="text-align: center; padding-top: 40px">
+    <div class="level12" style="text-align: center; padding-top: 15%">
       {{ getExamineNumber }}
     </div>
   </div>

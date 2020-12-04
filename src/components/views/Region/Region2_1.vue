@@ -4,18 +4,19 @@
       {{ getNoRectificationRisk }}
     </div>
     <div class="grid-content bg-purple-light">
-      <div class="level4">
+      <div class="level4" style="padding-top: 15px">
         <span>项目当前未整改高风险隐患列表</span>
       </div>
     </div>
     <el-table
         :data="noRectificationNumber"
+        :row-style="{height: '20px'}"
+        :cell-style="{padding: '5px'}"
         style="width: 100%; color: #93bce7"
-        max-height="400">
+        max-height="400px">
       <el-table-column
           prop="description"
-          label="隐患描述"
-          width="400px">
+          label="隐患描述">
       </el-table-column>
     </el-table>
   </div>

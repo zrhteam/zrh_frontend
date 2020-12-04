@@ -3,10 +3,10 @@
     <div style="display: none">
       {{ getPrjHistory }}
     </div>
-    <div class="level4">
+    <div class="level4" style="padding-top: 15px">
       <span>历次检查隐患数量变化</span>
     </div>
-    <div id="history_chart" style="height: 400px; width: 350px"></div>
+    <div id="history_chart" style="height: 90%; width: 100%"></div>
   </div>
 </template>
 

@@ -1,13 +1,13 @@
 <template>
   <div class="grid-content bg-purple">
-    <div class="level4">
+    <div class="level4" style="padding-top: 15px">
       <span>项目累计高风险数量排名</span>
     </div>
     <div>
-      <div style = 'display: none'>
+      <div style = 'display: none; text-align: center'>
         {{getHighRiskRank}}
       </div>
-      <div id = 'risk_rank' style="height: 550px; width: 600px"></div>
+      <div id = 'risk_rank' style="height: 95%; width: 100%; text-align: center"></div>
     </div>
 
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="grid-content bg-purple boundary plus_top">
-    <div class="level13">
+    <div class="level13" style="padding-top: 10px; padding-bottom: 10px">
       <span>总部整改率</span>
     </div>
     <div

@@ -4,7 +4,7 @@
     <el-header>
       <el-row>
         <el-col :span="24">
-          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left"><span>置地总部EHS数据大屏</span>
+          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left; padding-top: 20px"><span>置地总部EHS数据大屏</span>
           </div>
         </el-col>
       </el-row>
@@ -16,7 +16,7 @@
           <div class="grid-content bg-purple boundary">
             <div class="chart-image-icon">
               <div class="plus_top">
-                <div class="level7">
+                <div class="level7" style="padding-bottom: 10px">
                   <span>总部危险指数</span>
                 </div>
                 <div class="level8">
@@ -162,7 +162,7 @@ i {
 
 .chart-image-icon {
   position: absolute;
-  left: 0;
+  left: 20px;
   top: 0;
   width: 20%;
   height: 80%;
@@ -183,7 +183,7 @@ i {
 }
 
 .plus_top {
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 

@@ -3,14 +3,16 @@
     <div style="display: none">
       {{ getPrjRiskLevelList }}
     </div>
-    <div id="subtitle" class="level4">
+    <div id="subtitle" class="level4" style="padding-top: 10px">
       <span>当前未整改高风险隐患列表</span>
     </div>
-    <div class="level5">
+    <div class="level5" style="padding-bottom: 10px">
       <el-table
           :data="riskLevelList"
+          :row-style="{height: '20px'}"
+          :cell-style="{padding: '5px'}"
           style="width: 100%; color: #93bce7"
-          max-height = '400'>
+          max-height = '400px'>
         <el-table-column
             prop="description"
             label="隐患描述">
@@ -25,7 +27,8 @@ export default {
   name: "UnsolvedList",
   data() {
     return {
-      riskLevelList: []
+      riskLevelList: [],
+      timer: ''
     }
   },
   computed: {

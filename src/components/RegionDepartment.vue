@@ -4,7 +4,7 @@
     <el-header>
       <el-row>
         <el-col :span="24">
-          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left">
+          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left; padding-top: 17px">
             <span>商业地产事业部2020年巡检项目EHS大数据分析</span>
           </div>
         </el-col>
@@ -16,7 +16,7 @@
         <el-col :span="10" class="boundary-B margin">
           <el-row class="margin">
             <el-col :span = '24'>
-              <div class = 'safety_index' style="height: 100px">
+              <div class = 'safety_index' style="height: 150px">
                 <Region1_1></Region1_1>
               </div>
             </el-col>
@@ -44,7 +44,7 @@
         </el-col>
 <!--        各风险等级对应的隐患数量-->
         <el-col :span="10" class="boundary-B part1 margin">
-          <Region1_4 class="boundary-B"></Region1_4>
+          <Region1_4></Region1_4>
         </el-col>
       </el-row>
 

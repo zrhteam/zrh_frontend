@@ -4,12 +4,14 @@
       {{ getRiskNumberTop }}
     </div>
     <div class="grid-content bg-purple-light">
-      <div id="subtitle1" class="level4">
+      <div id="subtitle1" class="level4" style="padding-top: 15px">
         <span>项目累计出现隐患前十条</span>
       </div>
       <div>
         <el-table
             :data="riskNumberTop"
+            :row-style="{height: '20px'}"
+            :cell-style="{padding: '5px'}"
             style="width: 100%; color: #93bce7">
           <el-table-column
               prop="description"

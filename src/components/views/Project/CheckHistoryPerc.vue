@@ -3,7 +3,7 @@
     <div style="display: none">
       {{ getPrjHistoryPerception }}
     </div>
-    <div class="level4">
+    <div class="level4" style="padding-top: 15px">
       <span>历次检查隐患专业占比</span>
     </div>
     <div id="pie2" style="height: 370px; width: 500px"></div>

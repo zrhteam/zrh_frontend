@@ -3,11 +3,13 @@
     <div style="display: none">
       {{ getPrjRiskLevelData }}
     </div>
-    <div class="text item level4">
+    <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>历次检查累计发现隐患数量</span>
     </div>
     <el-table
         :data="PrjRiskLevelData"
+        :row-style="{height: '20px'}"
+        :cell-style="{padding: '6px'}"
         border
         style="width: 100%; color: #93bce7" class="level5"
         :header-cell-style="{color:'color: #3e78f3;'}">

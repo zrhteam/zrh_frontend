@@ -1,6 +1,6 @@
 <template>
   <div class="grid-content bg-purple">
-    <div class="level4">
+    <div class="level4" style="padding-top: 15px">
       <span>项目综合&专业风险指数排名</span>
     </div>
     <div>
