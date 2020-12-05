@@ -20,8 +20,9 @@
     <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: #13E8E9">
       <div id="map" bordered :dataSource="$store.state.get_locations.data" style="pointer-events:inherit"></div>
     </div>
-    <div style="background-color: #05283e; opacity: 0.8; margin-top: 20px; color: #1d87d7;position: absolute; z-index: 999999; text-align: center; width:100%">
-      <span class = "head" >大型综合体生命系统大数据平台</span>
+    <div
+        style="background-color: #05283e; opacity: 0.8; margin-top: 20px; color: #1d87d7;position: absolute; z-index: 999999; text-align: center; width:100%">
+      <span class="head">大型综合体生命系统大数据平台</span>
     </div>
     <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>
     <Search class="search-component"
@@ -34,7 +35,7 @@
     </Statistics>
   </el-container>
 
-<!--    </el-container>-->
+  <!--    </el-container>-->
 </template>
 
 <script>
@@ -125,7 +126,6 @@ export default {
     onSubmit() {
       console.log('submit!');
     },
-
   },
   computed: {
     //得到该地理位置的所有信息，包括地图上显示该位置并显示该位置所对应的风险等级
@@ -295,8 +295,9 @@ export default {
   color: #333;
   text-align: left;
 }
-.head{
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+
+.head {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   font-size: 40px;
 }
 </style>

@@ -151,6 +151,9 @@ export default {
             myChart.resize();
           };
   },
+  beforeRouteLeave(to, from, next) {
+    to.meta.keepAlive = false
+  },
   created() {
     this.$store.dispatch('get_headquarter/getInitRectification')
     this.$store.dispatch('get_headquarter/getInitRiskLevelData')

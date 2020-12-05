@@ -88,7 +88,8 @@ export default {
                     ]
                 )
               }
-            }
+            },
+            barMaxWidth: 40
           }
         ]
       };

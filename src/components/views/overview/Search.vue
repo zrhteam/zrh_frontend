@@ -37,6 +37,7 @@
 import Vue from 'vue'
 
 export default {
+  inject: ['reload'],
   name: "OverviewLeftSide",
   data() {
     return {
@@ -96,7 +97,7 @@ export default {
     nameList() {
       return this.$store.state.get_locations.name
       // console.log(this.dataset)
-    }
+    },
   },
 
   methods: {

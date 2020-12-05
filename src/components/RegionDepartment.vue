@@ -156,7 +156,9 @@ export default {
   mounted() {
     this.selfAdaption();
   },
-
+  beforeRouteLeave(to, from, next) {
+    to.meta.keepAlive = false
+  },
   methods: {
     selfAdaption(){
       let _this = this;
