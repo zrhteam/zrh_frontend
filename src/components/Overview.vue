@@ -99,7 +99,6 @@ export default {
       }
     });
   },
-
   methods: {
     loadMap() {//加载地图
       let map = L.map("map", {

@@ -37,7 +37,6 @@
 import Vue from 'vue'
 
 export default {
-  inject: ['reload'],
   name: "OverviewLeftSide",
   data() {
     return {
