@@ -108,9 +108,9 @@ export default {
 
         myChart.setOption(this.getSafetyIndexRank);
         myChart.resize();
-        window.addEventListener('resize', function (){
-          myChart.resize;
-        })
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      })
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
