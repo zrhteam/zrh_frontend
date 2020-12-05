@@ -112,7 +112,7 @@ export default {
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
-      rev = 1;
+        rev = 1;
       } else {
           rev = (rev) ? 1 : -1;
         }
