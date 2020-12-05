@@ -18,8 +18,7 @@
         </el-table-column>
         <el-table-column
             property="description"
-            label="隐患描述"
-            width="292">
+            label="隐患描述">
         </el-table-column>
         <el-table-column
             prop="major"
@@ -59,8 +58,30 @@ export default {
         obj.frequency = data[i].appear_time
         dataArray.push(obj)
       }
+      dataArray.sort(this.sortNumber('frequency', false))
       // console.log(dataArray)
       this.riskTop = dataArray
+    }
+  },
+  methods: {
+    sortNumber(attr, rev) {
+      if (rev == undefined) {
+        rev = 1;
+      } else {
+          rev = (rev) ? 1 : -1;
+        }
+
+      return function (a, b) {
+        a = a[attr];
+        b = b[attr];
+        if (a < b) {
+          return rev * -1;
+        }
+        if (a > b) {
+          return rev * 1;
+        }
+        return 0;
+      }
     }
   }
 }
