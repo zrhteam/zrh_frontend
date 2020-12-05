@@ -156,7 +156,7 @@ export default {
     this.$store.dispatch('get_headquarter/getInitRiskLevelData')
     this.$store.dispatch('get_headquarter/getInitNumberTop')
 
-    this.$store.dispatch('get_headquarter/getInitRiskIndexData')
+    // this.$store.dispatch('get_headquarter/getInitRiskIndexData')
     this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
   }
 }

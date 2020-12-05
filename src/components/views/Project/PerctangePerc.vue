@@ -122,6 +122,25 @@ export default {
           myChart.resize();
         })
       })
+    },
+    sortNumber(attr, rev){
+      if(rev == undefined) {
+        rev = 1;
+      }else {
+        rev = (rev)? 1 : -1;
+      }
+
+      return function (a, b) {
+        a = a[attr];
+        b = b[attr];
+        if (a < b) {
+          return rev * -1;
+        }
+        if (a > b) {
+          return rev * 1;
+        }
+        return 0;
+      }
     }
   },
   computed: {
@@ -205,6 +224,7 @@ export default {
         console.log(arr)
       }
       console.log(arr)
+      arr.sort(this.sortNumber('count', true))
       return arr
     },
   },
