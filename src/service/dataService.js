@@ -4,7 +4,7 @@ import axios from 'axios'
 // Vue.use(axios);
 Vue.prototype.axios = axios
 
-const dataServerUrl = "http://localhost:5000/api";//http://10.20.39.102:5000/api
+const dataServerUrl = "http://10.20.39.102:5000/api";//http://10.20.39.102:5000/api
 // const dataServerUrl = "/sv-analysis";
 // const dataServerUrl = Config.serverLink == ""? "" : Config.serverLink.substring(0,  Config.serverLink.length - 1);
 const $http = Vue.http;
@@ -27,56 +27,23 @@ function getLocation(callback){
        })
 }
 
-//overview页面查询部分
-function getProjectionMap(callback) {
-    const url = `${dataServerUrl}/overview_get_projection_map`;
-    axios.post(url)
-       .then(response => {
-            callback(response.data)
-       })
-       .catch(error=> {
-            console.log(error)
-       })
-}
-
-//overview页面地图部分
-/*
-    在得到每个项目的经纬度后
-    发送所有项目code
-    请求每个项目的各风险等级对应的数量
- */
-/*
-function getPrjPie(params, callback){
-  const url = `${dataServerUrl}/overview_pie`;
+//login页面查询部分
+function getLoginGrant(params, callback){
+    const url = `${dataServerUrl}/login_grant`;
   axios.post(url, params)
-       .then(response => {
-            callback(response.data)
-       })
-       .catch(error=> {
-            console.log(error)
-       })
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
 }
-*/
 
 
-// //overview页面右侧初始化数据加载
-//
-// function getInitData(callback){
-//   const url = `${dataServerUrl}/overview_right_init`;
-//   axios.post(url)
-//        .then(response => {
-//             callback(response.data)
-//        })
-//        .catch(error=> {
-//             console.log(error)
-//        })
-// }
-
-
-//置地总部EHS数据大屏页面
+//总部数据大屏页面
 /*
-*FunctionName: getInitIndexData
-* Purpose: 初始化页面显示不同专业（消防、电梯、电气、燃气）的危险指数
+*FunctionName: getHeadDangerIndex
+* Purpose: 总部页面显示不同专业（消防、电梯、电气、燃气）的危险指数
 * Parameter: cust_name
 * Return: 包含消防、电梯、电气、燃气危险指数的json文件
  */
