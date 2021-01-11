@@ -43,13 +43,13 @@ function getLoginGrant(params, callback){
 //总部数据大屏页面
 /*
 *FunctionName: getHeadDangerIndex
-* Purpose: 总部页面显示不同专业（消防、电梯、电气、燃气）的危险指数
-* Parameter: cust_name
-* Return: 包含消防、电梯、电气、燃气危险指数的json文件
+* Purpose: 总部页面显示总的，以及不同专业（消防、电梯、电气、燃气）的危险指数
+* Parameter: head_name
+* Return: 包含总的，消防、电梯、电气、燃气危险指数的json文件
  */
-//初始化页面需要数据：消防危险指数、电梯危险指数、电气危险指数、燃气危险指数
-function getInitIndexData(param,callback){
-  const url = `${dataServerUrl}/land_ehs_screen_top_left`;
+//总部页面需要数据：消防危险指数、电梯危险指数、电气危险指数、燃气危险指数
+function getHeadDangerIndex(param,callback){
+  const url = `${dataServerUrl}/head_index`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -59,15 +59,15 @@ function getInitIndexData(param,callback){
       })
 }
 
-//置地总部EHS数据大屏页面
+//总部数据大屏页面
 /*
-*FunctionName: getInitRectification
-* Purpose: 初始化页面显示总部整改率
-* Parameter: cust_name
+*FunctionName: getRectification
+* Purpose: 显示总部整改率
+* Parameter: head_name
 * Return: 包含总部整改率数据的json文件
  */
-function getInitRectification(param, callback){
-  const url = `${dataServerUrl}/land_ehs_screen_rectification`;
+function getRectification(param, callback){
+  const url = `${dataServerUrl}/head_rectification`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -77,15 +77,15 @@ function getInitRectification(param, callback){
       })
 }
 
-//置地总部EHS数据大屏页面
+//总部数据大屏页面
 /*
-*FunctionName: getInitRiskLevelData
+*FunctionName: getHeadRiskLevel
 * Purpose: 初始化页面显示隐患风险等级高、中、低风险及其对应的累计隐患数量
-* Parameter: cust_name
+* Parameter: head_name
 * Return: 风险等级及对应的累计隐患数量的json文件
  */
-function getInitRiskLevelData(param, callback){
-  const url = `${dataServerUrl}/land_ehs_screen_top_right`;
+function getHeadRiskLevel(param, callback){
+  const url = `${dataServerUrl}/head_risk_level`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -97,15 +97,15 @@ function getInitRiskLevelData(param, callback){
 
 }
 
-//置地总部EHS数据大屏页面
+//总部数据大屏页面
 /*
-*FunctionName: getInitRiskIndexData
-* Purpose: 初始化页面显示根据项目综合&专业风险指数排序的结果
-* Parameter: cust_name
+*FunctionName: getHeadIndexRank
+* Purpose: 显示根据项目综合&专业风险指数排序的结果
+* Parameter: head_name
 * Return: 根据项目综合&专业风险指数排序后的项目名称的json文件
  */
-function getInitRiskIndexData(param, callback){
-    const url = `${dataServerUrl}/land_ehs_screen_index_rank`;
+function getHeadIndexRank(param, callback){
+    const url = `${dataServerUrl}/head_index_rank`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -116,15 +116,15 @@ function getInitRiskIndexData(param, callback){
         })
 }
 
-//置地总部EHS数据大屏页面
+//总部数据大屏页面
 /*
-*FunctionName: getInitRiskNumberRank
+*FunctionName: getHeadRiskRank
 * Purpose: 初始化页面得到按照高风险数量排名的项目名称
-* Parameter: cust_name
+* Parameter: head_name
 * Return: 对高风险数量排序后的项目名称json文件
  */
-function getInitRiskNumberRank(param, callback){
-    const url = `${dataServerUrl}/land_ehs_screen_risk_number`;
+function getHeadRiskRank(param, callback){
+    const url = `${dataServerUrl}/head_risk_rank`;
     axios.post(url, param)
         .then(response => {
               callback(response.data)
@@ -135,15 +135,15 @@ function getInitRiskNumberRank(param, callback){
         })
 }
 
-//置地总部EHS数据大屏页面
+//总部数据大屏页面
 /*
-*FunctionName: getInitImage
-* Purpose: 初始化时得到所有项目未整改高风险隐患图片
-* Parameter: cust_name
+*FunctionName: getHeadHighImage
+* Purpose: 得到当前总部所有项目未整改高风险隐患图片
+* Parameter: head_name
 * Return: 返回包含未整改高风险图片的json文件
  */
-function getInitImage(param, callback){
-    const url = `${dataServerUrl}/land_ehs_screen_image`;
+function getHeadHighImage(param, callback){
+    const url = `${dataServerUrl}/head_high_image`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -153,15 +153,33 @@ function getInitImage(param, callback){
         })
 }
 
-//置地总部EHS数据大屏页面
+//总部数据大屏页面
 /*
-*FunctionName: getInitNumberTop
-* Purpose: 初始化页面得到所有项目中出现隐患数量排名前10的隐患
-* Parameter: cust_name
+*FunctionName: getHeadRankTop
+* Purpose: 得到所有项目中出现隐患数量排名前10的隐患
+* Parameter: head_name
 * Return: 包含在置地总部所有项目中隐患数量排名前10的隐患描述的json文件
  */
-function getInitNumberTop(param, callback){
-    const url = `${dataServerUrl}/data_ehs_screen_top10`;
+function getHeadRankTop(param, callback){
+    const url = `${dataServerUrl}/head_rank_top`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+//总部数据大屏页面
+/*
+*FunctionName: getHeadRiskList
+* Purpose: 得到当前总部所有项目中未整改高风险隐患
+* Parameter: head_name
+* Return: 当前总部所有项目中未整改高风险隐患列表的json文件
+ */
+function getHeadRiskList(param, callback){
+    const url = `${dataServerUrl}/head_risk_list`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -172,14 +190,14 @@ function getInitNumberTop(param, callback){
 }
 
 
-//地产事业部页面
+//区域级页面
 /*
 *FunctionName: getRegionInitIndex
-* Purpose: 初始化页面显示总的安全指数以及不同专业的安全指数
-* Parameter: ctr_name
+* Purpose: 区域级页面显示总的安全指数以及不同专业的安全指数
+* Parameter: region_name
 * Return: 包含总体安全指数、消防指数、电梯指数、燃气指数、电气指数的json文件
  */
-function getRegionInitIndex(param, callback){
+function getRegionIndex(param, callback){
     const url = `${dataServerUrl}/region_index`;
     axios.post(url, param)
         .then(response => {
@@ -190,15 +208,15 @@ function getRegionInitIndex(param, callback){
         })
 }
 
-//地产事业部页面
+//区域级页面
 /*
-*FunctionName: getInitRegionProjectNumber
-* Purpose: 初始化页面展示目前已检查的项目数量
-* Parameter: ctr_name
+*FunctionName: getRectificationNumber
+* Purpose: 区域级页面展示目前已检查的项目数量
+* Parameter: region_name
 * Return: 包含当前已检查项目数量的json文件
  */
-function getInitRegionProjectNumber(param, callback){
-  const url = `${dataServerUrl}/region_project_number`;
+function getRectificationNumber(param, callback){
+  const url = `${dataServerUrl}/region_rectification_number`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -209,15 +227,15 @@ function getInitRegionProjectNumber(param, callback){
 }
 
 
-//地产事业部页面
+//区域级页面
 /*
-*FunctionName: getInitRegionRiskLevel
-* Purpose: 初始化页面展示不同风险等级及其对应的累计发现隐患数量
-* Parameter: ctr_name
+*FunctionName: getRegionRiskLevel
+* Purpose: 区域级页面展示不同风险等级及其对应的累计发现隐患数量
+* Parameter: region_name
 * Return: 包含高、中、低风险对应的累计发现隐患数量的json文件
  */
-function getInitRegionRiskLevel(param, callback){
-  const url = `${dataServerUrl}/region_project_risk_level`;
+function getRegionRiskLevel(param, callback){
+  const url = `${dataServerUrl}/region_risk_level`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -227,15 +245,15 @@ function getInitRegionRiskLevel(param, callback){
       })
 }
 
-//地产事业部页面
+//区域级页面
 /*
-*FunctionName: getInitRegionHighRisk
-* Purpose: 初始化页面展示当前未整改高风险隐患描述列表
-* Parameter:ctr_name
+*FunctionName: getRegionRiskList
+* Purpose: 区域级页面展示当前未整改高风险隐患描述列表
+* Parameter:region_name
 * Return: 包含当前未整改的高风险隐患描述的json文件
  */
-function getInitRegionHighRisk(param, callback){
-  const url = `${dataServerUrl}/region_project_high_risk`;
+function getRegionRiskList(param, callback){
+  const url = `${dataServerUrl}/region_risk_list`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -245,15 +263,15 @@ function getInitRegionHighRisk(param, callback){
       })
 }
 
-//地产事业部页面
+//区域级页面
 /*
-*FunctionName: getInitRegionImage
+*FunctionName: getRegionHighImage
 * Purpose: 初始化页面展示当前未整改高风险隐患图片
-* Parameter: ctr_name
+* Parameter: region_name
 * Return: 包含未整改高风险隐患图片的json文件
  */
-function getInitRegionImage(param, callback){
-  const url = `${dataServerUrl}/region_project_Image`;
+function getRegionHighImage(param, callback){
+  const url = `${dataServerUrl}/region_high_image`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -263,15 +281,15 @@ function getInitRegionImage(param, callback){
       })
 }
 
-//地产事业部页面
+//区域级页面
 /*
-*FunctionName: getInitRegionMajor
+*FunctionName: getRegionDistribution
 * Purpose: 初始化页面展示各个项目发现的不同风险等级隐患在不同专业上的分布
-* Parameter: ctr_name
+* Parameter: region_name
 * Return: 包含按照项目+专业+风险等级聚类结果的json文件
  */
-function getInitRegionMajor(param, callback){
-  const url=`${dataServerUrl}/region_major`;
+function getRegionDistribution(param, callback){
+  const url=`${dataServerUrl}/region_distribution`;
   axios.post(url, param)
       .then(response =>{
           callback(response.data)
@@ -281,15 +299,15 @@ function getInitRegionMajor(param, callback){
       )
 }
 
-//地产事业部页面
+//区域级页面
 /*
-*FunctionName: getInitRegionNumberTop
+*FunctionName: getRegionRankTop
 * Purpose: 初始化页面展示在所有项目中数量排名前10的隐患
-* Parameter: ctr_name
+* Parameter: region_name
 * Return: 包含隐患数量在当前所有项目中排名前10的隐患描述的json文件
  */
-function getInitRegionNumberTop(param, callback){
-  const url = `${dataServerUrl}/region_project_number_top`;
+function getRegionRankTop(param, callback){
+  const url = `${dataServerUrl}/region_rank_top`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -299,15 +317,15 @@ function getInitRegionNumberTop(param, callback){
       })
 }
 
-//地产事业部页面
+//区域级页面
 /*
-*FunctionName: getInitRegionSafetyIndex
-* Purpose: 初始化页面展示按照项目安全指数排名的情况
-* Parameter: ctr_name
+*FunctionName: getRegionIndexRank
+* Purpose: 区域级页面展示按照项目安全指数排名的情况
+* Parameter: region_name
 * Return: 包含按照项目安全指数排序后的项目名称
  */
-function getInitRegionSafetyIndex(param, callback){
-  const url = `${dataServerUrl}/region_project_safety_index`;
+function getRegionIndexRank(param, callback){
+  const url = `${dataServerUrl}/region_index_rank`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -317,15 +335,15 @@ function getInitRegionSafetyIndex(param, callback){
       })
 }
 
-//地产事业部页面
+//区域级页面
 /*
-*FunctionName: getInitRegionRiskRank
-* Purpose: 初始化页面展示按照累计出现高风险数量排名的项目名称
-* Parameter: ctr_name
+*FunctionName: getRegionRiskNumber
+* Purpose: 区域级页面展示按照累计出现高风险数量排名的项目名称
+* Parameter: region_name
 * Return: 包含按照累计出现高风险数量排序后的项目名称
  */
-function getInitRegionRiskRank(param, callback){
-  const url = `${dataServerUrl}/region_project_risk_rank`;
+function getRegionRiskNumber(param, callback){
+  const url = `${dataServerUrl}/region_risk_number`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -338,13 +356,13 @@ function getInitRegionRiskRank(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectIndex
-* Purpose: 初始化页面展示项目危险指数和不同专业的指数
+*FunctionName: getProjectIndex
+* Purpose: 项目级页面展示项目危险指数和不同专业的指数
 * Parameter: project_name
 * Return: 包含项目危险指数、消防指数、电梯指数、燃气指数、电气指数的json文件
  */
-function getInitProjectIndex(param, callback){
-  const url = `${dataServerUrl}/region_project_index`;
+function getProjectIndex(param, callback){
+  const url = `${dataServerUrl}/project_index`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -357,13 +375,13 @@ function getInitProjectIndex(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectRectification
-* Purpose: 初始化页面展示当前整改率
+*FunctionName: getProjectRectification
+* Purpose: 项目级页面展示当前整改率
 * Parameter: project_name
 * Return: 包含当前项目整改率的json文件
  */
-function getInitProjectRectification(param, callback){
-  const url = `${dataServerUrl}/region_project_rectification`;
+function getProjectRectification(param, callback){
+  const url = `${dataServerUrl}/project_rectification`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -375,13 +393,13 @@ function getInitProjectRectification(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectRiskNumber
+*FunctionName: getProjectRiskLevel
 * Purpose: 初始化页面展示历次发现的不同风险等级的隐患数量
 * Parameter: project_name
 * Return: 包含不同风险等级及其对应的历次发现的隐患数量的json文件
  */
-function getInitProjectRiskNumber(param, callback){
-  const url = `${dataServerUrl}/region_project_risk_number`;
+function getProjectRiskLevel(param, callback){
+  const url = `${dataServerUrl}/project_risk_level`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -393,13 +411,13 @@ function getInitProjectRiskNumber(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectNumberChange
+*FunctionName: getProjectRiskChange
 * Purpose: 初始化页面展示历次检查隐患数量变化的情况
 * Parameter: project_name
 * Return: 包含历次检查的隐患数量的json文件
  */
-function getInitProjectNumberChange(param, callback){
-  const url = `${dataServerUrl}/region_project_number_change`;
+function getProjectRiskChange(param, callback){
+  const url = `${dataServerUrl}/project_risk_change`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -409,15 +427,16 @@ function getInitProjectNumberChange(param, callback){
       })
 }
 
+
 //项目级页面
 /*
-*FunctionName: getInitProjectNearestPerception
-* Purpose: 初始化页面饼图展示最近一次检查不同专业隐患占比情况
+*FunctionName: getProjectRiskRatio
+* Purpose: 项目级页面饼图展示历次检查中不同专业隐患占比情况
 * Parameter: project_name
-* Return: 包含消防、电梯、电气、燃气4个专业在最近一次检查中发现隐患数量的json文件
+* Return: 包含不同专业在历次检查中发现的隐患数量的占比的json文件
  */
-function getInitProjectNearestPerception(param, callback){
-  const url = `${dataServerUrl}/region_project_Nearest`;
+function getProjectRiskRatio(param, callback){
+  const url = `${dataServerUrl}/project_risk_ratio`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -429,31 +448,13 @@ function getInitProjectNearestPerception(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectHistoryPerception
-* Purpose: 初始化页面饼图展示历次检查中不同专业隐患占比情况
-* Parameter: project_name
-* Return: 包含消防、电梯、电气、燃气4个专业在历次检查中发现的隐患数量的json文件
- */
-function getInitProjectHistoryPerception(param, callback){
-  const url = `${dataServerUrl}/region_project_perception`;
-  axios.post(url, param)
-      .then(response => {
-          callback(response.data)
-      })
-      .catch(error => {
-          console.log(error)
-      })
-}
-
-//项目级页面
-/*
-*FunctionName: getInitProjectRisk
+*FunctionName: getProjectHighRisk
 * Purpose: 初始化页面展示当前未整改的高风险隐患列表
 * Parameter: project_name
 * Return: 包含当前未整改的高风险隐患描述的json文件
  */
-function getInitProjectRisk(param, callback){
-  const url = `${dataServerUrl}/region_project_risk`;
+function getProjectHighRisk(param, callback){
+  const url = `${dataServerUrl}/project_high_risk`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -465,13 +466,13 @@ function getInitProjectRisk(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectImage
+*FunctionName: getProjectHighImage
 * Purpose: 初始化页面展示当前未整改高风险隐患图片
 * Parameter: project_name
 * Return: 包含当前未整改高风险隐患图片的json文件
  */
-function getInitProjectImage(param, callback){
-  const url = `${dataServerUrl}/region_project_image`;
+function getProjectHighImage(param, callback){
+  const url = `${dataServerUrl}/project_high_image`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -483,13 +484,13 @@ function getInitProjectImage(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectSystem
-* Purpose: 初始化页面展示不同专业所有隐患子系统占比情况
+*FunctionName: getProjectMajorSystem
+* Purpose: 项目级页面展示不同专业所有隐患子系统占比情况
 * Parameter: project_name
 * Return: 包含在不同专业情况下属于不同隐患子系统的隐患数量的json文件
  */
-function getInitProjectSystem(param, callback){
-  const url=`${dataServerUrl}/project_system`;
+function getProjectMajorSystem(param, callback){
+  const url=`${dataServerUrl}/project_major_system`;
   axios.post(url, param)
       .then(response =>{
           callback(response.data)
@@ -500,13 +501,13 @@ function getInitProjectSystem(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectReason
-* Purpose: 初始化页面展示所有隐患在不同专业情况下不同致因阶段的数量
+*FunctionName: getProjectMajorStage
+* Purpose: 项目级页面展示所有隐患在不同专业情况下不同致因阶段的数量
 * Parameter: project_name
 * Return: 包含在不同专业情况下的隐患在不同致因（运营、施工等）阶段的数量的json文件
  */
-function getInitProjectReason(param, callback){
-  const url=`${dataServerUrl}/project_reason`;
+function getProjectMajorStage(param, callback){
+  const url=`${dataServerUrl}/project_major_stage`;
   axios.post(url, param)
       .then(response =>{
           callback(response.data)
@@ -517,13 +518,13 @@ function getInitProjectReason(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectRegionDistribution
-* Purpose: 初始化页面展示在不同专业情况下隐患区域分布情况
+*FunctionName: getProjectMajorArea
+* Purpose: 项目级页面展示在不同专业情况下隐患区域分布情况
 * Parameter: project_name
 * Return: 包含在不同专业情况下不同区域的隐患数量的json文件
  */
-function getInitProjectRegionDistribution(param, callback){
-  const url=`${dataServerUrl}/project_distribution`;
+function getProjectMajorArea(param, callback){
+  const url=`${dataServerUrl}/project_major_area`;
   axios.post(url, param)
       .then(response =>{
           callback(response.data)
@@ -534,13 +535,13 @@ function getInitProjectRegionDistribution(param, callback){
 
 //项目级页面
 /*
-*FunctionName: getInitProjectRiskTop
+*FunctionName: getProjectRiskTop
 * Purpose: 初始化页面展示出现次数排前5的隐患以及所属专业和出现频率
 * Parameter: project_name
 * Return: 包含route的json文件
  */
-function getInitProjectRiskTop(param, callback){
-  const url = `${dataServerUrl}/region_project_risk_top`;
+function getProjectRiskTop(param, callback){
+  const url = `${dataServerUrl}/project_risk_top`;
   axios.post(url, param)
       .then(response => {
           callback(response.data)
@@ -550,96 +551,210 @@ function getInitProjectRiskTop(param, callback){
       })
 }
 
+//检查记录
+/*
+*FunctionName: getCheckRectification
+* Purpose: 展示本次检查记录隐患整改率
+* Parameter: check_name
+* Return: 本次检查隐患整改率的json文件
+ */
+function getCheckRectification(param, callback){
+  const url = `${dataServerUrl}/check_rectification`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
 
-//get_subgroup_stats
+//检查记录
+/*
+*FunctionName: getCheckRiskLevel
+* Purpose: 展示本次检查记录各风险等级的隐患数量
+* Parameter: check_name
+* Return: 本次检查各等级风险对应的隐患数量的json文件
+ */
+function getCheckRiskLevel(param, callback){
+  const url = `${dataServerUrl}/check_risk_level`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
 
-// function getAllRecordsForOneCity(cityId, callback) {
-//   const url = `${dataServerUrl}/getallrecords`
-//   $http.post(url, {'cityId': cityId}).then(response => {
-//     callback(JSON.parse(response.data))
-//   }, errResponse => {
-//     console.log(errResponse)
-//   })
-// }
-//
-// function queryRegionFromBackground(cityId, positions, callback) {
-//   const url = `${dataServerUrl}/regionquery`
-//   $http.post(url, {'cityId': cityId, 'positions': positions}).then(response => {
-//     callback(JSON.parse(response.data))
-//   }, errResponse => {
-//     console.log(errResponse)
-//   })
-// }
-//
-// function queryStreetCollections(cityId, startIndex, number, condition, callback){
-//   const url = `${dataServerUrl}/streetsetquery`
-//   $http.post(url, {'cityId': cityId, 'startIndex': startIndex, 'number': number, 'condition': condition}).then(response => {
-//     callback(JSON.parse(response.data))
-//   }, errResponse => {
-//     console.log(errResponse)
-//   })
-// }
-//
-// function queryRegionCollections(cityId, startIndex, number, condition, callback){
-//   const url = `${dataServerUrl}/adregionsetquery`
-//   $http.post(url, {'cityId': cityId, 'startIndex': startIndex, 'number': number, 'condition': condition}).then(response => {
-//     callback(JSON.parse(response.data))
-//   }, errResponse => {
-//     console.log(errResponse)
-//   })
-// }
-//
-// function queryStatistics(cityId, type, callback){
-//   const url = `${dataServerUrl}/statisticsquery`
-//   $http.post(url, {'cityId': cityId, 'type': type}).then(response => {
-//     callback(JSON.parse(response.data))
-//   }, errResponse => {
-//     console.log(errResponse)
-//   })
-// }
-//
-// function queryAllCityStatics(cityIds, callback){
-//   const url = `${dataServerUrl}/allstatisticsquery`
-//   $http.post(url, {}).then(response => {
-//     callback(JSON.parse(response.data))
-//   }, errResponse => {
-//     console.log(errResponse)
-//   })
-// }
+//检查记录
+/*
+*FunctionName: getCheckRiskRatio
+* Purpose: 展示本次检查不同专业的隐患占比情况
+* Parameter: check_name
+* Return: 本次检查不同专业隐患占比情况的json文件
+ */
+function getCheckRiskRatio(param, callback){
+  const url = `${dataServerUrl}/check_risk_ratio`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
+
+//检查记录
+/*
+*FunctionName: getCheckHighRisk
+* Purpose: 展示本次检查未整改高风险隐患描述
+* Parameter: check_name
+* Return: 本次检查未整改高风险隐患描述的json文件
+ */
+function getCheckHighRisk(param, callback){
+  const url = `${dataServerUrl}/check_high_risk`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
+
+//检查记录
+/*
+*FunctionName: getCheckHighImage
+* Purpose: 展示本次检查未整改高风险隐患图片
+* Parameter: check_name
+* Return: 本次检查未整改高风险隐患图片的json文件
+ */
+function getCheckHighImage(param, callback){
+  const url = `${dataServerUrl}/check_high_image`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
+
+//检查记录
+/*
+*FunctionName: getCheckMajorSystem
+* Purpose: 展示本次检查不同隐患子系统下的隐患数量
+* Parameter: check_name
+* Return: 本次检查不同隐患子系统下的隐患数量的json文件
+ */
+function getCheckMajorSystem(param, callback){
+  const url = `${dataServerUrl}/check_major_system`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
+
+//检查记录
+/*
+*FunctionName: getCheckMajorStage
+* Purpose: 展示本次检查不同致因阶段下的隐患数量
+* Parameter: check_name
+* Return: 本次检查不同致因阶段下的隐患数量的json文件
+ */
+function getCheckMajorStage(param, callback){
+  const url = `${dataServerUrl}/check_major_stage`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
+
+//检查记录
+/*
+*FunctionName: getCheckMajorArea
+* Purpose: 展示本次检查不同区域下的隐患数量
+* Parameter: check_name
+* Return: 本次检查不同区域下的隐患数量的json文件
+ */
+function getCheckMajorArea(param, callback){
+  const url = `${dataServerUrl}/check_major_area`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
+
+//检查记录
+/*
+*FunctionName: getCheckRiskTop
+* Purpose: 展示本次检查出现次数排名前5的隐患描述及其所属专业和出现次数
+* Parameter: check_name
+* Return: 本次检查出现次数排名前5的隐患描述及其所属专业和出现次数的json文件
+ */
+function getCheckRiskTop(param, callback){
+  const url = `${dataServerUrl}/check_risk_top`;
+  axios.post(url, param)
+      .then(response => {
+          callback(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+}
 
 export default{
     getLocation,
-    getProjectionMap,
+    getLoginGrant,
     //getPrjPie,
     //getInitData,
-    getInitIndexData,
-    getInitRectification,
-    getInitRiskLevelData,
-    getInitRiskIndexData,
-    getInitRiskNumberRank,
-    getInitImage,
-    getInitNumberTop,
-    getRegionInitIndex,
-    getInitRegionProjectNumber,
-    getInitRegionRiskLevel,
-    getInitRegionHighRisk,
-    getInitRegionImage,
-    getInitRegionMajor,
-    getInitRegionNumberTop,
-    getInitRegionSafetyIndex,
-    getInitRegionRiskRank,
-    getInitProjectIndex,
-    getInitProjectRectification,
-    getInitProjectRiskNumber,
-    getInitProjectNumberChange,
-    getInitProjectNearestPerception,
-    getInitProjectHistoryPerception,
-    getInitProjectRisk,
-    getInitProjectImage,
-    getInitProjectSystem,
-    getInitProjectReason,
-    getInitProjectRegionDistribution,
-    getInitProjectRiskTop
+    getHeadDangerIndex,
+    getRectification,
+    getHeadRiskLevel,
+    getHeadIndexRank,
+    getHeadRiskRank,
+    getHeadHighImage,
+    getHeadRankTop,
+    getHeadRiskList,
+    getRegionIndex,
+    getRegionRiskLevel,
+    getRectificationNumber,
+    getRegionRiskList,
+    getRegionHighImage,
+    getRegionDistribution,
+    getRegionRankTop,
+    getRegionIndexRank,
+    getRegionRiskNumber,
+    getProjectIndex,
+    getProjectRectification,
+    getProjectRiskLevel,
+    getProjectRiskRatio,
+    getProjectHighRisk,
+    getProjectHighImage,
+    getProjectMajorSystem,
+    getProjectMajorStage,
+    getProjectMajorArea,
+    getProjectRiskTop,
+    getProjectRiskChange,
+    getCheckRectification,
+    getCheckRiskLevel,
+    getCheckRiskRatio,
+    getCheckHighRisk,
+    getCheckHighImage,
+    getCheckMajorSystem,
+    getCheckMajorStage,
+    getCheckMajorArea,
+    getCheckRiskTop
 
 
 }
