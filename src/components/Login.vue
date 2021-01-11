@@ -139,7 +139,7 @@ export default {
   watch: {
     grantData(data) {
       // console.log('grantData', data)
-      if (data.code == 0) {
+      if (data.code == 10000) {
         //项目级权限
         if (data.data.user_grant == '项目') {
           this.$router.push({path: '/prj_data_analysis'});
@@ -148,8 +148,8 @@ export default {
           this.$router.push({path: '/region_department'});
         }// 总部级权限
         else if (data.data.user_grant == '总部') {
-          // this.$router.push({path: '/land_headquarters'});
-          this.$router.push({path: '/register'});
+          this.$router.push({path: '/land_headquarters'});
+          // this.$router.push({path: '/register'});
         }// 超级用户权限
         else if (data.data.user_grant == '超级用户') {
           this.$router.push({path: '/land_headquarters'});
@@ -161,7 +161,7 @@ export default {
     }
   },
   created() {
-    this.username = 'headquarter1';
+    this.username = 'region1';
     this.password = '123456';
     $(document).ready(function () {
       var whei = $(window).width()
