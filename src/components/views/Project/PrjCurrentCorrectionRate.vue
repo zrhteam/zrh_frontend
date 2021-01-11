@@ -76,9 +76,6 @@ export default {
         myChart.resize();
       })
     }
-  },
-  created() {
-    this.$store.dispatch('get_project/getInitProjectRectification')
   }
 }
 </script>
