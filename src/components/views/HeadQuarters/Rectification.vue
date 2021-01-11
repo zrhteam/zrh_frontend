@@ -6,7 +6,7 @@
     <div
         style="color: rgb(247, 10, 10); font-family: Avenir;
         font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;">
-        {{getRectificationRate}}
+      {{ getRectificationRate }}
     </div>
   </div>
 </template>
@@ -16,9 +16,8 @@ export default {
   name: "Rectification",
   computed: {
     getRectificationRate() {
-      let rate = this.$store.state.get_headquarter.rectification;
-      let val = parseFloat(rate).toFixed(2)
-      return this.current_correction_rate = val + '%';
+      console.log(this.$store.state.get_headquarter.rectification)
+      return this.$store.state.get_headquarter.rectification
     },
   }
 }
