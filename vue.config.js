@@ -75,7 +75,8 @@ module.exports = {
         //open: true,//自动弹出浏览器页面
         open: process.platform === 'darwin',
         // host: 'localhost',
-        public:'10.20.39.102:8080',
+        // public:'10.20.39.102:8080',
+        public:'localhost:8080',
         host: '0.0.0.0',
         port: 8080,
         //port: 8022,
@@ -101,7 +102,8 @@ module.exports = {
         //proxy: null,
         proxy: {
             '/api': {
-                target: 'http://10.20.39.102:5000/',
+                target: 'http://localhost:5000/',
+                // target: 'http://10.20.39.102:5000/',
                 changeOrigin: true, // 允许websockets跨域
                 ws: true,
                 pathRewrite: {

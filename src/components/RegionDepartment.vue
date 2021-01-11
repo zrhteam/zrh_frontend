@@ -171,12 +171,15 @@ export default {
   },
 
   created() {
+    let param = new URLSearchParams();
+    param.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
+    this.$store.state.get_region.params = param
     this.$store.dispatch('get_region/getInitRegionProjectNumber')
     this.$store.dispatch('get_region/getInitRegionRiskLevel')
     this.$store.dispatch('get_region/getInitRegionHighRisk')
-    this.$store.dispatch('get_region/getInitRegionNumberTop')
     this.$store.dispatch('get_region/getInitRegionImage')
     this.$store.dispatch('get_region/getInitRegionMajor')
+    this.$store.dispatch('get_region/getInitRegionNumberTop')
     this.$store.dispatch('get_region/getInitRegionSafetyIndex')
     this.$store.dispatch('get_region/getInitRegionRiskRank')
   }
