@@ -29,6 +29,7 @@ export default {
   computed: {
     getRiskDistribution() {
       let data = this.$store.state.get_region.risk_distribution;
+      console.log("major_region", data)
       let xdata = [];
       for( let i in data){
         xdata.push(i)
@@ -164,7 +165,7 @@ export default {
         },
         grid3D: {
           viewControl: {
-            autoRotate: true
+            // autoRotate: true
           },
           light: {
             main: {
@@ -193,7 +194,7 @@ export default {
       let arr = [];
       for (let i in data) {
         for (let j in data[i]['major']){
-          arr.push([i, j, data[i]['major'][j][level]])
+          arr.push([i, j, data[i]['risk_level'][level]])
         }//for j
       }//for i
       console.log('the distribution:', arr)
