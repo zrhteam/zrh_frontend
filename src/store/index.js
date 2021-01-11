@@ -21,6 +21,7 @@ import get_locations from './modules/get_locations'
 import get_headquarter from "./modules/get_headquarter";
 import get_project from "@/store/modules/get_project";
 import get_region from '@/store/modules/get_region';
+import get_login from '@/store/modules/get_login'
 
 Vue.use(Vuex)
 
@@ -31,7 +32,8 @@ export default new Vuex.Store({
         get_locations,
         get_headquarter,
         get_project,
-        get_region
+        get_region,
+        get_login,
     },
     strict: debug
 })

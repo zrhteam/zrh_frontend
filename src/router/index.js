@@ -7,7 +7,7 @@ import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
 import NotFound from '../components/NotFound.vue'
 
 const routerOptions = [
-    {path: '/', component: 'Overview', meta: {keepAlive: false}},
+    {path: '/', component: 'Login', meta: {keepAlive: false}},
     {path: '/login', component: 'Login'},
     {path: '/particles', component: 'Particles'},
     {path: '/register', component: 'Register'},
@@ -25,7 +25,7 @@ const routes = routerOptions.map(route => {
 })
 const router = new Router({
     rous: [
-        {path: '/', component: 'Overview'},
+        {path: '/', component: 'Login'},
         {path: '/login', component: 'Login'},
         {path: '/particles', component: 'Particles'},
         {path: '/register', component: 'Register'},
