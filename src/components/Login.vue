@@ -143,13 +143,14 @@ export default {
         //项目级权限
         if (data.data.user_grant == '项目') {
           this.$router.push({path: '/prj_data_analysis'});
+          // this.$router.push({path: '/register'});
         }// 区域级权限
         else if (data.data.user_grant == '区域') {
           this.$router.push({path: '/region_department'});
         }// 总部级权限
         else if (data.data.user_grant == '总部') {
-          this.$router.push({path: '/land_headquarters'});
-          // this.$router.push({path: '/register'});
+          // this.$router.push({path: '/land_headquarters'});
+          this.$router.push({path: '/register'});
         }// 超级用户权限
         else if (data.data.user_grant == '超级用户') {
           this.$router.push({path: '/land_headquarters'});
@@ -161,7 +162,8 @@ export default {
     }
   },
   created() {
-    this.username = 'region1';
+    // this.username = 'headquarter1';
+    this.username = 'project1';
     this.password = '123456';
     $(document).ready(function () {
       var whei = $(window).width()

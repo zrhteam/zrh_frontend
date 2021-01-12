@@ -3,7 +3,7 @@
     <div style="display: none">
       {{ getPrjRiskLevelList }}
     </div>
-    <div id="subtitle" class="level4" style="padding-top: 10px">
+    <div class="level4">
       <span>当前未整改高风险隐患列表</span>
     </div>
     <div class="level5" style="padding-bottom: 10px">

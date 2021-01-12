@@ -1,16 +1,17 @@
 <template>
-  <div>
+  <el-card class="box-card boundary-C" shadow="never"
+                 style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getData }}
     </div>
-    <div style="padding-top: 15px">
+    <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
     </div>
-    <div id="bar_chart" style="height: 400px; width: 100%">
+    <div id="bar_chart" style="height: 80%; width: 100%">
       <!--        占比（可筛选专业）柱状图-->
 
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>

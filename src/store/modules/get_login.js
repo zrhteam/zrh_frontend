@@ -10,7 +10,9 @@ const state = {
     // //密码
     // password: null,
     //权限对应等级所包含的总部、区域、项目和检查
-    grant_data: []
+    grant_data: [],
+    //针对树形目录准备的
+    tree_data: [],
 }
 
 //getters
@@ -22,6 +24,9 @@ const getters = {
     //承载变化的权限对应等级所包含的总部、区域、项目和检查
     renderGrantData(state) {
         return state.grant_data;
+    },
+    renderTreeData(state) {
+        return state.tree_data;
     },
 }
 
@@ -42,6 +47,11 @@ const mutations = {
         // debugger
         console.log("change")
         state.grant_data = data
+    },
+    changeTreeData(state, data) {
+        // debugger
+        console.log("change")
+        state.tree_data = data
     },
 }
 

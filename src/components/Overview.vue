@@ -137,8 +137,8 @@ export default {
   },
   created() {
     this.$store.dispatch('get_locations/getLocation')
-    this.$store.dispatch('get_locations/getLatestProjection')
-    this.$store.dispatch('get_locations/getHighRiskRank')
+    // this.$store.dispatch('get_locations/getLatestProjection')
+    // this.$store.dispatch('get_locations/getHighRiskRank')
   },
   watch: {
     dataList(valMap) {

@@ -57,16 +57,17 @@ export default {
     level(val) {
       if (val == '项目层级') {
         this.search_name = ""
-        this.name = []
+        this.form.ctr_name = ""
+        // alert(this.form.ctr_name)
         this.name = this.prj_name
         // console.log("test", document.getElementById("select_module").val())
       } else if (val == '区域层级') {
         this.search_name = ""
-        this.name = []
+        // this.form.ctr_name = ""
         this.name = this.region_name
       } else if (val == '总部层级') {
         this.search_name = ""
-        this.name = []
+        // this.form.cust_name = ""
         this.name = this.head_name
       }
     },
@@ -134,13 +135,12 @@ export default {
       this.$store.state.get_project.params = params
       this.$router.push({path: '/prj_data_analysis'});
     },
-    selectChanged(value) {
+    selectChanged() {
       console.log("In selectChanged")
-      console.log(value)
-      console.log(document.getElementById("select_module").placeholder)
-      console.log(document.getElementById("select_module").innerText)
+      console.log(this.form.project_name)
+      this.form.project_name = ""
+      console.log(this.form.project_name)
       // console.log(document.getElementById("select_module").placeholder.clean())
-      $("#select_module").attr("placeholder","请选择")
     }
   },
   created() {

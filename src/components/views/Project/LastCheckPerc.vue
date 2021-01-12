@@ -54,9 +54,19 @@ export default {
             data: arr,
             emphasis: {
               itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                // shadowBlur: 10,
+                // shadowOffsetX: 0,
+                // shadowColor: 'rgba(0, 0, 0, 0.5)',
+                normal: {//颜色渐变
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#0095FF'},
+                                {offset: 0.5, color: '#0CB9FF'},
+                                {offset: 1, color: '#0095FF'}
+                            ]
+                        )
+                    }
               }
             }
           }

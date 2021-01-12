@@ -17,7 +17,7 @@ export default {
   name: "IndexView",
   props:['context'],
   mounted(){
-    console.log('this.context', this.context);
+    // console.log('this.context', this.context);
   }
 }
 </script>

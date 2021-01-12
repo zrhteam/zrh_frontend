@@ -29,7 +29,8 @@ const state = {
     prj_reason: {},
     //隐患分布区域占比
     prj_region: {},
-    data: []
+    //历次检查危险指数
+    prj_index: {}
 }
 
 //getters
@@ -84,6 +85,10 @@ const getters = {
     //承载基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     renderPrjRiskTop(state) {
         return state.prj_risk_top;
+    },
+    //历次检查危险指数
+    renderPrjIndex(state) {
+        return state.prj_index;
     }
 
 }
@@ -98,29 +103,29 @@ const actions = {
     },
 
     //得到基于项目级展示历次发现的不同风险等级的隐患数量
-    getInitProjectRiskNumber(context) {
-        dataService.getInitProjectRiskNumber(state.g_params, function (response) {
-            context.commit('changePrjRiskLevelData', response)
+    getInitProjectRiskLevel(context) {
+        dataService.getInitProjectRiskLevel(state.params, function (response) {
+            context.commit('changePrjRiskLevel', response)
         })
     },
 
     //基于项目级展示历次检查中不同专业隐患占比情况
     getInitProjectHistoryPerception(context) {
-        dataService.getInitProjectHistoryPerception(state.g_params, function (response) {
+        dataService.getInitProjectHistoryPerception(state.params, function (response) {
             context.commit('changePrjHistoryPerception', response)
         })
     },
 
     //得到基于项目级展示最近一次检查不同专业隐患占比情况
     getInitProjectNearestPerception(context) {
-        dataService.getInitProjectNearestPerception(state.g_params, function (response) {
+        dataService.getInitProjectNearestPerception(state.params, function (response) {
             context.commit('changePrjNearestPerception', response)
         })
     },
 
     //得到基于项目级展示历次检查隐患数量变化的情况
     getInitProjectNumberChange(context) {
-        dataService.getInitProjectNumberChange(state.g_params, function (response) {
+        dataService.getInitProjectNumberChange(state.params, function (response) {
             context.commit('changePrjNumberChange', response)
         })
     },
@@ -143,11 +148,6 @@ const actions = {
     //基于项目级展示不同专业所有隐患子系统占比情况
     getInitProjectSystem(context) {
         dataService.getInitProjectSystem(state.params, function (response) {
-            // console.log(response)
-// <<<<<<< HEAD
-//
-// =======
-// >>>>>>> f6f7baff9ca7b442fa9930f2a1e2f2fd5c38eeef
             context.commit('changePrjSystem', response)
         })
     },
@@ -166,85 +166,138 @@ const actions = {
 
     //得到基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     getInitProjectRiskTop(context) {
-        dataService.getInitProjectRiskTop(state.g_params, function (response) {
+        dataService.getInitProjectRiskTop(state.params, function (response) {
             context.commit('changePrjRiskTop', response)
         })
+    },
+
+    //历次检查危险指数
+    getInitProjectIndex(context) {
+        dataService.getInitProjectIndex(state.params, function (response) {
+            context.commit('changePrjIndex', response)
+        })
     }
-
-
 }
 
 //mutations
 const mutations = {
     //考虑项目级整改率变化
     changePrjRectification(state, data) {
-        state.prj_rectification = data.project_rectification
+        if (data.code === 10000) {
+            // console.log('project_high', data.data)
+            state.prj_rectification = data.data.rectification;
+        } else {
+            alert("出错了")
+        }
     },
-
     // 考虑基于项目级展示历次发现的不同风险等级的隐患数量
+    // changePrjRiskNumber(state, data) {
+    //     if (data.code === 10000) {
+    //         state.prj_risk_data = data.data
+    //     } else {
+    //         alert("出错了")
+    //     }
+    // },
+    //
+    changePrjRiskLevel(state, data) {
+        if (data.code === 10000) {
+            console.log('level', data.data)
+            state.prj_risk_data = data.data
+        } else {
+            alert("出错了")
+        }
+    },
+     //基于项目级展示最近一次检查不同专业隐患占比情况
     changePrjNearestPerception(state, data) {
         console.log(data)
         state.prj_nearest_perception = data
     },
-
     //基于项目级展示历次检查中不同专业隐患占比情况
-    changePrjRiskLevelData(state, data) {
-        console.log(data)
-        state.prj_risk_data = data
-    },
-
-    //基于项目级展示最近一次检查不同专业隐患占比情况
     changePrjHistoryPerception(state, data) {
-        console.log(data)
-        state.prj_history_prec = data
+        if (data.code === 10000) {
+            state.prj_history_prec = data.data
+        } else {
+            alert("出错了")
+        }
     },
 
     //基于项目级展示历次检查隐患数量变化的情况
     changePrjNumberChange(state, data) {
-        console.log(data)
-        state.prj_number_change = data
+        if (data.code === 10000) {
+            state.prj_number_change = data.data
+        } else {
+            alert("出错了")
+        }
     },
 
     //考虑基于项目级展示当前未整改的高风险隐患列表
     changePrjRiskLevelList(state, data) {
-        state.prj_risk_list = data.note_list
-        console.log(data.note_list)
+        if (data.code === 10000) {
+            console.log("list", data.data)
+            state.prj_risk_list = data.data.note_list
+        } else {
+            alert("出错了")
+        }
     },
 
     // 考虑基于项目级展示当前未整改高风险隐患图片
     changePrjImage(state, data) {
-        state.prj_image = data.image_list
-        // console.log(state.prj_image)
+        if (data.code === 10000) {
+            console.log("list", data.data)
+            state.prj_image = data.data.image_list
+        } else {
+            alert("出错了")
+        }
     },
 
     //基于项目级展示不同专业所有隐患子系统占比情况
     changePrjSystem(state, data) {
-        state.prj_system = data
-        console.log(state.prj_system)
-// <<<<<<< HEAD
-//
-// =======
-// >>>>>>> f6f7baff9ca7b442fa9930f2a1e2f2fd5c38eeef
+        if (data.code === 10000) {
+            // console.log("list", data.data)
+            state.prj_system = data.data
+        } else {
+            alert("出错了")
+        }
     },
 
     //占比
     changePrjReason(state, data) {
-        state.prj_reason = data
-        console.log(state.prj_reason)
+        if (data.code === 10000) {
+            // console.log("list", data.data)
+            state.prj_reason = data.data
+        } else {
+            alert("出错了")
+        }
     },
 
     changePrjRegion(state, data) {
-        state.prj_region = data
-        console.log(state.prj_region)
+        if (data.code === 10000) {
+            // console.log("list", data.data)
+            state.prj_region = data.data
+        } else {
+            alert("出错了")
+        }
     },
 
     //考虑基于项目级在历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     changePrjRiskTop(state, data) {
-        console.log(data)
-        state.prj_risk_top = data
+        if (data.code === 10000) {
+            console.log("top5", data.data)
+            state.prj_risk_top = data.data
+        } else {
+            alert("出错了")
+        }
     },
 
-
+    //历次检查危险指数
+    changePrjIndex(state, data) {
+        if (data.code === 10000) {
+            console.log("project_index", data.data)
+            state.prj_index = data.data
+        } else {
+            alert("出错了")
+        }
+    },
 }
 
 export default {

@@ -1,43 +1,38 @@
 <template>
-  <div>
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 70%; margin: 40px 40px 40px 40px">
     <div style="display: none">
       {{ getPrjHistoryPerception }}
     </div>
-    <div class="level4" style="padding-top: 15px">
+    <div class="level4">
       <span>历次检查隐患专业占比</span>
     </div>
-    <div id="pie2" style="height: 370px; width: 100%"></div>
+    <div id="pie2" style="height: 100%; width: 100%"></div>
     <!--          历次检查累计隐患专业占比 饼图-->
-  </div>
+  </el-card>
 </template>
 
 <script>
 export default {
   name: "CheckHistoryPerc",
+  // data() {
+  //   return {
+  //     screenWidth: document.body.clientWidth,
+  //   }
+  // },
   computed: {
     getPrjHistoryPerception() {
       let data = this.$store.state.get_project.prj_history_prec;
       // console.log(data)
       let arr_major = []
       for (let i in data) {
-        for (let j in data[i].major_list) {
-          let flag = false
-          for (let k in arr_major) {
-            if (j == arr_major[k].name) {
-              arr_major[k].value += data[i].major_list[j]
-              flag = true
-            }
-          }
-          if (flag == false) {
-            let obj = {
-              value: 0,
-              name: ''
-            }
-            obj.name = j;
-            obj.value = data[i].major_list[j]
-            arr_major.push(obj)
-          }
+        let obj = {
+          value: 0,
+          name: ''
         }
+        obj.name = i;
+        obj.value = data[i]
+        arr_major.push(obj)
       }
       // console.log(arr_major)
       let option = {
@@ -48,7 +43,7 @@ export default {
         series: [
           {
             type: 'pie',
-            radius: '50%',
+            radius: '60%',
             center: ['50%', '50%'],
             label: {
               normal: {
@@ -74,6 +69,14 @@ export default {
     this.drawPieChart()
   },
   mounted() {
+    // console.log(this.screenWidth)
+    // const that = this
+    // window.onresize = () => {
+    //   return (() => {
+    //     window.screenWidth = document.body.clientWidth
+    //     that.screenWidth = window.screenWidth
+    //   })()
+    // }
     this.drawPieChart();
   },
   methods: {
@@ -81,6 +84,10 @@ export default {
       let myChart = this.$echarts.init(document.getElementById('pie2'))
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(this.getPrjHistoryPerception);
+      myChart.resize();
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      })
     }
   }
 }

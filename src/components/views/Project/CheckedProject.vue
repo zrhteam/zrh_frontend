@@ -1,5 +1,6 @@
 <template>
-  <div class="grid-content bg-purple-light">
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getPrjRiskLevelData }}
     </div>
@@ -23,7 +24,7 @@
           label="累计发现隐患数量">
       </el-table-column>
     </el-table>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -37,6 +38,7 @@ export default {
   computed: {
     getPrjRiskLevelData() {
       let data = this.$store.state.get_project.prj_risk_data;
+      console.log("累计", data)
       var data_length = Object.keys(data)
       if (!data_length.length) {
         this.PrjRiskLevelData = []
@@ -84,7 +86,7 @@ export default {
         dataArray.push(obj1)
         obj.num = obj1.num + obj2.num + obj3.num
         dataArray.push(obj)
-        console.log(dataArray)
+        // console.log(dataArray)
         this.PrjRiskLevelData = dataArray
       }
     }

@@ -1,23 +1,17 @@
 <template>
-  <el-container>
-    <el-header>
-      <div style="display: none">
-        {{ getRate }}
-      </div>
-      <div class="level4" style="padding-top: 20px">
-        <span>当前整改率</span>
-      </div>
-      <div id="current_correction_rate" class="cur_level1" style="padding-top: 10px">
-        <span>{{ current_correction_rate }}</span>
-      </div>
-      <div class="cur_level2" style="padding-top: 10px">
-        <span>整改率</span>
-      </div>
-    </el-header>
-    <el-main>
-      <div id="dashboard" style="height: 180px; width: 100%; padding-top: 50px"></div>
-    </el-main>
-  </el-container>
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 70%; margin: 40px 40px 40px 40px">
+    <div style="display: none">
+      {{ getRate }}
+    </div>
+    <div class="level4">
+      <span>当前整改率</span>
+    </div>
+    <div id="current_correction_rate" class="cur_level1" style="text-align: left">
+      <span>{{ current_correction_rate }}</span>
+    </div>
+    <div id="dashboard" style="height: 80%; width: 100%;"></div>
+  </el-card>
 </template>
 
 <script>

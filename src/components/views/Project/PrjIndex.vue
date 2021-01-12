@@ -1,37 +1,47 @@
 <template>
-  <el-card class="box-card boundary-C" shadow="never"
-           style="background-color: transparent; height: 70%; margin: 40px 40px 40px 40px">
+  <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
+  <el-card class="box-card boundary-B" shadow="never"
+           style="background-color: transparent; height: 19%; margin: 0px 5px 5px 5px">
     <div style="display: none">
-      {{ getPrjHistory }}
+      {{ getPrjIndex }}
     </div>
     <div class="level4">
-      <span>历次检查隐患数量变化</span>
+      <span>历次检查危险指数</span>
     </div>
-    <div id="history_chart" style="height: 100%; width: 100%; display: block"></div>
+    <div id="index_chart" style="height: 100%; width: 100%; display: block"></div>
   </el-card>
 </template>
 
 <script>
 export default {
-  name: "CheckedHistory",
+  name: "PrjIndex",
   computed: {
-    getPrjHistory() {
-      let data = this.$store.state.get_project.prj_number_change;
-      // console.log('licichange', data)
+    getPrjIndex() {
+      //历次检查的指数
+      let tree_data = this.$store.state.get_login.grant_data.data.value
       let arr = []
-      for (let i in data) {
-        let obj = {
-          count: 0,
-          name: ''
+      let obj = {
+        // check_node: '',
+        // index: 0
+        name: '',
+        count: 0
+      };
+      for (let i in tree_data['headquarter_tag']) {
+        for (let j in tree_data['headquarter_tag'][i]['region_tag']) {
+          for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
+            for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
+              for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
+                obj['name'] = m;
+                obj['count'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].index
+                arr.push(obj)
+              }
+            }
+          }
         }
-        obj.name = data[i].start_time;
-        obj.count = data[i].risk_num
-        arr.push(obj)
       }
-      // console.log(arr)
-      arr.sort(this.sortNumber('count', true))
+      console.log("Index_arr", arr)
       return arr
-    }
+    },
   }
   ,
   updated() {
@@ -45,14 +55,12 @@ export default {
   methods: {
     drawBarChart() {
       // document.getElementById('history_chart').innerHTML = ''
-      let myChart = this.$echarts.init(document.getElementById('history_chart'))
+      let myChart = this.$echarts.init(document.getElementById('index_chart'))
       // 使用刚指定的配置项和数据显示图表。
-      let arr = this.getPrjHistory
+      let arr = this.getPrjIndex
       if (arr.length) {
         let option = {
-          tooltip: {
-          formatter: '{b}:{c} ({d}%)'
-        },
+          tooltip: {},
           dataset: {
             dimensions: ['name', 'count'],
             source: arr
@@ -60,6 +68,8 @@ export default {
           xAxis: {
             type: 'category',
             axisLabel: {
+              show: true,
+              // inside: true,
               interval: 0,
               rotate: 0,
               textStyle: {
@@ -78,7 +88,8 @@ export default {
               lineStyle: {
                 color: '#ffffff'
               }
-            }
+            },
+            splitNumber: 3
           },
           series: [
             {
@@ -109,7 +120,7 @@ export default {
                   )
                 }
               },
-              barMaxWidth: 40
+              barMaxWidth: 20
             }
           ]
         };
@@ -122,8 +133,7 @@ export default {
       window.addEventListener('resize', function () {
         myChart.resize();
       })
-    }
-    ,
+    },
     sortNumber(attr, rev) {
       if (rev == undefined) {
         rev = 1;

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getPrjImage }}
     </div>
@@ -18,13 +19,13 @@
         </el-carousel>
       </div>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
 export default {
   name: "UnsolvedImageList",
-  data(){
+  data() {
     return {
       img_list: []
     }
@@ -52,7 +53,7 @@ export default {
 </script>
 
 <style scoped>
-img{
+img {
   width: 100%;
   height: 100%;
 }
