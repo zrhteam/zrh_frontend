@@ -41,7 +41,28 @@ export default {
             },
             axisLine: { //仪表盘轴线样式
               lineStyle: {
-                width: 10
+                width: 10,
+                // splitNumber: 100,
+                color: [
+                    [1, new echarts.graphic.LinearGradient(0, 0, 1, 0,[
+                      {
+                        offset: 0.2,
+                        color: '#bb2205'
+                      },
+                      {
+                        offset: 0.5,
+                        color: '#e57733'
+                      },
+                      {
+                        offset: 0.8,
+                        color: '#f1e189'
+                      },
+                      {
+                        offset: 1,
+                        color: '#87b333'
+                      }
+                    ])]
+                ]
               }
             },
             splitLine: { //分割线样式
