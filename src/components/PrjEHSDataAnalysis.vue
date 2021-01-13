@@ -317,7 +317,7 @@ export default {
     //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
     this.$store.dispatch('get_project/getInitProjectRiskTop')
     //历次检查指数
-    this.$store.dispatch('get_project/getInitProjectIndex')
+    // this.$store.dispatch('get_project/getInitProjectIndex')
 
 
     let param1 = new URLSearchParams();

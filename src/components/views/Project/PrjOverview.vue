@@ -1,6 +1,7 @@
 <template>
   <!--  <div></div>-->
   <el-row class="boundary" style="height: 100%;">
+    <PrjDataScreen id="small" style="display: none"></PrjDataScreen>
     <el-row id="large1" class="boundary" style="height: 10%;">
       <el-col :span="4" style="height: 100%">
         <el-card class="boundary-C" shadow="never"
@@ -39,18 +40,10 @@
         </el-card>
         <el-card class="box-card boundary-B" shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
-                    <el-button size="mini" round
-                               style="position: absolute; z-index: 9; left: 12%; background-color: transparent; color: #ffffff"
-                               @click="intoPrjDataScreen">展开
-                    </el-button>
-<!--          <button type="submit"-->
-<!--              style="z-index: 9; float: right; background-color: transparent; color: #ffffff"-->
-<!--              @click="intoPrjDataScreen">展开-->
-<!--          </button>-->
-<!--          <button-->
-<!--              style="z-index: 9; float: right; background-color: transparent; color: #ffffff"-->
-<!--              @click="intoPrjDataScreen">展开-->
-<!--          </button>-->
+          <el-button size="mini" round
+                     style="position: absolute; z-index: 9; left: 12%; background-color: transparent; color: #ffffff"
+                     @click="intoPrjDataScreen">展开
+          </el-button>
           <PrjDataScreen></PrjDataScreen>
 
           <!--          <label>数据大屏缩略图</label>-->
@@ -101,7 +94,6 @@
         <!--      </el-card>-->
       </el-col>
     </el-row>
-    <PrjDataScreen id="small" style="display: none"></PrjDataScreen>
   </el-row>
   <!--  <PrjDataScreen></PrjDataScreen>-->
 </template>

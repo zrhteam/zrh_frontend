@@ -173,6 +173,9 @@ export default {
       large1.style.display = 'block'
       var large2 = document.getElementById('large2');
       large2.style.display = 'block'
+      var width = large2.style.width
+      large2.style.width = "500px"
+      large2.style.width = "99%"
       var small = document.getElementById('small');
       small.style.display = 'none'
     }

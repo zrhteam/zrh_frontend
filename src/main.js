@@ -19,6 +19,7 @@ import './js/leaflet.pm/dist/leaflet.pm.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 //import http from 'vuetest/api'
+import elementResizeDetectorMaker from 'element-resize-detector'
 
 Vue.config.productionTip = false
 Vue.L = Vue.prototype.$L = L;

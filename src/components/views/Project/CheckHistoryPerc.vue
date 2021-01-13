@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import elementResizeDetectorMaker from "element-resize-detector";
+
 export default {
   name: "CheckHistoryPerc",
   // data() {
@@ -112,10 +114,10 @@ export default {
                       c1: '#7c9473',
                       c2: '#d6efc7'
                     }];
-                  return new echarts.graphic.LinearGradient(1, 0, 0, 0,[{
+                  return new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
                     offset: 0,
                     color: colorList[params.dataIndex].c1
-                  },{
+                  }, {
                     offset: 1,
                     color: colorList[params.dataIndex].c2
                   }])
@@ -159,6 +161,14 @@ export default {
       window.addEventListener('resize', function () {
         myChart.resize();
       })
+      const _this = this;
+      const erd = elementResizeDetectorMaker();
+      erd.listenTo(document.getElementById("pie2"), element => {
+        _this.$nextTick(() => {
+          //监听到事件后执行的业务逻辑
+          myChart.resize();
+        });
+      });
     }
   }
 }

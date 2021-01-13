@@ -17,7 +17,8 @@
     "vue-beauty": "^2.0.0-beta.19",
     "vue-cookies": "^1.7.4",
     "vue-router": "^3.4.5",
-    "vuex": "^3.5.1"
+    "vuex": "^3.5.1",
+    "element-resize-detector": "^1.2.1"
   },
   "devDependencies": {
     "@types/d3": "^3.5.44",

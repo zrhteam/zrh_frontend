@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import elementResizeDetectorMaker from "element-resize-detector";
+
 export default {
   name: "CheckedHistory",
   computed: {
@@ -122,6 +124,14 @@ export default {
       window.addEventListener('resize', function () {
         myChart.resize();
       })
+       const _this = this;
+      const erd = elementResizeDetectorMaker();
+      erd.listenTo(document.getElementById("history_chart"), element => {
+        _this.$nextTick(() => {
+          //监听到事件后执行的业务逻辑
+          myChart.resize();
+        });
+      });
     }
     ,
     sortNumber(attr, rev) {

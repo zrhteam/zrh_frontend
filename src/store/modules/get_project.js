@@ -30,7 +30,9 @@ const state = {
     //隐患分布区域占比
     prj_region: {},
     //历次检查危险指数
-    prj_index: {}
+    prj_index: {},
+//    标记展开和返回 已展开: true
+    flag: false,
 }
 
 //getters
