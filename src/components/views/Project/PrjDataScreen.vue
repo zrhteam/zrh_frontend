@@ -1,11 +1,11 @@
 <template>
-  <el-row class="boundary prj_data_screen" style="height: 100%;">
+  <el-row class="prj_data_screen" style="height: 100%;">
     <el-col :span="4" style="height: 100%">
-      <el-card class="box-card boundary-C" shadow="never"
+      <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <label>Logo</label>
       </el-card>
-      <el-card class="box-card boundary-B" shadow="never"
+      <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
           <el-input
               placeholder="输入关键字进行过滤"
@@ -25,7 +25,7 @@
             </el-tree>
           </el-scrollbar>
         </el-card>
-      <el-card class="box-card boundary-C" shadow="never"
+      <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
         <el-button size="mini" round
                      style="background-color: transparent; color: #ffffff"
@@ -34,7 +34,7 @@
       </el-card>
     </el-col>
     <el-col :span="16" style="height: 100%">
-      <el-card class="box-card boundary-C" shadow="never"
+      <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <label>数据大屏</label>
       </el-card>
@@ -50,26 +50,26 @@
       </el-col>
       <el-col :span="8" style="height: 83%">
         <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>
-        <HistoryTopRisk class="boundary-B"></HistoryTopRisk>-->
+        <HistoryTopRisk class=""></HistoryTopRisk>-->
       </el-col>
-      <el-card class="box-card boundary-C" shadow="never"
+      <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
         <label>...</label>
       </el-card>
     </el-col>
     <el-col :span="4" style="height: 100%">
-      <el-card class="box-card boundary-C" shadow="never"
+      <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <label>可选择的统计图</label>
       </el-card>
-      <el-card class="box-card boundary-C" shadow="never"
+      <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 29%; margin: 0px 5px 5px 5px">
       </el-card>
 
-      <el-card class="box-card boundary-C" shadow="never"
+      <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 29%; margin: 0px 5px 5px 5px">
       </el-card>
-      <el-card class="box-card boundary-C" shadow="never"
+      <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 30%; margin: 0px 5px 5px 5px">
       </el-card>
     </el-col>

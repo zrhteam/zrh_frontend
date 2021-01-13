@@ -1,24 +1,24 @@
 <template>
   <!--  <div></div>-->
-  <el-row class="boundary" style="height: 100%;">
+  <el-row style="height: 100%;">
     <PrjDataScreen id="small" style="display: none"></PrjDataScreen>
-    <el-row id="large1" class="boundary" style="height: 10%;">
+    <el-row id="large1" class="" style="height: 10%;">
       <el-col :span="4" style="height: 100%">
-        <el-card class="boundary-C" shadow="never"
+        <el-card class="title-box-card" shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
           <label>Logo</label>
         </el-card>
       </el-col>
       <el-col :span="20" style="height: 100%">
-        <el-card class="box-card boundary-C" shadow="never"
+        <el-card class="title-box-card " shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
           <label>中瑞恒可视化系统</label>
         </el-card>
       </el-col>
     </el-row>
-    <el-row id="large2" class="boundary" style="height: 90%;">
-      <el-col :span="4" class="boundary-A" style="height: 100%">
-        <el-card class="box-card boundary-B" shadow="never"
+    <el-row id="large2" class="" style="height: 90%;">
+      <el-col :span="4" class="" style="height: 100%">
+        <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
           <el-input
               placeholder="输入关键字进行过滤"
@@ -38,29 +38,29 @@
             </el-tree>
           </el-scrollbar>
         </el-card>
-        <el-card class="box-card boundary-B" shadow="never"
+        <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
           <el-button size="mini" round
                      style="position: absolute; z-index: 9; left: 12%; background-color: transparent; color: #ffffff"
                      @click="intoPrjDataScreen">展开
           </el-button>
-          <PrjDataScreen></PrjDataScreen>
+          <PrjDataScreen id="small1"></PrjDataScreen>
 
           <!--          <label>数据大屏缩略图</label>-->
         </el-card>
       </el-col>
-      <el-col :span="10" class="boundary-A" style="height: 100%">
-        <el-card class="box-card boundary-B" shadow="never"
+      <el-col :span="10" class="" style="height: 100%">
+        <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 79%; margin: 0px 5px 5px 5px">
           <label>map</label>
         </el-card>
         <!--历次检查指数-->
         <PrjIndex></PrjIndex>
       </el-col>
-      <el-col :span="10" class="boundary-A" style="height: 100%">
+      <el-col :span="10" class="" style="height: 100%">
         <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
         <el-row style="height: 100%">
-          <el-card class="box-card boundary-C" shadow="never"
+          <el-card class="statistics-box-card " shadow="never"
                    style="background-color: transparent; height: 5%; margin: 0px 5px 5px 5px">
             <label>chart</label>
           </el-card>
@@ -69,8 +69,8 @@
             <CheckHistoryPerc></CheckHistoryPerc>
           </el-col>
           <el-col :span="12" style="height: 42%">
-            <el-card class="box-card boundary-C" shadow="never"
-                     style="background-color: transparent; height: 70%; margin: 40px 40px 40px 40px">
+            <el-card class="box-card " shadow="never"
+                     style="background-color: transparent; height: 80%; left: 10%; top: 10%">
               <!--          当前未整改高风险隐患列表-->
               <UnsolvedList></UnsolvedList>
             </el-card>
@@ -86,10 +86,12 @@
             <!--历次检查隐患数量变化-->
           </el-col>
           <!--          </el-row>-->
-          <el-card class="box-card boundary-C" shadow="never"
-                   style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
-            <label>more</label>
-          </el-card>
+          <el-col :span="24" style="height: 9%">
+            <el-card class="statistics-box-card" shadow="never"
+                     style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
+              <label>more</label>
+            </el-card>
+          </el-col>
         </el-row>
         <!--      </el-card>-->
       </el-col>
@@ -205,6 +207,8 @@ export default {
       large2.style.display = 'none'
       var small = document.getElementById('small');
       small.style.display = 'block'
+      small.style.width = "500px"
+      small.style.width = "99%"
     }
   },
 

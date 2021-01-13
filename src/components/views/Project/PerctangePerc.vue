@@ -1,6 +1,6 @@
 <template>
-  <el-card class="box-card boundary-C" shadow="never"
-                 style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
+  <el-card class="box-card " shadow="never"
+           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getData }}
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-
+import elementResizeDetectorMaker from "element-resize-detector";
 export default {
   name: "RiskProjPercentage",
   props: ['context'],
@@ -122,13 +122,37 @@ export default {
         window.addEventListener('resize', function () {
           myChart.resize();
         })
+        const _this = this;
+        const erd = elementResizeDetectorMaker();
+        if (this.type == 'system') {
+          erd.listenTo(document.getElementById("id_system"), element => {
+            _this.$nextTick(() => {
+              //监听到事件后执行的业务逻辑
+              myChart.resize();
+            });
+          });
+        } else if (this.type == 'reason') {
+          erd.listenTo(document.getElementById("id_reason"), element => {
+            _this.$nextTick(() => {
+              //监听到事件后执行的业务逻辑
+              myChart.resize();
+            });
+          });
+        } else if (this.type == 'region') {
+          erd.listenTo(document.getElementById("id_region"), element => {
+            _this.$nextTick(() => {
+              //监听到事件后执行的业务逻辑
+              myChart.resize();
+            });
+          });
+        }
       })
     },
-    sortNumber(attr, rev){
-      if(rev == undefined) {
+    sortNumber(attr, rev) {
+      if (rev == undefined) {
         rev = 1;
-      }else {
-        rev = (rev)? 1 : -1;
+      } else {
+        rev = (rev) ? 1 : -1;
       }
 
       return function (a, b) {

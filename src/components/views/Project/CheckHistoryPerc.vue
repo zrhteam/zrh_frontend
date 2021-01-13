@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card boundary-C" shadow="never"
-           style="background-color: transparent; height: 70%; margin: 40px 40px 40px 40px">
+           style="background-color: transparent; height: 80%; left: 10%; top: 10%">
     <div style="display: none">
       {{ getPrjHistoryPerception }}
     </div>

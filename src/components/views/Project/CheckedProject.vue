@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card boundary-C" shadow="never"
+  <el-card class="box-card " shadow="never"
            style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getPrjRiskLevelData }}
