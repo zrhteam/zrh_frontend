@@ -1,6 +1,7 @@
 <template>
-  <el-row class="boundary" style="height: 100%">
-    <el-row class="boundary" style="height: 10%">
+  <!--  <div></div>-->
+  <el-row class="boundary" style="height: 100%;">
+    <el-row id="large1" class="boundary" style="height: 10%;">
       <el-col :span="4" style="height: 100%">
         <el-card class="boundary-C" shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
@@ -14,7 +15,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row class="boundary" style="height: 90%">
+    <el-row id="large2" class="boundary" style="height: 90%;">
       <el-col :span="4" class="boundary-A" style="height: 100%">
         <el-card class="box-card boundary-B" shadow="never"
                  style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
@@ -38,8 +39,21 @@
         </el-card>
         <el-card class="box-card boundary-B" shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
+                    <el-button size="mini" round
+                               style="position: absolute; z-index: 9; left: 12%; background-color: transparent; color: #ffffff"
+                               @click="intoPrjDataScreen">展开
+                    </el-button>
+<!--          <button type="submit"-->
+<!--              style="z-index: 9; float: right; background-color: transparent; color: #ffffff"-->
+<!--              @click="intoPrjDataScreen">展开-->
+<!--          </button>-->
+<!--          <button-->
+<!--              style="z-index: 9; float: right; background-color: transparent; color: #ffffff"-->
+<!--              @click="intoPrjDataScreen">展开-->
+<!--          </button>-->
           <PrjDataScreen></PrjDataScreen>
-<!--          <label>数据大屏缩略图</label>-->
+
+          <!--          <label>数据大屏缩略图</label>-->
         </el-card>
       </el-col>
       <el-col :span="10" class="boundary-A" style="height: 100%">
@@ -48,7 +62,7 @@
           <label>map</label>
         </el-card>
         <!--历次检查指数-->
-          <PrjIndex></PrjIndex>
+        <PrjIndex></PrjIndex>
       </el-col>
       <el-col :span="10" class="boundary-A" style="height: 100%">
         <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
@@ -71,12 +85,12 @@
           <!--          </el-row>-->
           <!--          <el-row style="height: 42%">-->
           <el-col :span="12" style="height: 42%">
-              <!--当前整改率-->
-              <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>
+            <!--当前整改率-->
+            <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>
           </el-col>
           <el-col :span="12" style="height: 42%">
             <CheckedHistory></CheckedHistory>
-          <!--历次检查隐患数量变化-->
+            <!--历次检查隐患数量变化-->
           </el-col>
           <!--          </el-row>-->
           <el-card class="box-card boundary-C" shadow="never"
@@ -87,7 +101,9 @@
         <!--      </el-card>-->
       </el-col>
     </el-row>
+    <PrjDataScreen id="small" style="display: none"></PrjDataScreen>
   </el-row>
+  <!--  <PrjDataScreen></PrjDataScreen>-->
 </template>
 
 <script>
@@ -127,7 +143,7 @@ export default {
   watch: {
     filterText(val) {
       this.$refs.tree.filter(val);
-    },
+    }
 
   },
   computed: {
@@ -189,13 +205,22 @@ export default {
       console.log("arr", arr)
       this.data = arr
       this.$store.state.get_login.tree_data = arr
+    },
+    intoPrjDataScreen() {
+      var large1 = document.getElementById('large1');
+      large1.style.display = 'none'
+      var large2 = document.getElementById('large2');
+      large2.style.display = 'none'
+      var small = document.getElementById('small');
+      small.style.display = 'block'
     }
   },
 
   data() {
     return {
       filterText: '',
-      data: []
+      data: [],
+      status: true
 
     };
   },
@@ -230,4 +255,18 @@ export default {
   text-overflow: ellipsis;
   display: block;
 }
+
+/*button {*/
+/*  width: 50px;*/
+/*  background-color: #428bca;*/
+/*  border-color: #ffffff;*/
+/*  color: #fff;*/
+/*  border: solid 1px #ffffff;*/
+/*  border-radius: 40px 40px 40px 40px;*/
+/*  -khtml-border-radius: 10px; !* for old Konqueror browsers *!*/
+/*  !*text-align: center;*!*/
+/*  font-weight: 10;*/
+/*  font-size: 10px;*/
+/*  float: right;*/
+/*}*/
 </style>

@@ -26,8 +26,11 @@
           </el-scrollbar>
         </el-card>
       <el-card class="box-card boundary-C" shadow="never"
-               style="background-color: transparent; height: 7%; margin: 0px 5px 5px 5px">
-        <label>返回</label>
+               style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
+        <el-button size="mini" round
+                     style="background-color: transparent; color: #ffffff"
+                     @click="outPrjDataScreen">返回
+        </el-button>
       </el-card>
     </el-col>
     <el-col :span="16" style="height: 100%">
@@ -164,6 +167,14 @@ export default {
       console.log("arr", arr)
       this.data = arr
       this.$store.state.get_login.tree_data = arr
+    },
+    outPrjDataScreen() {
+      var large1 = document.getElementById('large1');
+      large1.style.display = 'block'
+      var large2 = document.getElementById('large2');
+      large2.style.display = 'block'
+      var small = document.getElementById('small');
+      small.style.display = 'none'
     }
   },
 
