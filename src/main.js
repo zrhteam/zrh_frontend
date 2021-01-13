@@ -18,6 +18,7 @@ import './js/leaflet.pm/dist/leaflet.pm.min.js'
 import './js/leaflet.pm/dist/leaflet.pm.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import dataV from '@jiaminghi/data-view'
 //import http from 'vuetest/api'
 import elementResizeDetectorMaker from 'element-resize-detector'
 
@@ -42,6 +43,7 @@ Vue.use(ElementUI)
 Vue.use(echarts)
 //Vue.use(echartsGL)
 Vue.use(Vuex)
+Vue.use(dataV)
 
 // new Vue({
 //     router,

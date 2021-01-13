@@ -43,7 +43,7 @@ export default {
               shadowBlur: 5,
               offsetCenter: [0, '50%'],
               textStyle: {
-                fontSize: 15,
+                fontSize: 25,
                 color: '#fff'
               }
             },
@@ -88,7 +88,16 @@ export default {
               shadowColor: '#fff',
               shadowBlur: 10
             },
-            data: [{value: val}]
+            title: {
+              textStyle: {
+                fontWeight: 'bolder',
+                fontSize: 20,
+                fontStyle: 'italic',
+                color:'#fff',
+                shadowBlur: 10
+              }
+            },
+            data: [{value: val, name: '整改率'}]
           }
         ]
       };
