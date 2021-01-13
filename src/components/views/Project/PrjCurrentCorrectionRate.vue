@@ -37,38 +37,56 @@ export default {
             radius: '100%',
             detail: {
               formatter: '{value}%',
+              // borderWidth: 1,
+              // borderColor: '#fff',
+              shadowColor: '#fff',//默认透明
+              shadowBlur: 5,
+              offsetCenter: [0, '50%'],
               textStyle: {
-                fontSize: 15
+                fontSize: 15,
+                color: '#fff'
               }
             },
             axisLine: { //仪表盘轴线样式
               lineStyle: {
-                width: 10,
+                width: 3,
                 // splitNumber: 100,
-                color: [
-                    [1, new echarts.graphic.LinearGradient(0, 0, 1, 0,[
-                      {
-                        offset: 0.2,
-                        color: '#bb2205'
-                      },
-                      {
-                        offset: 0.5,
-                        color: '#e57733'
-                      },
-                      {
-                        offset: 0.8,
-                        color: '#f1e189'
-                      },
-                      {
-                        offset: 1,
-                        color: '#87b333'
-                      }
-                    ])]
-                ]
+                color: [[0.2, '#bb2205'], [0.8, '#1e90ff'], [1, 'lime']],
+                shadowColor: '#fff',
+                shadowBlur: 10
               }
             },
-            splitLine: { //分割线样式
-              length: 10
+            //分割线样式
+            splitLine: {
+              length: 25,//属性length控制线长
+              lineStyle: {
+                width: 3,
+                color: '#fff',
+                shadowColor: '#fff',
+                shadowBlur: 10
+              }
+
+            },
+            //坐标轴小标记
+            axisLabel: {
+              fontWeight: 'bolder',
+              color: '#fff',
+              shadowColor: '#fff',//默认透明
+              shadowBlur: 10
+            },
+            //坐标轴小标记
+            axisTick: {
+              length: 15,
+              lineStyle: {
+                color: 'auto',
+                shadowColor: '#fff',
+                shadowBlur: 10
+              }
+            },
+            //分隔线
+            pointer: {
+              shadowColor: '#fff',
+              shadowBlur: 10
             },
             data: [{value: val}]
           }
