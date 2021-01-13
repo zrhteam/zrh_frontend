@@ -295,7 +295,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     to.meta.keepAlive = false
   },
-  created() {alert(1)
+  created() {
     let param = new URLSearchParams();
     param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
     this.$store.state.get_project.params = param
