@@ -33,6 +33,8 @@ const state = {
     prj_index: {},
 //    标记展开和返回 已展开: true
     flag: false,
+//    从project到check，存储map，方便调用
+    map: ''
 }
 
 //getters
@@ -43,7 +45,7 @@ const getters = {
     },
     //向后端发送的粒度参数
     renderGParams(params) {
-        return state.g_params;
+        return state.params;
     },
     //承载变化的项目级整改率
     renderPrjRectification(state) {
@@ -91,6 +93,9 @@ const getters = {
     //历次检查危险指数
     renderPrjIndex(state) {
         return state.prj_index;
+    },
+    renderMap(state) {
+        return state.map
     }
 
 }

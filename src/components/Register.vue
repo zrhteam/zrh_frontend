@@ -7,8 +7,8 @@
 <!--    </form>-->
 <!--  </div>-->
 <!--  <PrjOverview></PrjOverview>-->
-  <PrjDataScreen></PrjDataScreen>
-<!--  <PrjAnalysis></PrjAnalysis>-->
+<!--  <PrjDataScreen></PrjDataScreen>-->
+  <PrjAnalysis></PrjAnalysis>
 </template>
 <script>
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";

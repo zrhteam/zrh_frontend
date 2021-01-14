@@ -6,13 +6,14 @@
         <label>Logo</label>
       </el-card>
       <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
-          <el-input
-              placeholder="输入关键字进行过滤"
-              v-model="filterText"
-              size="mini">
-          </el-input>
-          <el-scrollbar style="height:100%">
+               style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
+        <el-input
+            placeholder="输入关键字进行过滤"
+            v-model="filterText"
+            size="mini">
+        </el-input>
+        <div style="height: 80%">
+          <el-scrollbar>
             <el-tree
                 class="filter-tree"
                 :data="data"
@@ -24,18 +25,19 @@
                 </span>
             </el-tree>
           </el-scrollbar>
-        </el-card>
+        </div>
+      </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
         <el-button size="mini" round
-                     style="background-color: transparent; color: #ffffff"
-                     @click="outPrjDataScreen">返回
+                   style="background-color: transparent; color: #ffffff"
+                   @click="outPrjDataScreen">返回
         </el-button>
       </el-card>
     </el-col>
     <el-col :span="16" style="height: 100%">
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
+      <el-card class="title-box-card " shadow="never"
+               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
         <label>数据大屏</label>
       </el-card>
       <el-col :span="8" style="height: 83%">
@@ -50,7 +52,8 @@
       </el-col>
       <el-col :span="8" style="height: 83%">
         <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>
-        <HistoryTopRisk class=""></HistoryTopRisk>-->
+        <HistoryTopRisk class=""></HistoryTopRisk>
+        -->
       </el-col>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
@@ -178,7 +181,7 @@ export default {
       large2.style.width = "99%"
       var small = document.getElementById('small');
       small.style.display = 'none'
-    }
+    },
   },
 
   data() {

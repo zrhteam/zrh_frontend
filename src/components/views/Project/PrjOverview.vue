@@ -25,23 +25,25 @@
               v-model="filterText"
               size="mini">
           </el-input>
-          <el-scrollbar style="height:100%">
-            <el-tree
-                class="filter-tree"
-                :data="data"
-                default-expand-all
-                :filter-node-method="filterNode"
-                ref="tree">
+          <div style="height: 80%">
+            <el-scrollbar>
+              <el-tree
+                  class="filter-tree"
+                  :data="data"
+                  default-expand-all
+                  :filter-node-method="filterNode"
+                  ref="tree">
                 <span class="span-ellipsis" slot-scope="{ node, data }">
                   <span :title="node.label">{{ node.label }}</span>
                 </span>
-            </el-tree>
-          </el-scrollbar>
+              </el-tree>
+            </el-scrollbar>
+          </div>
         </el-card>
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
           <el-button size="mini" round
-                     style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff"
+                     style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; position: absolute"
                      @click="intoPrjDataScreen">展开
           </el-button>
           <PrjDataScreen id="small1"></PrjDataScreen>
@@ -49,19 +51,9 @@
           <!--          <label>数据大屏缩略图</label>-->
         </el-card>
       </el-col>
-      <el-col :span="10" class="" style="height: 100%">
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height: 79%; margin: 0px 5px 5px 5px">
-          <!--          放地图-->
-          <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: #13E8E9">
-            <div id="map" bordered :dataSource="$store.state.get_locations.data" style="pointer-events:inherit"></div>
-          </div>
-          <!--          <div id="map" bordered style="pointer-events:inherit"></div>-->
-          <!--          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>-->
-        </el-card>
-        <!--历次检查指数-->
+        <!--地图+历次检查指数-->
         <PrjIndex></PrjIndex>
-      </el-col>
+<!--      </el-col>-->
       <el-col :span="10" class="" style="height: 100%">
         <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
         <el-row style="height: 100%">
@@ -144,45 +136,16 @@ export default {
     filterText(val) {
       this.$refs.tree.filter(val);
     }
-
   },
   mounted: function () {
-    this.map = this.loadMap();//加载地图
-    let m = document.getElementById("map")
-    this.map_width = window.getComputedStyle(m).width
-    this.map_height = window.getComputedStyle(m).height
-
-    this.svg = d3.select(this.$el).select('svg');
-    // this.svg = d3.select(this.map.getPanes().overlayPane).append("svg");
-
-    let _this = this;
-    this.map.on('drag', (e) => {
-      let center_position = this.map.latLngToContainerPoint([22, 107]);
-
-      if (this.locContainers) {
-        this.locContainers.each(function (d) {
-          let loc = _this.map.latLngToContainerPoint(d.locs)
-          d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
-        })
-      }
-    });
-
-    this.map.on('move', (e) => {
-      let center_position = this.map.latLngToContainerPoint([22, 107]);
-
-      if (this.locContainers) {
-        this.locContainers.each(function (d) {
-          let loc = _this.map.latLngToContainerPoint(d.locs)
-          d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
-        })
-      }
-    });
   },
   computed: {
     // getTreeData() {
     //   return this.$store.state.get_login.grant_data.data.value
     //   // console.log(this.dataset)
     // },
+    //得到每次检查地理位置的所有信息
+    //将各个点找到并显示
   },
   methods: {
     filterNode(value, data) {
@@ -190,8 +153,13 @@ export default {
       return data.label.indexOf(value) !== -1;
     },//对于总部
     getTreeData(tree_data) {
-      let arr = []
+      let arr = []//树形控件
+      let p_arr = []//包含每个检查经纬度坐标的一个数组
       let count = 1;
+      let obj = {
+        lat: 0,
+        lng: 0
+      }
       for (let i in tree_data['headquarter_tag']) {
         // let parent1 = [];
         let parent1 = {
@@ -229,6 +197,9 @@ export default {
                 child2['id'] = count++
                 child2['label'] = m
                 child1['children'].push(child2)
+                obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
+                obj['lng'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng
+                p_arr.push(obj)
               }
             }
           }
@@ -237,6 +208,7 @@ export default {
       console.log("arr", arr)
       this.data = arr
       this.$store.state.get_login.tree_data = arr
+      this.p_data = p_arr
     },
     intoPrjDataScreen() {
       var large1 = document.getElementById('large1');
@@ -247,36 +219,15 @@ export default {
       small.style.display = 'block'
       small.style.width = "500px"
       small.style.width = "99%"
-    },
-    loadMap() {//加载地图
-      let map = L.map("map", {
-        center: [34, 107], // 地图中心
-        zoom: 4, //缩放比列
-        zoomControl: false, //禁用 + - 按钮
-        doubleClickZoom: false, // 禁用双击放大
-        attributionControl: false // 移除右下角leaflet标识
-      });
-      let name = L.tileLayer(
-          // 'https://api.mapbox.com/styles/v1/zhaiyzh/ckes4nsma2yls19op279otef9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhhaXl6aCIsImEiOiJja2VyeWYzNTYwbHB1MnhzYTV0Z3didG1hIn0.forlrmKVYKXTsyP7voWu9Q'
-          "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",//初始化一个 openlayers 地图
-          // 天地图影像图层
-          // "http://t0.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=5d27dc75ca0c3bdf34f657ffe1e9881d", //parent.TiandituKey()为天地图密钥
-          // 天地图影像注记图层
-          // "http://t0.tianditu.com/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=5d27dc75ca0c3bdf34f657ffe1e9881d", //parent.TiandituKey()为天地图密钥
-          // 加载谷歌地图
-          // "http://webrd0{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8"
-          // 加载高德地图
-          // 'http://webrd0{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8'
-      ).addTo(map);
-      return map
-    },
+    }
   },
-
   data() {
     return {
       filterText: '',
       data: [],
+      p_data: [],
       map: "",
+      mapInfo: {},
       dataset: {},
       form: {
         name: '',
@@ -289,7 +240,7 @@ export default {
   },
   created() {
     console.log('grant', this.$store.state.get_login.grant_data)
-    //得到树形控件的内容
+    //得到树形控件的内容 还负责封装了地理位置信息
     this.getTreeData(this.$store.state.get_login.grant_data.data.value)
   }
 }
