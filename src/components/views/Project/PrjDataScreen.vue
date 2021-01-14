@@ -17,12 +17,14 @@
             <el-tree
                 class="filter-tree"
                 :data="data"
+                :props="defaultProps"
+                @node-click="handleNodeClick"
                 default-expand-all
                 :filter-node-method="filterNode"
                 ref="tree">
-                <span class="span-ellipsis" slot-scope="{ node, data }">
-                  <span :title="node.label">{{ node.label }}</span>
-                </span>
+<!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
+<!--                  <span :title="node.label">{{ node.label }}</span>-->
+<!--                </span>-->
             </el-tree>
           </el-scrollbar>
         </div>
@@ -171,23 +173,20 @@ export default {
       this.data = arr
       this.$store.state.get_login.tree_data = arr
     },
-    outPrjDataScreen() {
-      var large1 = document.getElementById('large1');
-      large1.style.display = 'block'
-      var large2 = document.getElementById('large2');
-      large2.style.display = 'block'
-      var width = large2.style.width
-      large2.style.width = "500px"
-      large2.style.width = "99%"
-      var small = document.getElementById('small');
-      small.style.display = 'none'
-    },
+    handleNodeClick(data, node) {
+        console.log("出来了", data);
+        console.log(node);
+    }
   },
 
   data() {
     return {
       filterText: '',
-      data: []
+      data: [],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      }
     };
   },
   created() {

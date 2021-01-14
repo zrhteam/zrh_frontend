@@ -30,12 +30,14 @@
               <el-tree
                   class="filter-tree"
                   :data="data"
+                  :props="defaultProps"
+                  @node-click="handleNodeClick"
                   default-expand-all
                   :filter-node-method="filterNode"
                   ref="tree">
-                <span class="span-ellipsis" slot-scope="{ node, data }">
-                  <span :title="node.label">{{ node.label }}</span>
-                </span>
+                <!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
+                <!--                  <span :title="node.label">{{ node.label }}</span>-->
+                <!--                </span>-->
               </el-tree>
             </el-scrollbar>
           </div>
@@ -51,10 +53,10 @@
           <!--          <label>数据大屏缩略图</label>-->
         </el-card>
       </el-col>
-        <!--地图+历次检查指数-->
-        <PrjIndex></PrjIndex>
-<!--      </el-col>-->
-      <el-col :span="10" class="" style="height: 100%">
+      <!--地图+历次检查指数-->
+      <PrjIndex></PrjIndex>
+      <!--      </el-col>-->
+      <el-col :span="10" id="prj_part" style="height: 100%">
         <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
         <el-row style="height: 100%">
           <el-card class="statistics-box-card " shadow="never"
@@ -92,6 +94,7 @@
         </el-row>
         <!--      </el-card>-->
       </el-col>
+      <CheckOverview id="check_part"></CheckOverview>
     </el-row>
   </el-row>
   <!--  <PrjDataScreen></PrjDataScreen>-->
@@ -112,10 +115,12 @@ import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorre
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
 import PrjDataScreen from '@/components/views/Project/PrjDataScreen.vue'
 import * as d3 from "d3/dist/d3";
+import CheckOverview from "@/components/views/Check/CheckOverview.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    CheckOverview,
     Granularity,
     HistoryTopRisk,
     PerctangePerc,
@@ -219,6 +224,28 @@ export default {
       small.style.display = 'block'
       small.style.width = "500px"
       small.style.width = "99%"
+    },
+    handleNodeClick(data, node) {
+      // console.log(data);
+      // console.log(node);
+      if (node.level == 4) {
+        let param1 = new URLSearchParams();
+        param1.append('check_code', data.label);
+        this.$store.state.get_check.params = param1
+        this.$store.dispatch('get_check/getCheckRectification')
+        this.$store.dispatch('get_check/getCheckRiskLevel')
+        this.$store.dispatch('get_check/getCheckRiskRatio')
+        this.$store.dispatch('get_check/getCheckHighRisk')
+        this.$store.dispatch('get_check/getCheckHighImage')
+        this.$store.dispatch('get_check/getCheckMajorSystem')
+        this.$store.dispatch('get_check/getCheckMajorArea')
+        this.$store.dispatch('get_check/getCheckMajorStage')
+        this.$store.dispatch('get_check/getCheckRiskTop')
+        var prj = document.getElementById('prj_part');
+        prj.style.display = 'none'
+        var check = document.getElementById('check');
+        check.style.display = 'block'
+      }
     }
   },
   data() {
@@ -235,7 +262,11 @@ export default {
       map_width: 0,
       map_height: 0,
       timer: '',
-      input: 'test'
+      input: 'test',
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      }
     };
   },
   created() {

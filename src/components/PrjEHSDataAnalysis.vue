@@ -319,20 +319,6 @@ export default {
     this.$store.dispatch('get_project/getInitProjectRiskTop')
     //历次检查指数
     // this.$store.dispatch('get_project/getInitProjectIndex')
-
-
-    let param1 = new URLSearchParams();
-    param1.append('check_code', 'ZRH(ZB)-2007-L01-A04-000-15');
-    this.$store.state.get_check.params = param1
-    this.$store.dispatch('get_check/getCheckRectification')
-    this.$store.dispatch('get_check/getCheckRiskLevel')
-    this.$store.dispatch('get_check/getCheckRiskRatio')
-    this.$store.dispatch('get_check/getCheckHighRisk')
-    this.$store.dispatch('get_check/getCheckHighImage')
-    this.$store.dispatch('get_check/getCheckMajorSystem')
-    this.$store.dispatch('get_check/getCheckMajorArea')
-    this.$store.dispatch('get_check/getCheckMajorStage')
-    this.$store.dispatch('get_check/getCheckRiskTop')
   }
 }
 </script>
