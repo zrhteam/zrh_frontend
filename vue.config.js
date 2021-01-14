@@ -17,6 +17,7 @@ module.exports = {
     //assetsDir: './dist',
     lintOnSave: false,//是否开启eslint
     runtimeCompiler: false,
+
     // use the full build with in-browser compiler?
     // https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
     //compiler: false,
@@ -56,7 +57,10 @@ module.exports = {
         //css预设器配置项
         loaderOptions: {
             css: {},
-            postcss: {}
+            postcss: {},
+            less: {
+                javascriptEnabled: true// less 配置
+            }
         },
         //启用 CSS modules for all css / pre-processor files.
         requireModuleExtension: false
@@ -112,6 +116,7 @@ module.exports = {
             }
         } // 代理转发配置，用于调试环境
     },
+
     // plugins: {//new
     //     'autoprefixer': {browsers: 'last 5 version'}
     // },
@@ -128,5 +133,6 @@ module.exports = {
     pluginOptions: {
         // ...
     },
+
 
 }

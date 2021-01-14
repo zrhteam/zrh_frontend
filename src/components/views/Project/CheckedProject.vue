@@ -7,39 +7,42 @@
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>历次检查累计发现隐患数量</span>
     </div>
-    <el-table
-        :data="PrjRiskLevelData"
-        :row-style="{height: '20px'}"
-        :cell-style="{padding: '6px'}"
-        border
-        style="width: 100%; color: #93bce7" class="level5"
-        :header-cell-style="{color:'color: #3e78f3;'}">
-      <el-table-column
-          prop="risk"
-          label="隐患风险等级"
-          min-width="80">
-      </el-table-column>
-      <el-table-column
-          prop="num"
-          label="累计发现隐患数量">
-      </el-table-column>
-    </el-table>
+<!--    <el-table-->
+<!--        :data="PrjRiskLevelData"-->
+<!--        :row-style="{height: '20px'}"-->
+<!--        :cell-style="{padding: '6px'}"-->
+<!--        border-->
+<!--        style="width: 100%; color: #93bce7" class="level5"-->
+<!--        :header-cell-style="{color:'color: #3e78f3;'}">-->
+<!--      <el-table-column-->
+<!--          prop="risk"-->
+<!--          label="隐患风险等级"-->
+<!--          min-width="80">-->
+<!--      </el-table-column>-->
+<!--      <el-table-column-->
+<!--          prop="num"-->
+<!--          label="累计发现隐患数量">-->
+<!--      </el-table-column>-->
+<!--    </el-table>-->
+    <div id = 'risk_level' style="height: 80%; width: 100%;"></div>
   </el-card>
 </template>
 
 <script>
+import elementResizeDetectorMaker from "element-resize-detector";
+
 export default {
   name: "CheckedProject",
-  data() {
-    return {
-      PrjRiskLevelData: []
-    }
-  },
+  // data() {
+  //   return {
+  //     PrjRiskLevelData: []
+  //   }
+  // },
   computed: {
     getPrjRiskLevelData() {
       let data = this.$store.state.get_project.prj_risk_data;
-      console.log("累计", data)
-      var data_length = Object.keys(data)
+      // console.log("累计", data)
+      let data_length = Object.keys(data);
       if (!data_length.length) {
         this.PrjRiskLevelData = []
       }
@@ -63,10 +66,10 @@ export default {
           risk: '高风险',
           num: 0
         }
-        let obj = {
-          risk: '列总计',
-          num: 0
-        }
+        // let obj = {
+        //   risk: '列总计',
+        //   num: 0
+        // }
         let dataArray = []
         for (let i in data) {
           for (let j in data[i]) {
@@ -84,13 +87,116 @@ export default {
         dataArray.push(obj3)
         dataArray.push(obj2)
         dataArray.push(obj1)
-        obj.num = obj1.num + obj2.num + obj3.num
-        dataArray.push(obj)
+        // obj.num = obj1.num + obj2.num + obj3.num
+        // dataArray.push(obj)
         // console.log(dataArray)
-        this.PrjRiskLevelData = dataArray
+        return dataArray
       }
     }
   },
+
+  updated() {
+    this.drawBarChart()
+  },
+  mounted() {
+    this.drawBarChart();
+  },
+  methods: {
+    drawBarChart(){
+      let myChart = this.$echarts.init(document.getElementById('risk_level'))
+      let arr = this.getPrjRiskLevelData
+      if (arr.length) {
+        let option = {
+          tooltip: {
+            // trigger:'item',
+            // formatter: '{b}:{d}%'
+        },
+          dataset: {
+            dimensions: ['risk', 'num'],
+            source: arr
+          },
+          xAxis: {
+            type: 'category',
+            axisLabel: {
+              interval: 0,
+              rotate: 0,
+              textStyle: {
+                fontSize: 10
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#ffffff',
+                fontSize: 8
+              }
+            }
+          },
+          yAxis: {
+            axisLine: {
+              lineStyle: {
+                color: '#ffffff'
+              }
+            }
+          },
+          series: [
+            {
+              type: 'bar',
+              itemStyle: {
+                normal: {
+                  //柱形图圆角，初始化效果
+                  barBorderRadius: [10, 10, 0, 0],
+                  color: new echarts.graphic.LinearGradient(
+                      0, 0, 0, 1,
+                      [
+                        {offset: 0, color: '#77b5b8'},
+                        // {offset: 0.5, color: '#1f77a0'},
+                        {offset: 1, color: '#107480'}
+                      ]
+                  )
+                }
+              },
+              label:{
+                show: true,
+                position: 'top',
+                textStyle: {
+                  fontSize: '7px',
+                  color: '#666'
+                },
+                // formatter: '{c}',
+              },
+              emphasis: {
+                itemStyle: {
+                  color: '#40abc4'
+                  //     new echarts.graphic.LinearGradient(
+                  //     0, 0, 0, 1,
+                  //     [
+                  //       {offset: 0.7, color: '#174489'},
+                  //       {offset: 1, color: '#83bff6'}
+                  //     ]
+                  // )
+                }
+              },
+              barMaxWidth: 40
+            }
+          ]
+        };
+        myChart.setOption(option);
+      }else{
+
+      }
+      myChart.resize();
+      window.addEventListener('resize', function (){
+        myChart.resize();
+      })
+      const _this = this;
+      const erd = elementResizeDetectorMaker();
+      erd.listenTo(document.getElementById('risk_level'), element=>{
+        _this.$nextTick(() => {
+          myChart.resize();
+        });
+      });
+    }
+  }
   // }
 }
 </script>

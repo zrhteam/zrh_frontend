@@ -10,7 +10,7 @@
       <el-table
           :data="riskLevelList"
           :row-style="{height: '20px'}"
-          :cell-style="{padding: '5px'}"
+          :cell-style="{padding: '1px'}"
           style="width: 100%; color: #93bce7"
           max-height = '400px'>
         <el-table-column

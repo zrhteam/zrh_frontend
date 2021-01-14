@@ -34,16 +34,15 @@ export default {
       arr.sort(this.sortNumber('count', true))
       return arr
     }
-  }
-  ,
+  },
+
   updated() {
     this.drawBarChart()
-  }
-  ,
+  },
+
   mounted() {
     this.drawBarChart();
-  }
-  ,
+  },
   methods: {
     drawBarChart() {
       // document.getElementById('history_chart').innerHTML = ''
@@ -53,7 +52,7 @@ export default {
       if (arr.length) {
         let option = {
           tooltip: {
-          formatter: '{b}:{c} ({d}%)'
+          // formatter: '{b}:{c} ({d}%)'
         },
           dataset: {
             dimensions: ['name', 'count'],
@@ -99,16 +98,26 @@ export default {
                   )
                 }
               },
+              label:{
+                show: true,
+                position: 'top',
+                textStyle: {
+                  fontSize: '7px',
+                  color: '#666'
+                },
+                // formatter: '{c}',
+              },
               emphasis: {
                 itemStyle: {
-                  color: new echarts.graphic.LinearGradient(
-                      0, 0, 0, 1,
-                      [
-                        {offset: 0, color: '#2378f7'},
-                        {offset: 0.7, color: '#2378f7'},
-                        {offset: 1, color: '#83bff6'}
-                      ]
-                  )
+                  color: '#40abc4'
+                  //     new echarts.graphic.LinearGradient(
+                  //     0, 0, 0, 1,
+                  //     [
+                  //       {offset: 0, color: '#2378f7'},
+                  //       {offset: 0.7, color: '#2378f7'},
+                  //       {offset: 1, color: '#83bff6'}
+                  //     ]
+                  // )
                 }
               },
               barMaxWidth: 40
@@ -132,8 +141,7 @@ export default {
           myChart.resize();
         });
       });
-    }
-    ,
+    },
     sortNumber(attr, rev) {
       if (rev == undefined) {
         rev = 1;
