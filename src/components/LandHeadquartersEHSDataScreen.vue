@@ -1,106 +1,66 @@
 <template>
   <!--  置地总部EHS数据大屏-->
-  <el-container>
-    <el-header>
-      <el-row>
-        <el-col :span="24">
-          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left; padding-top: 20px"><span>置地总部EHS数据大屏</span>
-          </div>
-        </el-col>
-      </el-row>
-    </el-header>
-    <el-main>
-      <!--      <el-row class="boundary-B" type="flex">-->
-      <!--总部1 总部安全指数一-->
-      <!--        <el-col :span="6" class="boundary-C margin">-->
-      <!--          <el-card shadow="never" style="background-color: transparent; height: 430px">-->
-      <!--            <div class="grid-content bg-purple boundary">-->
-      <!--              <div class="chart-image-icon">-->
-      <!--                <div class="plus_top">-->
-      <!--                  <div class="level7" style="padding-bottom: 10px">-->
-      <!--                    <span>总部危险指数</span>-->
-      <!--                  </div>-->
-      <!--                  <div class="level8" style="padding-top: 80px">-->
-      <!--                    <span>23,185</span>-->
-      <!--                  </div>-->
-      <!--                </div>-->
-      <!--              </div>-->
-      <!--            </div>-->
-      <!--          </el-card>-->
+<!--  <el-container>-->
+<!--    <el-header>-->
+<!--      <el-row>-->
+<!--        <el-col :span="24">-->
+<!--          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left; padding-top: 20px"><span>置地总部EHS数据大屏</span>-->
+<!--          </div>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--    </el-header>-->
+<!--    <el-main>-->
+<!--      <el-col :span="6" class="part1 margin">-->
+<!--        <el-card shadow="never" style="background-color: transparent; height: 430px">-->
+<!--          <Rectification></Rectification>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
+<!--      &lt;!&ndash;总部4 隐患数量&ndash;&gt;-->
+<!--      <el-col :span="6" class="part1 margin">-->
+<!--        <el-card shadow="never" style="background-color: transparent; height: 430px">-->
+<!--          <AccumRisk></AccumRisk>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
+<!--      &lt;!&ndash;      </el-row>&ndash;&gt;-->
 
-      <!--        </el-col>-->
-      <!--总部2 专业指数-->
-      <!--        <el-col :span="6" class="boundary part1 margin">-->
-      <!--          <el-card shadow="never" style="background-color: transparent; height: 430px">-->
-      <!--            <el-row>-->
-      <!--            <el-col :span="12">-->
-      <!--              <IndexView :context="{title:'消防危险指数'}"></IndexView>-->
-      <!--            </el-col>-->
-      <!--            <el-col :span="12">-->
-      <!--              <IndexView :context="{title:'电梯危险指数'}"></IndexView>-->
-      <!--            </el-col>-->
-      <!--          </el-row>-->
-      <!--          <el-row>-->
-      <!--            <el-col :span="12">-->
-      <!--              <IndexView :context="{title:'电气危险指数'}"></IndexView>-->
-      <!--            </el-col>-->
-      <!--            <el-colx :span="12">-->
-      <!--              <IndexView :context="{title:'燃气危险指数'}"></IndexView>-->
-      <!--            </el-colx>-->
-      <!--          </el-row>-->
-      <!--          </el-card>-->
+<!--      &lt;!&ndash;      <el-row class="boundary-B" type="flex">&ndash;&gt;-->
+<!--      &lt;!&ndash;&lt;!&ndash;        <el-row>&ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;          &lt;!&ndash;总部5 项目安全指数排名&ndash;&gt;&ndash;&gt;-->
+<!--      <el-col :span="12" class="part2 margin">-->
+<!--        &lt;!&ndash;            <el-card shadow="never" style="background-color: transparent; height: 480px">&ndash;&gt;-->
+<!--        &lt;!&ndash;              <ProjectIndex></ProjectIndex>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </el-card>&ndash;&gt;-->
+<!--        &lt;!&ndash;          当前未整改高风险隐患列表&ndash;&gt;-->
+<!--        <el-card shadow="never" style="background-color: transparent; height: 450px">-->
+<!--          <UnsolvedList></UnsolvedList>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
+<!--      &lt;!&ndash;总部6 项目累计高风险数量排名&ndash;&gt;-->
+<!--      <el-col :span="12" class="part2 margin">-->
+<!--        <el-card shadow="never" style="background-color: transparent; height: 480px">-->
+<!--          <HighProjectRisk></HighProjectRisk>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
+<!--      &lt;!&ndash;&lt;!&ndash;        </el-row>&ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;      </el-row>&ndash;&gt;-->
+<!--      <el-row class="boundary-B" type="flex">-->
+<!--        &lt;!&ndash;总部7 未整改高风险图片&ndash;&gt;-->
+<!--        <el-col :span="12" class="part2 margin">-->
+<!--          <el-card shadow="never" style="background-color: transparent; height: 460px">-->
+<!--            <HighRiskImages class="boundary-C"></HighRiskImages>-->
+<!--          </el-card>-->
+<!--        </el-col>-->
+<!--        &lt;!&ndash;总部8 项目累计风险数量前10&ndash;&gt;-->
+<!--        <el-col :span="12" class="part2 margin">-->
+<!--          <el-card shadow="never" style="background-color: transparent; height: 460px">-->
+<!--            <TopAccumRisk class="boundary-C"></TopAccumRisk>-->
+<!--          </el-card>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--    </el-main>-->
+<!--  </el-container>-->
+  <headquarterOverview></headquarterOverview>
 
-      <!--        </el-col>-->
-      <!--总部3 整改率-->
-      <el-col :span="6" class="part1 margin">
-        <el-card shadow="never" style="background-color: transparent; height: 430px">
-          <Rectification></Rectification>
-        </el-card>
-      </el-col>
-      <!--总部4 隐患数量-->
-      <el-col :span="6" class="part1 margin">
-        <el-card shadow="never" style="background-color: transparent; height: 430px">
-          <AccumRisk></AccumRisk>
-        </el-card>
-      </el-col>
-      <!--      </el-row>-->
-
-      <!--      <el-row class="boundary-B" type="flex">-->
-      <!--&lt;!&ndash;        <el-row>&ndash;&gt;-->
-      <!--          &lt;!&ndash;总部5 项目安全指数排名&ndash;&gt;-->
-      <el-col :span="12" class="part2 margin">
-        <!--            <el-card shadow="never" style="background-color: transparent; height: 480px">-->
-        <!--              <ProjectIndex></ProjectIndex>-->
-        <!--            </el-card>-->
-        <!--          当前未整改高风险隐患列表-->
-        <el-card shadow="never" style="background-color: transparent; height: 450px">
-          <UnsolvedList></UnsolvedList>
-        </el-card>
-      </el-col>
-      <!--总部6 项目累计高风险数量排名-->
-      <el-col :span="12" class="part2 margin">
-        <el-card shadow="never" style="background-color: transparent; height: 480px">
-          <HighProjectRisk></HighProjectRisk>
-        </el-card>
-      </el-col>
-      <!--&lt;!&ndash;        </el-row>&ndash;&gt;-->
-      <!--      </el-row>-->
-      <el-row class="boundary-B" type="flex">
-        <!--总部7 未整改高风险图片-->
-        <el-col :span="12" class="part2 margin">
-          <el-card shadow="never" style="background-color: transparent; height: 460px">
-            <HighRiskImages class="boundary-C"></HighRiskImages>
-          </el-card>
-        </el-col>
-        <!--总部8 项目累计风险数量前10-->
-        <el-col :span="12" class="part2 margin">
-          <el-card shadow="never" style="background-color: transparent; height: 460px">
-            <TopAccumRisk class="boundary-C"></TopAccumRisk>
-          </el-card>
-        </el-col>
-      </el-row>
-    </el-main>
-  </el-container>
 </template>
 
 <script>
@@ -118,6 +78,7 @@ import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue
 import HighRiskImages from "@/components/views/HeadQuarters/HighRiskImages.vue";
 import TopAccumRisk from "@/components/views/HeadQuarters/TopAccumRisk.vue";
 import UnsolvedList from "@/components/views/HeadQuarters/UnsolvedList.vue";
+import headquarterOverview from "@/components/views/HeadQuarters/headquarterOverview.vue";
 
 export default {
   name: "LandHeadquartersEHSDataScreen",
@@ -132,30 +93,30 @@ export default {
 
     HighRiskImages,
     TopAccumRisk,
-    UnsolvedList
+    UnsolvedList,
+    headquarterOverview
   },
 
+  data(){
+    return{
+      head_name: '',
+    }
+  },
   computed: {
-    //页面初始化时得到总部整改率
-    //得到累计隐患数量
 
   },
   methods: {
-    //提交按项目名称查询的函数
-    // GetInitPage() {
-    //   dataService.getRectificationRate(function (records) {
-    //     alert(records.msg)
-    //   })
-    // }
+    selfAdaption(){
+      let _this = this;
+      setTimeout(() =>{
+        window.addEventListener('resize', function () {
+          _this.$refs.echarts.resize();
+        })
+      }, 10)
+    }
   },
   mounted() {
-    window.onresize = () => {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById('number_histogram'));
-      myChart.resize();
-      myChart = this.$echarts.init(document.getElementById('number_histogram1'));
-      myChart.resize();
-    };
+    this.selfAdaption();
   },
   beforeRouteLeave(to, from, next) {
     to.meta.keepAlive = false
@@ -170,6 +131,7 @@ export default {
     this.$store.dispatch('get_headquarter/getInitImage')
     this.$store.dispatch('get_headquarter/getInitNumberTop')
     this.$store.dispatch('get_headquarter/getInitRiskList')
+    this.$store.dispatch('get_headquarter/getInitRiskIndexData')
 
     //
     // // this.$store.dispatch('get_headquarter/getInitRiskIndexData')

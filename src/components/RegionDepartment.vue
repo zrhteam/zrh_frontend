@@ -1,3 +1,4 @@
+<script src="../service/dataService.js"></script>
 <template>
   <!-- 商业地产事业部2020年巡检项目EHS大数据分析 -->
 <!--  <el-container>-->

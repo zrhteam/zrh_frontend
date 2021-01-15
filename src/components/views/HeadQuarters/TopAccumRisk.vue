@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 90%; left: 10%; top: 10%">
     <div style="display: none">
       {{ getNumberTop }}
     </div>
@@ -12,7 +13,8 @@
             :data="tableData"
             :row-style="{height: '20px'}"
             :cell-style="{padding: '5px'}"
-            style="width: 100%; color: #93bce7">
+            style="width: 100%; color: #93bce7"
+            max-height="400px">
           <el-table-column
               prop="description"
               label="隐患描述">
@@ -20,7 +22,7 @@
         </el-table>
       </div>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>

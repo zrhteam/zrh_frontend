@@ -149,8 +149,8 @@ export default {
           this.$router.push({path: '/region_department'});
         }// 总部级权限
         else if (data.data.user_grant == '总部') {
-          // this.$router.push({path: '/land_headquarters'});
-          this.$router.push({path: '/register'});
+          this.$router.push({path: '/land_headquarters'});
+          // this.$router.push({path: '/register'});
         }// 超级用户权限
         else if (data.data.user_grant == '超级用户') {
           this.$router.push({path: '/land_headquarters'});

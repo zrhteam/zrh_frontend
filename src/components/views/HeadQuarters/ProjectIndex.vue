@@ -1,5 +1,6 @@
 <template>
-  <div class="grid-content bg-purple">
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 90%; left: 10%; top: 10%">
     <div class="level4" style="padding-top: 15px">
       <span>项目综合&专业风险指数排名</span>
     </div>
@@ -11,7 +12,7 @@
       </div>
       <div id="number_histogram1" style="height: 400px; width: 100%"></div>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>

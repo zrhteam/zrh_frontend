@@ -1,5 +1,6 @@
 <template>
-  <div class="grid-content bg-purple">
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 90%; left: 10%; top: 10%">
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>所有项目未整改高风险隐患图片</span>
       <div style="display: none">
@@ -31,7 +32,7 @@
         </el-col>
       </el-row>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>

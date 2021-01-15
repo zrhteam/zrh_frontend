@@ -1,5 +1,6 @@
 <template>
-  <div class="grid-content bg-purple boundary plus_top">
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 90%; left: 10%; top: 10%">
     <div class="level13" style="padding-top: 10px; padding-bottom: 10px">
       <span>总部整改率</span>
     </div>
@@ -8,7 +9,7 @@
         font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;">
       {{ getRectificationRate }}
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>

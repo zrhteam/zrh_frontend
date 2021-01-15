@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card boundary-C" shadow="never"
+  <el-card class="box-card " shadow="never"
            style="background-color: transparent; height: 90%; left: 10%; top: 10%">
     <div style="display: none; ">
       {{ getRiskLevelData }}
@@ -7,21 +7,7 @@
       <div class="text item level4" style="padding-top: 15px; padding-bottom: 10px">
         <span>所有项目累计发现隐患数量</span>
       </div>
-<!--      <el-table-->
-<!--          :data="riskLevelData"-->
-<!--          :row-style="{height: '20px'}"-->
-<!--          :cell-style="{padding:'5px'}"-->
-<!--          border-->
-<!--          style="width: 100%; color: #93bce7">-->
-<!--        <el-table-column-->
-<!--            prop="risk"-->
-<!--            label="隐患风险等级">-->
-<!--        </el-table-column>-->
-<!--        <el-table-column-->
-<!--            prop="num"-->
-<!--            label="累计发现隐患数量">-->
-<!--        </el-table-column>-->
-<!--      </el-table>-->
+
     <div id = 'r_risk_level' style="height: 100%; width: 100%;"></div>
   </el-card>
 </template>
