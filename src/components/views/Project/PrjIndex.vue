@@ -268,10 +268,12 @@ export default {
         // check.style.width = "99%"
         document.getElementById('map_2').style.display = 'none'
         document.getElementById('map_1').style.display = 'block'
+        document.getElementById('prj_charts').style.display = 'none'
+        document.getElementById('check_charts').style.display = 'block'
         _this.map.setZoom(12)
         setTimeout(function () {
           _this.map.panTo(new L.LatLng(params.data.lat, params.data.lng));
-        }, 300)
+        }, 100)
       })
 
       return this.map
