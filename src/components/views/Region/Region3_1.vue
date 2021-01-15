@@ -57,8 +57,10 @@ export default {
       riskNumberTop: [],
     }
   },
+    mounted() {
+    this.timer =setInterval(this.updateTable, 1000);
+  },
   computed: {
-
     getRiskNumberTop() {
       let data = this.$store.state.get_region.risk_number_top;
       //console.log('the front end data:', this.$store.state.get_region.risk_number_top)
@@ -80,6 +82,16 @@ export default {
       console.log(dataArray)
       this.riskNumberTop = dataArray
     }
+  },
+  methods: {
+    updateTable(){
+      let first = this.riskNumberTop[0];
+      this.riskNumberTop.shift();
+      this.riskNumberTop.push(first);
+    },
+    beforeDestroy(){
+      clearInterval(this.timer);
+    },
   }
 }
 </script>
