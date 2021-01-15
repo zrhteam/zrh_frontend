@@ -23,7 +23,7 @@
         {{ getNumberHistogram }}
       </div>
       <!--        <svg></svg>-->
-      <div id="number_histogram" style="height: 100%; width: 100%"></div>
+      <div id="number_histogram" style="height: 90%; width: 100%"></div>
       <!--      </div>-->
 
     </el-card>
@@ -59,13 +59,14 @@ export default {
           dimensions: ['name', 'count'],
           source: arr
         },
-        xAxis: {type: 'category',
+        xAxis: {
+          type: 'category',
           axisLabel: {
-            interval: 0,
-            rotate: 45,
+            interval: 10,
+            rotate: 20,
             textStyle: {
               fontSize: 10
-            }
+            },
           },
           axisLine: {
             lineStyle: {
@@ -96,7 +97,7 @@ export default {
               }
             },
             label:{
-                show: true,
+                show: false,
                 position: 'top',
                 textStyle: {
                   fontSize: '7px',

@@ -6,13 +6,16 @@
       <el-col :span="4" style="height: 100%">
         <el-card class="title-box-card" shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label>Logo</label>
+          <el-image
+              style="width: 90%; height: 90%"
+              :src="url"
+              :fit="fit"></el-image>
         </el-card>
       </el-col>
       <el-col :span="20" style="height: 100%">
         <el-card class="title-box-card " shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label>中瑞恒可视化系统</label>
+          <label style="color: #c4bcbc; font-family:宋体; height: 95%; ">中瑞恒可视化系统</label>
         </el-card>
       </el-col>
     </el-row>
@@ -61,7 +64,7 @@
         <el-row style="height: 100%">
           <el-card class="statistics-box-card " shadow="never"
                    style="background-color: transparent; height: 5%; margin: 0px 5px 5px 5px">
-            <label>chart</label>
+<!--            <label>chart</label>-->
           </el-card>
           <!--          <el-row style="height: 42%">-->
           <el-col :span="12" style="height: 42%">
@@ -86,11 +89,13 @@
             <!--各等级隐患数量变化-->
           </el-col>
           <!--          </el-row>-->
-          <el-col :span="24" style="height: 9%">
-            <el-card class="statistics-box-card" shadow="never"
-                     style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
-              <label>more</label>
-            </el-card>
+          <el-col :span="24" style="height: 5%">
+            <el-col :span = '12' style="height: 5%">
+              <el-button size="mini" round
+                       style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">more</el-button>
+            </el-col>
+
+
           </el-col>
         </el-row>
         <!--      </el-card>-->
@@ -290,6 +295,8 @@ export default {
   },
   data() {
     return {
+      fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
       data: [],
       p_data: [],

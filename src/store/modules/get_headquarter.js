@@ -6,7 +6,7 @@ const state = {
     //向后端发送的参数
     params: {},
     //总部整改率
-    rectification: null,
+    rectification: {},
     //隐患高中低风险及其对应的累计隐患数量
     risk_level_data: {},
     //显示根据项目综合&专业风险指数排序的结果

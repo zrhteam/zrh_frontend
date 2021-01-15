@@ -4,7 +4,7 @@
     <el-row style="height: 100%">
       <el-card class="statistics-box-card " shadow="never"
                style="background-color: transparent; height: 5%; margin: 0px 5px 5px 5px">
-        <label>chart</label>
+<!--        <label>chart</label>-->
       </el-card>
       <!--          <el-row style="height: 42%">-->
       <el-col :span="12" style="height: 42%">

@@ -7,9 +7,9 @@
     <div class="level4">
       <span>当前整改率</span>
     </div>
-    <div id="current_correction_rate" class="cur_level1" style="text-align: left">
-      <span>{{ current_correction_rate }}</span>
-    </div>
+<!--    <div id="current_correction_rate" class="cur_level1" style="text-align: left">-->
+<!--      <span>{{ current_correction_rate }}</span>-->
+<!--    </div>-->
     <div id="dashboard" style="height: 80%; width: 100%;"></div>
   </el-card>
 </template>

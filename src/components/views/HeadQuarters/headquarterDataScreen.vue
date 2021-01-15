@@ -3,7 +3,10 @@
     <el-col :span="4" style="height: 100%">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
-        <label>Logo</label>
+        <el-image
+              style="width: 90%; height: 90%"
+              :src="url"
+              :fit="fit"></el-image>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
@@ -42,7 +45,7 @@
     <el-col :span="16" style="height: 100%;">
       <el-card class="title-box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
-        <label>数据大屏</label>
+        <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>
       </el-card>
       <el-col :span="8" style="height: 42%">
         <!--          当前未整改高风险隐患图片-->
@@ -165,6 +168,8 @@ export default {
 
   data() {
     return {
+      fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
       data: [],
       defaultProps: {

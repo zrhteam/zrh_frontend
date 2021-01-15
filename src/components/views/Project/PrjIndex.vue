@@ -21,7 +21,7 @@
       <div class="level4">
         <span>历次检查危险指数</span>
       </div>
-      <div id="index_chart" style="height: 100%; width: 100%; display: block"></div>
+      <div id="index_chart" style="height: 90%; width: 100%; display: block"></div>
     </el-card>
   </el-col>
 </template>

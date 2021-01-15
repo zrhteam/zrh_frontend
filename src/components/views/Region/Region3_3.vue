@@ -14,14 +14,14 @@
     </el-card>
     <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
     <el-card class="box-card " shadow="never"
-             style="background-color: transparent; height: 30%; margin: 0px 5px 5px 5px">
+             style="background-color: transparent; height: 28%; margin: 0px 5px 5px 5px">
       <div class="level4" style="display: block">
         <span>项目累计高风险数量排名</span>
       </div>
       <div style = 'display: none; text-align: center'>
         {{getHighRiskRank}}
       </div>
-      <div id = 'risk_rank' style="height: 100%; width: 100%; display: block"></div>
+      <div id = 'risk_rank' style="height: 90%; width: 100%; display: block"></div>
 
     </el-card>
   </el-col>
@@ -62,7 +62,7 @@ export default {
           type: 'category',
           axisLabel: {
             interval: 0,
-            rotate: 30
+            rotate: 20
           },
           axisLine: {
             lineStyle: {

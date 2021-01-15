@@ -11,7 +11,7 @@
       <div style="display: none; text-align: center">
         {{getRiskDistribution}}
       </div>
-      <div id = 'risk_distribution' style = 'height: 100%; width: 100%; '></div>
+      <div id = 'risk_distribution' style = 'height: 80%; width: 100%; '></div>
 <!--    </div>-->
 <!--      &lt;!&ndash;              在这里展示三维图&ndash;&gt;-->
 <!--      <div>-->
