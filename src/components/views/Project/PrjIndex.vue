@@ -4,8 +4,10 @@
              style="background-color: transparent; height: 79%; margin: 0px 5px 5px 5px">
       <!--          放地图-->
       <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: #13E8E9">
-        <div id="map"
+        <div id="map_1"
              style="pointer-events:inherit; height: 100%; width: 100%;"></div>
+        <div id="map_2"
+             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>
       </div>
       <!--          <div id="map" bordered style="pointer-events:inherit"></div>-->
       <!--          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>-->
@@ -75,8 +77,10 @@ export default {
     this.drawBarChart()
   },
   mounted() {
+    document.getElementById('map_2').style.display = 'none'
+    document.getElementById('map_1').style.display = 'block'
     this.map = this.loadMap();//加载地图
-    let m = document.getElementById("map")
+    let m = document.getElementById("map_1")
     this.map_width = window.getComputedStyle(m).width
     this.map_height = window.getComputedStyle(m).height
 
@@ -207,7 +211,7 @@ export default {
       });
     },
     loadMap() {//加载地图
-      this.map = L.map("map", {
+      this.map = L.map("map_1", {
         center: [34, 107], // 地图中心
         zoom: 4, //缩放比列
         zoomControl: false, //禁用 + - 按钮
@@ -243,11 +247,31 @@ export default {
       let myChart = this.$echarts.init(document.getElementById('index_chart'))
       let _this = this
       myChart.on('click', function (params) {
-        console.log(params.data)
+        // console.log(params.data)
+        let param1 = new URLSearchParams();
+        param1.append('check_code', (params.data.name))
+        _this.$store.state.get_check.params = param1
+        _this.$store.dispatch('get_check/getCheckRectification')
+        _this.$store.dispatch('get_check/getCheckRiskLevel')
+        _this.$store.dispatch('get_check/getCheckRiskRatio')
+        _this.$store.dispatch('get_check/getCheckHighRisk')
+        _this.$store.dispatch('get_check/getCheckHighImage')
+        _this.$store.dispatch('get_check/getCheckMajorSystem')
+        _this.$store.dispatch('get_check/getCheckMajorArea')
+        _this.$store.dispatch('get_check/getCheckMajorStage')
+        _this.$store.dispatch('get_check/getCheckRiskTop')
+        var prj = document.getElementById('prj_part');
+        prj.style.display = 'none'
+        var check = document.getElementById('check_part');
+        check.style.display = 'block'
+        // check.style.width = "500px"
+        // check.style.width = "99%"
+        document.getElementById('map_2').style.display = 'none'
+        document.getElementById('map_1').style.display = 'block'
         _this.map.setZoom(12)
         setTimeout(function () {
           _this.map.panTo(new L.LatLng(params.data.lat, params.data.lng));
-        },300)
+        }, 300)
       })
 
       return this.map
@@ -276,7 +300,7 @@ export default {
 </script>
 
 <style scoped>
-#map {
+#map_1 {
   width: 100%;
   height: calc(100vh);
 }

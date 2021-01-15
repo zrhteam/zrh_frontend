@@ -32,14 +32,12 @@
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
         <el-button size="mini" round
-                   style="background-color: transparent; color: #fff; "
+                   style="background-color: transparent; color: #ffffff"
                    @click="outPrjDataScreen">返回
         </el-button>
-
-
       </el-card>
     </el-col>
-    <el-col :span="16" style="height: 100%; display: none">
+    <el-col :span="16" style="height: 100%; ">
       <el-card class="title-box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
         <label>数据大屏</label>
@@ -64,7 +62,7 @@
         <label>...</label>
       </el-card>
     </el-col>
-    <CheckDataScreen></CheckDataScreen>
+<!--    <CheckDataScreen></CheckDataScreen>-->
     <el-col :span="4" style="height: 100%">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
@@ -178,22 +176,6 @@ export default {
       this.data = arr
       this.$store.state.get_login.tree_data = arr
     },
-
-    // returnButton(){
-    //   let vm = this;
-    //   $(document).ready(function(){
-    //     if(window.history && window.history.pushState){
-    //       $(window).on('popstate', function (){
-    //         window.history.pushState('forward', null, '#');
-    //         window.history.forward(1);
-    //         vm.goToPreview();
-    //       });
-    //     }
-    //     window.history.pushState('forward', null, '#');
-    //     window.history.forward(1);
-    //   })
-    // },
-
     handleNodeClick(data, node) {
         console.log("出来了", data);
         console.log(node);

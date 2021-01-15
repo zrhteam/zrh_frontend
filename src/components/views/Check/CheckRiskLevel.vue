@@ -2,7 +2,7 @@
 <el-card class="box-card " shadow="never"
            style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
-      {{ getPrjRiskLevelData }}
+      {{ getCheckRiskLevelData }}
     </div>
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>历次检查累计发现隐患数量</span>
@@ -17,7 +17,7 @@ import elementResizeDetectorMaker from "element-resize-detector";
 export default {
 name: "CheckRiskLevel",
   computed: {
-    getPrjRiskLevelData() {
+    getCheckRiskLevelData() {
       let data = this.$store.state.get_check.check_risk_data;
       // console.log("累计", data)
       let data_length = Object.keys(data);
@@ -82,7 +82,7 @@ name: "CheckRiskLevel",
   methods: {
     drawBarChart(){
       let myChart = this.$echarts.init(document.getElementById('check_risk_level'))
-      let arr = this.getPrjRiskLevelData
+      let arr = this.getCheckRiskLevelData
       if (arr.length) {
         let option = {
           tooltip: {

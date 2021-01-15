@@ -143,6 +143,37 @@ export default {
     }
   },
   mounted: function () {
+    document.getElementById('map_1').style.display = 'none'
+    document.getElementById('map_2').style.display = 'block'
+    this.map = this.loadMap();//加载地图
+    let m = document.getElementById("map_2")
+    this.map_width = window.getComputedStyle(m).width
+    this.map_height = window.getComputedStyle(m).height
+
+    this.svg = d3.select(this.$el).select('svg');
+    // this.svg = d3.select(this.map.getPanes().overlayPane).append("svg");
+
+    let _this = this;
+    this.map.on('drag', (e) => {
+      let center_position = this.map.latLngToContainerPoint([22, 107]);
+
+      if (this.locContainers) {
+        this.locContainers.each(function (d) {
+          let loc = _this.map.latLngToContainerPoint(d.locs)
+          d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
+        })
+      }
+    });
+
+    this.map.on('move', (e) => {
+      let center_position = this.map.latLngToContainerPoint([22, 107]);
+      if (this.locContainers) {
+        this.locContainers.each(function (d) {
+          let loc = _this.map.latLngToContainerPoint(d.locs)
+          d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
+        })
+      }
+    });
   },
   computed: {
     // getTreeData() {
@@ -228,6 +259,38 @@ export default {
     handleNodeClick(data, node) {
       // console.log(data);
       // console.log(node);
+      if (node.level == 3) {
+        let param = new URLSearchParams();
+        param.append('project_name', data.label);
+        this.$store.state.get_project.params = param
+
+        this.$store.dispatch('get_project/getInitProjectRectification')
+        this.$store.dispatch('get_project/getInitProjectRiskLevel')
+        this.$store.dispatch('get_project/getInitProjectHistoryPerception')
+        this.$store.dispatch('get_project/getInitProjectNumberChange')
+        // // 当前未整改高风险隐患列表
+        this.$store.dispatch('get_project/getInitPrjRisk')
+        // // 当前未整改高风险隐患图片
+        this.$store.dispatch('get_project/getInitProjectImage')
+        //
+        // //占比
+        this.$store.dispatch('get_project/getInitProjectSystem')
+        this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+        this.$store.dispatch('get_project/getInitProjectReason')
+
+        //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
+        this.$store.dispatch('get_project/getInitProjectRiskTop')
+        var prj = document.getElementById('prj_part');
+        prj.style.display = 'block'
+        var check = document.getElementById('check_part');
+        check.style.display = 'none'
+        document.getElementById('map_1').style.display = 'none'
+        document.getElementById('map_2').style.display = 'block'
+        this.map.setZoom(4)
+        setTimeout(function () {
+          this.map.panTo(new L.LatLng(34, 107));
+        }, 300)
+      }
       if (node.level == 4) {
         let param1 = new URLSearchParams();
         param1.append('check_code', data.label);
@@ -245,8 +308,52 @@ export default {
         prj.style.display = 'none'
         var check = document.getElementById('check_part');
         check.style.display = 'block'
+        document.getElementById('map_1').style.display = 'none'
+        document.getElementById('map_2').style.display = 'block'
+        this.map.setZoom(12)
+        setTimeout(function () {
+          this.map.panTo(new L.LatLng(30, 30));
+        }, 300)
       }
-    }
+    },
+    loadMap() {//加载地图
+      this.map = L.map("map_2", {
+        center: [34, 107], // 地图中心
+        zoom: 4, //缩放比列
+        zoomControl: false, //禁用 + - 按钮
+        // doubleClickZoom: false, // 禁用双击放大
+        attributionControl: false // 移除右下角leaflet标识
+      });
+      let name = L.tileLayer(
+          // 'https://api.mapbox.com/styles/v1/zhaiyzh/ckes4nsma2yls19op279otef9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhhaXl6aCIsImEiOiJja2VyeWYzNTYwbHB1MnhzYTV0Z3didG1hIn0.forlrmKVYKXTsyP7voWu9Q'
+          "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",//初始化一个 openlayers 地图
+          // 天地图影像图层
+          // "http://t0.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=5d27dc75ca0c3bdf34f657ffe1e9881d", //parent.TiandituKey()为天地图密钥
+          // 天地图影像注记图层
+          // "http://t0.tianditu.com/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=5d27dc75ca0c3bdf34f657ffe1e9881d", //parent.TiandituKey()为天地图密钥
+          // 加载谷歌地图
+          // "http://webrd0{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8"
+          // 加载高德地图
+          // 'http://webrd0{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8'
+      ).addTo(this.map);
+      // this.map.on('click', function (e) {
+      //   console.log(e);
+      //   alert('纬度：' + e.latlng.lat + '\n经度：' + e.latlng.lng);
+      // });
+      for (var i = 0; i < this.p_data.length; i++) {
+        L.marker([this.p_data[i].lat, this.p_data[i].lng]).addTo(this.map);
+        // var marker = L.marker([37.8542800187483, 112.534177962463]).addTo(this.map);
+        // this.map.on("click", function (e) {
+        //   var lat = e.latlng.lat;
+        //   var lng = e.latlng.lng;
+        //   marker.setLatLng([lat, lng]);
+        // });
+      }
+      // this.map.panTo(new L.LatLng(40.737, -73.923));
+      let myChart = this.$echarts.init(document.getElementById('index_chart'))
+      let _this = this
+      return this.map
+    },
   },
   data() {
     return {
