@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     getRate() {
-      let rate = this.$store.state.get_project.prj_rectification;
+      let rate = this.$store.state.get_check.check_rectification;
       let val = parseFloat(rate).toFixed(2)
       this.current_correction_rate = val + '%'
       let option = {

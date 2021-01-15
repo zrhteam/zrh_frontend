@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="display: none">
-      {{ getPrjRiskLevelList }}
+      {{ getCheckRiskLevelList }}
     </div>
     <div class="level4">
       <span>当前未整改高风险隐患列表</span>
@@ -32,10 +32,8 @@ export default {
     }
   },
   computed: {
-    getPrjRiskLevelList() {
-      let data = this.$store.state.get_project.prj_risk_list;
-      console.log(this.$store.state.get_project.prj_risk_list)
-      console.log(data)
+    getCheckRiskLevelList() {
+      let data = this.$store.state.get_check.check_risk_list;
       let dataArray = []
       for (let i in data) {
         let obj = {
