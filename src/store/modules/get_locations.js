@@ -19,7 +19,7 @@ const getters = {
         return state.data;
     },
 
-    renderName(State) {
+    renderName(state) {
         return state.name;
     },
 

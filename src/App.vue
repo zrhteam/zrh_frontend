@@ -54,17 +54,14 @@ export default {
 }
 
 .boundary {
-  border: dashed #00ffc4 1px;
-  border-width: 1px;
+  border: 1px dashed #00ffc4;
 }
 
 .boundary-B {
-  border: dashed #4363ce 1px;
-  border-width: 1px;
+  border: 1px dashed #4363ce;
 }
 
 .boundary-C {
-  border: dashed #58ce43 1px;
-  border-width: 1px;
+  border: 1px dashed #58ce43;
 }
 </style>

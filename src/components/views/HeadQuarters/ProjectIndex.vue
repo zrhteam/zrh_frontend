@@ -158,7 +158,8 @@ export default {
   //   },
   // },
   computed: {
-    getNumberHistogram() {
+    // getNumberHistogram() {
+    getIndexHistogram() {
       let data = this.$store.state.get_headquarter.risk_number_rank
       let arr = []
       for (let i in data) {
@@ -170,7 +171,22 @@ export default {
         obj.count = data[i]['high_risk_count'];
         arr.push(obj)
       }
+      arr.sort(this.sortNumber('count', true))
       console.log(arr)
+      return arr
+    },
+  },
+  updated() {
+    this.drawBarChart()
+  },
+  mounted() {
+    this.drawBarChart();
+  },
+  methods: {
+    drawBarChart() {
+      let myChart = this.$echarts.init(document.getElementById('number_histogram1'))
+      // 使用刚指定的配置项和数据显示图表。
+      let arr = this.getIndexHistogram
       let option = {
         tooltip: {},
         dataset: {
@@ -229,24 +245,30 @@ export default {
           }
         ]
       };
-      return option
-    },
-  },
-  updated() {
-    this.drawBarChart()
-  },
-  mounted() {
-    this.drawBarChart();
-  },
-  methods: {
-    drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('number_histogram1'))
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getNumberHistogram);
+      myChart.setOption(option);
       myChart.resize();
       window.addEventListener('resize', function () {
         myChart.resize();
       })
+    },
+    sortNumber(attr, rev){
+      if(rev == undefined) {
+        rev = 1;
+      }else {
+        rev = (rev)? 1 : -1;
+      }
+
+      return function (a, b) {
+        a = a[attr];
+        b = b[attr];
+        if (a < b) {
+          return rev * -1;
+        }
+        if (a > b) {
+          return rev * 1;
+        }
+        return 0;
+      }
     }
   }
 }

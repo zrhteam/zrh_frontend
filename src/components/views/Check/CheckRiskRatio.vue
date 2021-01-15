@@ -2,13 +2,13 @@
   <el-card class="box-card boundary-C" shadow="never"
            style="background-color: transparent; height: 80%; left: 10%; top: 10%">
     <div style="display: none">
-      {{ getPrjHistoryPerception }}
+      {{ getCheckHistoryPerception }}
     </div>
     <div class="level4">
-      <span>历次检查隐患专业占比</span>
+      <span>本次检查隐患专业占比</span>
     </div>
-    <div id="pie2" style="height: 100%; width: 100%"></div>
-    <!--          历次检查累计隐患专业占比 饼图-->
+    <div id="pie2_2" style="height: 100%; width: 100%"></div>
+    <!--          本次检查累计隐患专业占比 饼图-->
   </el-card>
 </template>
 
@@ -16,15 +16,10 @@
 import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
-  name: "CheckHistoryPerc",
-  // data() {
-  //   return {
-  //     screenWidth: document.body.clientWidth,
-  //   }
-  // },
+  name: "CheckRiskRatio",
   computed: {
-    getPrjHistoryPerception() {
-      let data = this.$store.state.get_project.prj_history_prec;
+    getCheckHistoryPerception() {
+      let data = this.$store.state.get_check.check_risk_ratio;
       // console.log(data)
       let arr_major = []
       for (let i in data) {
@@ -41,34 +36,6 @@ export default {
         tooltip: {
           formatter: '{b}:{c} ({d}%)'
         },
-        // color: ['#5182e4', '#3fb27e', '#9bcc66', '#f7cb4a', '#00b9ff', '#03a1ea'],
-        // color: function (params) {
-        //           let colorList = [
-        //             {
-        //               c1: '#fce5ca',
-        //               c2: '#ff9d62'
-        //             },
-        //             {
-        //               c1: '#508dff',
-        //               c2: '#26c5fe'
-        //             },
-        //             {
-        //               c1: '#63e587',
-        //               c2: '#5fe2e4'
-        //             },
-        //             {
-        //               c1: '#e8e87e',
-        //               c2: '#a1a170'
-        //             }]
-        //           return new echarts.graphic.LinearGradient(1, 0, 0, 0.[{
-        //             offset: 0,
-        //             color: colorList[params.dataIndex].c1
-        //           },{
-        //             offset: 1,
-        //             color: colorList[params.dataIndex].c2
-        //           }])
-        //         },
-
         series: [
           {
             type: 'pie',
@@ -154,16 +121,16 @@ export default {
   },
   methods: {
     drawPieChart() {
-      let myChart = this.$echarts.init(document.getElementById('pie2'))
+      let myChart = this.$echarts.init(document.getElementById('pie2_2'))
       // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getPrjHistoryPerception);
+      myChart.setOption(this.getCheckHistoryPerception);
       myChart.resize();
       window.addEventListener('resize', function () {
         myChart.resize();
       })
       const _this = this;
       const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById("pie2"), element => {
+      erd.listenTo(document.getElementById("pie2_2"), element => {
         _this.$nextTick(() => {
           //监听到事件后执行的业务逻辑
           myChart.resize();

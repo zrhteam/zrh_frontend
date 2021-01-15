@@ -23,51 +23,50 @@ export default {
 
   computed: {
     getSafetyIndexRank() {
+      let data = this.$store.state.get_region.high_risk_rank
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          count: 0
+        }
+        obj.name = i;
+        obj.count = data[i]['high_risk_count'];
+        arr.push(obj)
+      }//for
+      arr.sort(this.sortNumber('count', true))
+      console.log(arr)
       let option = {
-        // color: ['#77b5b8'],
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { type: 'shadow'}
+        tooltip: {},
+        dataset: {
+          dimensions: ['name', 'count'],
+          source: arr
         },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: ['石家庄万象城', '赣州万象城', '厦门万象城', '深圳万象城', '余姚万象城'],
-            axisTick: {
-              alignWithLabel: true
-            },
-            axisLabel: {
-              interval: 0,
-              rotate: 20
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#ffffff',
-                fontSize: 8
-              }
+        xAxis: {
+          type: 'category',
+          axisLabel: {
+            interval: 0,
+            rotate: 30
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff',
+              fontSize: 8
             }
           }
-        ],
-        yAxis: [
-            {
-              type: 'value',
-              axisLine: {
-                lineStyle: {
-                  color: '#ffffff',
-                  fontSize: 8
-                }
-              }
+        },
+        yAxis: {
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff',
+              fontSize: 8
             }
-        ],
-        series: [{
-          type: 'bar',
-          itemStyle: {
+          }
+        },
+        series: [
+          {
+            type: 'bar',
+            itemStyle: {
               normal: {
                 //柱形图圆角，初始化效果
                 barBorderRadius: [10, 10, 0, 0],
@@ -81,10 +80,22 @@ export default {
                 )
               }
             },
-          barWidth: '60%',
-          data: [5, 7, 9, 11, 14, 15]
-        }]
-      }
+            emphasis: {
+              itemStyle: {
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: '#2378f7'},
+                      {offset: 0.7, color: '#2378f7'},
+                      {offset: 1, color: '#83bff6'}
+                    ]
+                )
+              }
+            },
+            barMaxWidth: 40
+          }
+        ]
+      };
       return option
     }
   },
@@ -94,16 +105,34 @@ export default {
   methods: {
     myEcharts(){
       //基于准备好的dom，初始化echarts实例
-      this.$nextTick(_ =>{
         let myChart = this.$echarts.init(document.getElementById('safety'));
 
         myChart.setOption(this.getSafetyIndexRank);
         myChart.resize();
-        window.addEventListener('resize', function (){
-          myChart.resize;
-        })
+      window.addEventListener('resize', function () {
+        myChart.resize();
       })
+    },
+    sortNumber(attr, rev) {
+      if (rev == undefined) {
+      rev = 1;
+      } else {
+          rev = (rev) ? 1 : -1;
+        }
+
+      return function (a, b) {
+        a = a[attr];
+        b = b[attr];
+        if (a < b) {
+          return rev * -1;
+        }
+        if (a > b) {
+          return rev * 1;
+        }
+        return 0;
+      }
     }
+
   },
 
   updated() {

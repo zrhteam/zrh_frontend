@@ -88,7 +88,6 @@ const actions = {
     //得到当前未整改高风险隐患列表
     getInitRegionHighRisk(context) {
         dataService.getInitRegionHighRisk(state.params, function (response){
-            console.log(response)
             context.commit('changeNoRectificationRisk', response)
         })
     },
@@ -140,34 +139,58 @@ const actions = {
 const mutations = {
     //考虑已检查项目数量
     changeExamineNumber(state, data) {
-        state.examine_number = data.project_num
+        if (data.code === 10000) {
+            state.examine_number = data.data.rectification_number;
+        } else {
+            alert("出错了")
+        }
     },
 
     // 考虑累计隐患数量变化
     changeRiskLevelData(state, data) {
-        state.risk_level_data = data.risk_level
+        if (data.code === 10000) {
+            state.risk_level_data = data.data.risk_level;
+        } else {
+            alert("出错了")
+        }
     },
 
     //考虑当前未整改高风险隐患列表
     changeNoRectificationRisk(state, data){
-        state.no_rectification_risk = data
+        if (data.code === 10000) {
+            state.no_rectification_risk = data.data;
+        } else {
+            alert("出错了")
+        }
     },
 
     //考虑未整改隐患图片
     changeImage(state, data) {
-        state.images = data
+        if (data.code === 10000) {
+            console.log('image', data.data)
+            state.images = data.data;
+        } else {
+            alert("出错了")
+        }
     },
 
     //考虑所有项目中各隐患在各专业上的分布情况
     changeRiskDistribution(state, data) {
-        state.risk_distribution = data
-        console.log('risk_distribution:', state.risk_distribution)
+        if (data.code === 10000) {
+            console.log('major', data.data)
+            state.risk_distribution = data.data.project_distribution;
+        } else {
+            alert("出错了")
+        }
     },
 
     //考虑所有项目中出现隐患数量排名前10的隐患变化
     changeNumberTop(state, data) {
-        state.risk_number_top = data
-        console.log('risk_top', data)
+        if (data.code === 10000) {
+            state.risk_number_top = data.data;
+        } else {
+            alert("出错了")
+        }
     },
 
     //考虑项目安全指数排名的结果
@@ -178,7 +201,12 @@ const mutations = {
 
     //考虑项目中累计高风险数量排名的结果
     changeHighRiskRank(state, data) {
-        state.high_risk_rank = data
+        if (data.code === 10000) {
+            console.log('high', data.data)
+            state.high_risk_rank = data.data;
+        } else {
+            alert("出错了")
+        }
     }
 }
 

@@ -28,7 +28,7 @@ export default {
           count: 0
         }
         obj.name = i;
-        obj.count = data[i]['high_risk_count'];
+        obj.count = data[i]['count'];
         arr.push(obj)
       }//for
       arr.sort(this.sortNumber('count', true))
@@ -43,7 +43,7 @@ export default {
           type: 'category',
           axisLabel: {
             interval: 0,
-            rotate: 40
+            rotate: 30
           },
           axisLine: {
             lineStyle: {
@@ -88,7 +88,8 @@ export default {
                     ]
                 )
               }
-            }
+            },
+            barMaxWidth: 40
           }
         ]
       };
@@ -112,7 +113,7 @@ export default {
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
-      rev = 1;
+        rev = 1;
       } else {
           rev = (rev) ? 1 : -1;
         }

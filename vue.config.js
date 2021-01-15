@@ -17,6 +17,7 @@ module.exports = {
     //assetsDir: './dist',
     lintOnSave: false,//是否开启eslint
     runtimeCompiler: false,
+
     // use the full build with in-browser compiler?
     // https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
     //compiler: false,
@@ -56,7 +57,10 @@ module.exports = {
         //css预设器配置项
         loaderOptions: {
             css: {},
-            postcss: {}
+            postcss: {},
+            less: {
+                javascriptEnabled: true// less 配置
+            }
         },
         //启用 CSS modules for all css / pre-processor files.
         requireModuleExtension: false
@@ -75,7 +79,8 @@ module.exports = {
         //open: true,//自动弹出浏览器页面
         open: process.platform === 'darwin',
         // host: 'localhost',
-        public:'10.20.39.102:8080',
+        // public:'10.20.39.102:8080',
+        public:'localhost:8080',
         host: '0.0.0.0',
         port: 8080,
         //port: 8022,
@@ -101,7 +106,8 @@ module.exports = {
         //proxy: null,
         proxy: {
             '/api': {
-                target: 'http://10.20.39.102:5000/',
+                target: 'http://localhost:5000/',
+                // target: 'http://10.20.39.102:5000/',
                 changeOrigin: true, // 允许websockets跨域
                 ws: true,
                 pathRewrite: {
@@ -110,6 +116,7 @@ module.exports = {
             }
         } // 代理转发配置，用于调试环境
     },
+
     // plugins: {//new
     //     'autoprefixer': {browsers: 'last 5 version'}
     // },
@@ -126,5 +133,6 @@ module.exports = {
     pluginOptions: {
         // ...
     },
+
 
 }

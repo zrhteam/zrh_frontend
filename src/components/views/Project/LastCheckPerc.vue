@@ -39,7 +39,7 @@ export default {
         tooltip: {
           formatter: '{b}:{c} ({d}%)'
         },
-        color: ['#5182e4', '#3fb27e', '#9bcc66', '#f7cb4a', '#00b9ff', '#03a1ea'],
+        // color: ['#5182e4', '#3fb27e', '#9bcc66', '#f7cb4a', '#00b9ff', '#03a1ea'],
         series: [
           {
             type: 'pie',
@@ -52,13 +52,66 @@ export default {
                 }
             },
             data: arr,
-            emphasis: {
-              itemStyle: {
+            itemStyle: {
+              emphasis: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                // shadowColor: 'rgba(0, 0, 0, 0.5)'
+              },
+              normal: {
+                color: function (params) {
+                  var colorList = [
+                    {
+                      c1: '#fce5ca',
+                      c2: '#ff9d62'
+                    },
+                    {
+                      c1: '#63e587',
+                      c2: '#5fe2e4'
+                    },
+                    {
+                      c1: '#db6400',
+                      c2: '#ceb895'
+                    },
+                    {
+                      c1: '#e8e87e',
+                      c2: '#a1a170'
+                    },
+                    {
+                      c1: '#007965',
+                      c2: '#b1e2da'
+                    },
+                    {
+                      c1: '#7c9473',
+                      c2: '#d6efc7'
+                    }];
+                  return new echarts.graphic.LinearGradient(1, 0, 0, 0,[{
+                    offset: 0,
+                    color: colorList[params.dataIndex].c1
+                  },{
+                    offset: 1,
+                    color: colorList[params.dataIndex].c2
+                  }])
+                }
               }
-            }
+            },
+            // emphasis: {
+            //   itemStyle: {
+            //     // shadowBlur: 10,
+            //     // shadowOffsetX: 0,
+            //     // shadowColor: 'rgba(0, 0, 0, 0.5)',
+            //     normal: {//颜色渐变
+            //             color: new echarts.graphic.LinearGradient(
+            //                 0, 0, 0, 1,
+            //                 [
+            //                     {offset: 0, color: '#0095FF'},
+            //                     {offset: 0.5, color: '#0CB9FF'},
+            //                     {offset: 1, color: '#0095FF'}
+            //                 ]
+            //             )
+            //         }
+            //   }
+            // }
           }
         ]
       };

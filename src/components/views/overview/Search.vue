@@ -2,7 +2,7 @@
   <el-card class="box-card box">
     <el-form style="margin-left:20px; margin-right: 20px" ref="form" :model="form">
       <el-form-item label="输入层级">
-        <el-radio-group v-model="level">
+        <el-radio-group @change="selectChanged" v-model="level">
           <el-radio label="项目层级"></el-radio>
           <el-radio label="区域层级"></el-radio>
           <el-radio label="总部层级"></el-radio>
@@ -17,8 +17,8 @@
       <!--        尝试写带下拉列表的查询框-->
       <el-form-item size="mini" prop="name">
         <div>
-          <!--          <el-input maxlength="100px" size="mini" v-model="form.search_name"></el-input>-->
-          <el-select size="mini" v-model="form.search_name" filterable popper-class="select-option">
+<!--                    <el-input maxlength="100px" size="mini" v-model="form.search_name"></el-input>-->
+          <el-select placeholder="请选择" id="select_module" size="mini" v-model="form.search_name" filterable popper-class="select-option">
             <el-option
                 v-for="item in name"
                 :value="item"
@@ -56,10 +56,18 @@ export default {
   watch: {
     level(val) {
       if (val == '项目层级') {
+        this.search_name = ""
+        this.form.ctr_name = ""
+        // alert(this.form.ctr_name)
         this.name = this.prj_name
+        // console.log("test", document.getElementById("select_module").val())
       } else if (val == '区域层级') {
+        this.search_name = ""
+        // this.form.ctr_name = ""
         this.name = this.region_name
       } else if (val == '总部层级') {
+        this.search_name = ""
+        // this.form.cust_name = ""
         this.name = this.head_name
       }
     },
@@ -89,7 +97,7 @@ export default {
     nameList() {
       return this.$store.state.get_locations.name
       // console.log(this.dataset)
-    }
+    },
   },
 
   methods: {
@@ -126,6 +134,13 @@ export default {
       params.append('project_name', this.form.project_name)
       this.$store.state.get_project.params = params
       this.$router.push({path: '/prj_data_analysis'});
+    },
+    selectChanged() {
+      console.log("In selectChanged")
+      console.log(this.form.project_name)
+      this.form.project_name = ""
+      console.log(this.form.project_name)
+      // console.log(document.getElementById("select_module").placeholder.clean())
     }
   },
   created() {

@@ -14,7 +14,7 @@
 <!--      安全指数-->
       <el-row class="boundary" type="flex">
         <el-col :span="10" class="boundary-B margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 280px">
             <el-row class="margin">
             <el-col :span = '24'>
               <div class = 'safety_index' style="height: 150px">
@@ -43,14 +43,14 @@
         </el-col>
 <!--        已检查的项目数量-->
         <el-col :span="4" class="boundary-B part1 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 280px">
             <Region1_3></Region1_3>
           </el-card>
 
         </el-col>
 <!--        各风险等级对应的隐患数量-->
         <el-col :span="10" class="boundary-B part1 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 280px">
             <Region1_4></Region1_4>
           </el-card>
         </el-col>
@@ -59,19 +59,19 @@
       <el-row class="boundary" tyep="flex">
 <!--        项目当前未整改高风险隐患列表-->
         <el-col class="boundary-B part2 margin" :span="7">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 500px">
             <Region2_1></Region2_1>
           </el-card>
         </el-col>
 <!--        未整改高风险隐患图片-->
         <el-col class="boundary-B part2 margin" :span="8">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 500px">
             <Region2_2></Region2_2>
           </el-card>
         </el-col>
 <!--各项目累计发现的隐患在各专业的分布-->
         <el-col class="boundary-B part2 margin" :span="8">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 500px">
             <Region2_3></Region2_3>
           </el-card>
         </el-col>
@@ -80,19 +80,19 @@
       <el-row class="boundary" type="flex">
 <!--项目累计出现次数前10的隐患及其对应数量-->
         <el-col :span="8" class="boundary-B part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 570px">
             <Region3_1></Region3_1>
           </el-card>
         </el-col>
 <!--项目安全指数排名-->
         <el-col :span="8" class="boundary-B part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 570px">
             <Region3_2></Region3_2>
           </el-card>
         </el-col>
 <!--项目累计高风险数量排名-->
         <el-col :span="8" class="boundary-B part2 margin">
-          <el-card shadow="never" style="background-color: transparent">
+          <el-card shadow="never" style="background-color: transparent; height: 570px">
             <Region3_3 ref="echarts"></Region3_3>
           </el-card>
         </el-col>
@@ -156,7 +156,9 @@ export default {
   mounted() {
     this.selfAdaption();
   },
-
+  beforeRouteLeave(to, from, next) {
+    to.meta.keepAlive = false
+  },
   methods: {
     selfAdaption(){
       let _this = this;
@@ -169,12 +171,15 @@ export default {
   },
 
   created() {
+    let param = new URLSearchParams();
+    param.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
+    this.$store.state.get_region.params = param
     this.$store.dispatch('get_region/getInitRegionProjectNumber')
     this.$store.dispatch('get_region/getInitRegionRiskLevel')
     this.$store.dispatch('get_region/getInitRegionHighRisk')
-    this.$store.dispatch('get_region/getInitRegionNumberTop')
     this.$store.dispatch('get_region/getInitRegionImage')
     this.$store.dispatch('get_region/getInitRegionMajor')
+    this.$store.dispatch('get_region/getInitRegionNumberTop')
     this.$store.dispatch('get_region/getInitRegionSafetyIndex')
     this.$store.dispatch('get_region/getInitRegionRiskRank')
   }

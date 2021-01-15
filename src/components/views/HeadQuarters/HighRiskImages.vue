@@ -98,10 +98,6 @@ export default {
       this.tableData.shift();
       this.tableData.push(first);
     },
-  },
-  created() {
-    this.$store.dispatch('get_headquarter/getInitNumberTop')
-    this.$store.dispatch('get_headquarter/getInitImage')
   }
 }
 </script>
