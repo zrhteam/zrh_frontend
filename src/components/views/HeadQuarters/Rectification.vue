@@ -4,9 +4,7 @@
     <div class="level13" style="padding-top: 10px; padding-bottom: 10px">
       <span>总部整改率</span>
     </div>
-    <div
-        style="color: rgb(247, 10, 10); font-family: Avenir;
-        font-weight: bold; font-style: normal; line-height: normal; font-size: 30px;">
+    <div style="display: none;">
       {{ getRectificationRate }}
     </div>
     <div id="head_dashboard" style="height: 80%; width: 100%"></div>
@@ -138,7 +136,16 @@ export default {
   color: #ffffff;
 }
 
-.plus_top {
+.cur_level1 {
+  font-size: 30px;
+  font-family: Avenir;
+  color: #ffffff;
 
+}
+
+.cur_level2 {
+  font-size: 13px;
+  font-family: "Microsoft YaHei";
+  color: #ffffff;
 }
 </style>
