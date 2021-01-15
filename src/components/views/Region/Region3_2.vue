@@ -1,5 +1,6 @@
 <template>
-  <div class="grid-content bg-purple">
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 80%; left: 10%; top: 10%">
     <div class="level4" style="padding-top: 15px">
       <span>项目安全指数排名</span>
     </div>
@@ -11,7 +12,7 @@
         <!--                这里是写项目安全指数排名的柱状图-->
 <!--        <SafetyIndexHistogram></SafetyIndexHistogram>-->
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>

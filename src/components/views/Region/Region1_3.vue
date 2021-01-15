@@ -1,12 +1,13 @@
 <template>
-  <div class="grid-content bg-purple">
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 90%; left: 10%; top: 10%">
     <div class="level11" style="padding-top: 15px">
       <span>已检查项目数量</span>
     </div>
     <div class="level12" style="text-align: center; padding-top: 15%">
       {{ getExamineNumber }}
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>

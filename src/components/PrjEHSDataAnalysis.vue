@@ -151,6 +151,7 @@ import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue"
 
 import HistoryTopRisk from "@/components/views/Project/HistoryTopRisk.vue";
 import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
+import PrjEHSDataAnalysis3 from "@/components/views/Project/PrjEHSDataAnalysis3.vue";
 
 import PrjOverview from '@/components/views/Project/PrjOverview.vue'
 import PrjDataScreen from "@/components/views/Project/PrjDataScreen.vue";
@@ -169,107 +170,107 @@ export default {
     CheckedProject,
     IndexView,
     PrjCurrentCorrectionRate,
-    // PrjEHSDataAnalysis3,
+    PrjEHSDataAnalysis3,
     PrjOverview,
     PrjDataScreen,
 
   },
-  // data() {
-  //   return {
-  //     prj_name: '',
-  //     safety_index: '',
-  //     elevator_index: ''
-  //   }
-  // },
+  data() {
+    return {
+      prj_name: '',
+      safety_index: '',
+      elevator_index: ''
+    }
+  },
   computed: {
-    //得到累计隐患数量
-    // getNumberChange() {
-    //   let data = this.$store.state.get_project.prj_number_change;
-    //   // console.log(data)
-    // },
-    // getData() {
-    //   let data;
-    //   let arr = [];
-    //   data = this.$store.state.get_project.prj_system
-    //   for (let i in data) {
-    //       for (let j in data[i]) {
-    //         let obj = {
-    //           name: '',
-    //           count: 0
-    //         }
-    //         obj.name = j;
-    //         obj.count = data[i][j];
-    //         arr.push(obj)
-    //       }
-    //   }
-    //   this.system_data = arr;
-    //   // console.log("system_data", arr)
-    //
-    //   arr = [];
-    //   data = this.$store.state.get_project.prj_reason
-    //     let obj1 = {
-    //       name: '(空白)',
-    //       count: 0
-    //     }
-    //     let obj2 = {
-    //       name: '施工',
-    //       count: 0
-    //     }
-    //     let obj3 = {
-    //       name: '运营',
-    //       count: 0
-    //     }
-    //     for (let i in data) {
-    //       for (let j in data[i]) {
-    //         if (j == '施工') {
-    //           obj2.count += data[i][j];
-    //         } else if (j == '运营') {
-    //           obj3.count += data[i][j];
-    //         } else {
-    //           obj1.count += data[i][j]
-    //         }
-    //       }
-    //     }
-    //     arr.push(obj1)
-    //     arr.push(obj2)
-    //     arr.push(obj3)
-    //   this.reason_data = arr;
-    //   // console.log("reason_data", arr)
-    //
-    //
-    //   let data1;
-    //   let arr1 = [];
-    //   data1 = this.$store.state.get_project.prj_region
-    //     obj1 = {
-    //       name: '(空白)',
-    //       count: 0
-    //     }
-    //     obj2 = {
-    //       name: '公共区域',
-    //       count: 0
-    //     }
-    //     obj3 = {
-    //       name: '租户区域',
-    //       count: 0
-    //     }
-    //     for (let i in data1) {
-    //       for (let j in data1[i]) {
-    //         if (j == '公共区域') {
-    //           obj2.count += data1[i][j];
-    //         } else if (j == '租户区域') {
-    //           obj3.count += data1[i][j];
-    //         } else {
-    //           obj1.count += data1[i][j]
-    //         }
-    //       }
-    //     }
-    //     arr1.push(obj1)
-    //     arr1.push(obj2)
-    //     arr1.push(obj3)
-    //   this.region_data = arr1;
-    //   // console.log("region_data", arr1)
-    //   // return arr;
-    // }
+    // 得到累计隐患数量
+    getNumberChange() {
+      let data = this.$store.state.get_project.prj_number_change;
+      // console.log(data)
+    },
+    getData() {
+      let data;
+      let arr = [];
+      data = this.$store.state.get_project.prj_system
+      for (let i in data) {
+          for (let j in data[i]) {
+            let obj = {
+              name: '',
+              count: 0
+            }
+            obj.name = j;
+            obj.count = data[i][j];
+            arr.push(obj)
+          }
+      }
+      this.system_data = arr;
+      // console.log("system_data", arr)
+
+      arr = [];
+      data = this.$store.state.get_project.prj_reason
+        let obj1 = {
+          name: '(空白)',
+          count: 0
+        }
+        let obj2 = {
+          name: '施工',
+          count: 0
+        }
+        let obj3 = {
+          name: '运营',
+          count: 0
+        }
+        for (let i in data) {
+          for (let j in data[i]) {
+            if (j == '施工') {
+              obj2.count += data[i][j];
+            } else if (j == '运营') {
+              obj3.count += data[i][j];
+            } else {
+              obj1.count += data[i][j]
+            }
+          }
+        }
+        arr.push(obj1)
+        arr.push(obj2)
+        arr.push(obj3)
+      this.reason_data = arr;
+      // console.log("reason_data", arr)
+
+
+      let data1;
+      let arr1 = [];
+      data1 = this.$store.state.get_project.prj_region
+        obj1 = {
+          name: '(空白)',
+          count: 0
+        }
+        obj2 = {
+          name: '公共区域',
+          count: 0
+        }
+        obj3 = {
+          name: '租户区域',
+          count: 0
+        }
+        for (let i in data1) {
+          for (let j in data1[i]) {
+            if (j == '公共区域') {
+              obj2.count += data1[i][j];
+            } else if (j == '租户区域') {
+              obj3.count += data1[i][j];
+            } else {
+              obj1.count += data1[i][j]
+            }
+          }
+        }
+        arr1.push(obj1)
+        arr1.push(obj2)
+        arr1.push(obj3)
+      this.region_data = arr1;
+      // console.log("region_data", arr1)
+      // return arr;
+    }
   },
   methods: {
     goBack() {
@@ -277,21 +278,21 @@ export default {
     }
   },
   mounted() {
-    // window.onresize = () => {
-    //   // 基于准备好的dom，初始化echarts实例
-    //   let myChart = this.$echarts.init(document.getElementById('id_system'));
-    //   myChart.resize();
-    //   myChart = this.$echarts.init(document.getElementById('id_reason'));
-    //   myChart.resize();
-    //   myChart = this.$echarts.init(document.getElementById('id_region'));
-    //   myChart.resize();
-    //   myChart = this.$echarts.init(document.getElementById('history_chart'));
-    //   myChart.resize();
-    //   myChart = this.$echarts.init(document.getElementById('pie'));
-    //   myChart.resize();
-    //   myChart = this.$echarts.init(document.getElementById('pie2'));
-    //   myChart.resize();
-    // };
+    window.onresize = () => {
+      // 基于准备好的dom，初始化echarts实例
+      let myChart = this.$echarts.init(document.getElementById('id_system'));
+      myChart.resize();
+      myChart = this.$echarts.init(document.getElementById('id_reason'));
+      myChart.resize();
+      myChart = this.$echarts.init(document.getElementById('id_region'));
+      myChart.resize();
+      myChart = this.$echarts.init(document.getElementById('history_chart'));
+      myChart.resize();
+      myChart = this.$echarts.init(document.getElementById('pie'));
+      myChart.resize();
+      myChart = this.$echarts.init(document.getElementById('pie2'));
+      myChart.resize();
+    };
   },
   beforeRouteLeave(to, from, next) {
     to.meta.keepAlive = false

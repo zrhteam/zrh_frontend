@@ -66,7 +66,7 @@
           </el-col>
           <el-col :span="12" style="height: 42%">
             <el-card class="box-card " shadow="never"
-                     style="background-color: transparent; height: 80%; left: 10%; top: 10%">
+                     style="background-color: transparent; height: 90%; left: 10%; top: 10%">
               <!--          当前未整改高风险隐患列表-->
               <Region2_1></Region2_1>
             </el-card>
@@ -79,7 +79,7 @@
           </el-col>
           <el-col :span="12" style="height: 42%">
             <Region1_4></Region1_4>
-            <!--历次检查隐患数量变化-->
+            <!--各等级隐患数量变化-->
           </el-col>
           <!--          </el-row>-->
           <el-col :span="24" style="height: 9%">
@@ -216,8 +216,37 @@ export default {
         prj.style.display = 'block'
         let check = document.getElementById('check_part');
         check.style.display = 'none'
+        document.getElementById('map_1').style.display = 'none'
+        document.getElementById('map_2').style.display = 'block'
+        this.map.setZoom(12)
+        setTimeout(function () {
+          this.map.panTo(new L.LatLng(30, 30));
+        }, 300)
       }
-    }
+    },
+    loadMap() {//加载地图
+      this.map = L.map("map_2", {
+        center: [34, 107], // 地图中心
+        zoom: 4, //缩放比列
+        zoomControl: false, //禁用 + - 按钮
+        // doubleClickZoom: false, // 禁用双击放大
+        attributionControl: false // 移除右下角leaflet标识
+      });
+      let name = L.tileLayer(
+          // 'https://api.mapbox.com/styles/v1/zhaiyzh/ckes4nsma2yls19op279otef9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhhaXl6aCIsImEiOiJja2VyeWYzNTYwbHB1MnhzYTV0Z3didG1hIn0.forlrmKVYKXTsyP7voWu9Q'
+          "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",//初始化一个 openlayers 地图
+          // 天地图影像图层
+      ).addTo(this.map);
+
+      for (var i = 0; i < this.p_data.length; i++) {
+        L.marker([this.p_data[i].lat, this.p_data[i].lng]).addTo(this.map);
+
+      }
+      // this.map.panTo(new L.LatLng(40.737, -73.923));
+      let myChart = this.$echarts.init(document.getElementById('index_chart'))
+      let _this = this
+      return this.map
+    },
   },
   data(){
     return {

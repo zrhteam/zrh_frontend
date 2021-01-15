@@ -1,5 +1,6 @@
 <template>
-  <div class="grid-content bg-purple" >
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 90%; left: 10%; top: 10%">
     <div class="level4" style = 'text-align: left; padding-top: 15px; padding-bottom: 10px'>
       <span>所有项目累计发现隐患专业分布</span>
     </div>
@@ -10,13 +11,13 @@
       <div style="display: none; text-align: center">
         {{getRiskDistribution}}
       </div>
-      <div id = 'risk_distribution' style = 'height: 400px; width: 100%; padding-bottom: 10px'></div>
+      <div id = 'risk_distribution' style = 'height: 290px; width: 100%; '></div>
     </div>
 <!--      &lt;!&ndash;              在这里展示三维图&ndash;&gt;-->
 <!--      <div>-->
 <!--&lt;!&ndash;        <RiskDistribution></RiskDistribution>&ndash;&gt;-->
 <!--      </div>-->
-  </div>
+  </el-card>
 </template>
 
 <script>

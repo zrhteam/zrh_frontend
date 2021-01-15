@@ -78,7 +78,7 @@
 import Region2_2 from "@/components/views/Region/Region2_2.vue";
 import Region3_1 from "@/components/views/Region/Region3_1.vue";
 export default {
-  name: "RegionDataScreen",
+  name: "RegionOverview",
   components: {
     Region3_1,
     Region2_2

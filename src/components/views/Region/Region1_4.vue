@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <el-card class="box-card boundary-C" shadow="never"
+           style="background-color: transparent; height: 90%; left: 10%; top: 10%">
     <div style="display: none; color: rgb(0,0,0);">
       {{ getRiskLevelData }}
     </div>
@@ -23,7 +24,7 @@
         </el-table-column>
       </el-table>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
