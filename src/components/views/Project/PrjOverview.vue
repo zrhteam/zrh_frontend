@@ -298,7 +298,7 @@ export default {
         this.map.setZoom(4)
         setTimeout(function () {
           this.map.panTo(new L.LatLng(34, 107));
-        }, 300)
+        }, 100)
       }
       if (node.level == 4) {
         let param1 = new URLSearchParams();

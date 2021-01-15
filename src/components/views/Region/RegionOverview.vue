@@ -94,6 +94,7 @@
         </el-row>
         <!--      </el-card>-->
       </el-col>
+<!--      <PrjOverview></PrjOverview>-->
     </el-row>
   </el-row>
 </template>
@@ -217,14 +218,38 @@ export default {
         region.style.display = 'none'
         let prj = document.getElementById('prj_part');
         prj.style.display = 'block'
-        let check = document.getElementById('check_part');
-        check.style.display = 'none'
-        document.getElementById('map_1').style.display = 'none'
-        document.getElementById('map_2').style.display = 'block'
-        this.map.setZoom(12)
-        setTimeout(function () {
-          this.map.panTo(new L.LatLng(30, 30));
-        }, 300)
+        // let check = document.getElementById('check_part');
+        // check.style.display = 'none'
+        // document.getElementById('map_1').style.display = 'none'
+        // document.getElementById('map_2').style.display = 'block'
+        // this.map.setZoom(12)
+        // setTimeout(function () {
+        //   this.map.panTo(new L.LatLng(30, 30));
+        // }, 100)
+      } else if (node.level == 2) {
+        let param1 = new URLSearchParams();
+        param1.append('check_code', data.label);
+        this.$store.state.get_region.params = param1
+        this.$store.dispatch('get_region/getInitRegionProjectNumber')
+        this.$store.dispatch('get_region/getInitRegionRiskLevel')
+        this.$store.dispatch('get_region/getInitRegionHighRisk')
+        this.$store.dispatch('get_region/getInitRegionImage')
+        this.$store.dispatch('get_region/getInitRegionMajor')
+        this.$store.dispatch('get_region/getInitRegionNumberTop')
+        this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+        this.$store.dispatch('get_region/getInitRegionRiskRank')
+        let region = document.getElementById('region_part');
+        region.style.display = 'block'
+        let prj = document.getElementById('prj_part');
+        prj.style.display = 'node'
+        // let check = document.getElementById('check_part');
+        // check.style.display = 'none'
+        // document.getElementById('map_1').style.display = 'none'
+        // document.getElementById('map_2').style.display = 'block'
+        // this.map.setZoom(12)
+        // setTimeout(function () {
+        //   this.map.panTo(new L.LatLng(30, 30));
+        // }, 300)
       }
     },
     loadMap() {//加载地图
