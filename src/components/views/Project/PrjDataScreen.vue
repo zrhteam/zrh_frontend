@@ -37,7 +37,7 @@
         </el-button>
       </el-card>
     </el-col>
-    <el-col :span="16" style="height: 100%; ">
+    <el-col :span="16" id="prj_charts" style="height: 100%;">
       <el-card class="title-box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
         <label>数据大屏</label>
@@ -62,7 +62,7 @@
         <label>...</label>
       </el-card>
     </el-col>
-<!--    <CheckDataScreen></CheckDataScreen>-->
+    <CheckDataScreen id="check_charts" style="display: none"></CheckDataScreen>
     <el-col :span="4" style="height: 100%">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
@@ -177,7 +177,7 @@ export default {
       this.$store.state.get_login.tree_data = arr
     },
     handleNodeClick(data, node) {
-        console.log("出来了", data);
+        // console.log("出来了", data);
         console.log(node);
     },
     outPrjDataScreen() {
@@ -191,6 +191,10 @@ export default {
       large2.style.width = "99%"
       var prj_small = document.getElementById('prj_small');
       prj_small.style.display = 'none'
+      // document.getElementById('prj_charts').style.width = "500px"
+      // document.getElementById('prj_charts').style.width = "99%"
+      // document.getElementById('check_charts').style.width = "500px"
+      // document.getElementById('check_charts').style.width = "99%"
     },
   },
 

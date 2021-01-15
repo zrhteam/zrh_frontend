@@ -254,6 +254,13 @@ export default {
       var prj_small = document.getElementById('prj_small');
       prj_small.style.display = 'block'
       prj_small.style.width = "500px"
+      document.getElementById('prj_charts').style.height = "500px"
+      document.getElementById('check_charts').style.height = "500px"
+      setTimeout(function () {
+        prj_small.style.width = "99%"
+        document.getElementById('prj_charts').style.height = "99%"
+        document.getElementById('check_charts').style.height = "99%"
+      }, 100)
       prj_small.style.width = "99%"
     },
     handleNodeClick(data, node) {
@@ -286,6 +293,8 @@ export default {
         check.style.display = 'none'
         document.getElementById('map_1').style.display = 'none'
         document.getElementById('map_2').style.display = 'block'
+        document.getElementById('prj_charts').style.display = 'block'
+        document.getElementById('check_charts').style.display = 'none'
         this.map.setZoom(4)
         setTimeout(function () {
           this.map.panTo(new L.LatLng(34, 107));
@@ -310,10 +319,13 @@ export default {
         check.style.display = 'block'
         document.getElementById('map_1').style.display = 'none'
         document.getElementById('map_2').style.display = 'block'
+        document.getElementById('prj_charts').style.display = 'none'
+        document.getElementById('check_charts').style.display = 'block'
         this.map.setZoom(12)
+        let _this = this
         setTimeout(function () {
-          this.map.panTo(new L.LatLng(30, 30));
-        }, 300)
+          _this.map.panTo(new L.LatLng(31.8604, 117.3254));
+        }, 100)
       }
     },
     loadMap() {//加载地图
