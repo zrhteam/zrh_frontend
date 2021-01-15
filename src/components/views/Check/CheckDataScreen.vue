@@ -11,13 +11,13 @@
     </el-col>
     <el-col :span="8" style="height: 83%">
       <!--          当前未整改高风险隐患图片-->
-      <!--        <UnsolvedImageList></UnsolvedImageList>-->
+      <CheckHighImage></CheckHighImage>
       <CheckPertangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></CheckPertangePerc>
     </el-col>
     <el-col :span="8" style="height: 83%">
       <CheckPertangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></CheckPertangePerc>
       <!--        <HistoryTopRisk class=""></HistoryTopRisk>-->
-      -->
+      <CheckRiskTop></CheckRiskTop>
     </el-col>
     <el-card class="box-card " shadow="never"
              style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
@@ -29,10 +29,12 @@
 <script>
 import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
 import CheckPertangePerc from "@/components/views/Check/CheckPertangePerc.vue";
+import CheckHighImage from "@/components/views/Check/CheckHighImage.vue";
+import CheckRiskTop from "@/components/views/Check/CheckRiskTop.vue";
 
 export default {
   name: "CheckDataScreen",
-  components: {CheckPertangePerc, CheckRiskLevel}
+  components: {CheckRiskTop, CheckHighImage, CheckPertangePerc, CheckRiskLevel}
 }
 </script>
 
