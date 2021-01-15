@@ -37,7 +37,7 @@
         </el-button>
       </el-card>
     </el-col>
-    <el-col :span="16" style="height: 100%">
+    <el-col :span="16" style="height: 100%; display: none">
       <el-card class="title-box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
         <label>数据大屏</label>
@@ -62,6 +62,7 @@
         <label>...</label>
       </el-card>
     </el-col>
+    <CheckDataScreen></CheckDataScreen>
     <el-col :span="4" style="height: 100%">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
@@ -94,10 +95,12 @@ import CheckedProject from "@/components/views/Project/CheckedProject.vue";
 import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
 import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
+import CheckDataScreen from "@/components/views/Check/CheckDataScreen.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    CheckDataScreen,
     Granularity,
     HistoryTopRisk,
     PerctangePerc,
@@ -176,7 +179,19 @@ export default {
     handleNodeClick(data, node) {
         console.log("出来了", data);
         console.log(node);
-    }
+    },
+    outPrjDataScreen() {
+      var large1 = document.getElementById('large1');
+      large1.style.display = 'block'
+      large1.style.width = "500px"
+      large1.style.width = "99%"
+      var large2 = document.getElementById('large2');
+      large2.style.display = 'block'
+      large2.style.width = "500px"
+      large2.style.width = "99%"
+      var prj_small = document.getElementById('prj_small');
+      prj_small.style.display = 'none'
+    },
   },
 
   data() {
