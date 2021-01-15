@@ -1,5 +1,6 @@
 <template>
-  <el-row style="height: 100%;">
+  <!--  <div>-->
+  <el-row id="region1" style="height: 100%;">
     <RegionDataScreen id="region_small" style="display: none"></RegionDataScreen>
     <el-row id="region_large1" class="" style="height: 10%;">
       <el-col :span="4" style="height: 100%">
@@ -94,9 +95,12 @@
         </el-row>
         <!--      </el-card>-->
       </el-col>
-<!--      <PrjOverview></PrjOverview>-->
+      <!--      <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>-->
     </el-row>
+    <PrjOverview id="prj_part" style="display: none"></PrjOverview>
   </el-row>
+
+  <!--    </div>-->
 </template>
 
 <script>
@@ -106,12 +110,14 @@ import Region3_3 from "@/components/views/Region/Region3_3.vue";
 import Region2_3 from "@/components/views/Region/Region2_3.vue";
 import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
+import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
 
 export default {
   name: "RegionOverview",
   components: {
     PrjOverview,
+    PrjOverviewPart,
     Region1_3,
     Region1_4,
     Region2_1,
@@ -200,8 +206,9 @@ export default {
     },
     handleNodeClick(data, node) {
       if (node.level == 3) {
+        // this.$router.push({path: '/prj_data_analysis'});
         let param1 = new URLSearchParams();
-        param1.append('prj_code', data.label);
+        param1.append('project_name', data.label);
         this.$store.state.get_project.params = param1
         this.$store.dispatch('get_project/getInitPrjRisk')
         this.$store.dispatch('get_project/getInitProjectHistoryPerception')
@@ -215,9 +222,14 @@ export default {
         this.$store.dispatch('get_project/getInitProjectRiskTop')
         this.$store.dispatch('get_project/getInitProjectRegionDistribution')
         let region = document.getElementById('region_part');
-        region.style.display = 'none'
-        let prj = document.getElementById('prj_part');
-        prj.style.display = 'block'
+        let region_large1 = document.getElementById('region_large1');
+        region_large1.style.display = 'none'
+        let region_large2 = document.getElementById('region_large2');
+        region_large2.style.display = 'none'
+        let region_small = document.getElementById('region_small');
+        region_small.style.display = 'none'
+        document.getElementById('prj_part').style.display = 'block'
+
         // let check = document.getElementById('check_part');
         // check.style.display = 'none'
         // document.getElementById('map_1').style.display = 'none'

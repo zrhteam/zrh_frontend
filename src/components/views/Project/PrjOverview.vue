@@ -26,7 +26,7 @@
               size="mini">
           </el-input>
           <div style="height: 80%">
-            <el-scrollbar>
+            <el-scrollbar style="height: 100%">
               <el-tree
                   class="filter-tree"
                   :data="data"
@@ -35,9 +35,9 @@
                   default-expand-all
                   :filter-node-method="filterNode"
                   ref="tree">
-                <!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
-                <!--                  <span :title="node.label">{{ node.label }}</span>-->
-                <!--                </span>-->
+                                <span class="span-ellipsis" slot-scope="{ node, data }">
+                                  <span :title="node.label">{{ node.label }}</span>
+                                </span>
               </el-tree>
             </el-scrollbar>
           </div>
@@ -56,44 +56,7 @@
       <!--地图+历次检查指数-->
       <PrjIndex></PrjIndex>
       <!--      </el-col>-->
-      <el-col :span="10" id="prj_part" style="height: 100%">
-        <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
-        <el-row style="height: 100%">
-          <el-card class="statistics-box-card " shadow="never"
-                   style="background-color: transparent; height: 5%; margin: 0px 5px 5px 5px">
-            <label>chart</label>
-          </el-card>
-          <!--          <el-row style="height: 42%">-->
-          <el-col :span="12" style="height: 42%">
-            <CheckHistoryPerc></CheckHistoryPerc>
-          </el-col>
-          <el-col :span="12" style="height: 42%">
-            <el-card class="box-card " shadow="never"
-                     style="background-color: transparent; height: 80%; left: 10%; top: 10%">
-              <!--          当前未整改高风险隐患列表-->
-              <UnsolvedList></UnsolvedList>
-            </el-card>
-          </el-col>
-          <!--          </el-row>-->
-          <!--          <el-row style="height: 42%">-->
-          <el-col :span="12" style="height: 42%">
-            <!--当前整改率-->
-            <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>
-          </el-col>
-          <el-col :span="12" style="height: 42%">
-            <CheckedHistory></CheckedHistory>
-            <!--历次检查隐患数量变化-->
-          </el-col>
-          <!--          </el-row>-->
-          <el-col :span="24" style="height: 9%">
-            <el-card class="statistics-box-card" shadow="never"
-                     style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
-              <label>more</label>
-            </el-card>
-          </el-col>
-        </el-row>
-        <!--      </el-card>-->
-      </el-col>
+      <PrjOverviewPart></PrjOverviewPart>
       <CheckOverview id="check_part"></CheckOverview>
     </el-row>
   </el-row>
@@ -116,10 +79,12 @@ import PrjIndex from "@/components/views/Project/PrjIndex.vue";
 import PrjDataScreen from '@/components/views/Project/PrjDataScreen.vue'
 import * as d3 from "d3/dist/d3";
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
+import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    PrjOverviewPart,
     CheckOverview,
     Granularity,
     HistoryTopRisk,

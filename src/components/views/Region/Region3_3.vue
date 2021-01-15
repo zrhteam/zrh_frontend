@@ -4,9 +4,9 @@
              style="background-color: transparent; height: 70%; margin: 0px 5px 5px 5px">
       <!--          放地图-->
       <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: transparent">
-        <div id="map_1"
+        <div id="map_3"
              style="pointer-events:inherit; height: 100%; width: 100%;"></div>
-        <div id="map_2"
+        <div id="map_4"
              style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>
       </div>
       <!--          <div id="map" bordered style="pointer-events:inherit"></div>-->
@@ -179,7 +179,7 @@ export default {
       });
     },
     loadMap() {//加载地图
-      this.map = L.map("map_1", {
+      this.map = L.map("map_3", {
         center: [34, 107], // 地图中心
         zoom: 4, //缩放比列
         zoomControl: false, //禁用 + - 按钮
