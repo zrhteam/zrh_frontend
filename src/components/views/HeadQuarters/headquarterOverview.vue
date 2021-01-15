@@ -175,7 +175,7 @@ export default {
             };
             child1['id'] = count++
             child1['label'] = k
-            parent2['children'].push(child1)
+            // parent2['children'].push(child1)
             for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
               for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
                 let child2 = {
@@ -184,7 +184,7 @@ export default {
                 };
                 child2['id'] = count++
                 child2['label'] = m
-                child1['children'].push(child2)
+                // child1['children'].push(child2)
                 obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
                 obj['lng'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng
                 p_arr.push(obj)

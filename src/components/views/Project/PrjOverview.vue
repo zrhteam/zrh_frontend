@@ -29,20 +29,6 @@
               size="mini">
           </el-input>
           <div style="height: 80%">
-<!--            <el-scrollbar style="height: 100%">-->
-<!--              <el-tree-->
-<!--                  class="filter-tree"-->
-<!--                  :data="data"-->
-<!--                  :props="defaultProps"-->
-<!--                  @node-click="handleNodeClick"-->
-<!--                  default-expand-all-->
-<!--                  :filter-node-method="filterNode"-->
-<!--                  ref="tree">-->
-<!--                                <span class="span-ellipsis" slot-scope="{ node, data }">-->
-<!--                                  <span :title="node.label">{{ node.label }}</span>-->
-<!--                                </span>-->
-<!--              </el-tree>-->
-<!--            </el-scrollbar>-->
             <el-scrollbar style="height: 100%">
               <el-tree
                   class="filter-tree"
@@ -52,9 +38,9 @@
                   default-expand-all
                   :filter-node-method="filterNode"
                   ref="tree">
-                <span class="span-ellipsis" slot-scope="{ node, data }">
-                  <span :title="node.label">{{ node.label }}</span>
-                </span>
+                                <span class="span-ellipsis" slot-scope="{ node, data }">
+                                  <span :title="node.label">{{ node.label }}</span>
+                                </span>
               </el-tree>
             </el-scrollbar>
           </div>
@@ -76,6 +62,7 @@
       <PrjOverviewPart></PrjOverviewPart>
       <CheckOverview id="check_part"></CheckOverview>
     </el-row>
+    <RegionOverview id="region_part" style="display: none"></RegionOverview>
   </el-row>
   <!--  <PrjDataScreen></PrjDataScreen>-->
 </template>
@@ -97,10 +84,12 @@ import PrjDataScreen from '@/components/views/Project/PrjDataScreen.vue'
 import * as d3 from "d3/dist/d3";
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
 import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
+import RegionOverview from "@/components/views/Region/RegionDataScreen.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    RegionOverview,
     PrjOverviewPart,
     CheckOverview,
     Granularity,
@@ -269,7 +258,7 @@ export default {
 
         //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
         this.$store.dispatch('get_project/getInitProjectRiskTop')
-        var prj = document.getElementById('prj_part');
+        var prj = document.getElementById('prj_subpart');
         prj.style.display = 'block'
         var check = document.getElementById('check_part');
         check.style.display = 'none'
@@ -295,19 +284,35 @@ export default {
         this.$store.dispatch('get_check/getCheckMajorArea')
         this.$store.dispatch('get_check/getCheckMajorStage')
         this.$store.dispatch('get_check/getCheckRiskTop')
-        var prj = document.getElementById('prj_part');
+        var prj = document.getElementById('prj_subpart');
         prj.style.display = 'none'
         var check = document.getElementById('check_part');
         check.style.display = 'block'
+        // document.getElementById('check_part').style.display = 'none'
         document.getElementById('map_1').style.display = 'none'
         document.getElementById('map_2').style.display = 'block'
         document.getElementById('prj_charts').style.display = 'none'
         document.getElementById('check_charts').style.display = 'block'
+        var large1 = document.getElementById('large1');
+        large1.style.display = 'block'
+        var large2 = document.getElementById('large2');
+        large2.style.display = 'block'
+        var prj_small = document.getElementById('prj_small');
+        prj_small.style.display = 'none'
         this.map.setZoom(12)
         let _this = this
         setTimeout(function () {
           _this.map.panTo(new L.LatLng(31.8604, 117.3254));
         }, 100)
+      }else if (node.level == 2) {
+        // alert(this.$store.state.get_login.grant_data.data.user_grant)
+        document.getElementById('region_part').style.display = 'block'
+        var large1 = document.getElementById('large1');
+        large1.style.display = 'none'
+        var large2 = document.getElementById('large2');
+        large2.style.display = 'none'
+        var prj_small = document.getElementById('prj_small');
+        prj_small.style.display = 'none'
       }
     },
     loadMap() {//加载地图

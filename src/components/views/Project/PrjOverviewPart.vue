@@ -1,5 +1,5 @@
 <template>
-  <el-col :span="10" id="prj_part" style="height: 100%">
+  <el-col :span="10" id="prj_subpart" style="height: 100%">
     <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
     <el-row style="height: 100%">
       <el-card class="statistics-box-card " shadow="never"

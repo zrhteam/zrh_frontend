@@ -69,5 +69,6 @@ export default {
 }
 .el-tree-node__content:hover{
   background-color: #a0cfff;
+  color: #222222;
 }
 </style>
