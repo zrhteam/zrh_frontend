@@ -13,7 +13,7 @@
             size="mini">
         </el-input>
         <div style="height: 80%">
-          <el-scrollbar>
+          <el-scrollbar style="height: 100%">
             <el-tree
                 class="filter-tree"
                 :data="data"
@@ -22,6 +22,9 @@
                 default-expand-all
                 :filter-node-method="filterNode"
                 ref="tree">
+               <span class="span-ellipsis" slot-scope="{ node, data }">
+                  <span :title="node.label">{{ node.label }}</span>
+                </span>
             </el-tree>
           </el-scrollbar>
         </div>
@@ -36,16 +39,16 @@
 
       </el-card>
     </el-col>
-    <el-col :span="16" style="height: 100%; display: none">
+    <el-col :span="16" style="height: 100%;">
       <el-card class="title-box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
         <label>数据大屏</label>
       </el-card>
-      <el-col :span="8" style="height: 83%">
+      <el-col :span="8" style="height: 42%">
         <!--          当前未整改高风险隐患图片-->
         <HighRiskImages></HighRiskImages>
       </el-col>
-      <el-col :span="8" style="height: 83%">
+      <el-col :span="24" style="height: 42%">
         <ProjectIndex></ProjectIndex>
       </el-col>
       <el-card class="box-card " shadow="never"

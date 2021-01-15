@@ -26,7 +26,7 @@
               size="mini">
           </el-input>
           <div style="height: 80%">
-            <el-scrollbar style="height: 99%">
+            <el-scrollbar style="height: 96%">
               <el-tree
                   class="filter-tree"
                   :data="data"

@@ -4,14 +4,14 @@
     <div class="level4" style="padding-top: 15px">
       <span>项目综合&专业风险指数排名</span>
     </div>
-    <div>
+<!--    <div>-->
       <div id="mydiv1" style="font-color: black">
         <div style="display: none">
           {{ getIndexHistogram }}
         </div>
       </div>
-      <div id="number_histogram1" style="height: 400px; width: 100%"></div>
-    </div>
+      <div id="number_histogram1" style="height: 80%; width: 100%"></div>
+<!--    </div>-->
   </el-card>
 </template>
 

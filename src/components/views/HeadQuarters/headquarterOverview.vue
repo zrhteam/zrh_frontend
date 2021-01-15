@@ -25,7 +25,7 @@
               size="mini">
           </el-input>
           <div style="height: 80%">
-            <el-scrollbar>
+            <el-scrollbar style="height: 100%">
               <el-tree
                   class="filter-tree"
                   :data="data"
@@ -34,6 +34,9 @@
                   default-expand-all
                   :filter-node-method="filterNode"
                   ref="tree">
+                <span class="span-ellipsis" slot-scope="{ node, data }">
+                  <span :title="node.label">{{ node.label }}</span>
+                </span>
               </el-tree>
             </el-scrollbar>
           </div>
@@ -92,6 +95,7 @@
         <!--      </el-card>-->
       </el-col>
     </el-row>
+    <RegionOverview id="region_part" style="display: none"></RegionOverview>
   </el-row>
 </template>
 
@@ -102,9 +106,13 @@ import UnsolvedList from "@/components/views/HeadQuarters/UnsolvedList.vue";
 import AccumRisk from "@/components/views/HeadQuarters/AccumRisk.vue";
 import TopAccumRisk from "@/components/views/HeadQuarters/TopAccumRisk.vue";
 import headquarterDataScreen from "@/components/views/HeadQuarters/headquarterDataScreen.vue";
+import CheckOverview from "@/components/views/Check/CheckOverview.vue";
+import RegionOverview from "@/components/views/Region/RegionOverview.vue";
 export default {
   name: "headquarterOverview",
   components: {
+    RegionOverview,
+    CheckOverview,
     TopAccumRisk,
     AccumRisk,
     UnsolvedList,
@@ -192,11 +200,12 @@ export default {
       head_small.style.display = 'block'
       head_small.style.width = "500px"
       head_small.style.width = "99%"
+      document.getElementById('region_part').style.display = 'none'
     },
     handleNodeClick(data, node) {
       if (node.level == 2) {
         let param1 = new URLSearchParams();
-        param1.append('region_code', data.label);
+        param1.append('region_name', data.label);
         this.$store.state.get_region.params = param1
         this.$store.dispatch('get_region/getInitRegionProjectNumber')
         this.$store.dispatch('get_region/getInitRegionRiskLevel')
@@ -205,22 +214,21 @@ export default {
         this.$store.dispatch('get_region/getInitRegionMajor')
         this.$store.dispatch('get_region/getInitRegionNumberTop')
         this.$store.dispatch('get_region/getInitRegionSafetyIndex')
-        this.$store.dispatch('get_region/getInitRegionRiskRank')
+        // this.$store.dispatch('get_region/getInitRegionRiskRank')
+        document.getElementById('head_small').style.display = 'none'
+        document.getElementById('head_large1').style.display = 'none'
+        document.getElementById('head_large2').style.display = 'none'
+        document.getElementById('region_part').style.display = 'block'
+        // let check = document.getElementById('check_part');
+        // check.style.display = 'none'
+        // document.getElementById('map_1').style.display = 'none'
+        // document.getElementById('map_2').style.display = 'block'
+        // this.map.setZoom(12)
+        // setTimeout(function () {
+        //   this.map.panTo(new L.LatLng(30, 30));
+        // }, 300)
+      }else if (node.level == 1) {
 
-        let headquarter = document.getElementById('head_part');
-        headquarter.style.display = 'none'
-        let region = document.getElementById('region_part');
-        region.style.display = 'block'
-        let prj = document.getElementById('prj_part');
-        prj.style.display = 'none'
-        let check = document.getElementById('check_part');
-        check.style.display = 'none'
-        document.getElementById('map_1').style.display = 'none'
-        document.getElementById('map_2').style.display = 'block'
-        this.map.setZoom(12)
-        setTimeout(function () {
-          this.map.panTo(new L.LatLng(30, 30));
-        }, 300)
       }
     },
     loadMap() {//加载地图

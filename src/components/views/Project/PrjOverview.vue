@@ -26,6 +26,20 @@
               size="mini">
           </el-input>
           <div style="height: 80%">
+<!--            <el-scrollbar style="height: 100%">-->
+<!--              <el-tree-->
+<!--                  class="filter-tree"-->
+<!--                  :data="data"-->
+<!--                  :props="defaultProps"-->
+<!--                  @node-click="handleNodeClick"-->
+<!--                  default-expand-all-->
+<!--                  :filter-node-method="filterNode"-->
+<!--                  ref="tree">-->
+<!--                                <span class="span-ellipsis" slot-scope="{ node, data }">-->
+<!--                                  <span :title="node.label">{{ node.label }}</span>-->
+<!--                                </span>-->
+<!--              </el-tree>-->
+<!--            </el-scrollbar>-->
             <el-scrollbar style="height: 100%">
               <el-tree
                   class="filter-tree"
@@ -35,9 +49,9 @@
                   default-expand-all
                   :filter-node-method="filterNode"
                   ref="tree">
-                                <span class="span-ellipsis" slot-scope="{ node, data }">
-                                  <span :title="node.label">{{ node.label }}</span>
-                                </span>
+                <span class="span-ellipsis" slot-scope="{ node, data }">
+                  <span :title="node.label">{{ node.label }}</span>
+                </span>
               </el-tree>
             </el-scrollbar>
           </div>
