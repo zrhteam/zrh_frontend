@@ -243,7 +243,7 @@ export default {
         this.$store.dispatch('get_check/getCheckRiskTop')
         var prj = document.getElementById('prj_part');
         prj.style.display = 'none'
-        var check = document.getElementById('check');
+        var check = document.getElementById('check_part');
         check.style.display = 'block'
       }
     }
