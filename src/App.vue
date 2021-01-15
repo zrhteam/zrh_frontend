@@ -64,4 +64,7 @@ export default {
 .boundary-C {
   border: 1px dashed #58ce43;
 }
+.el-tree{
+  color: white;
+}
 </style>

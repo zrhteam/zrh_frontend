@@ -166,6 +166,14 @@ export default {
                   )
                 }
               },
+              label:{
+                show: true,
+                position: 'top',
+                textStyle: {
+                  fontSize: '7px',
+                  color: '#fff'
+                },
+              },
               emphasis: {
                 itemStyle: {
                   color: '#40abc4'

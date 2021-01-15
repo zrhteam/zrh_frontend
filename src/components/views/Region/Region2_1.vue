@@ -9,10 +9,11 @@
       </div>
     </div>
     <el-table
+        :header-cell-style="{color: '#fff'}"
         :data="noRectificationNumber"
         :row-style="{height: '20px'}"
         :cell-style="{padding: '5px'}"
-        style="width: 100%; color: #93bce7"
+        style="width: 100%; color: #fff"
         max-height="400px">
       <el-table-column
           prop="description"
@@ -72,14 +73,12 @@ export default {
 <style scoped>
 /*最外层透明*/
 /deep/ .el-table, /deep/ .el-table__expanded-cell{
-
   background-color: transparent;
 }
 /* 表格内背景颜色 */
 /deep/ .el-table th,
 /deep/ .el-table tr,
 /deep/ .el-table td {
-
   background-color: transparent;
 }
 </style>

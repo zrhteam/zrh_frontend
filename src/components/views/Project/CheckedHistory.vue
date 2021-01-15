@@ -103,9 +103,8 @@ export default {
                 position: 'top',
                 textStyle: {
                   fontSize: '7px',
-                  color: '#666'
+                  color: '#fff'
                 },
-                // formatter: '{c}',
               },
               emphasis: {
                 itemStyle: {

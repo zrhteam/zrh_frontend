@@ -10,10 +10,11 @@
       </div>
       <div style="padding-bottom: 10px"><!--            stripe-->
         <el-table
+            :header-cell-style="{color: '#fff'}"
             :data="tableData"
             :row-style="{height: '20px'}"
             :cell-style="{padding: '5px'}"
-            style="width: 100%; color: #93bce7"
+            style="width: 100%; color: #fff"
             max-height="400px">
           <el-table-column
               prop="description"

@@ -10,10 +10,11 @@
       </div>
       <div>
         <el-table
+            :header-cell-style="{color: '#fff'}"
             :data="riskNumberTop"
             :row-style="{height: '20px'}"
             :cell-style="{padding: '5px'}"
-            style="width: 100%; color: #93bce7">
+            style="width: 100%; color: #fff">
           <el-table-column
               prop="description"
               label="隐患描述"

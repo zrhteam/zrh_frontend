@@ -10,10 +10,11 @@
     <div>
 
       <el-table
+          :header-cell-style="{color: '#fff'}"
           :data="riskTop"
           :row-style="{height: '20px'}"
           :cell-style="{padding: '0px'}"
-          style="width: 100%; height: 100%; color: #93bce7">
+          style="width: 100%; height: 100%; color: #fff">
         <el-table-column
             label="序号" type = 'index'>
 <!--            type="index">-->

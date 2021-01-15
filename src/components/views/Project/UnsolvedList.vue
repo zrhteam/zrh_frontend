@@ -8,10 +8,11 @@
     </div>
     <div class="level5" style="padding-bottom: 10px">
       <el-table
+          :header-cell-style="{color: '#fff'}"
           :data="riskLevelList"
           :row-style="{height: '20px'}"
           :cell-style="{padding: '1px'}"
-          style="width: 100%; color: #93bce7"
+          style="width: 100%; color: #fff"
           max-height = '400px'>
         <el-table-column
             prop="description"

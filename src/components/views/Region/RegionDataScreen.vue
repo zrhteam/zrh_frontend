@@ -194,6 +194,8 @@ export default {
   display: inline-block;
 }
 
+
+
 .span-ellipsis {
   font-size: 0.1em;
   text-align: left;
