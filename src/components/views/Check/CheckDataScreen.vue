@@ -7,16 +7,15 @@
     <el-col :span="8" style="height: 83%">
       <!--本次检查累计发现隐患数量-->
       <CheckRiskLevel></CheckRiskLevel>
-      <!--        <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason'}"></PerctangePerc>-->
       <CheckPertangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason'}"> </CheckPertangePerc>
     </el-col>
     <el-col :span="8" style="height: 83%">
       <!--          当前未整改高风险隐患图片-->
       <!--        <UnsolvedImageList></UnsolvedImageList>-->
-      <!--        <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></PerctangePerc>-->
+      <CheckPertangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></CheckPertangePerc>
     </el-col>
     <el-col :span="8" style="height: 83%">
-      <!--        <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>-->
+      <CheckPertangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></CheckPertangePerc>
       <!--        <HistoryTopRisk class=""></HistoryTopRisk>-->
       -->
     </el-col>
