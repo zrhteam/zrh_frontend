@@ -1,7 +1,7 @@
 <template>
   <!--  <div></div>-->
   <el-row style="height: 100%;">
-    <PrjDataScreen id="small" style="display: none"></PrjDataScreen>
+    <PrjDataScreen id="prj_small" style="display: none"></PrjDataScreen>
     <el-row id="large1" class="" style="height: 10%;">
       <el-col :span="4" style="height: 100%">
         <el-card class="title-box-card" shadow="never"
@@ -220,10 +220,10 @@ export default {
       large1.style.display = 'none'
       var large2 = document.getElementById('large2');
       large2.style.display = 'none'
-      var small = document.getElementById('small');
-      small.style.display = 'block'
-      small.style.width = "500px"
-      small.style.width = "99%"
+      var prj_small = document.getElementById('prj_small');
+      prj_small.style.display = 'block'
+      prj_small.style.width = "500px"
+      prj_small.style.width = "99%"
     },
     handleNodeClick(data, node) {
       // console.log(data);

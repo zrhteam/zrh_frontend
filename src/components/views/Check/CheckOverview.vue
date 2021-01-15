@@ -14,7 +14,7 @@
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 80%; left: 10%; top: 10%">
           <!--          当前未整改高风险隐患列表-->
-<!--          <UnsolvedList></UnsolvedList>-->
+          <CheckHighRisk></CheckHighRisk>
         </el-card>
       </el-col>
       <!--          </el-row>-->
@@ -22,6 +22,7 @@
       <el-col :span="12" style="height: 42%">
         <!--当前整改率-->
 <!--        <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>-->
+        <CheckRectification></CheckRectification>
       </el-col>
       <el-col :span="12" style="height: 42%">
 <!--        <CheckedHistory></CheckedHistory>-->
@@ -41,9 +42,11 @@
 
 <script>
 import CheckRiskRatio from "@/components/views/Check/CheckRiskRatio.vue";
+import CheckHighRisk from "@/components/views/Check/CheckHighRisk.vue";
+import CheckRectification from "@/components/views/Check/CheckRectification.vue";
 export default {
   name: "CheckOverview",
-  components: {CheckRiskRatio}
+  components: {CheckRectification, CheckHighRisk, CheckRiskRatio}
 }
 </script>
 
