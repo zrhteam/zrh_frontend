@@ -313,6 +313,13 @@ export default {
         large2.style.display = 'none'
         var prj_small = document.getElementById('prj_small');
         prj_small.style.display = 'none'
+        let region_large1 = document.getElementById('region_large1');
+        region_large1.style.display = 'block'
+        let region_large2 = document.getElementById('region_large2');
+        region_large2.style.display = 'block'
+        document.getElementById('prj_part').style.display = 'none'
+        // let region_small = document.getElementById('region_small');
+        // region_small.style.display = 'block'
       }
     },
     loadMap() {//加载地图

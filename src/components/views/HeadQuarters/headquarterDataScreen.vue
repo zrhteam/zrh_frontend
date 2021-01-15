@@ -120,7 +120,7 @@ export default {
           };
           parent2['id'] = count++
           parent2['label'] = j
-          parent1['children'].push(parent2)
+          // parent1['children'].push(parent2)
           for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
             let child1 = {
               id: 0,
