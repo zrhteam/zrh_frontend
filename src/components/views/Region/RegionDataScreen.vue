@@ -1,5 +1,5 @@
 <template>
-  <el-row class="prj_data_screen" style="height: 100%;">
+  <el-row class="region_data_screen" style="height: 100%;">
     <el-col :span="4" style="height: 100%">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
@@ -22,9 +22,6 @@
                 default-expand-all
                 :filter-node-method="filterNode"
                 ref="tree">
-<!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
-<!--                  <span :title="node.label">{{ node.label }}</span>-->
-<!--                </span>-->
             </el-tree>
           </el-scrollbar>
         </div>
@@ -33,7 +30,7 @@
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
         <el-button size="mini" round
                    style="background-color: transparent; color: #fff; "
-                   @click="outPrjDataScreen">返回
+                   @click="outRegionDataScreen">返回
         </el-button>
 
 
@@ -45,26 +42,18 @@
         <label>数据大屏</label>
       </el-card>
       <el-col :span="8" style="height: 83%">
-        <!--历次检查累计发现隐患数量-->
-        <CheckedProject></CheckedProject>
-        <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason'}"></PerctangePerc>
-      </el-col>
-      <el-col :span="8" style="height: 83%">
         <!--          当前未整改高风险隐患图片-->
-        <UnsolvedImageList></UnsolvedImageList>
-        <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></PerctangePerc>
+        <Region2_2></Region2_2>
       </el-col>
       <el-col :span="8" style="height: 83%">
-        <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>
-        <HistoryTopRisk class=""></HistoryTopRisk>
-        -->
+        <Region3_1></Region3_1>
       </el-col>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
         <label>...</label>
       </el-card>
     </el-col>
-    <CheckDataScreen></CheckDataScreen>
+<!--    <CheckDataScreen></CheckDataScreen>-->
     <el-col :span="4" style="height: 100%">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
@@ -85,38 +74,14 @@
 </template>
 
 <script>
-import CheckedHistory from "@/components/views/Project/CheckedHistory.vue";
-import Granularity from "@/components/views/Project/Granularity.vue";
-import HistoryTopRisk from "@/components/views/Project/HistoryTopRisk.vue";
-import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
-import LastCheckPerc from "@/components/views/Project/LastCheckPerc.vue";
-import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
-import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
-import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
-import CheckedProject from "@/components/views/Project/CheckedProject.vue";
-import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
-import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
-import PrjIndex from "@/components/views/Project/PrjIndex.vue";
-import CheckDataScreen from "@/components/views/Check/CheckDataScreen.vue";
 
+import Region2_2 from "@/components/views/Region/Region2_2.vue";
+import Region3_1 from "@/components/views/Region/Region3_1.vue";
 export default {
-  name: "PrjOverview",
+  name: "RegionDataScreen",
   components: {
-    CheckDataScreen,
-    Granularity,
-    HistoryTopRisk,
-    PerctangePerc,
-    LastCheckPerc,
-    CheckHistoryPerc,
-    UnsolvedList,
-    UnsolvedImageList,
-    CheckedHistory,
-    CheckedProject,
-    IndexView,
-    PrjCurrentCorrectionRate,
-    // PrjEHSDataAnalysis3,
-    PrjIndex,
-
+    Region3_1,
+    Region2_2
   },
   watch: {
     filterText(val) {
@@ -178,36 +143,20 @@ export default {
       this.data = arr
       this.$store.state.get_login.tree_data = arr
     },
-
-    // returnButton(){
-    //   let vm = this;
-    //   $(document).ready(function(){
-    //     if(window.history && window.history.pushState){
-    //       $(window).on('popstate', function (){
-    //         window.history.pushState('forward', null, '#');
-    //         window.history.forward(1);
-    //         vm.goToPreview();
-    //       });
-    //     }
-    //     window.history.pushState('forward', null, '#');
-    //     window.history.forward(1);
-    //   })
-    // },
-
     handleNodeClick(data, node) {
         console.log("出来了", data);
         console.log(node);
     },
-    outPrjDataScreen() {
-      var large1 = document.getElementById('large1');
+    outRegionDataScreen() {
+      let large1 = document.getElementById('region_large1');
       large1.style.display = 'block'
       large1.style.width = "500px"
       large1.style.width = "99%"
-      var large2 = document.getElementById('large2');
+      let large2 = document.getElementById('region_large2');
       large2.style.display = 'block'
       large2.style.width = "500px"
       large2.style.width = "99%"
-      var prj_small = document.getElementById('prj_small');
+      let prj_small = document.getElementById('region_small');
       prj_small.style.display = 'none'
     },
   },

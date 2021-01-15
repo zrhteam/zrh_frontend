@@ -34,8 +34,8 @@ export default {
   computed: {
     getPrjRiskLevelList() {
       let data = this.$store.state.get_project.prj_risk_list;
-      console.log(this.$store.state.get_project.prj_risk_list)
-      console.log(data)
+      // console.log(this.$store.state.get_project.prj_risk_list)
+      console.log('unsolvedList', data)
       let dataArray = []
       for (let i in data) {
         let obj = {
@@ -44,7 +44,7 @@ export default {
         obj.description = data[i]
         dataArray.push(obj)
       }
-      console.log(dataArray)
+      // console.log('unsolvedList', dataArray)
       this.riskLevelList = dataArray
     },
   },
