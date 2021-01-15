@@ -25,7 +25,7 @@
               size="mini">
           </el-input>
           <div style="height: 80%">
-            <el-scrollbar>
+            <el-scrollbar style="height: 99%">
               <el-tree
                   class="filter-tree"
                   :data="data"
@@ -34,6 +34,9 @@
                   default-expand-all
                   :filter-node-method="filterNode"
                   ref="tree">
+                <span class="span-ellipsis" slot-scope="{ node, data }">
+                  <span :title="node.label">{{ node.label }}</span>
+                </span>
               </el-tree>
             </el-scrollbar>
           </div>
@@ -61,7 +64,7 @@
           </el-card>
           <!--          <el-row style="height: 42%">-->
           <el-col :span="12" style="height: 42%">
-<!--            已整改项目数量-->
+            <!--            已整改项目数量-->
             <Region1_3></Region1_3>
           </el-col>
           <el-col :span="12" style="height: 42%">
@@ -101,6 +104,7 @@ import Region1_4 from "@/components/views/Region/Region1_4.vue";
 import Region3_3 from "@/components/views/Region/Region3_3.vue";
 import Region2_3 from "@/components/views/Region/Region2_3.vue";
 import Region2_1 from "@/components/views/Region/Region2_1.vue";
+import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
 
 export default {
@@ -111,19 +115,18 @@ export default {
     Region1_4,
     Region2_1,
     Region2_3,
-    Region3_3
+    Region3_3,
+    RegionDataScreen
   },
   watch: {
     filterText(val) {
       this.$refs.tree.filter(val);
     }
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {
-    filterNode(value, data){
-      if(!value) return true;
+    filterNode(value, data) {
+      if (!value) return true;
       return data.label.indexOf(value) !== -1;
     },
     getTreeData(tree_data) {
@@ -170,7 +173,7 @@ export default {
                 };
                 child2['id'] = count++
                 child2['label'] = m
-                child1['children'].push(child2)
+                // child1['children'].push(child2)
                 obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
                 obj['lng'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng
                 p_arr.push(obj)
@@ -248,7 +251,7 @@ export default {
       return this.map
     },
   },
-  data(){
+  data() {
     return {
       filterText: '',
       data: [],

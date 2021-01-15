@@ -63,21 +63,21 @@
       </el-card>
     </el-col>
     <CheckDataScreen id="check_charts" style="display: none"></CheckDataScreen>
-    <el-col :span="4" style="height: 100%">
+    <el-col :span="4" style="height: 100%;overflow: scroll">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <label>可选择的统计图</label>
       </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 29%; margin: 0px 5px 5px 5px">
-      </el-card>
+        <el-card class="box-card " shadow="never"
+                 style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        </el-card>
 
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 29%; margin: 0px 5px 5px 5px">
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 30%; margin: 0px 5px 5px 5px">
-      </el-card>
+        <el-card class="box-card " shadow="never"
+                 style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        </el-card>
+        <el-card class="box-card " shadow="never"
+                 style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        </el-card>
     </el-col>
   </el-row>
 </template>

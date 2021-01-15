@@ -7,12 +7,12 @@
 <!--    <div>-->
 <!--      <checkbox></checkbox>-->
 <!--    </div>-->
-    <div>
+<!--    <div>-->
       <div style="display: none; text-align: center">
         {{getRiskDistribution}}
       </div>
-      <div id = 'risk_distribution' style = 'height: 290px; width: 100%; '></div>
-    </div>
+      <div id = 'risk_distribution' style = 'height: 100%; width: 100%; '></div>
+<!--    </div>-->
 <!--      &lt;!&ndash;              在这里展示三维图&ndash;&gt;-->
 <!--      <div>-->
 <!--&lt;!&ndash;        <RiskDistribution></RiskDistribution>&ndash;&gt;-->

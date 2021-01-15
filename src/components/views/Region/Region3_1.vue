@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <el-card class="box-card " shadow="never"
+                 style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getRiskNumberTop }}
     </div>
@@ -25,7 +26,7 @@
         </el-table>
       </div>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>

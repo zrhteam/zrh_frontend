@@ -39,6 +39,7 @@ export default {
   computed: {
     getHighRiskRank(){
       let data = this.$store.state.get_region.high_risk_rank
+      console.log('高风险', data)
       let arr = []
       for (let i in data) {
         let obj = {

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <el-card class="box-card " shadow="never"
+                 style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div class="grid-content bg-purple" >
       <div class = 'level4' style="padding-top: 15px; padding-bottom: 15px">
         <span>未整改高风险隐患图片</span>
@@ -16,7 +17,7 @@
     <div style="display: none">
       {{ getImage }}
     </div>
-  </div>
+  </el-card>
 
 </template>
 
