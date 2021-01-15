@@ -41,33 +41,6 @@ export default {
         tooltip: {
           formatter: '{b}:{c} ({d}%)'
         },
-        // color: ['#5182e4', '#3fb27e', '#9bcc66', '#f7cb4a', '#00b9ff', '#03a1ea'],
-        // color: function (params) {
-        //           let colorList = [
-        //             {
-        //               c1: '#fce5ca',
-        //               c2: '#ff9d62'
-        //             },
-        //             {
-        //               c1: '#508dff',
-        //               c2: '#26c5fe'
-        //             },
-        //             {
-        //               c1: '#63e587',
-        //               c2: '#5fe2e4'
-        //             },
-        //             {
-        //               c1: '#e8e87e',
-        //               c2: '#a1a170'
-        //             }]
-        //           return new echarts.graphic.LinearGradient(1, 0, 0, 0.[{
-        //             offset: 0,
-        //             color: colorList[params.dataIndex].c1
-        //           },{
-        //             offset: 1,
-        //             color: colorList[params.dataIndex].c2
-        //           }])
-        //         },
 
         series: [
           {
