@@ -22,9 +22,9 @@
                 default-expand-all
                 :filter-node-method="filterNode"
                 ref="tree">
-<!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
-<!--                  <span :title="node.label">{{ node.label }}</span>-->
-<!--                </span>-->
+              <!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
+              <!--                  <span :title="node.label">{{ node.label }}</span>-->
+              <!--                </span>-->
             </el-tree>
           </el-scrollbar>
         </div>
@@ -177,8 +177,67 @@ export default {
       this.$store.state.get_login.tree_data = arr
     },
     handleNodeClick(data, node) {
-        // console.log("出来了", data);
-        console.log(node);
+      if (node.level == 3) {
+        let param = new URLSearchParams();
+        param.append('project_name', data.label);
+        this.$store.state.get_project.params = param
+
+        this.$store.dispatch('get_project/getInitProjectRectification')
+        this.$store.dispatch('get_project/getInitProjectRiskLevel')
+        this.$store.dispatch('get_project/getInitProjectHistoryPerception')
+        this.$store.dispatch('get_project/getInitProjectNumberChange')
+        // // 当前未整改高风险隐患列表
+        this.$store.dispatch('get_project/getInitPrjRisk')
+        // // 当前未整改高风险隐患图片
+        this.$store.dispatch('get_project/getInitProjectImage')
+        //
+        // //占比
+        this.$store.dispatch('get_project/getInitProjectSystem')
+        this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+        this.$store.dispatch('get_project/getInitProjectReason')
+
+        //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
+        this.$store.dispatch('get_project/getInitProjectRiskTop')
+        var prj = document.getElementById('prj_part');
+        prj.style.display = 'block'
+        var check = document.getElementById('check_part');
+        check.style.display = 'none'
+        document.getElementById('map_1').style.display = 'none'
+        document.getElementById('map_2').style.display = 'block'
+        document.getElementById('prj_charts').style.display = 'block'
+        document.getElementById('check_charts').style.display = 'none'
+        this.map.setZoom(4)
+        setTimeout(function () {
+          this.map.panTo(new L.LatLng(34, 107));
+        }, 300)
+      }
+      if (node.level == 4) {
+        let param1 = new URLSearchParams();
+        param1.append('check_code', data.label);
+        this.$store.state.get_check.params = param1
+        this.$store.dispatch('get_check/getCheckRectification')
+        this.$store.dispatch('get_check/getCheckRiskLevel')
+        this.$store.dispatch('get_check/getCheckRiskRatio')
+        this.$store.dispatch('get_check/getCheckHighRisk')
+        this.$store.dispatch('get_check/getCheckHighImage')
+        this.$store.dispatch('get_check/getCheckMajorSystem')
+        this.$store.dispatch('get_check/getCheckMajorArea')
+        this.$store.dispatch('get_check/getCheckMajorStage')
+        this.$store.dispatch('get_check/getCheckRiskTop')
+        var prj = document.getElementById('prj_part');
+        prj.style.display = 'none'
+        var check = document.getElementById('check_part');
+        check.style.display = 'block'
+        document.getElementById('map_1').style.display = 'none'
+        document.getElementById('map_2').style.display = 'block'
+        document.getElementById('prj_charts').style.display = 'none'
+        document.getElementById('check_charts').style.display = 'block'
+        this.map.setZoom(12)
+        let _this = this
+        setTimeout(function () {
+          _this.map.panTo(new L.LatLng(31.8604, 117.3254));
+        }, 100)
+      }
     },
     outPrjDataScreen() {
       var large1 = document.getElementById('large1');
