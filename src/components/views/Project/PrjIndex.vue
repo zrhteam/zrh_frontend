@@ -268,20 +268,37 @@ export default {
         _this.$store.dispatch('get_check/getCheckMajorArea')
         _this.$store.dispatch('get_check/getCheckMajorStage')
         _this.$store.dispatch('get_check/getCheckRiskTop')
-        var prj = document.getElementById('prj_part');
+        // var prj = document.getElementById('prj_part');
+        // prj.style.display = 'none'
+        // var check = document.getElementById('check_part');
+        // check.style.display = 'block'
+        // check.style.width = "500px"
+        // check.style.width = "99%"
+         var prj = document.getElementById('prj_subpart');
         prj.style.display = 'none'
         var check = document.getElementById('check_part');
         check.style.display = 'block'
-        // check.style.width = "500px"
-        // check.style.width = "99%"
-        document.getElementById('map_2').style.display = 'none'
-        document.getElementById('map_1').style.display = 'block'
+        // document.getElementById('check_part').style.display = 'none'
+        document.getElementById('map_1').style.display = 'none'
+        document.getElementById('map_2').style.display = 'block'
         document.getElementById('prj_charts').style.display = 'none'
         document.getElementById('check_charts').style.display = 'block'
-        _this.map.setZoom(12)
-        setTimeout(function () {
-          _this.map.panTo(new L.LatLng(params.data.lat, params.data.lng));
-        }, 100)
+        var large1 = document.getElementById('large1');
+        large1.style.display = 'block'
+        var large2 = document.getElementById('large2');
+        large2.style.display = 'block'
+        var prj_small = document.getElementById('prj_small');
+        prj_small.style.display = 'none'
+
+        document.getElementById('map_2').style.display = 'none'
+        document.getElementById('map_1').style.display = 'block'
+        // document.getElementById('prj_charts').style.display = 'none'
+        // document.getElementById('check_charts').style.display = 'block'
+
+
+
+
+
       })
 
       return this.map

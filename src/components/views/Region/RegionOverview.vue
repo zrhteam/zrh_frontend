@@ -64,7 +64,7 @@
         <el-row style="height: 100%">
           <el-card class="statistics-box-card " shadow="never"
                    style="background-color: transparent; height: 5%; margin: 0px 5px 5px 5px">
-<!--            <label>chart</label>-->
+            <!--            <label>chart</label>-->
           </el-card>
           <!--          <el-row style="height: 42%">-->
           <el-col :span="12" style="height: 42%">
@@ -90,9 +90,11 @@
           </el-col>
           <!--          </el-row>-->
           <el-col :span="24" style="height: 5%">
-            <el-col :span = '12' style="height: 5%">
+            <el-col :span='12' style="height: 5%">
               <el-button size="mini" round
-                       style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">more</el-button>
+                         style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">
+                more
+              </el-button>
             </el-col>
 
 
@@ -103,6 +105,7 @@
       <!--      <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>-->
     </el-row>
     <PrjOverview id="prj_part" style="display: none"></PrjOverview>
+    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>
   </el-row>
 
   <!--    </div>-->
@@ -117,10 +120,12 @@ import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
 import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
+import HeadquarterOverview from "@/components/views/HeadQuarters/headquarterOverview.vue";
 
 export default {
   name: "RegionOverview",
   components: {
+    HeadquarterOverview,
     PrjOverview,
     PrjOverviewPart,
     Region1_3,
@@ -267,6 +272,31 @@ export default {
         // setTimeout(function () {
         //   this.map.panTo(new L.LatLng(30, 30));
         // }, 300)
+      } else if (node.level == 1) {
+        let param = new URLSearchParams();
+        param.append('headquarter_name', data.label);
+        this.$store.state.get_headquarter.params = param
+        this.$store.dispatch('get_headquarter/getInitRectification')
+        this.$store.dispatch('get_headquarter/getInitRiskLevelData')
+        this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
+        this.$store.dispatch('get_headquarter/getInitImage')
+        this.$store.dispatch('get_headquarter/getInitNumberTop')
+        this.$store.dispatch('get_headquarter/getInitRiskList')
+        this.$store.dispatch('get_headquarter/getInitRiskIndexData')
+
+        let region = document.getElementById('region_part');
+        region.style.display = 'block'
+        let prj = document.getElementById('prj_part');
+        prj.style.display = 'node'
+
+        let region_large1 = document.getElementById('region_large1');
+        region_large1.style.display = 'none'
+        let region_large2 = document.getElementById('region_large2');
+        region_large2.style.display = 'none'
+        let region_small = document.getElementById('region_small');
+        region_small.style.display = 'none'
+        document.getElementById('prj_part').style.display = 'none'
+        document.getElementById('head_up').style.display = 'none'
       }
     },
     loadMap() {//加载地图

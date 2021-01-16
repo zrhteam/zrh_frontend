@@ -22,7 +22,9 @@ export default {
   computed: {
     getRectificationRate() {
       let rate = this.$store.state.get_headquarter.rectification
-      console.log('整改率', rate)
+      rate = '12.80%'
+      // alert(rate)
+      console.log(rate)
       let val = parseFloat(rate).toFixed(2)
       let option = {
         series: [
