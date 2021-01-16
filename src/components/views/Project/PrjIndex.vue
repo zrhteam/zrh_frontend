@@ -68,7 +68,7 @@ export default {
           }
         }
       }
-      alert(arr.length)
+      // alert(arr.length)
       console.log("Index_arr", arr)
       this.arr = arr
       return arr
