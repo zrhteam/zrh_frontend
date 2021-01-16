@@ -43,7 +43,7 @@ export default {
           right: '2%',
           textStyle: {
             color: '#fff',
-            fontSize: 16
+            fontSize: 12
           },
           data: arr_major.name
         },
