@@ -41,6 +41,17 @@ export default {
         tooltip: {
           formatter: '{b}:{c} ({d}%)'
         },
+        legend: {
+          type: "scroll",
+          orient: 'vertical',
+          top: 20,
+          right: '2%',
+          textStyle:{
+            color: '#fff',
+            fontSize: 16
+          },
+          data: arr_major.name
+        },
 
         series: [
           {
@@ -62,7 +73,7 @@ export default {
               },
               normal: {
                 color: function (params) {
-                  var colorList = [
+                  let colorList = [
                     {
                       c1: '#fce5ca',
                       c2: '#ff9d62'
@@ -98,13 +109,6 @@ export default {
               }
             },
 
-            // emphasis: {
-            //   itemStyle: {
-            //     shadowBlur: 10,
-            //     shadowOffsetX: 0,
-            //     shadowColor: 'rgba(0, 0, 0, 0.5)'
-            //   },
-            // }
           }
         ]
       };

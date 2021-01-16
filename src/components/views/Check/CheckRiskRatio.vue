@@ -36,6 +36,17 @@ export default {
         tooltip: {
           formatter: '{b}:{c} ({d}%)'
         },
+        legend: {
+          type: "scroll",
+          orient: 'vertical',
+          top: 20,
+          right: '2%',
+          textStyle: {
+            color: '#fff',
+            fontSize: 16
+          },
+          data: arr_major.name
+        },
         series: [
           {
             type: 'pie',
@@ -47,6 +58,7 @@ export default {
                 formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
               }
             },
+
             data: arr_major,
             itemStyle: {
               emphasis: {
