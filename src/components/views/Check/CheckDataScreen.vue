@@ -2,7 +2,7 @@
   <el-col :span="16" style="height: 100%">
     <el-card class="title-box-card " shadow="never"
              style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
-      <label>数据大屏</label>
+      <label style="color: #c4bcbc; font-family:宋体; height: 95% ">数据大屏</label>
     </el-card>
     <el-col :span="8" style="height: 83%">
       <!--本次检查累计发现隐患数量-->

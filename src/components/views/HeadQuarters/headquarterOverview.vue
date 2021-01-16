@@ -63,11 +63,11 @@
         <el-row style="height: 100%">
           <el-card class="statistics-box-card " shadow="never"
                    style="background-color: transparent; height: 5%; margin: 0px 5px 5px 5px">
-<!--            <label>chart</label>-->
+            <!--            <label>chart</label>-->
           </el-card>
           <!--          <el-row style="height: 42%">-->
           <el-col :span="12" style="height: 42%">
-<!--            整改率-->
+            <!--            整改率-->
             <Rectification></Rectification>
           </el-col>
           <el-col :span="12" style="height: 42%">
@@ -89,13 +89,17 @@
           </el-col>
           <!--          </el-row>-->
           <el-col :span="24" style="height: 9%">
-            <el-col :span = '12' style="height: 5%">
-              <el-button size="mini" round
-                       style="z-index: 9; left: 12%; background-color: transparent; color: #fff; position: absolute">data analysis</el-button>
+            <el-col :span='12' style="height: 5%">
+              <el-button size="mini" round @click="intoDataAnalysis"
+                         style="z-index: 9; left: 12%; background-color: transparent; color: #fff; position: absolute">
+                data analysis
+              </el-button>
             </el-col>
-            <el-col :span = '12' style="height: 5%">
+            <el-col :span='12' style="height: 5%">
               <el-button size="mini" round
-                       style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">more</el-button>
+                         style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">
+                more
+              </el-button>
             </el-col>
           </el-col>
         </el-row>
@@ -115,6 +119,7 @@ import TopAccumRisk from "@/components/views/HeadQuarters/TopAccumRisk.vue";
 import headquarterDataScreen from "@/components/views/HeadQuarters/headquarterDataScreen.vue";
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
 import RegionOverview from "@/components/views/Region/RegionOverview.vue";
+
 export default {
   name: "headquarterOverview",
   components: {
@@ -132,12 +137,10 @@ export default {
       this.$refs.tree.filter(val);
     }
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {
-    filterNode(value, data){
-      if(!value) return true;
+    filterNode(value, data) {
+      if (!value) return true;
       return data.label.indexOf(value) !== -1;
     },
     getTreeData(tree_data) {
@@ -221,6 +224,7 @@ export default {
         this.$store.dispatch('get_region/getInitRegionMajor')
         this.$store.dispatch('get_region/getInitRegionNumberTop')
         this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+        this.$store.dispatch('get_region/getInitRegionRiskRank')
         // this.$store.dispatch('get_region/getInitRegionRiskRank')
         document.getElementById('head_small').style.display = 'none'
         document.getElementById('head_large1').style.display = 'none'
@@ -234,7 +238,7 @@ export default {
         // setTimeout(function () {
         //   this.map.panTo(new L.LatLng(30, 30));
         // }, 300)
-      }else if (node.level == 1) {
+      } else if (node.level == 1) {
 
       }
     },
@@ -261,8 +265,13 @@ export default {
       let _this = this
       return this.map
     },
+    intoDataAnalysis() {
+      var href = 'http://10.20.39.102:12001/test#/'
+      window.open(href, '_blank')
+      // window.location.href = 'http://10.20.39.102:12001/test#/';
+    }
   },
-  data(){
+  data() {
     return {
       fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
       url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',

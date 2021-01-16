@@ -296,6 +296,9 @@ export default {
         let region_small = document.getElementById('region_small');
         region_small.style.display = 'none'
         document.getElementById('prj_part').style.display = 'none'
+        document.getElementById('head_large1').style.display = 'none'
+        document.getElementById('head_large2').style.display = 'none'
+        document.getElementById('head_small').style.display = 'none'
         document.getElementById('head_up').style.display = 'none'
       }
     },

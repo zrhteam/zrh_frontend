@@ -41,6 +41,7 @@ export default {
   computed: {
     getNumberHistogram() {
       let data = this.$store.state.get_headquarter.risk_number_rank
+      // console.log("高风险区域",data)
       let arr = []
       for (let i in data) {
         let obj = {
