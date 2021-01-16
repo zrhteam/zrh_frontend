@@ -61,6 +61,7 @@ export default {
             label: {
               normal: {
                 show: true,
+                color: '#fff',
                 formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
               }
             },

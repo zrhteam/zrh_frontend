@@ -31,7 +31,8 @@
       <el-col :span="24" style="height: 9%">
         <el-card class="statistics-box-card" shadow="never"
                  style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
-          <label>more</label>
+          <el-button size="mini" round
+                       style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">more</el-button>
         </el-card>
       </el-col>
     </el-row>
