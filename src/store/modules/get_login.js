@@ -42,6 +42,9 @@ const actions = {
 
 //mutations
 const mutations = {
+    changeParams(state, data) {
+        state.params = data.params
+    },
     //考虑权限对应等级所包含的总部、区域、项目和检查
     changeGrantData(state, data) {
         // debugger

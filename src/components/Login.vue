@@ -125,7 +125,8 @@ export default {
       let params = new URLSearchParams();
       params.append('username', this.username);
       params.append('password', this.password);
-      this.$store.state.get_login.params = params
+      this.$store.commit('get_login/changeParams',{params: params})
+      // this.$store.state.get_login.params = params
       this.$store.dispatch('get_login/getLoginGrant')
     }
   },
@@ -162,8 +163,9 @@ export default {
     }
   },
   created() {
-    this.username = 'headquarter1';
+    // this.username = 'headquarter1';
     // this.username = 'region1';
+    this.username = 'project1';
     this.password = '123456';
     $(document).ready(function () {
       var whei = $(window).width()
