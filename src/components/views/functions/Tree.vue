@@ -72,6 +72,9 @@ export default {
         parent1['id'] = count++
         parent1['label'] = i
         arr.push(parent1)
+        if (this.user_grant === '总部') {
+          this.expandedKeys.push(parent1.id)
+        }
         for (let j in tree_data['headquarter_tag'][i]['region_tag']) {
           let parent2 = {
             id: 0,
@@ -173,127 +176,151 @@ export default {
           document.getElementById('head_up').style.display = 'none'
         } else if (node.level == 3) {//区域=》项目
           this.prjNodeClick(data, node)
+          document.getElementById('region_small').style.display = 'none'
+          document.getElementById('region_large1').style.display = 'none'
+          document.getElementById('region_large2').style.display = 'none'
+          document.getElementById('head_up').style.display = 'none'
+          document.getElementById('prj_part').style.display = 'block'
           //首先要判断当前是在数据大屏页面还是在主页面
           if ((document.getElementById("region_small").style.display === 'none') &&
               (document.getElementById("prj_small").style.display === 'none')) {//在主页面
-            document.getElementById('region_small').style.display = 'none'
-            document.getElementById('region_large1').style.display = 'none'
-            document.getElementById('region_large2').style.display = 'none'
-            document.getElementById('head_up').style.display = 'none'
-            document.getElementById('prj_part').style.display = 'block'
             document.getElementById("prj_small").style.display = 'none'
             document.getElementById('large1').style.display = 'block'
             document.getElementById('large2').style.display = 'block'
+            document.getElementById("prj_subpart").style.display = 'block'
+            document.getElementById('check_part').style.display = 'none'
+            document.getElementById("prj_charts").style.display = 'block'
+            document.getElementById('check_charts').style.display = 'none'
           } else {
-            document.getElementById('region_small').style.display = 'none'
-            document.getElementById('region_large1').style.display = 'none'
-            document.getElementById('region_large2').style.display = 'none'
-            document.getElementById('head_up').style.display = 'none'
-            document.getElementById('prj_part').style.display = 'block'
             document.getElementById('large1').style.display = 'none'
             document.getElementById('large2').style.display = 'none'
             document.getElementById("prj_subpart").style.display = 'block'
-            document.getElementById("chart_part").style.display = 'none'
+            document.getElementById("check_part").style.display = 'none'
             document.getElementById('prj_small').style.display = 'block'
+            document.getElementById("prj_charts").style.display = 'none'
+            document.getElementById('check_charts').style.display = 'block'
           }
         } else if (node.level == 4) {//区域=》检查
           this.checkNodeClick(data, node)
+          document.getElementById('region_small').style.display = 'none'
+          document.getElementById('region_large1').style.display = 'none'
+          document.getElementById('region_large2').style.display = 'none'
+          document.getElementById('head_up').style.display = 'none'
+          document.getElementById('prj_part').style.display = 'block'
+          document.getElementById("prj_subpart").style.display = 'none'
+          document.getElementById("check_part").style.display = 'block'
           //首先要判断当前是在数据大屏页面还是在主页面
           if ((document.getElementById("region_small").style.display === 'none') &&
               (document.getElementById("prj_small").style.display === 'none')) {//在主页面
-            document.getElementById('region_small').style.display = 'none'
-            document.getElementById('region_large1').style.display = 'none'
-            document.getElementById('region_large2').style.display = 'none'
-            document.getElementById('head_up').style.display = 'none'
-            document.getElementById('prj_part').style.display = 'block'
-            document.getElementById('large1').style.display = 'block'
-            document.getElementById('large2').style.display = 'block'
-            document.getElementById("prj_subpart").style.display = 'none'
-            document.getElementById("check_part").style.display = 'block'
             document.getElementById("prj_small").style.display = 'none'
-          } else {
-            document.getElementById('region_small').style.display = 'none'
-            document.getElementById('region_large1').style.display = 'none'
-            document.getElementById('region_large2').style.display = 'none'
-            document.getElementById('head_up').style.display = 'none'
-            document.getElementById('prj_part').style.display = 'block'
             document.getElementById('large1').style.display = 'block'
             document.getElementById('large2').style.display = 'block'
-            document.getElementById("prj_subpart").style.display = 'none'
-            document.getElementById("check_part").style.display = 'block'
+            document.getElementById("prj_charts").style.display = 'none'
+            document.getElementById('check_charts').style.display = 'block'
+          } else {
             document.getElementById('prj_small').style.display = 'block'
+            document.getElementById('large1').style.display = 'none'
+            document.getElementById('large2').style.display = 'none'
+            document.getElementById("prj_charts").style.display = 'none'
+            document.getElementById('check_charts').style.display = 'block'
           }
         }
       } else if (this.user_grant === '总部') {
-        if (node.level == 1) {
+        if (node.level == 1) {//总部=》总部
           this.headNodeClick(data, node)
-
-        } else if (node.level == 2) {
+          if ((document.getElementById("head_small").style.display === 'none') &&
+              (document.getElementById("region_small").style.display === 'none') &&
+              (document.getElementById("prj_small").style.display === 'none')) {//在主页面
+            document.getElementById("head_small").style.display = 'none'
+            document.getElementById('head_large1').style.display = 'block'
+            document.getElementById('head_large2').style.display = 'block'
+            document.getElementById('region_part').style.display = 'none'
+          } else {
+            document.getElementById("head_small").style.display = 'block'
+            document.getElementById('head_large1').style.display = 'none'
+            document.getElementById('head_large2').style.display = 'none'
+          }
+        } else if (node.level == 2) {//总部=》区域
           this.regionNodeClick(data, node)
+          document.getElementById("head_small").style.display = 'none'
+          document.getElementById('head_large1').style.display = 'none'
+          document.getElementById('head_large2').style.display = 'none'
+          document.getElementById('region_part').style.display = 'block'
           //首先要判断当前是在数据大屏页面还是在主页面
-          if ((document.getElementById("region_small").style.display === 'none') &&
+          if ((document.getElementById("head_small").style.display === 'none') &&
+              (document.getElementById("region_small").style.display === 'none') &&
               (document.getElementById("prj_small").style.display === 'none')) {//在主页面
             document.getElementById('region_small').style.display = 'none'
             document.getElementById('region_large1').style.display = 'block'
             document.getElementById('region_large2').style.display = 'block'
+
           } else {
             document.getElementById('region_small').style.display = 'block'
             document.getElementById('region_large1').style.display = 'none'
             document.getElementById('region_large2').style.display = 'none'
-          }
-          document.getElementById('prj_part').style.display = 'none'
-          document.getElementById('head_up').style.display = 'none'
-        } else if (node.level == 3) {//区域=》项目
-          this.prjNodeClick(data, node)
-          //首先要判断当前是在数据大屏页面还是在主页面
-          if ((document.getElementById("region_small").style.display === 'none') &&
-              (document.getElementById("prj_small").style.display === 'none')) {//在主页面
-            document.getElementById('region_small').style.display = 'none'
-            document.getElementById('region_large1').style.display = 'none'
-            document.getElementById('region_large2').style.display = 'none'
+            document.getElementById('prj_part').style.display = 'none'
             document.getElementById('head_up').style.display = 'none'
-            document.getElementById('prj_part').style.display = 'block'
+          }
+        } else if (node.level == 3) {//总部=》项目
+          this.prjNodeClick(data, node)
+          document.getElementById("head_small").style.display = 'none'
+          document.getElementById('head_large1').style.display = 'none'
+          document.getElementById('head_large2').style.display = 'none'
+          document.getElementById('region_part').style.display = 'block'
+          document.getElementById('region_small').style.display = 'none'
+          document.getElementById('region_large1').style.display = 'none'
+          document.getElementById('region_large2').style.display = 'none'
+          document.getElementById('head_up').style.display = 'none'
+          document.getElementById('prj_part').style.display = 'block'
+          //首先要判断当前是在数据大屏页面还是在主页面
+          if ((document.getElementById("head_small").style.display === 'none') &&
+              (document.getElementById("region_small").style.display === 'none') &&
+              (document.getElementById("prj_small").style.display === 'none')) {//在主页面
             document.getElementById("prj_small").style.display = 'none'
             document.getElementById('large1').style.display = 'block'
             document.getElementById('large2').style.display = 'block'
+            document.getElementById('prj_subpart').style.display = 'block'
+            document.getElementById('check_part').style.display = 'none'
+            document.getElementById("prj_charts").style.display = 'block'
+            document.getElementById('check_charts').style.display = 'none'
           } else {
-            document.getElementById('region_small').style.display = 'none'
-            document.getElementById('region_large1').style.display = 'none'
-            document.getElementById('region_large2').style.display = 'none'
-            document.getElementById('head_up').style.display = 'none'
-            document.getElementById('prj_part').style.display = 'block'
+            document.getElementById('prj_small').style.display = 'block'
             document.getElementById('large1').style.display = 'none'
             document.getElementById('large2').style.display = 'none'
             document.getElementById("prj_subpart").style.display = 'block'
-            document.getElementById("chart_part").style.display = 'none'
-            document.getElementById('prj_small').style.display = 'block'
+            document.getElementById("check_part").style.display = 'none'
+            document.getElementById("prj_charts").style.display = 'block'
+            document.getElementById('check_charts').style.display = 'none'
           }
-        } else if (node.level == 4) {//区域=》检查
+        } else if (node.level == 4) {//总部=》检查
           this.checkNodeClick(data, node)
+          document.getElementById("head_small").style.display = 'none'
+          document.getElementById('head_large1').style.display = 'none'
+          document.getElementById('head_large2').style.display = 'none'
+          document.getElementById('region_part').style.display = 'block'
+          document.getElementById('region_small').style.display = 'none'
+          document.getElementById('region_large1').style.display = 'none'
+          document.getElementById('region_large2').style.display = 'none'
+          document.getElementById('head_up').style.display = 'none'
+          document.getElementById('prj_part').style.display = 'block'
+          document.getElementById("prj_subpart").style.display = 'none'
           //首先要判断当前是在数据大屏页面还是在主页面
-          if ((document.getElementById("region_small").style.display === 'none') &&
+          if ((document.getElementById("head_small").style.display === 'none') &&
+              (document.getElementById("region_small").style.display === 'none') &&
               (document.getElementById("prj_small").style.display === 'none')) {//在主页面
-            document.getElementById('region_small').style.display = 'none'
-            document.getElementById('region_large1').style.display = 'none'
-            document.getElementById('region_large2').style.display = 'none'
-            document.getElementById('head_up').style.display = 'none'
-            document.getElementById('prj_part').style.display = 'block'
-            document.getElementById('large1').style.display = 'block'
-            document.getElementById('large2').style.display = 'block'
-            document.getElementById("prj_subpart").style.display = 'none'
             document.getElementById("check_part").style.display = 'block'
             document.getElementById("prj_small").style.display = 'none'
-          } else {
-            document.getElementById('region_small').style.display = 'none'
-            document.getElementById('region_large1').style.display = 'none'
-            document.getElementById('region_large2').style.display = 'none'
-            document.getElementById('head_up').style.display = 'none'
-            document.getElementById('prj_part').style.display = 'block'
             document.getElementById('large1').style.display = 'block'
             document.getElementById('large2').style.display = 'block'
-            document.getElementById("prj_subpart").style.display = 'none'
+            document.getElementById("prj_charts").style.display = 'none'
+            document.getElementById('check_charts').style.display = 'block'
+          } else {
             document.getElementById("check_part").style.display = 'block'
             document.getElementById('prj_small').style.display = 'block'
+            document.getElementById('large1').style.display = 'none'
+            document.getElementById('large2').style.display = 'none'
+            document.getElementById("prj_charts").style.display = 'none'
+            document.getElementById('check_charts').style.display = 'block'
           }
         }
       }
@@ -320,7 +347,7 @@ export default {
       this.$store.dispatch('get_region/getInitRegionImage')
       this.$store.dispatch('get_region/getInitRegionMajor')
       this.$store.dispatch('get_region/getInitRegionNumberTop')
-      this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+      // this.$store.dispatch('get_region/getInitRegionSafetyIndex')
       this.$store.dispatch('get_region/getInitRegionRiskRank')
     },
     prjNodeClick(data, node) {
