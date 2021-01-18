@@ -48,13 +48,13 @@ const mutations = {
     //考虑权限对应等级所包含的总部、区域、项目和检查
     changeGrantData(state, data) {
         // debugger
-        console.log("change")
+        // console.log("change")
         state.grant_data = data
     },
     changeTreeData(state, data) {
         // debugger
-        console.log("change")
-        state.tree_data = data
+        // console.log("change")
+        state.tree_data = data.params
     },
 }
 

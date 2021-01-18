@@ -188,6 +188,9 @@ const actions = {
 
 //mutations
 const mutations = {
+    changeParams(state, data) {
+        state.params = data.params
+    },
     //考虑项目级整改率变化
     changePrjRectification(state, data) {
         if (data.code === 10000) {

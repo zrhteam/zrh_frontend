@@ -42,7 +42,7 @@ export default {
         label: 'label'
       },
       data: [],
-      treeObj: this.treeObj,
+      treeObj1: this.treeObj,
       user_grant: this.$store.state.get_login.grant_data.data.user_grant,//当前用户的权限
       expandedKeys: []
     };
@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     getTreeData(tree_data) {
+      this.expandedKeys = []
       let arr = []//树形控件
       let p_arr = []//包含每个检查经纬度坐标的一个数组
       let count = 1;
@@ -80,6 +81,9 @@ export default {
           parent2['id'] = count++
           parent2['label'] = j
           parent1['children'].push(parent2)
+          if(this.user_grant === '区域') {
+              this.expandedKeys.push(parent2.id)
+          }
           for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
             let child1 = {
               id: 0,
@@ -97,8 +101,8 @@ export default {
                 };
                 child2['id'] = count++
                 child2['label'] = m
+                child1['children'].push(child2)
                 if(this.user_grant === '项目') {
-                  child1['children'].push(child2)
                   this.expandedKeys.push(child2.id)
                 }
                 obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
@@ -271,7 +275,7 @@ export default {
           document.getElementById("check_charts").style.display = 'block'
           document.getElementById("check_part").style.display = 'block'
         }
-        else{alert(1)
+        else{
           document.getElementById("prj_subpart").style.display = 'none'
           document.getElementById("prj_charts").style.display = 'none'
           document.getElementById("check_charts").style.display = 'block'
@@ -307,7 +311,7 @@ export default {
     }
   },
   created() {
-    this.getTreeData(this.treeObj)
+    this.getTreeData(this.treeObj1)
   }
 }
 </script>

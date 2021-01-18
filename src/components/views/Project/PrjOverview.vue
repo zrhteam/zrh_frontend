@@ -180,10 +180,11 @@ export default {
   },
   data() {
     return {
-      fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      fit: 'fill',
       url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
-      treeObj: {},
+      treeObj: this.$store.state.get_login.grant_data.data.value,
       p_data: [],
       map: "",
       mapInfo: {},
