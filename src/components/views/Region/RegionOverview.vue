@@ -152,98 +152,6 @@ export default {
       region_small.style.width = "500px"
       region_small.style.width = "99%"
     },
-    handleNodeClick(data, node) {
-      if (node.level == 3) {
-        // this.$router.push({path: '/prj_data_analysis'});
-        let param1 = new URLSearchParams();
-        param1.append('project_name', data.label);
-        this.$store.state.get_project.params = param1
-        this.$store.dispatch('get_project/getInitPrjRisk')
-        this.$store.dispatch('get_project/getInitProjectHistoryPerception')
-        this.$store.dispatch('get_project/getInitProjectImage')
-        this.$store.dispatch('get_project/getInitProjectIndex')
-        this.$store.dispatch('get_project/getInitProjectPerception')
-        this.$store.dispatch('get_project/getInitProjectReason')
-        this.$store.dispatch('get_project/getInitProjectNumberChange')
-        this.$store.dispatch('get_project/getInitProjectRiskLevel')
-        this.$store.dispatch('get_project/getInitProjectSystem')
-        this.$store.dispatch('get_project/getInitProjectRiskTop')
-        this.$store.dispatch('get_project/getInitProjectRegionDistribution')
-        let region = document.getElementById('region_part');
-        let region_large1 = document.getElementById('region_large1');
-        region_large1.style.display = 'none'
-        let region_large2 = document.getElementById('region_large2');
-        region_large2.style.display = 'none'
-        let region_small = document.getElementById('region_small');
-        region_small.style.display = 'none'
-        document.getElementById('prj_part').style.display = 'block'
-        document.getElementById('large1').style.display = 'block'
-        document.getElementById('large2').style.display = 'block'
-
-
-        // let check = document.getElementById('check_part');
-        // check.style.display = 'none'
-        // document.getElementById('map_1').style.display = 'none'
-        // document.getElementById('map_2').style.display = 'block'
-        // this.map.setZoom(12)
-        // setTimeout(function () {
-        //   this.map.panTo(new L.LatLng(30, 30));
-        // }, 100)
-      } else if (node.level == 2) {
-        let param1 = new URLSearchParams();
-        param1.append('check_code', data.label);
-        this.$store.state.get_region.params = param1
-        this.$store.dispatch('get_region/getInitRegionProjectNumber')
-        this.$store.dispatch('get_region/getInitRegionRiskLevel')
-        this.$store.dispatch('get_region/getInitRegionHighRisk')
-        this.$store.dispatch('get_region/getInitRegionImage')
-        this.$store.dispatch('get_region/getInitRegionMajor')
-        this.$store.dispatch('get_region/getInitRegionNumberTop')
-        this.$store.dispatch('get_region/getInitRegionSafetyIndex')
-        this.$store.dispatch('get_region/getInitRegionRiskRank')
-        let region = document.getElementById('region_part');
-        region.style.display = 'block'
-        let prj = document.getElementById('prj_part');
-        prj.style.display = 'node'
-        // let check = document.getElementById('check_part');
-        // check.style.display = 'none'
-        // document.getElementById('map_1').style.display = 'none'
-        // document.getElementById('map_2').style.display = 'block'
-        // this.map.setZoom(12)
-        // setTimeout(function () {
-        //   this.map.panTo(new L.LatLng(30, 30));
-        // }, 300)
-      } else if (node.level == 1) {
-        let param = new URLSearchParams();
-        param.append('headquarter_name', data.label);
-        this.$store.state.get_headquarter.params = param
-        this.$store.dispatch('get_headquarter/getInitRectification')
-        this.$store.dispatch('get_headquarter/getInitRiskLevelData')
-        this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
-        this.$store.dispatch('get_headquarter/getInitImage')
-        this.$store.dispatch('get_headquarter/getInitNumberTop')
-        this.$store.dispatch('get_headquarter/getInitRiskList')
-        this.$store.dispatch('get_headquarter/getInitRiskIndexData')
-
-        let region = document.getElementById('region_part');
-        region.style.display = 'block'
-        let prj = document.getElementById('prj_part');
-        prj.style.display = 'node'
-
-        let region_large1 = document.getElementById('region_large1');
-        region_large1.style.display = 'none'
-        let region_large2 = document.getElementById('region_large2');
-        region_large2.style.display = 'none'
-        let region_small = document.getElementById('region_small');
-        region_small.style.display = 'none'
-        document.getElementById('prj_part').style.display = 'none'
-        document.getElementById('head_large1').style.display = 'block'
-        document.getElementById('head_large2').style.display = 'block'
-        document.getElementById('head_small').style.display = 'none'
-        document.getElementById('head_up').style.display = 'none'
-        document.getElementById('region_part').style.display = 'none'
-      }
-    },
     loadMap() {//加载地图
       this.map = L.map("map_2", {
         center: [34, 107], // 地图中心
@@ -300,28 +208,6 @@ export default {
 </script>
 
 <style scoped>
-.filter-tree {
-  max-width: 500px;
-  max-height: 2000px;
-  overflow: scroll;
-  background-color: transparent;
-}
-
-.el-tree > .el-tree-node {
-  min-width: 100%;
-  display: inline-block;
-}
-
-.span-ellipsis {
-  font-size: 0.1em;
-  text-align: left;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: block;
-}
-
 #map {
   width: 100%;
   height: calc(100vh);
