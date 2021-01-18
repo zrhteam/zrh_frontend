@@ -21,30 +21,33 @@
     </el-row>
     <el-row id="region_large2" class="" style="height: 90%;">
       <el-col :span="4" class="" style="height: 100%">
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
-          <el-input
-              placeholder="输入关键字进行过滤"
-              v-model="filterText"
-              size="mini">
-          </el-input>
-          <div style="height: 80%">
-            <el-scrollbar style="height: 96%">
-              <el-tree
-                  class="filter-tree"
-                  :data="data"
-                  :props="defaultProps"
-                  @node-click="handleNodeClick"
-                  default-expand-all
-                  :filter-node-method="filterNode"
-                  ref="tree">
-                <span class="span-ellipsis" slot-scope="{ node, data }">
-                  <span :title="node.label">{{ node.label }}</span>
-                </span>
-              </el-tree>
-            </el-scrollbar>
-          </div>
-        </el-card>
+<!--        <el-card class="box-card " shadow="never"-->
+<!--                 style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">-->
+<!--          <el-input-->
+<!--              placeholder="输入关键字进行过滤"-->
+<!--              v-model="filterText"-->
+<!--              size="mini">-->
+<!--          </el-input>-->
+<!--          <div style="height: 80%">-->
+<!--            <el-scrollbar style="height: 96%">-->
+<!--              <el-tree-->
+<!--                  class="filter-tree"-->
+<!--                  :data="data"-->
+<!--                  :props="defaultProps"-->
+<!--                  @node-click="handleNodeClick"-->
+<!--                  default-expand-all-->
+<!--                  :filter-node-method="filterNode"-->
+<!--                  ref="tree">-->
+<!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
+<!--                  <span :title="node.label">{{ node.label }}</span>-->
+<!--                </span>-->
+<!--              </el-tree>-->
+<!--            </el-scrollbar>-->
+<!--          </div>-->
+<!--        </el-card>-->
+        <Tree
+          :treeObj="treeObj"
+        ></Tree>
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
           <el-button size="mini" round
@@ -121,6 +124,7 @@ import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
 import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
 import HeadquarterOverview from "@/components/views/HeadQuarters/headquarterOverview.vue";
+import Tree from "@/components/views/functions/Tree.vue"
 
 export default {
   name: "RegionOverview",
@@ -133,7 +137,8 @@ export default {
     Region2_1,
     Region2_3,
     Region3_3,
-    RegionDataScreen
+    RegionDataScreen,
+    Tree
   },
   watch: {
     filterText(val) {
@@ -239,6 +244,9 @@ export default {
         let region_small = document.getElementById('region_small');
         region_small.style.display = 'none'
         document.getElementById('prj_part').style.display = 'block'
+        document.getElementById('large1').style.display = 'block'
+        document.getElementById('large2').style.display = 'block'
+
 
         // let check = document.getElementById('check_part');
         // check.style.display = 'none'
@@ -296,10 +304,11 @@ export default {
         let region_small = document.getElementById('region_small');
         region_small.style.display = 'none'
         document.getElementById('prj_part').style.display = 'none'
-        document.getElementById('head_large1').style.display = 'none'
-        document.getElementById('head_large2').style.display = 'none'
+        document.getElementById('head_large1').style.display = 'block'
+        document.getElementById('head_large2').style.display = 'block'
         document.getElementById('head_small').style.display = 'none'
         document.getElementById('head_up').style.display = 'none'
+        document.getElementById('region_part').style.display = 'none'
       }
     },
     loadMap() {//加载地图
@@ -328,10 +337,11 @@ export default {
   },
   data() {
     return {
-      fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      fit: 'fill',
       url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
-      data: [],
+      treeObj: {},
       p_data: [],
       map: "",
       mapInfo: {},
@@ -351,8 +361,7 @@ export default {
     }
   },
   created() {
-    console.log('grant', this.$store.state.get_login.grant_data)
-    this.getTreeData(this.$store.state.get_login.grant_data.data.value)
+    this.treeObj = this.$store.state.get_login.grant_data.data.value
   }
 }
 </script>

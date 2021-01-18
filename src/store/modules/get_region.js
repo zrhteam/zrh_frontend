@@ -137,6 +137,9 @@ const actions = {
 
 //mutations
 const mutations = {
+    changeParams(state, data) {
+        state.params = data.params
+    },
     //考虑已检查项目数量
     changeExamineNumber(state, data) {
         if (data.code === 10000) {

@@ -85,7 +85,7 @@
 import Region2_2 from "@/components/views/Region/Region2_2.vue";
 import Region3_1 from "@/components/views/Region/Region3_1.vue";
 export default {
-  name: "RegionOverview",
+  name: "RegionDataScreen",
   components: {
     Region3_1,
     Region2_2
@@ -148,7 +148,8 @@ export default {
       }
       console.log("arr", arr)
       this.data = arr
-      this.$store.state.get_login.tree_data = arr
+      this.$store.commit('get_login/changeTreeData', {params: arr})
+      // this.$store.state.get_login.tree_data = arr
     },
     handleNodeClick(data, node) {
         console.log("出来了", data);
@@ -170,7 +171,8 @@ export default {
 
   data() {
     return {
-      fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      fit: 'fill',
       url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
       data: [],
