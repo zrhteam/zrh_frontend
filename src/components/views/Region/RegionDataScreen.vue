@@ -107,28 +107,4 @@ export default {
 </script>
 
 <style scoped>
-.filter-tree {
-  max-width: 500px;
-  max-height: 2000px;
-  overflow: scroll;
-  background-color: transparent;
-}
-
-.el-tree > .el-tree-node {
-  min-width: 100%;
-  display: inline-block;
-}
-
-
-
-.span-ellipsis {
-  font-size: 0.1em;
-  text-align: left;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: block;
-}
-
 </style>
