@@ -131,11 +131,8 @@ export default {
     this.$store.dispatch('get_headquarter/getInitImage')
     this.$store.dispatch('get_headquarter/getInitNumberTop')
     this.$store.dispatch('get_headquarter/getInitRiskList')
-    this.$store.dispatch('get_headquarter/getInitRiskIndexData')
-
-    //
+    // this.$store.dispatch('get_headquarter/getInitRiskIndexData')
     // // this.$store.dispatch('get_headquarter/getInitRiskIndexData')
-
   }
 }
 </script>
