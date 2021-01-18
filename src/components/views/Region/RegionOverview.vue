@@ -140,75 +140,8 @@ export default {
     RegionDataScreen,
     Tree
   },
-  watch: {
-    filterText(val) {
-      this.$refs.tree.filter(val);
-    }
-  },
   computed: {},
   methods: {
-    filterNode(value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
-    },
-    getTreeData(tree_data) {
-      let arr = []//树形控件
-      let p_arr = []//包含每个检查经纬度坐标的一个数组
-      let count = 1;
-      let obj = {
-        lat: 0,
-        lng: 0
-      }
-      for (let i in tree_data['headquarter_tag']) {
-        // let parent1 = [];
-        let parent1 = {
-          id: 0,
-          label: '',
-          children: []
-        };
-        parent1['id'] = count++
-        parent1['label'] = i
-        arr.push(parent1)
-        for (let j in tree_data['headquarter_tag'][i]['region_tag']) {
-          let parent2 = {
-            id: 0,
-            label: '',
-            children: []
-          };
-          parent2['id'] = count++
-          parent2['label'] = j
-          parent1['children'].push(parent2)
-          for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
-            let child1 = {
-              id: 0,
-              label: '',
-              children: []
-            };
-            child1['id'] = count++
-            child1['label'] = k
-            parent2['children'].push(child1)
-            for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
-              for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
-                let child2 = {
-                  id: 0,
-                  label: ''
-                };
-                child2['id'] = count++
-                child2['label'] = m
-                // child1['children'].push(child2)
-                obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
-                obj['lng'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng
-                p_arr.push(obj)
-              }
-            }
-          }
-        }
-      }
-      console.log("arr", arr)
-      this.data = arr
-      this.$store.state.get_login.tree_data = arr
-      this.p_data = p_arr
-    },
     intoRegionDataScreen() {
       let region_large1 = document.getElementById('region_large1');
       region_large1.style.display = 'none'

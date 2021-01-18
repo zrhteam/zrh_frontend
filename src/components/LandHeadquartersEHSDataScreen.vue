@@ -124,7 +124,7 @@ export default {
   created() {
     let param = new URLSearchParams();
     param.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
-    this.$store.state.get_headquarter.params = param
+    this.$store.commit('get_headquarter/changeParams', {params: param})
     this.$store.dispatch('get_headquarter/getInitRectification')
     this.$store.dispatch('get_headquarter/getInitRiskLevelData')
     this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
