@@ -6,8 +6,8 @@
       <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: transparent">
         <div id="map_5"
              style="pointer-events:inherit; height: 100%; width: 100%;"></div>
-        <div id="map_6"
-             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>
+<!--        <div id="map_6"-->
+<!--             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>-->
       </div>
       <!--          <div id="map" bordered style="pointer-events:inherit"></div>-->
       <!--          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>-->
@@ -131,8 +131,8 @@ export default {
     this.drawBarChart()
   },
   mounted() {
-    document.getElementById('map_2').style.display = 'none'
-    document.getElementById('map_5').style.display = 'block'
+    // document.getElementById('map_2').style.display = 'none'
+    // document.getElementById('map_5').style.display = 'block'
     this.map = this.loadMap();//加载地图
     let m = document.getElementById("map_5")
     this.map_width = window.getComputedStyle(m).width
@@ -198,6 +198,7 @@ export default {
       ).addTo(this.map);
       let p_data = this.$store.state.get_login.position
       // add a polygon
+      console.log("检查",p_data)
       let color = ['green', 'yellow', 'red', 'white','black']
       for (let i = 0; i < p_data.length; i++) {
         var polygon = L.polygon(p_data[i], {
