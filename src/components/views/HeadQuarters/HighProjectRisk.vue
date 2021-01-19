@@ -1,5 +1,5 @@
 <template>
-    <el-col :span="10" class="" style="height: 100%">
+  <el-col :span="10" class="" style="height: 100%">
     <el-card class="box-card " shadow="never"
              style="background-color: transparent; height: 70%; margin: 0px 5px 5px 5px">
       <!--          放地图-->
@@ -15,9 +15,9 @@
     <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
     <el-card class="box-card " shadow="never"
              style="background-color: transparent; height: 30%; margin: 0px 5px 5px 5px">
-          <div class="level4" style="display: block">
-      <span>项目高风险数量排名</span>
-    </div>
+      <div class="level4" style="display: block">
+        <span>区域高风险数量排名</span>
+      </div>
       <!--      <div id="mydiv2">-->
       <div style="display: none">
         {{ getNumberHistogram }}
@@ -41,7 +41,7 @@ export default {
   computed: {
     getNumberHistogram() {
       let data = this.$store.state.get_headquarter.risk_number_rank
-      // console.log("高风险区域",data)
+      console.log("高风险区域", data)
       let arr = []
       for (let i in data) {
         let obj = {
@@ -63,8 +63,8 @@ export default {
         xAxis: {
           type: 'category',
           axisLabel: {
-            interval: 10,
-            rotate: 20,
+            interval: 0,
+            rotate: 0,
             textStyle: {
               fontSize: 10
             },
@@ -74,12 +74,15 @@ export default {
               color: '#ffffff',
               fontSize: 6
             }
-          }},
-        yAxis: {axisLine: {
+          }
+        },
+        yAxis: {
+          axisLine: {
             lineStyle: {
               color: '#ffffff'
             }
-          }},
+          }
+        },
         series: [
           {
             type: 'bar',
@@ -97,14 +100,14 @@ export default {
                 )
               }
             },
-            label:{
-                show: false,
-                position: 'top',
-                textStyle: {
-                  fontSize: '7px',
-                  color: '#fff'
-                },
+            label: {
+              show: false,
+              position: 'top',
+              textStyle: {
+                fontSize: '7px',
+                color: '#fff'
               },
+            },
             emphasis: {
               itemStyle: {
                 color: new echarts.graphic.LinearGradient(
@@ -193,11 +196,25 @@ export default {
           "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",//初始化一个 openlayers 地图
           // 天地图影像图层
       ).addTo(this.map);
-
-      for (let i = 0; i < this.arr.length; i++) {
-        L.marker([this.arr[i].lat, this.arr[i].lng]).addTo(this.map);
-
+      let p_data = this.$store.state.get_login.position
+      // add a polygon
+      let color = ['green', 'yellow', 'red', 'white','black']
+      for (let i = 0; i < p_data.length; i++) {
+        var polygon = L.polygon(p_data[i], {
+          color: color[i%5],
+          fillColor: '#f03',
+          fillOpacity: 0.5
+        }).addTo(this.map);
       }
+      for (let i = 0; i < p_data.length; i++) {
+        for (let j = 0; j < p_data[i].length; j++) {
+          L.marker([p_data[i][j][0], p_data[i][j][1]]).addTo(this.map);
+        }
+      }
+      // for (let i = 0; i < this.arr.length; i++) {
+      //   L.marker([this.arr[i].lat, this.arr[i].lng]).addTo(this.map);
+      //
+      // }
       // this.map.panTo(new L.LatLng(40.737, -73.923));
       let myChart = this.$echarts.init(document.getElementById('index_chart'))
       let _this = this
@@ -215,7 +232,7 @@ export default {
         _this.$store.dispatch('get_headquarter/getInitRiskIndexData')
         let head = document.getElementById('head_part');
         head.style.display = 'none'
-        let region =document.getElementById('region_part');
+        let region = document.getElementById('region_part');
         let prj = document.getElementById('prj_part');
         prj.style.display = 'block'
         let check = document.getElementById('check_part');
@@ -232,11 +249,11 @@ export default {
 
       return this.map
     },
-    sortNumber(attr, rev){
-      if(rev == undefined) {
+    sortNumber(attr, rev) {
+      if (rev == undefined) {
         rev = 1;
-      }else {
-        rev = (rev)? 1 : -1;
+      } else {
+        rev = (rev) ? 1 : -1;
       }
 
       return function (a, b) {
