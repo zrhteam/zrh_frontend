@@ -88,39 +88,39 @@ export default {
     PrjDataScreen,
     Tree
   },
-  mounted: function () {
-    document.getElementById('map_1').style.display = 'none'
-    document.getElementById('map_2').style.display = 'block'
-    this.map = this.loadMap();//加载地图
-    let m = document.getElementById("map_2")
-    this.map_width = window.getComputedStyle(m).width
-    this.map_height = window.getComputedStyle(m).height
-
-    this.svg = d3.select(this.$el).select('svg');
-    // this.svg = d3.select(this.map.getPanes().overlayPane).append("svg");
-
-    let _this = this;
-    this.map.on('drag', (e) => {
-      let center_position = this.map.latLngToContainerPoint([22, 107]);
-
-      if (this.locContainers) {
-        this.locContainers.each(function (d) {
-          let loc = _this.map.latLngToContainerPoint(d.locs)
-          d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
-        })
-      }
-    });
-
-    this.map.on('move', (e) => {
-      let center_position = this.map.latLngToContainerPoint([22, 107]);
-      if (this.locContainers) {
-        this.locContainers.each(function (d) {
-          let loc = _this.map.latLngToContainerPoint(d.locs)
-          d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
-        })
-      }
-    });
-  },
+  // mounted: function () {
+  //   document.getElementById('map_1').style.display = 'none'
+  //   document.getElementById('map_2').style.display = 'block'
+  //   this.map = this.loadMap();//加载地图
+  //   let m = document.getElementById("map_2")
+  //   this.map_width = window.getComputedStyle(m).width
+  //   this.map_height = window.getComputedStyle(m).height
+  //
+  //   this.svg = d3.select(this.$el).select('svg');
+  //   // this.svg = d3.select(this.map.getPanes().overlayPane).append("svg");
+  //
+  //   let _this = this;
+  //   this.map.on('drag', (e) => {
+  //     let center_position = this.map.latLngToContainerPoint([22, 107]);
+  //
+  //     if (this.locContainers) {
+  //       this.locContainers.each(function (d) {
+  //         let loc = _this.map.latLngToContainerPoint(d.locs)
+  //         d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
+  //       })
+  //     }
+  //   });
+  //
+  //   this.map.on('move', (e) => {
+  //     let center_position = this.map.latLngToContainerPoint([22, 107]);
+  //     if (this.locContainers) {
+  //       this.locContainers.each(function (d) {
+  //         let loc = _this.map.latLngToContainerPoint(d.locs)
+  //         d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
+  //       })
+  //     }
+  //   });
+  // },
   methods: {
     intoPrjDataScreen() {
       var large1 = document.getElementById('large1');
@@ -139,6 +139,7 @@ export default {
       }, 100)
       prj_small.style.width = "99%"
     },
+    //PrjOverview.vue中的map_1首先被加载
     loadMap() {//加载地图
       this.map = L.map("map_2", {
         center: [34, 107], // 地图中心
@@ -164,8 +165,9 @@ export default {
       //   alert('纬度：' + e.latlng.lat + '\n经度：' + e.latlng.lng);
       // });
       let p_data = this.$store.state.get_login.position
-      for (var i = 0; i < p_data.length; i++) {
-        L.marker([p_data[i][0], p_data[i][1]]).addTo(this.map);
+      let _this = this
+      for (var i = 0; i < p_data[0][0].length; i++) {
+        L.marker([p_data[0][0][i][0], p_data[0][0][i][1]]).addTo(_this.map);
         // var marker = L.marker([37.8542800187483, 112.534177962463]).addTo(this.map);
         // this.map.on("click", function (e) {
         //   var lat = e.latlng.lat;
@@ -174,9 +176,8 @@ export default {
         // });
       }
       // this.map.panTo(new L.LatLng(40.737, -73.923));
-      let myChart = this.$echarts.init(document.getElementById('index_chart'))
-      let _this = this
-      return this.map
+      let myChart = _this.$echarts.init(document.getElementById('index_chart'))
+      return _this.map
     },
   },
   data() {
