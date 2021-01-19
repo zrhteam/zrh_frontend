@@ -167,7 +167,7 @@ export default {
                   )
                 }
               },
-              label:{
+              label: {
                 show: true,
                 position: 'top',
                 textStyle: {
@@ -244,54 +244,54 @@ export default {
       //   alert('纬度：' + e.latlng.lat + '\n经度：' + e.latlng.lng);
       // });
       let p_data = this.$store.state.get_login.position
-      for (var i = 0; i < p_data.length; i++) {
-        L.marker([p_data[i][0], p_data[i][0]]).addTo(this.map);
-        // var marker = L.marker([37.8542800187483, 112.534177962463]).addTo(this.map);
+      for (var i = 0; i < p_data[0].length; i++) {
+        L.marker( p_data[0][i]).addTo(this.map);
+      //   var marker = L.marker([37.8542800187483, 112.534177962463]).addTo(this.map);
         // this.map.on("click", function (e) {
-        //   var lat = e.latlng.lat;
-        //   var lng = e.latlng.lng;
-        //   marker.setLatLng([lat, lng]);
-        // });
+      //   //   var lat = e.latlng.lat;
+      //   //   var lng = e.latlng.lng;
+      //   //   marker.setLatLng([lat, lng]);
+      //   // });
       }
-      // this.map.panTo(new L.LatLng(40.737, -73.923));
-      let myChart = this.$echarts.init(document.getElementById('index_chart'))
+      // // this.map.panTo(new L.LatLng(40.737, -73.923));
+      // let myChart = this.$echarts.init(document.getElementById('index_chart'))
       let _this = this
-      myChart.on('click', function (params) {
-        // console.log(params.data)
-        let param1 = new URLSearchParams();
-        param1.append('check_code', (params.data.name))
-        _this.$store.state.get_check.params = param1
-        _this.$store.dispatch('get_check/getCheckRectification')
-        _this.$store.dispatch('get_check/getCheckRiskLevel')
-        _this.$store.dispatch('get_check/getCheckRiskRatio')
-        _this.$store.dispatch('get_check/getCheckHighRisk')
-        _this.$store.dispatch('get_check/getCheckHighImage')
-        _this.$store.dispatch('get_check/getCheckMajorSystem')
-        _this.$store.dispatch('get_check/getCheckMajorArea')
-        _this.$store.dispatch('get_check/getCheckMajorStage')
-        _this.$store.dispatch('get_check/getCheckRiskTop')
-        var prj = document.getElementById('prj_subpart');
-        prj.style.display = 'none'
-        var check = document.getElementById('check_part');
-        check.style.display = 'block'
-        // check.style.width = "500px"
-        // check.style.width = "99%"
-        document.getElementById('map_2').style.display = 'none'
-        document.getElementById('map_1').style.display = 'block'
-        document.getElementById('prj_charts').style.display = 'none'
-        document.getElementById('check_charts').style.display = 'block'
-        _this.map.setZoom(12)
-        setTimeout(function () {
-          _this.map.panTo(new L.LatLng(params.data.lat, params.data.lng));
-        }, 100)
-
-
-        // this.map.setZoom(12)
-        // let _this = this
-        // setTimeout(function () {
-        //   _this.map.panTo(new L.LatLng(31.8604, 117.3254));
-        // }, 100)
-      })
+      // myChart.on('click', function (params) {
+      //   // console.log(params.data)
+      //   let param1 = new URLSearchParams();
+      //   param1.append('check_code', (params.data.name))
+      //   _this.$store.state.get_check.params = param1
+      //   _this.$store.dispatch('get_check/getCheckRectification')
+      //   _this.$store.dispatch('get_check/getCheckRiskLevel')
+      //   _this.$store.dispatch('get_check/getCheckRiskRatio')
+      //   _this.$store.dispatch('get_check/getCheckHighRisk')
+      //   _this.$store.dispatch('get_check/getCheckHighImage')
+      //   _this.$store.dispatch('get_check/getCheckMajorSystem')
+      //   _this.$store.dispatch('get_check/getCheckMajorArea')
+      //   _this.$store.dispatch('get_check/getCheckMajorStage')
+      //   _this.$store.dispatch('get_check/getCheckRiskTop')
+      //   var prj = document.getElementById('prj_subpart');
+      //   prj.style.display = 'none'
+      //   var check = document.getElementById('check_part');
+      //   check.style.display = 'block'
+      //   // check.style.width = "500px"
+      //   // check.style.width = "99%"
+      //   document.getElementById('map_2').style.display = 'block'
+      //   document.getElementById('map_1').style.display = 'none'
+      //   document.getElementById('prj_charts').style.display = 'none'
+      //   document.getElementById('check_charts').style.display = 'block'
+      //   _this.map.setZoom(12)
+      //   setTimeout(function () {
+      //     _this.map.panTo(new L.LatLng(params.data.lat, params.data.lng));
+      //   }, 100)
+      //
+      //
+      //   // this.map.setZoom(12)
+      //   // let _this = this
+      //   // setTimeout(function () {
+      //   //   _this.map.panTo(new L.LatLng(31.8604, 117.3254));
+      //   // }, 100)
+      // })
 
       return this.map
     },
