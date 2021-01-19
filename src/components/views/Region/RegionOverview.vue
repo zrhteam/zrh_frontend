@@ -21,30 +21,6 @@
     </el-row>
     <el-row id="region_large2" class="" style="height: 90%;">
       <el-col :span="4" class="" style="height: 100%">
-<!--        <el-card class="box-card " shadow="never"-->
-<!--                 style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">-->
-<!--          <el-input-->
-<!--              placeholder="输入关键字进行过滤"-->
-<!--              v-model="filterText"-->
-<!--              size="mini">-->
-<!--          </el-input>-->
-<!--          <div style="height: 80%">-->
-<!--            <el-scrollbar style="height: 96%">-->
-<!--              <el-tree-->
-<!--                  class="filter-tree"-->
-<!--                  :data="data"-->
-<!--                  :props="defaultProps"-->
-<!--                  @node-click="handleNodeClick"-->
-<!--                  default-expand-all-->
-<!--                  :filter-node-method="filterNode"-->
-<!--                  ref="tree">-->
-<!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
-<!--                  <span :title="node.label">{{ node.label }}</span>-->
-<!--                </span>-->
-<!--              </el-tree>-->
-<!--            </el-scrollbar>-->
-<!--          </div>-->
-<!--        </el-card>-->
         <Tree
           :treeObj="treeObj"
         ></Tree>
@@ -108,7 +84,7 @@
       <!--      <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>-->
     </el-row>
     <PrjOverview id="prj_part" style="display: none"></PrjOverview>
-    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>
+<!--    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>-->
   </el-row>
 
   <!--    </div>-->
@@ -123,13 +99,13 @@ import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
 import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
-import HeadquarterOverview from "@/components/views/HeadQuarters/headquarterOverview.vue";
+// import HeadquarterOverview from "@/components/views/HeadQuarters/HeadquarterOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue"
 
 export default {
   name: "RegionOverview",
   components: {
-    HeadquarterOverview,
+    // HeadquarterOverview,
     PrjOverview,
     PrjOverviewPart,
     Region1_3,
