@@ -18,10 +18,10 @@
       <div class="level4" style="display: block">
         <span>项目累计高风险数量排名</span>
       </div>
-      <div style = 'display: none; text-align: center'>
-        {{getHighRiskRank}}
+      <div style='display: none; text-align: center'>
+        {{ getHighRiskRank }}
       </div>
-      <div id = 'risk_rank' style="height: 90%; width: 100%; display: block"></div>
+      <div id='risk_rank' style="height: 90%; width: 100%; display: block"></div>
 
     </el-card>
   </el-col>
@@ -37,7 +37,7 @@ export default {
   name: "Region3_3",
   //components: {RegionNumberHistogram}
   computed: {
-    getHighRiskRank(){
+    getHighRiskRank() {
       let data = this.$store.state.get_region.high_risk_rank
       console.log('高风险', data)
       let arr = []
@@ -96,14 +96,14 @@ export default {
                 )
               }
             },
-            label:{
-                show: true,
-                position: 'top',
-                textStyle: {
-                  fontSize: '7px',
-                  color: '#fff'
-                },
+            label: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                fontSize: '7px',
+                color: '#fff'
               },
+            },
             emphasis: {
               itemStyle: {
                 color: '#40abc4'
@@ -191,10 +191,15 @@ export default {
           "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",//初始化一个 openlayers 地图
           // 天地图影像图层
       ).addTo(this.map);
-
-      for (let i = 0; i < this.arr.length; i++) {
-        L.marker([this.arr[i].lat, this.arr[i].lng]).addTo(this.map);
-
+      let p_data = this.$store.state.get_login.position
+      // add a polygon
+      var polygon = L.polygon(p_data, {
+        color: 'green',
+        fillColor: '#f03',
+        fillOpacity: 0.5
+      }).addTo(this.map);
+      for (let i = 0; i < p_data.length; i++) {
+        L.marker([p_data[i][0], p_data[i][1]]).addTo(this.map);
       }
       // this.map.panTo(new L.LatLng(40.737, -73.923));
       let myChart = this.$echarts.init(document.getElementById('index_chart'))
@@ -212,7 +217,7 @@ export default {
         _this.$store.dispatch('get_region/getInitRegionNumberTop')
         _this.$store.dispatch('get_region/getInitRegionSafetyIndex')
         _this.$store.dispatch('get_region/getInitRegionRiskRank')
-        let region =document.getElementById('region_part');
+        let region = document.getElementById('region_part');
         let prj = document.getElementById('prj_part');
         prj.style.display = 'none'
         let check = document.getElementById('check_part');
@@ -233,8 +238,8 @@ export default {
       if (rev == undefined) {
         rev = 1;
       } else {
-          rev = (rev) ? 1 : -1;
-        }
+        rev = (rev) ? 1 : -1;
+      }
 
       return function (a, b) {
         a = a[attr];
