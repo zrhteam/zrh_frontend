@@ -13,6 +13,8 @@ const state = {
     grant_data: [],
     //针对树形目录准备的
     tree_data: [],
+//    存已解析的经纬度
+    position: []
 }
 
 //getters
@@ -44,6 +46,9 @@ const actions = {
 const mutations = {
     changeParams(state, data) {
         state.params = data.params
+    },
+    changePosition(state, data) {
+        state.position = data.params
     },
     //考虑权限对应等级所包含的总部、区域、项目和检查
     changeGrantData(state, data) {
