@@ -115,6 +115,9 @@ const actions = {
 
 //mutations
 const mutations = {
+    changeParams(state, data) {
+        state.params = data.params
+    },
     //考虑总部整改率变化
     changeRectification(state, data) {
         // console.log("aa", data)

@@ -126,7 +126,8 @@ export default {
     return {
       filterText: '',
       data: [],
-      fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      fit: 'fill',
       url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       defaultProps: {
         children: 'children',

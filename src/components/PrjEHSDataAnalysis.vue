@@ -300,7 +300,9 @@ export default {
   created() {
     let param = new URLSearchParams();
     param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-    this.$store.state.get_project.params = param
+    this.$store.commit('get_project/changeParams', {params: param})
+    // this.$store.commit('get_login/changeParams',{params: params})
+    // this.$store.state.get_project.params = param
 
     this.$store.dispatch('get_project/getInitProjectRectification')
     this.$store.dispatch('get_project/getInitProjectRiskLevel')
