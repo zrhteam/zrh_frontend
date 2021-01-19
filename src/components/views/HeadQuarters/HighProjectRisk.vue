@@ -198,7 +198,7 @@ export default {
       ).addTo(this.map);
       let p_data = this.$store.state.get_login.position
       // add a polygon
-      console.log("检查",p_data)
+      // console.log("检查",p_data)
       let color = ['green', 'yellow', 'red', 'white','black']
       for (let i = 0; i < p_data.length; i++) {
         var polygon = L.polygon(p_data[i], {
