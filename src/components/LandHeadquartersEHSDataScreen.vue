@@ -65,35 +65,35 @@
 
 <script>
 import * as d3 from "d3";
-import dataService from "@/service/dataService";
-import FireHazardIndex from "@/components/views/functions/FireHazardIndex.vue";
-
-import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
-import Rectification from "@/components/views/HeadQuarters/Rectification.vue";
-import AccumRisk from "@/components/views/HeadQuarters/AccumRisk.vue";
-
-import ProjectIndex from "@/components/views/HeadQuarters/ProjectIndex.vue";
-import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue";
-
-import HighRiskImages from "@/components/views/HeadQuarters/HighRiskImages.vue";
-import TopAccumRisk from "@/components/views/HeadQuarters/TopAccumRisk.vue";
-import UnsolvedList from "@/components/views/HeadQuarters/UnsolvedList.vue";
-import headquarterOverview from "@/components/views/HeadQuarters/headquarterOverview.vue";
+// import dataService from "@/service/dataService";
+// import FireHazardIndex from "@/components/views/functions/FireHazardIndex.vue";
+//
+// import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
+// import Rectification from "@/components/views/HeadQuarters/Rectification.vue";
+// import AccumRisk from "@/components/views/HeadQuarters/AccumRisk.vue";
+//
+// import ProjectIndex from "@/components/views/HeadQuarters/ProjectIndex.vue";
+// import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue";
+//
+// import HighRiskImages from "@/components/views/HeadQuarters/HighRiskImages.vue";
+// import TopAccumRisk from "@/components/views/HeadQuarters/TopAccumRisk.vue";
+// import UnsolvedList from "@/components/views/HeadQuarters/UnsolvedList.vue";
+import headquarterOverview from "@/components/views/HeadQuarters/HeadquarterOverview.vue";
 
 export default {
   name: "LandHeadquartersEHSDataScreen",
   components: {
-    AccumRisk,
-    Rectification,
-    FireHazardIndex,
-    IndexView,
-
-    ProjectIndex,
-    HighProjectRisk,
-
-    HighRiskImages,
-    TopAccumRisk,
-    UnsolvedList,
+    // AccumRisk,
+    // Rectification,
+    // FireHazardIndex,
+    // IndexView,
+    //
+    // ProjectIndex,
+    // HighProjectRisk,
+    //
+    // HighRiskImages,
+    // TopAccumRisk,
+    // UnsolvedList,
     headquarterOverview
   },
 
