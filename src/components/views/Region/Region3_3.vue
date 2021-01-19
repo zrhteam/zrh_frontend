@@ -193,11 +193,13 @@ export default {
       ).addTo(this.map);
       let p_data = this.$store.state.get_login.position
       // add a polygon
-      var polygon = L.polygon(p_data, {
-        color: 'green',
-        fillColor: '#f03',
-        fillOpacity: 0.5
-      }).addTo(this.map);
+      for (let i = 0; i < p_data.length; i++) {
+        var polygon = L.polygon(p_data, {
+          color: 'green',
+          fillColor: '#f03',
+          fillOpacity: 0.5
+        }).addTo(this.map);
+      }
       for (let i = 0; i < p_data.length; i++) {
         L.marker([p_data[i][0], p_data[i][1]]).addTo(this.map);
       }
