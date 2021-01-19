@@ -6,8 +6,8 @@
       <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: transparent">
         <div id="map_3"
              style="pointer-events:inherit; height: 100%; width: 100%;"></div>
-        <div id="map_4"
-             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>
+<!--        <div id="map_4"-->
+<!--             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>-->
       </div>
       <!--          <div id="map" bordered style="pointer-events:inherit"></div>-->
       <!--          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>-->
@@ -128,10 +128,10 @@ export default {
     this.drawBarChart();
   },
   mounted() {
-    document.getElementById('map_2').style.display = 'none'
-    document.getElementById('map_1').style.display = 'block'
+    // document.getElementById('map_2').style.display = 'none'
+    // document.getElementById('map_1').style.display = 'block'
     this.map = this.loadMap();//加载地图
-    let m = document.getElementById("map_1")
+    let m = document.getElementById("map_3")
     this.map_width = window.getComputedStyle(m).width
     this.map_height = window.getComputedStyle(m).height
 
@@ -192,16 +192,18 @@ export default {
           // 天地图影像图层
       ).addTo(this.map);
       let p_data = this.$store.state.get_login.position
+      console.log("检查", p_data)
+      alert(p_data[0])
       // add a polygon
-      for (let i = 0; i < p_data.length; i++) {
-        var polygon = L.polygon(p_data, {
+      // for (let i = 0; i < p_data.length; i++) {
+        var polygon = L.polygon(p_data[0], {
           color: 'green',
           fillColor: '#f03',
           fillOpacity: 0.5
         }).addTo(this.map);
-      }
-      for (let i = 0; i < p_data.length; i++) {
-        L.marker([p_data[i][0], p_data[i][1]]).addTo(this.map);
+      // }
+      for (let i = 0; i < p_data[0].length; i++) {
+        L.marker([p_data[0][i][0], p_data[0][i][1]]).addTo(this.map);
       }
       // this.map.panTo(new L.LatLng(40.737, -73.923));
       let myChart = this.$echarts.init(document.getElementById('index_chart'))
