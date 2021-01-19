@@ -14,7 +14,7 @@
                 scatterChart: undefined,
                 chartOption: {
                     title: {
-                        text: 'Insight',
+                        text: '数据洞察',
                         // subtext: ''
                     },
                     backgroundColor: '',
@@ -23,11 +23,11 @@
                         showDelay: 0,
                         formatter: function (params) {
                             if (params.componentType === 'series') {
-                                return params.seriesName + ' :<br/>'
-                                    + 'Impact: ' + params.value[0] + '<br/>'
-                                    + 'Random: ' + params.value[1].toFixed(2) + '<br/>';
+                                return params.seriesName + '<br/>'
+                                    + '影响: ' + params.value[0] + '<br/>'
+                                    + '重要性: ' + params.value[1].toFixed(2) + '<br/>';
                             } else {
-                                return 'Impact: ' + params.value.toFixed(2)
+                                return '重要性: ' + params.value.toFixed(2)
                             }
                         },
                         axisPointer: {
@@ -40,14 +40,14 @@
                         }
                     },
                     legend: {
-                        data: ['Top K', 'Trend', 'Correlation']
+                        data: ['前K项', '趋势', '相关性']
                     },
                     toolbox: {
                         show: true,
                         feature: {
                             mark: {show: true},
                             dataZoom: {show: true},
-                            dataView: {show: true, readOnly: false},
+                            dataView: {show: true, readOnly: true},
                             restore: {show: true},
                             saveAsImage: {show: true},
                         }
@@ -55,7 +55,7 @@
                     xAxis: [
                         {
                             type: 'value',
-                            name: 'Impact',
+                            name: '影响',
                             scale: true,
                             axisLabel: {
                                 formatter: (value, index) => {
@@ -67,7 +67,7 @@
                     yAxis: [
                         {
                             type: 'value',
-                            name: 'Random',
+                            name: '重要性',
                             scale: true,
                             axisLabel: {
                                 formatter: '{value}'
@@ -76,7 +76,7 @@
                     ],
                     series: [
                         {
-                            name: 'Top K',
+                            name: '前K项',
                             type: 'scatter',
                             data: [
                                 // {value: [1, 2], pid: 1},
@@ -99,7 +99,7 @@
                             }
                         },
                         {
-                            name: 'Trend',
+                            name: '趋势',
                             type: 'scatter',
                             data: [
                                 // {value: [3, 4], pid: 2},
@@ -122,7 +122,7 @@
                             }
                         },
                         {
-                            name: 'Correlation',
+                            name: '相关性',
                             type: 'scatter',
                             data: [
                                 // {value: [4, 5], pid: 3},
@@ -161,9 +161,9 @@
                     console.log('click %o', params);
                     let seriesType;
                     switch (params.seriesName) {
-                        case 'Top K': seriesType = 'top1'; break;
-                        case 'Trend': seriesType = 'trend'; break;
-                        case 'Correlation': seriesType = 'correlation'; break;
+                        case '前K项': seriesType = 'top1'; break;
+                        case '趋势': seriesType = 'trend'; break;
+                        case '相关性': seriesType = 'correlation'; break;
                         default: console.log('Error type'); return;
                     }
                     this.$store.commit("get_analyze/addChartData",

@@ -14,14 +14,24 @@
         ],
         data () {
             let this_ = this
+            let chartName;
+            switch (this.type) {
+                case 'top1': chartName = '前K项'; break;
+                case 'trend': chartName = '趋势'; break;
+                case 'correlation': chartName = '相关性'; break;
+                default: console.log('type error: %s', this.type)
+            }
             return {
                 refChart: undefined,
                 chartOption: {
                     title : {
-                        text: this.type,
+                        text: chartName,
                         // subtext: ''
                     },
                     backgroundColor: '',
+                    grid: {
+                        right: '100px',
+                    },
                     tooltip : {
                         trigger: 'item',
                         showDelay : 0,
@@ -58,11 +68,6 @@
                                 onclick: this_.closeChart
                             }
                         },
-                        iconStyle:{
-                            normal:{
-                                color:'#dddddd',//设置颜色
-                            }
-                        }
                     },
                     xAxis : [
                         {
@@ -93,6 +98,24 @@
                 refChart.setOption(this.chartOption);
             },
             updateRefChartData (chartMeta) {
+                if (chartMeta.y_coord_str) {
+                    if (chartMeta.y_coord_str.indexOf('danger_number') !== -1) {
+                        chartMeta.y_coord_str = '危险指数和'
+                    } else if (chartMeta.y_coord_str.indexOf('count of risk_level') !== -1) {
+                        let cnt = chartMeta.y_coord_str.split('=')[1]
+                        chartMeta.y_coord_str = '风险等级' + cnt + '数量'
+                    }
+                }
+                if (this.type === 'correlation') {
+                    for (let i = 0; i < chartMeta.data_list.length; i++) {
+                        if (chartMeta.data_list[i].col.indexOf('danger_number') !== -1){
+                            chartMeta.data_list[i].col = '危险指数和'
+                        } else if (chartMeta.data_list[i].col.indexOf('count of risk_level') !== -1) {
+                            let cnt = chartMeta.data_list[i].col.split('=')[1]
+                            chartMeta.data_list[i].col = '风险等级' + cnt + '数量'
+                        }
+                    }
+                }
                 switch(this.type) {
                     case 'top1':
                         let xLabelList = []
@@ -100,7 +123,7 @@
                             xLabelList.push(i)
                         }
                         this.chartOption.xAxis = {
-                            name: 'Rank',
+                            name: '排名',
                             type: 'category',
                             data: xLabelList
                         }
@@ -109,7 +132,7 @@
                             type: 'value'
                         }
                         this.chartOption.tooltip.formatter = function (params) {
-                            return 'Rank : ' + params.name + '<br/>' + params.value;
+                            return '排名 : ' + params.name + '<br/>' + params.value;
                         }
                         this.chartOption.legend.data = []
                         this.chartOption.series = [{
@@ -136,8 +159,8 @@
                             data: chartMeta.data_list,
                             markPoint : {
                                 data : [
-                                    {type : 'max', name: 'Max'},
-                                    {type : 'min', name: 'Min'}
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
                                 ]
                             }
                         }]
@@ -164,8 +187,8 @@
                                 data: chartMeta.data_list[0].list,
                                 markPoint : {
                                     data : [
-                                        {type : 'max', name: 'Max'},
-                                        {type : 'min', name: 'Min'}
+                                        {type : 'max', name: '最大值'},
+                                        {type : 'min', name: '最小值'}
                                     ]
                                 },
                             },
@@ -175,8 +198,8 @@
                                 data: chartMeta.data_list[1].list,
                                 markPoint: {
                                     data: [
-                                        {type: 'max', name: 'Max'},
-                                        {type: 'min', name: 'Min'}
+                                        {type : 'max', name: '最大值'},
+                                        {type : 'min', name: '最小值'}
                                     ]
                                 },
                             }]
