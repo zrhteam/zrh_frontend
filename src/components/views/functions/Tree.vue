@@ -57,11 +57,8 @@ export default {
       this.expandedKeys = []
       let arr = []//树形控件
       let p_arr = []//包含每个检查经纬度坐标的一个数组
+      let pp = []
       let count = 1;
-      let obj = {
-        lat: 0,
-        lng: 0
-      }
       for (let i in tree_data['headquarter_tag']) {
         // let parent1 = [];
         let parent1 = {
@@ -108,6 +105,17 @@ export default {
                 if (this.user_grant === '项目') {
                   this.expandedKeys.push(child2.id)
                 }
+                //一个项目是不是只有一个坐标
+                let sub_p = []
+                let obj = {
+                  lat: 0,
+                  lng: 0
+                }
+                sub_p.push(tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat)
+                sub_p.push(tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng)
+                if (pp.indexOf(sub_p) == -1) {
+                  pp.push(sub_p)
+                }
                 obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
                 obj['lng'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng
                 p_arr.push(obj)
@@ -116,6 +124,7 @@ export default {
           }
         }
       }
+      this.$store.commit('get_login/changePosition', {params: pp})
       console.log("arr", arr)
       this.data = arr
       // this.$store.state.get_login.tree_data = arr
@@ -173,13 +182,13 @@ export default {
             document.getElementById('region_large2').style.display = 'none'
           }
           document.getElementById('prj_part').style.display = 'none'
-          document.getElementById('head_up').style.display = 'none'
+          // document.getElementById('head_up').style.display = 'none'
         } else if (node.level == 3) {//区域=》项目
           this.prjNodeClick(data, node)
           document.getElementById('region_small').style.display = 'none'
           document.getElementById('region_large1').style.display = 'none'
           document.getElementById('region_large2').style.display = 'none'
-          document.getElementById('head_up').style.display = 'none'
+          // document.getElementById('head_up').style.display = 'none'
           document.getElementById('prj_part').style.display = 'block'
           //首先要判断当前是在数据大屏页面还是在主页面
           if ((document.getElementById("region_small").style.display === 'none') &&
@@ -205,7 +214,7 @@ export default {
           document.getElementById('region_small').style.display = 'none'
           document.getElementById('region_large1').style.display = 'none'
           document.getElementById('region_large2').style.display = 'none'
-          document.getElementById('head_up').style.display = 'none'
+          // document.getElementById('head_up').style.display = 'none'
           document.getElementById('prj_part').style.display = 'block'
           document.getElementById("prj_subpart").style.display = 'none'
           document.getElementById("check_part").style.display = 'block'
@@ -259,7 +268,7 @@ export default {
             document.getElementById('region_large1').style.display = 'none'
             document.getElementById('region_large2').style.display = 'none'
             document.getElementById('prj_part').style.display = 'none'
-            document.getElementById('head_up').style.display = 'none'
+            // document.getElementById('head_up').style.display = 'none'
           }
         } else if (node.level == 3) {//总部=》项目
           this.prjNodeClick(data, node)
@@ -270,7 +279,7 @@ export default {
           document.getElementById('region_small').style.display = 'none'
           document.getElementById('region_large1').style.display = 'none'
           document.getElementById('region_large2').style.display = 'none'
-          document.getElementById('head_up').style.display = 'none'
+          // document.getElementById('head_up').style.display = 'none'
           document.getElementById('prj_part').style.display = 'block'
           //首先要判断当前是在数据大屏页面还是在主页面
           if ((document.getElementById("head_small").style.display === 'none') &&
@@ -301,7 +310,7 @@ export default {
           document.getElementById('region_small').style.display = 'none'
           document.getElementById('region_large1').style.display = 'none'
           document.getElementById('region_large2').style.display = 'none'
-          document.getElementById('head_up').style.display = 'none'
+          // document.getElementById('head_up').style.display = 'none'
           document.getElementById('prj_part').style.display = 'block'
           document.getElementById("prj_subpart").style.display = 'none'
           //首先要判断当前是在数据大屏页面还是在主页面
