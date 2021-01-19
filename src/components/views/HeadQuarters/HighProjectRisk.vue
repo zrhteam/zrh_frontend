@@ -206,11 +206,11 @@ export default {
           fillOpacity: 0.5
         }).addTo(this.map);
       }
-      for (let i = 0; i < p_data.length; i++) {
-        for (let j = 0; j < p_data[i].length; j++) {
-          L.marker([p_data[i][j][0], p_data[i][j][1]]).addTo(this.map);
-        }
-      }
+      // for (let i = 0; i < p_data.length; i++) {
+      //   for (let j = 0; j < p_data[i].length; j++) {
+      //     L.marker([p_data[i][j][0], p_data[i][j][1]]).addTo(this.map);
+      //   }
+      // }
       // for (let i = 0; i < this.arr.length; i++) {
       //   L.marker([this.arr[i].lat, this.arr[i].lng]).addTo(this.map);
       //
