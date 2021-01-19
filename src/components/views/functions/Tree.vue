@@ -16,6 +16,8 @@
             @node-click="handleNodeClick"
             :default-expanded-keys="expandedKeys"
             :filter-node-method="filterNode"
+            accordion
+            :expand-on-click-node="true"
             ref="tree">
                                 <span class="span-ellipsis" slot-scope="{ node, data }">
                                   <span :title="node.label">{{ node.label }}</span>
@@ -56,8 +58,7 @@ export default {
     getTreeData(tree_data) {
       this.expandedKeys = []
       let arr = []//树形控件
-      let p_arr = []//包含每个检查经纬度坐标的一个数组
-      let pp = []
+      let pp = []//包含每个检查经纬度坐标的一个数组
       let count = 1;
       for (let i in tree_data['headquarter_tag']) {
         // let parent1 = [];
@@ -76,23 +77,24 @@ export default {
           let parent2 = {
             id: 0,
             label: '',
+            pos: [],
             children: []
           };
           parent2['id'] = count++
           parent2['label'] = j
-          parent1['children'].push(parent2)
           if (this.user_grant === '区域') {
             this.expandedKeys.push(parent2.id)
           }
+          let r_p = [];//每个区域围成一个多边形并存入经纬度数组pp
           for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
             let child1 = {
               id: 0,
               label: '',
+              pos: [],
               children: []
             };
             child1['id'] = count++
             child1['label'] = k
-            parent2['children'].push(child1)
             for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
               for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
                 let child2 = {
@@ -107,36 +109,55 @@ export default {
                 }
                 //一个项目是不是只有一个坐标
                 let sub_p = []
-                let obj = {
-                  lat: 0,
-                  lng: 0
-                }
                 sub_p.push(tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat)
                 sub_p.push(tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng)
-                if (pp.indexOf(sub_p) == -1) {
-                  pp.push(sub_p)
+                if (r_p.indexOf(sub_p) == -1) {
+                  r_p.push(sub_p)
+                  child1['pos'].push(sub_p[0])
+                  child1['pos'].push(sub_p[1])
                 }
-                obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
-                obj['lng'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng
-                p_arr.push(obj)
+                // obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
+                // obj['lng'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng
+                // p_arr.push(obj)
               }
             }
+            parent2['children'].push(child1)
           }
+          let area = 0;
+          let x = 0;
+          let y = 0;
+          for (let i = 1; i <= r_p.length; i++) {
+            let lat = r_p[i % r_p.length][0];
+            let lng = r_p[i % r_p.length][1];
+            let nextLat = r_p[i - 1][0];
+            let nextLng = r_p[i - 1][1];
+            let temp = (lat * nextLng - lng * nextLat) / 2;
+            area += temp;
+            x += (temp * (lat + nextLat)) / 3;
+            y += (temp * (lng + nextLng)) / 3;
+          }
+          x = x / area;
+          y = y / area;
+          parent2['pos'].push(x)
+          parent2['pos'].push(y)
+          parent1['children'].push(parent2)
+          pp.push(r_p)
         }
       }
       this.$store.commit('get_login/changePosition', {params: pp})
-      console.log("arr", arr)
+      console.log("arr检查", arr)
       this.data = arr
       // this.$store.state.get_login.tree_data = arr
-      this.p_data = p_arr
+      // this.p_data = p_arr
     },
     filterNode(value, data) {
       if (!value) return true;
       return data.label.indexOf(value) !== -1;
     },
     handleNodeClick(data, node) {
-      // console.log(data);
+      // console.log("节点", data);
       // console.log(node);
+      this.expandedKeys.push(data.id)
       if (this.user_grant === '项目') {
         if ((node.level == 1) || (node.level == 2)) {
           alert("您没有权限")
@@ -399,6 +420,7 @@ export default {
     }
   },
   created() {
+    console.log("区域", this.$store.state.get_login.grant_data.data)
     this.getTreeData(this.treeObj1)
   }
 }
