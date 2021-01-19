@@ -4,6 +4,7 @@ import Overview from '../components/Overview.vue'
 import LandHeadquartersEHSDataScreen from "../components/LandHeadquartersEHSDataScreen.vue";
 import RegionDepartment from "@/components/RegionDepartment.vue";
 import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
+import Analyze from "@/components/Analyze.vue"
 import NotFound from '../components/NotFound.vue'
 
 const routerOptions = [
@@ -15,6 +16,7 @@ const routerOptions = [
     {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen', meta: {keepAlive: false}},
     {path: '/region_department', component: 'RegionDepartment', meta: {keepAlive: false}},
     {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis', meta: {keepAlive: false}},
+    {path: '/analyze', component: 'Analyze', meta: {keepAlive:false}},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {
@@ -33,6 +35,7 @@ const router = new Router({
         {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
         {path: '/region_department', component: 'RegionDepartment'},
         {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis'},
+        {path: '/analyze', component: 'Analyze'},
         {path: '*', component: 'NotFound'}
     ]
 })
