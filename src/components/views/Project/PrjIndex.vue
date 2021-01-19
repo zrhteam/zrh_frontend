@@ -243,8 +243,9 @@ export default {
       //   console.log(e);
       //   alert('纬度：' + e.latlng.lat + '\n经度：' + e.latlng.lng);
       // });
-      for (var i = 0; i < this.arr.length; i++) {
-        L.marker([this.arr[i].lat, this.arr[i].lng]).addTo(this.map);
+      let p_data = this.$store.state.get_login.position
+      for (var i = 0; i < p_data.length; i++) {
+        L.marker([p_data[i][0], p_data[i][0]]).addTo(this.map);
         // var marker = L.marker([37.8542800187483, 112.534177962463]).addTo(this.map);
         // this.map.on("click", function (e) {
         //   var lat = e.latlng.lat;
@@ -285,24 +286,6 @@ export default {
         }, 100)
 
 
-
-        // let param1 = new URLSearchParams();
-        // param1.append('check_code', data.label);
-        // var prj = document.getElementById('prj_subpart');
-        // prj.style.display = 'none'
-        // var check = document.getElementById('check_part');
-        // check.style.display = 'block'
-        // // document.getElementById('check_part').style.display = 'none'
-        // document.getElementById('map_1').style.display = 'none'
-        // document.getElementById('map_2').style.display = 'block'
-        // document.getElementById('prj_charts').style.display = 'none'
-        // document.getElementById('check_charts').style.display = 'block'
-        // var large1 = document.getElementById('large1');
-        // large1.style.display = 'block'
-        // var large2 = document.getElementById('large2');
-        // large2.style.display = 'block'
-        // var prj_small = document.getElementById('prj_small');
-        // prj_small.style.display = 'none'
         // this.map.setZoom(12)
         // let _this = this
         // setTimeout(function () {
