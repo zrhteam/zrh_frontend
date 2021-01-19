@@ -41,7 +41,7 @@
       <PrjOverviewPart></PrjOverviewPart>
       <CheckOverview id="check_part" style="display: none"></CheckOverview>
     </el-row>
-    <RegionOverview id="region_part" style="display: none"></RegionOverview>
+<!--    <RegionOverview id="region_part" style="display: none"></RegionOverview>-->
   </el-row>
   <!--  <PrjDataScreen></PrjDataScreen>-->
 </template>
@@ -163,8 +163,9 @@ export default {
       //   console.log(e);
       //   alert('纬度：' + e.latlng.lat + '\n经度：' + e.latlng.lng);
       // });
-      for (var i = 0; i < this.p_data.length; i++) {
-        L.marker([this.p_data[i].lat, this.p_data[i].lng]).addTo(this.map);
+      let p_data = this.$store.state.get_login.position
+      for (var i = 0; i < p_data.length; i++) {
+        L.marker([p_data[i][0], p_data[i][1]]).addTo(this.map);
         // var marker = L.marker([37.8542800187483, 112.534177962463]).addTo(this.map);
         // this.map.on("click", function (e) {
         //   var lat = e.latlng.lat;
@@ -185,7 +186,6 @@ export default {
       url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
       treeObj: this.$store.state.get_login.grant_data.data.value,
-      p_data: [],
       map: "",
       mapInfo: {},
       dataset: {},
