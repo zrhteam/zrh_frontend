@@ -1,31 +1,25 @@
 <template>
     <div class="chart-card">
-<!--        <el-button type="text" id="close-btm" @click="closeChart" icon="el-icon-close"></el-button>-->
         <div ref="refChart" style="width: 400px; height: 300px;"/>
     </div>
 </template>
 
 <script>
-    import dataService from "@/service/dataService";
+    import translateInsightType from "@/js/analyze/language";
+    import {wrapperChartOption} from "@/js/analyze/chartDataParse";
+
     export default {
         name: "RefChart",
         props: [
-            'pid', 'type', 'chartKey'
+            'chartData'
         ],
         data () {
             let this_ = this
-            let chartName;
-            switch (this.type) {
-                case 'top1': chartName = '前K项'; break;
-                case 'trend': chartName = '趋势'; break;
-                case 'correlation': chartName = '相关性'; break;
-                default: console.log('type error: %s', this.type)
-            }
             return {
                 refChart: undefined,
                 chartOption: {
                     title : {
-                        text: chartName,
+                        text: '未知',
                         // subtext: ''
                     },
                     backgroundColor: '',
@@ -41,8 +35,7 @@
                                     + 'x : ' + params.value[0] + '<br/>'
                                     + 'y : ' + params.value[1] + '<br/>';
                             } else {
-                                return params.seriesName + ' :<br/>'
-                                    + params.name + ' : '
+                                return params.name + '值 : '
                                     + params.value;
                             }
                         },
@@ -70,24 +63,6 @@
                             }
                         },
                     },
-                    xAxis : [
-                        {
-                            type : 'value',
-                            scale:true,
-                            axisLabel : {
-                                formatter: '{value}'
-                            }
-                        }
-                    ],
-                    yAxis : [
-                        {
-                            type : 'value',
-                            scale:true,
-                            axisLabel : {
-                                formatter: '{value}'
-                            }
-                        }
-                    ],
                     series : []
                 },
             }
@@ -98,135 +73,31 @@
                 this.refChart = refChart
                 refChart.setOption(this.chartOption);
             },
-            updateRefChartData (chartMeta) {
-                if (chartMeta.y_coord_str) {
-                    if (chartMeta.y_coord_str.indexOf('danger_number') !== -1) {
-                        chartMeta.y_coord_str = '危险指数和'
-                    } else if (chartMeta.y_coord_str.indexOf('count of risk_level') !== -1) {
-                        let cnt = chartMeta.y_coord_str.split('=')[1]
-                        chartMeta.y_coord_str = '风险等级' + cnt + '数量'
+            updateRefChartData (chartData) {
+
+                this.chartOption.title.text = translateInsightType(this.chartData.type)
+
+                if (chartData.y_coord_str) {
+                    if (chartData.y_coord_str.indexOf('danger_number') !== -1) {
+                        chartData.y_coord_str = '危险指数和'
+                    } else if (chartData.y_coord_str.indexOf('count of risk_level') !== -1) {
+                        let cnt = chartData.y_coord_str.split('=')[1]
+                        chartData.y_coord_str = '风险等级' + cnt + '数量'
                     }
                 }
-                if (this.type === 'correlation') {
-                    for (let i = 0; i < chartMeta.data_list.length; i++) {
-                        if (chartMeta.data_list[i].col.indexOf('danger_number') !== -1){
-                            chartMeta.data_list[i].col = '危险指数和'
-                        } else if (chartMeta.data_list[i].col.indexOf('count of risk_level') !== -1) {
-                            let cnt = chartMeta.data_list[i].col.split('=')[1]
-                            chartMeta.data_list[i].col = '风险等级' + cnt + '数量'
-                        }
-                    }
-                }
-                switch(this.type) {
-                    case 'top1':
-                        let xLabelList = []
-                        for (let i = 1; i <= 10; i++) {
-                            xLabelList.push(i)
-                        }
-                        this.chartOption.xAxis = {
-                            name: '排名',
-                            type: 'category',
-                            data: xLabelList
-                        }
-                        this.chartOption.yAxis = {
-                            name: chartMeta.y_coord_str,
-                            type: 'value'
-                        }
-                        this.chartOption.tooltip.formatter = function (params) {
-                            return '排名 : ' + params.name + '<br/>' + params.value;
-                        }
-                        this.chartOption.legend.data = []
-                        this.chartOption.series = [{
-                            name: 'Rank',
-                            type: 'bar',
-                            data: chartMeta.data_list
-                        }]
-                        break;
-                    case 'trend':
-                        this.chartOption.xAxis = {
-                            name: chartMeta.x_coord_str,
-                            type: 'category',
-                            boundaryGap : false,
-                            data: chartMeta.x_label_list,
-                        }
-                        this.chartOption.yAxis = {
-                            name: chartMeta.y_coord_str,
-                            type: 'value'
-                        }
-                        this.chartOption.legend.data = []
-                        this.chartOption.series = [{
-                            name: 'Rank',
-                            type: 'line',
-                            data: chartMeta.data_list,
-                            markPoint : {
-                                data : [
-                                    {type : 'max', name: '最大值'},
-                                    {type : 'min', name: '最小值'}
-                                ]
-                            }
-                        }]
-                        break;
-                    case 'correlation':
-                        this.chartOption.xAxis = {
-                            name: chartMeta.x_coord_str,
-                            type : 'category',
-                            boundaryGap : false,
-                            data: chartMeta.x_label_list,
-                        }
-                        this.chartOption.yAxis = {
-                            // name: 'yy',
-                            type: 'value'
-                        }
-                        this.chartOption.legend.data = [
-                            chartMeta.data_list[0].col,
-                            chartMeta.data_list[1].col,
-                        ]
-                        this.chartOption.series = [
-                            {
-                                name: chartMeta.data_list[0].col,
-                                type: 'line',
-                                data: chartMeta.data_list[0].list,
-                                markPoint : {
-                                    data : [
-                                        {type : 'max', name: '最大值'},
-                                        {type : 'min', name: '最小值'}
-                                    ]
-                                },
-                            },
-                            {
-                                name: chartMeta.data_list[1].col,
-                                type: 'line',
-                                data: chartMeta.data_list[1].list,
-                                markPoint: {
-                                    data: [
-                                        {type : 'max', name: '最大值'},
-                                        {type : 'min', name: '最小值'}
-                                    ]
-                                },
-                            }]
-                        console.log('series %o', this.chartOption.series)
-                        break;
-                    default:
-                        console.log('type error')
-                }
-                console.log('chart option: %o', this.chartOption)
+                this.chartOption = wrapperChartOption(this.chartOption, chartData)
                 this.refChart.setOption(this.chartOption);
             },
             closeChart () {
-                console.log('close chart %d', this.chartKey)
+                console.log('close chart %d', this.chartData.chartKey)
                 this.$store.commit('get_analyze/removeChartData',
-                    {chartKey: this.chartKey})
+                    {chartKey: this.chartData.chartKey})
             }
         },
         mounted: function () {
             this.initChart();
-            let params = new URLSearchParams();
-            params.append('pid', this.pid)
-            params.append('type', this.type)
-            dataService.getAnalyzeRefChartData(params,response => {
-                this.updateRefChartData(response)
-            })
-        }
+            this.updateRefChartData(this.chartData);
+        },
     }
 </script>
 

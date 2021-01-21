@@ -2,18 +2,16 @@
     <div style="">
         <BaseScatterChart/>
         <div id="container">
-            <RefChart v-for="(insight, index) in insightList"
-                      :pid="insight.pid"
-                      :type="insight.type"
-                      :chartKey="insight.chartKey"
-                      :key="insight.chartKey"/>
+            <RefChart v-for="(chartData, index) in chartDataList"
+                      :chartData="chartData"
+                      :key="chartData.chartKey"/>
         </div>
     </div>
 </template>
 
 <script>
-    import BaseScatterChart from "@/components/mychart/baseScatterChart/BaseScatterChartIndex.vue";
-    import RefChart from "@/components/mychart/refChart/RefChartIndex.vue";
+    import BaseScatterChart from "@/components/mychart/BaseScatterChart/BaseScatterChartIndex.vue";
+    import RefChart from "@/components/mychart/RefChart/RefChartIndex.vue";
     import {mapGetters} from "vuex";
 
     export default {
@@ -27,7 +25,7 @@
         },
         computed: {
             ...mapGetters({
-                insightList: 'get_analyze/renderChartDataList'
+                chartDataList: 'get_analyze/renderChartDataList'
             })
         }
     }

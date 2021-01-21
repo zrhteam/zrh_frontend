@@ -738,7 +738,7 @@ function getAnalyzeInsightList(param, callback) {
  * Parameter: pid, type
  * Return: 几种图表数据中的一种 (json)
  */
-function getAnalyzeRefChartData(param, callback) {
+function getAnalyzeRefChartMeta(param, callback) {
     const url = `${dataServerUrl}/analyze/insight/ref`
     axios.post(url, param)
         .then(response => {
@@ -850,5 +850,5 @@ export default {
     getCheckMajorArea,
     getCheckRiskTop,
     getAnalyzeInsightList,
-    getAnalyzeRefChartData,
+    getAnalyzeRefChartMeta,
 }
