@@ -7,17 +7,26 @@
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
     </div>
-    <div id="bar_chart" style="height: 80%; width: 100%">
-      <!--        占比（可筛选专业）柱状图-->
+    <!--    <div id="bar_chart" style="height: 80%; width: 100%">-->
+    <!--      &lt;!&ndash;        占比（可筛选专业）柱状图&ndash;&gt;-->
 
+    <!--    </div>-->
+    <!--        占比（可筛选专业）柱状图-->
+    <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">
+    </div>
+    <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">
+    </div>
+    <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">
     </div>
   </el-card>
 </template>
 
 <script>
 import elementResizeDetectorMaker from "element-resize-detector";
+import {bar_option} from "@/utils/constants.js";
+
 export default {
-  name: "RiskProjPercentage",
+  name: "ProjPercentage",
   props: ['context'],
   data() {
     return {
@@ -29,132 +38,35 @@ export default {
     drawBarChart() {
       this.$nextTick(_ => {
         let myChart;
-        if (this.type == 'system') {
-          if (document.getElementById('bar_chart')) {
-            document.getElementById('bar_chart').id = 'id_system'
-          }
-          myChart = this.$echarts.init(document.getElementById('id_system'))
-        } else if (this.type == 'reason') {
-          if (document.getElementById('bar_chart')) {
-            document.getElementById('bar_chart').id = 'id_reason'
-          }
-          myChart = this.$echarts.init(document.getElementById('id_reason'))
-        } else if (this.type == 'region') {
-          if (document.getElementById('bar_chart')) {
-            document.getElementById('bar_chart').id = 'id_region'
-          }
-          myChart = this.$echarts.init(document.getElementById('id_region'))
-        }
-        // 使用刚指定的配置项和数据显示图表。
+        myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
         console.log("bar_arr", arr)
-        if (arr.length) {
-          let option = {
-            tooltip: {},
-            dataset: {
-              dimensions: ['name', 'count'],
-              source: arr
-            },
-            xAxis: {
-              type: 'category',
-              axisLabel: {
-                interval: 0,
-                rotate: 45,
-                textStyle: {
-                  fontSize: 10
-                }
-              },
-              axisLine: {
-                lineStyle: {
-                  color: '#ffffff',
-                  fontSize: 8
-                }
-              }
-            },
-            yAxis: {
-              axisLine: {
-                lineStyle: {
-                  color: '#ffffff'
-                }
-              },
-              axisLabel: {
-                // textStyle: {
-                //   fontSize: 10
-                // }
-              }
-            },
-            series: [
-              {
-                type: 'bar',
-                itemStyle: {
-                  normal: {
-                    //柱形图圆角，初始化效果
-                    barBorderRadius: [10, 10, 0, 0],
-                    color: new echarts.graphic.LinearGradient(
-                        0, 0, 0, 1,
-                        [
-                          {offset: 0, color: '#77b5b8'},
-                          // {offset: 0.5, color: '#1f77a0'},
-                          {offset: 1, color: '#107480'}
-                        ]
-                    )
-                  }
-                },
-                label:{
-                show: true,
-                position: 'top',
-                textStyle: {
-                  fontSize: '7px',
-                  color: '#fff'
-                },
-              },
-                emphasis: {
-                  itemStyle: {
-                    color: '#40abc4'
-                    //     new echarts.graphic.LinearGradient(
-                    //     0, 0, 0, 1,
-                    //     [
-                    //       {offset: 0, color: '#2378f7'},
-                    //       {offset: 0.7, color: '#2378f7'},
-                    //       {offset: 1, color: '#83bff6'}
-                    //     ]
-                    // )
-                  }
-                },
-                barMaxWidth: 40
-              }
-            ]
-          };
-          myChart.setOption(option);
-        }
+        bar_option['dataset']['source'] = arr
+        myChart.setOption(bar_option);
         myChart.resize();
         window.addEventListener('resize', function () {
           myChart.resize();
         })
         const _this = this;
         const erd = elementResizeDetectorMaker();
-        if (this.type == 'system') {
-          erd.listenTo(document.getElementById("id_system"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
+        erd.listenTo(document.getElementById("id_system"), element => {
+          _this.$nextTick(() => {
+            //监听到事件后执行的业务逻辑
+            myChart.resize();
           });
-        } else if (this.type == 'reason') {
-          erd.listenTo(document.getElementById("id_reason"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
+        });
+        erd.listenTo(document.getElementById("id_reason"), element => {
+          _this.$nextTick(() => {
+            //监听到事件后执行的业务逻辑
+            myChart.resize();
           });
-        } else if (this.type == 'region') {
-          erd.listenTo(document.getElementById("id_region"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
+        });
+        erd.listenTo(document.getElementById("id_region"), element => {
+          _this.$nextTick(() => {
+            //监听到事件后执行的业务逻辑
+            myChart.resize();
           });
-        }
+        });
       })
     },
     sortNumber(attr, rev) {
@@ -182,7 +94,7 @@ export default {
       console.log('this.context', this.context);
       let data;
       let arr = [];
-      if (this.context.type == 'system') {
+      if (this.context.id == 'id_system') {
         data = this.$store.state.get_project.prj_system
         for (let i in data) {
           for (let j in data[i]) {
@@ -196,7 +108,7 @@ export default {
           }
         }
         console.log(arr)
-      } else if (this.context.type == 'reason') {
+      } else if (this.context.id == 'id_reason') {
         data = this.$store.state.get_project.prj_reason
         console.log(data)
         let obj1 = {
@@ -226,7 +138,7 @@ export default {
         arr.push(obj2)
         arr.push(obj3)
         console.log(arr)
-      } else if (this.context.type == 'region') {
+      } else if (this.context.id == 'id_region') {
         data = this.$store.state.get_project.prj_region
         console.log(data)
         let obj1 = {
@@ -265,15 +177,10 @@ export default {
   updated() {
     this.drawBarChart()
   },
-  mounted() {
-    console.log('this.context', this.context.type);
-    this.type = this.context.type
-    // if (this.context.type == system) {
-    //   document.getElementById('bar_chart').id = 'id_system'
-    //   let id = 'id_system'
-    this.drawBarChart();
-    // }
-  }
+  // mounted() {
+  //   this.drawBarChart();
+  //   // }
+  // }
 }
 </script>
 
