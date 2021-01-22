@@ -178,7 +178,10 @@ export default {
       return arr
     },
   },
-  updated() {
+  // updated() {
+  //   this.drawBarChart()
+  // },
+  mounted() {
     this.drawBarChart()
   }
 }
