@@ -29,8 +29,6 @@ export default {
   props: ['context'],
   data() {
     return {
-      // type: '',
-      // bar_chart: 'xx'
     }
   },
   methods: {
@@ -41,10 +39,10 @@ export default {
         // 使用刚指定的配置项和数据显示图表。
         let arr = this.getData
         // console.log("bar_arr", arr)
-        if (arr.length) {
+        // if (arr.length) {
           bar_option['dataset']['source'] = arr
           myChart.setOption(bar_option);
-        }
+        // }
         myChart.resize();
         window.addEventListener('resize', function () {
           myChart.resize();
@@ -111,7 +109,6 @@ export default {
             arr.push(obj)
           }
         }
-        console.log(arr)
       } else if (this.context.id == 'id_check_reason') {
         data = this.$store.state.get_check.check_reason
         console.log(data)
@@ -141,7 +138,6 @@ export default {
         arr.push(obj1)
         arr.push(obj2)
         arr.push(obj3)
-        console.log(arr)
       } else if (this.context.id == 'id_check_region') {
         data = this.$store.state.get_check.check_region
         console.log(data)
@@ -171,19 +167,18 @@ export default {
         arr.push(obj1)
         arr.push(obj2)
         arr.push(obj3)
-        console.log(arr)
       }
-      console.log(arr)
+      // console.log("查看",arr)
       arr.sort(this.sortNumber('count', true))
       return arr
     },
   },
-  // updated() {
-  //   this.drawBarChart()
-  // },
-  mounted() {
+  updated() {
     this.drawBarChart()
-  }
+  },
+  // mounted() {
+  //   this.drawBarChart()
+  // }
 }
 </script>
 
