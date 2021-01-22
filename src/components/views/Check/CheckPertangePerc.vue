@@ -7,16 +7,22 @@
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
     </div>
-    <div id="check_bar_chart" style="height: 80%; width: 100%">
-      <!--        占比（可筛选专业）柱状图-->
+<!--    <div id="check_bar_chart" style="height: 80%; width: 100%">-->
+<!--      &lt;!&ndash;        占比（可筛选专业）柱状图&ndash;&gt;-->
 
+<!--    </div>-->
+  <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">
+    </div>
+    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">
+    </div>
+    <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">
     </div>
   </el-card>
 </template>
 
 <script>
 import elementResizeDetectorMaker from "element-resize-detector";
-import {bar_option} from "@/utils/constants";
+import {bar_option} from "@/utils/constants.js";
 
 export default {
   name: "CheckPertangePerc",
@@ -31,25 +37,10 @@ export default {
     drawBarChart() {
       this.$nextTick(_ => {
         let myChart;
-        if (this.type == 'system') {
-          if (document.getElementById('check_bar_chart')) {
-            document.getElementById('check_bar_chart').id = 'id_check_system'
-          }
-          myChart = this.$echarts.init(document.getElementById('id_check_system'))
-        } else if (this.type == 'reason') {
-          if (document.getElementById('check_bar_chart')) {
-            document.getElementById('check_bar_chart').id = 'id_check_reason'
-          }
-          myChart = this.$echarts.init(document.getElementById('id_check_reason'))
-        } else if (this.type == 'region') {
-          if (document.getElementById('check_bar_chart')) {
-            document.getElementById('check_bar_chart').id = 'id_check_region'
-          }
-          myChart = this.$echarts.init(document.getElementById('id_check_region'))
-        }
+        myChart = this.$echarts.init(document.getElementById(this.context.id))
         // 使用刚指定的配置项和数据显示图表。
         let arr = this.getData
-        console.log("bar_arr", arr)
+        // console.log("bar_arr", arr)
         if (arr.length) {
           bar_option['dataset']['source'] = arr
           myChart.setOption(bar_option);
@@ -60,29 +51,27 @@ export default {
         })
         const _this = this;
         const erd = elementResizeDetectorMaker();
-        if (this.type == 'system') {
           erd.listenTo(document.getElementById("id_check_system"), element => {
             _this.$nextTick(() => {
               //监听到事件后执行的业务逻辑
               myChart.resize();
             });
           });
-        } else if (this.type == 'reason') {
           erd.listenTo(document.getElementById("id_check_reason"), element => {
             _this.$nextTick(() => {
               //监听到事件后执行的业务逻辑
               myChart.resize();
             });
           });
-        } else if (this.type == 'region') {
           erd.listenTo(document.getElementById("id_check_region"), element => {
             _this.$nextTick(() => {
               //监听到事件后执行的业务逻辑
               myChart.resize();
             });
           });
-        }
-      })
+      // })
+
+    })
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
@@ -106,10 +95,10 @@ export default {
   },
   computed: {
     getData() {
-      console.log('this.context', this.context);
+      // console.log('this.context', this.context);
       let data;
       let arr = [];
-      if (this.context.type == 'system') {
+      if (this.context.id == 'id_check_system') {
         data = this.$store.state.get_check.check_system
         for (let i in data) {
           for (let j in data[i]) {
@@ -123,7 +112,7 @@ export default {
           }
         }
         console.log(arr)
-      } else if (this.context.type == 'reason') {
+      } else if (this.context.id == 'id_check_reason') {
         data = this.$store.state.get_check.check_reason
         console.log(data)
         let obj1 = {
@@ -153,7 +142,7 @@ export default {
         arr.push(obj2)
         arr.push(obj3)
         console.log(arr)
-      } else if (this.context.type == 'region') {
+      } else if (this.context.id == 'id_check_region') {
         data = this.$store.state.get_check.check_region
         console.log(data)
         let obj1 = {
@@ -191,15 +180,6 @@ export default {
   },
   updated() {
     this.drawBarChart()
-  },
-  mounted() {
-    console.log('this.context', this.context.type);
-    this.type = this.context.type
-    // if (this.context.type == system) {
-    //   document.getElementById('bar_chart').id = 'id_system'
-    //   let id = 'id_system'
-    this.drawBarChart();
-    // }
   }
 }
 </script>
