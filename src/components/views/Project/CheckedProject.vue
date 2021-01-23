@@ -30,6 +30,7 @@
 
 <script>
 import elementResizeDetectorMaker from "element-resize-detector";
+import {bar_option} from "@/utils/constants";
 
 export default {
   name: "CheckedProject",
@@ -38,6 +39,9 @@ export default {
   //     PrjRiskLevelData: []
   //   }
   // },
+  data() {
+    return {}
+  },
   computed: {
     getPrjRiskLevelData() {
       let data = this.$store.state.get_project.prj_risk_data;
@@ -55,16 +59,16 @@ export default {
       //  1：低风险； 2：中风险； 3：高风险
       else {
         let obj1 = {
-          risk: '低风险',
-          num: 0
+          name: '低风险',
+          count: 0
         }
         let obj2 = {
-          risk: '中风险',
-          num: 0
+          name: '中风险',
+          count: 0
         }
         let obj3 = {
-          risk: '高风险',
-          num: 0
+          name: '高风险',
+          count: 0
         }
         // let obj = {
         //   risk: '列总计',
@@ -74,13 +78,13 @@ export default {
         for (let i in data) {
           for (let j in data[i]) {
             if (j == 1) {
-              obj1.num += data[i][j]
+              obj1.count += data[i][j]
             }
             if (j == 2) {
-              obj2.num += data[i][j]
+              obj2.count += data[i][j]
             }
             if (j == 3) {
-              obj3.num += data[i][j]
+              obj3.count += data[i][j]
             }
           }
         }
@@ -94,96 +98,21 @@ export default {
       }
     }
   },
-
   updated() {
     this.drawBarChart()
   },
-  mounted() {
-    this.drawBarChart();
-  },
+  // mounted() {
+  //   this.drawBarChart();
+  // },
   methods: {
     drawBarChart(){
       let myChart = this.$echarts.init(document.getElementById('risk_level'))
       let arr = this.getPrjRiskLevelData
-      if (arr.length) {
-        let option = {
-          tooltip: {
-            // trigger:'item',
-            // formatter: '{b}:{d}%'
-        },
-          dataset: {
-            dimensions: ['risk', 'num'],
-            source: arr
-          },
-          xAxis: {
-            type: 'category',
-            axisLabel: {
-              interval: 0,
-              rotate: 0,
-              textStyle: {
-                fontSize: 10
-              }
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#ffffff',
-                fontSize: 8
-              }
-            }
-          },
-          yAxis: {
-            axisLine: {
-              lineStyle: {
-                color: '#ffffff'
-              }
-            }
-          },
-          series: [
-            {
-              type: 'bar',
-              itemStyle: {
-                normal: {
-                  //柱形图圆角，初始化效果
-                  barBorderRadius: [10, 10, 0, 0],
-                  color: new echarts.graphic.LinearGradient(
-                      0, 0, 0, 1,
-                      [
-                        {offset: 0, color: '#77b5b8'},
-                        // {offset: 0.5, color: '#1f77a0'},
-                        {offset: 1, color: '#107480'}
-                      ]
-                  )
-                }
-              },
-              label:{
-                show: true,
-                position: 'top',
-                textStyle: {
-                  fontSize: '7px',
-                  color: '#fff'
-                },
-                // formatter: '{c}',
-              },
-              emphasis: {
-                itemStyle: {
-                  color: '#40abc4'
-                  //     new echarts.graphic.LinearGradient(
-                  //     0, 0, 0, 1,
-                  //     [
-                  //       {offset: 0.7, color: '#174489'},
-                  //       {offset: 1, color: '#83bff6'}
-                  //     ]
-                  // )
-                }
-              },
-              barMaxWidth: 40
-            }
-          ]
-        };
-        myChart.setOption(option);
-      }else{
-
-      }
+      // console.log("检查1",bar_option)
+      // bar_option["dataset"]["dimensions"] = ['risk', 'num']
+      bar_option["dataset"]["source"] = arr
+      // console.log("检查2",bar_option)
+      myChart.setOption(bar_option);
       myChart.resize();
       window.addEventListener('resize', function (){
         myChart.resize();
