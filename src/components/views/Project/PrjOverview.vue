@@ -15,7 +15,8 @@
       <el-col :span="20" style="height: 100%">
         <el-card class="title-box-card " shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>
+          <label style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{title1}}</label>
+          <label style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{title2}}</label>
         </el-card>
       </el-col>
     </el-row>
@@ -197,6 +198,8 @@ export default {
       map_height: 0,
       timer: '',
       input: 'test',
+      title1: this.$store.state.get_login.grant_data.data.headquarter_tag + this.$store.state.get_login.grant_data.data.region_tag,
+      title2: this.$store.state.get_login.grant_data.data.project_tag
     };
   },
   created() {

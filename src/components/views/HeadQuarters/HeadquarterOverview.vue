@@ -1,5 +1,6 @@
 <template>
   <el-row style="height: 100%;">
+  <el-row style="height: 100%;" id="head_quarter">
     <headquarterDataScreen id="head_small" style="display: none"></headquarterDataScreen>
     <el-row id="head_large1" class="" style="height: 10%;">
       <el-col :span="4" style="height: 100%">
@@ -85,8 +86,10 @@
         <!--      </el-card>-->
       </el-col>
     </el-row>
-    <RegionOverview id="region_part" style="display: none"></RegionOverview>
+
   </el-row>
+    <RegionOverview id="region_part" style="display: none"></RegionOverview>
+    </el-row>
 </template>
 
 <script>

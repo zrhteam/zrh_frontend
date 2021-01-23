@@ -1,6 +1,7 @@
 <template>
   <!--  <div>-->
-  <el-row id="region1" style="height: 100%;">
+  <el-row style="height: 100%;">
+  <el-row id="region" style="height: 100%;">
     <RegionDataScreen id="region_small" style="display: none"></RegionDataScreen>
     <el-row id="region_large1" class="" style="height: 10%;">
       <el-col :span="4" style="height: 100%">
@@ -83,10 +84,11 @@
       </el-col>
       <!--      <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>-->
     </el-row>
-    <PrjOverview id="prj_part" style="display: none"></PrjOverview>
+
 <!--    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>-->
   </el-row>
-
+    <PrjOverview id="prj_part" style="display: none"></PrjOverview>
+</el-row>
   <!--    </div>-->
 </template>
 
