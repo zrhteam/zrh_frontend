@@ -17,6 +17,7 @@
             :default-expanded-keys="expandedKeys"
             :filter-node-method="filterNode"
             accordion
+            default-expand-all
             :expand-on-click-node="true"
             ref="tree">
                                 <span class="span-ellipsis" slot-scope="{ node, data }">
@@ -44,6 +45,7 @@ export default {
         label: 'label'
       },
       data: [],
+      map: "",
       treeObj1: this.treeObj,
       user_grant: this.$store.state.get_login.grant_data.data.user_grant,//当前用户的权限
       expandedKeys: []
@@ -145,7 +147,7 @@ export default {
         }
       }
       this.$store.commit('get_login/changePosition', {params: pp})
-      console.log("arr检查", arr)
+      console.log("arr", arr)
       this.data = arr
       // this.$store.state.get_login.tree_data = arr
       // this.p_data = p_arr
@@ -272,6 +274,8 @@ export default {
           }
         } else if (node.level == 2) {//总部=》区域
           this.regionNodeClick(data, node)
+          console.log("检查", data)
+          console.log(node)
           document.getElementById("head_small").style.display = 'none'
           document.getElementById('head_large1').style.display = 'none'
           document.getElementById('head_large2').style.display = 'none'
@@ -291,6 +295,23 @@ export default {
             document.getElementById('prj_part').style.display = 'none'
             // document.getElementById('head_up').style.display = 'none'
           }
+          //为了画出多边形，要重新封装该区域的数据
+          let r_p = [];
+          for(let i in data['children']) {
+            // alert(data['children'][i])
+            console.log(data['children'][i]['pos'])
+          }
+          var container = L.DomUtil.get('map_3'); if(container != null){ container._leaflet_id = null; }
+          this.map = new L.map("map_3");
+          // this.map.setView([30,30], 6)
+          // this.map = L.map("map_3", {
+          //   center: [34, 107], // 地图中心
+          //   zoom: 4, //缩放比列
+          //   zoomControl: false, //禁用 + - 按钮
+          //   // doubleClickZoom: false, // 禁用双击放大
+          //   attributionControl: false // 移除右下角leaflet标识
+          // });
+          // this.map.panTo(data.pos[0], data.pos[1])
         } else if (node.level == 3) {//总部=》项目
           this.prjNodeClick(data, node)
           document.getElementById("head_small").style.display = 'none'
@@ -420,7 +441,7 @@ export default {
     }
   },
   created() {
-    console.log("区域", this.$store.state.get_login.grant_data.data)
+    // console.log("区域", this.$store.state.get_login.grant_data.data)
     this.getTreeData(this.treeObj1)
   }
 }
