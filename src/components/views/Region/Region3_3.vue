@@ -32,6 +32,7 @@
 //import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
 import * as d3 from "d3/dist/d3";
 import elementResizeDetectorMaker from "element-resize-detector";
+import {bar_option} from "@/utils/constants";
 
 export default {
   name: "Region3_3",
@@ -52,76 +53,10 @@ export default {
       }//for
       arr.sort(this.sortNumber('count', true))
       console.log(arr)
-      let option = {
-        tooltip: {},
-        dataset: {
-          dimensions: ['name', 'count'],
-          source: arr
-        },
-        xAxis: {
-          type: 'category',
-          axisLabel: {
-            interval: 0,
-            rotate: 20
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#ffffff',
-              fontSize: 8
-            }
-          }
-        },
-        yAxis: {
-          axisLine: {
-            lineStyle: {
-              color: '#ffffff',
-              fontSize: 8
-            }
-          }
-        },
-        series: [
-          {
-            type: 'bar',
-            itemStyle: {
-              normal: {
-                //柱形图圆角，初始化效果
-                barBorderRadius: [10, 10, 0, 0],
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: '#77b5b8'},
-                      // {offset: 0.5, color: '#1f77a0'},
-                      {offset: 1, color: '#107480'}
-                    ]
-                )
-              }
-            },
-            label: {
-              show: true,
-              position: 'top',
-              textStyle: {
-                fontSize: '7px',
-                color: '#fff'
-              },
-            },
-            emphasis: {
-              itemStyle: {
-                color: '#40abc4'
-                //     new echarts.graphic.LinearGradient(
-                //     0, 0, 0, 1,
-                //     [
-                //       {offset: 0, color: '#2378f7'},
-                //       {offset: 0.7, color: '#2378f7'},
-                //       {offset: 1, color: '#83bff6'}
-                //     ]
-                // )
-              }
-            },
-            barMaxWidth: 20
-          }
-        ]
-      };
-      return option
+      bar_option["dataset"]["source"] = arr
+      bar_option["series"]["barMaxWidth"] = 20
+      bar_option["xAxis"]["axisLabel"]["rotate"] = 20
+      return bar_option
     },
   },
   updated() {
@@ -192,8 +127,6 @@ export default {
           // 天地图影像图层
       ).addTo(this.map);
       let p_data = this.$store.state.get_login.position
-      console.log("检查", p_data)
-      alert(p_data[0])
       // add a polygon
       // for (let i = 0; i < p_data.length; i++) {
         var polygon = L.polygon(p_data[0], {
