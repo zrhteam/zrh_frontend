@@ -18,6 +18,12 @@
     </div>
     <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">
     </div>
+    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">
+    </div>
+    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">
+    </div>
+    <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">
+    </div>
   </el-card>
 </template>
 
@@ -49,19 +55,7 @@ export default {
         })
         const _this = this;
         const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById("id_system"), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
-            myChart.resize();
-          });
-        });
-        erd.listenTo(document.getElementById("id_reason"), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
-            myChart.resize();
-          });
-        });
-        erd.listenTo(document.getElementById("id_region"), element => {
+        erd.listenTo(document.getElementById(this.context.id), element => {
           _this.$nextTick(() => {
             //监听到事件后执行的业务逻辑
             myChart.resize();
@@ -94,8 +88,11 @@ export default {
       console.log('this.context', this.context);
       let data;
       let arr = [];
-      if (this.context.id == 'id_system') {
-        data = this.$store.state.get_project.prj_system
+      if ((this.context.id == 'id_system')||(this.context.id == 'id_check_system')) {
+        if(this.context.id == 'id_system') {
+          data = this.$store.state.get_project.prj_system
+        }
+        else data = this.$store.state.get_check.check_system
         for (let i in data) {
           for (let j in data[i]) {
             let obj = {
@@ -108,8 +105,10 @@ export default {
           }
         }
         console.log(arr)
-      } else if (this.context.id == 'id_reason') {
-        data = this.$store.state.get_project.prj_reason
+      } else if ((this.context.id == 'id_reason')||(this.context.id == 'id_check_reason')) {
+        if(this.context.id == 'id_reason')
+          data = this.$store.state.get_project.prj_reason
+        else data = this.$store.state.get_check.check_reason
         console.log(data)
         let obj1 = {
           name: '(空白)',
@@ -138,8 +137,10 @@ export default {
         arr.push(obj2)
         arr.push(obj3)
         console.log(arr)
-      } else if (this.context.id == 'id_region') {
-        data = this.$store.state.get_project.prj_region
+      } else if ((this.context.id == 'id_region')||(this.context.id == 'id_check_region')) {
+        if(this.context.id == 'id_region')
+          data = this.$store.state.get_project.prj_region
+        else data = this.$store.state.get_check.check_region
         console.log(data)
         let obj1 = {
           name: '(空白)',
