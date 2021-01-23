@@ -13,8 +13,11 @@ const state = {
     grant_data: [],
     //针对树形目录准备的
     tree_data: [],
-//    存已解析的经纬度
+//    存已解析的经纬度 总部到区域的二维数组
     position: []
+//
+//    针对项目级的position
+
 }
 
 //getters

@@ -203,7 +203,7 @@ const mutations = {
         }
     },
 
-    changeCheckMajorReason(state, data) {
+    changeCheckMajorStage(state, data) {
         if (data.code === 10000) {
            console.log("check_致因阶段", data.data)
             state.check_reason = data.data
