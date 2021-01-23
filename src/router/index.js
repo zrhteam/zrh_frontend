@@ -6,6 +6,7 @@ import RegionDepartment from "@/components/RegionDepartment.vue";
 import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
 import Analyze from "@/components/Analyze.vue"
 import NotFound from '../components/NotFound.vue'
+import SuperOverview from "@/components/SuperOverview.vue";//对应超级用户登录系统后都独有的首页
 
 const routerOptions = [
     {path: '/', component: 'Login', meta: {keepAlive: false}},
@@ -17,6 +18,7 @@ const routerOptions = [
     {path: '/region_department', component: 'RegionDepartment', meta: {keepAlive: false}},
     {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis', meta: {keepAlive: false}},
     {path: '/analyze', component: 'Analyze', meta: {keepAlive:false}},
+    {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive:false}},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {
@@ -36,6 +38,7 @@ const router = new Router({
         {path: '/region_department', component: 'RegionDepartment'},
         {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis'},
         {path: '/analyze', component: 'Analyze'},
+        {path: '/super_overview', component: 'SuperOverview'},
         {path: '*', component: 'NotFound'}
     ]
 })

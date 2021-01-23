@@ -1,17 +1,19 @@
 <template>
     <div style="">
-        <BaseScatterChart/>
+        <BaseScatterChart></BaseScatterChart>
         <div id="container">
             <RefChart v-for="(chartData, index) in chartDataList"
                       :chartData="chartData"
-                      :key="chartData.chartKey"/>
+                      :key="chartData.chartKey"> </RefChart>
         </div>
     </div>
 </template>
 
 <script>
-    import BaseScatterChart from "@/components/mychart/BaseScatterChart/BaseScatterChartIndex.vue";
-    import RefChart from "@/components/mychart/RefChart/RefChartIndex.vue";
+    // import BaseScatterChart from "@/components/mychart/BaseScatterChart/BaseScatterChartIndex.vue";
+    import BaseScatterChart from "@/components/mychart/baseScatterChart/BaseScatterChartIndex.vue";
+    // import RefChart from "@/components/mychart/RefChart/RefChartIndex.vue";
+    import RefChart from "@/components/mychart/refChart/RefChartIndex.vue";
     import {mapGetters} from "vuex";
 
     export default {
