@@ -27,15 +27,15 @@
       <el-col :span="8" style="height: 83%">
         <!--历次检查累计发现隐患数量-->
         <CheckedProject></CheckedProject>
-        <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason'}"></PerctangePerc>
+        <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason', id:'id_reason'}"></PerctangePerc>
       </el-col>
       <el-col :span="8" style="height: 83%">
         <!--          当前未整改高风险隐患图片-->
         <UnsolvedImageList></UnsolvedImageList>
-        <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region'}"></PerctangePerc>
+        <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region', id:'id_region'}"></PerctangePerc>
       </el-col>
       <el-col :span="8" style="height: 83%">
-        <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system'}"></PerctangePerc>
+        <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system', id:'id_system'}"></PerctangePerc>
         <HistoryTopRisk class=""></HistoryTopRisk>
         -->
       </el-col>
