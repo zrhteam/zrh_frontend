@@ -1,3 +1,4 @@
+<!--check这一部分和project这一部分可以用一个子组件-->
 <template>
 <el-card class="box-card " shadow="never"
            style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
