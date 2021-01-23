@@ -17,6 +17,7 @@
 // })
 import Vue from 'vue'
 import Vuex from 'vuex'
+import get_analyze from "@/store/modules/get_analyze";
 import get_locations from './modules/get_locations'
 import get_headquarter from "./modules/get_headquarter";
 import get_project from "@/store/modules/get_project";
@@ -30,6 +31,7 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
     modules: {
+        get_analyze,
         get_locations,
         get_headquarter,
         get_project,

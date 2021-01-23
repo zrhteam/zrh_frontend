@@ -713,6 +713,43 @@ function getCheckRiskTop(param, callback) {
         })
 }
 
+
+// Analyze Part
+/*
+ * FunctionName: getAnalyzeInsightList
+ * Purpose: 获取所有insight
+ * Parameter: None
+ * Return: insight list
+ */
+function getAnalyzeInsightList(param, callback) {
+    const url = `${dataServerUrl}/analyze/insight/main`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getAnalyzeRefChartData
+ * Purpose: 获取特定的insight的图表所需要的信息
+ * Parameter: pid, type
+ * Return: 几种图表数据中的一种 (json)
+ */
+function getAnalyzeRefChartMeta(param, callback) {
+    const url = `${dataServerUrl}/analyze/insight/ref`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+
 //get_subgroup_stats
 
 // function getAllRecordsForOneCity(cityId, callback) {
@@ -811,5 +848,7 @@ export default {
     getCheckMajorSystem,
     getCheckMajorStage,
     getCheckMajorArea,
-    getCheckRiskTop
+    getCheckRiskTop,
+    getAnalyzeInsightList,
+    getAnalyzeRefChartMeta,
 }
