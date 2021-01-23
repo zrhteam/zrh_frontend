@@ -4,9 +4,10 @@ import Overview from '../components/Overview.vue'
 import LandHeadquartersEHSDataScreen from "../components/LandHeadquartersEHSDataScreen.vue";
 import RegionDepartment from "@/components/RegionDepartment.vue";
 import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
-import Analyze from "@/components/Analyze.vue"
+import Analyze from "@/components/Analyze.vue"//对应数据洞察
 import NotFound from '../components/NotFound.vue'
 import SuperOverview from "@/components/SuperOverview.vue";//对应超级用户登录系统后都独有的首页
+import DataCompare from "@/components/DataCompare.vue";//对应数据分析那一块
 
 const routerOptions = [
     {path: '/', component: 'Login', meta: {keepAlive: false}},
@@ -19,6 +20,7 @@ const routerOptions = [
     {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis', meta: {keepAlive: false}},
     {path: '/analyze', component: 'Analyze', meta: {keepAlive:false}},
     {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive:false}},
+    {path: '/data_compare', component: 'DataCompare', meta: {keepAlive:false}},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {
@@ -39,6 +41,7 @@ const router = new Router({
         {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis'},
         {path: '/analyze', component: 'Analyze'},
         {path: '/super_overview', component: 'SuperOverview'},
+        {path: '/data_compare', component: 'DataCompare'},
         {path: '*', component: 'NotFound'}
     ]
 })

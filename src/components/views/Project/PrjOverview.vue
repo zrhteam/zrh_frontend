@@ -24,6 +24,7 @@
       <el-col :span="4" class="" style="height: 100%">
         <Tree
           :treeObj="treeObj"
+          @handleNodeClick="handleNodeClick"
         ></Tree>
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
@@ -180,6 +181,38 @@ export default {
       let myChart = _this.$echarts.init(document.getElementById('index_chart'))
       return _this.map
     },
+    handleNodeClick(data, node) {
+      // console.log("查看",data)
+      if (this.$store.state.get_login.grant_data.data.user_grant === '项目') {
+        if ((node.level == 1) || (node.level == 2)) {
+          alert("您没有权限")
+        } else if (node.level == 3) {
+          this.prjNodeClick(data.label)
+          document.getElementById('prj_subpart').style.display = 'block'
+          document.getElementById('check_part').style.display = 'none'
+          document.getElementById('map_1').style.display = 'none'
+          document.getElementById('map_2').style.display = 'block'
+          document.getElementById('prj_charts').style.display = 'block'
+          document.getElementById('check_charts').style.display = 'none'
+        } else if (node.level == 4) {
+          this.checkNodeClick(data.label)
+          //首先要判断当前是在数据大屏页面还是在主页面
+          if (document.getElementById("prj_small").style.display === 'none') {//在主页面
+            document.getElementById("prj_subpart").style.display = 'none'
+            document.getElementById("prj_charts").style.display = 'none'
+            document.getElementById("check_charts").style.display = 'block'
+            document.getElementById("check_part").style.display = 'block'
+          } else {
+            document.getElementById("prj_subpart").style.display = 'none'
+            document.getElementById("prj_charts").style.display = 'none'
+            document.getElementById("check_charts").style.display = 'block'
+            document.getElementById("check_part").style.display = 'block'
+            // document.getElementById("large1").style.display = 'none'
+            // document.getElementById("large2").style.display = 'none'
+          }
+        }
+      }
+    }
   },
   data() {
     return {
@@ -202,6 +235,11 @@ export default {
       title2: this.$store.state.get_login.grant_data.data.project_tag
     };
   },
+  // mounted() {
+  //   this.$refs['modelTree'].$on('treeNodeClickFunName', (s, data, node)=>{debugger
+  //     console.log("查看", data)
+  //   })
+  // },
   created() {
     console.log('grant', this.$store.state.get_login.grant_data)
     //得到树形控件的内容 还负责封装了地理位置信息

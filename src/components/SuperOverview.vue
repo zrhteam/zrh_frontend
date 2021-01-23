@@ -17,6 +17,7 @@
         </el-dropdown>
       </div>
     </el-col>
+<!--    可以考虑把数据分析和数据洞察分开-->
     <el-col :span="8">
       <div class="grid-content bg-purple">
         <el-button type="primary" @click="enterDataAnalysis">数据分析系统</el-button>
@@ -58,7 +59,7 @@ export default {
       this.enterHead(command)
     },
     enterDataAnalysis() {
-      this.$router.push({path: '/'});//数据分析系统的地址待填
+      this.$router.push({path: '/data_compare'});
     }
   }
 }
