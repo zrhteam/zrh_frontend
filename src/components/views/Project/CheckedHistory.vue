@@ -13,6 +13,7 @@
 
 <script>
 import elementResizeDetectorMaker from "element-resize-detector";
+import {bar_option} from "@/utils/constants";
 
 export default {
   name: "CheckedHistory",
@@ -47,92 +48,14 @@ export default {
     drawBarChart() {
       // document.getElementById('history_chart').innerHTML = ''
       let myChart = this.$echarts.init(document.getElementById('history_chart'))
-      // 使用刚指定的配置项和数据显示图表。
-      let arr = this.getPrjHistory
-      if (arr.length) {
-        let option = {
-          tooltip: {
-          // formatter: '{b}:{c} ({d}%)'
-        },
-          dataset: {
-            dimensions: ['name', 'count'],
-            source: arr
-          },
-          xAxis: {
-            type: 'category',
-            axisLabel: {
-              interval: 0,
-              rotate: 0,
-              textStyle: {
-                fontSize: 10
-              }
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#ffffff',
-                fontSize: 8
-              }
-            }
-          },
-          yAxis: {
-            axisLine: {
-              lineStyle: {
-                color: '#ffffff'
-              }
-            }
-          },
-          series: [
-            {
-              type: 'bar',
-              itemStyle: {
-                normal: {
-                  //柱形图圆角，初始化效果
-                  barBorderRadius: [10, 10, 0, 0],
-                  color: new echarts.graphic.LinearGradient(
-                      0, 0, 0, 1,
-                      [
-                        {offset: 0, color: '#77b5b8'},
-                        // {offset: 0.5, color: '#1f77a0'},
-                        {offset: 1, color: '#107480'}
-                      ]
-                  )
-                }
-              },
-              label:{
-                show: true,
-                position: 'top',
-                textStyle: {
-                  fontSize: '7px',
-                  color: '#fff'
-                },
-              },
-              emphasis: {
-                itemStyle: {
-                  color: '#40abc4'
-                  //     new echarts.graphic.LinearGradient(
-                  //     0, 0, 0, 1,
-                  //     [
-                  //       {offset: 0, color: '#2378f7'},
-                  //       {offset: 0.7, color: '#2378f7'},
-                  //       {offset: 1, color: '#83bff6'}
-                  //     ]
-                  // )
-                }
-              },
-              barMaxWidth: 40
-            }
-          ]
-        };
-        myChart.setOption(option);
-      } else {
-        // document.getElementById('history_chart').innerHTML = ''
-        // document.getElementById('history_chart').innerHTML = '<div style="color: #909399; text-align: center; vertical-align: center">暂无数据</div>'
-      }
+      bar_option['dataset']['source'] = this.getPrjHistory
+      bar_option["xAxis"]["axisLabel"]["rotate"] = 0
+      myChart.setOption(bar_option);
       myChart.resize();
       window.addEventListener('resize', function () {
         myChart.resize();
       })
-       const _this = this;
+      const _this = this;
       const erd = elementResizeDetectorMaker();
       erd.listenTo(document.getElementById("history_chart"), element => {
         _this.$nextTick(() => {

@@ -4,12 +4,12 @@
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <el-image
-              style="width: 90%; height: 90%"
-              :src="url"
-              :fit="fit"></el-image>
+            style="width: 90%; height: 90%"
+            :src="url"
+            :fit="fit"></el-image>
       </el-card>
       <Tree
-        :treeObj="treeObj"
+          :treeObj="treeObj"
       ></Tree>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
@@ -50,16 +50,19 @@
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <label>可选择的统计图</label>
       </el-card>
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+      </el-card>
 
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        </el-card>
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+      </el-card>
     </el-col>
   </el-row>
 </template>

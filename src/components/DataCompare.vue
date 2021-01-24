@@ -67,8 +67,10 @@ export default {
     },
     handleTrNodeClick(data, node) {
     },
-    handleTrCheck(a, b, level) {
-      if(level >= this.radio) {
+    handleTrCheck(a, b, level) {debugger
+      // console.log(this.radio)
+      // console.log(level)
+      if(level > this.radio) {
         this.$message.error('您当前选择的层级与粒度不对应！');
       }
     }

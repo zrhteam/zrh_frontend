@@ -48,6 +48,7 @@ export default {
         let arr = this.getData
         console.log("bar_arr", arr)
         bar_option['dataset']['source'] = arr
+        bar_option["xAxis"]["axisLabel"]["rotate"] = 45
         myChart.setOption(bar_option);
         myChart.resize();
         window.addEventListener('resize', function () {
