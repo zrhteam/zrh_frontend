@@ -23,6 +23,7 @@
       <el-col :span="4" class="" style="height: 100%">
         <Tree
             :treeObj="treeObj"
+            @handleNodeClick="handleTrNodeClick"
         ></Tree>
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
@@ -132,6 +133,9 @@ export default {
       var href = 'http://10.20.39.102:12001/test#/'
       window.open(href, '_blank')
       // window.location.href = 'http://10.20.39.102:12001/test#/';
+    },
+    handleTrNodeClick(data, node) {
+      this.handleTreeNodeClick(data, node)
     }
   },
   data() {

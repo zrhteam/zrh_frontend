@@ -24,6 +24,7 @@
       <el-col :span="4" class="" style="height: 100%">
         <Tree
           :treeObj="treeObj"
+          @handleNodeClick="handleTrNodeClick"
         ></Tree>
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
@@ -153,6 +154,9 @@ export default {
       let _this = this
       return this.map
     },
+    handleTrNodeClick(data, node) {
+      this.handleTreeNodeClick(data, node)
+    }
   },
   data() {
     return {
