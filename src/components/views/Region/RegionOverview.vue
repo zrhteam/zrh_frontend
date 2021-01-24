@@ -16,7 +16,8 @@
       <el-col :span="20" style="height: 100%">
         <el-card class="title-box-card " shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label style="color: #c4bcbc; font-family:宋体; height: 95%; ">中瑞恒可视化系统</label>
+          <label id="region_title1" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{title1}}</label>
+          <label id="region_title2" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{title2}}</label>
         </el-card>
       </el-col>
     </el-row>
@@ -179,8 +180,9 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'label'
-      }
-
+      },
+      title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
+      title2: this.$store.state.get_login.grant_data.data.region_tag,
     }
   },
   created() {
