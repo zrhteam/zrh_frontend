@@ -362,7 +362,7 @@ function getInitRegionNumberTop(param, callback) {
 //地产事业部页面
 /*
 *FunctionName: getRegionOtherTop
-* Purpose: 初始化页面显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
+* Purpose: 初始化页面显示在不同筛选条件（风险等级(1, 2,3, all)/致因阶段/分布区域）下隐患数量排名前top的隐患描述
 * Parameter: region_name，condition， top
 * Return: 返回在不同筛选条件下（风险等级/致因阶段/分布区域）隐患数量排名前top的隐患描述及其出现次数的json文件
  */
@@ -668,7 +668,7 @@ function getInitProjectRiskTop(param, callback) {
 //项目级页面
 /*
 *FunctionName: getProjectOtherTop
-* Purpose: 初始化页面显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
+* Purpose: 初始化页面显示在不同筛选条件（风险等级(1, 2,3, all)/致因阶段/分布区域）下，出现次数排名前top的隐患描述
 * Parameter: project_name，condition, top
 * Return: 返回不同筛选条件下，出现次数排名前top的隐患描述及其出现次数的json文件
  */
@@ -906,9 +906,9 @@ function getCheckRiskTop(param, callback) {
 //检查记录
 /*
 *FunctionName: getCheckOtherTop
-* Purpose: 显示在当前检查中，不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述及其出现次数
+* Purpose: 显示在当前检查中，不同筛选条件（风险等级(1, 2,3, all)/致因阶段/分布区域）下，出现次数排名前top的隐患描述及其出现次数
 * Parameter: check_name，condition， top
-* Return: 返回在不同筛选条件（专业/系统/设备/组件）下，当前检查出现次数排名前top的隐患描述、所属专业和专业次数的json文件
+* Return: 返回在不同筛选条件（风险等级(1, 2,3, all)/致因阶段/分布区域）下，当前检查出现次数排名前top的隐患描述、所属专业和专业次数的json文件
  */
 function getCheckOtherTop(param, callback) {
     const url = `${dataServerUrl}/check/check_other_top`;
