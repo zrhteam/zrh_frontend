@@ -8,9 +8,12 @@
               :src="url"
               :fit="fit"></el-image>
       </el-card>
-      <Tree
-          :treeObj="treeObj"
-        ></Tree>
+<!--      <Tree-->
+<!--          :treeObj="treeObj"-->
+<!--        ></Tree>-->
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
+      </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
         <el-button size="mini" round
