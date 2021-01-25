@@ -172,6 +172,12 @@ const actions = {
             context.commit('changeCheckOtherTop', response)
         })
     },
+    //在当前检查中，显示违反次数排名前10的法规、违反次数及其相关条款号和内容
+    getCheckRule(context) {
+        dataService.getCheckRule(state.params, function (response) {
+            context.commit('changeCheckRule', response)
+        })
+    },
     //在当前检查中，显示隐患次数排名前10的系统名称
     getCheckSystem(context) {
         dataService.getCheckSystem(state.params, function (response) {
