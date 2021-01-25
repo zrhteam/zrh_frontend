@@ -2,12 +2,15 @@
   <el-col :span="16" style="height: 100%">
     <el-card class="title-box-card " shadow="never"
              style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
-      <label style="color: #c4bcbc; font-family:宋体; height: 95% ">数据大屏</label>
+<!--      <label style="color: #c4bcbc; font-family:宋体; height: 95% ">数据大屏</label>-->
+      <label class="check_title1" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+      <label class="check_title2" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
+      <label class="check_title3" style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
     </el-card>
     <el-col :span="8" style="height: 83%">
       <!--本次检查累计发现隐患数量-->
       <CheckRiskLevel></CheckRiskLevel>
-      <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason', id:'id_check_reason'}"> </PerctangePerc>
+      <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason', id:'id_check_reason'}"></PerctangePerc>
     </el-col>
     <el-col :span="8" style="height: 83%">
       <!--          当前未整改高风险隐患图片-->
@@ -34,7 +37,14 @@ import CheckRiskTop from "@/components/views/Check/CheckRiskTop.vue";
 
 export default {
   name: "CheckDataScreen",
-  components: {CheckRiskTop, CheckHighImage, PerctangePerc, CheckRiskLevel}
+  components: {CheckRiskTop, CheckHighImage, PerctangePerc, CheckRiskLevel},
+  data() {
+    return {
+      title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
+      title2: this.$store.state.get_login.grant_data.data.region_tag,
+      title3: this.$store.state.get_login.grant_data.data.project_tag
+    }
+  }
 }
 </script>
 
