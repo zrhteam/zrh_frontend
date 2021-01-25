@@ -995,6 +995,248 @@ function getCheckUnit(param, callback) {
 }
 
 
+//data analysis
+/*
+ * FunctionName: getCheckNumber
+ * Purpose: 两个对象之间检查次数的对比
+ * Parameter: object1, object2
+ * Return: 返回两个对象的检查次数
+ */
+function getCheckNumber(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_check_number`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getProjectNumber
+ * Purpose: 两个对象之间项目数量的对比
+ * Parameter: object1, object2
+ * Return: 返回两个对象的项目数量
+ */
+function getProjectNumber(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_project_number`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getMajorRiskNumber
+ * Purpose: 两个对象之间不同专业隐患数量的对比
+ * Parameter: object1, object2
+ * Return: 返回两个对象不同专业的隐患数量
+ */
+function getMajorRiskNumber(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_major_number`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getSystemRiskNumber
+ * Purpose: 两个对象之间在同一专业下不同系统的隐患数量的对比
+ * Parameter: object1, object2, major
+ * Return: 返回两个对象在同一专业下不同系统的隐患数量的对比
+ */
+function getSystemRiskNumber(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_system_number`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+
+/*
+ * FunctionName: getDeviceRiskNumber
+ * Purpose: 两个对象之间不同设备隐患数量的对比
+ * Parameter: object1, object2, system
+ * Return: 返回两个对象在同一系统中不同设备对应的隐患数量
+ */
+function getDeviceRiskNumber(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_device_number`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getUnitRiskNumber
+ * Purpose: 两个对象之间不同组件隐患数量的对比
+ * Parameter: object1, object2, device
+ * Return: 返回两个对象在同一设备下不同组件对应的隐患数量
+ */
+function getUnitRiskNumber(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_unit_number`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getRiskLevel
+ * Purpose: 两个对象之间各风险等级隐患数量的对比
+ * Parameter: object1, object2
+ * Return: 返回两个对象不同风险等级对应的隐患数量
+ */
+function getRiskLevel(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_risk_level`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getAreaRisk
+ * Purpose: 两个对象之间不同分布区域隐患数量的对比
+ * Parameter: object1, object2
+ * Return: 返回两个对象在不同分布区域的隐患数量
+ */
+function getAreaRisk(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_area_risk`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getStageRisk
+ * Purpose: 两个对象之间不同致因阶段隐患数量的对比
+ * Parameter: object1, object2
+ * Return: 返回两个对象在不同致因阶段的隐患数量
+ */
+function getStageRisk(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_stage_risk`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getTopNumber
+ * Purpose: 两个对象之间出现次数前top的隐患的对比
+ * Parameter: object1, object2, top
+ * Return: 返回两个对象出现次数前top的隐患描述及其出现次数
+ */
+function getTopNumber(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_top_number`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getLawTop
+ * Purpose: 两个对象之间违反次数最多的法规标准的对比
+ * Parameter: object1, object2, top
+ * Return: 返回两个对象违反次数最多的法规
+ */
+function getLawTop(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_law_top`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getUnitNumberTop
+ * Purpose: 两个对象之间出现隐患次数前top的组件的对比
+ * Parameter: object1, object2, top
+ * Return: 返回两个对象出现隐患次数前top的组件名
+ */
+function getUnitNumberTop(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_unit_top`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getDeviceNumberTop
+ * Purpose: 两个对象之间出现隐患次数前top的设备的对比
+ * Parameter: object1, object2, top
+ * Return: 返回两个对象出现隐患次数前top的设备名
+ */
+function getDeviceNumberTop(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_device_top`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
+ * FunctionName: getSystemNumberTop
+ * Purpose: 两个对象之间出现隐患次数前top的系统的对比
+ * Parameter: object1, object2, top
+ * Return: 返回两个对象出现隐患次数前top的系统名
+ */
+function getSystemNumberTop(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_system_top`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+
+
 // Analyze Part
 /*
  * FunctionName: getAnalyzeInsightList
@@ -1087,6 +1329,20 @@ export default {
     getCheckSystem,
     getCheckDevice,
     getCheckUnit,
+    getCheckNumber,
+    getProjectNumber,
+    getMajorRiskNumber,
+    getSystemRiskNumber,
+    getDeviceRiskNumber,
+    getUnitRiskNumber,
+    getRiskLevel,
+    getAreaRisk,
+    getStageRisk,
+    getTopNumber,
+    getLawTop,
+    getUnitNumberTop,
+    getDeviceNumberTop,
+    getSystemNumberTop,
     getAnalyzeInsightList,
     getAnalyzeRefChartMeta,
 }
