@@ -4,14 +4,17 @@
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <el-image
-              style="width: 90%; height: 90%"
-              :src="url"
-              :fit="fit">
+            style="width: 90%; height: 90%"
+            :src="url"
+            :fit="fit">
         </el-image>
       </el-card>
-      <Tree
-          :treeObj="treeObj"
-        ></Tree>
+<!--      <Tree-->
+<!--          :treeObj="treeObj"-->
+<!--      ></Tree>-->
+      <el-card class="box-card " shadow="never"
+           style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
+      </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
         <el-button size="mini" round
@@ -25,7 +28,11 @@
     <el-col :span="16" style="height: 100%;">
       <el-card class="title-box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
-        <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>
+        <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>-->
+        <label id="region_title1_1"
+               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+        <label id="region_title2_1"
+               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
       </el-card>
       <el-col :span="8" style="height: 83%">
         <!--          当前未整改高风险隐患图片-->
@@ -39,7 +46,7 @@
         <label>...</label>
       </el-card>
     </el-col>
-<!--    <CheckDataScreen></CheckDataScreen>-->
+    <!--    <CheckDataScreen></CheckDataScreen>-->
     <el-col :span="4" style="height: 100%">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
@@ -64,6 +71,7 @@
 import Region2_2 from "@/components/views/Region/Region2_2.vue";
 import Region3_1 from "@/components/views/Region/Region3_1.vue";
 import Tree from "@/components/views/functions/Tree.vue"
+
 export default {
   name: "RegionDataScreen",
   components: {
@@ -96,7 +104,9 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'label'
-      }
+      },
+      title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
+      title2: this.$store.state.get_login.grant_data.data.region_tag,
     };
   },
   created() {

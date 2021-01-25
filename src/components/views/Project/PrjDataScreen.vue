@@ -8,9 +8,12 @@
             :src="url"
             :fit="fit"></el-image>
       </el-card>
-      <Tree
-          :treeObj="treeObj"
-      ></Tree>
+      <!--      <Tree-->
+      <!--          :treeObj="treeObj"-->
+      <!--      ></Tree>-->
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
+      </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
         <el-button size="mini" round
@@ -22,7 +25,13 @@
     <el-col :span="16" id="prj_charts" style="height: 100%;">
       <el-card class="title-box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
-        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>
+        <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>-->
+        <label id="prj_title1_1"
+               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+        <label id="prj_title2_1"
+               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
+        <label id="prj_title3_1"
+               style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
       </el-card>
       <el-col :span="8" style="height: 83%">
         <!--历次检查累计发现隐患数量-->
@@ -37,7 +46,6 @@
       <el-col :span="8" style="height: 83%">
         <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system', id:'id_system'}"></PerctangePerc>
         <HistoryTopRisk class=""></HistoryTopRisk>
-        -->
       </el-col>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
@@ -137,6 +145,9 @@ export default {
         label: 'label'
       },
       treeObj: {},
+      title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
+      title2: this.$store.state.get_login.grant_data.data.region_tag,
+      title3: this.$store.state.get_login.grant_data.data.project_tag
     };
   },
   created() {
