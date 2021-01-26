@@ -157,8 +157,8 @@ const actions = {
         })
     },
     //显示项目中各风险等级及其对应的隐患数量,按年份
-    getInitProjectLevelYear(context) {
-        dataService.getInitProjectLevelYear(state.params, function (response) {
+    getProjectRiskLevelYear(context) {
+        dataService.getProjectRiskLevelYear(state.params, function (response) {
             context.commit('changePrjLevelYear', response)
         })
     },

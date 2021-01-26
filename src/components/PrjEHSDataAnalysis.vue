@@ -136,41 +136,12 @@
 </template>
 
 <script>
-
-import Granularity from "@/components/views/Project/Granularity.vue";
-
-import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
-import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
-import CheckedProject from "@/components/views/Project/CheckedProject.vue";
-import CheckedHistory from "@/components/views/Project/CheckedHistory.vue";
-
-import LastCheckPerc from "@/components/views/Project/LastCheckPerc.vue";
-import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
-import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
-import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
-
-import HistoryTopRisk from "@/components/views/Project/HistoryTopRisk.vue";
-import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
-import PrjEHSDataAnalysis3 from "@/components/views/Project/PrjEHSDataAnalysis3.vue";
-
 import PrjOverview from '@/components/views/Project/PrjOverview.vue'
 import PrjDataScreen from "@/components/views/Project/PrjDataScreen.vue";
 
 export default {
   name: "PrjEHSDataAnalysis",
   components: {
-    Granularity,
-    HistoryTopRisk,
-    PerctangePerc,
-    LastCheckPerc,
-    CheckHistoryPerc,
-    UnsolvedList,
-    UnsolvedImageList,
-    CheckedHistory,
-    CheckedProject,
-    IndexView,
-    PrjCurrentCorrectionRate,
-    PrjEHSDataAnalysis3,
     PrjOverview,
     PrjDataScreen,
 
@@ -304,24 +275,40 @@ export default {
     // this.$store.commit('get_login/changeParams',{params: params})
     // this.$store.state.get_project.params = param
 
-    this.$store.dispatch('get_project/getInitProjectRectification')
-    this.$store.dispatch('get_project/getInitProjectRiskLevel')
-    this.$store.dispatch('get_project/getInitProjectHistoryPerception')
-    this.$store.dispatch('get_project/getInitProjectNumberChange')
+    // // this.$store.dispatch('get_project/getInitProjectRectification')
+    // this.$store.dispatch('get_project/getInitProjectNumberChange')
     // // 当前未整改高风险隐患列表
-    this.$store.dispatch('get_project/getInitPrjRisk')
-    // // 当前未整改高风险隐患图片
-    this.$store.dispatch('get_project/getInitProjectImage')
-    //
-    // //占比
-    this.$store.dispatch('get_project/getInitProjectSystem')
-    this.$store.dispatch('get_project/getInitProjectRegionDistribution')
-    this.$store.dispatch('get_project/getInitProjectReason')
+    // this.$store.dispatch('get_project/getInitPrjRisk')
 
-    //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
-    this.$store.dispatch('get_project/getInitProjectRiskTop')
-    //历次检查指数
+
+    //显示项目的整体危险指数以及各专业的危险指数
     // this.$store.dispatch('get_project/getInitProjectIndex')
+    //显示项目中各风险等级及其对应的隐患数量
+    this.$store.dispatch('get_project/getInitProjectRiskLevel')
+    //显示项目中各风险等级及其对应的隐患数量,按年份
+    this.$store.dispatch('get_project/getProjectRiskLevelYear')
+    //基于项目级展示不同专业隐患占比情况
+    this.$store.dispatch('get_project/getInitProjectHistoryPerception')
+    //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
+    this.$store.dispatch('get_project/getInitProjectImage')
+    //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
+    this.$store.dispatch('get_project/getInitProjectSystem')
+    //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
+    this.$store.dispatch('get_project/getInitProjectReason')
+    //基于项目级显示在不同专业情况下，隐患区域分布的情况
+    this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+    //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
+    this.$store.dispatch('get_project/getInitProjectRiskTop')
+    //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
+    this.$store.dispatch('get_project/getProjectOtherTop')
+    //基于项目级隐患次数排名前10的系统名称
+    this.$store.dispatch('get_project/getProjectSystemNumber')
+    //基于项目级隐患次数排名前10的设备名称
+    this.$store.dispatch('get_project/getProjectDeviceNumber')
+    //基于项目级隐患次数排名前10的组件名称
+    this.$store.dispatch('get_project/getProjectUnitNumber')
+    // 基于项目级显示违反次数排名前10的法规、违反次数及其相关条款号和内容
+    this.$store.dispatch('get_project/getProjectRules')
   }
 }
 </script>
