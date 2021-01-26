@@ -12,7 +12,7 @@
           style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 52px;">
         <!--              图片播放-->
 
-        <el-carousel indicator-position="none">
+        <el-carousel indicator-position="none" :interval="3000">
           <el-carousel-item v-for="item in img_list">
             <img :src="item.url" alt/>
           </el-carousel-item>

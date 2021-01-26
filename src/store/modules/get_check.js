@@ -222,7 +222,6 @@ const mutations = {
     //在当前检查中，不同风险等级的隐患数量
     changeCheckRiskLevel(state, data) {
         if (data.code === 10000) {
-            // console.log('check_level', data.data)
             state.check_risk_data = data.data
         } else {
             alert("出错了")
@@ -249,7 +248,7 @@ const mutations = {
     // 考虑基于项目级展示当前未整改高风险隐患图片
     changeCheckHighImage(state, data) {
         if (data.code === 10000) {
-            console.log("check_未整改高风险隐患图片", data.data)
+            // console.log("check_未整改高风险隐患图片", data.data)
             state.check_image = data.data.image_list
         } else {
             alert("出错了")
@@ -258,7 +257,7 @@ const mutations = {
     //展示本次检查不同隐患子系统下的隐患数量
     changeCheckMajorSystem(state, data) {
         if (data.code === 10000) {
-            console.log("check_不同隐患子系统下的隐患数量", data.data)
+            // console.log("check_不同隐患子系统下的隐患数量", data.data)
             state.check_system = data.data
         } else {
             alert("出错了")
@@ -267,7 +266,7 @@ const mutations = {
     //在当前检查中，在不同专业情况下，隐患区域分布的情况
     changeCheckMajorArea(state, data) {
         if (data.code === 10000) {
-            console.log("check_隐患区域", data.data)
+            // console.log("check_隐患区域", data.data)
             state.check_region = data.data
         } else {
             alert("出错了")
@@ -276,7 +275,7 @@ const mutations = {
     //在当前检查中，在不同专业时，不同致因阶段的隐患数量
     changeCheckMajorStage(state, data) {
         if (data.code === 10000) {
-           console.log("check_致因阶段", data.data)
+           // console.log("check_致因阶段", data.data)
             state.check_reason = data.data
         } else {
             alert("出错了")

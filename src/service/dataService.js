@@ -966,7 +966,8 @@ function getCheckSystem(param, callback) {
 * Return: 返回出现隐患次数排名前10的设备名称的json文件
  */
 function getCheckDevice(param, callback) {
-    const url = `${dataServerUrl}/check/check_device`;
+    // const url = `${dataServerUrl}/check/check_device`;
+    const url = `${dataServerUrl}/check/check_equipment`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -984,7 +985,8 @@ function getCheckDevice(param, callback) {
 * Return: 返回出现隐患次数排名前10的组件名称的json文件
  */
 function getCheckUnit(param, callback) {
-    const url = `${dataServerUrl}/check/check_unit`;
+    // const url = `${dataServerUrl}/check/check_unit`;
+    const url = `${dataServerUrl}/check/check_module`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
