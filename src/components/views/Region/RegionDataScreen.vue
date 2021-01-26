@@ -9,11 +9,11 @@
             :fit="fit">
         </el-image>
       </el-card>
-<!--      <Tree-->
-<!--          :treeObj="treeObj"-->
-<!--      ></Tree>-->
+      <!--      <Tree-->
+      <!--          :treeObj="treeObj"-->
+      <!--      ></Tree>-->
       <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
+               style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
@@ -21,7 +21,10 @@
                    style="background-color: transparent; color: #fff; "
                    @click="outRegionDataScreen">返回
         </el-button>
-
+        <el-button size="mini" round
+                   style="background-color: transparent; color: #fff; "
+                   @click="addScreen">添加屏幕
+        </el-button>
 
       </el-card>
     </el-col>
@@ -34,17 +37,29 @@
         <label id="region_title2_1"
                style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
       </el-card>
-      <el-col :span="8" style="height: 83%">
-        <!--          当前未整改高风险隐患图片-->
-        <Region2_2></Region2_2>
-      </el-col>
-      <el-col :span="8" style="height: 83%">
-        <Region3_1></Region3_1>
-      </el-col>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
-        <label>...</label>
-      </el-card>
+<!--      <Region2_2 v-if="flag === num"></Region2_2>-->
+      <div :is="com" style="height: 83%"></div>
+<!--            <el-col :span="8" style="height: 100%">-->
+<!--              &lt;!&ndash;          当前未整改高风险隐患图片&ndash;&gt;-->
+<!--              <Region2_2></Region2_2>-->
+<!--            </el-col>-->
+<!--            <el-col :span="8" style="height: 100%">-->
+<!--              <Region3_1></Region3_1>-->
+<!--            </el-col>-->
+<!--            <el-col :span="8" style="height: 100%">-->
+<!--              <Region3_1></Region3_1>-->
+<!--            </el-col>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">-->
+        <el-button size="mini" round
+                   style="background-color: transparent; color: #fff; "
+                   @click="lastScreen">上一张
+        </el-button>
+        <el-button size="mini" round
+                   style="background-color: transparent; color: #fff; "
+                   @click="nextScreen">下一张
+        </el-button>
+<!--      </el-card>-->
     </el-col>
     <!--    <CheckDataScreen></CheckDataScreen>-->
     <el-col :span="4" style="height: 100%">
@@ -92,8 +107,35 @@ export default {
       let prj_small = document.getElementById('region_small');
       prj_small.style.display = 'none'
     },
-  },
+    addScreen() {
+      // let node2 = document.getElementById('test1')
+      // node2.appendChild(node)
+      // this.arr.push(this.num)
+      // this.num = this.num + 1
+      // node2.appendChild(node)
+      // this.arr.push(this.num)
+      // this.num = this.num + 1
+      // this.in = (this.in + 1) % this.arr.length;
+      // this.com = this.arr[this.in]
+      this.arr.push(this.add_arr[this.add_in])
+      this.add++
+    },
+    lastScreen() {
 
+      this.in = (this.in + this.in - 1) % this.arr.length;
+      this.com = this.arr[this.in]
+      this.$nextTick(() => {
+        document.getElementById('region_small').style.display = 'block'
+      });
+    },
+    nextScreen() {
+      this.in = (this.in + 1) % this.arr.length;
+      this.com = this.arr[this.in]
+      this.$nextTick(() => {
+        document.getElementById('region_small').style.display = 'block'
+      });
+    }
+  },
   data() {
     return {
       // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
@@ -107,6 +149,11 @@ export default {
       },
       title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
       title2: this.$store.state.get_login.grant_data.data.region_tag,
+      in: 0,
+      arr: ['Region2_2', 'Region3_1', 'Region2_2','Region3_1'],
+      com: 'Region2_2',
+      add_arr: ['Region2_2', 'Region3_1', 'Region2_2','Region3_1'],
+      add_in: 0
     };
   },
   created() {
