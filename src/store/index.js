@@ -24,6 +24,7 @@ import get_project from "@/store/modules/get_project";
 import get_region from '@/store/modules/get_region';
 import get_login from '@/store/modules/get_login'
 import get_check from '@/store/modules/get_check'
+import get_comparison from '@/store/modules/get_comparison'
 
 Vue.use(Vuex)
 
@@ -37,7 +38,8 @@ export default new Vuex.Store({
         get_project,
         get_region,
         get_login,
-        get_check
+        get_check,
+        get_comparison
     },
     strict: debug
 })
