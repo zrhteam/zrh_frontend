@@ -192,7 +192,7 @@ const actions = {
         })
     },
     //显示该区域不同专业下各系统隐患占比情况
-    getRegionMSysRatio(context) {
+    getRegionSystemRatio(context) {
         dataService.getRegionSystemRatio(state.params, function (response) {
             //console.log(response)
             context.commit('changeRegionSysRatio', response)

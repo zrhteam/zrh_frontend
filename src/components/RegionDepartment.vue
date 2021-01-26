@@ -191,15 +191,38 @@ export default {
     param.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
     this.$store.commit('get_region/changeParams', {params: param})
     // this.$store.state.get_region.params = param
-    this.$store.dispatch('get_region/getInitRegionProjectNumber')
-    this.$store.dispatch('get_region/getInitRegionRiskLevel')
-    this.$store.dispatch('get_region/getInitRegionHighRisk')
-    this.$store.dispatch('get_region/getInitRegionImage')
-    this.$store.dispatch('get_region/getInitRegionMajor')
-    this.$store.dispatch('get_region/getInitRegionNumberTop')
-    // this.$store.dispatch('get_region/getInitRegionSafetyIndex')
-    this.$store.dispatch('get_region/getInitRegionRiskRank')
+    // this.$store.dispatch('get_region/getInitRegionProjectNumber')
+    // this.$store.dispatch('get_region/getInitRegionHighRisk')
+    // this.$store.dispatch('get_region/getInitRegionMajor')
 
+    //显示该区域整体安全指数以及各专业安全指数
+    this.$store.dispatch('get_region/getRegionInitIndex')
+    //显示该区域各风险等级对应的隐患数量
+    this.$store.dispatch('get_region/getInitRegionRiskLevel')
+    //按照年份显示该区域各等级风险对应的隐患数量
+    this.$store.dispatch('get_region/getRegionRiskLevelYear')
+    //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
+    this.$store.dispatch('get_region/getInitRegionImage')
+    //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
+    this.$store.dispatch('get_region/getInitRegionNumberTop')
+    //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
+    this.$store.dispatch('get_region/getRegionOtherTop')
+    //显示按照安全指数排名后的 项目名称
+    this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+    //显示按照隐累计高风险患数量排名后的项目名称 (原来的项目累计高风险数量排名)
+    this.$store.dispatch('get_region/getInitRegionRiskRank')
+    //基于该区域每个项目的检查次数对项目排名
+    this.$store.dispatch('get_region/getRegionCheckRank')
+    //显示该区域各专业隐患占比情况
+    this.$store.dispatch('get_region/getRegionMajorRatio')
+    //显示该区域不同专业下各系统隐患占比情况
+    this.$store.dispatch('get_region/getRegionSystemRatio')
+    //根据隐患数量显示不同致因阶段的占比情况
+    this.$store.dispatch('get_region/getRegionStageRatio')
+    //根据隐患数量显示不同分布区域的占比情况
+    this.$store.dispatch('get_region/getRegionAreaRatio')
+    //根据隐患数量显示不同风险等级的占比情况
+    this.$store.dispatch('get_region/getRegionLevelRatio')
   }
 }
 </script>

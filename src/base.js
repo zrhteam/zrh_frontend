@@ -4,45 +4,94 @@ exports.install = function (Vue, options) {
         let param = new URLSearchParams();
         param.append('headquarter_name', headquarter_name);
         this.$store.commit('get_headquarter/changeParams', {params: param})
-        this.$store.dispatch('get_headquarter/getInitRectification')
-        this.$store.dispatch('get_headquarter/getInitRiskLevelData')
-        this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
-        this.$store.dispatch('get_headquarter/getInitImage')
-        this.$store.dispatch('get_headquarter/getInitNumberTop')
-        this.$store.dispatch('get_headquarter/getInitRiskList')
+        //显示整个总部检查后的总体危险指数以及各专业对应的危险指数
         this.$store.dispatch('get_headquarter/getInitRiskIndexData')
+        //展示总部各风险等级及其对应的隐患数量
+        this.$store.dispatch('get_headquarter/getInitRiskLevelData')
+        //根据风险指数对区域进行排序
+        this.$store.dispatch('get_headquarter/getInitRiskIndexData')
+        //显示每个区域的高风险数量
+        this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
+        //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
+        this.$store.dispatch('get_headquarter/getInitNumberTop')
+        //按年份显示总部的高中低风险等级对应的隐患数量
+        this.$store.dispatch('get_headquarter/getHeadRiskLevelYear')
+        //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
+        this.$store.dispatch('get_headquarter/getHeadOtherNumberTop')
+        //按照检查次数对区域排名
+        this.$store.dispatch('get_headquarter/getHeadCheckRank')
+        //各专业隐患数量占比
+        this.$store.dispatch('get_headquarter/getHeadMajorRatio')
+        // 各致因阶段的隐患数量占比情况
+        this.$store.dispatch('get_headquarter/getHeadStageRatio')
+        // 各分布区域的隐患数量占比情况
+        this.$store.dispatch('get_headquarter/getHeadAreaRatio')
+        // 展示按照项目数量对区域排名
+        this.$store.dispatch('get_headquarter/getHeadProjectRank')
     };
     Vue.prototype.regionNodeClick = function (region_name) {//全局函数2,点击树形控件的区域，查询该区域的大屏信息
         let param = new URLSearchParams();
         param.append('region_name', region_name);
         this.$store.commit('get_region/changeParams', {params: param})
-        this.$store.dispatch('get_region/getInitRegionProjectNumber')
+        //显示该区域整体安全指数以及各专业安全指数
+        this.$store.dispatch('get_region/getRegionInitIndex')
+        //显示该区域各风险等级对应的隐患数量
         this.$store.dispatch('get_region/getInitRegionRiskLevel')
-        this.$store.dispatch('get_region/getInitRegionHighRisk')
+        //按照年份显示该区域各等级风险对应的隐患数量
+        this.$store.dispatch('get_region/getRegionRiskLevelYear')
+        //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
         this.$store.dispatch('get_region/getInitRegionImage')
-        this.$store.dispatch('get_region/getInitRegionMajor')
+        //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
         this.$store.dispatch('get_region/getInitRegionNumberTop')
-        // this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+        //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
+        this.$store.dispatch('get_region/getRegionOtherTop')
+        //显示按照安全指数排名后的 项目名称
+        this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+        //显示按照隐累计高风险患数量排名后的项目名称 (原来的项目累计高风险数量排名)
         this.$store.dispatch('get_region/getInitRegionRiskRank')
+        //基于该区域每个项目的检查次数对项目排名
+        this.$store.dispatch('get_region/getRegionCheckRank')
+        //显示该区域各专业隐患占比情况
+        this.$store.dispatch('get_region/getRegionMajorRatio')
+        //显示该区域不同专业下各系统隐患占比情况
+        this.$store.dispatch('get_region/getRegionSystemRatio')
+        //根据隐患数量显示不同致因阶段的占比情况
+        this.$store.dispatch('get_region/getRegionStageRatio')
+        //根据隐患数量显示不同分布区域的占比情况
+        this.$store.dispatch('get_region/getRegionAreaRatio')
+        //根据隐患数量显示不同风险等级的占比情况
+        this.$store.dispatch('get_region/getRegionLevelRatio')
     };
     Vue.prototype.prjNodeClick = function (project_name) {//全局函数3,点击树形控件的项目，查询该项目的大屏信息
         let param = new URLSearchParams();
         param.append('project_name', project_name);
         this.$store.commit('get_project/changeParams', {params: param})
-        this.$store.dispatch('get_project/getInitProjectRectification')
+        //显示项目中各风险等级及其对应的隐患数量
         this.$store.dispatch('get_project/getInitProjectRiskLevel')
+        //显示项目中各风险等级及其对应的隐患数量,按年份
+        this.$store.dispatch('get_project/getProjectRiskLevelYear')
+        //基于项目级展示不同专业隐患占比情况
         this.$store.dispatch('get_project/getInitProjectHistoryPerception')
-        this.$store.dispatch('get_project/getInitProjectNumberChange')
-        // // 当前未整改高风险隐患列表
-        this.$store.dispatch('get_project/getInitPrjRisk')
-        // // 当前未整改高风险隐患图片
+        //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
         this.$store.dispatch('get_project/getInitProjectImage')
-        // //占比
+        //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
         this.$store.dispatch('get_project/getInitProjectSystem')
-        this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+        //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
         this.$store.dispatch('get_project/getInitProjectReason')
-        //  历次检查中出现次数排前5的隐患描述及其所属专业和出现次数
+        //基于项目级显示在不同专业情况下，隐患区域分布的情况
+        this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+        //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
         this.$store.dispatch('get_project/getInitProjectRiskTop')
+        //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
+        this.$store.dispatch('get_project/getProjectOtherTop')
+        //基于项目级隐患次数排名前10的系统名称
+        this.$store.dispatch('get_project/getProjectSystemNumber')
+        //基于项目级隐患次数排名前10的设备名称
+        this.$store.dispatch('get_project/getProjectDeviceNumber')
+        //基于项目级隐患次数排名前10的组件名称
+        this.$store.dispatch('get_project/getProjectUnitNumber')
+        // 基于项目级显示违反次数排名前10的法规、违反次数及其相关条款号和内容
+        this.$store.dispatch('get_project/getProjectRules')
         // this.map.setZoom(4)
         // setTimeout(function () {
         //   this.map.panTo(new L.LatLng(34, 107));
@@ -52,15 +101,35 @@ exports.install = function (Vue, options) {
         let param1 = new URLSearchParams();
         param1.append('check_code', check_code);
         this.$store.commit('get_check/changeParams', {params: param1})
-        this.$store.dispatch('get_check/getCheckRectification')
+        // this.$store.dispatch('get_check/getCheckRectification')
+        // this.$store.dispatch('get_check/getCheckHighRisk')
+
+        //展示不同风险等级的隐患数量
         this.$store.dispatch('get_check/getCheckRiskLevel')
+        //按年份展示不同风险等级的隐患数量
+        this.$store.dispatch('get_check/getCheckLevelYear')
+        //该检查中不同专业隐患占比情况
         this.$store.dispatch('get_check/getCheckRiskRatio')
-        this.$store.dispatch('get_check/getCheckHighRisk')
+        //该检查中当前未整改高风险隐患图片
         this.$store.dispatch('get_check/getCheckHighImage')
+        //该检查中在不同专业下属于不同隐患子系统的隐患数量
         this.$store.dispatch('get_check/getCheckMajorSystem')
-        this.$store.dispatch('get_check/getCheckMajorArea')
+        //该检查中在不同专业情况下在不同致因阶段的隐患数量
         this.$store.dispatch('get_check/getCheckMajorStage')
+        //该检查中在不同专业情况下，隐患区域分布的情况
+        this.$store.dispatch('get_check/getCheckMajorArea')
+        //在当前检查中，不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述及其出现次数
         this.$store.dispatch('get_check/getCheckRiskTop')
+        // 在当前检查中，不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述及其出现次数
+        this.$store.dispatch('get_check/getCheckOtherTop')
+        // 在当前检查中,显示违反次数排名前10的法规、违反次数及其相关条款号和内容
+        this.$store.dispatch('get_check/getCheckRule')
+        //显示在当前检查中隐患次数排名前10的系统名称
+        this.$store.dispatch('get_check/getCheckSystem')
+        //显示在当前检查中隐患次数排名前10的设备名称
+        this.$store.dispatch('get_check/getCheckDevice')
+        //显示在当前检查中隐患次数排名前10的组件名称
+        this.$store.dispatch('get_check/getCheckUnit')
     };
     Vue.prototype.handleTreeNodeClick = function (data, node) {//全局函数5,点击树形控件，查看页面权限，决定页面展示
         if (this.$store.state.get_login.grant_data.data.user_grant === '项目') {
@@ -78,10 +147,10 @@ exports.install = function (Vue, options) {
                 this.checkNodeClick(data.label)
                 //首先要判断当前是在数据大屏页面还是在主页面
                 // if (document.getElementById("prj_small").style.display === 'none') {//在主页面
-                    document.getElementById("prj_subpart").style.display = 'none'
-                    document.getElementById("prj_charts").style.display = 'none'
-                    document.getElementById("check_charts").style.display = 'block'
-                    document.getElementById("check_part").style.display = 'block'
+                document.getElementById("prj_subpart").style.display = 'none'
+                document.getElementById("prj_charts").style.display = 'none'
+                document.getElementById("check_charts").style.display = 'block'
+                document.getElementById("check_part").style.display = 'block'
                 // } else {
                 //     document.getElementById("prj_subpart").style.display = 'none'
                 //     document.getElementById("prj_charts").style.display = 'none'

@@ -124,15 +124,38 @@ export default {
   created() {
     let param = new URLSearchParams();
     param.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
-    this.$store.commit('get_headquarter/changeParams', {params: param})
-    this.$store.dispatch('get_headquarter/getInitRectification')
-    this.$store.dispatch('get_headquarter/getInitRiskLevelData')
-    this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
-    this.$store.dispatch('get_headquarter/getInitImage')
-    this.$store.dispatch('get_headquarter/getInitNumberTop')
-    this.$store.dispatch('get_headquarter/getInitRiskList')
+    // this.$store.commit('get_headquarter/changeParams', {params: param})
+    // this.$store.dispatch('get_headquarter/getInitRectification')
+    // this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
+    // this.$store.dispatch('get_headquarter/getInitImage')
+    // this.$store.dispatch('get_headquarter/getInitNumberTop')
+    // this.$store.dispatch('get_headquarter/getInitRiskList')
     // this.$store.dispatch('get_headquarter/getInitRiskIndexData')
-    // // this.$store.dispatch('get_headquarter/getInitRiskIndexData')
+
+    //显示整个总部检查后的总体危险指数以及各专业对应的危险指数
+    this.$store.dispatch('get_headquarter/getInitRiskIndexData')
+    //展示总部各风险等级及其对应的隐患数量
+    this.$store.dispatch('get_headquarter/getInitRiskLevelData')
+    //根据风险指数对区域进行排序
+    this.$store.dispatch('get_headquarter/getInitRiskIndexData')
+    //显示每个区域的高风险数量
+    this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
+    //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
+    this.$store.dispatch('get_headquarter/getInitNumberTop')
+    //按年份显示总部的高中低风险等级对应的隐患数量
+    this.$store.dispatch('get_headquarter/getHeadRiskLevelYear')
+    //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
+    this.$store.dispatch('get_headquarter/getHeadOtherNumberTop')
+    //按照检查次数对区域排名
+    this.$store.dispatch('get_headquarter/getHeadCheckRank')
+    //各专业隐患数量占比
+    this.$store.dispatch('get_headquarter/getHeadMajorRatio')
+    // 各致因阶段的隐患数量占比情况
+    this.$store.dispatch('get_headquarter/getHeadStageRatio')
+    // 各分布区域的隐患数量占比情况
+    this.$store.dispatch('get_headquarter/getHeadAreaRatio')
+    // 展示按照项目数量对区域排名
+    this.$store.dispatch('get_headquarter/getHeadProjectRank')
   }
 }
 </script>
