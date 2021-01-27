@@ -6,6 +6,14 @@
     </div>
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
+      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterMajor">
+        <el-option
+            v-for="item in option"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
     </div>
     <!--    <div id="bar_chart" style="height: 80%; width: 100%">-->
     <!--      &lt;!&ndash;        占比（可筛选专业）柱状图&ndash;&gt;-->
@@ -36,8 +44,8 @@ export default {
   props: ['context'],
   data() {
     return {
-      // type: '',
-      // bar_chart: 'xx'
+      value: '',
+      option: []
     }
   },
   methods: {
@@ -82,6 +90,44 @@ export default {
         }
         return 0;
       }
+    },
+    filterMajor(value) {
+      let param2 = new URLSearchParams();
+      param2.append('check_code', this.$store.state.get_check.check_code);
+      var obj = {};
+      //使用find()方法在下拉数据中根据value绑定的数据查找对象
+      obj = this.option.find(function (item) {
+        return item.value === value;
+      })
+      if(obj.label === '全部专业') {
+        obj.label = 'all'
+      }
+      param2.append('major', obj.label);
+      if (this.context.id == 'id_check_reason') {
+        //该检查中在筛选专业条件下属于不同致因阶段的隐患数量
+        this.$store.commit('get_check/changeParam2', {params: param2})
+        this.$store.dispatch('get_check/getCheckMajorStage')
+      }else if (this.context.id == 'id_check_region') {
+        //该检查中在筛选专业条件下属于不同分布区域的隐患数量
+        this.$store.commit('get_check/changeParam2', {params: param2})
+        this.$store.dispatch('get_check/getCheckMajorArea')
+      }else if (this.context.id == 'id_check_system') {
+        //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
+        this.$store.commit('get_check/changeParam2', {params: param2})
+        this.$store.dispatch('get_check/getCheckMajorSystem')
+      }else if (this.context.id == 'id_reason') {
+        //该项目中在筛选专业条件下属于不同致因阶段的隐患数量
+        this.$store.commit('get_project/changeParam2', {params: param2})
+        this.$store.dispatch('get_project/getInitProjectReason')
+      }else if (this.context.id == 'id_region') {
+        //该项目中在筛选专业条件下属于不同分布区域的隐患数量
+        this.$store.commit('get_project/changeParam2', {params: param2})
+        this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+      }else if (this.context.id == 'id_system') {
+        //该项目中在筛选专业条件下属于不同隐患子系统的隐患数量
+        this.$store.commit('get_project/changeParam2', {params: param2})
+        this.$store.dispatch('get_project/getInitProjectSystem')
+      }
     }
   },
   computed: {
@@ -89,11 +135,26 @@ export default {
       console.log('this.context', this.context);
       let data;
       let arr = [];
-      if ((this.context.id == 'id_system')||(this.context.id == 'id_check_system')) {
-        if(this.context.id == 'id_system') {
+      if ((this.context.id == 'id_system') || (this.context.id == 'id_check_system')) {
+        if (this.context.id == 'id_system') {
           data = this.$store.state.get_project.prj_system
+        } else data = this.$store.state.get_check.check_system
+        console.log("隐患子系统",data)
+        for (let i in data) {
+          for (let j in data[i]) {
+            let obj = {
+              name: '',
+              count: 0
+            }
+            obj.name = j;
+            obj.count = data[i][j];
+            arr.push(obj)
+          }
         }
-        else data = this.$store.state.get_check.check_system
+      } else if ((this.context.id == 'id_reason') || (this.context.id == 'id_check_reason')) {
+        if (this.context.id == 'id_reason')
+          data = this.$store.state.get_project.prj_reason
+        else data = this.$store.state.get_check.check_reason
         for (let i in data) {
           for (let j in data[i]) {
             let obj = {
@@ -106,73 +167,43 @@ export default {
           }
         }
         console.log(arr)
-      } else if ((this.context.id == 'id_reason')||(this.context.id == 'id_check_reason')) {
-        if(this.context.id == 'id_reason')
-          data = this.$store.state.get_project.prj_reason
-        else data = this.$store.state.get_check.check_reason
-        console.log(data)
-        let obj1 = {
-          name: '(空白)',
-          count: 0
-        }
-        let obj2 = {
-          name: '施工',
-          count: 0
-        }
-        let obj3 = {
-          name: '运营',
-          count: 0
-        }
-        for (let i in data) {
-          for (let j in data[i]) {
-            if (j == '施工') {
-              obj2.count += data[i][j];
-            } else if (j == '运营') {
-              obj3.count += data[i][j];
-            } else {
-              obj1.count += data[i][j]
-            }
-          }
-        }
-        arr.push(obj1)
-        arr.push(obj2)
-        arr.push(obj3)
-        console.log(arr)
-      } else if ((this.context.id == 'id_region')||(this.context.id == 'id_check_region')) {
-        if(this.context.id == 'id_region')
+      } else if ((this.context.id == 'id_region') || (this.context.id == 'id_check_region')) {
+        if (this.context.id == 'id_region')
           data = this.$store.state.get_project.prj_region
         else data = this.$store.state.get_check.check_region
-        console.log(data)
-        let obj1 = {
-          name: '(空白)',
-          count: 0
-        }
-        let obj2 = {
-          name: '公共区域',
-          count: 0
-        }
-        let obj3 = {
-          name: '租户区域',
-          count: 0
-        }
         for (let i in data) {
           for (let j in data[i]) {
-            if (j == '公共区域') {
-              obj2.count += data[i][j];
-            } else if (j == '租户区域') {
-              obj3.count += data[i][j];
-            } else {
-              obj1.count += data[i][j]
+            let obj = {
+              name: '',
+              count: 0
             }
+            obj.name = j;
+            obj.count = data[i][j];
+            arr.push(obj)
           }
         }
-        arr.push(obj1)
-        arr.push(obj2)
-        arr.push(obj3)
-        console.log(arr)
       }
-      console.log(arr)
       arr.sort(this.sortNumber('count', true))
+      let count = 0
+      let filter = []
+      this.option = []
+      for (let i in data) {
+        if (filter.indexOf(i) === -1) {
+          filter.push(i)
+          let obj = {
+            value: '',
+            label: ''
+          }
+          obj['value'] = count++;
+          obj['label'] = i
+          this.option.push(obj)
+        }
+      }
+      let obj = {
+        value: count++,
+        label: '全部专业'
+      }
+      this.option.push(obj)
       return arr
     },
   },

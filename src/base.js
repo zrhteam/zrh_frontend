@@ -66,6 +66,8 @@ exports.install = function (Vue, options) {
         let param = new URLSearchParams();
         param.append('project_name', project_name);
         this.$store.commit('get_project/changeParams', {params: param})
+        //项目名称也需要封装
+        this.$store.commit('get_project/changePrjName', {prj_name: project_name})
         //显示项目中各风险等级及其对应的隐患数量
         this.$store.dispatch('get_project/getInitProjectRiskLevel')
         //显示项目中各风险等级及其对应的隐患数量,按年份
@@ -74,6 +76,12 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_project/getInitProjectHistoryPerception')
         //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
         this.$store.dispatch('get_project/getInitProjectImage')
+
+        //以下三项筛选专业，默认发全部传all
+        let param2 = new URLSearchParams();
+        param2.append('project_name', project_name);
+        param2.append('major', 'all');
+        this.$store.commit('get_project/changeParam2', {params: param2})
         //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
         this.$store.dispatch('get_project/getInitProjectSystem')
         //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
@@ -101,6 +109,8 @@ exports.install = function (Vue, options) {
         let param1 = new URLSearchParams();
         param1.append('check_code', check_code);
         this.$store.commit('get_check/changeParams', {params: param1})
+        //check_code也需要封装
+        this.$store.commit('get_check/changeCheckCode', {check_code: check_code})
         // this.$store.dispatch('get_check/getCheckRectification')
         // this.$store.dispatch('get_check/getCheckHighRisk')
 
@@ -112,7 +122,13 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_check/getCheckRiskRatio')
         //该检查中当前未整改高风险隐患图片
         this.$store.dispatch('get_check/getCheckHighImage')
+
+        //以下三项筛选专业，默认发全部传all
+        let param2 = new URLSearchParams();
+        param2.append('check_code', check_code);
+        param2.append('major', 'all');
         //该检查中在不同专业下属于不同隐患子系统的隐患数量
+        this.$store.commit('get_check/changeParam2', {params: param2})
         this.$store.dispatch('get_check/getCheckMajorSystem')
         //该检查中在不同专业情况下在不同致因阶段的隐患数量
         this.$store.dispatch('get_check/getCheckMajorStage')

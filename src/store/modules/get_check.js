@@ -5,6 +5,8 @@ import dataService from '@/service/dataService'
 const state = {
     //向后端发送的参数
     params: {},
+    //check_code也需要封装
+    check_code: '',
     // //展示当前整改率
     // check_rectification: {},
     //展示不同风险等级的隐患数量
@@ -15,8 +17,12 @@ const state = {
     check_risk_ratio: {},
     //该检查中当前未整改高风险隐患图片
     check_image: [],
+
     //该检查中在不同专业下属于不同隐患子系统的隐患数量
     check_system: {},
+    //筛选专业
+    param2: {},
+
     //该检查中在不同专业情况下在不同致因阶段的隐患数量
     check_reason: {},
     //该检查中在不同专业情况下，隐患区域分布的情况
@@ -143,20 +149,20 @@ const actions = {
     },
     //展示在当前检查中，不同隐患子系统下的隐患数量
     getCheckMajorSystem(context) {
-        dataService.getCheckMajorSystem(state.params, function (response) {
+        dataService.getCheckMajorSystem(state.param2, function (response) {
             // console.log(response)
             context.commit('changeCheckMajorSystem', response)
         })
     },
     //在当前检查中，在不同专业情况下，隐患区域分布的情况
     getCheckMajorArea(context) {
-        dataService.getCheckMajorArea(state.params, function (response) {
+        dataService.getCheckMajorArea(state.param2, function (response) {
             context.commit('changeCheckMajorArea', response)
         })
     },
     //在当前检查中，在不同专业时，不同致因阶段的隐患数量
     getCheckMajorStage(context) {
-        dataService.getCheckMajorStage(state.params, function (response) {
+        dataService.getCheckMajorStage(state.param2, function (response) {
             context.commit('changeCheckMajorStage', response)
         })
     },
@@ -210,6 +216,10 @@ const mutations = {
     changeParams(state, data) {
         state.params = data.params
     },
+    //check_code也需要封装
+    changeCheckCode(state, data) {
+        state.check_code = data.check_code
+    },
     // //考虑项目级整改率变化
     // changeCheckRectification(state, data) {
     //     if (data.code === 10000) {
@@ -254,6 +264,12 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //筛选专业
+    changeParam2(state, data) {
+        state.param2 = data.params
+    },
+
     //展示本次检查不同隐患子系统下的隐患数量
     changeCheckMajorSystem(state, data) {
         if (data.code === 10000) {

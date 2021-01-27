@@ -5,6 +5,8 @@ import dataService from '@/service/dataService'
 const state = {
     //向后端发送的参数
     params: {},
+    //项目名称也需要封装
+    prj_name: '',
     //向后端发送的粒度
     // g_params: {},
     //基于项目级展示当前整改率
@@ -19,6 +21,10 @@ const state = {
     prj_history_prec: {},
     //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
     prj_image: [],
+
+    //筛选专业
+    param2: {},
+
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
     prj_system: {},
     //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
@@ -177,19 +183,19 @@ const actions = {
     },
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
     getInitProjectSystem(context) {
-        dataService.getInitProjectSystem(state.params, function (response) {
+        dataService.getInitProjectSystem(state.param2, function (response) {
             context.commit('changePrjSystem', response)
         })
     },
     //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
     getInitProjectReason(context) {
-        dataService.getInitProjectReason(state.params, function (response) {
+        dataService.getInitProjectReason(state.param2, function (response) {
             context.commit('changePrjReason', response)
         })
     },
     //基于项目级显示在不同专业情况下，隐患区域分布的情况
     getInitProjectRegionDistribution(context) {
-        dataService.getInitProjectRegionDistribution(state.params, function (response) {
+        dataService.getInitProjectRegionDistribution(state.param2, function (response) {
             context.commit('changePrjRegion', response)
         })
     },
@@ -251,6 +257,10 @@ const actions = {
 const mutations = {
     changeParams(state, data) {
         state.params = data.params
+    },
+    //项目名称也需要封装
+    changePrjName(state, data) {
+        state.prj_name = data.prj_name
     },
     // //考虑项目级整改率变化
     // changePrjRectification(state, data) {
@@ -314,6 +324,12 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //筛选专业
+    changeParam2(state, data) {
+        state.param2 = data.params
+    },
+
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
     changePrjSystem(state, data) {
         if (data.code === 10000) {

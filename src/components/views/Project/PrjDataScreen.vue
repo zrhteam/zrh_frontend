@@ -33,18 +33,40 @@
         <label id="prj_title3_1"
                style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
       </el-card>
+      <!--      三个可筛选专业封装了一个-->
+      <div style="display: none">
+        {{ getOption }}
+      </div>
       <el-col :span="8" style="height: 83%">
         <!--历次检查累计发现隐患数量-->
         <CheckedProject></CheckedProject>
-        <PerctangePerc :context="{title:'所有致因阶段占比（可筛选专业）', type:'reason', id:'id_reason'}"></PerctangePerc>
+        <PerctangePerc
+            :context="{
+          title:'所有致因阶段占比（可筛选专业）',
+          type:'reason',
+          id:'id_reason',
+          option:this.reason_option
+        }"></PerctangePerc>
       </el-col>
       <el-col :span="8" style="height: 83%">
         <!--          当前未整改高风险隐患图片-->
         <UnsolvedImageList></UnsolvedImageList>
-        <PerctangePerc :context="{title:'所有隐患分布区域占比（可筛选专业）', type:'region', id:'id_region'}"></PerctangePerc>
+        <PerctangePerc
+            :context="{
+          title:'所有隐患分布区域占比（可筛选专业）',
+          type:'region',
+          id:'id_region',
+          option:this.region_option
+          }"></PerctangePerc>
       </el-col>
       <el-col :span="8" style="height: 83%">
-        <PerctangePerc :context="{title:'所有隐患子系统占比（可筛选专业）', type:'system', id:'id_system'}"></PerctangePerc>
+        <PerctangePerc
+            :context="{
+          title:'所有隐患子系统占比（可筛选专业）',
+          type:'system',
+          id:'id_system',
+          option:this.system_option
+        }"></PerctangePerc>
         <HistoryTopRisk class=""></HistoryTopRisk>
       </el-col>
       <el-card class="box-card " shadow="never"
@@ -60,13 +82,32 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-      </el-card>
-
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        指数尚未提供数据
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <!--        <PrjRiskLevelYear></PrjRiskLevelYear>-->
+        <CheckRiskLevelYear></CheckRiskLevelYear>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <div style="display: none">
+          {{ getSysName }}
+        </div>
+        <TopName
+            :context="{title:'隐患次数累计系统名称排名（11）',
+            top_data:this.sys_name,
+            label1:'系统名称',
+            label2:'出现频率',
+        }"></TopName>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <div style="display: none">
+          {{ getDeviceName }}
+        </div>
+        <TopName
+            :context="{title:'隐患次数累计系统名称排名（12）', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -90,10 +131,16 @@ import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorre
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
 import CheckDataScreen from "@/components/views/Check/CheckDataScreen.vue";
 import Tree from "@/components/views/functions/Tree.vue";
+import PrjRiskLevelYear from "@/components/views/Project/PrjRiskLevelYear.vue";
+import CheckRiskLevelYear from "@/components/views/Check/CheckRiskLevelYear.vue";
+import TopName from "@/components/views/functions/TopName.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    TopName,
+    CheckRiskLevelYear,
+    PrjRiskLevelYear,
     CheckDataScreen,
     Granularity,
     HistoryTopRisk,
@@ -131,8 +178,59 @@ export default {
       // document.getElementById('check_charts').style.width = "500px"
       // document.getElementById('check_charts').style.width = "99%"
     },
-  },
+    getOption() {
+      let data = this.$store.state.get_project.prj_reason
+      let count = 0
+      let filter = []
+      this.reason_option = []
+      for (let i in data) {
+        if (filter.indexOf(i) === -1) {
+          filter.push(i)
+          let obj = {
+            value: '',
+            label: ''
+          }
+          obj['value'] = count++;
+          obj['label'] = i
+          this.reason_option.push(obj)
+        }
+      }
 
+      data = this.$store.state.get_project.prj_region
+      count = 0
+      filter = []
+      this.region_option = []
+      for (let i in data) {
+        if (filter.indexOf(i) === -1) {
+          filter.push(i)
+          let obj = {
+            value: '',
+            label: ''
+          }
+          obj['value'] = count++;
+          obj['label'] = i
+          this.region_option.push(obj)
+        }
+      }
+
+      data = this.$store.state.get_project.prj_system
+      count = 0
+      filter = []
+      this.system_option = []
+      for (let i in data) {
+        if (filter.indexOf(i) === -1) {
+          filter.push(i)
+          let obj = {
+            value: '',
+            label: ''
+          }
+          obj['value'] = count++;
+          obj['label'] = i
+          this.system_option.push(obj)
+        }
+      }
+    }
+  },
   data() {
     return {
       filterText: '',
@@ -147,12 +245,36 @@ export default {
       treeObj: {},
       title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
       title2: this.$store.state.get_login.grant_data.data.region_tag,
-      title3: this.$store.state.get_login.grant_data.data.project_tag
+      title3: this.$store.state.get_login.grant_data.data.project_tag,
+      sys_name: [],
+      device_name: [],
+      reason_option: [],
+      region_option: [],
+      system_option: []
     };
+  },
+  computed: {
+    getSysName() {
+      let data = this.$store.state.get_check.check_sys_name
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].appear_time
+        this.sys_name.push(obj)
+      }
+    },
+    getDeviceName() {
+      let data = this.$store.state.get_check.check_device_name
+    },
+
   },
   created() {
     //得到树形控件的内容
     this.treeObj = this.$store.state.get_login.grant_data.data.value
+    this.getOption()
   }
 }
 </script>
