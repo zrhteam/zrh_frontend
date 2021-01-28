@@ -138,6 +138,18 @@
             :top_data="this.$store.state.get_project.prj_risk_top"
         ></TopRisk>
       </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopRisk
+            :context="{
+                  title:'隐患次数累计设备名称排名（prj10）',
+                  label1:'隐患描述',
+                  label2:'出现频率',
+                  sign:'prj_other',
+                  option:this.other_option}"
+            :top_data="this.$store.state.get_project.prj_other_top"
+        ></TopRisk>
+      </el-card>
     </el-col>
   </el-row>
 </template>
@@ -160,7 +172,8 @@ import Tree from "@/components/views/functions/Tree.vue";
 import PrjRiskLevelYear from "@/components/views/Project/PrjRiskLevelYear.vue";
 import CheckRiskLevelYear from "@/components/views/Check/CheckRiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
-import TopRisk from "@/components/views/functions/TopRisk.vue";
+// import TopRisk from "@/components/views/functions/TopRisk.vue";
+import TopRisk from "../functions/TopRisk.vue";
 
 export default {
   name: "PrjOverview",
@@ -240,7 +253,7 @@ export default {
       other_option: [{
         value: '高风险',
         key: 3
-      },{
+      }, {
         value: '中风险',
         key: 2
       }, {
@@ -249,7 +262,7 @@ export default {
       }, {
         value: '风险',
         key: 'all'
-      },{
+      }, {
         value: '致因阶段',
         key: 'stage'
       }, {
