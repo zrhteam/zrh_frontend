@@ -218,7 +218,7 @@ export default {
         }else {
           this.option = this.$store.state.get_check.all_majors
         }
-      }else if ((this.context.id == 'id_check_system') || (this.context.id == 'id_check_reason') || (this.context.id == 'id_check_region')) {
+      }else if ((this.context.id == 'id_system') || (this.context.id == 'id_reason') || (this.context.id == 'id_region')) {
         let major = []
         let filter = []
         let count = 0
@@ -243,7 +243,7 @@ export default {
         major.push(obj)
         let old_major = this.$store.state.get_project.all_majors
         if (old_major.length < major.length) {
-          this.$store.commit('get_check/changeAllMajors', {all_majors: major})
+          this.$store.commit('get_project/changeAllMajors', {all_majors: major})
           this.option = major
         }else {
           this.option = this.$store.state.get_project.all_majors
