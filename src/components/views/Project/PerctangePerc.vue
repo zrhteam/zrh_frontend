@@ -102,7 +102,6 @@ export default {
       }else {
         param2.append('major', obj.label);
       }
-      // obj.label = 'all'
       if (this.context.id == 'id_check_reason') {
         //该检查中在筛选专业条件下属于不同致因阶段的隐患数量
         param2.append('check_code', this.$store.state.get_check.check_code);
@@ -188,6 +187,7 @@ export default {
         }
       }
       arr.sort(this.sortNumber('count', true))
+      if ((this.context.id == 'id_check_system') || (this.context.id == 'id_check_reason') || (this.context.id == 'id_check_region')) {
       // if (this.value === '全部专业') {
         let major = []
         let filter = []
@@ -212,15 +212,43 @@ export default {
         obj['label'] = '全部专业'
         major.push(obj)
         let old_major = this.$store.state.get_check.all_majors
-      // debugger
         if (old_major.length < major.length) {
           this.$store.commit('get_check/changeAllMajors', {all_majors: major})
           this.option = major
         }else {
           this.option = this.$store.state.get_check.all_majors
         }
-        console.log("1", this.option)
-      // }
+      }else if ((this.context.id == 'id_check_system') || (this.context.id == 'id_check_reason') || (this.context.id == 'id_check_region')) {
+        let major = []
+        let filter = []
+        let count = 0
+        for (let i in data) {
+          if (filter.indexOf(i) === -1) {
+            filter.push(i)
+            let obj = {
+              value: '',
+              label: ''
+            }
+            obj['value'] = count++;
+            obj['label'] = i
+            major.push(obj)
+          }
+        }
+        let obj = {
+          value: '',
+          label: ''
+        }
+        obj['value'] = '全部专业';
+        obj['label'] = '全部专业'
+        major.push(obj)
+        let old_major = this.$store.state.get_project.all_majors
+        if (old_major.length < major.length) {
+          this.$store.commit('get_check/changeAllMajors', {all_majors: major})
+          this.option = major
+        }else {
+          this.option = this.$store.state.get_project.all_majors
+        }
+      }
       return arr
     },
   },

@@ -222,8 +222,23 @@ export default {
     this.$store.dispatch('get_project/getInitProjectReason')
     //基于项目级显示在不同专业情况下，隐患区域分布的情况
     this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+
+    //筛选，默认发condition: major, top: 5
+    let param3 = new URLSearchParams();
+    param3.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    param3.append('condition', 'major');
+    param3.append('top', 5);
+    this.$store.commit('get_project/changeParam3', {params: param3})
     //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
     this.$store.dispatch('get_project/getInitProjectRiskTop')
+
+    //筛选，默认发condition: stage,all top: 5
+    let param4 = new URLSearchParams();
+    param4.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    param4.append('condition', 'risk_level');
+    param4.append('level', 'all');
+    param4.append('top', 5);
+    this.$store.commit('get_project/changeParam4', {params: param4})
     //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
     this.$store.dispatch('get_project/getProjectOtherTop')
     //基于项目级隐患次数排名前10的系统名称

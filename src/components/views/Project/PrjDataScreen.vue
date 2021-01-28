@@ -126,6 +126,18 @@
             :top_data="this.$store.state.get_check.check_other_top"
         ></TopRisk>
       </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopRisk
+            :context="{
+          title:'历史重复出现隐患排名（prj9）',
+          label1:'隐患描述',
+          label2:'出现频率',
+          sign:'prj_risk',
+          option:this.risk_option}"
+            :top_data="this.$store.state.get_project.prj_risk_top"
+        ></TopRisk>
+      </el-card>
     </el-col>
   </el-row>
 </template>

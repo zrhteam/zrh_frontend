@@ -25,16 +25,21 @@ const state = {
     //筛选专业
     param2: {},
     //筛选专业,封装所有专业
-    param4: {},
-
+    all_majors: [],
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
     prj_system: {},
     //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
     prj_reason: {},
     //基于项目级显示在不同专业情况下，隐患区域分布的情况
     prj_region: {},
+
+    //筛选
+    param3: {},
     //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
     prj_risk_top: {},
+
+    //筛选
+    param4: {},
     //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
     prj_other_top: {},
     //基于项目级隐患次数排名前10的系统名称
@@ -203,13 +208,13 @@ const actions = {
     },
     //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
     getInitProjectRiskTop(context) {
-        dataService.getInitProjectRiskTop(state.params, function (response) {
+        dataService.getInitProjectRiskTop(state.param3, function (response) {
             context.commit('changePrjRiskTop', response)
         })
     },
     //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
     getProjectOtherTop(context) {
-        dataService.getProjectOtherTop(state.params, function (response) {
+        dataService.getProjectOtherTop(state.param4, function (response) {
             context.commit('changePrjOtherTop', response)
         })
     },
@@ -332,8 +337,8 @@ const mutations = {
         state.param2 = data.params
     },
     //筛选专业,封装所有专业
-    changeParam4(state, data) {
-        state.param4 = data.params
+    changeAllMajors(state, data) {
+        state.all_majors = data.all_majors
     },
 
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
@@ -363,6 +368,11 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //筛选
+    changeParam3(state, data) {
+        state.param3 = data.params
+    },
     //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
     changePrjRiskTop(state, data) {
         if (data.code === 10000) {
@@ -371,6 +381,11 @@ const mutations = {
         } else {
             alert("出错了")
         }
+    },
+
+    //筛选
+    changeParam4(state, data) {
+        state.param4 = data.params
     },
     //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
     changePrjOtherTop(state, data) {
