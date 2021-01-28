@@ -139,6 +139,25 @@ export default {
         param3.append('top', this.top_value);
         this.$store.commit('get_project/changeParam3', {params: param3})
         this.$store.dispatch('get_project/getInitProjectRiskTop')
+      }else if (this.context.sign === 'prj_other') {
+        let param4 = new URLSearchParams();
+        var obj = {};
+        //使用find()方法在下拉数据中根据value绑定的数据查找对象
+        let _this = this
+        obj = this.context.option.find(function (item) {
+          return item.value === _this.value;
+        })
+        param4.append('check_code', this.$store.state.get_project.prj_name);
+        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
+          param4.append('condition', 'risk_level');
+          param4.append('level', obj.key);
+        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
+          param4.append('condition', obj.key);
+          param4.append('level', 0);
+        }
+        param4.append('top', this.top_value);
+        this.$store.commit('get_project/changeParam4', {params: param4})
+        this.$store.dispatch('get_Project/getProjectOtherTop')
       }
     },
     filterTop() {
@@ -189,6 +208,25 @@ export default {
         param3.append('top', this.top_value);
         this.$store.commit('get_project/changeParam3', {params: param3})
         this.$store.dispatch('get_project/getInitProjectRiskTop')
+      }else if (this.context.sign === 'prj_other') {
+        let param4 = new URLSearchParams();
+        var obj = {};
+        //使用find()方法在下拉数据中根据value绑定的数据查找对象
+        let _this = this
+        obj = this.context.option.find(function (item) {
+          return item.value === _this.value;
+        })
+        param4.append('project_name', this.$store.state.get_project.prj_name);
+        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
+          param4.append('condition', 'risk_level');
+          param4.append('level', obj.key);
+        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
+          param4.append('condition', obj.key);
+          param4.append('level', 0);
+        }
+        param4.append('top', this.top_value);
+        this.$store.commit('get_project/changeParam4', {params: param4})
+        this.$store.dispatch('get_project/getProjectOtherTop')
       }
     },
     updateList() {
