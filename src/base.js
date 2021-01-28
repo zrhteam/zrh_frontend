@@ -134,8 +134,43 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_check/getCheckMajorStage')
         //该检查中在不同专业情况下，隐患区域分布的情况
         this.$store.dispatch('get_check/getCheckMajorArea')
+        // //得到数据后先把专业封装了
+        // let data = this.$store.state.get_check.check_system
+        // console.log("有没有", data)
+        // let count = 0
+        // let major = []
+        // for (let i in data) {
+        //     let obj = {
+        //         label: '',
+        //         value: 0
+        //     }
+        //     obj.value = count++;
+        //     obj.label = i;
+        //     major.push(obj)
+        // }
+        // let obj = {
+        //     value: count++,
+        //     label: '全部专业'
+        // }
+        // major.push(obj)
+        // this.$store.commit('get_check/changeAllMajors', {all_majors: major})
+
+        //筛选，默认发condition: major, top: 5
+        let param3 = new URLSearchParams();
+        param3.append('check_code', check_code);
+        param3.append('condition', 'major');
+        param3.append('top', 5);
+        this.$store.commit('get_check/changeParam3', {params: param3})
         //在当前检查中，不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述及其出现次数
         this.$store.dispatch('get_check/getCheckRiskTop')
+
+        //筛选，默认发condition: stage,all top: 5
+        let param4 = new URLSearchParams();
+        param4.append('check_code', check_code);
+        param4.append('condition', 'risk_level');
+        param4.append('level', 'all');
+        param4.append('top', 5);
+        this.$store.commit('get_check/changeParam4', {params: param4})
         // 在当前检查中，不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述及其出现次数
         this.$store.dispatch('get_check/getCheckOtherTop')
         // 在当前检查中,显示违反次数排名前10的法规、违反次数及其相关条款号和内容

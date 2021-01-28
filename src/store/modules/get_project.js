@@ -24,6 +24,8 @@ const state = {
 
     //筛选专业
     param2: {},
+    //筛选专业,封装所有专业
+    param4: {},
 
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
     prj_system: {},
@@ -328,6 +330,10 @@ const mutations = {
     //筛选专业
     changeParam2(state, data) {
         state.param2 = data.params
+    },
+    //筛选专业,封装所有专业
+    changeParam4(state, data) {
+        state.param4 = data.params
     },
 
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量

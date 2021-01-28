@@ -18,17 +18,24 @@ const state = {
     //该检查中当前未整改高风险隐患图片
     check_image: [],
 
-    //该检查中在不同专业下属于不同隐患子系统的隐患数量
-    check_system: {},
     //筛选专业
     param2: {},
-
+    //筛选专业,封装所有专业
+    all_majors: [],
+    //该检查中在不同专业下属于不同隐患子系统的隐患数量
+    check_system: {},
     //该检查中在不同专业情况下在不同致因阶段的隐患数量
     check_reason: {},
     //该检查中在不同专业情况下，隐患区域分布的情况
     check_region: {},
+
+    //筛选
+    param3: {},
     //在当前检查中，不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述及其出现次数
     check_risk_top: {},
+
+    //筛选
+    param4: {},
     // 在当前检查中，不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述及其出现次数
     check_other_top: {},
     // 在当前检查中,显示违反次数排名前10的法规、违反次数及其相关条款号和内容
@@ -168,13 +175,13 @@ const actions = {
     },
     //得到检查中不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述及其出现次数
     getCheckRiskTop(context) {
-        dataService.getCheckRiskTop(state.params, function (response) {
+        dataService.getCheckRiskTop(state.param3, function (response) {
             context.commit('changeCheckRiskTop', response)
         })
     },
     //得到检查中不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述及其出现次数
     getCheckOtherTop(context) {
-        dataService.getCheckOtherTop(state.params, function (response) {
+        dataService.getCheckOtherTop(state.param4, function (response) {
             context.commit('changeCheckOtherTop', response)
         })
     },
@@ -269,6 +276,10 @@ const mutations = {
     changeParam2(state, data) {
         state.param2 = data.params
     },
+    //筛选专业,封装所有专业
+    changeAllMajors(state, data) {
+        state.all_majors = data.all_majors
+    },
 
     //展示本次检查不同隐患子系统下的隐患数量
     changeCheckMajorSystem(state, data) {
@@ -297,6 +308,11 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //筛选
+    changeParam3(state, data) {
+        state.param3 = data.params
+    },
     //不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述及其出现次数
     changeCheckRiskTop(state, data) {
         if (data.code === 10000) {
@@ -306,10 +322,14 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //筛选
+    changeParam4(state, data) {
+        state.param4 = data.params
+    },
     //得到检查中不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述及其出现次数
     changeCheckOtherTop(state, data) {
         if (data.code === 10000) {
-            // console.log("check_top5", data.data)
             state.check_other_top = data.data
         } else {
             alert("出错了")

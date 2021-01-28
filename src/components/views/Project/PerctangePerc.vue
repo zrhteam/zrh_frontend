@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       value: '',
-      option: []
+      option: ''
     }
   },
   methods: {
@@ -54,7 +54,6 @@ export default {
         let myChart;
         myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
-        console.log("bar_arr", arr)
         bar_option['dataset']['source'] = arr
         bar_option["xAxis"]["axisLabel"]["rotate"] = 45
         myChart.setOption(bar_option);
@@ -93,38 +92,45 @@ export default {
     },
     filterMajor(value) {
       let param2 = new URLSearchParams();
-      param2.append('check_code', this.$store.state.get_check.check_code);
       var obj = {};
       //使用find()方法在下拉数据中根据value绑定的数据查找对象
       obj = this.option.find(function (item) {
         return item.value === value;
       })
-      if(obj.label === '全部专业') {
-        obj.label = 'all'
+      if (obj.label === '全部专业') {
+        param2.append('major', 'all');
+      }else {
+        param2.append('major', obj.label);
       }
-      param2.append('major', obj.label);
+      // obj.label = 'all'
       if (this.context.id == 'id_check_reason') {
         //该检查中在筛选专业条件下属于不同致因阶段的隐患数量
+        param2.append('check_code', this.$store.state.get_check.check_code);
         this.$store.commit('get_check/changeParam2', {params: param2})
         this.$store.dispatch('get_check/getCheckMajorStage')
-      }else if (this.context.id == 'id_check_region') {
+      } else if (this.context.id == 'id_check_region') {
         //该检查中在筛选专业条件下属于不同分布区域的隐患数量
+        param2.append('check_code', this.$store.state.get_check.check_code);
         this.$store.commit('get_check/changeParam2', {params: param2})
         this.$store.dispatch('get_check/getCheckMajorArea')
-      }else if (this.context.id == 'id_check_system') {
+      } else if (this.context.id == 'id_check_system') {
         //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
+        param2.append('check_code', this.$store.state.get_check.check_code);
         this.$store.commit('get_check/changeParam2', {params: param2})
         this.$store.dispatch('get_check/getCheckMajorSystem')
-      }else if (this.context.id == 'id_reason') {
+      } else if (this.context.id == 'id_reason') {
         //该项目中在筛选专业条件下属于不同致因阶段的隐患数量
+        param2.append('project_name', this.$store.state.get_project.prj_name);
         this.$store.commit('get_project/changeParam2', {params: param2})
         this.$store.dispatch('get_project/getInitProjectReason')
-      }else if (this.context.id == 'id_region') {
+      } else if (this.context.id == 'id_region') {
         //该项目中在筛选专业条件下属于不同分布区域的隐患数量
+        param2.append('project_name', this.$store.state.get_project.prj_name);
         this.$store.commit('get_project/changeParam2', {params: param2})
         this.$store.dispatch('get_project/getInitProjectRegionDistribution')
-      }else if (this.context.id == 'id_system') {
+      } else if (this.context.id == 'id_system') {
         //该项目中在筛选专业条件下属于不同隐患子系统的隐患数量
+        param2.append('project_name', this.$store.state.get_project.prj_name);
         this.$store.commit('get_project/changeParam2', {params: param2})
         this.$store.dispatch('get_project/getInitProjectSystem')
       }
@@ -132,14 +138,13 @@ export default {
   },
   computed: {
     getData() {
-      console.log('this.context', this.context);
       let data;
       let arr = [];
       if ((this.context.id == 'id_system') || (this.context.id == 'id_check_system')) {
         if (this.context.id == 'id_system') {
           data = this.$store.state.get_project.prj_system
         } else data = this.$store.state.get_check.check_system
-        console.log("隐患子系统",data)
+        // console.log("隐患子系统",data)
         for (let i in data) {
           for (let j in data[i]) {
             let obj = {
@@ -166,7 +171,6 @@ export default {
             arr.push(obj)
           }
         }
-        console.log(arr)
       } else if ((this.context.id == 'id_region') || (this.context.id == 'id_check_region')) {
         if (this.context.id == 'id_region')
           data = this.$store.state.get_project.prj_region
@@ -184,26 +188,39 @@ export default {
         }
       }
       arr.sort(this.sortNumber('count', true))
-      let count = 0
-      let filter = []
-      this.option = []
-      for (let i in data) {
-        if (filter.indexOf(i) === -1) {
-          filter.push(i)
-          let obj = {
-            value: '',
-            label: ''
+      // if (this.value === '全部专业') {
+        let major = []
+        let filter = []
+        let count = 0
+        for (let i in data) {
+          if (filter.indexOf(i) === -1) {
+            filter.push(i)
+            let obj = {
+              value: '',
+              label: ''
+            }
+            obj['value'] = count++;
+            obj['label'] = i
+            major.push(obj)
           }
-          obj['value'] = count++;
-          obj['label'] = i
-          this.option.push(obj)
         }
-      }
-      let obj = {
-        value: count++,
-        label: '全部专业'
-      }
-      this.option.push(obj)
+        let obj = {
+          value: '',
+          label: ''
+        }
+        obj['value'] = '全部专业';
+        obj['label'] = '全部专业'
+        major.push(obj)
+        let old_major = this.$store.state.get_check.all_majors
+      // debugger
+        if (old_major.length < major.length) {
+          this.$store.commit('get_check/changeAllMajors', {all_majors: major})
+          this.option = major
+        }else {
+          this.option = this.$store.state.get_check.all_majors
+        }
+        console.log("1", this.option)
+      // }
       return arr
     },
   },
@@ -214,6 +231,9 @@ export default {
   //   this.drawBarChart();
   //   // }
   // }
+  created() {
+    this.value = '全部专业'
+  }
 }
 </script>
 

@@ -33,10 +33,6 @@
         <label id="prj_title3_1"
                style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
       </el-card>
-      <!--      三个可筛选专业封装了一个-->
-      <div style="display: none">
-        {{ getOption }}
-      </div>
       <el-col :span="8" style="height: 83%">
         <!--历次检查累计发现隐患数量-->
         <CheckedProject></CheckedProject>
@@ -45,7 +41,6 @@
           title:'所有致因阶段占比（可筛选专业）',
           type:'reason',
           id:'id_reason',
-          option:this.reason_option
         }"></PerctangePerc>
       </el-col>
       <el-col :span="8" style="height: 83%">
@@ -56,7 +51,6 @@
           title:'所有隐患分布区域占比（可筛选专业）',
           type:'region',
           id:'id_region',
-          option:this.region_option
           }"></PerctangePerc>
       </el-col>
       <el-col :span="8" style="height: 83%">
@@ -65,7 +59,6 @@
           title:'所有隐患子系统占比（可筛选专业）',
           type:'system',
           id:'id_system',
-          option:this.system_option
         }"></PerctangePerc>
         <HistoryTopRisk class=""></HistoryTopRisk>
       </el-col>
@@ -107,10 +100,31 @@
           {{ getDeviceName }}
         </div>
         <TopName
-            :context="{title:'隐患次数累计系统名称排名（12）', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
+            :context="{title:'隐患次数累计设备名称排名（12）', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopRisk
+            :context="{
+          title:'历史重复出现隐患排名（8）',
+          label1:'隐患描述',
+          label2:'出现频率',
+          sign:'check_risk',
+          option:this.risk_option}"
+            :top_data="this.$store.state.get_check.check_risk_top"
+        ></TopRisk>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopRisk
+            :context="{
+                  title:'隐患次数累计设备名称排名（9）',
+                  label1:'隐患描述',
+                  label2:'出现频率',
+                  sign:'check_other',
+                  option:this.other_option}"
+            :top_data="this.$store.state.get_check.check_other_top"
+        ></TopRisk>
       </el-card>
     </el-col>
   </el-row>
@@ -134,10 +148,12 @@ import Tree from "@/components/views/functions/Tree.vue";
 import PrjRiskLevelYear from "@/components/views/Project/PrjRiskLevelYear.vue";
 import CheckRiskLevelYear from "@/components/views/Check/CheckRiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
+import TopRisk from "@/components/views/functions/TopRisk.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    TopRisk,
     TopName,
     CheckRiskLevelYear,
     PrjRiskLevelYear,
@@ -178,58 +194,6 @@ export default {
       // document.getElementById('check_charts').style.width = "500px"
       // document.getElementById('check_charts').style.width = "99%"
     },
-    getOption() {
-      let data = this.$store.state.get_project.prj_reason
-      let count = 0
-      let filter = []
-      this.reason_option = []
-      for (let i in data) {
-        if (filter.indexOf(i) === -1) {
-          filter.push(i)
-          let obj = {
-            value: '',
-            label: ''
-          }
-          obj['value'] = count++;
-          obj['label'] = i
-          this.reason_option.push(obj)
-        }
-      }
-
-      data = this.$store.state.get_project.prj_region
-      count = 0
-      filter = []
-      this.region_option = []
-      for (let i in data) {
-        if (filter.indexOf(i) === -1) {
-          filter.push(i)
-          let obj = {
-            value: '',
-            label: ''
-          }
-          obj['value'] = count++;
-          obj['label'] = i
-          this.region_option.push(obj)
-        }
-      }
-
-      data = this.$store.state.get_project.prj_system
-      count = 0
-      filter = []
-      this.system_option = []
-      for (let i in data) {
-        if (filter.indexOf(i) === -1) {
-          filter.push(i)
-          let obj = {
-            value: '',
-            label: ''
-          }
-          obj['value'] = count++;
-          obj['label'] = i
-          this.system_option.push(obj)
-        }
-      }
-    }
   },
   data() {
     return {
@@ -248,9 +212,38 @@ export default {
       title3: this.$store.state.get_login.grant_data.data.project_tag,
       sys_name: [],
       device_name: [],
-      reason_option: [],
-      region_option: [],
-      system_option: []
+      risk_option: [{
+        value: '专业',
+        key: 'major'
+      }, {
+        value: '系统',
+        key: 'system'
+      }, {
+        value: '设备',
+        key: 'equipment'
+      }, {
+        value: '组件',
+        key: 'module'
+      }],
+      other_option: [{
+        value: '高风险',
+        key: 3
+      },{
+        value: '中风险',
+        key: 2
+      }, {
+        value: '低风险',
+        key: 1
+      }, {
+        value: '风险',
+        key: 'all'
+      },{
+        value: '致因阶段',
+        key: 'stage'
+      }, {
+        value: '分布区域',
+        key: 'area'
+      }],
     };
   },
   computed: {
@@ -267,14 +260,13 @@ export default {
       }
     },
     getDeviceName() {
+      //没有从后台拿到数据
       let data = this.$store.state.get_check.check_device_name
-    },
-
+    }
   },
   created() {
     //得到树形控件的内容
     this.treeObj = this.$store.state.get_login.grant_data.data.value
-    this.getOption()
   }
 }
 </script>
