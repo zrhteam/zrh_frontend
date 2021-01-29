@@ -5,6 +5,8 @@ import dataService from '@/service/dataService'
 const state = {
     //向后端发送的参数
     params: {},
+    //head_name也需要封装
+    head_name: '',
     //显示整个总部检查后的总体危险指数以及各专业对应的危险指数
     risk_index_data: {},
     //展示总部各风险等级及其对应的隐患数量
@@ -13,10 +15,16 @@ const state = {
     rank_by_index: {},
     //显示每个区域的高风险数量
     risk_number_rank: {},
+
+    //筛选
+    param3: {},
     //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
     risk_number_top: {},
     //按年份显示总部的高中低风险等级对应的隐患数量
     risk_level_year: {},
+
+    //筛选
+    param4: {},
     //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
     other_number_top: {},
     //按照检查次数对区域排名
@@ -146,20 +154,19 @@ const actions = {
     },
     //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
     getInitNumberTop(context) {
-        dataService.getInitNumberTop(state.params, function (response) {
+        dataService.getInitNumberTop(state.param3, function (response) {
             context.commit('changeNumberTop', response)
         })
     },
     //按年份显示总部的高中低风险等级对应的隐患数量
     getHeadRiskLevelYear(context) {
         dataService.getHeadRiskLevelYear(state.params, function (response) {
-            console.log(response)
             context.commit('changeHeadRiskLevelYear', response)
         })
     },
     //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
     getHeadOtherNumberTop(context) {
-        dataService.getHeadOtherNumberTop(state.params, function (response) {
+        dataService.getHeadOtherNumberTop(state.param4, function (response) {
             context.commit('changeOtherNumberTop', response)
         })
     },
@@ -221,6 +228,10 @@ const mutations = {
     changeParams(state, data) {
         state.params = data.params
     },
+    //head_name也需要封装
+    changeHeadName(state, data) {
+        state.head_name = data.head_name
+    },
     //显示整个总部检查后的总体危险指数以及各专业对应的危险指数
     changeIndexData(state, data) {
         // console.log("aa", data)
@@ -254,6 +265,11 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //筛选
+    changeParam3(state, data) {
+        state.param3 = data.params
+    },
     //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
     changeNumberTop(state, data) {
         // console.log("top", data)
@@ -267,10 +283,15 @@ const mutations = {
     changeHeadRiskLevelYear(state, data) {
         // console.log("aa", data)
         if (data.code === 10000) {
-            state.risk_index_year = data.data;
+            state.risk_level_year = data.data;
         } else {
             alert("出错了")
         }
+    },
+
+    //筛选
+    changeParam4(state, data) {
+        state.param4 = data.params
     },
     //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
     changeOtherNumberTop(state, data) {

@@ -126,7 +126,7 @@ export default {
         param4.append('top', this.top_value);
         this.$store.commit('get_check/changeParam4', {params: param4})
         this.$store.dispatch('get_check/getCheckOtherTop')
-      }else if (this.context.sign === 'prj_risk') {
+      } else if (this.context.sign === 'prj_risk') {
         let param3 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -139,7 +139,7 @@ export default {
         param3.append('top', this.top_value);
         this.$store.commit('get_project/changeParam3', {params: param3})
         this.$store.dispatch('get_project/getInitProjectRiskTop')
-      }else if (this.context.sign === 'prj_other') {
+      } else if (this.context.sign === 'prj_other') {
         let param4 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -171,7 +171,7 @@ export default {
         param3.append('top', this.top_value);
         this.$store.commit('get_region/changeParam3', {params: param3})
         this.$store.dispatch('get_region/getInitRegionNumberTop')
-      }else if (this.context.sign === 'region_other') {
+      } else if (this.context.sign === 'region_other') {
         let param4 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -190,7 +190,7 @@ export default {
         param4.append('top', this.top_value);
         this.$store.commit('get_region/changeParam4', {params: param4})
         this.$store.dispatch('get_region/getRegionOtherTop')
-      }else if (this.context.sign === 'head_risk') {
+      } else if (this.context.sign === 'head_risk') {
         let param3 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -203,7 +203,7 @@ export default {
         param3.append('top', this.top_value);
         this.$store.commit('get_headquarter/changeParam3', {params: param3})
         this.$store.dispatch('get_headquarter/getInitNumberTop')
-      }else if (this.context.sign === 'head_other') {
+      } else if (this.context.sign === 'head_other') {
         let param4 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -258,7 +258,7 @@ export default {
         param4.append('top', this.top_value);
         this.$store.commit('get_check/changeParam4', {params: param4})
         this.$store.dispatch('get_check/getCheckOtherTop')
-      }else if (this.context.sign === 'prj_risk') {
+      } else if (this.context.sign === 'prj_risk') {
         let param3 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -272,7 +272,7 @@ export default {
         param3.append('top', this.top_value);
         this.$store.commit('get_project/changeParam3', {params: param3})
         this.$store.dispatch('get_project/getInitProjectRiskTop')
-      }else if (this.context.sign === 'prj_other') {
+      } else if (this.context.sign === 'prj_other') {
         let param4 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -291,7 +291,7 @@ export default {
         param4.append('top', this.top_value);
         this.$store.commit('get_project/changeParam4', {params: param4})
         this.$store.dispatch('get_project/getProjectOtherTop')
-      }else if (this.context.sign === 'region_risk') {
+      } else if (this.context.sign === 'region_risk') {
         let param3 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -305,7 +305,7 @@ export default {
         param3.append('top', this.top_value);
         this.$store.commit('get_region/changeParam3', {params: param3})
         this.$store.dispatch('get_region/getInitRegionNumberTop')
-      }else if (this.context.sign === 'region_other') {
+      } else if (this.context.sign === 'region_other') {
         let param4 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -324,7 +324,7 @@ export default {
         param4.append('top', this.top_value);
         this.$store.commit('get_region/changeParam4', {params: param4})
         this.$store.dispatch('get_region/getRegionOtherTop')
-      }else if (this.context.sign === 'head_risk') {
+      } else if (this.context.sign === 'head_risk') {
         let param3 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -338,7 +338,7 @@ export default {
         param3.append('top', this.top_value);
         this.$store.commit('get_headquarter/changeParam3', {params: param3})
         this.$store.dispatch('get_headquarter/getInitNumberTop')
-      }else if (this.context.sign === 'head_other') {
+      } else if (this.context.sign === 'head_other') {
         let param4 = new URLSearchParams();
         var obj = {};
         //使用find()方法在下拉数据中根据value绑定的数据查找对象
@@ -367,13 +367,13 @@ export default {
           if (document.getElementById('large1').style.display === 'none')
             document.getElementById('prj_small').style.display = 'block'
         });
-      }else if ((this.context.sign === 'region_risk') || (this.context.sign === 'region_other')) {
+      } else if ((this.context.sign === 'region_risk') || (this.context.sign === 'region_other')) {
         this.$nextTick(() => {
           // this.sub_top_data = this.getTopRisk
           if (document.getElementById('region_large1').style.display === 'none')
             document.getElementById('region_small').style.display = 'block'
         });
-      }else if ((this.context.sign === 'head_risk') || (this.context.sign === 'head_other')) {
+      } else if ((this.context.sign === 'head_risk') || (this.context.sign === 'head_other')) {
         this.$nextTick(() => {
           // this.sub_top_data = this.getTopRisk
           if (document.getElementById('head_large1').style.display === 'none')
@@ -424,13 +424,13 @@ export default {
           arr.push(obj)
           obj['description'] = i
         }
-      }else if ((this.context.sign === 'prj_risk') || (this.context.sign === 'region_risk') || (this.context.sign === 'head_risk')) {
+      } else if ((this.context.sign === 'prj_risk') || (this.context.sign === 'region_risk') || (this.context.sign === 'head_risk')) {
         let data = ''
-        if(this.context.sign === 'prj_risk'){
+        if (this.context.sign === 'prj_risk') {
           data = this.$store.state.get_project.prj_risk_top
-        }else if(this.context.sign === 'region_risk') {
+        } else if (this.context.sign === 'region_risk') {
           data = this.$store.state.get_region.risk_number_top
-        }else if(this.context.sign === 'head_risk') {
+        } else if (this.context.sign === 'head_risk') {
           data = this.$store.state.get_headquarter.risk_number_top
         }
         arr = []
@@ -446,18 +446,24 @@ export default {
           let o = this.context.option.find(function (item) {
             return value === item.value;
           })
-          obj['description'] = i
-          obj['belong'] = data[i][o.key]
-          obj['appear_time'] = data[i].appear_time
+          if ((this.context.sign === 'region_risk') || (this.context.sign === 'head_risk')) {
+            obj['description'] = i
+            obj['belong'] = data[i]['count'][o.key]
+            obj['appear_time'] = data[i]['count'].appear_time
+          } else if (this.context.sign === 'prj_risk' ) {
+            obj['description'] = i
+            obj['belong'] = data[i][o.key]
+            obj['appear_time'] = data[i].appear_time
+          }
           arr.push(obj)
         }
-      }else if ((this.context.sign === 'prj_other') || (this.context.sign === 'region_other') || (this.context.sign === 'head_other')) {
+      } else if ((this.context.sign === 'prj_other') || (this.context.sign === 'region_other') || (this.context.sign === 'head_other')) {
         let data = ''
-        if(this.context.sign === 'prj_other'){
+        if (this.context.sign === 'prj_other') {
           data = this.$store.state.get_project.prj_other_top
-        }else if(this.context.sign === 'region_other') {
+        } else if (this.context.sign === 'region_other') {
           data = this.$store.state.get_region.risk_other_top
-        }else if(this.context.sign === 'head_other') {
+        } else if (this.context.sign === 'head_other') {
           data = this.$store.state.get_headquarter.other_number_top
         }
         arr = []

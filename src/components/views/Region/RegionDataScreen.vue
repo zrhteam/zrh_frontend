@@ -200,7 +200,6 @@ export default {
       //   this.high_risk_rank.push(obj)
       // }
       let data = this.$store.state.get_region.rank_by_check
-      console.log("检查", data)
       for (let i in data) {
         let obj = {
           name: '',
@@ -236,12 +235,6 @@ export default {
       }, {
         value: '系统',
         key: 'system'
-      }, {
-        value: '设备',
-        key: 'equipment'
-      }, {
-        value: '组件',
-        key: 'module'
       }],
       other_option: [{
         value: '高风险',
