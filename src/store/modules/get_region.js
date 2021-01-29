@@ -5,6 +5,8 @@ import dataService from '@/service/dataService'
 const state = {
     //向后端发送的参数
     params: {},
+    //区域名称也需要封装
+    region_name: '',
     //显示该区域整体安全指数以及各专业安全指数
     region_index: {},
     //显示该区域各风险等级对应的隐患数量
@@ -13,8 +15,14 @@ const state = {
     risk_level_year: {},
     //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
     images: {},
+
+    //筛选
+    param3: {},
     //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
     risk_number_top: {},
+
+    //筛选
+    param4: {},
     //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
     risk_other_top: {},
     //显示按照安全指数排名后的 项目名称
@@ -151,14 +159,14 @@ const actions = {
     },
     //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
     getInitRegionNumberTop(context) {
-        dataService.getInitRegionNumberTop(state.params, function (response) {
+        dataService.getInitRegionNumberTop(state.param3, function (response) {
             //console.log(response)
             context.commit('changeNumberTop', response)
         })
     },
     //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
     getRegionOtherTop(context) {
-        dataService.getRegionOtherTop(state.params, function (response) {
+        dataService.getRegionOtherTop(state.param4, function (response) {
             //console.log(response)
             context.commit('changeOtherTop', response)
         })
@@ -248,6 +256,11 @@ const mutations = {
     changeParams(state, data) {
         state.params = data.params
     },
+    //区域名称也需要封装
+    changeRegionName(state, data) {
+        state.region_name = data.region_name
+    },
+    region_name: '',
     //显示该区域整体安全指数以及各专业安全指数
     changeRegionIndex(state, data) {
         if (data.code === 10000) {
@@ -281,6 +294,11 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //筛选
+    changeParam3(state, data) {
+        state.param3 = data.params
+    },
     //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
     changeNumberTop(state, data) {
         if (data.code === 10000) {
@@ -288,6 +306,11 @@ const mutations = {
         } else {
             alert("出错了")
         }
+    },
+
+    //筛选
+    changeParam4(state, data) {
+        state.param4 = data.params
     },
     //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
     changeOtherTop(state, data) {
