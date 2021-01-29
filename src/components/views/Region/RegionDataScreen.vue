@@ -100,6 +100,27 @@
             :top_data="this.$store.state.get_region.risk_other_top"
         ></TopRisk>
       </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <div style="display: none">
+          {{ getName }}
+        </div>
+        <TopName
+            :context="{title:'根据累计高风险的项目排名（8）',
+            top_data:this.high_risk_rank,
+            label1:'项目名称',
+            label2:'检查次数',
+        }"></TopName>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopName
+            :context="{title:'根据检查次数的项目排名（9）',
+            top_data:this.rank_by_check,
+            label1:'项目名称',
+            label2:'检查次数',
+        }"></TopName>
+      </el-card>
     </el-col>
   </el-row>
 </template>
@@ -111,10 +132,12 @@ import Region3_1 from "@/components/views/Region/Region3_1.vue";
 import Tree from "@/components/views/functions/Tree.vue"
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
+import TopName from "@/components/views/functions/TopName.vue";
 
 export default {
   name: "RegionDataScreen",
   components: {
+    TopName,
     TopRisk,
     RiskLevelYear,
     Tree,
@@ -161,6 +184,32 @@ export default {
       this.$nextTick(() => {
         document.getElementById('region_small').style.display = 'block'
       });
+    }
+  },
+  computed: {
+    getName() {
+      // let data = this.$store.state.get_region.high_risk_rank
+      // // console.log("检查", data)
+      // for (let i in data) {
+      //   let obj = {
+      //     name: '',
+      //     appear_time: 0
+      //   }
+      //   obj['name'] = i
+      //   obj['appear_time'] = data[i].count
+      //   this.high_risk_rank.push(obj)
+      // }
+      let data = this.$store.state.get_region.rank_by_check
+      console.log("检查", data)
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].count
+        this.rank_by_check.push(obj)
+      }
     }
   },
   data() {
@@ -213,6 +262,8 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
+      high_risk_rank: [],
+      rank_by_check: []
     };
   },
   created() {

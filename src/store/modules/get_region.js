@@ -220,13 +220,13 @@ const actions = {
             context.commit('changeRegionAreaRatio', response)
         })
     },
-    //根据隐患数量显示不同风险等级的占比情况
-    getRegionLevelRatio(context) {
-        dataService.getRegionLevelRatio(state.params, function (response) {
-            //console.log(response)
-            context.commit('changeRegionLevelRatio', response)
-        })
-    },
+    // //根据隐患数量显示不同风险等级的占比情况
+    // getRegionLevelRatio(context) {
+    //     dataService.getRegionLevelRatio(state.params, function (response) {
+    //         //console.log(response)
+    //         context.commit('changeRegionLevelRatio', response)
+    //     })
+    // },
 
     // //得到已检查项目的数量
     // getInitRegionProjectNumber(context) {
@@ -330,7 +330,7 @@ const mutations = {
     //显示按照隐累计高风险患数量排名后的项目名称 (原来的项目累计高风险数量排名)
     changeHighRiskRank(state, data) {
         if (data.code === 10000) {
-            // console.log('high', data.data)
+            console.log('high', data.data)
             state.high_risk_rank = data.data;
         } else {
             alert("出错了")

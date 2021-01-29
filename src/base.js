@@ -66,7 +66,7 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_region/getInitRegionSafetyIndex')
         //显示按照隐累计高风险患数量排名后的项目名称 (原来的项目累计高风险数量排名)
         this.$store.dispatch('get_region/getInitRegionRiskRank')
-        //基于该区域每个项目的检查次数对项目排名
+        // //基于该区域每个项目的检查次数对项目排名
         this.$store.dispatch('get_region/getRegionCheckRank')
         //显示该区域各专业隐患占比情况
         this.$store.dispatch('get_region/getRegionMajorRatio')
@@ -77,7 +77,7 @@ exports.install = function (Vue, options) {
         //根据隐患数量显示不同分布区域的占比情况
         this.$store.dispatch('get_region/getRegionAreaRatio')
         //根据隐患数量显示不同风险等级的占比情况
-        this.$store.dispatch('get_region/getRegionLevelRatio')
+        // this.$store.dispatch('get_region/getRegionLevelRatio')
     };
     Vue.prototype.prjNodeClick = function (project_name) {//全局函数3,点击树形控件的项目，查询该项目的大屏信息
         let param = new URLSearchParams();

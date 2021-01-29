@@ -226,7 +226,7 @@ export default {
     //根据隐患数量显示不同分布区域的占比情况
     this.$store.dispatch('get_region/getRegionAreaRatio')
     //根据隐患数量显示不同风险等级的占比情况
-    this.$store.dispatch('get_region/getRegionLevelRatio')
+    // this.$store.dispatch('get_region/getRegionLevelRatio')
   }
 }
 </script>
