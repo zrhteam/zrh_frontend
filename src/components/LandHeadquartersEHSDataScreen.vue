@@ -125,6 +125,8 @@ export default {
     let param = new URLSearchParams();
     param.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
     this.$store.commit('get_headquarter/changeParams', {params: param})
+    //总部名称也需要封装
+    this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
     // this.$store.dispatch('get_headquarter/getInitRectification')
     // this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
     // this.$store.dispatch('get_headquarter/getInitImage')

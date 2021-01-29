@@ -4,6 +4,8 @@ exports.install = function (Vue, options) {
         let param = new URLSearchParams();
         param.append('headquarter_name', headquarter_name);
         this.$store.commit('get_headquarter/changeParams', {params: param})
+        //总部名称也需要封装
+        this.$store.commit('get_headquarter/changeHeadName', {head_name: headquarter_name})
         //显示整个总部检查后的总体危险指数以及各专业对应的危险指数
         this.$store.dispatch('get_headquarter/getInitRiskIndexData')
         //展示总部各风险等级及其对应的隐患数量

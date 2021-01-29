@@ -15,6 +15,7 @@
     <div id='check_level_year' style="height: 80%; width: 100%;" v-if="context.id==='check_level_year'"></div>
     <div id='prj_level_year' style="height: 80%; width: 100%;" v-if="context.id==='prj_level_year'"></div>
     <div id='region_level_year' style="height: 80%; width: 100%;" v-if="context.id==='region_level_year'"></div>
+    <div id='head_level_year' style="height: 80%; width: 100%;" v-if="context.id==='head_level_year'"></div>
   </el-card>
 </template>
 
@@ -80,8 +81,10 @@ export default {
       } else if (this.context.id == 'prj_level_year') {
         data = this.$store.state.get_project.prj_level_year
       } else if (this.context.id == 'region_level_year') {
-        console.log("查看", this.$store.state.get_region.risk_level_year)
         data = this.$store.state.get_region.risk_level_year
+      } else if (this.context.id == 'head_level_year') {
+        data = this.$store.state.get_headquarter.risk_level_year
+        console.log('数据', data)
       }
       let risk_level = ['risk_level', '高风险', '中风险', '低风险']
       if (this.level_year.length === 0) {
@@ -95,7 +98,6 @@ export default {
         }
         this.level_year.push(sub_arr)
       }
-      console.log('数据', this.level_year)
     },
   },
   updated() {
