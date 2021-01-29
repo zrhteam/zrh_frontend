@@ -68,3 +68,73 @@ export const bar_option = {
         }
     ]
 };
+//对于一个x量对应三个bar
+export const bar_option2 = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+        source: []
+    },
+    // Declare several bar series, each will be mapped
+    // to a column of dataset.source by default.
+    series: [
+        {
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    //柱形图圆角，初始化效果
+                    barBorderRadius: [10, 10, 0, 0],
+                }
+            },
+            barMaxWidth: 40
+        },
+        {
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    //柱形图圆角，初始化效果
+                    barBorderRadius: [10, 10, 0, 0],
+                }
+            },
+            barMaxWidth: 40
+        },
+        {
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    //柱形图圆角，初始化效果
+                    barBorderRadius: [10, 10, 0, 0],
+                }
+            },
+            barMaxWidth: 40
+        }
+    ],
+    xAxis: {
+        type: 'category',
+        axisLabel: {
+            interval: 0,
+            rotate: 45,
+            textStyle: {
+                fontSize: 10
+            }
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#ffffff',
+                fontSize: 8
+            }
+        }
+    },
+    yAxis: {
+        axisLine: {
+            lineStyle: {
+                color: '#ffffff'
+            }
+        },
+        axisLabel: {
+            // textStyle: {
+            //   fontSize: 10
+            // }
+        }
+    },
+};

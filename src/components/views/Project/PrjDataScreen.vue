@@ -79,13 +79,12 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <PrjRiskLevelYear></PrjRiskLevelYear>-->
-        <CheckRiskLevelYear></CheckRiskLevelYear>
+        <RiskLevelYear :context="{title:'检查累计年隐患数量（2）', id:'check_level_year'}"></RiskLevelYear>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <div style="display: none">
-          {{ getSysName }}
+          {{ getName }}
         </div>
         <TopName
             :context="{title:'隐患次数累计系统名称排名（11）',
@@ -96,9 +95,6 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <div style="display: none">
-          {{ getDeviceName }}
-        </div>
         <TopName
             :context="{title:'隐患次数累计设备名称排名（12）', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
       </el-card>
@@ -128,6 +124,10 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <TopRisk
             :context="{
           title:'历史重复出现隐患排名（prj9）',
@@ -150,6 +150,15 @@
             :top_data="this.$store.state.get_project.prj_other_top"
         ></TopRisk>
       </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopName
+            :context="{title:'隐患次数累计系统名称排名（prj11）',
+            top_data:this.prj_sys_name,
+            label1:'系统名称',
+            label2:'出现频率',
+        }"></TopName>
+      </el-card>
     </el-col>
   </el-row>
 </template>
@@ -169,19 +178,16 @@ import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorre
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
 import CheckDataScreen from "@/components/views/Check/CheckDataScreen.vue";
 import Tree from "@/components/views/functions/Tree.vue";
-import PrjRiskLevelYear from "@/components/views/Project/PrjRiskLevelYear.vue";
-import CheckRiskLevelYear from "@/components/views/Check/CheckRiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
-// import TopRisk from "@/components/views/functions/TopRisk.vue";
-import TopRisk from "../functions/TopRisk.vue";
+import TopRisk from "@/components/views/functions/TopRisk.vue";
+import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    RiskLevelYear,
     TopRisk,
     TopName,
-    CheckRiskLevelYear,
-    PrjRiskLevelYear,
     CheckDataScreen,
     Granularity,
     HistoryTopRisk,
@@ -269,10 +275,12 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
+      prj_sys_name: [],
+      prj_device_name: [],
     };
   },
   computed: {
-    getSysName() {
+    getName() {
       let data = this.$store.state.get_check.check_sys_name
       for (let i in data) {
         let obj = {
@@ -283,10 +291,20 @@ export default {
         obj['appear_time'] = data[i].appear_time
         this.sys_name.push(obj)
       }
-    },
-    getDeviceName() {
+
       //没有从后台拿到数据
-      let data = this.$store.state.get_check.check_device_name
+      data = this.$store.state.get_check.check_device_name
+
+      data = this.$store.state.get_project.prj_sys_name
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].appear_time
+        this.prj_sys_name.push(obj)
+      }
     }
   },
   created() {

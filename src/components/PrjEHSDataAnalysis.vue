@@ -208,6 +208,12 @@ export default {
     this.$store.dispatch('get_project/getProjectRiskLevelYear')
     //基于项目级展示不同专业隐患占比情况
     this.$store.dispatch('get_project/getInitProjectHistoryPerception')
+
+    //筛选，默认发top: 5
+    let param5 = new URLSearchParams();
+    param5.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    param5.append('top', 5);
+    this.$store.commit('get_project/changeParam5', {params: param5})
     //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
     this.$store.dispatch('get_project/getInitProjectImage')
 

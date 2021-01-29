@@ -19,6 +19,9 @@ const state = {
     prj_level_year: {},
     //基于项目级展示不同专业隐患占比情况
     prj_history_prec: {},
+
+    //筛选前top
+    param5: {},
     //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
     prj_image: [],
 
@@ -183,7 +186,7 @@ const actions = {
     },
     //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
     getInitProjectImage(context) {
-        dataService.getInitProjectImage(state.params, function (response) {
+        dataService.getInitProjectImage(state.param5, function (response) {
             // console.log(response)
             context.commit('changePrjImage', response)
         })
@@ -322,10 +325,15 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //筛选前top
+    changeParam5(state, data) {
+        state.param5 = data.params
+    },
     //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
     changePrjImage(state, data) {
         if (data.code === 10000) {
-            console.log("list", data.data)
+            // console.log("list", data.data)
             state.prj_image = data.data.image_list
         } else {
             alert("出错了")
