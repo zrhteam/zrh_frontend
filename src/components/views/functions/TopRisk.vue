@@ -147,7 +147,7 @@ export default {
         obj = this.context.option.find(function (item) {
           return item.value === _this.value;
         })
-        param4.append('check_code', this.$store.state.get_project.prj_name);
+        param4.append('project_name', this.$store.state.get_project.prj_name);
         if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
           param4.append('condition', 'risk_level');
           param4.append('level', obj.key);
@@ -157,7 +157,7 @@ export default {
         }
         param4.append('top', this.top_value);
         this.$store.commit('get_project/changeParam4', {params: param4})
-        this.$store.dispatch('get_Project/getProjectOtherTop')
+        this.$store.dispatch('get_project/getProjectOtherTop')
       }
     },
     filterTop() {
@@ -231,10 +231,9 @@ export default {
     },
     updateList() {
       this.sub_top_data = this.getTopRisk
-      if ((this.context.sign === 'check_risk') || (this.context.sign === 'check_other') || (this.context.sign === 'prj_risk')) {
+      if ((this.context.sign === 'check_risk') || (this.context.sign === 'check_other') || (this.context.sign === 'prj_risk') || (this.context.sign === 'prj_other')) {
         this.$nextTick(() => {
           // this.sub_top_data = this.getTopRisk
-          // console.log("改变", this.sub_top_data)
           if (document.getElementById('large1').style.display === 'none')
             document.getElementById('prj_small').style.display = 'block'
         });
@@ -286,7 +285,6 @@ export default {
       }else if (this.context.sign === 'prj_risk') {
         let data = this.$store.state.get_project.prj_risk_top
         arr = []
-        console.log("改变", data)
         this.sub_top_data = []
         for (let i in data) {
           let obj = {
@@ -304,6 +302,25 @@ export default {
           obj['appear_time'] = data[i].appear_time
           arr.push(obj)
         }
+      }else if (this.context.sign === 'prj_other') {
+        let data = this.$store.state.get_project.prj_other_top
+        arr = []
+        this.sub_top_data = []
+        for (let i in data) {
+          let obj = {
+            description: '',
+            belong: '',
+            appear_time: 0
+          }
+          let value = this.value
+          let o = this.context.option.find(function (item) {
+            return value === item.value;
+          })
+          obj['belong'] = o.value
+          obj['appear_time'] = data[i].appear_time
+          arr.push(obj)
+          obj['description'] = i
+        }
       }
       return arr
     }
@@ -314,7 +331,7 @@ export default {
   created() {
     if ((this.context.sign === 'check_risk') || (this.context.sign === 'prj_risk')) {
       this.value = "专业"
-    } else if (this.context.sign === 'check_other') {
+    } else if ((this.context.sign === 'check_other') || (this.context.sign === 'prj_other')) {
       this.value = "风险"
     }
   }
