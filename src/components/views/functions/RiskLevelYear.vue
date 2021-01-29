@@ -14,6 +14,7 @@
     </div>
     <div id='check_level_year' style="height: 80%; width: 100%;" v-if="context.id==='check_level_year'"></div>
     <div id='prj_level_year' style="height: 80%; width: 100%;" v-if="context.id==='prj_level_year'"></div>
+    <div id='region_level_year' style="height: 80%; width: 100%;" v-if="context.id==='region_level_year'"></div>
   </el-card>
 </template>
 
@@ -78,6 +79,9 @@ export default {
         data = this.$store.state.get_check.check_level_year
       } else if (this.context.id == 'prj_level_year') {
         data = this.$store.state.get_project.prj_level_year
+      } else if (this.context.id == 'region_level_year') {
+        console.log("查看", this.$store.state.get_region.risk_level_year)
+        data = this.$store.state.get_region.risk_level_year
       }
       let risk_level = ['risk_level', '高风险', '中风险', '低风险']
       if (this.level_year.length === 0) {

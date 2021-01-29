@@ -260,7 +260,6 @@ const mutations = {
     changeRegionName(state, data) {
         state.region_name = data.region_name
     },
-    region_name: '',
     //显示该区域整体安全指数以及各专业安全指数
     changeRegionIndex(state, data) {
         if (data.code === 10000) {

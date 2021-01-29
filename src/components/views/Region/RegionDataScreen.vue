@@ -37,45 +37,68 @@
         <label id="region_title2_1"
                style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
       </el-card>
-<!--      <Region2_2 v-if="flag === num"></Region2_2>-->
+      <!--      <Region2_2 v-if="flag === num"></Region2_2>-->
       <div :is="com" style="height: 83%"></div>
-<!--            <el-col :span="8" style="height: 100%">-->
-<!--              &lt;!&ndash;          当前未整改高风险隐患图片&ndash;&gt;-->
-<!--              <Region2_2></Region2_2>-->
-<!--            </el-col>-->
-<!--            <el-col :span="8" style="height: 100%">-->
-<!--              <Region3_1></Region3_1>-->
-<!--            </el-col>-->
-<!--            <el-col :span="8" style="height: 100%">-->
-<!--              <Region3_1></Region3_1>-->
-<!--            </el-col>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">-->
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #fff; "
-                   @click="lastScreen">上一张
-        </el-button>
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #fff; "
-                   @click="nextScreen">下一张
-        </el-button>
-<!--      </el-card>-->
+      <!--            <el-col :span="8" style="height: 100%">-->
+      <!--              &lt;!&ndash;          当前未整改高风险隐患图片&ndash;&gt;-->
+      <!--              <Region2_2></Region2_2>-->
+      <!--            </el-col>-->
+      <!--            <el-col :span="8" style="height: 100%">-->
+      <!--              <Region3_1></Region3_1>-->
+      <!--            </el-col>-->
+      <!--            <el-col :span="8" style="height: 100%">-->
+      <!--              <Region3_1></Region3_1>-->
+      <!--            </el-col>-->
+      <!--      <el-card class="box-card " shadow="never"-->
+      <!--               style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">-->
+      <el-button size="mini" round
+                 style="background-color: transparent; color: #fff; "
+                 @click="lastScreen">上一张
+      </el-button>
+      <el-button size="mini" round
+                 style="background-color: transparent; color: #fff; "
+                 @click="nextScreen">下一张
+      </el-button>
+      <!--      </el-card>-->
     </el-col>
     <!--    <CheckDataScreen></CheckDataScreen>-->
-    <el-col :span="4" style="height: 100%">
+    <el-col :span="4" style="height: 100%; overflow: scroll">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <label>可选择的统计图</label>
       </el-card>
       <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 29%; margin: 0px 5px 5px 5px">
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <RiskLevelYear :context="{title:'区域累计年隐患数量（3）', id:'region_level_year'}"></RiskLevelYear>
       </el-card>
 
       <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 29%; margin: 0px 5px 5px 5px">
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <Region2_2></Region2_2>
       </el-card>
       <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 30%; margin: 0px 5px 5px 5px">
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopRisk
+            :context="{
+          title:'历史重复出现隐患排名（5）',
+          label1:'隐患描述',
+          label2:'出现频率',
+          sign:'region_risk',
+          option:this.risk_option}"
+            :top_data="this.$store.state.get_region.risk_number_top"
+        ></TopRisk>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopRisk
+            :context="{
+                  title:'历史重复出现隐患排名（6）',
+                  label1:'隐患描述',
+                  label2:'出现频率',
+                  sign:'region_other',
+                  option:this.other_option}"
+            :top_data="this.$store.state.get_region.risk_other_top"
+        ></TopRisk>
       </el-card>
     </el-col>
   </el-row>
@@ -86,10 +109,14 @@
 import Region2_2 from "@/components/views/Region/Region2_2.vue";
 import Region3_1 from "@/components/views/Region/Region3_1.vue";
 import Tree from "@/components/views/functions/Tree.vue"
+import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
+import TopRisk from "@/components/views/functions/TopRisk.vue";
 
 export default {
   name: "RegionDataScreen",
   components: {
+    TopRisk,
+    RiskLevelYear,
     Tree,
     Region3_1,
     Region2_2
@@ -150,10 +177,42 @@ export default {
       title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
       title2: this.$store.state.get_login.grant_data.data.region_tag,
       in: 0,
-      arr: ['Region2_2', 'Region3_1', 'Region2_2','Region3_1'],
-      com: 'Region2_2',
-      add_arr: ['Region2_2', 'Region3_1', 'Region2_2','Region3_1'],
-      add_in: 0
+      arr: ['Region2_2', 'Region3_1', 'Region2_2', 'Region3_1'],
+      com: '',
+      add_arr: ['Region2_2', 'Region3_1', 'Region2_2', 'Region3_1'],
+      add_in: 0,
+      risk_option: [{
+        value: '专业',
+        key: 'major'
+      }, {
+        value: '系统',
+        key: 'system'
+      }, {
+        value: '设备',
+        key: 'equipment'
+      }, {
+        value: '组件',
+        key: 'module'
+      }],
+      other_option: [{
+        value: '高风险',
+        key: 3
+      }, {
+        value: '中风险',
+        key: 2
+      }, {
+        value: '低风险',
+        key: 1
+      }, {
+        value: '风险',
+        key: 'all'
+      }, {
+        value: '致因阶段',
+        key: 'stage'
+      }, {
+        value: '分布区域',
+        key: 'area'
+      }],
     };
   },
   created() {
@@ -164,4 +223,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

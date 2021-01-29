@@ -158,6 +158,38 @@ export default {
         param4.append('top', this.top_value);
         this.$store.commit('get_project/changeParam4', {params: param4})
         this.$store.dispatch('get_project/getProjectOtherTop')
+      } else if (this.context.sign === 'region_risk') {
+        let param3 = new URLSearchParams();
+        var obj = {};
+        //使用find()方法在下拉数据中根据value绑定的数据查找对象
+        let _this = this
+        obj = this.context.option.find(function (item) {
+          return item.value === _this.value;
+        })
+        param3.append('region_name', this.$store.state.get_region.region_name);
+        param3.append('condition', obj.key);
+        param3.append('top', this.top_value);
+        this.$store.commit('get_region/changeParam3', {params: param3})
+        this.$store.dispatch('get_region/getInitRegionNumberTop')
+      }else if (this.context.sign === 'region_other') {
+        let param4 = new URLSearchParams();
+        var obj = {};
+        //使用find()方法在下拉数据中根据value绑定的数据查找对象
+        let _this = this
+        obj = this.context.option.find(function (item) {
+          return item.value === _this.value;
+        })
+        param4.append('region_name', this.$store.state.get_region.region_name);
+        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
+          param4.append('condition', 'risk_level');
+          param4.append('level', obj.key);
+        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
+          param4.append('condition', obj.key);
+          param4.append('level', 0);
+        }
+        param4.append('top', this.top_value);
+        this.$store.commit('get_region/changeParam4', {params: param4})
+        this.$store.dispatch('get_region/getRegionOtherTop')
       }
     },
     filterTop() {
@@ -227,6 +259,39 @@ export default {
         param4.append('top', this.top_value);
         this.$store.commit('get_project/changeParam4', {params: param4})
         this.$store.dispatch('get_project/getProjectOtherTop')
+      }else if (this.context.sign === 'region_risk') {
+        let param3 = new URLSearchParams();
+        var obj = {};
+        //使用find()方法在下拉数据中根据value绑定的数据查找对象
+        let _this = this
+        obj = this.context.option.find(function (item) {
+          return item.value === _this.value;
+        })
+
+        param3.append('region_name', this.$store.state.get_region.region_name);
+        param3.append('condition', this.key);
+        param3.append('top', this.top_value);
+        this.$store.commit('get_region/changeParam3', {params: param3})
+        this.$store.dispatch('get_region/getInitRegionNumberTop')
+      }else if (this.context.sign === 'region_other') {
+        let param4 = new URLSearchParams();
+        var obj = {};
+        //使用find()方法在下拉数据中根据value绑定的数据查找对象
+        let _this = this
+        obj = this.context.option.find(function (item) {
+          return item.value === _this.value;
+        })
+        param4.append('region_name', this.$store.state.get_region.region_name);
+        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
+          param4.append('condition', 'risk_level');
+          param4.append('level', obj.key);
+        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
+          param4.append('condition', obj.key);
+          param4.append('level', 0);
+        }
+        param4.append('top', this.top_value);
+        this.$store.commit('get_region/changeParam4', {params: param4})
+        this.$store.dispatch('get_region/getRegionOtherTop')
       }
     },
     updateList() {
@@ -236,6 +301,12 @@ export default {
           // this.sub_top_data = this.getTopRisk
           if (document.getElementById('large1').style.display === 'none')
             document.getElementById('prj_small').style.display = 'block'
+        });
+      }else if ((this.context.sign === 'region_risk') || (this.context.sign === 'region_other')) {
+        this.$nextTick(() => {
+          // this.sub_top_data = this.getTopRisk
+          if (document.getElementById('region_large1').style.display === 'none')
+            document.getElementById('region_small').style.display = 'block'
         });
       }
     }
@@ -282,8 +353,13 @@ export default {
           arr.push(obj)
           obj['description'] = i
         }
-      }else if (this.context.sign === 'prj_risk') {
-        let data = this.$store.state.get_project.prj_risk_top
+      }else if ((this.context.sign === 'prj_risk') || (this.context.sign === 'region_risk')) {
+        let data = ''
+        if(this.context.sign === 'prj_risk'){
+          data = this.$store.state.get_project.prj_risk_top
+        }else if(this.context.sign === 'region_risk') {
+          data = this.$store.state.get_region.risk_number_top
+        }
         arr = []
         this.sub_top_data = []
         for (let i in data) {
@@ -302,8 +378,13 @@ export default {
           obj['appear_time'] = data[i].appear_time
           arr.push(obj)
         }
-      }else if (this.context.sign === 'prj_other') {
-        let data = this.$store.state.get_project.prj_other_top
+      }else if ((this.context.sign === 'prj_other') || (this.context.sign === 'region_other')) {
+        let data = ''
+        if(this.context.sign === 'prj_other'){
+          data = this.$store.state.get_project.prj_other_top
+        }else if(this.context.sign === 'region_other') {
+          data = this.$store.state.get_region.risk_other_top
+        }
         arr = []
         this.sub_top_data = []
         for (let i in data) {
@@ -329,9 +410,9 @@ export default {
     this.updateList()
   },
   created() {
-    if ((this.context.sign === 'check_risk') || (this.context.sign === 'prj_risk')) {
+    if ((this.context.sign === 'check_risk') || (this.context.sign === 'prj_risk') || (this.context.sign === 'region_risk')) {
       this.value = "专业"
-    } else if ((this.context.sign === 'check_other') || (this.context.sign === 'prj_other')) {
+    } else if ((this.context.sign === 'check_other') || (this.context.sign === 'prj_other') || (this.context.sign === 'region_other')) {
       this.value = "风险"
     }
   }

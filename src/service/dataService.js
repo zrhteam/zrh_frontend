@@ -293,7 +293,7 @@ function getRegionInitIndex(param, callback) {
 * Return: 返回该区域每年各风险等级对应的隐患数量的json文件
  */
 function getRegionRiskLevelYear(param, callback) {
-    const url = `${dataServerUrl}/region/region_risk_leve_year`;
+    const url = `${dataServerUrl}/region/region_risk_level_year`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)

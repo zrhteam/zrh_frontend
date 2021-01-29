@@ -1,9 +1,3 @@
-<script>
-import RegionOverview from "@/components/views/Region/RegionDataScreen";
-export default {
-  components: {RegionOverview}
-}
-</script>
 <template>
   <!-- 商业地产事业部2020年巡检项目EHS大数据分析 -->
 <!--  <el-container>-->
@@ -110,8 +104,6 @@ export default {
 </template>
 
 <script>
-
-
 import SafetyIndexHistogram from "@/components/views/functions/SafetyIndexHistogram.vue";
 import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
 import checkbox from "@/components/views/functions/checkbox.vue";
@@ -126,9 +118,6 @@ import Region3_1 from "@/components/views/Region/Region3_1.vue";
 import Region3_2 from "@/components/views/Region/Region3_2.vue";
 import Region3_3 from "@/components/views/Region/Region3_3.vue";
 import RegionOverview from "@/components/views/Region/RegionOverview.vue";
-
-
-
 
 export default {
   name: "RegionDepartment",
@@ -147,7 +136,6 @@ export default {
   data(){
     return {
       region_name: '',
-
     }
   },
 
@@ -168,7 +156,6 @@ export default {
 
 
   },
-
   mounted() {
     this.selfAdaption();
   },
@@ -190,6 +177,8 @@ export default {
     let param = new URLSearchParams();
     param.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
     this.$store.commit('get_region/changeParams', {params: param})
+    //区域名称也需要封装
+    this.$store.commit('get_region/changeRegionName', {region_name: this.$store.state.get_login.grant_data.data.region_tag})
     // this.$store.state.get_region.params = param
     // this.$store.dispatch('get_region/getInitRegionProjectNumber')
     // this.$store.dispatch('get_region/getInitRegionHighRisk')
@@ -203,8 +192,23 @@ export default {
     this.$store.dispatch('get_region/getRegionRiskLevelYear')
     //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
     this.$store.dispatch('get_region/getInitRegionImage')
+
+    //筛选，默认发condition: major, top: 5
+    let param3 = new URLSearchParams();
+    param3.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
+    param3.append('condition', 'major');
+    param3.append('top', 5);
+    this.$store.commit('get_region/changeParam3', {params: param3})
     //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
     this.$store.dispatch('get_region/getInitRegionNumberTop')
+
+    //筛选，默认发condition: stage,all top: 5
+    let param4 = new URLSearchParams();
+    param4.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
+    param4.append('condition', 'risk_level');
+    param4.append('level', 'all');
+    param4.append('top', 5);
+    this.$store.commit('get_region/changeParam4', {params: param4})
     //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
     this.$store.dispatch('get_region/getRegionOtherTop')
     //显示按照安全指数排名后的 项目名称

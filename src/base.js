@@ -33,6 +33,8 @@ exports.install = function (Vue, options) {
         let param = new URLSearchParams();
         param.append('region_name', region_name);
         this.$store.commit('get_region/changeParams', {params: param})
+        //区域名称也需要封装
+        this.$store.commit('get_region/changeRegionName', {region_name: region_name})
         //显示该区域整体安全指数以及各专业安全指数
         this.$store.dispatch('get_region/getRegionInitIndex')
         //显示该区域各风险等级对应的隐患数量
@@ -41,8 +43,23 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_region/getRegionRiskLevelYear')
         //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
         this.$store.dispatch('get_region/getInitRegionImage')
+
+        //筛选，默认发condition: major, top: 5
+        let param3 = new URLSearchParams();
+        param3.append('region_name', region_name);
+        param3.append('condition', 'major');
+        param3.append('top', 5);
+        this.$store.commit('get_region/changeParam3', {params: param3})
         //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
         this.$store.dispatch('get_region/getInitRegionNumberTop')
+
+        //筛选，默认发condition: stage,all top: 5
+        let param4 = new URLSearchParams();
+        param4.append('region_name', region_name);
+        param4.append('condition', 'risk_level');
+        param4.append('level', 'all');
+        param4.append('top', 5);
+        this.$store.commit('get_region/changeParam4', {params: param4})
         //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
         this.$store.dispatch('get_region/getRegionOtherTop')
         //显示按照安全指数排名后的 项目名称
@@ -74,6 +91,12 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_project/getProjectRiskLevelYear')
         //基于项目级展示不同专业隐患占比情况
         this.$store.dispatch('get_project/getInitProjectHistoryPerception')
+
+        //筛选，默认发top: 5
+        let param5 = new URLSearchParams();
+        param5.append('project_name', project_name);
+        param5.append('top', 5);
+        this.$store.commit('get_project/changeParam5', {params: param5})
         //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
         this.$store.dispatch('get_project/getInitProjectImage')
 
@@ -89,7 +112,7 @@ exports.install = function (Vue, options) {
         //基于项目级显示在不同专业情况下，隐患区域分布的情况
         this.$store.dispatch('get_project/getInitProjectRegionDistribution')
 
-         //筛选，默认发condition: major, top: 5
+        //筛选，默认发condition: major, top: 5
         let param3 = new URLSearchParams();
         param3.append('project_name', project_name);
         param3.append('condition', 'major');
