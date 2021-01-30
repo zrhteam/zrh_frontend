@@ -45,7 +45,7 @@
       </el-col>
       <el-col :span="8" style="height: 83%">
         <!--          当前未整改高风险隐患图片-->
-        <UnsolvedImageList></UnsolvedImageList>
+<!--        <UnsolvedImageList></UnsolvedImageList>-->
         <PerctangePerc
             :context="{
           title:'所有隐患分布区域占比（可筛选专业）',
@@ -60,7 +60,7 @@
           type:'system',
           id:'id_system',
         }"></PerctangePerc>
-        <HistoryTopRisk class=""></HistoryTopRisk>
+<!--        <HistoryTopRisk class=""></HistoryTopRisk>-->
       </el-col>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
@@ -72,6 +72,9 @@
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <label>可选择的统计图</label>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -310,7 +313,7 @@ export default {
       }],
       prj_sys_name: [],
       prj_device_name: [],
-      prj_unit_name: []
+      prj_unit_name: [],
     };
   },
   computed: {

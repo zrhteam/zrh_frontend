@@ -7,7 +7,7 @@
     <div class="level4">
       <span>历次检查隐患专业占比</span>
     </div>
-    <div id="pie2" style="height: 100%; width: 100%"></div>
+    <div id="pie2" style="height: 95%; width: 100%"></div>
     <!--          历次检查累计隐患专业占比 饼图-->
   </el-card>
 </template>

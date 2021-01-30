@@ -73,7 +73,6 @@ export default {
     getPrjRiskTop() {
       let data = this.$store.state.get_project.prj_risk_top;
       console.log(this.$store.state.get_project.prj_risk_top)
-      console.log(data)
       let dataArray = []
       for (let i in data) {
         let obj = {
@@ -82,7 +81,7 @@ export default {
           frequency: 0
         }
         obj.description = i
-        obj.major = data[i].belonged_major
+        obj.major = data[i].major
         obj.frequency = data[i].appear_time
         dataArray.push(obj)
       }

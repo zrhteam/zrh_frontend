@@ -24,7 +24,7 @@
 <!--          label="累计发现隐患数量">-->
 <!--      </el-table-column>-->
 <!--    </el-table>-->
-    <div id = 'risk_level' style="height: 100%; width: 100%;"></div>
+    <div id = 'risk_level' style="height: 90%; width: 100%;"></div>
   </el-card>
 </template>
 

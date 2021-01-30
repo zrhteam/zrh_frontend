@@ -1,5 +1,5 @@
 <template>
-  <el-col :span="10" class="" style="height: 100%">
+  <el-col :span="15" class="" style="height: 100%">
     <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
     <el-row style="height: 100%">
       <el-card class="statistics-box-card " shadow="never"
@@ -20,24 +20,22 @@
       <!--          </el-row>-->
       <!--          <el-row style="height: 42%">-->
       <el-col :span="12" style="height: 42%">
-        <!--当前整改率-->
-<!--        <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>-->
-        <CheckRectification></CheckRectification>
+
       </el-col>
       <el-col :span="12" style="height: 42%">
 <!--        <CheckedHistory></CheckedHistory>-->
         <!--历次检查隐患数量变化-->
       </el-col>
       <!--          </el-row>-->
-      <el-col :span="24" style="height: 9%">
-        <el-card class="statistics-box-card" shadow="never"
-                 style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
-          <el-button size="mini" round
-                         style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">
-                more
-              </el-button>
-        </el-card>
-      </el-col>
+<!--      <el-col :span="24" style="height: 9%">-->
+<!--        <el-card class="statistics-box-card" shadow="never"-->
+<!--                 style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">-->
+<!--          <el-button size="mini" round-->
+<!--                         style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">-->
+<!--                more-->
+<!--              </el-button>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
     </el-row>
     <!--      </el-card>-->
   </el-col>
