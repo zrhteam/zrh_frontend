@@ -14,9 +14,12 @@ const state = {
     //针对树形目录准备的
     tree_data: [],
 //    存已解析的经纬度 总部到区域的二维数组
-    position: []
+    position: [],
 //
 //    针对项目级的position
+
+    now_node: -1,
+    expandedKeys: []
 
 }
 
@@ -63,6 +66,16 @@ const mutations = {
         // debugger
         // console.log("change")
         state.tree_data = data.params
+    },
+    changeNowNode(state, data) {
+        // debugger
+        // console.log("change")
+        state.now_node = data.params
+    },
+    changeExpandedKeys(state, data) {
+        // debugger
+        // console.log("change")
+        state.expandedKeys = data.params
     },
 }
 

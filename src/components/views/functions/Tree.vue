@@ -54,7 +54,7 @@ export default {
       map: "",
       treeObj1: this.treeObj,
       user_grant: this.$store.state.get_login.grant_data.data.user_grant,//当前用户的权限
-      expandedKeys: []
+      expandedKeys: this.$store.state.get_login.expandedKeys,
     };
   },
   watch: {
@@ -64,7 +64,12 @@ export default {
   },
   methods: {
     getTreeData(tree_data) {
-      this.expandedKeys = []
+      this.expandedKeys = this.$store.state.get_login.expandedKeys
+      if (this.$store.state.get_login.now_node != -1) {
+        this.expandedKeys = this.$store.state.get_login.expandedKeys
+        this.expandedKeys.push(this.$store.state.get_login.now_node)
+        this.$store.commit('get_login/changeExpandedKeys', {params: this.expandedKeys})
+      }
       let arr = []//树形控件
       let pp = []//包含每个检查经纬度坐标的一个数组
       let count = 1;
@@ -152,6 +157,7 @@ export default {
           pp.push(r_p)
         }
       }
+      this.$store.commit('get_login/changeExpandedKeys', {params: this.expandedKeys})
       this.$store.commit('get_login/changePosition', {params: pp})
       this.data = arr
       // this.$store.state.get_login.tree_data = arr
@@ -162,7 +168,9 @@ export default {
       return data.label.indexOf(value) !== -1;
     },
     handleNodeClick(data, node) {
-      this.expandedKeys.push(data.id)
+      this.$store.commit('get_login/changeNowNode', {params: data.id})
+      // this.expandedKeys.push(data.id)
+      this.getTreeData(this.treeObj1)
       this.$emit('handleNodeClick', data, node)
     },
     handleCheck(a, b) {

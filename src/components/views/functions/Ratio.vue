@@ -126,9 +126,7 @@ export default {
               arr.push(obj)
             }
           }
-
         }
-        console.log("看一下", arr)
       }
       return arr
     },
