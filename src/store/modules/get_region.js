@@ -33,6 +33,11 @@ const state = {
     rank_by_check: {},
     //显示该区域各专业隐患占比情况
     region_major_ratio: {},
+
+    //筛选专业
+    param2: {},
+    //筛选专业,封装所有专业
+    all_majors: [],
     //显示该区域不同专业下各系统隐患占比情况
     region_sys_ratio: {},
     //根据隐患数量显示不同致因阶段的占比情况
@@ -201,7 +206,7 @@ const actions = {
     },
     //显示该区域不同专业下各系统隐患占比情况
     getRegionSystemRatio(context) {
-        dataService.getRegionSystemRatio(state.params, function (response) {
+        dataService.getRegionSystemRatio(state.param2, function (response) {
             //console.log(response)
             context.commit('changeRegionSysRatio', response)
         })
@@ -353,6 +358,15 @@ const mutations = {
         } else {
             alert("出错了")
         }
+    },
+
+    //筛选专业
+    changeParam2(state, data) {
+        state.param2 = data.params
+    },
+    //筛选专业，封装所有专业
+    changeAllMajors(state, data) {
+        state.all_majors = data.all_majors
     },
     //显示该区域不同专业下各系统隐患占比情况
     changeRegionSysRatio(state, data) {

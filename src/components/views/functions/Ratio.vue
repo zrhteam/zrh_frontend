@@ -14,11 +14,20 @@
     </div>
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
+      <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"
+                 @change="filterMajor">
+        <el-option
+            v-for="item in option"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
     </div>
     <div id="id_region_major" style="height: 80%; width: 100%" v-if="context.id==='id_region_major'">
     </div>
-    <!--    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">-->
-    <!--    </div>-->
+    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">
+    </div>
     <div id="id_region_reason" style="height: 80%; width: 100%" v-if="context.id==='id_region_reason'">
     </div>
     <div id="id_region_region" style="height: 80%; width: 100%" v-if="context.id==='id_region_region'">
@@ -38,6 +47,13 @@ import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "Ratio",
+  data() {
+    return {
+      show: false,
+      value: '全部专业',
+      option: ''
+    }
+  },
   props: ['context'],
   methods: {
     drawBarChart() {
@@ -60,6 +76,23 @@ export default {
           });
         });
       })
+    },
+    filterMajor(value) {
+      let param2 = new URLSearchParams();
+      var obj = {};
+      //使用find()方法在下拉数据中根据value绑定的数据查找对象
+      obj = this.option.find(function (item) {
+        return item.value === value;
+      })
+      if (obj.label === '全部专业') {
+        param2.append('major', 'all');
+      } else {
+        param2.append('major', obj.label);
+      }
+      param2.append('region_name', this.$store.state.get_region.region_name);
+      this.$store.commit('get_region/changeParam2', {params: param2})
+      //显示该区域不同专业下各系统隐患占比情况
+      this.$store.dispatch('get_region/getRegionSystemRatio')
     }
   },
   computed: {
@@ -103,7 +136,7 @@ export default {
             }
           }
         }
-      }else if ((this.context.id == 'id_region_region') || (this.context.id == 'id_head_region')) {
+      } else if ((this.context.id == 'id_region_region') || (this.context.id == 'id_head_region')) {
         if (this.context.id == 'id_region_region') {
           data = this.$store.state.get_region.region_area_ratio
         } else data = this.$store.state.get_headquarter.head_area_ratio
@@ -127,6 +160,51 @@ export default {
             }
           }
         }
+      } else if (this.context.id == 'id_region_system') {
+        this.show = true
+        data = this.$store.state.get_region.region_sys_ratio
+        for(let i in data) {
+          for(let j in data[i]) {
+            let obj = {
+              name: '',
+              value: ''
+            }
+            obj['name'] = j;
+            obj['value'] = data[i][j]
+            arr.push(obj)
+          }
+        }
+
+        let major = []
+        let filter = []
+        let count = 0
+        for (let i in data) {
+          if (filter.indexOf(i) === -1) {
+            filter.push(i)
+            let obj = {
+              value: '',
+              label: ''
+            }
+            obj['value'] = count++;
+            obj['label'] = i
+            major.push(obj)
+          }
+        }
+        let obj = {
+          value: '',
+          label: ''
+        }
+        obj['value'] = '全部专业';
+        obj['label'] = '全部专业'
+        major.push(obj)
+        let old_major = this.$store.state.get_region.all_majors
+        if (old_major.length < major.length) {
+          this.$store.commit('get_region/changeAllMajors', {all_majors: major})
+          this.option = major
+        } else {
+          this.option = this.$store.state.get_region.all_majors
+        }
+        // console.log("看一下", data)
       }
       return arr
     },
