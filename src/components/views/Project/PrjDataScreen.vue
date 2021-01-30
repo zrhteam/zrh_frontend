@@ -83,6 +83,15 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+<!--        <TopName-->
+<!--            :context="{title:'隐患次数累计系统名称排名（10）',-->
+<!--            top_data:this.sys_name,-->
+<!--            label1:'系统名称',-->
+<!--            label2:'出现频率',-->
+<!--        }"></TopName>-->
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <div style="display: none">
           {{ getName }}
         </div>
@@ -97,6 +106,11 @@
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <TopName
             :context="{title:'隐患次数累计设备名称排名（12）', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopName
+            :context="{title:'隐患次数累计组件名称排名（13）', top_data:this.unit_name, label1:'组件名称', label2:'出现频率'}"></TopName>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -155,6 +169,24 @@
         <TopName
             :context="{title:'隐患次数累计系统名称排名（prj11）',
             top_data:this.prj_sys_name,
+            label1:'系统名称',
+            label2:'出现频率',
+        }"></TopName>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopName
+            :context="{title:'隐患次数累计设备名称排名（prj12）',
+            top_data:this.prj_device_name,
+            label1:'系统名称',
+            label2:'出现频率',
+        }"></TopName>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <TopName
+            :context="{title:'隐患次数累计组件名称排名（prj13）',
+            top_data:this.prj_unit_name,
             label1:'系统名称',
             label2:'出现频率',
         }"></TopName>
@@ -243,6 +275,7 @@ export default {
       title3: this.$store.state.get_login.grant_data.data.project_tag,
       sys_name: [],
       device_name: [],
+      unit_name: [],
       risk_option: [{
         value: '专业',
         key: 'major'
@@ -277,6 +310,7 @@ export default {
       }],
       prj_sys_name: [],
       prj_device_name: [],
+      prj_unit_name: []
     };
   },
   computed: {
@@ -292,8 +326,28 @@ export default {
         this.sys_name.push(obj)
       }
 
-      //没有从后台拿到数据
       data = this.$store.state.get_check.check_device_name
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].appear_time
+        this.device_name.push(obj)
+      }
+
+      data = this.$store.state.get_check.check_unit_name
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].appear_time
+        this.unit_name.push(obj)
+      }
+
 
       data = this.$store.state.get_project.prj_sys_name
       for (let i in data) {
@@ -305,6 +359,31 @@ export default {
         obj['appear_time'] = data[i].appear_time
         this.prj_sys_name.push(obj)
       }
+
+      data = this.$store.state.get_project.prj_device_name
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].appear_time
+        this.prj_device_name.push(obj)
+      }
+
+      data = this.$store.state.get_project.prj_unit_name
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].appear_time
+        this.prj_unit_name.push(obj)
+      }
+
+      // data = this.$store.state.get_project.prj_rule
+      // console.log("rule", data)
     }
   },
   created() {
