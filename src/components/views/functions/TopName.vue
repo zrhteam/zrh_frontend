@@ -4,7 +4,7 @@
 <!--  <el-card class="box-card " shadow="never"-->
 <!--           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">-->
   <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height: 100%; margin: 2% 2% 2% 2%">
     <div class="level4" style="padding-top: 0px; padding-bottom: 10px; padding-left: 10px">
       <span>{{ context.title }}</span>
     </div>

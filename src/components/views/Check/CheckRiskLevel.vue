@@ -1,13 +1,19 @@
 <template>
   <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
     <div style="display: none">
-      {{ getCheckRiskLevelData }}
+      {{ getRiskLevelData }}
     </div>
+<!--    <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">-->
+<!--      <span>历次检查累计发现隐患数量</span>-->
+<!--    </div>-->
+<!--    <div id='check_risk_level' style="height: 80%; width: 100%;"></div>-->
+
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
-      <span>历次检查累计发现隐患数量</span>
+      <span>{{ context.title }}</span>
     </div>
-    <div id='check_risk_level' style="height: 80%; width: 100%;"></div>
+    <div id='check_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='check_risk_level'"></div>
+    <div id='prj_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='prj_risk_level'"></div>
   </el-card>
 </template>
 
@@ -20,9 +26,15 @@ export default {
   data() {
     return {}
   },
+  props: ['context'],
   computed: {
-    getCheckRiskLevelData() {
-      let data = this.$store.state.get_check.check_risk_data;
+    getRiskLevelData() {
+      let data = ''
+      if(context.id==='check_risk_level') {
+          data = this.$store.state.get_check.check_risk_data;
+      }else if(context.id==='prj_risk_level') {
+          data = this.$store.state.get_project.prj_risk_data;
+      }
       console.log("累计", data)
       let data_length = Object.keys(data);
       if (!data_length.length) {

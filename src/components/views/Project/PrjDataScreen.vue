@@ -33,38 +33,34 @@
         <label id="prj_title3_1"
                style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
       </el-card>
-      <el-col :span="8" style="height: 83%">
-        <!--历次检查累计发现隐患数量-->
-<!--        <CheckedProject></CheckedProject>-->
-        <PerctangePerc
-            :context="{
-          title:'所有致因阶段占比（可筛选专业）',
-          type:'reason',
-          id:'id_reason',
-        }"></PerctangePerc>
-      </el-col>
-      <el-col :span="8" style="height: 83%">
-        <!--          当前未整改高风险隐患图片-->
-<!--        <UnsolvedImageList></UnsolvedImageList>-->
-        <PerctangePerc
-            :context="{
-          title:'所有隐患分布区域占比（可筛选专业）',
-          type:'region',
-          id:'id_region',
-          }"></PerctangePerc>
-      </el-col>
-      <el-col :span="8" style="height: 83%">
-        <PerctangePerc
-            :context="{
-          title:'所有隐患子系统占比（可筛选专业）',
-          type:'system',
-          id:'id_system',
-        }"></PerctangePerc>
-<!--        <HistoryTopRisk class=""></HistoryTopRisk>-->
-      </el-col>
+<!--      <el-col :span="8" style="height: 83%">-->
+<!--        <PerctangePerc-->
+<!--            :context="{-->
+<!--          title:'所有致因阶段占比（可筛选专业）',-->
+<!--          type:'reason',-->
+<!--          id:'id_reason',-->
+<!--        }"></PerctangePerc>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 83%">-->
+
+<!--        <PerctangePerc-->
+<!--            :context="{-->
+<!--          title:'所有隐患分布区域占比（可筛选专业）',-->
+<!--          type:'region',-->
+<!--          id:'id_region',-->
+<!--          }"></PerctangePerc>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 83%">-->
+<!--        <PerctangePerc-->
+<!--            :context="{-->
+<!--          title:'所有隐患子系统占比（可筛选专业）',-->
+<!--          type:'system',-->
+<!--          id:'id_system',-->
+<!--        }"></PerctangePerc>-->
+
+<!--      </el-col>-->
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
-        <label>...</label>
       </el-card>
     </el-col>
     <CheckDataScreen id="check_charts" style="display: none"></CheckDataScreen>
@@ -141,7 +137,7 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>
+<!--        <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>-->
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -157,15 +153,15 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopRisk
-            :context="{
-                  title:'隐患次数累计设备名称排名（prj10）',
-                  label1:'隐患描述',
-                  label2:'出现频率',
-                  sign:'prj_other',
-                  option:this.other_option}"
-            :top_data="this.$store.state.get_project.prj_other_top"
-        ></TopRisk>
+<!--        <TopRisk-->
+<!--            :context="{-->
+<!--                  title:'隐患次数累计设备名称排名（prj10）',-->
+<!--                  label1:'隐患描述',-->
+<!--                  label2:'出现频率',-->
+<!--                  sign:'prj_other',-->
+<!--                  option:this.other_option}"-->
+<!--            :top_data="this.$store.state.get_project.prj_other_top"-->
+<!--        ></TopRisk>-->
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">

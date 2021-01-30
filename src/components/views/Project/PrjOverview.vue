@@ -41,61 +41,89 @@
           <!--          <label>数据大屏缩略图</label>-->
         </el-card>
       </el-col>
-      <!--地图+历次检查指数-->
-<!--      <PrjIndex></PrjIndex>-->
-      <!--      </el-col>-->
 <!--      第二列放pie、bar、table-->
-      <el-col id="prj_subpart" :span="15" style="height: 100%">
+      <el-col id="prj_subpart" :span="20" style="height: 100%">
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
-<!--          第二列分为3行2列-->
-<!--          第一行-->
-          <el-row style="height: 30%">
+          <el-col :span="12" style="height: 100%">
+            <el-row style="height: 30%">
+                                          <!--            第一列-->
+              <el-col :span="11" style="height: 100%; margin-left: 4%">
+                <CheckHistoryPerc></CheckHistoryPerc>
+              </el-col>
+<!--            第2列-->
+              <el-col :span="11" style="height: 100%">
+                <PerctangePerc
+                  :context="{
+                  title:'所有致因阶段占比（可筛选专业）',
+                  type:'reason',
+                  id:'id_reason',
+                }"></PerctangePerc>
+              </el-col>
 
-              <!--            第一列-->
-            <el-col :span="12" style="height: 100%">
-              <CheckHistoryPerc></CheckHistoryPerc>
-            </el-col>
+            </el-row>
+            <el-row style="height: 30%">
+              <el-col style="height: 100%; margin-left: 2%">
+                <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>
+              </el-col>
+            </el-row>
+            <el-row style="height: 30%">
+              <el-col style="height: 100%; margin-left: 2%">
+                <TopName
+                  :context="{title:'隐患次数累计系统名称排名（prj11）',
+                  top_data:this.prj_sys_name,
+                  label1:'系统名称',
+                  label2:'出现频率',
+                }"></TopName>
+              </el-col>
+            </el-row>
+          </el-col>
+          <el-col :span="12" style="height: 100%">
+            <el-row style="height: 30%">
+                            <!--            第3列-->
+              <el-col :span="12" style="height: 100%">
+                <PerctangePerc
+                  :context="{
+                  title:'所有隐患分布区域占比（可筛选专业）',
+                  type:'region',
+                  id:'id_region',
+                 }"></PerctangePerc>
+              </el-col>
 
-<!--            第二列-->
-            <el-col>
-
-            </el-col>
-          </el-row>
-<!--          第二行-->
-          <el-row style="height: 30%">
-<!--            第1列-->
-            <el-col :span="12" style="height: 100%">
-<!--              <CheckedHistory></CheckedHistory>-->
-            </el-col>
-<!--            第二列-->
-            <el-col :span="12" style="height: 100%">
-              <CheckedProject></CheckedProject>
-            </el-col>
-          </el-row>
-<!--          第三行-->
-          <el-row style="height: 30%">
-<!--            第一列-->
-            <el-col :span="12" style="height: 100%">
-              <HistoryTopRisk></HistoryTopRisk>
-            </el-col>
-<!--            第二列-->
-            <el-col  :span="12" style="height: 100%">
-              <UnsolvedImageList></UnsolvedImageList>
-            </el-col>
-          </el-row>
+<!--            第4列-->
+              <el-col :span="12" style="height: 100%">
+                <PerctangePerc
+                  :context="{
+                  title:'所有隐患子系统占比（可筛选专业）',
+                  type:'system',
+                  id:'id_system',
+                }"></PerctangePerc>
+              </el-col>
+            </el-row>
+            <el-row style="height: 30%">
+              <el-col style="height: 100%">
+                <CheckRiskLevel :context="{title:'项目风险等级隐患数量', id:'prj_risk_level'}"></CheckRiskLevel>
+              </el-col>
+            </el-row>
+            <el-row style="height: 30%">
+              <el-col style="height: 100%">
+                <TopRisk
+                  :context="{
+                    title:'隐患次数累计设备名称排名（prj10）',
+                    label1:'隐患描述',
+                    label2:'出现频率',
+                    sign:'prj_other',
+                    option:this.other_option}"
+                    :top_data="this.$store.state.get_project.prj_other_top"
+                ></TopRisk>
+              </el-col>
+            </el-row>
+          </el-col>
 
         </el-card>
       </el-col>
       <!--      <PrjOverviewPart></PrjOverviewPart>-->
       <CheckOverview id="check_part" style="display: none"></CheckOverview>
-            <!--      第三列放image、table-->
-      <el-col :span="5" style="height: 100%">
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
-
-        </el-card>
-      </el-col>
 
 
 
@@ -124,10 +152,18 @@ import CheckOverview from "@/components/views/Check/CheckOverview.vue";
 import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import RegionOverview from "@/components/views/Region/RegionDataScreen.vue";
 import Tree from "@/components/views/functions/Tree.vue";
+import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
+import TopRisk from "@/components/views/functions/TopRisk.vue";
+import TopName from "@/components/views/functions/TopName.vue";
+import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    CheckRiskLevel,
+    RiskLevelYear,
+    TopRisk,
+    TopName,
     RegionOverview,
     PrjOverviewPart,
     CheckOverview,
@@ -147,39 +183,7 @@ export default {
     PrjDataScreen,
     Tree
   },
-  // mounted: function () {
-  //   document.getElementById('map_1').style.display = 'none'
-  //   document.getElementById('map_2').style.display = 'block'
-  //   this.map = this.loadMap();//加载地图
-  //   let m = document.getElementById("map_2")
-  //   this.map_width = window.getComputedStyle(m).width
-  //   this.map_height = window.getComputedStyle(m).height
-  //
-  //   this.svg = d3.select(this.$el).select('svg');
-  //   // this.svg = d3.select(this.map.getPanes().overlayPane).append("svg");
-  //
-  //   let _this = this;
-  //   this.map.on('drag', (e) => {
-  //     let center_position = this.map.latLngToContainerPoint([22, 107]);
-  //
-  //     if (this.locContainers) {
-  //       this.locContainers.each(function (d) {
-  //         let loc = _this.map.latLngToContainerPoint(d.locs)
-  //         d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
-  //       })
-  //     }
-  //   });
-  //
-  //   this.map.on('move', (e) => {
-  //     let center_position = this.map.latLngToContainerPoint([22, 107]);
-  //     if (this.locContainers) {
-  //       this.locContainers.each(function (d) {
-  //         let loc = _this.map.latLngToContainerPoint(d.locs)
-  //         d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
-  //       })
-  //     }
-  //   });
-  // },
+
   methods: {
     intoPrjDataScreen() {
       var large1 = document.getElementById('large1');
@@ -261,7 +265,26 @@ export default {
       input: 'test',
       title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
       title2: this.$store.state.get_login.grant_data.data.region_tag,
-      title3: this.$store.state.get_login.grant_data.data.project_tag
+      title3: this.$store.state.get_login.grant_data.data.project_tag,
+      other_option: [{
+        value: '高风险',
+        key: 3
+      }, {
+        value: '中风险',
+        key: 2
+      }, {
+        value: '低风险',
+        key: 1
+      }, {
+        value: '风险',
+        key: 'all'
+      }, {
+        value: '致因阶段',
+        key: 'stage'
+      }, {
+        value: '分布区域',
+        key: 'area'
+      }],
     };
   },
   created() {

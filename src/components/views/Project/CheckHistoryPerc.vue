@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card" shadow="never"
-           style="background-color: transparent; height: 100%; left: 10%; top: 10%">
-    <div style="display: none">
+           style="background-color: transparent; height: 100%; margin-top: 2%">
+    <div style="display: none;">
       {{ getPrjHistoryPerception }}
     </div>
     <div class="level4">

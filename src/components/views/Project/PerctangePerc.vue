@@ -1,12 +1,12 @@
 <template>
   <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height: 100%; margin-top: 2%; margin-bottom: 2%;">
     <div style="display: none">
       {{ getData }}
     </div>
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
-      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterMajor">
+      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 25%;" @change="filterMajor">
         <el-option
             v-for="item in option"
             :key="item.value"
