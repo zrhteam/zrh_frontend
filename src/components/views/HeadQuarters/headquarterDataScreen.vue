@@ -96,6 +96,16 @@
           id: 'id_head_major'
         }"></Ratio>
       </el-card>
+      <Ratio
+            :context="{
+          title:'致因阶段隐患占比（10）',
+          id: 'id_head_reason'
+        }"></Ratio>
+        <Ratio
+            :context="{
+          title:'分布区域隐患占比（11）',
+          id: 'id_head_region'
+        }"></Ratio>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <TopName

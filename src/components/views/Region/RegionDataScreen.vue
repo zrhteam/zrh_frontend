@@ -128,6 +128,16 @@
           title:'各专业隐患数量占比（10）',
           id: 'id_region_major'
         }"></Ratio>
+        <Ratio
+            :context="{
+          title:'致因阶段隐患占比（12）',
+          id: 'id_region_reason'
+        }"></Ratio>
+        <Ratio
+            :context="{
+          title:'分布区域隐患占比（13）',
+          id: 'id_region_region'
+        }"></Ratio>
       </el-card>
     </el-col>
   </el-row>
