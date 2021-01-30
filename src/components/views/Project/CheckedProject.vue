@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 80%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getPrjRiskLevelData }}
     </div>
@@ -24,7 +24,7 @@
 <!--          label="累计发现隐患数量">-->
 <!--      </el-table-column>-->
 <!--    </el-table>-->
-    <div id = 'risk_level' style="height: 80%; width: 100%;"></div>
+    <div id = 'risk_level' style="height: 100%; width: 100%;"></div>
   </el-card>
 </template>
 

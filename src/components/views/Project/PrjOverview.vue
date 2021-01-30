@@ -50,10 +50,10 @@
                  style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
 <!--          第二列分为3行2列-->
 <!--          第一行-->
-          <el-row>
+          <el-row style="height: 30%">
 
               <!--            第一列-->
-            <el-col :span="12">
+            <el-col :span="12" style="height: 100%">
               <CheckHistoryPerc></CheckHistoryPerc>
             </el-col>
 
@@ -63,24 +63,24 @@
             </el-col>
           </el-row>
 <!--          第二行-->
-          <el-row>
+          <el-row style="height: 30%">
 <!--            第1列-->
-            <el-col :span="12">
+            <el-col :span="12" style="height: 100%">
               <CheckedHistory></CheckedHistory>
             </el-col>
 <!--            第二列-->
-            <el-col :span="12">
+            <el-col :span="12" style="height: 100%">
               <CheckedProject></CheckedProject>
             </el-col>
           </el-row>
 <!--          第三行-->
-          <el-row>
+          <el-row style="height: 30%">
 <!--            第一列-->
-            <el-col :span="12">
+            <el-col :span="12" style="height: 100%">
               <HistoryTopRisk></HistoryTopRisk>
             </el-col>
 <!--            第二列-->
-            <el-col  :span="12">
+            <el-col  :span="12" style="height: 100%">
               <UnsolvedImageList></UnsolvedImageList>
             </el-col>
           </el-row>
