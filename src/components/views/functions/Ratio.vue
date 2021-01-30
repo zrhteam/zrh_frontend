@@ -17,8 +17,8 @@
     </div>
     <div id="id_region_major" style="height: 80%; width: 100%" v-if="context.id==='id_region_major'">
     </div>
-<!--    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">-->
-<!--    </div>-->
+    <!--    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">-->
+    <!--    </div>-->
     <div id="id_region_reason" style="height: 80%; width: 100%" v-if="context.id==='id_region_reason'">
     </div>
     <div id="id_region_region" style="height: 80%; width: 100%" v-if="context.id==='id_region_region'">
@@ -79,30 +79,56 @@ export default {
           obj.value = data[i];
           arr.push(obj)
         }
-      }else if ((this.context.id == 'id_region_reason') || (this.context.id == 'id_head_reason')) {
+      } else if ((this.context.id == 'id_region_reason') || (this.context.id == 'id_head_reason')) {
         if (this.context.id == 'id_region_reason') {
           data = this.$store.state.get_region.region_stage_ratio
         } else data = this.$store.state.get_headquarter.head_stage_ratio
         for (let i in data) {
-          let obj = {
-            name: '',
-            value: 0
-          }
-          let flag = false
-          arr.forEach(item=>{
-            if(item.name === data[i]) {
-              flag = true
+          for (let j in data[i]) {
+            let obj = {
+              name: '',
+              value: 0
             }
-          })
-          if(flag === false) {
-            obj.name = i;
-            obj.value = data[i];
-            arr.push(obj)
-          }else {
-            arr[i].value = arr[i].value + data[i]
+            let flag = false
+            arr.forEach(item => {
+              if (item.name === j) {
+                item.value = item.value + data[i][j]
+                flag = true
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              obj.value = data[i][j];
+              arr.push(obj)
+            }
+          }
+        }
+      }else if ((this.context.id == 'id_region_region') || (this.context.id == 'id_head_region')) {
+        if (this.context.id == 'id_region_region') {
+          data = this.$store.state.get_region.region_area_ratio
+        } else data = this.$store.state.get_headquarter.head_area_ratio
+        for (let i in data) {
+          for (let j in data[i]) {
+            let obj = {
+              name: '',
+              value: 0
+            }
+            let flag = false
+            arr.forEach(item => {
+              if (item.name === j) {
+                item.value = item.value + data[i][j]
+                flag = true
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              obj.value = data[i][j];
+              arr.push(obj)
+            }
           }
 
         }
+        console.log("看一下", arr)
       }
       return arr
     },
