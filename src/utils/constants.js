@@ -70,7 +70,11 @@ export const bar_option = {
 };
 //对于一个x量对应三个bar
 export const bar_option2 = {
-    legend: {},
+    legend: {
+        textStyle: {
+            color: '#ffffff'
+        }
+    },
     tooltip: {},
     dataset: {
         source: []
@@ -84,6 +88,7 @@ export const bar_option2 = {
                 normal: {
                     //柱形图圆角，初始化效果
                     barBorderRadius: [10, 10, 0, 0],
+                    color: "#4992ff"
                 }
             },
             barMaxWidth: 40
@@ -94,6 +99,7 @@ export const bar_option2 = {
                 normal: {
                     //柱形图圆角，初始化效果
                     barBorderRadius: [10, 10, 0, 0],
+                    color: '#58d9f9'
                 }
             },
             barMaxWidth: 40
@@ -104,6 +110,7 @@ export const bar_option2 = {
                 normal: {
                     //柱形图圆角，初始化效果
                     barBorderRadius: [10, 10, 0, 0],
+                    color: '#05c091'
                 }
             },
             barMaxWidth: 40
