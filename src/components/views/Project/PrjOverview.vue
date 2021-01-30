@@ -1,5 +1,6 @@
 <template>
   <!--  <div></div>-->
+<!--  第一行放标题-->
   <el-row style="height: 100%;">
     <PrjDataScreen id="prj_small" style="display: none"></PrjDataScreen>
     <el-row id="large1" class="" style="height: 10%;">
@@ -21,7 +22,9 @@
         </el-card>
       </el-col>
     </el-row>
+<!--    第二行放图片-->
     <el-row id="large2" class="" style="height: 90%;">
+<!--      第一列放树状图和缩略图-->
       <el-col :span="4" class="" style="height: 100%">
         <Tree
           :treeObj="treeObj"
@@ -39,8 +42,52 @@
         </el-card>
       </el-col>
       <!--地图+历次检查指数-->
-      <PrjIndex></PrjIndex>
+<!--      <PrjIndex></PrjIndex>-->
       <!--      </el-col>-->
+<!--      第二列放pie、bar、table-->
+      <el-col :span="15" class="" style="height: 100%">
+        <el-card class="box-card " shadow="never"
+                 style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
+<!--          第二列分为3行2列-->
+<!--          第一行-->
+          <el-row>
+
+              <!--            第一列-->
+            <el-col :span="12">
+              <CheckHistoryPerc></CheckHistoryPerc>
+            </el-col>
+
+<!--            第二列-->
+            <el-col>
+
+            </el-col>
+          </el-row>
+<!--          第二行-->
+          <el-row>
+<!--            第1列-->
+            <el-col :span="12">
+              <CheckedHistory></CheckedHistory>
+            </el-col>
+<!--            第二列-->
+            <el-col :span="12">
+              <CheckedProject></CheckedProject>
+            </el-col>
+          </el-row>
+<!--          第三行-->
+          <el-row>
+<!--            第一列-->
+            <el-col :span="12">
+              <HistoryTopRisk></HistoryTopRisk>
+            </el-col>
+<!--            第二列-->
+            <el-col  :span="12">
+              <UnsolvedImageList></UnsolvedImageList>
+            </el-col>
+          </el-row>
+
+        </el-card>
+      </el-col>
+<!--      第三列放image、table-->
       <PrjOverviewPart></PrjOverviewPart>
       <CheckOverview id="check_part" style="display: none"></CheckOverview>
     </el-row>

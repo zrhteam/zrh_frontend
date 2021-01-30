@@ -37,6 +37,8 @@ const state = {
     head_area_ratio: {},
     // 展示按照项目数量对区域排名
     rank_by_prj: {},
+    //每次点击的key
+    chartKey: 0,
 
 
     // //总部整改率
@@ -102,6 +104,7 @@ const getters = {
     },
     // 展示按照项目数量对区域排名
     renderHeadProjectRank(state) {
+        // console.log('rank_by_prj', state.rank_by_prj)
         return state.rank_by_prj;
     },
 

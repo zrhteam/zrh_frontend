@@ -35,7 +35,7 @@
       </el-card>
       <el-col :span="8" style="height: 83%">
         <!--历次检查累计发现隐患数量-->
-        <CheckedProject></CheckedProject>
+<!--        <CheckedProject></CheckedProject>-->
         <PerctangePerc
             :context="{
           title:'所有致因阶段占比（可筛选专业）',

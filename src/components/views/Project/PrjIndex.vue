@@ -1,17 +1,17 @@
 <template>
   <el-col :span="10" class="" style="height: 100%">
-    <el-card class="box-card " shadow="never"
-             style="background-color: transparent; height: 79%; margin: 0px 5px 5px 5px">
-      <!--          放地图-->
-      <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: #13E8E9">
-        <div id="map_1"
-             style="pointer-events:inherit; height: 100%; width: 100%;"></div>
-        <div id="map_2"
-             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>
-      </div>
-      <!--          <div id="map" bordered style="pointer-events:inherit"></div>-->
-      <!--          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>-->
-    </el-card>
+<!--    <el-card class="box-card " shadow="never"-->
+<!--             style="background-color: transparent; height: 79%; margin: 0px 5px 5px 5px">-->
+<!--      &lt;!&ndash;          放地图&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: #13E8E9">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div id="map_1"&ndash;&gt;-->
+<!--&lt;!&ndash;             style="pointer-events:inherit; height: 100%; width: 100%;"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div id="map_2"&ndash;&gt;-->
+<!--&lt;!&ndash;             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--      &lt;!&ndash;          <div id="map" bordered style="pointer-events:inherit"></div>&ndash;&gt;-->
+<!--      &lt;!&ndash;          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>&ndash;&gt;-->
+<!--    </el-card>-->
     <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
     <el-card class="box-card boundary-B" shadow="never"
              style="background-color: transparent; height: 19%; margin: 0px 5px 5px 5px">
