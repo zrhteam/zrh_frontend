@@ -90,6 +90,14 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <Ratio
+            :context="{
+          title:'各专业隐患数量占比（9）',
+          id: 'id_head_major'
+        }"></Ratio>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <TopName
             :context="{title:'根据项目数量的区域排名（12）',
             top_data:this.rank_by_prj,
@@ -118,9 +126,11 @@ import Tree from "@/components/views/functions/Tree.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
+import Ratio from "@/components/views/functions/Ratio.vue";
 export default {
   name: "headquarterOverview",
   components: {
+    Ratio,
     RiskLevelYear,
     ProjectIndex,
     HighRiskImages,

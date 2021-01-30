@@ -5,7 +5,7 @@
       {{ getPrjRiskLevelData }}
     </div>
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
-      <span>历次检查累计发现隐患数量</span>
+      <span>历次检查累计发现隐患数量（2）</span>
     </div>
 <!--    <el-table-->
 <!--        :data="PrjRiskLevelData"-->

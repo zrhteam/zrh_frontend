@@ -121,6 +121,14 @@
             label2:'检查次数',
         }"></TopName>
       </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <Ratio
+            :context="{
+          title:'各专业隐患数量占比（10）',
+          id: 'id_region_major'
+        }"></Ratio>
+      </el-card>
     </el-col>
   </el-row>
 </template>
@@ -133,6 +141,7 @@ import Tree from "@/components/views/functions/Tree.vue"
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import TopName from "@/components/views/functions/TopName.vue";
+import Ratio from "@/components/views/functions/Ratio.vue";
 
 export default {
   name: "RegionDataScreen",
@@ -142,7 +151,8 @@ export default {
     RiskLevelYear,
     Tree,
     Region3_1,
-    Region2_2
+    Region2_2,
+    Ratio
   },
   methods: {
     outRegionDataScreen() {

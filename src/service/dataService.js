@@ -709,7 +709,8 @@ function getProjectSystemNumber(param, callback) {
 * Return: 返回出现隐患次数排名前10的设备名称及出现隐患的次数的json文件
  */
 function getProjectDeviceNumber(param, callback) {
-    const url = `${dataServerUrl}/project/project_device_number`;
+    // const url = `${dataServerUrl}/project/project_device_number`;
+    const url = `${dataServerUrl}/project/project_equipment_number`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -727,7 +728,8 @@ function getProjectDeviceNumber(param, callback) {
 * Return: 返回出现隐患次数排名前10的组件名称及出现隐患的次数的json文件
  */
 function getProjectUnitNumber(param, callback) {
-    const url = `${dataServerUrl}/project/project_unit_number`;
+    // const url = `${dataServerUrl}/project/project_unit_number`;
+    const url = `${dataServerUrl}/project/project_module_number`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
