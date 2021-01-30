@@ -4,10 +4,10 @@
     <div style="display: none">
       {{ getRiskLevelData }}
     </div>
-<!--    <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">-->
-<!--      <span>历次检查累计发现隐患数量</span>-->
-<!--    </div>-->
-<!--    <div id='check_risk_level' style="height: 80%; width: 100%;"></div>-->
+    <!--    <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">-->
+    <!--      <span>历次检查累计发现隐患数量</span>-->
+    <!--    </div>-->
+    <!--    <div id='check_risk_level' style="height: 80%; width: 100%;"></div>-->
 
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>{{ context.title }}</span>
@@ -30,24 +30,57 @@ export default {
   computed: {
     getRiskLevelData() {
       let data = ''
-      if(context.id==='check_risk_level') {
-          data = this.$store.state.get_check.check_risk_data;
-      }else if(context.id==='prj_risk_level') {
-          data = this.$store.state.get_project.prj_risk_data;
-      }
-      console.log("累计", data)
-      let data_length = Object.keys(data);
-      if (!data_length.length) {
-        this.PrjRiskLevelData = []
-      }
-          // console.log(this.$store.state.get_project.prj_risk_data)
-          // if(!data.length) {
-          //   // this.PrjRiskLevelData = []
-          // }
-          // else {
-          //  风险等级对应情况
-      //  1：低风险； 2：中风险； 3：高风险
-      else {
+      let dataArray = []
+      if (this.context.id === 'check_risk_level') {
+        data = this.$store.state.get_check.check_risk_data;
+        console.log("累计1", data)
+        // let data_length = Object.keys(data);
+        // if (!data_length.length) {
+        //   this.PrjRiskLevelData = []
+        // }
+        //     // console.log(this.$store.state.get_project.prj_risk_data)
+        //     // if(!data.length) {
+        //     //   // this.PrjRiskLevelData = []
+        //     // }
+        //     // else {
+        //     //  风险等级对应情况
+        // //  1：低风险； 2：中风险； 3：高风险
+        // else {
+        //   let obj1 = {
+        //     name: '低风险',
+        //     count: 0
+        //   }
+        //   let obj2 = {
+        //     name: '中风险',
+        //     count: 0
+        //   }
+        //   let obj3 = {
+        //     name: '高风险',
+        //     count: 0
+        //   }
+        //   // let obj = {
+        //   //   risk: '列总计',
+        //   //   num: 0
+        //   // }
+        //   for (let i in data) {
+        //     for (let j in data[i]) {
+        //       if (j == 1) {
+        //         obj1.count += data[i][j]
+        //       }
+        //       if (j == 2) {
+        //         obj2.count += data[i][j]
+        //       }
+        //       if (j == 3) {
+        //         obj3.count += data[i][j]
+        //       }
+        //     }
+        //   }
+        dataArray.push(obj3)
+        dataArray.push(obj2)
+        dataArray.push(obj1)
+        // }
+      } else if (this.context.id === 'prj_risk_level') {
+        data = this.$store.state.get_project.prj_risk_data;
         let obj1 = {
           name: '低风险',
           count: 0
@@ -64,28 +97,18 @@ export default {
         //   risk: '列总计',
         //   num: 0
         // }
-        let dataArray = []
-        for (let i in data) {
-          for (let j in data[i]) {
-            if (j == 1) {
-              obj1.count += data[i][j]
-            }
-            if (j == 2) {
-              obj2.count += data[i][j]
-            }
-            if (j == 3) {
-              obj3.count += data[i][j]
-            }
-          }
-        }
+        obj1.count += data['1']
+        obj1.count += data['2']
+        obj1.count += data['3']
         dataArray.push(obj3)
         dataArray.push(obj2)
         dataArray.push(obj1)
-        // obj.num = obj1.num + obj2.num + obj3.num
-        // dataArray.push(obj)
-        // console.log(dataArray)
-        return dataArray
+        console.log("累计1", data)
       }
+      // obj.num = obj1.num + obj2.num + obj3.num
+      // dataArray.push(obj)
+      // console.log(dataArray)
+      return dataArray
     }
   },
   updated() {
