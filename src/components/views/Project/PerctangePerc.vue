@@ -37,7 +37,7 @@
 
 <script>
 import elementResizeDetectorMaker from "element-resize-detector";
-import {bar_option} from "@/utils/constants.js";
+import {bar_option, pie_option} from "@/utils/constants.js";
 
 export default {
   name: "ProjPercentage",
@@ -54,9 +54,12 @@ export default {
         let myChart;
         myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
-        bar_option['dataset']['source'] = arr
-        bar_option["xAxis"]["axisLabel"]["rotate"] = 45
-        myChart.setOption(bar_option);
+        // bar_option['dataset']['source'] = arr
+        // bar_option["xAxis"]["axisLabel"]["rotate"] = 45
+        // myChart.setOption(bar_option);
+        // console.log("arr", arr)
+        pie_option['series'][0]['data'] = arr
+        myChart.setOption(pie_option);
         myChart.resize();
         window.addEventListener('resize', function () {
           myChart.resize();
@@ -148,10 +151,12 @@ export default {
           for (let j in data[i]) {
             let obj = {
               name: '',
-              count: 0
+              // count: 0
+              value: 0
             }
             obj.name = j;
-            obj.count = data[i][j];
+            // obj.count = data[i][j];
+             obj.value = data[i][j];
             arr.push(obj)
           }
         }
@@ -163,10 +168,12 @@ export default {
           for (let j in data[i]) {
             let obj = {
               name: '',
-              count: 0
+              // count: 0
+              value: 0
             }
             obj.name = j;
-            obj.count = data[i][j];
+            // obj.count = data[i][j];
+            obj.value = data[i][j];
             arr.push(obj)
           }
         }
@@ -178,15 +185,17 @@ export default {
           for (let j in data[i]) {
             let obj = {
               name: '',
-              count: 0
+              value: 0
+              // count: 0
             }
             obj.name = j;
-            obj.count = data[i][j];
+            // obj.count = data[i][j];
+            obj.value = data[i][j];
             arr.push(obj)
           }
         }
       }
-      arr.sort(this.sortNumber('count', true))
+      // arr.sort(this.sortNumber('count', true))
       if ((this.context.id == 'id_check_system') || (this.context.id == 'id_check_reason') || (this.context.id == 'id_check_region')) {
       // if (this.value === '全部专业') {
         let major = []
