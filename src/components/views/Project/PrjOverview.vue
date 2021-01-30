@@ -63,7 +63,7 @@
 
             </el-row>
             <el-row style="height: 30%">
-              <el-col style="height: 100%; margin-left: 2%">
+              <el-col style="height: 100%; margin-left: 2%; margin-bottom: 2%">
                 <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>
               </el-col>
             </el-row>
@@ -100,9 +100,9 @@
                 }"></PerctangePerc>
               </el-col>
             </el-row>
-            <el-row style="height: 30%">
+            <el-row style="height: 30%; margin-bottom: 2%">
               <el-col style="height: 100%">
-                <CheckRiskLevel :context="{title:'项目风险等级隐患数量', id:'prj_risk_level'}"></CheckRiskLevel>
+                <RiskLevelYear :context="{title:'项目风险等级隐患数量', id:'check_level_year'}"></RiskLevelYear>
               </el-col>
             </el-row>
             <el-row style="height: 30%">
