@@ -87,6 +87,13 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_region/getRegionCheckRank')
         //显示该区域各专业隐患占比情况
         this.$store.dispatch('get_region/getRegionMajorRatio')
+
+        //以下三项筛选专业，默认发全部传all
+        let param2 = new URLSearchParams();
+        param2.append('region_name', region_name);
+        param2.append('major', 'all');
+        //该检查中在不同专业下属于不同隐患子系统的隐患数量
+        this.$store.commit('get_region/changeParam2', {params: param2})
         //显示该区域不同专业下各系统隐患占比情况
         this.$store.dispatch('get_region/getRegionSystemRatio')
         //根据隐患数量显示不同致因阶段的占比情况

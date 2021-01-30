@@ -67,7 +67,7 @@ export default {
     },
     handleTrNodeClick(data, node) {
     },
-    handleTrCheck(a, b, level) {debugger
+    handleTrCheck(a, b, level) {
       // console.log(this.radio)
       // console.log(level)
       if(level > this.radio) {

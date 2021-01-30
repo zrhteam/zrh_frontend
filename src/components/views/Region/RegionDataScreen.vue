@@ -105,21 +105,31 @@
         <div style="display: none">
           {{ getName }}
         </div>
-        <TopName
-            :context="{title:'根据累计高风险的项目排名（8）',
-            top_data:this.high_risk_rank,
-            label1:'项目名称',
-            label2:'检查次数',
-        }"></TopName>
+<!--        <TopName-->
+<!--            :context="{title:'根据累计高风险的项目排名（8）',-->
+<!--            top_data:this.high_risk_rank,-->
+<!--            label1:'项目名称',-->
+<!--            label2:'检查次数',-->
+<!--        }"></TopName>-->
+        <BarRank
+            :context="{
+          title:'根据累计高风险的项目排名（8）',
+          id: 'id_region_rank1'}"
+        ></BarRank>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopName
-            :context="{title:'根据检查次数的项目排名（9）',
-            top_data:this.rank_by_check,
-            label1:'项目名称',
-            label2:'检查次数',
-        }"></TopName>
+<!--        <TopName-->
+<!--            :context="{title:'根据检查次数的项目排名（9）',-->
+<!--            top_data:this.rank_by_check,-->
+<!--            label1:'项目名称',-->
+<!--            label2:'检查次数',-->
+<!--        }"></TopName>-->
+        <BarRank
+            :context="{
+          title:'根据检查次数的项目排名（9）',
+          id: 'id_region_rank2'}"
+        ></BarRank>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -128,11 +138,25 @@
           title:'各专业隐患数量占比（10）',
           id: 'id_region_major'
         }"></Ratio>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <Ratio
+            :context="{
+          title:'隐患子系统隐患占比（12）',
+          id: 'id_region_system'
+        }"></Ratio>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <Ratio
             :context="{
           title:'致因阶段隐患占比（12）',
           id: 'id_region_reason'
         }"></Ratio>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <Ratio
             :context="{
           title:'分布区域隐患占比（13）',
@@ -152,10 +176,12 @@ import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import TopName from "@/components/views/functions/TopName.vue";
 import Ratio from "@/components/views/functions/Ratio.vue";
+import BarRank from "@/components/views/functions/BarRank.vue";
 
 export default {
   name: "RegionDataScreen",
   components: {
+    BarRank,
     TopName,
     TopRisk,
     RiskLevelYear,

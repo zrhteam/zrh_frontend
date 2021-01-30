@@ -219,6 +219,12 @@ export default {
     this.$store.dispatch('get_region/getRegionCheckRank')
     //显示该区域各专业隐患占比情况
     this.$store.dispatch('get_region/getRegionMajorRatio')
+
+    //筛选，默认发major all
+    let param2 = new URLSearchParams();
+    param2.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
+    param2.append('major', 'all');
+    this.$store.commit('get_region/changeParam2', {params: param2})
     //显示该区域不同专业下各系统隐患占比情况
     this.$store.dispatch('get_region/getRegionSystemRatio')
     //根据隐患数量显示不同致因阶段的占比情况

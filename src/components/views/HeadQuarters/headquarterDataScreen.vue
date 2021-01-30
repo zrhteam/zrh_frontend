@@ -4,13 +4,13 @@
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
         <el-image
-              style="width: 90%; height: 90%"
-              :src="url"
-              :fit="fit"></el-image>
+            style="width: 90%; height: 90%"
+            :src="url"
+            :fit="fit"></el-image>
       </el-card>
-<!--      <Tree-->
-<!--          :treeObj="treeObj"-->
-<!--        ></Tree>-->
+      <!--      <Tree-->
+      <!--          :treeObj="treeObj"-->
+      <!--        ></Tree>-->
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
       </el-card>
@@ -27,8 +27,9 @@
     <el-col :span="16" style="height: 100%;">
       <el-card class="title-box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
-<!--        <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>-->
-        <label id="head_title1_1" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{title1}}</label>
+        <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>-->
+        <label id="head_title1_1"
+               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
       </el-card>
       <el-col :span="8" style="height: 42%">
         <!--          当前未整改高风险隐患图片-->
@@ -42,7 +43,7 @@
         <label>...</label>
       </el-card>
     </el-col>
-<!--    <CheckDataScreen></CheckDataScreen>-->
+    <!--    <CheckDataScreen></CheckDataScreen>-->
     <el-col :span="4" style="height: 100%; overflow: scroll">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
@@ -81,12 +82,17 @@
         <div style="display: none">
           {{ getName }}
         </div>
-        <TopName
-            :context="{title:'根据检查次数的区域排名（8）',
-            top_data:this.rank_by_check,
-            label1:'项目名称',
-            label2:'检查次数',
-        }"></TopName>
+        <!--        <TopName-->
+        <!--            :context="{title:'根据检查次数的区域排名（8）',-->
+        <!--            top_data:this.rank_by_check,-->
+        <!--            label1:'项目名称',-->
+        <!--            label2:'检查次数',-->
+        <!--        }"></TopName>-->
+        <BarRank
+            :context="{
+          title:'根据检查次数的区域排名（8）',
+          id: 'id_head_rank1'}"
+        ></BarRank>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -96,34 +102,35 @@
           id: 'id_head_major'
         }"></Ratio>
       </el-card>
-      <Ratio
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <Ratio
             :context="{
           title:'致因阶段隐患占比（10）',
           id: 'id_head_reason'
         }"></Ratio>
+      </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <Ratio
             :context="{
           title:'分布区域隐患占比（11）',
           id: 'id_head_region'
         }"></Ratio>
+      </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopName
-            :context="{title:'根据项目数量的区域排名（12）',
-            top_data:this.rank_by_prj,
-            label1:'项目名称',
-            label2:'检查次数',
-        }"></TopName>
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 29%; margin: 0px 5px 5px 5px">
-      </el-card>
-
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 29%; margin: 0px 5px 5px 5px">
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 30%; margin: 0px 5px 5px 5px">
+<!--        <TopName-->
+<!--            :context="{title:'根据项目数量的区域排名（12）',-->
+<!--            top_data:this.rank_by_prj,-->
+<!--            label1:'项目名称',-->
+<!--            label2:'检查次数',-->
+<!--        }"></TopName>-->
+        <BarRank
+            :context="{
+          title:'根据项目数量的区域排名（12）',
+          id: 'id_head_rank2'}"
+        ></BarRank>
       </el-card>
     </el-col>
   </el-row>
@@ -137,9 +144,12 @@ import TopRisk from "@/components/views/functions/TopRisk.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
 import Ratio from "@/components/views/functions/Ratio.vue";
+import BarRank from "@/components/views/functions/BarRank.vue";
+
 export default {
   name: "headquarterOverview",
   components: {
+    BarRank,
     Ratio,
     RiskLevelYear,
     ProjectIndex,
