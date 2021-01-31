@@ -71,4 +71,8 @@ export default {
   background-color: #a0cfff;
   color: #222222;
 }
+.el-tree-node:focus > .el-tree-node__content {
+    background-color: #969696 !important;
+}
+
 </style>

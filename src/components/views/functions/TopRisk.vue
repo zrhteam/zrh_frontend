@@ -42,9 +42,10 @@
           :header-cell-style="{color: '#fff'}"
           :data="sub_top_data"
           :row-style="{height: '20px'}"
-          :cell-style="{padding: '0px'}"
           :default-sort="{prop: 'appear_time', order: 'descending'}"
-          style="width: 100%; height: 90%; color: #fff">
+          ref="table"
+          height="300"
+          style="width: 100%; color: #fff">
         <el-table-column
             label="排名" type='index'>
         </el-table-column>
@@ -450,7 +451,7 @@ export default {
             obj['description'] = i
             obj['belong'] = data[i]['count'][o.key]
             obj['appear_time'] = data[i]['count'].appear_time
-          } else if (this.context.sign === 'prj_risk' ) {
+          } else if (this.context.sign === 'prj_risk') {
             obj['description'] = i
             obj['belong'] = data[i][o.key]
             obj['appear_time'] = data[i].appear_time
@@ -486,6 +487,22 @@ export default {
       }
       return arr
     }
+  },
+  mounted() {
+    // 拿到表格挂载后的真实DOM
+    const table = this.$refs.table
+    // 拿到表格中承载数据的div元素
+    const divData = table.bodyWrapper
+    // 拿到元素后，对元素进行定时增加距离顶部距离，实现滚动效果(此配置为每100毫秒移动1像素)
+    setInterval(() => {
+      // 元素自增距离顶部1像素
+      divData.scrollTop += 1
+      // 判断元素是否滚动到底部(可视高度+距离顶部=整个高度)
+      if (divData.clientHeight + divData.scrollTop == divData.scrollHeight) {
+        // 重置table距离顶部距离
+        divData.scrollTop = 0
+      }
+    }, 100)
   },
   updated() {
     this.updateList()
