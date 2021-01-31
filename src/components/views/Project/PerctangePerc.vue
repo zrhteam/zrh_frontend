@@ -102,7 +102,7 @@ export default {
       })
       if (obj.label === '全部专业') {
         param2.append('major', 'all');
-      }else {
+      } else {
         param2.append('major', obj.label);
       }
       if (this.context.id == 'id_check_reason') {
@@ -154,10 +154,20 @@ export default {
               // count: 0
               value: 0
             }
-            obj.name = j;
-            // obj.count = data[i][j];
-             obj.value = data[i][j];
-            arr.push(obj)
+            //查询所有专业时可能会需要数据合并
+            let flag = false
+            arr.find(function (item) {
+              if (j === item.name) {
+                flag = true
+                item[j] = item[j] + data[i][j]
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              // obj.count = data[i][j];
+              obj.value = data[i][j];
+              arr.push(obj)
+            }
           }
         }
       } else if ((this.context.id == 'id_reason') || (this.context.id == 'id_check_reason')) {
@@ -171,10 +181,19 @@ export default {
               // count: 0
               value: 0
             }
-            obj.name = j;
-            // obj.count = data[i][j];
-            obj.value = data[i][j];
-            arr.push(obj)
+            //查询所有专业时可能会需要数据合并
+            let flag = false
+            arr.forEach(item => {
+              if (item.name === j) {
+                item.value = item.value + data[i][j]
+                flag = true
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              obj.value = data[i][j];
+              arr.push(obj)
+            }
           }
         }
       } else if ((this.context.id == 'id_region') || (this.context.id == 'id_check_region')) {
@@ -188,16 +207,25 @@ export default {
               value: 0
               // count: 0
             }
-            obj.name = j;
-            // obj.count = data[i][j];
-            obj.value = data[i][j];
-            arr.push(obj)
+            //查询所有专业时可能会需要数据合并
+            let flag = false
+            arr.forEach(item => {
+              if (item.name === j) {
+                item.value = item.value + data[i][j]
+                flag = true
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              obj.value = data[i][j];
+              arr.push(obj)
+            }
           }
         }
       }
       // arr.sort(this.sortNumber('count', true))
       if ((this.context.id == 'id_check_system') || (this.context.id == 'id_check_reason') || (this.context.id == 'id_check_region')) {
-      // if (this.value === '全部专业') {
+        // if (this.value === '全部专业') {
         let major = []
         let filter = []
         let count = 0
@@ -224,10 +252,10 @@ export default {
         if (old_major.length < major.length) {
           this.$store.commit('get_check/changeAllMajors', {all_majors: major})
           this.option = major
-        }else {
+        } else {
           this.option = this.$store.state.get_check.all_majors
         }
-      }else if ((this.context.id == 'id_system') || (this.context.id == 'id_reason') || (this.context.id == 'id_region')) {
+      } else if ((this.context.id == 'id_system') || (this.context.id == 'id_reason') || (this.context.id == 'id_region')) {
         let major = []
         let filter = []
         let count = 0
@@ -254,7 +282,7 @@ export default {
         if (old_major.length < major.length) {
           this.$store.commit('get_project/changeAllMajors', {all_majors: major})
           this.option = major
-        }else {
+        } else {
           this.option = this.$store.state.get_project.all_majors
         }
       }
