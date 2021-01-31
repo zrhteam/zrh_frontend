@@ -50,7 +50,7 @@
         </el-table-column>
         <el-table-column
             property="description"
-            :label="context.label1" width="100%">
+            :label="context.label1" min-width="150px">
         </el-table-column>
         <el-table-column
             prop="belong"

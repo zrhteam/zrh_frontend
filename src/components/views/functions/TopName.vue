@@ -21,7 +21,7 @@
         </el-table-column>
         <el-table-column
             property="name"
-            :label="context.label1" width="100%">
+            :label="context.label1" min-width="300px">
         </el-table-column>
         <el-table-column
             prop="appear_time"

@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height: 100%; margin: 2% 2% 0% 2%">
     <div style="display: none">
       {{ getRiskLevelData }}
     </div>
@@ -81,29 +81,33 @@ export default {
         // }
       } else if (this.context.id === 'prj_risk_level') {
         data = this.$store.state.get_project.prj_risk_data;
-        let obj1 = {
-          name: '低风险',
-          count: 0
+        if ('risk_level' in data) {
+          data = data['risk_level']
+          let obj1 = {
+            name: '低风险',
+            count: 0
+          }
+          let obj2 = {
+            name: '中风险',
+            count: 0
+          }
+          let obj3 = {
+            name: '高风险',
+            count: 0
+          }
+          // let obj = {
+          //   risk: '列总计',
+          //   num: 0
+          // }
+          obj1.count = data['1']
+          obj2.count = data['2']
+          obj3.count = data['3']
+          dataArray.push(obj3)
+          dataArray.push(obj2)
+          dataArray.push(obj1)
+          console.log("累计1", data)
         }
-        let obj2 = {
-          name: '中风险',
-          count: 0
-        }
-        let obj3 = {
-          name: '高风险',
-          count: 0
-        }
-        // let obj = {
-        //   risk: '列总计',
-        //   num: 0
-        // }
-        obj1.count += data['1']
-        obj1.count += data['2']
-        obj1.count += data['3']
-        dataArray.push(obj3)
-        dataArray.push(obj2)
-        dataArray.push(obj1)
-        console.log("累计1", data)
+
       }
       // obj.num = obj1.num + obj2.num + obj3.num
       // dataArray.push(obj)
@@ -119,8 +123,9 @@ export default {
   // },
   methods: {
     drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('check_risk_level'))
-      let arr = this.getCheckRiskLevelData
+      let myChart = this.$echarts.init(document.getElementById(this.context.id))
+      let arr = this.getRiskLevelData
+      debugger
       bar_option["dataset"]["source"] = arr
       myChart.setOption(bar_option);
       myChart.resize();

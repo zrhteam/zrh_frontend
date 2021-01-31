@@ -88,6 +88,13 @@
 <!--            label1:'系统名称',-->
 <!--            label2:'出现频率',-->
 <!--        }"></TopName>-->
+                        <Rules
+            :context="{title:'违反法规次数排名（10）',
+            top_data:this.rule_name,
+            label1:'违反次数',
+            label2:'法规名称',
+            label3:'条款号',
+        }"></Rules>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -165,12 +172,12 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopName
-            :context="{title:'隐患次数累计系统名称排名（prj11）',
-            top_data:this.prj_sys_name,
-            label1:'系统名称',
-            label2:'出现频率',
-        }"></TopName>
+<!--        <TopName-->
+<!--            :context="{title:'隐患次数累计系统名称排名（prj11）',-->
+<!--            top_data:this.prj_sys_name,-->
+<!--            label1:'系统名称',-->
+<!--            label2:'出现频率',-->
+<!--        }"></TopName>-->
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -212,10 +219,12 @@ import Tree from "@/components/views/functions/Tree.vue";
 import TopName from "@/components/views/functions/TopName.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
+import Rules from "@/components/views/functions/Rules.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    Rules,
     RiskLevelYear,
     TopRisk,
     TopName,
@@ -275,6 +284,7 @@ export default {
       sys_name: [],
       device_name: [],
       unit_name: [],
+      rule_name: [],
       risk_option: [{
         value: '专业',
         key: 'major'
@@ -381,8 +391,23 @@ export default {
         this.prj_unit_name.push(obj)
       }
 
+      data = this.$store.state.get_check.check_rule
+      for (let i in data) {
+        let obj = {
+          appear_time: 0,
+          rule_name: '',
+          clause: '',
+          clause_contact: ''
+        }
+        obj['appear_time'] = data[i].appear_time
+        obj['rule_name'] = i
+        obj['clause'] = data[i].clause
+        obj['clause_contact'] = data[i].clause_contact
+        this.rule_name.push(obj)
+      }
+
       // data = this.$store.state.get_project.prj_rule
-      // console.log("rule", data)
+      console.log("rule", this.rule_name)
     }
   },
   created() {

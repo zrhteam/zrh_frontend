@@ -1,6 +1,6 @@
 <template>
   <!--  <div></div>-->
-<!--  第一行放标题-->
+  <!--  第一行放标题-->
   <el-row style="height: 100%;">
     <PrjDataScreen id="prj_small" style="display: none"></PrjDataScreen>
     <el-row id="large1" class="" style="height: 10%;">
@@ -16,19 +16,22 @@
       <el-col :span="20" style="height: 100%">
         <el-card class="title-box-card " shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label id="prj_title1" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{title1}}</label>
-          <label id="prj_title2" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{title2}}</label>
-          <label id="prj_title3" style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{title3}}</label>
+          <label id="prj_title1"
+                 style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+          <label id="prj_title2"
+                 style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
+          <label id="prj_title3"
+                 style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
         </el-card>
       </el-col>
     </el-row>
-<!--    第二行放图片-->
+    <!--    第二行放图片-->
     <el-row id="large2" class="" style="height: 90%;">
-<!--      第一列放树状图和缩略图-->
+      <!--      第一列放树状图和缩略图-->
       <el-col :span="4" class="" style="height: 100%">
         <Tree
-          :treeObj="treeObj"
-          @handleNodeClick="handleTrNodeClick"
+            :treeObj="treeObj"
+            @handleNodeClick="handleTrNodeClick"
         ></Tree>
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
@@ -41,20 +44,20 @@
           <!--          <label>数据大屏缩略图</label>-->
         </el-card>
       </el-col>
-<!--      第二列放pie、bar、table-->
+      <!--      第二列放pie、bar、table-->
       <el-col id="prj_subpart" :span="20" style="height: 100%">
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
           <el-col :span="12" style="height: 100%">
             <el-row style="height: 30%">
-                                          <!--            第一列-->
+              <!--            第一列-->
               <el-col :span="11" style="height: 100%; margin-left: 4%">
                 <CheckHistoryPerc></CheckHistoryPerc>
               </el-col>
-<!--            第2列-->
+              <!--            第2列-->
               <el-col :span="11" style="height: 100%">
                 <PerctangePerc
-                  :context="{
+                    :context="{
                   title:'所有致因阶段占比（可筛选专业）',
                   type:'reason',
                   id:'id_reason',
@@ -69,8 +72,11 @@
             </el-row>
             <el-row style="height: 30%">
               <el-col style="height: 100%; margin-left: 2%">
+                <div style="display: none">
+                  {{ getName }}
+                </div>
                 <TopName
-                  :context="{title:'隐患次数累计系统名称排名（prj11）',
+                    :context="{title:'隐患次数累计系统名称排名（prj11）',
                   top_data:this.prj_sys_name,
                   label1:'系统名称',
                   label2:'出现频率',
@@ -80,20 +86,20 @@
           </el-col>
           <el-col :span="12" style="height: 100%">
             <el-row style="height: 30%">
-                            <!--            第3列-->
+              <!--            第3列-->
               <el-col :span="12" style="height: 100%">
                 <PerctangePerc
-                  :context="{
+                    :context="{
                   title:'所有隐患分布区域占比（可筛选专业）',
                   type:'region',
                   id:'id_region',
                  }"></PerctangePerc>
               </el-col>
 
-<!--            第4列-->
+              <!--            第4列-->
               <el-col :span="12" style="height: 100%">
                 <PerctangePerc
-                  :context="{
+                    :context="{
                   title:'所有隐患子系统占比（可筛选专业）',
                   type:'system',
                   id:'id_system',
@@ -102,13 +108,14 @@
             </el-row>
             <el-row style="height: 30%; margin-bottom: 2%">
               <el-col style="height: 100%">
-                <RiskLevelYear :context="{title:'项目风险等级隐患数量', id:'check_level_year'}"></RiskLevelYear>
+<!--                <RiskLevelYear :context="{title:'项目风险等级隐患数量', id:'check_level_year'}"></RiskLevelYear>-->
+                <CheckRiskLevel :context="{title:'项目风险等级隐患数量', id:'prj_risk_level'}"> </CheckRiskLevel>
               </el-col>
             </el-row>
             <el-row style="height: 30%">
               <el-col style="height: 100%">
                 <TopRisk
-                  :context="{
+                    :context="{
                     title:'隐患次数累计设备名称排名（prj10）',
                     label1:'隐患描述',
                     label2:'出现频率',
@@ -124,11 +131,8 @@
       </el-col>
       <!--      <PrjOverviewPart></PrjOverviewPart>-->
       <CheckOverview id="check_part" style="display: none"></CheckOverview>
-
-
-
     </el-row>
-<!--    <RegionOverview id="region_part" style="display: none"></RegionOverview>-->
+    <!--    <RegionOverview id="region_part" style="display: none"></RegionOverview>-->
   </el-row>
   <!--  <PrjDataScreen></PrjDataScreen>-->
 </template>
@@ -246,6 +250,20 @@ export default {
       this.handleTreeNodeClick(data, node)
     }
   },
+  computed: {
+    getName() {
+      let data = this.$store.state.get_project.prj_sys_name
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].appear_time
+        this.prj_sys_name.push(obj)
+      }
+    }
+  },
   data() {
     return {
       // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
@@ -285,6 +303,7 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
+      prj_sys_name: []
     };
   },
   created() {
