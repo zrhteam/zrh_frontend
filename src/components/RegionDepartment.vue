@@ -18,7 +18,6 @@
 <!--            <el-row class="margin">-->
 <!--            <el-col :span = '24'>-->
 <!--              <div class = 'safety_index' style="height: 150px">-->
-<!--                <Region1_1></Region1_1>-->
 <!--              </div>-->
 <!--            </el-col>-->
 <!--          </el-row>-->
@@ -44,7 +43,6 @@
 <!--&lt;!&ndash;        已检查的项目数量&ndash;&gt;-->
 <!--        <el-col :span="4" class="boundary-B part1 margin">-->
 <!--          <el-card shadow="never" style="background-color: transparent; height: 280px">-->
-<!--            <Region1_3></Region1_3>-->
 <!--          </el-card>-->
 
 <!--        </el-col>-->
@@ -107,9 +105,7 @@
 import SafetyIndexHistogram from "@/components/views/functions/SafetyIndexHistogram.vue";
 import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
 import checkbox from "@/components/views/functions/checkbox.vue";
-import Region1_1 from "@/components/views/Region/Region1_1.vue";
 import ProjectIndexView from "@/components/views/Region/ProjectIndexView.vue";
-import Region1_3 from "@/components/views/Region/Region1_3.vue";
 import Region1_4 from "@/components/views/Region/Region1_4.vue";
 import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import Region2_2 from "@/components/views/Region/Region2_2.vue";
@@ -130,8 +126,8 @@ export default {
     Region2_2,
     Region2_1,
     Region1_4,
-    ProjectIndexView, Region1_1,
-    Region1_3, checkbox
+    ProjectIndexView,
+    checkbox
   },
   data(){
     return {

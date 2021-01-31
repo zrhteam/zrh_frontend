@@ -33,32 +33,32 @@
         <label id="prj_title3_1"
                style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
       </el-card>
-<!--      <el-col :span="8" style="height: 83%">-->
-<!--        <PerctangePerc-->
-<!--            :context="{-->
-<!--          title:'所有致因阶段占比（可筛选专业）',-->
-<!--          type:'reason',-->
-<!--          id:'id_reason',-->
-<!--        }"></PerctangePerc>-->
-<!--      </el-col>-->
-<!--      <el-col :span="8" style="height: 83%">-->
+      <!--      <el-col :span="8" style="height: 83%">-->
+      <!--        <PerctangePerc-->
+      <!--            :context="{-->
+      <!--          title:'所有致因阶段占比（可筛选专业）',-->
+      <!--          type:'reason',-->
+      <!--          id:'id_reason',-->
+      <!--        }"></PerctangePerc>-->
+      <!--      </el-col>-->
+      <!--      <el-col :span="8" style="height: 83%">-->
 
-<!--        <PerctangePerc-->
-<!--            :context="{-->
-<!--          title:'所有隐患分布区域占比（可筛选专业）',-->
-<!--          type:'region',-->
-<!--          id:'id_region',-->
-<!--          }"></PerctangePerc>-->
-<!--      </el-col>-->
-<!--      <el-col :span="8" style="height: 83%">-->
-<!--        <PerctangePerc-->
-<!--            :context="{-->
-<!--          title:'所有隐患子系统占比（可筛选专业）',-->
-<!--          type:'system',-->
-<!--          id:'id_system',-->
-<!--        }"></PerctangePerc>-->
+      <!--        <PerctangePerc-->
+      <!--            :context="{-->
+      <!--          title:'所有隐患分布区域占比（可筛选专业）',-->
+      <!--          type:'region',-->
+      <!--          id:'id_region',-->
+      <!--          }"></PerctangePerc>-->
+      <!--      </el-col>-->
+      <!--      <el-col :span="8" style="height: 83%">-->
+      <!--        <PerctangePerc-->
+      <!--            :context="{-->
+      <!--          title:'所有隐患子系统占比（可筛选专业）',-->
+      <!--          type:'system',-->
+      <!--          id:'id_system',-->
+      <!--        }"></PerctangePerc>-->
 
-<!--      </el-col>-->
+      <!--      </el-col>-->
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
       </el-card>
@@ -82,13 +82,7 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-<!--        <TopName-->
-<!--            :context="{title:'隐患次数累计系统名称排名（10）',-->
-<!--            top_data:this.sys_name,-->
-<!--            label1:'系统名称',-->
-<!--            label2:'出现频率',-->
-<!--        }"></TopName>-->
-                        <Rules
+        <Rules
             :context="{title:'违反法规次数排名（10）',
             top_data:this.rule_name,
             label1:'违反次数',
@@ -144,7 +138,7 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-<!--        <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>-->
+        <!--        <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>-->
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -160,24 +154,24 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-<!--        <TopRisk-->
-<!--            :context="{-->
-<!--                  title:'隐患次数累计设备名称排名（prj10）',-->
-<!--                  label1:'隐患描述',-->
-<!--                  label2:'出现频率',-->
-<!--                  sign:'prj_other',-->
-<!--                  option:this.other_option}"-->
-<!--            :top_data="this.$store.state.get_project.prj_other_top"-->
-<!--        ></TopRisk>-->
+                <TopRisk
+                    :context="{
+                          title:'隐患次数累计设备名称排名（prj10）',
+                          label1:'隐患描述',
+                          label2:'出现频率',
+                          sign:'prj_other',
+                          option:this.other_option}"
+                    :top_data="this.$store.state.get_project.prj_other_top"
+                ></TopRisk>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-<!--        <TopName-->
-<!--            :context="{title:'隐患次数累计系统名称排名（prj11）',-->
-<!--            top_data:this.prj_sys_name,-->
-<!--            label1:'系统名称',-->
-<!--            label2:'出现频率',-->
-<!--        }"></TopName>-->
+        <!--        <TopName-->
+        <!--            :context="{title:'隐患次数累计系统名称排名（prj11）',-->
+        <!--            top_data:this.prj_sys_name,-->
+        <!--            label1:'系统名称',-->
+        <!--            label2:'出现频率',-->
+        <!--        }"></TopName>-->
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -197,6 +191,16 @@
             label2:'出现频率',
         }"></TopName>
       </el-card>
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+        <Rules
+            :context="{title:'违反法规次数排名（prj14）',
+            top_data:this.prj_rule_name,
+            label1:'违反次数',
+            label2:'法规名称',
+            label3:'条款号',
+        }"></Rules>
+      </el-card>
     </el-col>
   </el-row>
 </template>
@@ -204,15 +208,11 @@
 <script>
 import CheckedHistory from "@/components/views/Project/CheckedHistory.vue";
 import Granularity from "@/components/views/Project/Granularity.vue";
-import HistoryTopRisk from "@/components/views/Project/HistoryTopRisk.vue";
 import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
-import LastCheckPerc from "@/components/views/Project/LastCheckPerc.vue";
 import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
 import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
 import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
 import CheckedProject from "@/components/views/Project/CheckedProject.vue";
-import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
-import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
 import CheckDataScreen from "@/components/views/Check/CheckDataScreen.vue";
 import Tree from "@/components/views/functions/Tree.vue";
@@ -230,16 +230,12 @@ export default {
     TopName,
     CheckDataScreen,
     Granularity,
-    HistoryTopRisk,
     PerctangePerc,
-    LastCheckPerc,
     CheckHistoryPerc,
     UnsolvedList,
     UnsolvedImageList,
     CheckedHistory,
     CheckedProject,
-    IndexView,
-    PrjCurrentCorrectionRate,
     // PrjEHSDataAnalysis3,
     PrjIndex,
     Tree
@@ -320,6 +316,7 @@ export default {
       prj_sys_name: [],
       prj_device_name: [],
       prj_unit_name: [],
+      prj_rule_name: []
     };
   },
   computed: {
@@ -406,8 +403,20 @@ export default {
         this.rule_name.push(obj)
       }
 
-      // data = this.$store.state.get_project.prj_rule
-      console.log("rule", this.rule_name)
+      data = this.$store.state.get_project.prj_rule
+      for (let i in data) {
+        let obj = {
+          appear_time: 0,
+          rule_name: '',
+          clause: '',
+          clause_contact: ''
+        }
+        obj['appear_time'] = data[i].appear_time
+        obj['rule_name'] = i
+        obj['clause'] = data[i].clause
+        obj['clause_contact'] = data[i].clause_contact
+        this.prj_rule_name.push(obj)
+      }
     }
   },
   created() {

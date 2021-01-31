@@ -54,15 +54,12 @@
           <el-col :span="12" style="height: 42%">
             <el-card class="box-card " shadow="never"
                      style="background-color: transparent; height: 90%; left: 10%; top: 10%">
-              <!--          当前未整改高风险隐患列表-->
-              <UnsolvedList></UnsolvedList>
             </el-card>
           </el-col>
           <!--          </el-row>-->
           <!--          <el-row style="height: 42%">-->
           <el-col :span="12" style="height: 42%">
             <!--出现次数排名前10的隐患-->
-            <TopAccumRisk></TopAccumRisk>
           </el-col>
           <el-col :span="12" style="height: 42%">
             <AccumRisk></AccumRisk>
@@ -96,9 +93,7 @@
 <script>
 import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue";
 import Rectification from "@/components/views/HeadQuarters/Rectification.vue";
-import UnsolvedList from "@/components/views/HeadQuarters/UnsolvedList.vue";
 import AccumRisk from "@/components/views/HeadQuarters/AccumRisk.vue";
-import TopAccumRisk from "@/components/views/HeadQuarters/TopAccumRisk.vue";
 import headquarterDataScreen from "@/components/views/HeadQuarters/headquarterDataScreen.vue";
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
 import RegionOverview from "@/components/views/Region/RegionOverview.vue";
@@ -109,9 +104,7 @@ export default {
   components: {
     RegionOverview,
     CheckOverview,
-    TopAccumRisk,
     AccumRisk,
-    UnsolvedList,
     Rectification,
     HighProjectRisk,
     headquarterDataScreen,

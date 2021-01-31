@@ -20,8 +20,6 @@
       <!--          </el-row>-->
       <!--          <el-row style="height: 42%">-->
       <el-col :span="12" style="height: 42%">
-        <!--当前整改率-->
-        <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>
       </el-col>
       <el-col :span="12" style="height: 42%">
         <CheckedHistory></CheckedHistory>
@@ -44,7 +42,6 @@
 import CheckedHistory from "@/components/views/Project/CheckedHistory.vue";
 import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
 import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
-import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
 
 export default {
   name: "PrjOverviewPart",
@@ -52,7 +49,6 @@ export default {
     CheckHistoryPerc,
     CheckedHistory,
     UnsolvedList,
-    PrjCurrentCorrectionRate,
 
   },
 }

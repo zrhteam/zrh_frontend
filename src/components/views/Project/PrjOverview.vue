@@ -116,7 +116,7 @@
               <el-col style="height: 100%">
                 <TopRisk
                     :context="{
-                    title:'隐患次数累计设备名称排名（prj10）',
+                    title:'隐患次数累计排名（prj10）',
                     label1:'隐患描述',
                     label2:'出现频率',
                     sign:'prj_other',
@@ -140,15 +140,11 @@
 <script>
 import CheckedHistory from "@/components/views/Project/CheckedHistory.vue";
 import Granularity from "@/components/views/Project/Granularity.vue";
-import HistoryTopRisk from "@/components/views/Project/HistoryTopRisk.vue";
 import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
-import LastCheckPerc from "@/components/views/Project/LastCheckPerc.vue";
 import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
 import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
 import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
 import CheckedProject from "@/components/views/Project/CheckedProject.vue";
-import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
-import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
 import PrjDataScreen from '@/components/views/Project/PrjDataScreen.vue'
 import * as d3 from "d3/dist/d3";
@@ -172,16 +168,12 @@ export default {
     PrjOverviewPart,
     CheckOverview,
     Granularity,
-    HistoryTopRisk,
     PerctangePerc,
-    LastCheckPerc,
     CheckHistoryPerc,
     UnsolvedList,
     UnsolvedImageList,
     CheckedHistory,
     CheckedProject,
-    IndexView,
-    PrjCurrentCorrectionRate,
     // PrjEHSDataAnalysis3,
     PrjIndex,
     PrjDataScreen,
@@ -262,6 +254,7 @@ export default {
         obj['appear_time'] = data[i].appear_time
         this.prj_sys_name.push(obj)
       }
+      console.log("看",data)
     }
   },
   data() {

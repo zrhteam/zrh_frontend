@@ -51,7 +51,6 @@
           <!--          <el-row style="height: 42%">-->
           <el-col :span="12" style="height: 42%">
             <!--            已整改项目数量-->
-            <Region1_3></Region1_3>
           </el-col>
           <el-col :span="12" style="height: 42%">
             <el-card class="box-card " shadow="never"
@@ -95,7 +94,6 @@
 </template>
 
 <script>
-import Region1_3 from "@/components/views/Region/Region1_3.vue";
 import Region1_4 from "@/components/views/Region/Region1_4.vue";
 import Region3_3 from "@/components/views/Region/Region3_3.vue";
 import Region2_3 from "@/components/views/Region/Region2_3.vue";
@@ -112,7 +110,6 @@ export default {
     // HeadquarterOverview,
     PrjOverview,
     PrjOverviewPart,
-    Region1_3,
     Region1_4,
     Region2_1,
     Region2_3,
