@@ -51,14 +51,14 @@
           <el-col :span="12" style="height: 100%">
             <el-row style="height: 30%">
               <!--            第一列-->
-              <el-col :span="11" style="height: 100%; margin-left: 4%">
+              <el-col :span="11" style="height: 100%; margin-left: 4.5%">
                 <CheckHistoryPerc></CheckHistoryPerc>
               </el-col>
               <!--            第2列-->
-              <el-col :span="11" style="height: 100%">
+              <el-col :span="11" style="height: 100%;width:46%">
                 <PerctangePerc
                     :context="{
-                  title:'所有致因阶段占比（可筛选专业）',
+                  title:'所有致因阶段占比（专业筛选）',
                   type:'reason',
                   id:'id_reason',
                 }"></PerctangePerc>
@@ -66,12 +66,12 @@
 
             </el-row>
             <el-row style="height: 30%">
-              <el-col style="height: 100%; margin-left: 2%; margin-bottom: 2%">
+              <el-col :span="22" style="height: 100%; margin-left: 2%; margin-bottom: 2%; width: 100%">
                 <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>
               </el-col>
             </el-row>
             <el-row style="height: 30%">
-              <el-col style="height: 100%; margin-left: 2%">
+              <el-col :span="22" style="height: 100%; margin-left: 2%; width: 100%">
                 <div style="display: none">
                   {{ getName }}
                 </div>
@@ -87,20 +87,20 @@
           <el-col :span="12" style="height: 100%">
             <el-row style="height: 30%">
               <!--            第3列-->
-              <el-col :span="12" style="height: 100%">
+              <el-col :span="11" style="height: 100%; width:46%">
                 <PerctangePerc
                     :context="{
-                  title:'所有隐患分布区域占比（可筛选专业）',
+                  title:'所有分布区域占比（专业筛选）',
                   type:'region',
                   id:'id_region',
                  }"></PerctangePerc>
               </el-col>
 
               <!--            第4列-->
-              <el-col :span="12" style="height: 100%">
+              <el-col :span="11" style="height: 100%;width:46.5%">
                 <PerctangePerc
                     :context="{
-                  title:'所有隐患子系统占比（可筛选专业）',
+                  title:'所有隐患子系统占比（专业筛选）',
                   type:'system',
                   id:'id_system',
                 }"></PerctangePerc>

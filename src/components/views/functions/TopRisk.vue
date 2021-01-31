@@ -12,8 +12,8 @@
   <!--显示在不同条件(专业/系统)下隐患数量排名前top的隐患  -->
   <!--显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患  -->
   <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 2% 2% 2% 2%">
-    <div class="level4" style="padding-top: 0px; padding-bottom: 10px; padding-left: 10px">
+           style="background-color: transparent; height: 100%; margin: 2% 4% 2% 0%">
+    <div class="level4">
       <span>{{ context.title }}</span>
       <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterCondition">
         <el-option
