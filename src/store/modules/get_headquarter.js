@@ -107,6 +107,11 @@ const getters = {
         // console.log('rank_by_prj', state.rank_by_prj)
         return state.rank_by_prj;
     },
+    renderBarChartByKey(state){
+        return key => {
+            return state.rank_by_prj.find(item => item.chartKey === key)
+        }
+    }
 
 
     // //承载变化的总部整改率
@@ -350,6 +355,13 @@ const mutations = {
             alert("出错了")
         }
     },
+    //添加新的图表
+    addChartData(state, data) {
+        let chartKey = state.chartKey
+        state.rank_by_prj = state.rank_by_prj.filter((item) => {
+            return item.chartKey !== chartKey
+        })
+    }
 
     // //考虑总部整改率变化
     // changeRectification(state, data) {

@@ -164,8 +164,8 @@ export default {
   },
   created() {
     // this.username = 'headquarter1';
-    // this.username = 'region1';
-    this.username = 'project1';
+    this.username = 'region1';
+    // this.username = 'project1';
     this.password = '123456';
     $(document).ready(function () {
       var whei = $(window).width()
