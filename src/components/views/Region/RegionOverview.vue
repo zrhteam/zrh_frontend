@@ -44,42 +44,50 @@
       <el-col :span="10" id="region_part" style="height: 100%">
         <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
         <el-row style="height: 100%">
-          <el-card class="statistics-box-card " shadow="never"
-                   style="background-color: transparent; height: 5%; margin: 0px 5px 5px 5px">
             <!--            <label>chart</label>-->
-          </el-card>
           <!--          <el-row style="height: 42%">-->
-          <el-col :span="12" style="height: 42%">
-            <!--            已整改项目数量-->
-          </el-col>
-          <el-col :span="12" style="height: 42%">
-            <el-card class="box-card " shadow="never"
-                     style="background-color: transparent; height: 90%; left: 10%; top: 10%">
-              <!--          当前未整改高风险隐患列表-->
-              <Region2_1></Region2_1>
-            </el-card>
-          </el-col>
+<!--          <el-col :span="12" style="height: 42%">-->
+<!--            &lt;!&ndash;            已整改项目数量&ndash;&gt;-->
+<!--          </el-col>-->
+<!--          <el-col :span="12" style="height: 42%">-->
+<!--            <el-card class="box-card " shadow="never"-->
+<!--                     style="background-color: transparent; height: 90%; left: 10%; top: 10%">-->
+<!--              &lt;!&ndash;          当前未整改高风险隐患列表&ndash;&gt;-->
+<!--              <Region2_1></Region2_1>-->
+<!--            </el-card>-->
+<!--          </el-col>-->
           <!--          </el-row>-->
-          <!--          <el-row style="height: 42%">-->
-          <el-col :span="12" style="height: 42%">
+<!--                    <el-row style="height: 42%">-->
+          <el-col :span="20" style="height: 31%; margin-bottom: 4%">
             <!--3维信息-->
-            <Region2_3></Region2_3>
+<!--            <Region2_3></Region2_3>-->
+            <TopRisk
+            :context="{
+          title:'历史重复出现隐患排名（5）',
+          label1:'隐患描述',
+          label2:'出现频率',
+          sign:'region_risk',
+          option:this.risk_option}"
+            :top_data="this.$store.state.get_region.risk_number_top"
+        ></TopRisk>
           </el-col>
-          <el-col :span="12" style="height: 42%">
+          <el-col :span="20" style="height: 31%;margin-bottom: 4%">
+            <TopRisk
+            :context="{
+          title:'历史重复出现隐患排名（6）',
+          label1:'隐患描述',
+          label2:'出现频率',
+          sign:'region_other',
+          option:this.other_option}"
+            :top_data="this.$store.state.get_region.risk_other_top"
+        ></TopRisk>
+            <!--各等级隐患数量变化-->
+          </el-col>
+          <el-col :span="20" style="height: 31%">
             <Region1_4></Region1_4>
             <!--各等级隐患数量变化-->
           </el-col>
-          <!--          </el-row>-->
-          <el-col :span="24" style="height: 5%">
-            <el-col :span='12' style="height: 5%">
-              <el-button size="mini" round
-                         style="z-index: 9; right: 12%; background-color: transparent; color: #fff; position: absolute">
-                more
-              </el-button>
-            </el-col>
-
-
-          </el-col>
+<!--                    </el-row>-->
         </el-row>
         <!--      </el-card>-->
       </el-col>
@@ -103,10 +111,12 @@ import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
 // import HeadquarterOverview from "@/components/views/HeadQuarters/HeadquarterOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue"
+import TopRisk from "@/components/views/functions/TopRisk.vue";
 
 export default {
   name: "RegionOverview",
   components: {
+    TopRisk,
     // HeadquarterOverview,
     PrjOverview,
     PrjOverviewPart,
@@ -180,6 +190,32 @@ export default {
       },
       title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
       title2: this.$store.state.get_login.grant_data.data.region_tag,
+      risk_option: [{
+        value: '专业',
+        key: 'major'
+      }, {
+        value: '系统',
+        key: 'system'
+      }],
+      other_option: [{
+        value: '高风险',
+        key: 3
+      }, {
+        value: '中风险',
+        key: 2
+      }, {
+        value: '低风险',
+        key: 1
+      }, {
+        value: '风险',
+        key: 'all'
+      }, {
+        value: '致因阶段',
+        key: 'stage'
+      }, {
+        value: '分布区域',
+        key: 'area'
+      }],
     }
   },
   created() {

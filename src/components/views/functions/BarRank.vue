@@ -99,9 +99,9 @@ export default {
         }
       } else if ((this.context.id == 'id_region_rank1') || (this.context.id == 'id_region_rank2')) {
         if (this.context.id == 'id_region_rank1') {
+          data = this.$store.state.get_region.high_risk_rank
+        } else if (this.context.id === 'id_region_rank2') {
           data = this.$store.state.get_region.rank_by_check
-        } else if (this.context.id == 'id_region_rank2') {
-          data = this.$store.state.get_region.rank_by_prj
         }
         for (let i in data) {
           let obj = {
