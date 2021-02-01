@@ -49,7 +49,6 @@
           <!--          <el-row style="height: 42%">-->
           <el-col :span="12" style="height: 42%">
             <!--            整改率-->
-            <Rectification></Rectification>
           </el-col>
           <el-col :span="12" style="height: 42%">
             <el-card class="box-card " shadow="never"
@@ -92,7 +91,6 @@
 
 <script>
 import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue";
-import Rectification from "@/components/views/HeadQuarters/Rectification.vue";
 import AccumRisk from "@/components/views/HeadQuarters/AccumRisk.vue";
 import headquarterDataScreen from "@/components/views/HeadQuarters/headquarterDataScreen.vue";
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
@@ -105,7 +103,6 @@ export default {
     RegionOverview,
     CheckOverview,
     AccumRisk,
-    Rectification,
     HighProjectRisk,
     headquarterDataScreen,
     Tree

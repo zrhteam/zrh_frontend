@@ -12,7 +12,6 @@
 <!--    <el-main>-->
 <!--      <el-col :span="6" class="part1 margin">-->
 <!--        <el-card shadow="never" style="background-color: transparent; height: 430px">-->
-<!--          <Rectification></Rectification>-->
 <!--        </el-card>-->
 <!--      </el-col>-->
 <!--      &lt;!&ndash;总部4 隐患数量&ndash;&gt;-->
@@ -64,9 +63,6 @@
 import * as d3 from "d3";
 // import dataService from "@/service/dataService";
 // import FireHazardIndex from "@/components/views/functions/FireHazardIndex.vue";
-//
-// import Rectification from "@/components/views/HeadQuarters/Rectification.vue";
-//
 // import ProjectIndex from "@/components/views/HeadQuarters/ProjectIndex.vue";
 // import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue";
 //
@@ -76,7 +72,6 @@ import headquarterOverview from "@/components/views/HeadQuarters/HeadquarterOver
 export default {
   name: "LandHeadquartersEHSDataScreen",
   components: {
-    // Rectification,
     // FireHazardIndex,
     //
     // ProjectIndex,
@@ -116,7 +111,6 @@ export default {
     this.$store.commit('get_headquarter/changeParams', {params: param})
     //总部名称也需要封装
     this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
-    // this.$store.dispatch('get_headquarter/getInitRectification')
     // this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
     // this.$store.dispatch('get_headquarter/getInitImage')
     // this.$store.dispatch('get_headquarter/getInitNumberTop')
