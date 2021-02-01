@@ -4,7 +4,7 @@
       <el-row style="height: 10%">
       <el-col :span="4" style="height: 100%">
         <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
+               style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
           <el-image
             style="width: 90%; height: 90%"
             :src="url"
@@ -14,7 +14,7 @@
       </el-col>
       <el-col :span="18" style="height: 100%;">
         <el-card class="title-box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
+               style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px; top: 1%">
         <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>-->
           <label id="region_title1_1"
                style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
@@ -25,7 +25,7 @@
       </el-col>
       <el-col :span="2" style="height: 100%">
         <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
+               style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
           <el-button size="mini" round
                    style="background-color: transparent; color: #fff; "
                    @click="outRegionDataScreen">返回
@@ -35,29 +35,29 @@
       </el-row>
       <el-row style="height: 85%">
       <el-col :span='12' style="height: 100%">
-        <el-row style="height: 30%">
+        <el-row style="height: 30%;">
           <BarRank
             :context="{
               title:'根据检查次数的项目排名（9）',
               id: 'id_region_rank2'}"
           ></BarRank>
         </el-row>
-        <el-row style="height: 30%">
+        <el-row style="height: 30%; margin:2% 0% 0 0">
           <Ratio
             :context="{
               title:'隐患子系统隐患占比（12）',
               id: 'id_region_system'
           }"></Ratio>
         </el-row>
-        <el-row style="height: 30%">
-          <el-col :span="12" style="height: 100%">
+        <el-row style="height: 30%;margin:4% 0% 0 0">
+          <el-col :span="11" style="height: 100%;margin-left:1.5%">
             <Ratio
               :context="{
                 title:'致因阶段隐患占比（12）',
                 id: 'id_region_reason'
             }"></Ratio>
           </el-col>
-          <el-col :span="12" style="height: 100%">
+          <el-col :span="11" style="height: 100%;margin-left:2%">
             <Ratio
               :context="{
                 title:'分布区域隐患占比（13）',
@@ -70,14 +70,14 @@
         <el-row style="height: 30%">
           <RiskLevelYear :context="{title:'区域累计年隐患数量（3）', id:'region_level_year'}"></RiskLevelYear>
         </el-row>
-        <el-row style="height: 30%">
+        <el-row style="height: 30%;margin:2% 0% 0 0">
           <Ratio
             :context="{
               title:'各专业隐患数量占比（10）',
               id: 'id_region_major'
           }"></Ratio>
         </el-row>
-        <el-row style="height: 30%">
+        <el-row style="height: 30%;margin:2% 0% 0 0">
           <Region2_2></Region2_2>
         </el-row>
       </el-col>

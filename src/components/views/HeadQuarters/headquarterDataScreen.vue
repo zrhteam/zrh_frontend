@@ -30,7 +30,7 @@
         </el-col>
       </el-row>
       <el-row style="height: 85%;">
-        <el-col :span="8" style="height: 45%; ">
+        <el-col :span="8" style="height: 45%; margin-left:0.5%">
           <Ratio
               :context="{
           title:'各专业隐患数量占比（9）',
@@ -44,7 +44,7 @@
           id: 'id_head_reason'
         }"></Ratio>
         </el-col>
-        <el-col :span="8" style="height: 45%; width: 32%">
+        <el-col :span="8" style="height: 45%; width: 31.5%">
           <Ratio
               :context="{
           title:'分布区域隐患占比（11）',
