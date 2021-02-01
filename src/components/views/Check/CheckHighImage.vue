@@ -1,6 +1,6 @@
 <template>
 <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height: 100%; margin: 2% 4% 2% 0%">
     <div style="display: none">
       {{ getPrjImage }}
     </div>

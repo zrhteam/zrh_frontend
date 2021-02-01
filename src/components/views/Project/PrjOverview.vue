@@ -193,10 +193,13 @@ export default {
       document.getElementById('check_charts').style.height = "500px"
       setTimeout(function () {
         prj_small.style.width = "99%"
-        document.getElementById('prj_charts').style.height = "85%"
+        document.getElementById('prj_charts').style.height = "99%"
         document.getElementById('check_charts').style.height = "99%"
       }, 100)
       prj_small.style.width = "99%"
+      if(document.getElementById('prj_charts').style.display === 'none') {
+        document.getElementById('check_charts').style.display = 'block'
+      }
     },
     //PrjOverview.vue中的map_1首先被加载
     loadMap() {//加载地图
@@ -240,7 +243,6 @@ export default {
     },
     handleTrNodeClick(data, node) {
       this.handleTreeNodeClick(data, node)
-      debugger
       this.$nextTick(() => {
         // if ((document.getElementById("large2").style.display === 'block') && (document.getElementById("prj_subpart").style.display === 'none')) {
           document.getElementById("check_part").style.display = 'block'

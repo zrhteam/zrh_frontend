@@ -1,6 +1,6 @@
 <template>
-  <el-row class="prj_data_screen" style="height: 100%;">
-    <el-col :span="20" style="height: 100%;">
+  <el-row style="height: 100%;">
+    <el-col id="prj_charts"  :span="20" style="height: 100%;">
       <el-row style="height: 10%;">
         <el-col :span="4" style="height: 100%">
           <el-card class="box-card " shadow="never"
@@ -33,7 +33,7 @@
           </el-card>
         </el-col>
       </el-row>
-      <el-row id="prj_charts" style="height: 85%;">
+      <el-row style="height: 85%;">
         <el-col :span="12" style="height: 100%; margin-left: 6%">
           <el-row style="height: 32%; margin-bottom: 1%">
             <TopRisk
@@ -101,21 +101,15 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        指数尚未提供数据
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <RiskLevelYear :context="{title:'检查累计年隐患数量（2）', id:'check_level_year'}"></RiskLevelYear>
+<!--        <RiskLevelYear :context="{title:'检查累计年隐患数量（2）', id:'check_level_year'}"></RiskLevelYear>-->
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <Rules
-            :context="{title:'违反法规次数排名（10）',
-            top_data:this.rule_name,
-            label1:'违反次数',
-            label2:'法规名称',
-            label3:'条款号',
-        }"></Rules>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -126,25 +120,15 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopName
-            :context="{title:'隐患次数累计设备名称排名（12）', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopName
-            :context="{title:'隐患次数累计组件名称排名（13）', top_data:this.unit_name, label1:'组件名称', label2:'出现频率'}"></TopName>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopRisk
-            :context="{
-          title:'历史重复出现隐患排名（8）',
-          label1:'隐患描述',
-          label2:'出现频率',
-          sign:'check_risk',
-          option:this.risk_option}"
-            :top_data="this.$store.state.get_check.check_risk_top"
-        ></TopRisk>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">

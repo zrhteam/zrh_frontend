@@ -88,7 +88,7 @@
 
 <!--    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>-->
   </el-row>
-    <PrjOverview id="prj_part" style="display: none"></PrjOverview>
+    <PrjOverview id="prj_part" style=""></PrjOverview>
 </el-row>
   <!--    </div>-->
 </template>
