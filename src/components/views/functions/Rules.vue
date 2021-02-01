@@ -2,7 +2,7 @@
   <!--检查显示违反次数排名前10的法规及相关条款号和内容-->
   <!--项目显示违反次数排名前10的法规、违反次数及其相关条款号和内容-->
   <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height: 100%; margin: 2% 4% 2% 0%">
     <div class="level4" style="padding-top: 0px; padding-bottom: 10px; padding-left: 10px">
       <span>{{ context.title }}</span>
     </div>
@@ -23,12 +23,12 @@
         <el-table-column
             prop="rule_name"
             suitable="suitable"
-            :label="context.label2" width="100%">
+            :label="context.label2" min-width="150px">
         </el-table-column>
         <el-table-column
             prop="clause"
             suitable="suitable"
-            :label="context.label3" width="100%">
+            :label="context.label3">
         </el-table-column>
       </el-table>
     </div>

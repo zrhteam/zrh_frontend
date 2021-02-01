@@ -71,7 +71,7 @@
               </el-col>
             </el-row>
             <el-row style="height: 30%">
-              <el-col :span="22" style="height: 100%; margin-left: 2%; width: 100%">
+              <el-col :span="22" style="height: 100%; margin-left: 4%; width: 100%">
                 <div style="display: none">
                   {{ getName }}
                 </div>
@@ -130,7 +130,7 @@
         </el-card>
       </el-col>
       <!--      <PrjOverviewPart></PrjOverviewPart>-->
-      <CheckOverview id="check_part" style="display: none"></CheckOverview>
+      <CheckOverview id="check_part" ></CheckOverview>
     </el-row>
     <!--    <RegionOverview id="region_part" style="display: none"></RegionOverview>-->
   </el-row>
@@ -193,7 +193,7 @@ export default {
       document.getElementById('check_charts').style.height = "500px"
       setTimeout(function () {
         prj_small.style.width = "99%"
-        document.getElementById('prj_charts').style.height = "99%"
+        document.getElementById('prj_charts').style.height = "85%"
         document.getElementById('check_charts').style.height = "99%"
       }, 100)
       prj_small.style.width = "99%"
@@ -240,6 +240,12 @@ export default {
     },
     handleTrNodeClick(data, node) {
       this.handleTreeNodeClick(data, node)
+      debugger
+      this.$nextTick(() => {
+        // if ((document.getElementById("large2").style.display === 'block') && (document.getElementById("prj_subpart").style.display === 'none')) {
+          document.getElementById("check_part").style.display = 'block'
+        // }
+      })
     }
   },
   computed: {

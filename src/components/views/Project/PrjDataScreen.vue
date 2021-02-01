@@ -1,67 +1,94 @@
 <template>
   <el-row class="prj_data_screen" style="height: 100%;">
-    <el-col :span="4" style="height: 100%">
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
-        <el-image
-            style="width: 90%; height: 90%"
-            :src="url"
-            :fit="fit"></el-image>
-      </el-card>
-      <!--      <Tree-->
-      <!--          :treeObj="treeObj"-->
-      <!--      ></Tree>-->
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #ffffff"
-                   @click="outPrjDataScreen">返回
-        </el-button>
-      </el-card>
-    </el-col>
-    <el-col :span="16" id="prj_charts" style="height: 100%;">
-      <el-card class="title-box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
-        <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>-->
-        <label id="prj_title1_1"
-               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
-        <label id="prj_title2_1"
-               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
-        <label id="prj_title3_1"
-               style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
-      </el-card>
-      <!--      <el-col :span="8" style="height: 83%">-->
-      <!--        <PerctangePerc-->
-      <!--            :context="{-->
-      <!--          title:'所有致因阶段占比（可筛选专业）',-->
-      <!--          type:'reason',-->
-      <!--          id:'id_reason',-->
-      <!--        }"></PerctangePerc>-->
-      <!--      </el-col>-->
-      <!--      <el-col :span="8" style="height: 83%">-->
-
-      <!--        <PerctangePerc-->
-      <!--            :context="{-->
-      <!--          title:'所有隐患分布区域占比（可筛选专业）',-->
-      <!--          type:'region',-->
-      <!--          id:'id_region',-->
-      <!--          }"></PerctangePerc>-->
-      <!--      </el-col>-->
-      <!--      <el-col :span="8" style="height: 83%">-->
-      <!--        <PerctangePerc-->
-      <!--            :context="{-->
-      <!--          title:'所有隐患子系统占比（可筛选专业）',-->
-      <!--          type:'system',-->
-      <!--          id:'id_system',-->
-      <!--        }"></PerctangePerc>-->
-
-      <!--      </el-col>-->
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
-      </el-card>
+    <el-col :span="20" style="height: 100%;">
+      <el-row style="height: 10%;">
+        <el-col :span="4" style="height: 100%">
+          <el-card class="box-card " shadow="never"
+                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
+            <el-image
+                style="width: 90%; height: 90%"
+                :src="url"
+                :fit="fit"></el-image>
+          </el-card>
+        </el-col>
+        <el-col :span="18" style="height: 100%;">
+          <el-card class="title-box-card" shadow="never"
+                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
+            <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>-->
+            <label id="prj_title1_1"
+                   style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+            <label id="prj_title2_1"
+                   style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
+            <label id="prj_title3_1"
+                   style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
+          </el-card>
+        </el-col>
+        <el-col :span="2" style="height: 100%;">
+          <el-card class="box-card " shadow="never"
+                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
+            <el-button size="mini" round
+                       style="background-color: transparent; color: #ffffff"
+                       @click="outPrjDataScreen">返回
+            </el-button>
+          </el-card>
+        </el-col>
+      </el-row>
+      <el-row id="prj_charts" style="height: 85%;">
+        <el-col :span="12" style="height: 100%; margin-left: 6%">
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <TopRisk
+                :context="{
+          title:'历史重复出现隐患排名（prj9）',
+          label1:'隐患描述',
+          label2:'出现频率',
+          sign:'prj_risk',
+          option:this.risk_option}"
+                :top_data="this.$store.state.get_project.prj_risk_top"
+            ></TopRisk>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <TopRisk
+                :context="{
+                          title:'隐患次数累计设备名称排名（prj10）',
+                          label1:'隐患描述',
+                          label2:'出现频率',
+                          sign:'prj_other',
+                          option:this.other_option}"
+                :top_data="this.$store.state.get_project.prj_other_top"
+            ></TopRisk>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <Rules
+                :context="{title:'违反法规次数排名（prj14）',
+            top_data:this.prj_rule_name,
+            label1:'违反次数',
+            label2:'法规名称',
+            label3:'条款号',
+        }"></Rules>
+          </el-row>
+        </el-col>
+        <el-col :span="10" style="height: 100%;">
+          <el-row style="height: 32%; margin-bottom: 1%">
+                    <TopName
+            :context="{title:'隐患次数累计设备名称排名（prj12）',
+            top_data:this.prj_device_name,
+            label1:'系统名称',
+            label2:'出现频率',
+        }"></TopName>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+                    <TopName
+            :context="{title:'隐患次数累计组件名称排名（prj13）',
+            top_data:this.prj_unit_name,
+            label1:'系统名称',
+            label2:'出现频率',
+        }"></TopName>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <UnsolvedImageList></UnsolvedImageList>
+          </el-row>
+        </el-col>
+      </el-row>
     </el-col>
     <CheckDataScreen id="check_charts" style="display: none"></CheckDataScreen>
     <el-col :span="4" style="height: 100%;overflow: scroll">
@@ -95,12 +122,7 @@
         <div style="display: none">
           {{ getName }}
         </div>
-        <TopName
-            :context="{title:'隐患次数累计系统名称排名（11）',
-            top_data:this.sys_name,
-            label1:'系统名称',
-            label2:'出现频率',
-        }"></TopName>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -126,43 +148,20 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopRisk
-            :context="{
-                  title:'隐患次数累计设备名称排名（9）',
-                  label1:'隐患描述',
-                  label2:'出现频率',
-                  sign:'check_other',
-                  option:this.other_option}"
-            :top_data="this.$store.state.get_check.check_other_top"
-        ></TopRisk>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
         <!--        <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>-->
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopRisk
-            :context="{
-          title:'历史重复出现隐患排名（prj9）',
-          label1:'隐患描述',
-          label2:'出现频率',
-          sign:'prj_risk',
-          option:this.risk_option}"
-            :top_data="this.$store.state.get_project.prj_risk_top"
-        ></TopRisk>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-                <TopRisk
-                    :context="{
-                          title:'隐患次数累计设备名称排名（prj10）',
-                          label1:'隐患描述',
-                          label2:'出现频率',
-                          sign:'prj_other',
-                          option:this.other_option}"
-                    :top_data="this.$store.state.get_project.prj_other_top"
-                ></TopRisk>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -175,31 +174,15 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopName
-            :context="{title:'隐患次数累计设备名称排名（prj12）',
-            top_data:this.prj_device_name,
-            label1:'系统名称',
-            label2:'出现频率',
-        }"></TopName>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopName
-            :context="{title:'隐患次数累计组件名称排名（prj13）',
-            top_data:this.prj_unit_name,
-            label1:'系统名称',
-            label2:'出现频率',
-        }"></TopName>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <Rules
-            :context="{title:'违反法规次数排名（prj14）',
-            top_data:this.prj_rule_name,
-            label1:'违反次数',
-            label2:'法规名称',
-            label3:'条款号',
-        }"></Rules>
+
       </el-card>
     </el-col>
   </el-row>

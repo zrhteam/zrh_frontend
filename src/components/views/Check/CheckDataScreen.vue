@@ -16,30 +16,30 @@
     <el-col :span="8" style="height: 83%">
       <!--本次检查累计发现隐患数量-->
       <CheckRiskLevel></CheckRiskLevel>
-      <PerctangePerc
-          :context="{
-        title:'所有致因阶段占比（可筛选专业）',
-        type:'reason',
-        id:'id_check_reason',
-       }"></PerctangePerc>
+<!--      <PerctangePerc-->
+<!--          :context="{-->
+<!--        title:'所有致因阶段占比（可筛选专业）',-->
+<!--        type:'reason',-->
+<!--        id:'id_check_reason',-->
+<!--       }"></PerctangePerc>-->
     </el-col>
     <el-col :span="8" style="height: 83%">
       <!--          当前未整改高风险隐患图片-->
       <CheckHighImage></CheckHighImage>
-      <PerctangePerc
-          :context="{
-        title:'所有隐患分布区域占比（可筛选专业）',
-        type:'region',
-        id:'id_check_region',
-        }"></PerctangePerc>
+<!--      <PerctangePerc-->
+<!--          :context="{-->
+<!--        title:'所有隐患分布区域占比（可筛选专业）',-->
+<!--        type:'region',-->
+<!--        id:'id_check_region',-->
+<!--        }"></PerctangePerc>-->
     </el-col>
     <el-col :span="8" style="height: 83%">
-      <PerctangePerc
-          :context="{
-        title:'所有隐患子系统占比（可筛选专业）',
-        type:'system',
-        id:'id_check_system',
-        }"></PerctangePerc>
+<!--      <PerctangePerc-->
+<!--          :context="{-->
+<!--        title:'所有隐患子系统占比（可筛选专业）',-->
+<!--        type:'system',-->
+<!--        id:'id_check_system',-->
+<!--        }"></PerctangePerc>-->
       <!--        <HistoryTopRisk class=""></HistoryTopRisk>-->
       <CheckRiskTop></CheckRiskTop>
     </el-col>

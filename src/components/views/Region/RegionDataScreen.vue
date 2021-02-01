@@ -21,10 +21,10 @@
                    style="background-color: transparent; color: #fff; "
                    @click="outRegionDataScreen">返回
         </el-button>
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #fff; "
-                   @click="addScreen">添加屏幕
-        </el-button>
+<!--        <el-button size="mini" round-->
+<!--                   style="background-color: transparent; color: #fff; "-->
+<!--                   @click="addScreen">添加屏幕-->
+<!--        </el-button>-->
 
       </el-card>
     </el-col>
@@ -38,7 +38,7 @@
                style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
       </el-card>
       <!--      <Region2_2 v-if="flag === num"></Region2_2>-->
-      <div :is="com" style="height: 83%"></div>
+<!--      <div :is="com" style="height: 83%"></div>-->
       <!--            <el-col :span="8" style="height: 100%">-->
       <!--              &lt;!&ndash;          当前未整改高风险隐患图片&ndash;&gt;-->
       <!--              <Region2_2></Region2_2>-->
@@ -51,14 +51,14 @@
       <!--            </el-col>-->
       <!--      <el-card class="box-card " shadow="never"-->
       <!--               style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">-->
-      <el-button size="mini" round
-                 style="background-color: transparent; color: #fff; "
-                 @click="lastScreen">上一张
-      </el-button>
-      <el-button size="mini" round
-                 style="background-color: transparent; color: #fff; "
-                 @click="nextScreen">下一张
-      </el-button>
+<!--      <el-button size="mini" round-->
+<!--                 style="background-color: transparent; color: #fff; "-->
+<!--                 @click="lastScreen">上一张-->
+<!--      </el-button>-->
+<!--      <el-button size="mini" round-->
+<!--                 style="background-color: transparent; color: #fff; "-->
+<!--                 @click="nextScreen">下一张-->
+<!--      </el-button>-->
       <!--      </el-card>-->
     </el-col>
     <!--    <CheckDataScreen></CheckDataScreen>-->

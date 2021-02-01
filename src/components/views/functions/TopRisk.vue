@@ -44,7 +44,7 @@
           :row-style="{height: '20px'}"
           :default-sort="{prop: 'appear_time', order: 'descending'}"
           ref="table"
-          height="300"
+          height="200"
           style="width: 100%; color: #fff">
         <el-table-column
             label="排名" type='index'>
@@ -55,12 +55,12 @@
         </el-table-column>
         <el-table-column
             prop="belong"
-            label="所属">
+            label="所属" min-width="100px">
         </el-table-column>
         <el-table-column
             prop="appear_time"
             suitable="suitable"
-            :label="context.label2" width="100%">
+            :label="context.label2">
         </el-table-column>
       </el-table>
     </div>
