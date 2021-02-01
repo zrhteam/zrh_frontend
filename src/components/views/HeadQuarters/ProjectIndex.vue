@@ -59,7 +59,7 @@ export default {
         },
         xAxis: {type: 'category',
           axisLabel: {
-            interval: 10,
+            interval: 0,
             rotate: 20,
             textStyle: {
               fontSize: 10

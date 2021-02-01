@@ -1,49 +1,72 @@
 <template>
   <el-row class="region_data_screen" style="height: 100%;">
-    <el-col :span="4" style="height: 100%">
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
-        <el-image
-            style="width: 90%; height: 90%"
-            :src="url"
-            :fit="fit"></el-image>
-      </el-card>
-      <!--      <Tree-->
-      <!--          :treeObj="treeObj"-->
-      <!--        ></Tree>-->
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 12%; margin: 0px 5px 5px 5px">
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #fff; "
-                   @click="outHeadDataScreen">返回
-        </el-button>
-
-
-      </el-card>
+    <el-col :span="20" style="height: 100%;">
+      <el-row style="height: 10%;">
+        <el-col :span="4" style="height: 100%">
+          <el-card class="box-card " shadow="never"
+                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
+            <el-image
+                style="width: 90%; height: 90%"
+                :src="url"
+                :fit="fit"></el-image>
+          </el-card>
+        </el-col>
+        <el-col :span="18" style="height: 100%;">
+          <el-card class="title-box-card" shadow="never"
+                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
+            <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>-->
+            <label
+                style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+          </el-card>
+        </el-col>
+        <el-col :span="2" style="height: 100%;">
+          <el-card class="box-card " shadow="never"
+                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
+            <el-button size="mini" round
+                       style="background-color: transparent; color: #ffffff"
+                       @click="outHeadDataScreen">返回
+            </el-button>
+          </el-card>
+        </el-col>
+      </el-row>
+      <el-row style="height: 85%;">
+        <el-col :span="8" style="height: 45%; ">
+          <Ratio
+              :context="{
+          title:'各专业隐患数量占比（9）',
+          id: 'id_head_major'
+        }"></Ratio>
+        </el-col>
+        <el-col :span="8" style="height: 45%; ">
+          <Ratio
+              :context="{
+          title:'致因阶段隐患占比（10）',
+          id: 'id_head_reason'
+        }"></Ratio>
+        </el-col>
+        <el-col :span="8" style="height: 45%; width: 32%">
+          <Ratio
+              :context="{
+          title:'分布区域隐患占比（11）',
+          id: 'id_head_region'
+        }"></Ratio>
+        </el-col>
+        <el-col :span="12" style="height: 45%; margin-top: 4%">
+          <BarRank
+            :context="{
+          title:'根据检查次数的区域排名（8）',
+          id: 'id_head_rank1'}"
+        ></BarRank>
+        </el-col>
+        <el-col :span="12" style="height: 45%; margin-top: 4%">
+          <BarRank
+            :context="{
+          title:'根据项目数量的区域排名（12）',
+          id: 'id_head_rank2'}"
+        ></BarRank>
+        </el-col>
+      </el-row>
     </el-col>
-    <el-col :span="16" style="height: 100%;">
-      <el-card class="title-box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px; top: 1%">
-        <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>-->
-        <label id="head_title1_1"
-               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
-      </el-card>
-      <el-col :span="8" style="height: 42%">
-        <!--          当前未整改高风险隐患图片-->
-        <HighRiskImages></HighRiskImages>
-      </el-col>
-      <el-col :span="24" style="height: 42%">
-        <ProjectIndex></ProjectIndex>
-      </el-col>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 6%; margin: 0px 5px 5px 5px">
-        <label>...</label>
-      </el-card>
-    </el-col>
-    <!--    <CheckDataScreen></CheckDataScreen>-->
     <el-col :span="4" style="height: 100%; overflow: scroll">
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
@@ -51,31 +74,15 @@
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopRisk
-            :context="{
-          title:'历史重复出现隐患排名（5）',
-          label1:'隐患描述',
-          label2:'出现频率',
-          sign:'head_risk',
-          option:this.risk_option}"
-            :top_data="this.$store.state.get_headquarter.risk_number_top"
-        ></TopRisk>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <RiskLevelYear :context="{title:'总部累计年隐患数量（6）', id:'head_level_year'}"></RiskLevelYear>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <TopRisk
-            :context="{
-                  title:'历史重复出现隐患排名（7）',
-                  label1:'隐患描述',
-                  label2:'出现频率',
-                  sign:'head_other',
-                  option:this.other_option}"
-            :top_data="this.$store.state.get_headquarter.other_number_top"
-        ></TopRisk>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
@@ -88,49 +95,29 @@
         <!--            label1:'项目名称',-->
         <!--            label2:'检查次数',-->
         <!--        }"></TopName>-->
-        <BarRank
-            :context="{
-          title:'根据检查次数的区域排名（8）',
-          id: 'id_head_rank1'}"
-        ></BarRank>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <Ratio
-            :context="{
-          title:'各专业隐患数量占比（9）',
-          id: 'id_head_major'
-        }"></Ratio>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <Ratio
-            :context="{
-          title:'致因阶段隐患占比（10）',
-          id: 'id_head_reason'
-        }"></Ratio>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <Ratio
-            :context="{
-          title:'分布区域隐患占比（11）',
-          id: 'id_head_region'
-        }"></Ratio>
+
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-<!--        <TopName-->
-<!--            :context="{title:'根据项目数量的区域排名（12）',-->
-<!--            top_data:this.rank_by_prj,-->
-<!--            label1:'项目名称',-->
-<!--            label2:'检查次数',-->
-<!--        }"></TopName>-->
-        <BarRank
-            :context="{
-          title:'根据项目数量的区域排名（12）',
-          id: 'id_head_rank2'}"
-        ></BarRank>
+        <!--        <TopName-->
+        <!--            :context="{title:'根据项目数量的区域排名（12）',-->
+        <!--            top_data:this.rank_by_prj,-->
+        <!--            label1:'项目名称',-->
+        <!--            label2:'检查次数',-->
+        <!--        }"></TopName>-->
+
       </el-card>
     </el-col>
   </el-row>
