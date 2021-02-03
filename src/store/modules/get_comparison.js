@@ -2,24 +2,35 @@ import dataService from '@/service/dataService'
 
 //initial state
 const state = {
-    // 向后端发送的默认参数
+    // 向后端发送的默认参数 level, object1, object2
     params: {},
+    object1: '',
+    object2: '',
     // 两个对象之间检查次数的对比
     by_check: {},
     // 两个对象之间项目数量的对比
     by_prj: {},
     // 两个对象之间不同专业隐患数量的对比
     by_major: {},
+
+    //参数 level, object1, object2， major
+    param2: {},
     // 两个对象之间在同一专业下不同系统的隐患数量的对比
     by_sys: {},
+
+    //参数 level, object1, object2， system
+    param3: {},
     // 两个对象之间不同设备隐患数量的对比
     by_device: {},
+
+    //参数 level, object1, object2, device
+    param4: {},
     // 两个对象之间不同组件隐患数量的对比
     by_unit: {},
     // 两个对象之间各风险等级隐患数量的对比
     by_risk_level: {},
     // 两个对象之间不同分布区域隐患数量的对比
-    by_area: {},
+    by_area: [],
     // 两个对象之间不同致因阶段隐患数量的对比
     by_stage: {},
     // 两个对象之间出现次数前top的隐患的对比
@@ -100,6 +111,7 @@ const getters = {
 
 //actions
 const actions = {
+
     // 两个对象之间检查次数的对比
     getCheckNumber(context) {
         dataService.getCheckNumber(state.params, function (response) {
@@ -120,19 +132,19 @@ const actions = {
     },
     // 两个对象之间在同一专业下不同系统的隐患数量的对比
     getSystemRiskNumber(context) {
-        dataService.getMajorRiskNumber(state.params, function (response) {
+        dataService.getMajorRiskNumber(state.param2, function (response) {
             context.commit('changeSystemRiskNumber', response)
         })
     },
     // 两个对象之间不同设备隐患数量的对比
     getDeviceRiskNumber(context) {
-        dataService.getDeviceRiskNumber(state.params, function (response) {
+        dataService.getDeviceRiskNumber(state.param3, function (response) {
             context.commit('changeDeviceRiskNumber', response)
         })
     },
     // 两个对象之间不同组件隐患数量的对比
     getUnitRiskNumber(context) {
-        dataService.getUnitRiskNumber(state.params, function (response) {
+        dataService.getUnitRiskNumber(state.param4, function (response) {
             context.commit('changeUnitRiskNumber', response)
         })
     },
@@ -188,6 +200,16 @@ const actions = {
 
 //mutations
 const mutations = {
+    changeParams(state, data) {
+        state.params = data.params
+    },
+    changeObject1(state, data) {
+        state.object1 = data.object1
+    },
+    changeObject2(state, data) {
+        state.object2 = data.object2
+    },
+
     // 两个对象之间检查次数的对比
     changeCheckNumber(state, data) {
         if (data.code === 10000) {
@@ -201,7 +223,7 @@ const mutations = {
     changeProjectNumber(state, data) {
         if (data.code === 10000) {
             // console.log("project_index", data.data)
-            state.by_project = data.data
+            state.by_prj = data.data
         } else {
             alert("出错了")
         }
@@ -215,6 +237,11 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //参数 level, object1, object2， major
+    changeParam2(state, data) {
+        state.param2 = data.param2
+    },
     // 两个对象之间在同一专业下不同系统的隐患数量的对比
     changeSystemRiskNumber(state, data) {
         if (data.code === 10000) {
@@ -224,6 +251,11 @@ const mutations = {
             alert("出错了")
         }
     },
+
+    //参数 level, object1, object2， system
+    changeParam3(state, data) {
+        state.param3 = data.param3
+    },
     // 两个对象之间不同设备隐患数量的对比
     changeDeviceRiskNumber(state, data) {
         if (data.code === 10000) {
@@ -232,6 +264,11 @@ const mutations = {
         } else {
             alert("出错了")
         }
+    },
+
+    //参数 level, object1, object2， device
+    changeParam4(state, data) {
+        state.param4 = data.param4
     },
     // 两个对象之间不同组件隐患数量的对比
     changeUnitRiskNumber(state, data) {

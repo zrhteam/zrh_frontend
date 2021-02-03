@@ -59,7 +59,7 @@ export default {
   },
   watch: {
     filterText(val) {
-      this.$refs.tree.filter(val);
+      this.$refs.modelTree.filter(val);
     }
   },
   methods: {
@@ -78,6 +78,7 @@ export default {
         let parent1 = {
           id: 0,
           label: '',
+          level:1,
           children: []
         };
         parent1['id'] = count++
@@ -90,6 +91,7 @@ export default {
           let parent2 = {
             id: 0,
             label: '',
+            level: 2,
             pos: [],
             children: []
           };
@@ -103,6 +105,7 @@ export default {
             let child1 = {
               id: 0,
               label: '',
+              level: 3,
               pos: [],
               children: []
             };
@@ -112,7 +115,8 @@ export default {
               for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
                 let child2 = {
                   id: 0,
-                  label: ''
+                  label: '',
+                  level: 4
                 };
                 child2['id'] = count++
                 child2['label'] = m

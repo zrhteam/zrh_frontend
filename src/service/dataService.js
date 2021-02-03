@@ -1076,7 +1076,7 @@ function getSystemRiskNumber(param, callback) {
  * Return: 返回两个对象在同一系统中不同设备对应的隐患数量
  */
 function getDeviceRiskNumber(param, callback) {
-    const url = `${dataServerUrl}/analyze/analysis_device_number`
+    const url = `${dataServerUrl}/analyze/analysis_equipment_number`
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -1093,7 +1093,7 @@ function getDeviceRiskNumber(param, callback) {
  * Return: 返回两个对象在同一设备下不同组件对应的隐患数量
  */
 function getUnitRiskNumber(param, callback) {
-    const url = `${dataServerUrl}/analyze/analysis_unit_number`
+    const url = `${dataServerUrl}/analyze/analysis_module_number`
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -1195,7 +1195,7 @@ function getLawTop(param, callback) {
  * Return: 返回两个对象出现隐患次数前top的组件名
  */
 function getUnitNumberTop(param, callback) {
-    const url = `${dataServerUrl}/analyze/analysis_unit_top`
+    const url = `${dataServerUrl}/analyze/analysis_module_top`
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -1212,7 +1212,7 @@ function getUnitNumberTop(param, callback) {
  * Return: 返回两个对象出现隐患次数前top的设备名
  */
 function getDeviceNumberTop(param, callback) {
-    const url = `${dataServerUrl}/analyze/analysis_device_top`
+    const url = `${dataServerUrl}/analyze/analysis_equipment_top`
     axios.post(url, param)
         .then(response => {
             callback(response.data)
