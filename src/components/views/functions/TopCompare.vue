@@ -32,14 +32,14 @@
     <div id='id_risk_o1' style="height: 50%; width: 100%;" v-if="context.id1==='id_risk_o1'"></div>
     <div id='id_risk_o2' style="height: 40%; width: 100%;" v-if="context.id2==='id_risk_o2'"></div>
 
-    <div id='id_module_o1' style="height: 50%; width: 100%;" v-if="context.id1==='id_module_o1'"></div>
-    <div id='id_module_o2' style="height: 40%; width: 100%;" v-if="context.id2==='id_module_o2'"></div>
+    <div id='id_module_top1' style="height: 50%; width: 100%;" v-if="context.id1==='id_module_top1'"></div>
+    <div id='id_module_top2' style="height: 40%; width: 100%;" v-if="context.id2==='id_module_top2'"></div>
 
-    <div id='id_equip_o1' style="height: 50%; width: 100%;" v-if="context.id1==='id_equip_o1'"></div>
-    <div id='id_equip_o2' style="height: 40%; width: 100%;" v-if="context.id2==='id_equip_o2'"></div>
+    <div id='id_equip_top1' style="height: 50%; width: 100%;" v-if="context.id1==='id_equip_top1'"></div>
+    <div id='id_equip_top2' style="height: 40%; width: 100%;" v-if="context.id2==='id_equip_top2'"></div>
 
-    <div id='id_sys_o1' style="height: 50%; width: 100%;" v-if="context.id1==='id_sys_o1'"></div>
-    <div id='id_sys_o2' style="height: 40%; width: 100%;" v-if="context.id2==='id_sys_o2'"></div>
+    <div id='id_system_top1' style="height: 50%; width: 100%;" v-if="context.id1==='id_system_top1'"></div>
+    <div id='id_system_top2' style="height: 40%; width: 100%;" v-if="context.id2==='id_system_top2'"></div>
 
   </el-card>
 </template>
@@ -122,11 +122,11 @@ export default {
         data = this.$store.state.get_comparison.by_stage
       } else if (this.context.id1 === 'id_risk_o1') {
         data = this.$store.state.get_comparison.by_risk_top
-      } else if (this.context.id1 === 'id_module_o1') {
+      } else if (this.context.id1 === 'id_module_top1') {
         data = this.$store.state.get_comparison.by_unit_top
-      } else if (this.context.id1 === 'id_equip_o1') {
+      } else if (this.context.id1 === 'id_equip_top1') {
         data = this.$store.state.get_comparison.by_device_top
-      } else if (this.context.id1 === 'id_sys_o1') {
+      } else if (this.context.id1 === 'id_system_top1') {
         data = this.$store.state.get_comparison.by_sys_top
       }
       let count = 0;

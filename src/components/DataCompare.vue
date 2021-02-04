@@ -46,7 +46,7 @@
         </el-col>
       </el-row>
     </el-col>
-    <el-col :span="16" style="height: 100%">
+    <el-col :span="16" style="height: 100%; flex-direction: row; overflow-x: scroll">
       <el-col :span="24" class="level4" style="height: 15%; vertical-align: middle; padding-top: %" v-if="isShow">
         <!--        <div class="level4" style="; padding-left: 10px">-->
         <p>object1:{{ this.obj1 }}</p>
@@ -108,8 +108,8 @@
             v-if="isShow"
             :context="{
                     title:'隐患数量前top组件对比',
-                    id1:'id_module_o1',
-                    id2:'id_module_o2'}"
+                    id1:'id_module_top1',
+                    id2:'id_module_top2'}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -117,8 +117,8 @@
             v-if="isShow"
             :context="{
                     title:'隐患数量前top设备对比',
-                    id1:'id_equip_o1',
-                    id2:'id_equip_o2'}"
+                    id1:'id_equip_top1',
+                    id2:'id_equip_top2'}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -126,8 +126,8 @@
             v-if="isShow"
             :context="{
                     title:'隐患数量前top系统对比',
-                    id1:'id_sys_o1',
-                    id2:'id_sys_o2'}"
+                    id1:'id_system_top1',
+                    id2:'id_system_top2'}"
         ></TopCompare>
       </el-col>
       <el-col :span="24" style="height: 25%">
