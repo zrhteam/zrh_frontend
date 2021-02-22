@@ -13,7 +13,7 @@
     </div>
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>{{ context.title }}</span>
-      <el-select v-model="top_value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterCondition">
+      <el-select v-model="top_value" placeholder="请选择" size="mini" style="max-width: 8em;">
         <el-option
             v-for="item in top_option"
             :key="item.value"
@@ -24,22 +24,22 @@
       </el-select>
     </div>
     <div id='id_area_o1' style="height: 50%; width: 100%;" v-if="context.id1==='id_area_o1'"></div>
-    <div id='id_area_o2' style="height: 40%; width: 100%;" v-if="context.id2==='id_area_o2'"></div>
+    <div id='id_area_o2' style="height: 50%; width: 100%;" v-if="context.id2==='id_area_o2'"></div>
 
     <div id='id_stage_o1' style="height: 50%; width: 100%;" v-if="context.id1==='id_stage_o1'"></div>
-    <div id='id_stage_o2' style="height: 40%; width: 100%;" v-if="context.id2==='id_stage_o2'"></div>
+    <div id='id_stage_o2' style="height: 50%; width: 100%;" v-if="context.id2==='id_stage_o2'"></div>
 
     <div id='id_risk_o1' style="height: 50%; width: 100%;" v-if="context.id1==='id_risk_o1'"></div>
-    <div id='id_risk_o2' style="height: 40%; width: 100%;" v-if="context.id2==='id_risk_o2'"></div>
+    <div id='id_risk_o2' style="height: 50%; width: 100%;" v-if="context.id2==='id_risk_o2'"></div>
 
     <div id='id_module_top1' style="height: 50%; width: 100%;" v-if="context.id1==='id_module_top1'"></div>
-    <div id='id_module_top2' style="height: 40%; width: 100%;" v-if="context.id2==='id_module_top2'"></div>
+    <div id='id_module_top2' style="height: 50%; width: 100%;" v-if="context.id2==='id_module_top2'"></div>
 
     <div id='id_equip_top1' style="height: 50%; width: 100%;" v-if="context.id1==='id_equip_top1'"></div>
-    <div id='id_equip_top2' style="height: 40%; width: 100%;" v-if="context.id2==='id_equip_top2'"></div>
+    <div id='id_equip_top2' style="height: 50%; width: 100%;" v-if="context.id2==='id_equip_top2'"></div>
 
     <div id='id_system_top1' style="height: 50%; width: 100%;" v-if="context.id1==='id_system_top1'"></div>
-    <div id='id_system_top2' style="height: 40%; width: 100%;" v-if="context.id2==='id_system_top2'"></div>
+    <div id='id_system_top2' style="height: 50%; width: 100%;" v-if="context.id2==='id_system_top2'"></div>
 
   </el-card>
 </template>

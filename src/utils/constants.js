@@ -29,10 +29,16 @@ export const bar_option = {
             }
         },
         axisLabel: {
+            margin:2
             // textStyle: {
             //   fontSize: 10
             // }
-        }
+        },
+    },
+    grid: {
+        left: 35,
+        y: '10%',
+        y2: '50%'
     },
     series: [
         {
@@ -72,8 +78,10 @@ export const bar_option = {
 export const bar_option2 = {
     legend: {
         textStyle: {
-            color: '#ffffff'
-        }
+            color: '#ffffff',
+            fontSize: 12
+        },
+        left: 6
     },
     tooltip: {},
     dataset: {

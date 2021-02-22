@@ -6,8 +6,8 @@
     <div style="display: none">
       {{ getData }}
     </div>
-    <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
-      <span class="level4">{{ context.title }}</span>
+    <div class="level4" style="padding-top: 15px; padding-bottom: 15px;">
+      <span>{{ context.title }}</span>
     </div>
     <div id="id_by_check" style="height: 80%; width: 100%" v-if="context.id==='id_by_check'">
     </div>
@@ -41,7 +41,11 @@ export default {
           },
           legend: {
             orient: 'vertical',
-            left: '14'
+            left: '6',
+            textStyle: {
+              color: '#ffffff',
+              fontSize: 12
+            }
           },
           series: [
             {
@@ -56,7 +60,7 @@ export default {
                 label: {
                   show: true,
                   fontSize: '14',
-                  fontWeight: 'bold'
+                  color: '#ffffff'
                 }
               },
               itemStyle: {

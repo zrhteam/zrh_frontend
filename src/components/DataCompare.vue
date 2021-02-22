@@ -130,7 +130,7 @@
                     id2:'id_system_top2'}"
         ></TopCompare>
       </el-col>
-      <el-col :span="24" style="height: 25%">
+      <el-col :span="24" style="height: 50%">
         <DrillDown
             v-if="isShow"
             :context="{
@@ -188,8 +188,8 @@ export default {
       if (level > this.radio) {
         this.$message.error('您当前选择的层级与粒度不对应！');
       } else {
-        console.log('c', c)
-        console.log('d', d)
+        // console.log('c', c)
+        // console.log('d', d)
         this.obj2 = ''
         for (let i in d.checkedNodes) {
           if (d.checkedNodes[i].level === parseInt(this.radio)) {

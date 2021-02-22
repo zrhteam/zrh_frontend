@@ -11,21 +11,21 @@
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>{{ context.title }}</span>
     </div>
-    <el-col :span="6" style="height: 80%">
-      <div id='id_major_o1' style="height: 40%;"></div>
-      <div id='id_major_o2' style="height: 40%;"></div>
+    <el-col :span="6" style="height: 100%">
+      <div id='id_major_o1' style="height: 50%;"></div>
+      <div id='id_major_o2' style="height: 50%;"></div>
     </el-col>
-    <el-col :span="6" style="height: 80%">
-      <div id='id_sys_o1' style="height: 40%;"></div>
-      <div id='id_sys_o2' style="height: 40%;"></div>
+    <el-col :span="6" style="height: 100%">
+      <div id='id_sys_o1' style="height: 50%;"></div>
+      <div id='id_sys_o2' style="height: 50%;"></div>
     </el-col>
-    <el-col :span="6" style="height: 80%">
-      <div id='id_equip_o1' style="height: 40%;"></div>
-      <div id='id_equip_o2' style="height: 40%;"></div>
+    <el-col :span="6" style="height: 100%">
+      <div id='id_equip_o1' style="height: 50%;"></div>
+      <div id='id_equip_o2' style="height: 50%;"></div>
     </el-col>
-    <el-col :span="6" style="height: 80%">
-      <div id='id_module_o1' style="height: 40%;"></div>
-      <div id='id_module_o2' style="height: 40%;"></div>
+    <el-col :span="6" style="height: 100%">
+      <div id='id_module_o1' style="height: 50%;"></div>
+      <div id='id_module_o2' style="height: 50%;"></div>
     </el-col>
     <!--    <div id='region_level_year' style="height: 80%; width: 100%;" v-if="context.id==='region_level_year'"></div>-->
     <!--    <div id='head_level_year' style="height: 80%; width: 100%;" v-if="context.id==='head_level_year'"></div>-->
