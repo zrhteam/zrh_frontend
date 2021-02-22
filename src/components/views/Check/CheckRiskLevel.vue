@@ -99,6 +99,7 @@ export default {
     drawBarChart() {
       let myChart = this.$echarts.init(document.getElementById(this.context.id))
       let arr = this.getRiskLevelData
+      bar_option["grid"]["y2"] = "20%"
       bar_option["dataset"]["source"] = arr
       myChart.setOption(bar_option);
       myChart.resize();

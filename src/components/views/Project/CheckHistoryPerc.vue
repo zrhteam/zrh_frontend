@@ -56,7 +56,7 @@ export default {
         series: [
           {
             type: 'pie',
-            radius: '60%',
+            radius: '50%',
             center: ['50%', '50%'],
             label: {
               normal: {

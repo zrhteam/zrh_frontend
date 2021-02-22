@@ -85,10 +85,10 @@ export default {
         a = a[attr];
         b = b[attr];
         if (a < b) {
-          return rev * -1;
+          return rev * 1;
         }
         if (a > b) {
-          return rev * 1;
+          return rev * -1;
         }
         return 0;
       }
@@ -223,7 +223,6 @@ export default {
           }
         }
       }
-      // arr.sort(this.sortNumber('count', true))
       if ((this.context.id == 'id_check_system') || (this.context.id == 'id_check_reason') || (this.context.id == 'id_check_region')) {
         // if (this.value === '全部专业') {
         let major = []
@@ -286,7 +285,24 @@ export default {
           this.option = this.$store.state.get_project.all_majors
         }
       }
-      return arr
+      arr.sort(this.sortNumber('value', true))
+      console.log("aaaaaa", arr)
+      let new_arr = []
+      let obj = {
+          value: 0,
+          name: '其它'
+        }
+      for(let i = 0; i < arr.length; i++) {
+        if(i < 5) {
+          new_arr.push(arr[i])
+        }else {
+          obj.value += arr[i].value
+        }
+      }
+      if(obj.value > 0) {
+        new_arr.push(obj)
+      }
+      return new_arr
     },
   },
   updated() {

@@ -29,7 +29,7 @@ export const bar_option = {
             }
         },
         axisLabel: {
-            margin:2
+            margin: 2
             // textStyle: {
             //   fontSize: 10
             // }
@@ -86,6 +86,11 @@ export const bar_option2 = {
     tooltip: {},
     dataset: {
         source: []
+    },
+    grid: {
+        left: 35,
+        y: '10%',
+        y2: '20%'
     },
     // Declare several bar series, each will be mapped
     // to a column of dataset.source by default.
@@ -175,11 +180,27 @@ export const pie_option = {
             type: 'pie',
             radius: '60%',
             center: ['50%', '50%'],
+            // minAngle: 5, //最小的扇区角度
+            // startAngle: 45, //起始角度
             label: {
                 normal: {
                     show: true,
                     color: '#fff',
-                    formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
+                    // formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
+                    formatter(v) {
+                        let text = v.name + ':' + v.value
+                        if (text.length < 6) {
+                            return text;
+                        } else if (text.length > 6 && text.length <= 12) {
+                            return text = `${text.slice(0, 6)}\n${text.slice(6)}`
+                        } else if (text.length > 12 && text.length <= 18) {
+                            return text = `${text.slice(0, 6)}\n${text.slice(6, 12)}\n${text.slice(12)}`
+                        } else if (text.length > 18 && text.length <= 24) {
+                            return text = `${text.slice(0, 6)}\n${text.slice(6, 12)}\n${text.slice(12, 18)}\n${text.slice(18)}`
+                        } else if (text.length > 24) {
+                            return text = `${text.slice(0, 6)}\n${text.slice(6, 12)}\n${text.slice(12, 18)}\n${text.slice(8, 24)}\n${text.slice(24)}`
+                        }
+                    },
                 }
             },
             data: [],
