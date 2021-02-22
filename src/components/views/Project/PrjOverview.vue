@@ -262,7 +262,6 @@ export default {
         obj['appear_time'] = data[i].appear_time
         this.prj_sys_name.push(obj)
       }
-      console.log("看",data)
     }
   },
   data() {
@@ -308,7 +307,7 @@ export default {
     };
   },
   created() {
-    console.log('grant', this.$store.state.get_login.grant_data)
+    // console.log('grant', this.$store.state.get_login.grant_data)
     //得到树形控件的内容 还负责封装了地理位置信息
     this.treeObj = this.$store.state.get_login.grant_data.data.value
   }

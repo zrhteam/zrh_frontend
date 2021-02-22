@@ -18,7 +18,7 @@
           height="300"
           style="width: 100%; color: #fff">
         <el-table-column
-            label="排名" type='index'>
+             type='index'>
         </el-table-column>
         <el-table-column
             property="name"

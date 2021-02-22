@@ -12,7 +12,6 @@
           :data="context.top_data"
           :row-style="{height: '20px'}"
           :default-sort="{prop: 'appear_time', order: 'descending'}"
-          @row-click="rowClick"
           ref="table"
           height="300"
           style="width: 100%; color: #fff">
@@ -29,6 +28,17 @@
             prop="clause"
             suitable="suitable"
             :label="context.label3">
+          <template slot-scope="scope">
+            <el-popover trigger="hover" placement="top">
+              <p style="color: #ffffff">条款内容: {{ scope.row.clause_contact }}</p>
+              <div slot="reference" class="name-wrapper">
+                <el-tag
+                  effect="plain"
+                  color="transparent"
+                >{{ scope.row.clause }}</el-tag>
+              </div>
+            </el-popover>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -39,15 +49,7 @@
 export default {
   name: "Rules",
   props: ['context'],
-  methods: {
-    rowClick(row, column) {
-      this.$notify({
-        title: '条款内容',
-        message: row.clause_contact,
-        offset: 200
-      });
-    }
-  }, mounted() {
+  mounted() {
     // 拿到表格挂载后的真实DOM
     const table = this.$refs.table
     // 拿到表格中承载数据的div元素
