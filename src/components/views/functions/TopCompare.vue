@@ -108,7 +108,7 @@ export default {
       )
     },
     filterTop() {
-      alert(this.top_value)
+      // alert(this.top_value)
     },
   },
   computed: {

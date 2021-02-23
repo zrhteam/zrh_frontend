@@ -57,12 +57,8 @@ export default {
   computed: {
     getPrjImage() {
       let data = this.$store.state.get_project.prj_image;
-      // console.log(this.$store.state.get_project.prj_image)
-      console.log("imagedata", data)
+      // console.log("imagedata", data)
       // this.img_list.push(data);
-      //
-      // console.log(this.img_list)
-
       for (let i in data) {
         let obj = {
           url: ''
@@ -70,7 +66,6 @@ export default {
         obj.url = 'http://' + data[i]
         this.img_list.push(obj)
       }
-      console.log(this.img_list)
     },
   },
   methods: {
@@ -79,7 +74,7 @@ export default {
       var obj = {};
       //使用find()方法在下拉数据中根据value绑定的数据查找对象
       let _this = this
-      obj = this.context.option.find(function (item) {
+      obj = this.top_option.find(function (item) {
         return item.value === _this.value;
       })
       param5.append('project_name', this.$store.state.get_project.prj_name);

@@ -267,9 +267,8 @@ export default {
         obj = this.context.option.find(function (item) {
           return item.value === _this.value;
         })
-
         param3.append('project_name', this.$store.state.get_project.prj_name);
-        param3.append('condition', this.key);
+        param3.append('condition', obj.key);
         param3.append('top', this.top_value);
         this.$store.commit('get_project/changeParam3', {params: param3})
         this.$store.dispatch('get_project/getInitProjectRiskTop')
@@ -302,7 +301,7 @@ export default {
         })
 
         param3.append('region_name', this.$store.state.get_region.region_name);
-        param3.append('condition', this.key);
+        param3.append('condition', obj.key);
         param3.append('top', this.top_value);
         this.$store.commit('get_region/changeParam3', {params: param3})
         this.$store.dispatch('get_region/getInitRegionNumberTop')
@@ -335,7 +334,7 @@ export default {
         })
 
         param3.append('headquarter_name', this.$store.state.get_headquarter.head_name);
-        param3.append('condition', this.key);
+        param3.append('condition', obj.key);
         param3.append('top', this.top_value);
         this.$store.commit('get_headquarter/changeParam3', {params: param3})
         this.$store.dispatch('get_headquarter/getInitNumberTop')
