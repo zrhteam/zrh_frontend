@@ -286,7 +286,6 @@ export default {
         }
       }
       arr.sort(this.sortNumber('value', true))
-      console.log("aaaaaa", arr)
       let new_arr = []
       let obj = {
           value: 0,

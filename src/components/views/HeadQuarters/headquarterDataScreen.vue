@@ -16,7 +16,7 @@
                    style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
             <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>-->
             <label
-                style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+                style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title1 }}</label>
           </el-card>
         </el-col>
         <el-col :span="2" style="height: 100%;">

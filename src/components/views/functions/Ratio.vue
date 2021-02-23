@@ -93,6 +93,25 @@ export default {
       this.$store.commit('get_region/changeParam2', {params: param2})
       //显示该区域不同专业下各系统隐患占比情况
       this.$store.dispatch('get_region/getRegionSystemRatio')
+    },
+    sortNumber(attr, rev) {
+      if (rev == undefined) {
+        rev = 1;
+      } else {
+        rev = (rev) ? 1 : -1;
+      }
+
+      return function (a, b) {
+        a = a[attr];
+        b = b[attr];
+        if (a < b) {
+          return rev * 1;
+        }
+        if (a > b) {
+          return rev * -1;
+        }
+        return 0;
+      }
     }
   },
   computed: {
@@ -206,7 +225,23 @@ export default {
         }
         // console.log("看一下", data)
       }
-      return arr
+      arr.sort(this.sortNumber('value', true))
+      let new_arr = []
+      let obj = {
+          value: 0,
+          name: '其它'
+        }
+      for(let i = 0; i < arr.length; i++) {
+        if(i < 5) {
+          new_arr.push(arr[i])
+        }else {
+          obj.value += arr[i].value
+        }
+      }
+      if(obj.value > 0) {
+        new_arr.push(obj)
+      }
+      return new_arr
     },
   },
   updated() {

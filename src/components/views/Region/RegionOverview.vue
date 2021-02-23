@@ -16,8 +16,8 @@
       <el-col :span="20" style="height: 100%">
         <el-card class="title-box-card " shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label id="region_title1" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{title1}}</label>
-          <label id="region_title2" style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{title2}}</label>
+          <label id="region_title1" style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{title1}}</label>
+          <label id="region_title2" style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{title2}}</label>
         </el-card>
       </el-col>
     </el-row>

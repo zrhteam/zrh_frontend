@@ -17,11 +17,11 @@
         <el-card class="title-box-card " shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
           <label id="prj_title1"
-                 style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title1 }}</label>
           <label id="prj_title2"
-                 style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
+                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title2 }}</label>
           <label id="prj_title3"
-                 style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
+                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
         </el-card>
       </el-col>
     </el-row>
@@ -45,7 +45,7 @@
         </el-card>
       </el-col>
       <!--      第二列放pie、bar、table-->
-      <el-col id="prj_subpart" :span="20" style="height: 100%">
+      <el-col id="prj_subpart" :span="20" style="height: 100%" v-show="show1">
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
           <el-col :span="12" style="height: 100%">
@@ -130,7 +130,7 @@
         </el-card>
       </el-col>
       <!--      <PrjOverviewPart></PrjOverviewPart>-->
-      <CheckOverview id="check_part" ></CheckOverview>
+      <CheckOverview id="check_part" v-show="!show1"></CheckOverview>
     </el-row>
     <!--    <RegionOverview id="region_part" style="display: none"></RegionOverview>-->
   </el-row>
@@ -303,7 +303,8 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
-      prj_sys_name: []
+      prj_sys_name: [],
+      show1: false
     };
   },
   created() {

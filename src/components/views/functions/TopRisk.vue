@@ -236,7 +236,7 @@ export default {
         })
 
         param3.append('check_code', this.$store.state.get_check.check_code);
-        param3.append('condition', this.key);
+        param3.append('condition', obj.key);
         param3.append('top', this.top_value);
         this.$store.commit('get_check/changeParam3', {params: param3})
         this.$store.dispatch('get_check/getCheckRiskTop')

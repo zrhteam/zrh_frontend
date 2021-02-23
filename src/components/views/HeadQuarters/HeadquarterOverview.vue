@@ -16,7 +16,7 @@
           <el-card class="title-box-card " shadow="never"
                    style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
             <label id="head_title1"
-                   style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+                   style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title1 }}</label>
           </el-card>
         </el-col>
       </el-row>
@@ -40,7 +40,8 @@
         <!--地图+高风险隐患数量排名-->
         <HighProjectRisk></HighProjectRisk>
         <!--      </el-col>-->
-        <el-col :span="10" id="head_part" style="height: 100%">
+<!--        <el-col :span="10" id="head_part" style="height: 100%">-->
+        <el-col :span="10" style="height: 100%">
           <el-row style="height: 100%">
             <!--            <label>chart</label>-->
             <!--          <el-row style="height: 42%">-->

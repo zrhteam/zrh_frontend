@@ -17,9 +17,9 @@
                style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px; top: 1%">
         <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95% ">中瑞恒可视化系统</label>-->
           <label id="region_title1_1"
-               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>
+               style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title1 }}</label>
           <label id="region_title2_1"
-               style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>
+               style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title2 }}</label>
         </el-card>
       <!--      </el-card>-->
       </el-col>
