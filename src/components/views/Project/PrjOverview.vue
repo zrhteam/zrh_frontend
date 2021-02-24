@@ -4,24 +4,17 @@
   <el-row style="height: 100%;">
     <PrjDataScreen id="prj_small" style="display: none"></PrjDataScreen>
     <el-row id="large1" class="" style="height: 10%;">
-      <el-col :span="4" style="height: 100%">
-        <el-card class="title-box-card" shadow="never"
-                 style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <el-image
-              style="width: 90%; height: 90%"
-              :src="url"
-              :fit="fit"></el-image>
-        </el-card>
-      </el-col>
-      <el-col :span="20" style="height: 100%">
+      <el-col :span="24" style="height: 100%">
         <el-card class="title-box-card " shadow="never"
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label id="prj_title1"
-                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title1 }}</label>
-          <label id="prj_title2"
-                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title2 }}</label>
-          <label id="prj_title3"
-                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.5em; height: 40% ">{{ title3 }}</label>
+          <h4>
+            <span id="prj_title1"
+                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title1 }}</span>
+            <span id="prj_title2"
+                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title2 }}</span>
+            <span id="prj_title3"
+                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title3 }}</span>
+          </h4>
         </el-card>
       </el-col>
     </el-row>
@@ -45,7 +38,7 @@
         </el-card>
       </el-col>
       <!--      第二列放pie、bar、table-->
-      <el-col id="prj_subpart" :span="20" style="height: 100%" v-show="show1">
+      <el-col id="prj_subpart" :span="20" style="height: 100%">
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
           <el-col :span="12" style="height: 100%">
@@ -130,7 +123,7 @@
         </el-card>
       </el-col>
       <!--      <PrjOverviewPart></PrjOverviewPart>-->
-      <CheckOverview id="check_part" v-show="!show1"></CheckOverview>
+      <CheckOverview id="check_part"></CheckOverview>
     </el-row>
     <!--    <RegionOverview id="region_part" style="display: none"></RegionOverview>-->
   </el-row>
@@ -188,7 +181,7 @@ export default {
       large2.style.display = 'none'
       var prj_small = document.getElementById('prj_small');
       prj_small.style.display = 'block'
-      prj_small.style.width = "500px"
+      prj_small.style.width = "100%"
       document.getElementById('prj_charts').style.height = "500px"
       document.getElementById('check_charts').style.height = "500px"
       setTimeout(function () {
@@ -304,7 +297,6 @@ export default {
         key: 'area'
       }],
       prj_sys_name: [],
-      show1: false
     };
   },
   created() {

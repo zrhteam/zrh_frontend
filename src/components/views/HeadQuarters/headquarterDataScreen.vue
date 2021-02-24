@@ -1,34 +1,41 @@
 <template>
   <el-row class="region_data_screen" style="height: 100%;">
+    <el-row style="height: 10%">
+      <el-card class="title-box-card" shadow="never"
+               style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
+        <h4 id="head_title1"
+            style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.6em;">{{ title1 }}</h4>
+      </el-card>
+    </el-row>
     <el-col :span="20" style="height: 100%;">
-      <el-row style="height: 10%;">
-        <el-col :span="4" style="height: 100%">
-          <el-card class="box-card " shadow="never"
-                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
-            <el-image
-                style="width: 90%; height: 90%"
-                :src="url"
-                :fit="fit"></el-image>
-          </el-card>
-        </el-col>
-        <el-col :span="18" style="height: 100%;">
-          <el-card class="title-box-card" shadow="never"
-                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
-            <!--        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>-->
-            <label
-                style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title1 }}</label>
-          </el-card>
-        </el-col>
-        <el-col :span="2" style="height: 100%;">
-          <el-card class="box-card " shadow="never"
-                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
-            <el-button size="mini" round
-                       style="background-color: transparent; color: #ffffff"
-                       @click="outHeadDataScreen">返回
-            </el-button>
-          </el-card>
-        </el-col>
-      </el-row>
+      <!--      <el-row style="height: 10%;">-->
+      <!--        <el-col :span="4" style="height: 100%">-->
+      <!--          <el-card class="box-card " shadow="never"-->
+      <!--                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">-->
+      <!--            <el-image-->
+      <!--                style="width: 90%; height: 90%"-->
+      <!--                :src="url"-->
+      <!--                :fit="fit"></el-image>-->
+      <!--          </el-card>-->
+      <!--        </el-col>-->
+      <!--        <el-col :span="18" style="height: 100%;">-->
+      <!--          <el-card class="title-box-card" shadow="never"-->
+      <!--                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">-->
+      <!--            &lt;!&ndash;        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>&ndash;&gt;-->
+      <!--            &lt;!&ndash;            <label&ndash;&gt;-->
+      <!--            &lt;!&ndash;                style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title1 }}</label>&ndash;&gt;-->
+      <!--          </el-card>-->
+      <!--        </el-col>-->
+      <!--        <el-col :span="2" style="height: 100%;">-->
+      <!--          <el-card class="box-card " shadow="never"-->
+      <!--                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">-->
+      <!--            <el-button size="mini" round-->
+      <!--                       style="background-color: transparent; color: #ffffff"-->
+      <!--                       @click="outHeadDataScreen">返回-->
+      <!--            </el-button>-->
+      <!--          </el-card>-->
+      <!--        </el-col>-->
+      <!--      </el-row>-->
       <el-row style="height: 85%;">
         <el-col :span="8" style="height: 45%; margin-left:0.5%">
           <Ratio
@@ -53,24 +60,31 @@
         </el-col>
         <el-col :span="12" style="height: 45%; margin-top: 4%">
           <BarRank
-            :context="{
+              :context="{
           title:'根据检查次数的区域排名（8）',
           id: 'id_head_rank1'}"
-        ></BarRank>
+          ></BarRank>
         </el-col>
         <el-col :span="12" style="height: 45%; margin-top: 4%">
           <BarRank
-            :context="{
+              :context="{
           title:'根据项目数量的区域排名（12）',
           id: 'id_head_rank2'}"
-        ></BarRank>
+          ></BarRank>
         </el-col>
       </el-row>
     </el-col>
-    <el-col :span="4" style="height: 100%; overflow: scroll">
+    <el-col :span="4" style="height: 89%; overflow: scroll">
+      <el-card class="box-card " shadow="never"
+               style="background-color: transparent; height: 6%; margin: 0; text-align: right">
+        <el-button size="mini" round
+                   style="background-color: transparent; color: #ffffff; vertical-align: top; text-align: right"
+                   @click="outHeadDataScreen">返回
+        </el-button>
+      </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
-        <label>可选择的统计图</label>
+        <h6 style="color: #ffffff; font-family: Noto Sans SC; font-size: 0.6em;">可选择</h6>
       </el-card>
       <el-card class="box-card " shadow="never"
                style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">

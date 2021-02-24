@@ -1,103 +1,107 @@
 <template>
   <!--  <div>-->
   <el-row style="height: 100%;">
-  <el-row id="region" style="height: 100%;">
-    <RegionDataScreen id="region_small" style="display: none"></RegionDataScreen>
-    <el-row id="region_large1" class="" style="height: 10%;">
-      <el-col :span="4" style="height: 100%">
-        <el-card class="title-box-card" shadow="never"
-                 style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <el-image
-              style="width: 90%; height: 90%"
-              :src="url"
-              :fit="fit"></el-image>
-        </el-card>
-      </el-col>
-      <el-col :span="20" style="height: 100%">
-        <el-card class="title-box-card " shadow="never"
-                 style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label id="region_title1" style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{title1}}</label>
-          <label id="region_title2" style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{title2}}</label>
-        </el-card>
-      </el-col>
-    </el-row>
-    <el-row id="region_large2" class="" style="height: 90%;">
-      <el-col :span="4" class="" style="height: 100%">
-        <Tree
-          :treeObj="treeObj"
-          @handleNodeClick="handleTrNodeClick"
-        ></Tree>
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
-          <el-button size="mini" round
-                     style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; position: absolute"
-                     @click="intoRegionDataScreen">展开
-          </el-button>
-          <RegionDataScreen id="region_small1"></RegionDataScreen>
+    <el-row id="region" style="height: 100%;">
+      <RegionDataScreen id="region_small" style="display: none"></RegionDataScreen>
+      <el-row id="region_large1" class="" style="height: 10%;">
+        <!--      <el-col :span="4" style="height: 100%">-->
+        <!--        <el-card class="title-box-card" shadow="never"-->
+        <!--                 style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">-->
+        <!--          <el-image-->
+        <!--              style="width: 90%; height: 90%"-->
+        <!--              :src="url"-->
+        <!--              :fit="fit"></el-image>-->
+        <!--        </el-card>-->
+        <!--      </el-col>-->
+        <el-col :span="24" style="height: 100%">
+          <el-card class="title-box-card " shadow="never"
+                   style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
+            <h4>
+              <span id="region_title1"
+                    style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.5em; vertical-align: 65%; height: 100%">{{ title1 }}</span>
+              <span id="region_title2"
+                    style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.5em; vertical-align: 65%; height: 100%">{{ title2 }}</span>
+            </h4>
+          </el-card>
+        </el-col>
+      </el-row>
+      <el-row id="region_large2" class="" style="height: 90%;">
+        <el-col :span="4" class="" style="height: 100%">
+          <Tree
+              :treeObj="treeObj"
+              @handleNodeClick="handleTrNodeClick"
+          ></Tree>
+          <el-card class="box-card " shadow="never"
+                   style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
+            <el-button size="mini" round
+                       style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; position: absolute"
+                       @click="intoRegionDataScreen">展开
+            </el-button>
+            <RegionDataScreen id="region_small1"></RegionDataScreen>
 
-          <!--          <label>数据大屏缩略图</label>-->
-        </el-card>
-      </el-col>
-      <!--地图+高风险隐患数量排名-->
-      <Region3_3></Region3_3>
-      <!--      </el-col>-->
-      <el-col :span="10" id="region_part" style="height: 100%">
-        <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
-        <el-row style="height: 100%">
+            <!--          <label>数据大屏缩略图</label>-->
+          </el-card>
+        </el-col>
+        <!--地图+高风险隐患数量排名-->
+        <Region3_3></Region3_3>
+        <!--      </el-col>-->
+        <el-col :span="10" id="region_part" style="height: 100%">
+          <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
+          <el-row style="height: 100%">
             <!--            <label>chart</label>-->
-          <!--          <el-row style="height: 42%">-->
-<!--          <el-col :span="12" style="height: 42%">-->
-<!--            &lt;!&ndash;            已整改项目数量&ndash;&gt;-->
-<!--          </el-col>-->
-<!--          <el-col :span="12" style="height: 42%">-->
-<!--            <el-card class="box-card " shadow="never"-->
-<!--                     style="background-color: transparent; height: 90%; left: 10%; top: 10%">-->
-<!--              &lt;!&ndash;          当前未整改高风险隐患列表&ndash;&gt;-->
-<!--              <Region2_1></Region2_1>-->
-<!--            </el-card>-->
-<!--          </el-col>-->
-          <!--          </el-row>-->
-<!--                    <el-row style="height: 42%">-->
-          <el-col :span="20" style="height: 31%; margin-bottom: 4%">
-            <!--3维信息-->
-<!--            <Region2_3></Region2_3>-->
-            <TopRisk
-            :context="{
+            <!--          <el-row style="height: 42%">-->
+            <!--          <el-col :span="12" style="height: 42%">-->
+            <!--            &lt;!&ndash;            已整改项目数量&ndash;&gt;-->
+            <!--          </el-col>-->
+            <!--          <el-col :span="12" style="height: 42%">-->
+            <!--            <el-card class="box-card " shadow="never"-->
+            <!--                     style="background-color: transparent; height: 90%; left: 10%; top: 10%">-->
+            <!--              &lt;!&ndash;          当前未整改高风险隐患列表&ndash;&gt;-->
+            <!--              <Region2_1></Region2_1>-->
+            <!--            </el-card>-->
+            <!--          </el-col>-->
+            <!--          </el-row>-->
+            <!--                    <el-row style="height: 42%">-->
+            <el-col :span="20" style="height: 31%; margin-bottom: 4%">
+              <!--3维信息-->
+              <!--            <Region2_3></Region2_3>-->
+              <TopRisk
+                  :context="{
           title:'历史重复出现隐患排名（5）',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'region_risk',
           option:this.risk_option}"
-            :top_data="this.$store.state.get_region.risk_number_top"
-        ></TopRisk>
-          </el-col>
-          <el-col :span="20" style="height: 31%;margin-bottom: 4%">
-            <TopRisk
-            :context="{
+                  :top_data="this.$store.state.get_region.risk_number_top"
+              ></TopRisk>
+            </el-col>
+            <el-col :span="20" style="height: 31%;margin-bottom: 4%">
+              <TopRisk
+                  :context="{
           title:'历史重复出现隐患排名（6）',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'region_other',
           option:this.other_option}"
-            :top_data="this.$store.state.get_region.risk_other_top"
-        ></TopRisk>
-            <!--各等级隐患数量变化-->
-          </el-col>
-          <el-col :span="20" style="height: 31%">
-            <Region1_4></Region1_4>
-            <!--各等级隐患数量变化-->
-          </el-col>
-<!--                    </el-row>-->
-        </el-row>
-        <!--      </el-card>-->
-      </el-col>
-      <!--      <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>-->
-    </el-row>
+                  :top_data="this.$store.state.get_region.risk_other_top"
+              ></TopRisk>
+              <!--各等级隐患数量变化-->
+            </el-col>
+            <el-col :span="20" style="height: 31%">
+              <Region1_4></Region1_4>
+              <!--各等级隐患数量变化-->
+            </el-col>
+            <!--                    </el-row>-->
+          </el-row>
+          <!--      </el-card>-->
+        </el-col>
+        <!--      <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>-->
+      </el-row>
 
-<!--    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>-->
-  </el-row>
+      <!--    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>-->
+    </el-row>
     <PrjOverview id="prj_part" style=""></PrjOverview>
-</el-row>
+  </el-row>
   <!--    </div>-->
 </template>
 
