@@ -64,11 +64,12 @@ export default {
   },
   methods: {
     getTreeData(tree_data) {
-      this.expandedKeys = this.$store.state.get_login.expandedKeys
+      this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
       if (this.$store.state.get_login.now_node != -1) {
-        this.expandedKeys = this.$store.state.get_login.expandedKeys
-        this.expandedKeys.push(this.$store.state.get_login.now_node)
-        this.$store.commit('get_login/changeExpandedKeys', {params: this.expandedKeys})
+        let arr = this.expandedKeys
+        arr.push(this.$store.state.get_login.now_node)
+        this.$store.commit('get_login/changeExpandedKeys', {params: arr})
+        this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
       }
       let arr = []//树形控件
       let pp = []//包含每个检查经纬度坐标的一个数组
@@ -78,14 +79,17 @@ export default {
         let parent1 = {
           id: 0,
           label: '',
-          level:1,
+          level: 1,
           children: []
         };
         parent1['id'] = count++
         parent1['label'] = i
         arr.push(parent1)
         if (this.user_grant === '总部') {
-          this.expandedKeys.push(parent1.id)
+          let arr = this.expandedKeys
+          arr.push(parent1.id)
+          this.$store.commit('get_login/changeExpandedKeys', {params: arr})
+          this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
         }
         for (let j in tree_data['headquarter_tag'][i]['region_tag']) {
           let parent2 = {
@@ -98,7 +102,10 @@ export default {
           parent2['id'] = count++
           parent2['label'] = j
           if (this.user_grant === '区域') {
-            this.expandedKeys.push(parent2.id)
+            let arr = this.expandedKeys
+            arr.push(parent2.id)
+            this.$store.commit('get_login/changeExpandedKeys', {params: arr})
+            this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
           }
           let r_p = [];//每个区域围成一个多边形并存入经纬度数组pp
           for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
@@ -122,7 +129,10 @@ export default {
                 child2['label'] = m
                 child1['children'].push(child2)
                 if (this.user_grant === '项目') {
-                  this.expandedKeys.push(child2.id)
+                  let arr = this.expandedKeys
+                  arr.push(child2.id)
+                  this.$store.commit('get_login/changeExpandedKeys', {params: arr})
+                  this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
                 }
                 //一个项目是不是只有一个坐标
                 let sub_p = []
@@ -182,7 +192,10 @@ export default {
     },
     treeExpand(data, node, self) {
       // console.log("add",this.expandedKeys)
-      this.expandedKeys.push(data.id)
+      let arr = this.expandedKeys
+      arr.push(data.id)
+      this.$store.commit('get_login/changeExpandedKeys', {params: arr})
+      this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
     }
   },
   created() {
