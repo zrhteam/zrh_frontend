@@ -45,13 +45,14 @@
           :default-sort="{prop: 'appear_time', order: 'descending'}"
           ref="table"
           height="200"
+          stripe
           style="width: 100%; color: #fff">
         <el-table-column
              type='index'>
         </el-table-column>
         <el-table-column
             property="description"
-            :label="context.label1" min-width="150px">
+            :label="context.label1" min-width="200px">
         </el-table-column>
         <el-table-column
             prop="belong"
@@ -60,7 +61,7 @@
         <el-table-column
             prop="appear_time"
             suitable="suitable"
-            :label="context.label2">
+            :label="context.label2" min-width="60px">
         </el-table-column>
       </el-table>
     </div>
