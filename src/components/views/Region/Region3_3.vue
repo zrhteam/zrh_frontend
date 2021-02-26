@@ -14,9 +14,9 @@
       <!--          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>-->
 <!--    </el-card>-->
     <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
-    <el-card class="box-card " shadow="never"
-             style="background-color: transparent; height: 28%; margin: 0px 5px 5px 5px">
-      <div class="level4" style="display: block">
+    <el-card class="box-card-t " shadow="never"
+             style="background-color: transparent; height: 30%; margin: 2%">
+      <div class="level4" style="display: block; margin-top: 0.5%">
         <span>项目累计高风险数量排名</span>
       </div>
       <div style='display: none; text-align: center'>

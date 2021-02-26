@@ -5,7 +5,7 @@
   <!--  总部-->
   <!--  按年份-->
   <el-card class="box-card-t " shadow="never"
-           style="background-color: transparent; height: 100%; padding: 2%">
+           style="background-color: transparent; height: 100%; margin: 2%">
     <div style="display: none">
       {{ getRiskLevelYear }}
     </div>

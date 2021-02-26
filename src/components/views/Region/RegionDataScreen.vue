@@ -5,18 +5,24 @@
                style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px; top: 1%">
         <h4>
           <span id="region_title1_1"
-                style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.5em; vertical-align: 65%; height: 100%">{{
+                style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.5em; vertical-align: 65%; height: 100%">{{
               title1
             }}</span>
           <span id="region_title2_1"
-                style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.5em; vertical-align: 65%; height: 100%">{{
+                style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.5em; vertical-align: 65%; height: 100%">{{
               title2
             }}</span>
         </h4>
       </el-card>
     </el-row>
-    <el-col :span="20" style="height: 100%">
-      <el-row style="height: 85%">
+    <el-row style="height: 4%;">
+      <el-button size="mini" round
+                   style="background-color: transparent; color: #ffffff; float: right"
+                   @click="outRegionDataScreen">返回
+        </el-button>
+    </el-row>
+<!--    <el-col :span="20" style="height: 100%">-->
+      <el-row style="height: 80%">
         <el-col :span='12' style="height: 100%">
           <el-row style="height: 30%;">
             <BarRank
@@ -32,15 +38,15 @@
               id: 'id_region_system'
           }"></Ratio>
           </el-row>
-          <el-row style="height: 30%;margin:4% 0% 0 0">
-            <el-col :span="11" style="height: 100%;margin-left:1.5%">
+          <el-row style="height: 30%;margin:3.2% 0% 0 0">
+            <el-col :span="11" style="height: 100%;margin-left:1%">
               <Ratio
                   :context="{
                 title:'致因阶段隐患占比（12）',
                 id: 'id_region_reason'
             }"></Ratio>
             </el-col>
-            <el-col :span="11" style="height: 100%;margin-left:2%">
+            <el-col :span="11" style="height: 100%;margin-left:6%">
               <Ratio
                   :context="{
                 title:'分布区域隐患占比（13）',
@@ -65,98 +71,7 @@
           </el-row>
         </el-col>
       </el-row>
-    </el-col>
-
-    <!--    <CheckDataScreen></CheckDataScreen>-->
-
-    <el-col :span="4" style="height: 89%; overflow: scroll">
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 6%; margin: 0; text-align: right">
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #ffffff; vertical-align: top; text-align: right"
-                   @click="outRegionDataScreen">返回
-        </el-button>
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
-        <h6 style="color: #ffffff; font-family: Noto Sans SC; font-size: 0.6em;">可选择</h6>
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <RiskLevelYear :context="{title:'区域累计年隐患数量（3）', id:'region_level_year'}"></RiskLevelYear>-->
-      </el-card>
-
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <Region2_2></Region2_2>-->
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <div style="display: none">-->
-        <!--          {{ getName }}-->
-        <!--        </div>-->
-
-        <!--        <BarRank-->
-        <!--            :context="{-->
-        <!--          title:'根据累计高风险的项目排名（8）',-->
-        <!--          id: 'id_region_rank1'}"-->
-        <!--        ></BarRank>-->
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <TopName-->
-        <!--            :context="{title:'根据检查次数的项目排名（9）',-->
-        <!--            top_data:this.rank_by_check,-->
-        <!--            label1:'项目名称',-->
-        <!--            label2:'检查次数',-->
-        <!--        }"></TopName>-->
-        <!--        <BarRank-->
-        <!--            :context="{-->
-        <!--          title:'根据检查次数的项目排名（9）',-->
-        <!--          id: 'id_region_rank2'}"-->
-        <!--        ></BarRank>-->
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <Ratio-->
-        <!--            :context="{-->
-        <!--          title:'各专业隐患数量占比（10）',-->
-        <!--          id: 'id_region_major'-->
-        <!--        }"></Ratio>-->
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <Ratio-->
-        <!--            :context="{-->
-        <!--          title:'隐患子系统隐患占比（12）',-->
-        <!--          id: 'id_region_system'-->
-        <!--        }"></Ratio>-->
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <Ratio-->
-        <!--            :context="{-->
-        <!--          title:'致因阶段隐患占比（12）',-->
-        <!--          id: 'id_region_reason'-->
-        <!--        }"></Ratio>-->
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <Ratio-->
-        <!--            :context="{-->
-        <!--          title:'分布区域隐患占比（13）',-->
-        <!--          id: 'id_region_region'-->
-        <!--        }"></Ratio>-->
-      </el-card>
-    </el-col>
+<!--    </el-col>-->
   </el-row>
 
 </template>

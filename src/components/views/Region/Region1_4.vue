@@ -1,6 +1,6 @@
 <template>
-  <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 90%; margin: 2% 4% 2% 0%">
+  <el-card class="box-card-t " shadow="never"
+           style="background-color: transparent; height: 100%; padding: 2%">
     <div style="display: none; ">
       {{ getRiskLevelData }}
     </div>

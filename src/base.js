@@ -362,9 +362,12 @@ exports.install = function (Vue, options) {
                 document.getElementById('check_part').style.display = 'none'
             } else if (node.level == 4) {//总部=》检查
                 this.checkNodeClick(data.label)
-                document.getElementById('check_title1').innerHTML = document.getElementById('head_title1').innerHTML
-                document.getElementById('check_title2').innerHTML = document.getElementById('region_title2').innerHTML
-                document.getElementById('check_title3').innerHTML = document.getElementById('project_title3').innerHTML
+                // document.getElementById('check_title1').innerHTML = document.getElementById('head_title1').innerHTML
+                // document.getElementById('check_title2').innerHTML = document.getElementById('region_title2').innerHTML
+                // document.getElementById('check_title3').innerHTML = document.getElementById('project_title3').innerHTML
+                document.getElementById('prj_title1_1').innerHTML = document.getElementById('head_title1').innerHTML
+                document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
+                document.getElementById('prj_title3_1').innerHTML = document.getElementById('prj_title3').innerHTML
                 document.getElementById("head_quarter").style.display = 'none'
                 document.getElementById('region_part').style.display = 'block'
                 document.getElementById('region').style.display = 'none'
