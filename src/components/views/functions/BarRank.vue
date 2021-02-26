@@ -5,7 +5,7 @@
   <!--  区域级-->
   <!--  属于同一总部该区域内每个项目的高风险隐患数量-->
   <!--  返回该区域每个项目的检查次数-->
-  <el-card class="box-card " shadow="never"
+  <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 2%">
     <div style="display: none">
       {{ getData }}

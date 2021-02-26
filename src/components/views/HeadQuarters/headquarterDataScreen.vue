@@ -9,7 +9,14 @@
         </h4>
       </el-card>
     </el-row>
-    <el-col :span="20" style="height: 100%;">
+    <el-row style="height: 4%;">
+      <el-button size="mini" round
+                   style="background-color: transparent; color: #ffffff; float: right"
+                 @click="outHeadDataScreen">返回
+      </el-button>
+    </el-row>
+
+<!--    <el-col :span="24" style="height: 95%;">-->
       <!--      <el-row style="height: 10%;">-->
       <!--        <el-col :span="4" style="height: 100%">-->
       <!--          <el-card class="box-card " shadow="never"-->
@@ -31,14 +38,14 @@
       <!--        <el-col :span="2" style="height: 100%;">-->
       <!--          <el-card class="box-card " shadow="never"-->
       <!--                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">-->
-      <!--            <el-button size="mini" round-->
-      <!--                       style="background-color: transparent; color: #ffffff"-->
-      <!--                       @click="outHeadDataScreen">返回-->
-      <!--            </el-button>-->
+<!--                  <el-button size="mini" round-->
+<!--                             style="background-color: transparent; color: #ffffff"-->
+<!--                             @click="outHeadDataScreen">返回-->
+<!--                  </el-button>-->
       <!--          </el-card>-->
       <!--        </el-col>-->
       <!--      </el-row>-->
-      <el-row style="height: 85%;">
+      <el-row style="height: 80%;">
         <el-col :span="8" style="height: 45%; margin-left:0.5%">
           <Ratio
               :context="{
@@ -75,33 +82,33 @@
           ></BarRank>
         </el-col>
       </el-row>
-    </el-col>
-    <el-col :span="4" style="height: 89%; overflow: scroll">
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 6%; margin: 0; text-align: right">
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #ffffff; vertical-align: top; text-align: right"
-                   @click="outHeadDataScreen">返回
-        </el-button>
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
-        <h6 style="color: #ffffff; font-family: Noto Sans SC; font-size: 0.6em;">可选择</h6>
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+<!--    </el-col>-->
+<!--    <el-col :span="4" style="height: 89%; overflow: scroll">-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 6%; margin: 0; text-align: right">-->
+<!--        <el-button size="mini" round-->
+<!--                   style="background-color: transparent; color: #ffffff; vertical-align: top; text-align: right"-->
+<!--                   @click="outHeadDataScreen">返回-->
+<!--        </el-button>-->
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">-->
+<!--        <h6 style="color: #ffffff; font-family: Noto Sans SC; font-size: 0.6em;">可选择</h6>-->
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
 
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
 
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
 
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
         <div style="display: none">
           {{ getName }}
         </div>
@@ -112,30 +119,30 @@
         <!--            label2:'检查次数',-->
         <!--        }"></TopName>-->
 
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
 
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
 
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
 
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <TopName-->
-        <!--            :context="{title:'根据项目数量的区域排名（12）',-->
-        <!--            top_data:this.rank_by_prj,-->
-        <!--            label1:'项目名称',-->
-        <!--            label2:'检查次数',-->
-        <!--        }"></TopName>-->
+<!--      </el-card>-->
+<!--      <el-card class="box-card " shadow="never"-->
+<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
+<!--        &lt;!&ndash;        <TopName&ndash;&gt;-->
+<!--        &lt;!&ndash;            :context="{title:'根据项目数量的区域排名（12）',&ndash;&gt;-->
+<!--        &lt;!&ndash;            top_data:this.rank_by_prj,&ndash;&gt;-->
+<!--        &lt;!&ndash;            label1:'项目名称',&ndash;&gt;-->
+<!--        &lt;!&ndash;            label2:'检查次数',&ndash;&gt;-->
+<!--        &lt;!&ndash;        }"></TopName>&ndash;&gt;-->
 
-      </el-card>
-    </el-col>
+<!--      </el-card>-->
+<!--    </el-col>-->
   </el-row>
 </template>
 

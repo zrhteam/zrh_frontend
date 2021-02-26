@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card-list " shadow="never"
-           style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height:88%; margin: 0px 5px 5px 5px">
     <el-input
         placeholder="输入关键字进行过滤"
         v-model="filterText"
@@ -64,12 +64,12 @@ export default {
   },
   methods: {
     getTreeData(tree_data) {
-      this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
+      this.expandedKeys = this.$store.state.get_login.expandedKeys
       if (this.$store.state.get_login.now_node != -1) {
         let arr = this.expandedKeys
         arr.push(this.$store.state.get_login.now_node)
         this.$store.commit('get_login/changeExpandedKeys', {params: arr})
-        this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
+        this.expandedKeys = this.$store.state.get_login.expandedKeys
       }
       let arr = []//树形控件
       let pp = []//包含每个检查经纬度坐标的一个数组
@@ -89,7 +89,7 @@ export default {
           let arr = this.expandedKeys
           arr.push(parent1.id)
           this.$store.commit('get_login/changeExpandedKeys', {params: arr})
-          this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
+          this.expandedKeys = this.$store.state.get_login.expandedKeys
         }
         for (let j in tree_data['headquarter_tag'][i]['region_tag']) {
           let parent2 = {
@@ -105,7 +105,7 @@ export default {
             let arr = this.expandedKeys
             arr.push(parent2.id)
             this.$store.commit('get_login/changeExpandedKeys', {params: arr})
-            this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
+            this.expandedKeys = this.$store.state.get_login.expandedKeys
           }
           let r_p = [];//每个区域围成一个多边形并存入经纬度数组pp
           for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
@@ -132,7 +132,7 @@ export default {
                   let arr = this.expandedKeys
                   arr.push(child2.id)
                   this.$store.commit('get_login/changeExpandedKeys', {params: arr})
-                  this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
+                  this.expandedKeys = this.$store.state.get_login.expandedKeys
                 }
                 //一个项目是不是只有一个坐标
                 let sub_p = []
@@ -195,7 +195,7 @@ export default {
       let arr = this.expandedKeys
       arr.push(data.id)
       this.$store.commit('get_login/changeExpandedKeys', {params: arr})
-      this.expandedKeys = this.$store.state.get_login.expandedKeys.slice()
+      this.expandedKeys = this.$store.state.get_login.expandedKeys
     }
   },
   created() {

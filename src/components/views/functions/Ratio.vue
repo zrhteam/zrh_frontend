@@ -7,7 +7,7 @@
   <!--各专业隐患数量占比-->
   <!--各致因阶段的隐患数量占比情况-->
   <!--各分布区域的隐患数量占比情况-->
-  <el-card class="box-card " shadow="never"
+  <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 2%">
     <div style="display: none">
       {{ getData }}

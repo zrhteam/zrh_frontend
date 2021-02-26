@@ -31,12 +31,12 @@
               @handleNodeClick="handleTrNodeClick"
           ></Tree>
           <el-card class="box-card " shadow="never"
-                   style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
+                   style="background-color: transparent; height: 10%; margin: 0px 5px 5px 5px">
             <el-button size="mini" round
-                       style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; position: absolute"
+                       style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; float: left"
                        @click="intoHeadDataScreen">展开
             </el-button>
-            <headquarterDataScreen id="head_small1"></headquarterDataScreen>
+<!--            <headquarterDataScreen id="head_small1"></headquarterDataScreen>-->
 
             <!--          <label>数据大屏缩略图</label>-->
           </el-card>
