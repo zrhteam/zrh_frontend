@@ -101,10 +101,10 @@ export default {
                     }];
                   return new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
                     offset: 0,
-                    color: colorList[params.dataIndex].c1
+                    color: colorList[params.dataIndex % colorList.length].c1
                   }, {
                     offset: 1,
-                    color: colorList[params.dataIndex].c2
+                    color: colorList[params.dataIndex % colorList.length].c2
                   }])
                 }
               }

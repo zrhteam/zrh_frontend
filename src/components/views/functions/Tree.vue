@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card " shadow="never"
+  <el-card class="box-card-list " shadow="never"
            style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
     <el-input
         placeholder="输入关键字进行过滤"
@@ -201,7 +201,11 @@ export default {
   created() {
     // console.log("区域", this.$store.state.get_login.grant_data.data)
     this.getTreeData(this.treeObj1)
-  }
+  },
+  // mounted() {
+  //   console.log("区域", this.$store.state.get_login.grant_data.data)
+  //   this.getTreeData(this.treeObj1)
+  // },
 }
 </script>
 

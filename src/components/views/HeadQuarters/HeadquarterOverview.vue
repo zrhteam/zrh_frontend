@@ -3,25 +3,29 @@
     <el-row style="height: 100%;" id="head_quarter">
       <headquarterDataScreen id="head_small" style="display: none"></headquarterDataScreen>
       <el-row id="head_large1" class="" style="height: 10%;">
-<!--        <el-col :span="4" style="height: 100%">-->
-<!--          <el-card class="title-box-card" shadow="never"-->
-<!--                   style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">-->
-<!--            <el-image-->
-<!--                style="width: 90%; height: 90%"-->
-<!--                :src="url"-->
-<!--                :fit="fit"></el-image>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
+        <!--        <el-col :span="4" style="height: 100%">-->
+        <!--          <el-card class="title-box-card" shadow="never"-->
+        <!--                   style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">-->
+        <!--            <el-image-->
+        <!--                style="width: 90%; height: 90%"-->
+        <!--                :src="url"-->
+        <!--                :fit="fit"></el-image>-->
+        <!--          </el-card>-->
+        <!--        </el-col>-->
         <el-col :span="24" style="height: 100%">
           <div class="title-box-card " shadow="never"
-                   style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
-            <h4 id="head_title1"
-                   style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.6em;">{{ title1 }}</h4>
+               style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
+            <h4>
+              <span id="head_title1"
+                    style="color: #ffffff; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold;vertical-align: 45%; height: 100%">{{
+                  title1
+                }}</span>
+            </h4>
           </div>
         </el-col>
       </el-row>
       <el-row id="head_large2" class="" style="height: 90%;">
-        <el-col :span="4" class="" style="height: 100%">
+        <el-col :span="5" class="" style="height: 100%; padding-left: 2%; padding-top: 1.5%">
           <Tree
               :treeObj="treeObj"
               @handleNodeClick="handleTrNodeClick"
@@ -40,8 +44,8 @@
         <!--地图+高风险隐患数量排名-->
         <HighProjectRisk></HighProjectRisk>
         <!--      </el-col>-->
-<!--        <el-col :span="10" id="head_part" style="height: 100%">-->
-        <el-col :span="10" style="height: 100%">
+        <!--        <el-col :span="10" id="head_part" style="height: 100%">-->
+        <el-col :span="9" style="height: 100%; padding-right: 2.5%">
           <el-row style="height: 100%">
             <!--            <label>chart</label>-->
             <!--          <el-row style="height: 42%">-->
@@ -57,32 +61,32 @@
             <!--          </el-col>-->
             <!--          </el-row>-->
             <!--                    <el-row style="height: 42%">-->
-            <el-col :span="20" style="height: 30%; margin-bottom: 3%; margin-left: 2%">
+            <el-col :span="24" style="height: 29%; margin: 2% 0 2% 2%">
               <!--3维信息-->
               <!--            <Region2_3></Region2_3>-->
               <TopRisk
-            :context="{
+                  :context="{
           title:'历史重复出现隐患排名（5）',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'head_risk',
           option:this.risk_option}"
-            :top_data="this.$store.state.get_headquarter.risk_number_top"
-        ></TopRisk>
+                  :top_data="this.$store.state.get_headquarter.risk_number_top"
+              ></TopRisk>
             </el-col>
-            <el-col :span="20" style="height: 30%;margin-bottom: 4%; margin-left: 2%">
+            <el-col :span="24" style="height: 29%;margin: 2%">
               <TopRisk
-            :context="{
+                  :context="{
                   title:'历史重复出现隐患排名（7）',
                   label1:'隐患描述',
                   label2:'出现频率',
                   sign:'head_other',
                   option:this.other_option}"
-            :top_data="this.$store.state.get_headquarter.other_number_top"
-        ></TopRisk>
+                  :top_data="this.$store.state.get_headquarter.other_number_top"
+              ></TopRisk>
               <!--各等级隐患数量变化-->
             </el-col>
-            <el-col :span="20" style="height: 30%">
+            <el-col :span="24" style="height: 29%;margin: 2%">
               <RiskLevelYear :context="{title:'总部累计年隐患数量（6）', id:'head_level_year'}"></RiskLevelYear>
               <!--各等级隐患数量变化-->
             </el-col>
@@ -137,7 +141,13 @@ export default {
     },
     handleTrNodeClick(data, node) {
       this.handleTreeNodeClick(data, node)
+    },
+    back() {
+      window.history.back()
     }
+  },
+  destroyed() {
+    window.removeEventListener('popstate', this.goBack, false)
   },
   data() {
     return {
@@ -188,6 +198,12 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
+    }
+  },
+  mounted() {
+    if (window.history && window.history.pushState) {
+      history.pushState(null, null, document.URL)
+      window.addEventListener('popstate', this.back, false)
     }
   },
   created() {

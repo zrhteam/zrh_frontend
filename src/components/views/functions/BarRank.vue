@@ -43,6 +43,7 @@ export default {
         arr.sort(this.sortNumber('count', true))
         bar_option['dataset']['source'] = arr
         bar_option["xAxis"]["axisLabel"]["rotate"] = 45
+        bar_option["grid"]["y2"] = '30%'
         myChart.setOption(bar_option);
         myChart.resize();
         window.addEventListener('resize', function () {
@@ -117,6 +118,9 @@ export default {
     },
   },
   updated() {
+    this.drawBarChart()
+  },
+  mounted() {
     this.drawBarChart()
   },
 }

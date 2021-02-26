@@ -64,14 +64,14 @@ export default {
         window.addEventListener('resize', function () {
           myChart.resize();
         })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById(this.context.id), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
-            myChart.resize();
-          });
-        });
+        // const _this = this;
+        // const erd = elementResizeDetectorMaker();
+        // erd.listenTo(document.getElementById(this.context.id), element => {
+        //   _this.$nextTick(() => {
+        //     //监听到事件后执行的业务逻辑
+        //     myChart.resize();
+        //   });
+        // });
       })
     },
     sortNumber(attr, rev) {
@@ -291,11 +291,11 @@ export default {
           value: 0,
           name: '其它'
         }
-      for(let i = 0; i < arr.length; i++) {
-        if(i < 5) {
-          new_arr.push(arr[i])
+      for(let ii = 0; ii < arr.length; ii++) {
+        if(ii < 5) {
+          new_arr.push(arr[ii])
         }else {
-          obj.value += arr[i].value
+          obj.value += arr[ii].value
         }
       }
       if(obj.value > 0) {
@@ -307,10 +307,9 @@ export default {
   updated() {
     this.drawBarChart()
   },
-  // mounted() {
-  //   this.drawBarChart();
-  //   // }
-  // }
+  mounted() {
+    this.drawBarChart();
+  },
   created() {
     this.value = '全部专业'
   }

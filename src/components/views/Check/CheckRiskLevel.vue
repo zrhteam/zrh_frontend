@@ -91,10 +91,10 @@ export default {
   },
   updated() {
     this.drawBarChart()
+  },  mounted() {
+    this.drawBarChart();
   },
-  // mounted() {
-  //   this.drawBarChart();
-  // },
+
   methods: {
     drawBarChart() {
       let myChart = this.$echarts.init(document.getElementById(this.context.id))

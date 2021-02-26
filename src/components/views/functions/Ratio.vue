@@ -247,6 +247,9 @@ export default {
   updated() {
     this.drawBarChart()
   },
+  mounted() {
+    this.drawBarChart();
+  },
 }
 </script>
 

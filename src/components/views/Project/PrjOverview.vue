@@ -39,7 +39,7 @@
       </el-col>
       <!--      第二列放pie、bar、table-->
       <el-col id="prj_subpart" :span="20" style="height: 100%">
-        <el-card class="box-card " shadow="never"
+        <el-card class="margin-box-card " shadow="never"
                  style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
           <el-col :span="12" style="height: 100%">
             <el-row style="height: 30%">

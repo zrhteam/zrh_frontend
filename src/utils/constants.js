@@ -88,8 +88,8 @@ export const bar_option2 = {
         source: []
     },
     grid: {
-        left: 35,
-        y: '10%',
+        left: 55,
+        y: '30%',
         y2: '20%'
     },
     // Declare several bar series, each will be mapped

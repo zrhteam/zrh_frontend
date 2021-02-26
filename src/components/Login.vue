@@ -30,12 +30,15 @@
 
     <div class="header">
       <!--      <div class="header-center fl">-->
-      <div class="header-title" v-show="isShow">
+      <div class="header-title">
         登录界面
       </div>
-      <div class="header-title" v-show="!isShow">
-        注册界面
-      </div>
+      <!--      <div class="header-title" v-show="isShow">-->
+      <!--        登录界面-->
+      <!--      </div>-->
+      <!--      <div class="header-title" v-show="!isShow">-->
+      <!--        注册界面-->
+      <!--      </div>-->
       <div class="header-img"></div>
       <div class="header-bottom fl"></div>
 
@@ -55,13 +58,14 @@
           </div>
 
           <div class="right-infp-btn">
-            <button class="btn" v-show="isShow" @click="hasGrantLogin">登录</button>
-            <button class="btn" v-show="!isShow">注册</button>
+            <!--            <button class="btn" v-show="isShow" @click="hasGrantLogin">登录</button>-->
+            <!--            <button class="btn" v-show="!isShow">注册</button>-->
+            <button class="btn" @click="hasGrantLogin">登录</button>
           </div>
           <div class="bottom">
-            <el-button class="register_btn" type="text" v-show="isShow" @click="jumpToLogin">注册</el-button>
-            <el-button class="register_btn" type="text" v-show="!isShow" @click="jumpToLogin">登录</el-button>
-            <el-button class="pwd_btn" type="text" v-show="isShow">忘记密码</el-button>
+            <!--            <el-button class="register_btn" type="text" v-show="isShow" @click="jumpToLogin">注册</el-button>-->
+            <!--            <el-button class="register_btn" type="text" v-show="!isShow" @click="jumpToLogin">登录</el-button>-->
+            <el-button class="pwd_btn" type="text" @click="forgetPsw">忘记密码</el-button>
           </div>
         </div>
       </div>
@@ -80,7 +84,7 @@ export default {
   },
   data() {
     return {
-      isShow: true,
+      // isShow: true,
       username: '',
       password: ''
     }
@@ -117,17 +121,29 @@ export default {
       //   console.log(error.response)
       // })
     },
-    jumpToLogin() {
-      console.log("in jumpToLogin")
-      this.isShow = !this.isShow
-    },
+    // jumpToLogin() {
+    //   console.log("in jumpToLogin")
+    //   this.isShow = !this.isShow
+    // },
     hasGrantLogin() {
       let params = new URLSearchParams();
       params.append('username', this.username);
       params.append('password', this.password);
-      this.$store.commit('get_login/changeParams',{params: params})
+      this.$store.commit('get_login/changeParams', {params: params})
       // this.$store.state.get_login.params = params
       this.$store.dispatch('get_login/getLoginGrant')
+      // //在页面加载时读取sessionStorage里的状态信息
+      // sessionStorage.getItem("userMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("userMsg"))));
+      // //在页面刷新时将vuex里的信息保存到sessionStorage里
+      // window.addEventListener("beforeunload", () => {
+      //   sessionStorage.setItem("userMsg", JSON.stringify(this.$store.state))
+      // })
+    },
+    forgetPsw() {
+      this.$alert('忘记密码，请联系管理员XX，联系方式：XXX XXXX XXXX', '提示', {
+        confirmButtonText: '确定',
+        type: 'warning'
+      })
     }
   },
   computed: {
@@ -154,9 +170,11 @@ export default {
           // this.$router.push({path: '/register'});
         }// 超级用户权限
         else if (data.data.user_grant == '超级用户') {
-          this.$router.push({path: '/land_headquarters'});
+          this.$router.push({path: '/super_overview'});
+          // this.$router.push({path: '/data_compare'});
+          // this.$router.push({path: '/analyze'});
         }
-      }else {
+      } else {
         alert("出错了")
       }
 
@@ -164,9 +182,11 @@ export default {
   },
   created() {
     // this.username = 'headquarter1';
-    this.username = 'region1';
-    // this.username = 'project1';
+    // this.username = 'region1';
+    this.username = 'project1';
     this.password = '123456';
+    // this.username = 'boss';
+    // this.password = 'iamboss';
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
@@ -175,6 +195,11 @@ export default {
         $("html").css({fontSize: whei / 24})
       });
     });
+    //在页面加载时读取sessionStorage里的状态信息
+    sessionStorage.getItem("userMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("userMsg"))));
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.clear();
+    })
   }
 }
 </script>
