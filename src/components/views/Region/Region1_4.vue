@@ -5,7 +5,7 @@
       {{ getRiskLevelData }}
     </div>
       <div class="text item level4" style="padding-top: 15px; padding-bottom: 10px">
-        <span>所有项目累计发现隐患数量</span>
+        <span>隐患总量</span>
       </div>
 
     <div id = 'r_risk_level' style="height: 100%; width: 100%;"></div>

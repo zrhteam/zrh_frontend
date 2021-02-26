@@ -27,7 +27,7 @@
             <el-row style="height: 32%; margin-bottom: 1%">
               <TopRisk
                   :context="{
-          title:'历史重复出现隐患排名（prj9）',
+          title:'重复出现隐患列表',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'prj_risk',
@@ -38,7 +38,7 @@
             <el-row style="height: 32%; margin-bottom: 1%">
               <TopRisk
                   :context="{
-                          title:'隐患次数累计设备名称排名（prj10）',
+                          title:'重复出现隐患列表',
                           label1:'隐患描述',
                           label2:'出现频率',
                           sign:'prj_other',
@@ -48,7 +48,7 @@
             </el-row>
             <el-row style="height: 32%; margin-bottom: 1%">
               <Rules
-                  :context="{title:'违反法规次数排名（prj14）',
+                  :context="{title:'最容易违反的法规标准',
             top_data:this.prj_rule_name,
             label1:'违反次数',
             label2:'法规名称',
@@ -59,7 +59,7 @@
           <el-col :span="10" style="height: 100%;">
             <el-row style="height: 32%; margin-bottom: 1%">
               <TopName
-                  :context="{title:'隐患次数累计设备名称排名（prj12）',
+                  :context="{title:'最容易出现隐患的设备',
             top_data:this.prj_device_name,
             label1:'系统名称',
             label2:'出现频率',
@@ -67,7 +67,7 @@
             </el-row>
             <el-row style="height: 32%; margin-bottom: 1%">
               <TopName
-                  :context="{title:'隐患次数累计组件名称排名（prj13）',
+                  :context="{title:'最容易出现隐患的组件',
             top_data:this.prj_unit_name,
             label1:'系统名称',
             label2:'出现频率',

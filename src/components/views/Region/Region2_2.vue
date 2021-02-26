@@ -5,7 +5,7 @@
            style="background-color: transparent; height: 100%; margin: 2%">
     <div class="grid-content bg-purple">
       <div class='level4' style="padding-top: 15px; padding-bottom: 15px">
-        <span>未整改高风险隐患图片</span>
+        <span>最新高风险隐患</span>
       </div>
       <!--      图片走马灯播放-->
       <div style="font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 52px">

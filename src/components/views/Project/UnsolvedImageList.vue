@@ -4,7 +4,7 @@
 
     <div class="grid-content bg-purple">
       <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
-        <span>未整改高风险隐患图片</span>
+        <span>最新高风险隐患</span>
         <el-select v-model="top_value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterTop">
           <el-option
               v-for="item in top_option"

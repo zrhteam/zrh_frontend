@@ -5,7 +5,7 @@
       {{ getCheckHistoryPerception }}
     </div>
     <div class="level4">
-      <span>本次检查隐患专业占比(3)</span>
+      <span>不同专业隐患数量</span>
     </div>
     <div id="pie2_2" style="height: 100%; width: 100%"></div>
     <!--          本次检查累计隐患专业占比 饼图-->

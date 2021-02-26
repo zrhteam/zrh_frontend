@@ -6,7 +6,7 @@
     </div>
     <div class="grid-content bg-purple">
       <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
-        <span>未整改高风险隐患图片</span>
+        <span>高风险隐患</span>
       </div>
       <div
           style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 52px;">

@@ -67,7 +67,7 @@
               <!--            <Region2_3></Region2_3>-->
               <TopRisk
                   :context="{
-          title:'历史重复出现隐患排名（5）',
+          title:'重复出现隐患列表列表',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'region_risk',
@@ -78,7 +78,7 @@
             <el-col :span="24" style="height: 29%;margin: 2%">
               <TopRisk
                   :context="{
-          title:'历史重复出现隐患排名（6）',
+          title:'重复出现隐患列表',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'region_other',

@@ -13,7 +13,7 @@
     <el-card class="box-card-t " shadow="never"
              style="background-color: transparent; height: 30%; margin: 2%">
       <div class="level4" style="display: block; margin-top: 0.5%">
-        <span>区域高风险数量排名</span>
+        <span>各区域高风险数量</span>
       </div>
       <!--      <div id="mydiv2">-->
       <div style="display: none">

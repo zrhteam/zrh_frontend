@@ -66,7 +66,7 @@
               <!--            <Region2_3></Region2_3>-->
               <TopRisk
                   :context="{
-          title:'历史重复出现隐患排名（5）',
+          title:'重复出现隐患列表',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'head_risk',
@@ -77,7 +77,7 @@
             <el-col :span="24" style="height: 29%;margin: 2%">
               <TopRisk
                   :context="{
-                  title:'历史重复出现隐患排名（7）',
+                  title:'重复出现隐患列表',
                   label1:'隐患描述',
                   label2:'出现频率',
                   sign:'head_other',
@@ -87,7 +87,7 @@
               <!--各等级隐患数量变化-->
             </el-col>
             <el-col :span="24" style="height: 29%;margin: 2%">
-              <RiskLevelYear :context="{title:'总部累计年隐患数量（6）', id:'head_level_year'}"></RiskLevelYear>
+              <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>
               <!--各等级隐患数量变化-->
             </el-col>
             <!--                    </el-row>-->

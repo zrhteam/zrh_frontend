@@ -21,7 +21,7 @@
           <el-row style="height: 32%; margin-bottom: 1%">
             <TopRisk
                 :context="{
-          title:'历史重复出现隐患排名（8）',
+          title:'重复出现隐患',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'check_risk',
@@ -31,7 +31,7 @@
           </el-row>
           <el-row style="height: 32%; margin-bottom: 1%">
             <Rules
-                :context="{title:'违反法规次数排名（10）',
+                :context="{title:'最容易违反的法规标准',
             top_data:this.rule_name,
             label1:'违反次数',
             label2:'法规名称',
@@ -54,11 +54,11 @@
           </div>
           <el-row style="height: 32%; margin-bottom: 1%">
             <TopName
-                :context="{title:'隐患次数累计设备名称排名（12）', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
+                :context="{title:'最容易出现隐患的设备', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
           </el-row>
           <el-row style="height: 32%; margin-bottom: 1%">
             <TopName
-                :context="{title:'隐患次数累计组件名称排名（13）', top_data:this.unit_name, label1:'组件名称', label2:'出现频率'}"></TopName>
+                :context="{title:'最容易出现隐患的组件', top_data:this.unit_name, label1:'组件名称', label2:'出现频率'}"></TopName>
           </el-row>
           <el-row style="height: 32%; margin-bottom: 1%">
             <CheckHighImage></CheckHighImage>

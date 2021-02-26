@@ -17,7 +17,7 @@
     <el-card class="box-card-t " shadow="never"
              style="background-color: transparent; height: 30%; margin: 2%">
       <div class="level4" style="display: block; margin-top: 0.5%">
-        <span>项目累计高风险数量排名</span>
+        <span>各项目高风险数量</span>
       </div>
       <div style='display: none; text-align: center'>
         {{ getHighRiskRank }}

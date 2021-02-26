@@ -49,35 +49,35 @@
         <el-col :span="8" style="height: 45%; margin-left:0.5%">
           <Ratio
               :context="{
-          title:'各专业隐患数量占比（9）',
+          title:'不同专业隐患数量',
           id: 'id_head_major'
         }"></Ratio>
         </el-col>
         <el-col :span="8" style="height: 45%; ">
           <Ratio
               :context="{
-          title:'致因阶段隐患占比（10）',
+          title:'不同致因阶段隐患数量',
           id: 'id_head_reason'
         }"></Ratio>
         </el-col>
         <el-col :span="8" style="height: 45%; width: 31.5%">
           <Ratio
               :context="{
-          title:'分布区域隐患占比（11）',
+          title:'不同分布区域隐患数量',
           id: 'id_head_region'
         }"></Ratio>
         </el-col>
         <el-col :span="12" style="height: 45%; margin-top: 4%">
           <BarRank
               :context="{
-          title:'根据检查次数的区域排名（8）',
+          title:'各区域检查次数',
           id: 'id_head_rank1'}"
           ></BarRank>
         </el-col>
         <el-col :span="12" style="height: 45%; margin-top: 4%">
           <BarRank
               :context="{
-          title:'根据项目数量的区域排名（12）',
+          title:'各区域在管项目数量',
           id: 'id_head_rank2'}"
           ></BarRank>
         </el-col>

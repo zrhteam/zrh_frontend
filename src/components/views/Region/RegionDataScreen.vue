@@ -27,14 +27,14 @@
           <el-row style="height: 30%;">
             <BarRank
                 :context="{
-              title:'根据检查次数的项目排名（9）',
+              title:'各项目检查次数',
               id: 'id_region_rank2'}"
             ></BarRank>
           </el-row>
           <el-row style="height: 30%; margin:2% 0% 0 0">
             <Ratio
                 :context="{
-              title:'隐患子系统隐患占比（12）',
+              title:'不同子系统隐患数量',
               id: 'id_region_system'
           }"></Ratio>
           </el-row>
@@ -42,14 +42,14 @@
             <el-col :span="11" style="height: 100%;margin-left:1%">
               <Ratio
                   :context="{
-                title:'致因阶段隐患占比（12）',
+                title:'不同致因阶段隐患数量',
                 id: 'id_region_reason'
             }"></Ratio>
             </el-col>
             <el-col :span="11" style="height: 100%;margin-left:6%">
               <Ratio
                   :context="{
-                title:'分布区域隐患占比（13）',
+                title:'不同分布区域隐患数量',
                 id: 'id_region_region'
             }"></Ratio>
             </el-col>
@@ -57,12 +57,12 @@
         </el-col>
         <el-col :span='12' style="height: 100%">
           <el-row style="height: 30%">
-            <RiskLevelYear :context="{title:'区域累计年隐患数量（3）', id:'region_level_year'}"></RiskLevelYear>
+            <RiskLevelYear :context="{title:'年度隐患数量', id:'region_level_year'}"></RiskLevelYear>
           </el-row>
           <el-row style="height: 30%;margin:2% 0% 0 0">
             <Ratio
                 :context="{
-              title:'各专业隐患数量占比（10）',
+              title:'不同专业隐患数量',
               id: 'id_region_major'
           }"></Ratio>
           </el-row>

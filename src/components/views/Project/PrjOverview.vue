@@ -9,11 +9,11 @@
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
           <h4>
             <span id="prj_title1"
-                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title1 }}</span>
+                 style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title1 }}</span>
             <span id="prj_title2"
-                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title2 }}</span>
+                 style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title2 }}</span>
             <span id="prj_title3"
-                 style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title3 }}</span>
+                 style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title3 }}</span>
           </h4>
         </el-card>
       </el-col>
@@ -51,7 +51,7 @@
               <el-col :span="11" style="height: 100%;width:46%">
                 <PerctangePerc
                     :context="{
-                  title:'所有致因阶段占比（专业筛选）',
+                  title:'不同致因阶段隐患数量',
                   type:'reason',
                   id:'id_reason',
                 }"></PerctangePerc>
@@ -69,7 +69,7 @@
                   {{ getName }}
                 </div>
                 <TopName
-                    :context="{title:'隐患次数累计系统名称排名（prj11）',
+                    :context="{title:'最容易出现隐患的系统',
                   top_data:this.prj_sys_name,
                   label1:'系统名称',
                   label2:'出现频率',
@@ -83,7 +83,7 @@
               <el-col :span="11" style="height: 100%; width:46%">
                 <PerctangePerc
                     :context="{
-                  title:'所有分布区域占比（专业筛选）',
+                  title:'不同分布区域隐患数量',
                   type:'region',
                   id:'id_region',
                  }"></PerctangePerc>
@@ -93,7 +93,7 @@
               <el-col :span="11" style="height: 100%;width:46.5%">
                 <PerctangePerc
                     :context="{
-                  title:'所有隐患子系统占比（专业筛选）',
+                  title:'不同子系统隐患数量',
                   type:'system',
                   id:'id_system',
                 }"></PerctangePerc>
@@ -102,7 +102,7 @@
             <el-row style="height: 30%; margin-bottom: 2%">
               <el-col style="height: 100%">
 <!--                <RiskLevelYear :context="{title:'项目风险等级隐患数量', id:'check_level_year'}"></RiskLevelYear>-->
-                <CheckRiskLevel :context="{title:'项目风险等级隐患数量', id:'prj_risk_level'}"> </CheckRiskLevel>
+                <CheckRiskLevel :context="{title:'隐患总量', id:'prj_risk_level'}"> </CheckRiskLevel>
               </el-col>
             </el-row>
             <el-row style="height: 30%">
