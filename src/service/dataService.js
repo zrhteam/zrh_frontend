@@ -1239,6 +1239,18 @@ function getSystemNumberTop(param, callback) {
         })
 }
 
+//    发送授权信息
+function postGrantInfo(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_grant_info`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 
 
 // Analyze Part
@@ -1275,6 +1287,7 @@ function getAnalyzeRefChartMeta(param, callback) {
             console.log(error)
         })
 }
+
 
 
 
@@ -1347,6 +1360,7 @@ export default {
     getUnitNumberTop,
     getDeviceNumberTop,
     getSystemNumberTop,
+    postGrantInfo,
     getAnalyzeInsightList,
     getAnalyzeRefChartMeta,
 }

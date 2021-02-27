@@ -42,7 +42,11 @@ const state = {
     // 两个对象之间出现隐患次数前top的设备的对比
     by_device_top: {},
     // 两个对象之间出现隐患次数前top的系统的对比
-    by_sys_top: {}
+    by_sys_top: {},
+
+//    存放要授权的信息
+    grant_param: {},
+    grant_info: {}
 }
 
 //getters
@@ -194,6 +198,12 @@ const actions = {
     getSystemNumberTop(context) {
         dataService.getSystemNumberTop(state.params, function (response) {
             context.commit('changeSystemNumberTop', response)
+        })
+    },
+//    发送授权信息
+    postGrantInfo(context) {
+        dataService.postGrantInfo(state.grant_param, function (response) {
+            context.commit('changeGrantInfo', response)
         })
     },
 }
@@ -351,6 +361,24 @@ const mutations = {
             alert("出错了")
         }
     },
+//    存放授权内容
+    changeGrantParam(state, data) {
+        state.grant_param = data.params
+    },
+    changeGrantInfo(state, data) {
+        if (data.code === 10000) {
+            this.$message({
+                message: '授权成功',
+                type: 'success'
+            });
+        } else {
+            this.$message({
+                showClose: true,
+                message: '授权失败',
+                type: 'error'
+            });
+        }
+    }
 }
 
 

@@ -13,6 +13,7 @@
     </div>
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>{{ context.title }}</span>
+      <el-button type="text" @click="grantChart" style="float: right; vertical-align: middle">授权</el-button>
       <el-select v-model="top_value" placeholder="请选择" size="mini" style="max-width: 8em;">
         <el-option
             v-for="item in top_option"
@@ -110,6 +111,15 @@ export default {
     filterTop() {
       // alert(this.top_value)
     },
+    grantChart() {
+      let params = new URLSearchParams();
+      params.append('level', this.context.level);
+      params.append('title', this.context.title);
+      params.append('object1', this.o1);
+      params.append('object2', this.o2);
+      this.$store.commit('get_comparison/changeGrantParam', {params: params})
+      this.$store.dispatch('get_comparison/postGrantInfo')
+    }
   },
   computed: {
     getTop() {

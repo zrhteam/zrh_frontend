@@ -8,6 +8,7 @@
     </div>
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px;">
       <span>{{ context.title }}</span>
+      <el-button type="text" @click="grantChart" style="float: right; vertical-align: middle">授权</el-button>
     </div>
     <div id="id_by_check" style="height: 80%; width: 100%" v-if="context.id==='id_by_check'">
     </div>
@@ -24,7 +25,7 @@ export default {
   data() {
     return {
       obj1: this.$store.state.get_comparison.object1,
-      obj2: this.$store.state.get_comparison.object2
+      obj2: this.$store.state.get_comparison.object2,
     }
   },
   props: ['context'],
@@ -128,6 +129,18 @@ export default {
         });
       })
     },
+    grantChart() {
+      let arr = this.getData;
+      console.log("arr", arr[0])
+      console.log("arr", arr[1])
+      let params = new URLSearchParams();
+      params.append('level', this.context.level);
+      params.append('title', this.context.title);
+      params.append('project1', arr[0]);
+      params.append('project2', arr[1]);
+      this.$store.commit('get_comparison/changeGrantParam', {params: params})
+      this.$store.dispatch('get_comparison/postGrantInfo')
+    }
   },
   computed: {
     getData() {

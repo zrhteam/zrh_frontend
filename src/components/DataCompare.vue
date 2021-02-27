@@ -58,7 +58,8 @@
             v-if="isShow"
             :context="{
                     title:'检查次数对比',
-                    id:'id_by_check'}"
+                    id:'id_by_check',
+                    level: this.level}"
         ></DoughnutChart>
       </el-col>
       <el-col :span="8" style="height: 25%">
@@ -66,7 +67,8 @@
             v-if="isShow"
             :context="{
                     title:'项目数量对比',
-                    id:'id_by_prj'}"
+                    id:'id_by_prj',
+                    level: this.level}"
         ></DoughnutChart>
       </el-col>
       <el-col :span="8" style="height: 25%">
@@ -74,7 +76,8 @@
             v-if="isShow"
             :context="{
                     title:'各风险等级隐患数量对比',
-                    id:'id_risk_level'}"></RiskLevelYear>
+                    id:'id_risk_level',
+                    level: this.level}"></RiskLevelYear>
       </el-col>
       <el-col :span="8" style="height: 50%">
         <TopCompare
@@ -82,7 +85,8 @@
             :context="{
                     title:'前top分布区域隐患数量对比',
                     id1:'id_area_o1',
-                    id2:'id_area_o2'}"
+                    id2:'id_area_o2',
+                    level: this.level}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -91,7 +95,8 @@
             :context="{
                     title:'前top致因阶段隐患数量对比',
                     id1:'id_stage_o1',
-                    id2:'id_stage_o2'}"
+                    id2:'id_stage_o2',
+                    level: this.level}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -100,7 +105,8 @@
             :context="{
                     title:'前top隐患数量对比',
                     id1:'id_risk_o1',
-                    id2:'id_risk_o2'}"
+                    id2:'id_risk_o2',
+                    level: this.level}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -109,7 +115,8 @@
             :context="{
                     title:'隐患数量前top组件对比',
                     id1:'id_module_top1',
-                    id2:'id_module_top2'}"
+                    id2:'id_module_top2',
+                    level: this.level}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -118,7 +125,8 @@
             :context="{
                     title:'隐患数量前top设备对比',
                     id1:'id_equip_top1',
-                    id2:'id_equip_top2'}"
+                    id2:'id_equip_top2',
+                    level: this.level}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -127,7 +135,8 @@
             :context="{
                     title:'隐患数量前top系统对比',
                     id1:'id_system_top1',
-                    id2:'id_system_top2'}"
+                    id2:'id_system_top2',
+                    level: this.level}"
         ></TopCompare>
       </el-col>
       <el-col :span="24" style="height: 50%">
@@ -136,7 +145,8 @@
             :context="{
                     title:'前top专业隐患数量对比',
                     id1:'id_major_o1',
-                    id2:'id_major_o2'}"
+                    id2:'id_major_o2',
+                    level: this.level}"
         ></DrillDown>
       </el-col>
     </el-col>
@@ -158,9 +168,11 @@ export default {
       treeObj: this.$store.state.get_login.grant_data.data.value,
       defaultProps: {
         children: 'children',
-        label: 'label'
+        label: 'label',
+        level: this.level
       },
       radio: '3',
+      level: 'project',
       obj1: this.$store.state.get_comparison.object1,
       obj2: this.$store.state.get_comparison.object2,
       isShow: false
@@ -199,15 +211,14 @@ export default {
       }
     },
     submit() {
-      let level = '';
       if (this.radio === '1') {
-        level = 'headquarter'
+        this.level = 'headquarter'
       } else if (this.radio === '2') {
-        level = 'region'
+        this.level = 'region'
       } else if (this.radio === '3') {
-        level = 'project'
+        this.level = 'project'
       } else if (this.radio === '4') {
-        level = 'check'
+        this.level = 'check'
       }
       if(this.obj1[this.obj1.length - 1] === ',') {
         this.obj1 = this.obj1.substr(0, this.obj1.length - 1)
@@ -216,7 +227,7 @@ export default {
         this.obj2 = this.obj2.substr(0, this.obj2.length - 1)
       }
       let param = new URLSearchParams();
-      param.append('level', level);
+      param.append('level', this.level);
       param.append('object1', this.obj1);
       param.append('object2', this.obj2);
       this.$store.commit('get_comparison/changeParams', {params: param})

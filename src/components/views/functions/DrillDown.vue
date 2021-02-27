@@ -10,6 +10,7 @@
     </div>
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>{{ context.title }}</span>
+      <el-button type="text" @click="grantChart" style="float: right; vertical-align: middle">授权</el-button>
     </div>
     <el-col :span="6" style="height: 100%">
       <div id='id_major_o1' style="height: 50%;"></div>
@@ -130,7 +131,6 @@ export default {
     },
     nextDrawBarChart(id, arr) {
       this.$nextTick(_ => {
-            console.log('arr', arr)
             let myChart = this.$echarts.init(document.getElementById(id))
             bar_option['dataset']['source'] = arr
             myChart.setOption(bar_option);
@@ -219,14 +219,21 @@ export default {
         }
         return 0;
       }
+    },
+    grantChart() {
+      let params = new URLSearchParams();
+      params.append('level', this.context.level);
+      params.append('title', this.context.title);
+      params.append('object1', this.major_o1);
+      params.append('object2', this.major_o2);
+      this.$store.commit('get_comparison/changeGrantParam', {params: params})
+      this.$store.dispatch('get_comparison/postGrantInfo')
     }
   },
   computed: {
     getTop() {
       let data;
       if (this.context.id1 === 'id_major_o1') {
-        this.o1 = []
-        this.o2 = []
         data = this.$store.state.get_comparison.by_major
         for (let i in data['object1']) {
           let obj = {
