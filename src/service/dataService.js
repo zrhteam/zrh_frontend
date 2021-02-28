@@ -1239,6 +1239,18 @@ function getSystemNumberTop(param, callback) {
         })
 }
 
+//得到所有可被授权的对象
+function getAllUserName(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_all_user_name`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 //    发送授权信息
 function postGrantInfo(param, callback) {
     const url = `${dataServerUrl}/analyze/analysis_grant_info`
@@ -1360,6 +1372,7 @@ export default {
     getUnitNumberTop,
     getDeviceNumberTop,
     getSystemNumberTop,
+    getAllUserName,
     postGrantInfo,
     getAnalyzeInsightList,
     getAnalyzeRefChartMeta,

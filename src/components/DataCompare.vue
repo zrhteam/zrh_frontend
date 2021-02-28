@@ -244,6 +244,7 @@ export default {
       this.$store.dispatch('get_comparison/getUnitNumberTop')
       this.$store.dispatch('get_comparison/getDeviceNumberTop')
       this.$store.dispatch('get_comparison/getSystemNumberTop')
+      this.$store.dispatch('get_comparison/getAllUserName')
       this.$nextTick(() => {
         this.isShow = true
         // let data = this.$store.state.get_comparison.by_check

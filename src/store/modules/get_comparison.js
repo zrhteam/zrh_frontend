@@ -44,9 +44,10 @@ const state = {
     // 两个对象之间出现隐患次数前top的系统的对比
     by_sys_top: {},
 
-//    存放要授权的信息
+    //    存放要授权的信息
     grant_param: {},
-    grant_info: {}
+    // 存放所有可被授权的用户对象
+    all_user_name: []
 }
 
 //getters
@@ -198,6 +199,12 @@ const actions = {
     getSystemNumberTop(context) {
         dataService.getSystemNumberTop(state.params, function (response) {
             context.commit('changeSystemNumberTop', response)
+        })
+    },
+//    所有可被授权的用户
+    getAllUserName(context) {
+        dataService.getAllUserName(state.params, function (response) {
+            context.commit('changeAllUserName', response)
         })
     },
 //    发送授权信息
@@ -378,7 +385,16 @@ const mutations = {
                 type: 'error'
             });
         }
-    }
+    },
+//    所有可被授权的用户
+    changeAllUserName(state, data) {
+        if (data.code === 10000) {
+            // console.log("project_index", data.data)
+            state.all_user_name = data.data
+        } else {
+            alert("出错了")
+        }
+    },
 }
 
 

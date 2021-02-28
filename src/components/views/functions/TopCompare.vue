@@ -112,6 +112,7 @@ export default {
       // alert(this.top_value)
     },
     grantChart() {
+      console.log("aaa", this.$store.state.get_comparison.all_user_name)
       let params = new URLSearchParams();
       params.append('level', this.context.level);
       params.append('title', this.context.title);

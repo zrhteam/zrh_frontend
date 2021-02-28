@@ -2,7 +2,7 @@
   <!--  显示检查中各风险等级及其对应的隐患数量-->
   <!--  显示项目中各风险等级及其对应的隐患数量-->
 
-  <el-card class="box-card " shadow="never"
+  <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 2% 4% 0% 0%">
     <div style="display: none">
       {{ getRiskLevelData }}

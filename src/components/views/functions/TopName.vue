@@ -3,7 +3,7 @@
   <!--存放项目级出现次数排名前10的系统/设备/组件->3张列表-->
   <!--  <el-card class="box-card " shadow="never"-->
   <!--           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">-->
-  <el-card class="box-card " shadow="never"
+  <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 2% 4% 2% 0%">
     <div class="level4">
       <span>{{ context.title }}</span>
