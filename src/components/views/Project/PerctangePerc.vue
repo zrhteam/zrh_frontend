@@ -58,20 +58,30 @@ export default {
         // bar_option["xAxis"]["axisLabel"]["rotate"] = 45
         // myChart.setOption(bar_option);
         // console.log("arr", arr)
-        pie_option['series'][0]['data'] = arr
-        myChart.setOption(pie_option);
-        myChart.resize();
-        window.addEventListener('resize', function () {
+        if(arr.length != 0) {
+          pie_option['series'][0]['data'] = arr
+          myChart.setOption(pie_option);
           myChart.resize();
-        })
-        // const _this = this;
-        // const erd = elementResizeDetectorMaker();
-        // erd.listenTo(document.getElementById(this.context.id), element => {
-        //   _this.$nextTick(() => {
-        //     //监听到事件后执行的业务逻辑
-        //     myChart.resize();
-        //   });
-        // });
+          window.addEventListener('resize', function () {
+            myChart.resize();
+          })
+          const _this = this;
+          const erd = elementResizeDetectorMaker();
+          erd.listenTo(document.getElementById(this.context.id), element => {
+            _this.$nextTick(() => {
+              //监听到事件后执行的业务逻辑
+              myChart.resize();
+            });
+          });
+        }else if (this.context.id) {
+          this.$nextTick(() => {
+            const dom = document.getElementById(this.context.id)
+            dom.innerHTML = '暂无数据'
+            dom.style.color = '#ffffff'
+            dom.style.fontSize = '14px'
+            dom.removeAttribute("_echarts_instance_")
+          })
+        }
       })
     },
     sortNumber(attr, rev) {
