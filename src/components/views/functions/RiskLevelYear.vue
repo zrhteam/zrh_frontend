@@ -65,21 +65,30 @@ export default {
               ]
             }
             bar_option2['dataset']['source'] = arr
-            myChart.setOption(bar_option2);
-            myChart.resize();
-            window.addEventListener('resize', function () {
+            if (arr.length != 0) {
+              myChart.setOption(bar_option2);
               myChart.resize();
-            })
-            const _this = this;
-            const erd = elementResizeDetectorMaker();
-            erd.listenTo(document.getElementById(this.context.id), element => {
-              _this.$nextTick(() => {
-                //监听到事件后执行的业务逻辑
+              window.addEventListener('resize', function () {
                 myChart.resize();
+              })
+              const _this = this;
+              const erd = elementResizeDetectorMaker();
+              erd.listenTo(document.getElementById(this.context.id), element => {
+                _this.$nextTick(() => {
+                  //监听到事件后执行的业务逻辑
+                  myChart.resize();
+                });
               });
-            });
-          }
-      )
+            } else if (this.context.id) {
+              this.$nextTick(() => {
+                const dom = document.getElementById(this.context.id)
+                dom.innerHTML = '暂无数据'
+                dom.style.color = '#ffffff'
+                dom.style.fontSize = '14px'
+                dom.removeAttribute("_echarts_instance_")
+              })
+            }
+          })
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
@@ -106,7 +115,9 @@ export default {
       let data;
       if (this.context.id === 'id_risk_level') {
         this.level_year = []
-        data = this.$store.state.get_comparison.by_risk_level
+        // data = this.$store.state.get_comparison.by_risk_level
+        data = this.$store.state.get_headquarter.risk_level_year
+        console.log("dataaaa", data)
         let obj = ['object']
         let high = ['高风险']
         let mid = ['中风险']

@@ -46,7 +46,7 @@ export default {
           orient: 'vertical',
           top: 20,
           right: '2%',
-          textStyle:{
+          textStyle: {
             color: '#fff',
             fontSize: 12
           },
@@ -132,21 +132,31 @@ export default {
   },
   methods: {
     drawPieChart() {
-      let myChart = this.$echarts.init(document.getElementById('pie2'))
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getPrjHistoryPerception);
-      myChart.resize();
-      window.addEventListener('resize', function () {
+      if (this.getPrjHistoryPerception["series"][0]["data"].length != 0) {
+        let myChart = this.$echarts.init(document.getElementById('pie2'))
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(this.getPrjHistoryPerception);
         myChart.resize();
-      })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById("pie2"), element => {
-        _this.$nextTick(() => {
-          //监听到事件后执行的业务逻辑
+        window.addEventListener('resize', function () {
           myChart.resize();
+        })
+        const _this = this;
+        const erd = elementResizeDetectorMaker();
+        erd.listenTo(document.getElementById("pie2"), element => {
+          _this.$nextTick(() => {
+            //监听到事件后执行的业务逻辑
+            myChart.resize();
+          });
         });
-      });
+      }else if (document.getElementById("pie2")) {
+          this.$nextTick(() => {
+            const dom = document.getElementById(document.getElementById("pie2"))
+            dom.innerHTML = '暂无数据'
+            dom.style.color = '#ffffff'
+            dom.style.fontSize = '14px'
+            dom.removeAttribute("_echarts_instance_")
+          })
+        }
     }
   }
 }

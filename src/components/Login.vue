@@ -170,8 +170,8 @@ export default {
           // this.$router.push({path: '/register'});
         }// 超级用户权限
         else if (data.data.user_grant == '超级用户') {
-          this.$router.push({path: '/super_overview'});
-          // this.$router.push({path: '/data_compare'});
+          // this.$router.push({path: '/super_overview'});
+          this.$router.push({path: '/data_compare'});
           // this.$router.push({path: '/analyze'});
         }
       } else {
@@ -183,10 +183,10 @@ export default {
   created() {
     // this.username = 'headquarter1';
     // this.username = 'region1';
-    this.username = 'project1';
-    this.password = '123456';
-    // this.username = 'boss';
-    // this.password = 'iamboss';
+    // this.username = 'project1';
+    // this.password = '123456';
+    this.username = 'boss';
+    this.password = 'iamboss';
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});

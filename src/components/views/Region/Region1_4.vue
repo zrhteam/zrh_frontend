@@ -4,11 +4,11 @@
     <div style="display: none; ">
       {{ getRiskLevelData }}
     </div>
-      <div class="text item level4" style="padding-top: 15px; padding-bottom: 10px">
-        <span>隐患总量</span>
-      </div>
+    <div class="text item level4" style="padding-top: 15px; padding-bottom: 10px">
+      <span>隐患总量</span>
+    </div>
 
-    <div id = 'r_risk_level' style="height: 100%; width: 100%;"></div>
+    <div id='r_risk_level' style="height: 100%; width: 100%;"></div>
   </el-card>
 </template>
 
@@ -72,7 +72,7 @@ export default {
     this.drawBarChart();
   },
   methods: {
-    drawBarChart(){
+    drawBarChart() {
       let myChart = this.$echarts.init(document.getElementById('r_risk_level'))
       let arr = this.getRiskLevelData
       if (arr.length) {
@@ -80,7 +80,7 @@ export default {
           tooltip: {
             // trigger:'item',
             // formatter: '{b}:{d}%'
-        },
+          },
           dataset: {
             dimensions: ['risk', 'num'],
             source: arr
@@ -125,7 +125,7 @@ export default {
                   )
                 }
               },
-              label:{
+              label: {
                 show: true,
                 position: 'top',
                 textStyle: {
@@ -151,20 +151,27 @@ export default {
           ]
         };
         myChart.setOption(option);
-      }else{
-
-      }
-      myChart.resize();
-      window.addEventListener('resize', function (){
         myChart.resize();
-      })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById('r_risk_level'), element=>{
-        _this.$nextTick(() => {
+        window.addEventListener('resize', function () {
           myChart.resize();
+        })
+        const _this = this;
+        const erd = elementResizeDetectorMaker();
+        erd.listenTo(document.getElementById('r_risk_level'), element => {
+          _this.$nextTick(() => {
+            myChart.resize();
+          });
         });
-      });
+      }else if (document.getElementById("r_risk_level")) {
+        this.$nextTick(() => {
+          const dom = document.getElementById(document.getElementById("r_risk_level"))
+          dom.innerHTML = '暂无数据'
+          dom.style.color = '#ffffff'
+          dom.style.fontSize = '14px'
+          dom.removeAttribute("_echarts_instance_")
+        })
+      }
+
     }
   }
 }
@@ -172,10 +179,11 @@ export default {
 
 <style scoped>
 /*最外层透明*/
-/deep/ .el-table, /deep/ .el-table__expanded-cell{
+/deep/ .el-table, /deep/ .el-table__expanded-cell {
 
   background-color: transparent;
 }
+
 /* 表格内背景颜色 */
 /deep/ .el-table th,
 /deep/ .el-table tr,

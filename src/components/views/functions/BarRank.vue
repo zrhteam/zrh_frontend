@@ -40,23 +40,33 @@ export default {
         let myChart;
         myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
-        arr.sort(this.sortNumber('count', true))
-        bar_option['dataset']['source'] = arr
-        bar_option["xAxis"]["axisLabel"]["rotate"] = 45
-        bar_option["grid"]["y2"] = '30%'
-        myChart.setOption(bar_option);
-        myChart.resize();
-        window.addEventListener('resize', function () {
+        if (arr.length != 0) {
+          arr.sort(this.sortNumber('count', true))
+          bar_option['dataset']['source'] = arr
+          bar_option["xAxis"]["axisLabel"]["rotate"] = 45
+          bar_option["grid"]["y2"] = '30%'
+          myChart.setOption(bar_option);
           myChart.resize();
-        })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById(this.context.id), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
+          window.addEventListener('resize', function () {
             myChart.resize();
+          })
+          const _this = this;
+          const erd = elementResizeDetectorMaker();
+          erd.listenTo(document.getElementById(this.context.id), element => {
+            _this.$nextTick(() => {
+              //监听到事件后执行的业务逻辑
+              myChart.resize();
+            });
           });
-        });
+        } else if (this.context.id) {
+          this.$nextTick(() => {
+            const dom = document.getElementById(this.context.id)
+            dom.innerHTML = '暂无数据'
+            dom.style.color = '#ffffff'
+            dom.style.fontSize = '14px'
+            dom.removeAttribute("_echarts_instance_")
+          })
+        }
       })
     },
     sortNumber(attr, rev) {

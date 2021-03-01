@@ -376,12 +376,14 @@ exports.install = function (Vue, options) {
                 document.getElementById('check_part').style.display = 'block'
             }
         } else if (this.$store.state.get_login.grant_data.data.user_grant = "超级用户") {
-            // this.headNodeClick(data.label)
             if (node.level == 1) {//总部=》总部
                 this.headNodeClick(data.label)
-                document.getElementById('head_title1').innerHTML = data.label
-                document.getElementById('head_quarter').style.display = 'block'
-                document.getElementById('region_part').style.display = 'none'
+                setTimeout(() => {
+                    document.getElementById('head_title1').innerHTML = data.label
+                    document.getElementById('head_title2').innerHTML = data.label
+                    document.getElementById('head_quarter').style.display = 'block'
+                    document.getElementById('region_part').style.display = 'none'
+                }, 200);
             } else if (node.level == 2) {//总部=》区域
                 this.regionNodeClick(data.label)
                 document.getElementById('region_title1').innerHTML = document.getElementById('head_title1').innerHTML

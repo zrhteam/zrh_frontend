@@ -91,7 +91,7 @@ export default {
   },
   updated() {
     this.drawBarChart()
-  },  mounted() {
+  }, mounted() {
     this.drawBarChart();
   },
 
@@ -101,18 +101,28 @@ export default {
       let arr = this.getRiskLevelData
       bar_option["grid"]["y2"] = "20%"
       bar_option["dataset"]["source"] = arr
-      myChart.setOption(bar_option);
-      myChart.resize();
-      window.addEventListener('resize', function () {
+      if (arr.length != 0) {
+        myChart.setOption(bar_option);
         myChart.resize();
-      })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById('check_risk_level'), element => {
-        _this.$nextTick(() => {
+        window.addEventListener('resize', function () {
           myChart.resize();
+        })
+        const _this = this;
+        const erd = elementResizeDetectorMaker();
+        erd.listenTo(document.getElementById('check_risk_level'), element => {
+          _this.$nextTick(() => {
+            myChart.resize();
+          });
         });
-      });
+      } else if (this.context.id) {
+        this.$nextTick(() => {
+          const dom = document.getElementById(this.context.id)
+          dom.innerHTML = '暂无数据'
+          dom.style.color = '#ffffff'
+          dom.style.fontSize = '14px'
+          dom.removeAttribute("_echarts_instance_")
+        })
+      }
     }
   }
 }

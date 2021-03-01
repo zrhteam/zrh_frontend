@@ -1,18 +1,18 @@
 <template>
   <el-col :span="10" class="" style="height: 100%">
-<!--    <el-card class="box-card " shadow="never"-->
-<!--             style="background-color: transparent; height: 70%; margin: 0px 5px 5px 5px">-->
-      <!--          放地图-->
-      <div class="map_container" style="height: 66%; width: 100%; z-index:1; background-color: transparent">
-<!--        <div id="map_3"-->
-<!--             style="pointer-events:inherit; height: 100%; width: 100%;"></div>-->
-        <div :style="{height:'100%',width:'100%'}" ref="map_3"></div>
-<!--        <div id="map_4"-->
-<!--             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>-->
-      </div>
-      <!--          <div id="map" bordered style="pointer-events:inherit"></div>-->
-      <!--          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>-->
-<!--    </el-card>-->
+    <!--    <el-card class="box-card " shadow="never"-->
+    <!--             style="background-color: transparent; height: 70%; margin: 0px 5px 5px 5px">-->
+    <!--          放地图-->
+    <div class="map_container" style="height: 66%; width: 100%; z-index:1; background-color: transparent">
+      <!--        <div id="map_3"-->
+      <!--             style="pointer-events:inherit; height: 100%; width: 100%;"></div>-->
+      <div :style="{height:'100%',width:'100%'}" ref="map_3"></div>
+      <!--        <div id="map_4"-->
+      <!--             style="pointer-events:inherit; height: 100%; width: 100%; display: none"></div>-->
+    </div>
+    <!--          <div id="map" bordered style="pointer-events:inherit"></div>-->
+    <!--          <svg style="position: absolute; z-index: 8; width: 100%; height: 100%" pointer-events="none"></svg>-->
+    <!--    </el-card>-->
     <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
     <el-card class="box-card-t " shadow="never"
              style="background-color: transparent; height: 30%; margin: 2%">
@@ -36,7 +36,7 @@ import elementResizeDetectorMaker from "element-resize-detector";
 import {bar_option} from "@/utils/constants";
 import echarts from "echarts";
 //   import '../../node_modules/echarts/map/js/world.js'
-import  '../../../../node_modules/echarts/map/js/china.js'
+import '../../../../node_modules/echarts/map/js/china.js'
 
 export default {
   name: "Region3_3",
@@ -50,7 +50,6 @@ export default {
   computed: {
     getHighRiskRank() {
       let data = this.$store.state.get_region.high_risk_rank
-      console.log('高风险', data)
       let arr = []
       for (let i in data) {
         let obj = {
@@ -109,20 +108,30 @@ export default {
   },
   methods: {
     drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('risk_rank'))
-      myChart.setOption(this.getHighRiskRank);
-      myChart.resize();
-      window.addEventListener('resize', function () {
+      if (bar_option["dataset"]["source"].length != 0) {
+        let myChart = this.$echarts.init(document.getElementById('risk_rank'))
+        myChart.setOption(this.getHighRiskRank);
         myChart.resize();
-      })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById("risk_rank"), element => {
-        _this.$nextTick(() => {
-          //监听到事件后执行的业务逻辑
+        window.addEventListener('resize', function () {
           myChart.resize();
+        })
+        const _this = this;
+        const erd = elementResizeDetectorMaker();
+        erd.listenTo(document.getElementById("risk_rank"), element => {
+          _this.$nextTick(() => {
+            //监听到事件后执行的业务逻辑
+            myChart.resize();
+          });
         });
-      });
+      } else if (document.getElementById("risk_rank")) {
+        this.$nextTick(() => {
+          const dom = document.getElementById(document.getElementById("risk_rank"))
+          dom.innerHTML = '暂无数据'
+          dom.style.color = '#ffffff'
+          dom.style.fontSize = '14px'
+          dom.removeAttribute("_echarts_instance_")
+        })
+      }
     },
     // loadMap() {//加载地图
     //   this.map = L.map("map_3", {

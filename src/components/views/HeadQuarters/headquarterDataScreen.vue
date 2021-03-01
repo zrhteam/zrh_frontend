@@ -4,7 +4,7 @@
       <el-card class="title-box-card" shadow="never"
                style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
         <h4>
-          <span id="head_title1"
+          <span id="head_title2"
                 style="color: #ffffff; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; vertical-align: 45%; height: 100%">{{title1}}</span>
         </h4>
       </el-card>

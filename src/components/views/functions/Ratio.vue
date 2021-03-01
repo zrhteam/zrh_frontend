@@ -62,19 +62,29 @@ export default {
         myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
         pie_option["series"][0]["data"] = arr
-        myChart.setOption(pie_option);
-        myChart.resize();
-        window.addEventListener('resize', function () {
+        if (arr.length != 0) {
+          myChart.setOption(pie_option);
           myChart.resize();
-        })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById(this.context.id), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
+          window.addEventListener('resize', function () {
             myChart.resize();
+          })
+          const _this = this;
+          const erd = elementResizeDetectorMaker();
+          erd.listenTo(document.getElementById(this.context.id), element => {
+            _this.$nextTick(() => {
+              //监听到事件后执行的业务逻辑
+              myChart.resize();
+            });
           });
-        });
+        } else if (this.context.id) {
+          this.$nextTick(() => {
+            const dom = document.getElementById(this.context.id)
+            dom.innerHTML = '暂无数据'
+            dom.style.color = '#ffffff'
+            dom.style.fontSize = '14px'
+            dom.removeAttribute("_echarts_instance_")
+          })
+        }
       })
     },
     filterMajor(value) {
@@ -182,8 +192,8 @@ export default {
       } else if (this.context.id == 'id_region_system') {
         this.show = true
         data = this.$store.state.get_region.region_sys_ratio
-        for(let i in data) {
-          for(let j in data[i]) {
+        for (let i in data) {
+          for (let j in data[i]) {
             let obj = {
               name: '',
               value: ''
@@ -228,17 +238,17 @@ export default {
       arr.sort(this.sortNumber('value', true))
       let new_arr = []
       let obj = {
-          value: 0,
-          name: '其它'
-        }
-      for(let i = 0; i < arr.length; i++) {
-        if(i < 5) {
+        value: 0,
+        name: '其它'
+      }
+      for (let i = 0; i < arr.length; i++) {
+        if (i < 5) {
           new_arr.push(arr[i])
-        }else {
+        } else {
           obj.value += arr[i].value
         }
       }
-      if(obj.value > 0) {
+      if (obj.value > 0) {
         new_arr.push(obj)
       }
       return new_arr

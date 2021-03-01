@@ -134,21 +134,31 @@ export default {
   },
   methods: {
     drawPieChart() {
-      let myChart = this.$echarts.init(document.getElementById('pie2_2'))
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getCheckHistoryPerception);
-      myChart.resize();
-      window.addEventListener('resize', function () {
+      if (this.getCheckHistoryPerception['series'][0]["data"].length != 0) {
+        let myChart = this.$echarts.init(document.getElementById('pie2_2'))
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(this.getCheckHistoryPerception);
         myChart.resize();
-      })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById("pie2_2"), element => {
-        _this.$nextTick(() => {
-          //监听到事件后执行的业务逻辑
+        window.addEventListener('resize', function () {
           myChart.resize();
+        })
+        const _this = this;
+        const erd = elementResizeDetectorMaker();
+        erd.listenTo(document.getElementById("pie2_2"), element => {
+          _this.$nextTick(() => {
+            //监听到事件后执行的业务逻辑
+            myChart.resize();
+          });
         });
-      });
+      } else if (document.getElementById("pie2_2")) {
+        this.$nextTick(() => {
+          const dom = document.getElementById(document.getElementById("pie2_2"))
+          dom.innerHTML = '暂无数据'
+          dom.style.color = '#ffffff'
+          dom.style.fontSize = '14px'
+          dom.removeAttribute("_echarts_instance_")
+        })
+      }
     }
   }
 }

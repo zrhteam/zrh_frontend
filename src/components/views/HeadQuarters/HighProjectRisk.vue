@@ -1,14 +1,14 @@
 <template>
   <el-col :span="10" class="" style="height: 100%">
-<!--    <el-card class="box-card " shadow="never"-->
-<!--             style="background-color: transparent; height: 67%; margin: 0px 5px 5px 5px">-->
-      <!--          放地图-->
-      <div class="map_container" style="height: 66%; width: 100%; z-index:1; background-color: transparent">
-<!--        <div id="map_5"-->
-<!--             style="pointer-events:inherit; height: 100%; width: 100%;"></div>-->
-        <div :style="{height:'100%',width:'100%'}" ref="map_5"></div>
-      </div>
-<!--    </el-card>-->
+    <!--    <el-card class="box-card " shadow="never"-->
+    <!--             style="background-color: transparent; height: 67%; margin: 0px 5px 5px 5px">-->
+    <!--          放地图-->
+    <div class="map_container" style="height: 66%; width: 100%; z-index:1; background-color: transparent">
+      <!--        <div id="map_5"-->
+      <!--             style="pointer-events:inherit; height: 100%; width: 100%;"></div>-->
+      <div :style="{height:'100%',width:'100%'}" ref="map_5"></div>
+    </div>
+    <!--    </el-card>-->
     <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
     <el-card class="box-card-t " shadow="never"
              style="background-color: transparent; height: 30%; margin: 2%">
@@ -34,7 +34,7 @@ import elementResizeDetectorMaker from "element-resize-detector";
 // import * as d3 from "d3/dist/d3";
 import echarts from "echarts";
 //   import '../../node_modules/echarts/map/js/world.js'
-import  '../../../../node_modules/echarts/map/js/china.js'
+import '../../../../node_modules/echarts/map/js/china.js'
 
 export default {
   name: "HighProjectRisk",
@@ -59,7 +59,6 @@ export default {
         arr.push(obj)
       }
       arr.sort(this.sortNumber('count', true))
-      console.log(arr)
       let option = {
         tooltip: {},
         dataset: {
@@ -181,21 +180,31 @@ export default {
   },
   methods: {
     drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('number_histogram'))
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getNumberHistogram);
-      myChart.resize();
-      window.addEventListener('resize', function () {
+      if (this.getNumberHistogram["dataset"]["source"].length != 0) {
+        let myChart = this.$echarts.init(document.getElementById('number_histogram'))
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(this.getNumberHistogram);
         myChart.resize();
-      })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById("risk_rank"), element => {
-        _this.$nextTick(() => {
-          //监听到事件后执行的业务逻辑
+        window.addEventListener('resize', function () {
           myChart.resize();
+        })
+        const _this = this;
+        const erd = elementResizeDetectorMaker();
+        erd.listenTo(document.getElementById("risk_rank"), element => {
+          _this.$nextTick(() => {
+            //监听到事件后执行的业务逻辑
+            myChart.resize();
+          });
         });
-      });
+      }else if('number_histogram'){
+        this.$nextTick(() => {
+          const dom = document.getElementById('number_histogram')
+          dom.innerHTML = '暂无数据'
+          dom.style.color = '#ffffff'
+          dom.style.fontSize = '14px'
+          dom.removeAttribute("_echarts_instance_")
+        })
+      }
     },
     // loadMap() {//加载地图
     //   this.map = L.map("map_5", {
