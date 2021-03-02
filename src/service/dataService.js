@@ -1263,6 +1263,18 @@ function postGrantInfo(param, callback) {
         })
 }
 
+//查询该用户下的授权数据
+function getGrantInfo(param, callback) {
+    const url = `${dataServerUrl}/analyze/analysis_query_grant`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 
 
 // Analyze Part
@@ -1374,6 +1386,7 @@ export default {
     getSystemNumberTop,
     getAllUserName,
     postGrantInfo,
+    getGrantInfo,
     getAnalyzeInsightList,
     getAnalyzeRefChartMeta,
 }

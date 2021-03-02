@@ -5,8 +5,8 @@ import dataService from '@/service/dataService'
 const state = {
     //向后端发送的参数
     params: {},
-    // //用户名
-    // username: '',
+    //登录时保存用户名
+    user_name: '',
     // //密码
     // password: null,
     //权限对应等级所包含的总部、区域、项目和检查
@@ -19,7 +19,11 @@ const state = {
 //    针对项目级的position
 
     now_node: -1,
-    expandedKeys: []
+    expandedKeys: [],
+//    查询该用户下的授权数据
+    grant_info: {},
+//    查询需发送用户名
+    param_name: {}
 
 }
 
@@ -45,6 +49,12 @@ const actions = {
         dataService.getLoginGrant(state.params, function (response) {
             context.commit('changeGrantData', response)
         })
+    },
+//    查询该用户下的授权数据
+    getGrantInfo(context) {
+        dataService.getGrantInfo(state.param_name, function (response) {
+            context.commit('changeGrantInfo', response)
+        })
     }
 }
 
@@ -52,6 +62,10 @@ const actions = {
 const mutations = {
     changeParams(state, data) {
         state.params = data.params
+    },
+    //登录时保存用户名
+    changeUserName(state, data) {
+        state.user_name = data.data
     },
     changePosition(state, data) {
         state.position = data.params
@@ -76,6 +90,18 @@ const mutations = {
         // debugger
         // console.log("change")
         state.expandedKeys = data.params
+    },
+//    查询该用户下的授权数据
+    changeGrantInfo(state, data) {
+        // debugger
+        // console.log("change")
+        state.grant_info = data
+    },
+//    查询需发送用户名
+    changeNameParam(state, data) {
+        // debugger
+        // console.log("change")
+        state.param_name = data.params
     },
 }
 

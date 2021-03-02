@@ -58,8 +58,7 @@
         background-repeat: no-repeat;
         background-size: 100% 100%;
         background-position: center center;
-
-
+        z-index: -99;
     }
 
 
@@ -194,7 +193,7 @@
 
     /*带标题的矩形框*/
     .box-card-t .el-card__body {
-        padding: 2% 6% 4% 6%;
+        padding: 2% 4% 2% 4%;
         height: 98%;
         /*width: 92%;*/
         background-size: 150% 150%;
@@ -244,7 +243,13 @@
 
     .el-popover {
         background: #062e48 !important;
-    / / 弹出框颜色
+    /* 弹出框颜色*/
+    }
+
+    /*弹出框标题*/
+    .el-popover__title {
+        /*颜色*/
+        color: #ffffff;
     }
 
     .el-tag {
@@ -256,7 +261,9 @@
 /*    按钮*/
     .el-button {
         padding: 0;
+        color: #ffffff;
     }
+
 
 </style>
 </body>

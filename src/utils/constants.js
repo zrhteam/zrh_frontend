@@ -37,6 +37,7 @@ export const bar_option = {
     },
     grid: {
         left: 35,
+        x2: '2%',
         y: '10%',
         y2: '50%'
     },
@@ -50,9 +51,9 @@ export const bar_option = {
                     color: new echarts.graphic.LinearGradient(
                         0, 0, 0, 1,
                         [
-                            {offset: 0, color: '#77b5b8'},
+                            {offset: 0, color: '#23dbdc'},
                             // {offset: 0.5, color: '#1f77a0'},
-                            {offset: 1, color: '#107480'}
+                            {offset: 1, color: '#1860b4'}
                         ]
                     )
                 }
@@ -163,6 +164,14 @@ export const pie_option = {
     tooltip: {
         formatter: '{b}:{c} ({d}%)'
     },
+    legend: {
+        orient: 'vertical',
+        left: '10',
+        textStyle: {
+            color: '#ffffff',
+            fontSize: 12
+        }
+    },
     // legend: {
     //   type: "scroll",
     //   orient: 'vertical',
@@ -179,7 +188,7 @@ export const pie_option = {
         {
             type: 'pie',
             radius: '60%',
-            center: ['50%', '50%'],
+            center: ['60%', '60%'],
             // minAngle: 5, //最小的扇区角度
             // startAngle: 45, //起始角度
             label: {
@@ -212,42 +221,51 @@ export const pie_option = {
                 },
                 normal: {
                     color: function (params) {
+                        //自定义颜色
                         let colorList = [
-                            {
-                                c1: '#fce5ca',
-                                c2: '#ff9d62'
-                            },
-                            {
-                                c1: '#63e587',
-                                c2: '#5fe2e4'
-                            },
-                            {
-                                c1: '#db6400',
-                                c2: '#ceb895'
-                            },
-                            {
-                                c1: '#e8e87e',
-                                c2: '#a1a170'
-                            },
-                            {
-                                c1: '#007965',
-                                c2: '#b1e2da'
-                            },
-                            {
-                                c1: '#7c9473',
-                                c2: '#d6efc7'
-                            }];
-                        return new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
-                            offset: 0,
-                            color: colorList[(params.dataIndex) % colorList.length].c1
-                        }, {
-                            offset: 1,
-                            color: colorList[(params.dataIndex) % colorList.length].c2
-                        }])
-                    }
-                }
-            },
+                            '#3d5bfb', '#7c00ff', '#11aeff', '#27e0a6', '#00c800', '#e8395d',
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    //渐变色
+                //     color: function (params) {
+                //         let colorList = [
+                //             {
+                //                 c1: '#fce5ca',
+                //                 c2: '#ff9d62'
+                //             },
+                //             {
+                //                 c1: '#63e587',
+                //                 c2: '#5fe2e4'
+                //             },
+                //             {
+                //                 c1: '#db6400',
+                //                 c2: '#ceb895'
+                //             },
+                //             {
+                //                 c1: '#e8e87e',
+                //                 c2: '#a1a170'
+                //             },
+                //             {
+                //                 c1: '#007965',
+                //                 c2: '#b1e2da'
+                //             },
+                //             {
+                //                 c1: '#7c9473',
+                //                 c2: '#d6efc7'
+                //             }];
+                //         return new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                //             offset: 0,
+                //             color: colorList[(params.dataIndex) % colorList.length].c1
+                //         }, {
+                //             offset: 1,
+                //             color: colorList[(params.dataIndex) % colorList.length].c2
+                //         }])
+                // }
+            }
+        },
 
-        }
-    ]
-};
+}
+]
+}
+;

@@ -129,7 +129,9 @@ export default {
       let params = new URLSearchParams();
       params.append('username', this.username);
       params.append('password', this.password);
+      let _this = this
       this.$store.commit('get_login/changeParams', {params: params})
+      this.$store.commit('get_login/changeUserName', {data: _this.username})
       // this.$store.state.get_login.params = params
       this.$store.dispatch('get_login/getLoginGrant')
       // //在页面加载时读取sessionStorage里的状态信息
@@ -181,12 +183,12 @@ export default {
     }
   },
   created() {
-    // this.username = 'headquarter1';
+    this.username = 'headquarter1';
     // this.username = 'region1';
     // this.username = 'project1';
-    // this.password = '123456';
-    this.username = 'boss';
-    this.password = 'iamboss';
+    this.password = '123456';
+    // this.username = 'boss';
+    // this.password = 'iamboss';
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
@@ -394,6 +396,6 @@ input::-webkit-input-placeholder {
   float: right;
   display: block;
   margin-right: auto;
-
 }
+
 </style>
