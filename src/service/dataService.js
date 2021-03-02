@@ -267,6 +267,24 @@ function getHeadProjectRank(param, callback) {
         })
 }
 
+//置地总部EHS数据大屏页面
+/*
+*FunctionName: getHeadDangerProblem
+* Purpose: 显示该总部存在的红线问题及其对应的原因
+* Parameter: head_name
+* Return: 返回该总部存在的红线问题及其对应原因的json文件
+ */
+function getHeadDangerProblem(param, callback) {
+    const url = `${dataServerUrl}/headquarter/head_danger_problem`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 //地产事业部页面
 /*
 *FunctionName: getRegionInitIndex
@@ -494,6 +512,24 @@ function getRegionStageRatio(param, callback) {
  */
 function getRegionAreaRatio(param, callback) {
     const url = `${dataServerUrl}/region/region_area_ratio`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+//地产事业部页面
+/*
+*FunctionName: getRegionDangerProblem
+* Purpose: 显示该区域存在的红线问题及其对应原因
+* Parameter: region_name
+* Return: 返回该区域存在的红线问题及其对应原因的json文件
+ */
+function getRegionDangerProblem(param, callback) {
+    const url = `${dataServerUrl}/region/region_danger_problem`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -757,6 +793,24 @@ function getProjectRules(param, callback) {
         })
 }
 
+//项目级页面
+/*
+*FunctionName: getProjectDangerProblem
+* Purpose: 显示该项目中存在的红线问题及可能导致该问题的原因
+* Parameter: project_name
+* Return: 返回该项目中存在的红线问题和导致该问题的原因的json文件
+ */
+function getProjectDangerProblem(param, callback) {
+    const url = `${dataServerUrl}/project/project_danger_problem`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 //以下的对象是每一次检查***************************************
 
 //检查记录
@@ -989,6 +1043,26 @@ function getCheckDevice(param, callback) {
 function getCheckUnit(param, callback) {
     // const url = `${dataServerUrl}/check/check_unit`;
     const url = `${dataServerUrl}/check/check_module`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+
+//检查记录
+/*
+*FunctionName: getCheckDangerProblem
+* Purpose: 显示该次检查记录中存在的红线问题及导致其存在的原因
+* Parameter: check_name
+* Return: 返回该次检查记录中存在的红线问题及其原因的json文件
+ */
+function getCheckDangerProblem(param, callback) {
+    // const url = `${dataServerUrl}/check/check_unit`;
+    const url = `${dataServerUrl}/check/check_danger_problem`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -1330,6 +1404,7 @@ export default {
     getHeadStageRatio,
     getHeadAreaRatio,
     getHeadProjectRank,
+    getHeadDangerProblem,
     getRegionInitIndex,
     getInitRegionRiskLevel,
     getRegionRiskLevelYear,
@@ -1343,6 +1418,7 @@ export default {
     getRegionSystemRatio,
     getRegionStageRatio,
     getRegionAreaRatio,
+    getRegionDangerProblem,
     getInitProjectIndex,
     getInitProjectRiskLevel,
     getProjectRiskLevelYear,
@@ -1357,6 +1433,7 @@ export default {
     getProjectDeviceNumber,
     getProjectUnitNumber,
     getProjectRules,
+    getProjectDangerProblem,
     getCheckRiskLevel,
     getCheckLevelYear,
     getCheckRiskRatio,
@@ -1371,6 +1448,7 @@ export default {
     getCheckDevice,
     getCheckUnit,
     getCheckNumber,
+    getCheckDangerProblem,
     getProjectNumber,
     getMajorRiskNumber,
     getSystemRiskNumber,
