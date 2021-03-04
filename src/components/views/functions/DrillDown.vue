@@ -10,7 +10,18 @@
     </div>
     <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
       <span>{{ context.title }}</span>
-      <el-button type="text" @click="grantChart" style="float: right; vertical-align: middle">授权</el-button>
+      <el-button type="text" @click="dropGrantChart" v-if="!isShow" style="float: right; vertical-align: middle">取消授权
+      </el-button>
+      <el-select size="mini" v-model="value" v-if="isShow" filterable placeholder="授权" @change="grantChart"
+                 style="max-width: 6em; float: right">
+        <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
+      <!--      <el-button type="text" @click="grantChart" style="float: right; vertical-align: middle">授权</el-button>-->
     </div>
     <el-col :span="6" style="height: 100%">
       <div id='id_major_o1' style="height: 50%;"></div>
@@ -48,6 +59,9 @@ export default {
       o2: [],
       major_o1: [],
       major_o2: [],
+      isShow: true,
+      options: [],
+      value: ''
     }
   },
   methods: {
@@ -92,11 +106,11 @@ export default {
               });
             });
 
-            myChart = this.$echarts.init(document.getElementById(this.context.id2))
-            bar_option['dataset']['source'] = this.major_o2
-            myChart.setOption(bar_option);
-
-            myChart.on('click', function (params) {
+            setTimeout(() => {
+              myChart = this.$echarts.init(document.getElementById(this.context.id2))
+              bar_option['dataset']['source'] = this.major_o2
+              myChart.setOption(bar_option);
+              myChart.on('click', function (params) {
               let sys = []
               for (let i in data['object2']) {
                 if (i === params.name) {
@@ -115,6 +129,9 @@ export default {
               }
               _this.nextDrawBarChart('id_sys_o2', sys)
             })
+            }, 100)
+            // myChart = this.$echarts.init(document.getElementById(this.context.id2))
+
 
             myChart.resize();
             window.addEventListener('resize', function () {
@@ -157,8 +174,8 @@ export default {
                     }
                   }
                 }
-                if(params.data.obj === 'object1') _this.nextDrawBarChart('id_equip_o1', arr)
-                else if(params.data.obj === 'object2') _this.nextDrawBarChart('id_equip_o2', arr)
+                if (params.data.obj === 'object1') _this.nextDrawBarChart('id_equip_o1', arr)
+                else if (params.data.obj === 'object2') _this.nextDrawBarChart('id_equip_o2', arr)
               }
               if (params.data.level === 'equipment') {
                 for (let i in data[params.data.obj]) {
@@ -180,8 +197,8 @@ export default {
                     }
                   }
                 }
-                if(params.data.obj === 'object1') _this.nextDrawBarChart('id_module_o1', arr)
-                else if(params.data.obj === 'object2') _this.nextDrawBarChart('id_module_o2', arr)
+                if (params.data.obj === 'object1') _this.nextDrawBarChart('id_module_o1', arr)
+                else if (params.data.obj === 'object2') _this.nextDrawBarChart('id_module_o2', arr)
               }
               // console.log('111', params)
             })
@@ -224,10 +241,15 @@ export default {
       let params = new URLSearchParams();
       params.append('level', this.context.level);
       params.append('title', this.context.title);
-      params.append('object1', this.major_o1);
-      params.append('object2', this.major_o2);
+      params.append('object1', this.$store.state.get_comparison.object1);
+      params.append('object2', this.$store.state.get_comparison.object2);
+      params.append('user_name', this.value);
       this.$store.commit('get_comparison/changeGrantParam', {params: params})
       this.$store.dispatch('get_comparison/postGrantInfo')
+      // this.isShow = !this.isShow
+    },
+    dropGrantChart() {
+      // this.isShow = !this.isShow
     }
   },
   computed: {
@@ -255,11 +277,40 @@ export default {
           this.major_o2.push(obj)
         }
       }
+      data = this.$store.state.get_comparison.all_user_name
+      this.options = []
+      for (let i in data) {
+        let obj = {
+          value: '',
+          key: ''
+        }
+        obj.value = data[i]
+        obj.key = data[i]
+        this.options.push(obj)
+      }
+      if (this.context.flag === 'grant') {
+        this.isShow = false
+      } else if (this.context.flag === 'origin') {
+        this.isShow = true
+      }
     },
   },
   updated() {
     this.drawBarChart()
   },
+  mounted() {
+    this.drawBarChart()
+  },
+  destroyed() {
+    let myChart = this.$echarts.init(document.getElementById("id_major_o1"))
+    window.addEventListener('resize', function () {
+      myChart.resize();
+    })
+    myChart = this.$echarts.init(document.getElementById("id_major_o2"))
+    window.addEventListener('resize', function () {
+      myChart.resize();
+    })
+  }
 }
 </script>
 

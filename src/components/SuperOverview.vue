@@ -1,14 +1,15 @@
 <template>
-  <el-row>
-    <el-col :span="6">
-      <div class="grid-content bg-purple">
-        <el-button type="primary" @click="enterDB">数据库可视化系统</el-button>
-      </div>
+  <div class="background" style="vertical-align: center">
+<!--    <img :src="imgSrc" width="100%" height="100%" alt="" />-->
+    <el-col :span="8" style="height: 100%">
+<!--      <div class="grid-content bg-purple">-->
+        <el-button type="primary" icon="el-icon-view" @click="enterDB" style="font-size: 30px; top: 60%;"></el-button>
+<!--      </div>-->
     </el-col>
-    <el-col :span="6">
-      <div class="grid-content bg-purple-light">
+    <el-col :span="4">
+<!--      <div class="grid-content bg-purple-light">-->
         <el-dropdown @command="handleCommand">
-          <el-button type="primary">
+          <el-button type="primary" style="font-size: 30px; top: 60%;">
             数据可视化系统<i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
           <el-dropdown-menu slot="dropdown">
@@ -16,20 +17,20 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-      </div>
+<!--      </div>-->
     </el-col>
-    <!--    可以考虑把数据分析和数据洞察分开-->
-    <el-col :span="6">
+    <!--    把数据分析和数据洞察分开-->
+    <el-col :span="4">
       <div class="grid-content bg-purple">
-        <el-button type="primary" @click="enterDataAnalysis">数据分析系统</el-button>
+        <el-button type="primary" @click="enterDataAnalysis" style="font-size: 50px; top: 60%;">数据分析系统</el-button>
       </div>
     </el-col>
-    <el-col :span="6">
+    <el-col :span="8">
       <div class="grid-content bg-purple">
-        <el-button type="primary" @click="enterDataInsight">数据洞察系统</el-button>
+        <el-button type="primary" @click="enterDataInsight" style="font-size: 30px; top: 60%;">数据洞察系统</el-button>
       </div>
     </el-col>
-  </el-row>
+    </div>
 </template>
 
 <script>
@@ -37,7 +38,8 @@ export default {
   name: "SuperOverview",
   data() {
     return {
-      headList: []
+      headList: [],
+      imgSrc: require('../assets/home_page.png')
     }
   },
   mounted() {
@@ -84,5 +86,17 @@ export default {
 </script>
 
 <style scoped>
-
+.background{
+    width:100%;
+    height:100%;  /**宽高100%是为了图片铺满屏幕 */
+    position: relative;
+}
+.background {
+  background: url("../assets/home_page.png") no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 </style>

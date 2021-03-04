@@ -5,144 +5,215 @@
                style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
         <h4>
           <span id="head_title2"
-                style="color: #ffffff; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; vertical-align: 45%; height: 100%">{{title1}}</span>
+                style="color: #ffffff; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; vertical-align: 45%; height: 100%">{{
+              title1
+            }}</span>
         </h4>
       </el-card>
     </el-row>
-    <el-row style="height: 4%;">
-      <el-button size="mini" round
-                   style="background-color: transparent; color: #ffffff; float: right"
-                 @click="outHeadDataScreen">返回
-      </el-button>
-    </el-row>
+    <el-row style="height: 100px;">
+      <el-col :span="4" style="height: 100%">
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="数据大屏" name="first" :key=" 'first' " lazy>
+          </el-tab-pane>
 
-<!--    <el-col :span="24" style="height: 95%;">-->
-      <!--      <el-row style="height: 10%;">-->
-      <!--        <el-col :span="4" style="height: 100%">-->
-      <!--          <el-card class="box-card " shadow="never"-->
-      <!--                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">-->
-      <!--            <el-image-->
-      <!--                style="width: 90%; height: 90%"-->
-      <!--                :src="url"-->
-      <!--                :fit="fit"></el-image>-->
-      <!--          </el-card>-->
-      <!--        </el-col>-->
-      <!--        <el-col :span="18" style="height: 100%;">-->
-      <!--          <el-card class="title-box-card" shadow="never"-->
-      <!--                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">-->
-      <!--            &lt;!&ndash;        <label style="color: #c4bcbc; font-family:宋体; height: 95%">中瑞恒可视化系统</label>&ndash;&gt;-->
-      <!--            &lt;!&ndash;            <label&ndash;&gt;-->
-      <!--            &lt;!&ndash;                style="color: #c4bcbc; font-family:Noto Sans SC; font-size: 1em; height: 80% ">{{ title1 }}</label>&ndash;&gt;-->
-      <!--          </el-card>-->
-      <!--        </el-col>-->
-      <!--        <el-col :span="2" style="height: 100%;">-->
-      <!--          <el-card class="box-card " shadow="never"-->
-      <!--                   style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">-->
-<!--                  <el-button size="mini" round-->
-<!--                             style="background-color: transparent; color: #ffffff"-->
-<!--                             @click="outHeadDataScreen">返回-->
-<!--                  </el-button>-->
-      <!--          </el-card>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
-      <el-row style="height: 80%;">
-        <el-col :span="8" style="height: 45%; margin-left:0.5%">
-          <Ratio
-              :context="{
+          <el-tab-pane label="授权页面" name="second" :key=" 'second' " lazy>
+          </el-tab-pane>
+
+          <!--         <el-tab-pane label="授权页面" name="second" :key=" 'second' " lazy>-->
+          <!--         </el-tab-pane>-->
+        </el-tabs>
+      </el-col>
+      <el-col :span="20" style="height: 100%; padding-top: 3%">
+        <el-button size="mini" round
+                   style="background-color: transparent; color: #ffffff; float: right;"
+                   @click="outHeadDataScreen">返回
+        </el-button>
+      </el-col>
+    </el-row>
+    <el-row v-if="isFirst" style="height: 75%;">
+      <div style="display: none">
+        {{ getName }}
+      </div>
+      <el-col :span="8" style="height: 48%; margin-left:0.5%">
+        <Ratio
+            :context="{
           title:'不同专业隐患数量',
-          id: 'id_head_major'
+          id: 'id_head_major',
         }"></Ratio>
-        </el-col>
-        <el-col :span="8" style="height: 45%; ">
-          <Ratio
-              :context="{
+      </el-col>
+      <el-col :span="8" style="height: 48%; ">
+        <Ratio
+            :context="{
           title:'不同致因阶段隐患数量',
           id: 'id_head_reason'
         }"></Ratio>
-        </el-col>
-        <el-col :span="8" style="height: 45%; width: 31.5%">
-          <Ratio
-              :context="{
+      </el-col>
+      <el-col :span="8" style="height: 48%; width: 32.5%">
+        <Ratio
+            :context="{
           title:'不同分布区域隐患数量',
           id: 'id_head_region'
         }"></Ratio>
-        </el-col>
-        <el-col :span="12" style="height: 45%; margin-top: 4%">
-          <BarRank
-              :context="{
+      </el-col>
+      <el-col :span="12" style="height: 48%; margin-top: 1%">
+        <BarRank
+            :context="{
           title:'各区域检查次数',
           id: 'id_head_rank1'}"
-          ></BarRank>
-        </el-col>
-        <el-col :span="12" style="height: 45%; margin-top: 4%">
-          <BarRank
-              :context="{
+        ></BarRank>
+      </el-col>
+      <el-col :span="12" style="height: 48%; margin-top: 1%">
+        <BarRank
+            :context="{
           title:'各区域在管项目数量',
           id: 'id_head_rank2'}"
-          ></BarRank>
+        ></BarRank>
+      </el-col>
+    </el-row>
+    <el-row v-if="isSecond" style="height: 75%;">
+      <el-col :span="24" style="height: 100%; flex-direction: row; overflow-x: scroll">
+        <el-col :span="24" class="level4" style="min-height: 30px" v-if="isShow">
+          <!--        <div class="level4" style="; padding-left: 10px">-->
+          <el-popover
+              placement="top-start"
+              title="粒度"
+              width="400"
+              trigger="hover">
+            <span style="color: #ffffff">{{ level }}</span>
+            <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">粒度
+            </el-button>
+          </el-popover>
+          <el-popover
+              placement="top-start"
+              title="object1"
+              width="400"
+              trigger="hover">
+            <span style="color: #ffffff">{{ obj1 }}</span>
+            <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">object1
+            </el-button>
+          </el-popover>
+          <el-popover
+              placement="top-start"
+              title="object2"
+              width="400"
+              trigger="hover"
+              style="color: #ffffff">
+            <span style="color: #ffffff">{{ obj2 }}</span>
+            <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">object2
+            </el-button>
+          </el-popover>
+
+          <!--        </div>-->
         </el-col>
-      </el-row>
-<!--    </el-col>-->
-<!--    <el-col :span="4" style="height: 89%; overflow: scroll">-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 6%; margin: 0; text-align: right">-->
-<!--        <el-button size="mini" round-->
-<!--                   style="background-color: transparent; color: #ffffff; vertical-align: top; text-align: right"-->
-<!--                   @click="outHeadDataScreen">返回-->
-<!--        </el-button>-->
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">-->
-<!--        <h6 style="color: #ffffff; font-family: Noto Sans SC; font-size: 0.6em;">可选择</h6>-->
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
-
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
-
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
-
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
-        <div style="display: none">
-          {{ getName }}
-        </div>
-        <!--        <TopName-->
-        <!--            :context="{title:'根据检查次数的区域排名（8）',-->
-        <!--            top_data:this.rank_by_check,-->
-        <!--            label1:'项目名称',-->
-        <!--            label2:'检查次数',-->
-        <!--        }"></TopName>-->
-
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
-
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
-
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
-
-<!--      </el-card>-->
-<!--      <el-card class="box-card " shadow="never"-->
-<!--               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">-->
-<!--        &lt;!&ndash;        <TopName&ndash;&gt;-->
-<!--        &lt;!&ndash;            :context="{title:'根据项目数量的区域排名（12）',&ndash;&gt;-->
-<!--        &lt;!&ndash;            top_data:this.rank_by_prj,&ndash;&gt;-->
-<!--        &lt;!&ndash;            label1:'项目名称',&ndash;&gt;-->
-<!--        &lt;!&ndash;            label2:'检查次数',&ndash;&gt;-->
-<!--        &lt;!&ndash;        }"></TopName>&ndash;&gt;-->
-
-<!--      </el-card>-->
-<!--    </el-col>-->
+        <el-col :span="8" style="height: 25%">
+          <DoughnutChart
+              v-if="isShows[0]"
+              :context="{
+                    title:this.titles[0],
+                    id:'id_by_check',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></DoughnutChart>
+        </el-col>
+        <el-col :span="8" style="height: 25%">
+          <DoughnutChart
+              v-if="isShows[1]"
+              :context="{
+                    title:this.titles[1],
+                    id:'id_by_prj',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></DoughnutChart>
+        </el-col>
+        <el-col :span="8" style="height: 25%">
+          <RiskLevelYear
+              v-if="isShows[2]"
+              :context="{
+                    title:this.titles[2],
+                    id:'id_risk_level',
+                    level: this.level,
+                    flag: 'grant'}"></RiskLevelYear>
+        </el-col>
+        <el-col :span="8" style="height: 50%">
+          <TopCompare
+              v-if="isShows[3]"
+              :context="{
+                    title:this.titles[3],
+                    id1:'id_area_o1',
+                    id2:'id_area_o2',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></TopCompare>
+        </el-col>
+        <el-col :span="8" style="height: 50%">
+          <TopCompare
+              v-if="isShows[4]"
+              :context="{
+                    title:this.titles[4],
+                    id1:'id_stage_o1',
+                    id2:'id_stage_o2',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></TopCompare>
+        </el-col>
+        <el-col :span="8" style="height: 50%">
+          <TopCompare
+              v-if="isShows[5]"
+              :context="{
+                    title:this.titles[5],
+                    id1:'id_risk_o1',
+                    id2:'id_risk_o2',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></TopCompare>
+        </el-col>
+        <el-col :span="8" style="height: 50%">
+          <TopCompare
+              v-if="isShows[6]"
+              :context="{
+                    title:this.titles[6],
+                    id1:'id_module_top1',
+                    id2:'id_module_top2',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></TopCompare>
+        </el-col>
+        <el-col :span="8" style="height: 50%">
+          <TopCompare
+              v-if="isShows[7]"
+              :context="{
+                    title:this.titles[7],
+                    id1:'id_equip_top1',
+                    id2:'id_equip_top2',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></TopCompare>
+        </el-col>
+        <el-col :span="8" style="height: 50%">
+          <TopCompare
+              v-if="isShows[8]"
+              :context="{
+                    title:this.titles[8],
+                    id1:'id_system_top1',
+                    id2:'id_system_top2',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></TopCompare>
+        </el-col>
+        <el-col :span="24" style="height: 50%">
+          <DrillDown
+              v-if="isShows[9]"
+              :context="{
+                    title:this.titles[9],
+                    id1:'id_major_o1',
+                    id2:'id_major_o2',
+                    level: this.level,
+                    flag: 'grant'}"
+          ></DrillDown>
+        </el-col>
+      </el-col>
+    </el-row>
   </el-row>
 </template>
 
@@ -155,10 +226,16 @@ import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
 import Ratio from "@/components/views/functions/Ratio.vue";
 import BarRank from "@/components/views/functions/BarRank.vue";
+import DoughnutChart from "@/components/views/functions/DoughnutChart.vue";
+import TopCompare from "@/components/views/functions/TopCompare.vue";
+import DrillDown from "@/components/views/functions/DrillDown.vue";
 
 export default {
   name: "headquarterOverview",
   components: {
+    DrillDown,
+    TopCompare,
+    DoughnutChart,
     BarRank,
     Ratio,
     RiskLevelYear,
@@ -181,10 +258,72 @@ export default {
       let prj_small = document.getElementById('head_small');
       prj_small.style.display = 'none'
     },
+    handleClick(tab, event) {
+      // console.log(tab, event)
+      if (tab.name === 'first') {
+        this.isFirst = true
+        this.isSecond = false
+      } else if (tab.name === 'second') {
+        this.isFirst = false
+        this.isSecond = true
+      }
+      setTimeout(function () {
+        document.getElementById('head_small').style.display = 'block'
+      }, 100);
+    }
   },
   computed: {
     getName() {
-      let data = this.$store.state.get_headquarter.rank_by_check
+      let data = this.$store.state.get_login.grant_info.data
+      for (let i in data) {
+        for (let j in this.titles) {
+          if (data[i].title === this.titles[j]) {
+            this.isShow = true
+            this.isShows[j] = true
+            this.level = data[i].level
+            this.obj1 = data[i].object1
+            this.obj2 = data[i].object2
+            let param = new URLSearchParams();
+            param.append('level', data[i].level);
+            param.append('object1', data[i].object1);
+            param.append('object2', data[i].object2);
+            this.$store.commit('get_comparison/changeParams', {params: param})
+            this.$store.commit('get_comparison/changeObject1', {object1: data[i].object1})
+            this.$store.commit('get_comparison/changeObject2', {object2: data[i].object2})
+          }
+        }
+      }
+      if (this.isShows[0] == true) {
+        this.$store.dispatch('get_comparison/getCheckNumber')
+      }
+      if (this.isShows[1] == true) {
+        this.$store.dispatch('get_comparison/getProjectNumber')
+      }
+      if (this.isShows[2] == true) {
+        this.$store.dispatch('get_comparison/getRiskLevel')
+      }
+      if (this.isShows[3] == true) {
+        this.$store.dispatch('get_comparison/getAreaRisk')
+      }
+      if (this.isShows[4] == true) {
+        this.$store.dispatch('get_comparison/getStageRisk')
+      }
+      if (this.isShows[5] == true) {
+        this.$store.dispatch('get_comparison/getTopNumber')
+      }
+      if (this.isShows[6] == true) {
+        this.$store.dispatch('get_comparison/getUnitNumberTop')
+      }
+      if (this.isShows[7] == true) {
+        this.$store.dispatch('get_comparison/getDeviceNumberTop')
+      }
+      if (this.isShows[8] == true) {
+        this.$store.dispatch('get_comparison/getSystemNumberTop')
+      }
+      if (this.isShows[9] == true) {
+        this.$store.dispatch('get_comparison/getMajorRiskNumber')
+      }
+      data = this.$store.state.get_headquarter.rank_by_check
       for (let i in data) {
         let obj = {
           name: '',
@@ -245,7 +384,16 @@ export default {
         key: 'area'
       }],
       rank_by_check: [],
-      rank_by_prj: []
+      rank_by_prj: [],
+      activeName: 'first',
+      isFirst: true,
+      isSecond: false,
+      level: '',
+      obj1: '',
+      obj2: '',
+      titles: ['检查次数对比', "项目数量对比", '各风险等级隐患数量对比', '前top分布区域隐患数量对比', '前top致因阶段隐患数量对比', '前top隐患数量对比', '隐患数量前top组件对比', '隐患数量前top设备对比', '隐患数量前top系统对比', '前top专业隐患数量对比'],
+      isShow: false,
+      isShows: [false, false, false, false, false, false, false, false, false, false]
     };
   },
   created() {

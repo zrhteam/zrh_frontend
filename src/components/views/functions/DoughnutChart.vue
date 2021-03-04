@@ -8,7 +8,17 @@
     </div>
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px;">
       <span>{{ context.title }}</span>
-      <el-button type="text" @click="grantChart" style="float: right; vertical-align: middle">授权</el-button>
+      <el-button type="text" @click="dropGrantChart" v-if="!isShow" style="float: right; vertical-align: middle">取消授权
+      </el-button>
+      <el-select size="mini" v-model="value" v-if="isShow" filterable placeholder="授权" @change="grantChart"
+                 style="max-width: 6em; float: right">
+        <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
     </div>
     <div id="id_by_check" style="height: 80%; width: 100%" v-if="context.id==='id_by_check'">
     </div>
@@ -26,6 +36,9 @@ export default {
     return {
       obj1: this.$store.state.get_comparison.object1,
       obj2: this.$store.state.get_comparison.object2,
+      options: [],
+      value: '',
+      isShow: true
     }
   },
   props: ['context'],
@@ -72,39 +85,12 @@ export default {
                 },
                 normal: {
                   color: function (params) {
+                    //自定义颜色
                     let colorList = [
-                      {
-                        c1: '#fce5ca',
-                        c2: '#ff9d62'
-                      },
-                      {
-                        c1: '#63e587',
-                        c2: '#5fe2e4'
-                      },
-                      {
-                        c1: '#db6400',
-                        c2: '#ceb895'
-                      },
-                      {
-                        c1: '#e8e87e',
-                        c2: '#a1a170'
-                      },
-                      {
-                        c1: '#007965',
-                        c2: '#b1e2da'
-                      },
-                      {
-                        c1: '#7c9473',
-                        c2: '#d6efc7'
-                      }];
-                    return new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
-                      offset: 0,
-                      color: colorList[(params.dataIndex) % colorList.length].c1
-                    }, {
-                      offset: 1,
-                      color: colorList[(params.dataIndex) % colorList.length].c2
-                    }])
-                  }
+                      '#3d5bfb', '#7c00ff', '#11aeff', '#27e0a6', '#00c800', '#e8395d',
+                    ];
+                    return colorList[params.dataIndex]
+                  },
                 }
               },
               labelLine: {
@@ -130,16 +116,18 @@ export default {
       })
     },
     grantChart() {
-      let arr = this.getData;
-      console.log("arr", arr[0])
-      console.log("arr", arr[1])
       let params = new URLSearchParams();
       params.append('level', this.context.level);
       params.append('title', this.context.title);
-      params.append('project1', arr[0]);
-      params.append('project2', arr[1]);
+      params.append('object1', this.$store.state.get_comparison.object1);
+      params.append('object2', this.$store.state.get_comparison.object2);
+      params.append('user_name', this.value);
       this.$store.commit('get_comparison/changeGrantParam', {params: params})
       this.$store.dispatch('get_comparison/postGrantInfo')
+      // this.isShow = !this.isShow
+    },
+    dropGrantChart() {
+      // this.isShow = !this.isShow
     }
   },
   computed: {
@@ -149,7 +137,6 @@ export default {
       if (this.context.id == 'id_by_check') {
         // 两个对象之间检查次数的对比
         data = this.$store.state.get_comparison.by_check
-        // console.log('data1', data)
         for (let i in data) {
           let obj = {
             name: '',
@@ -184,12 +171,37 @@ export default {
           arr.push(obj)
         }
       }
+      if (this.context.flag === 'grant') {
+        this.isShow = false
+      } else if (this.context.flag === 'origin') {
+        this.isShow = true
+      }
+      data = this.$store.state.get_comparison.all_user_name
+      this.options = []
+      for (let i in data) {
+        let obj = {
+          value: '',
+          key: ''
+        }
+        obj.value = data[i]
+        obj.key = data[i]
+        this.options.push(obj)
+      }
       return arr
     },
   },
   updated() {
     this.drawBarChart()
   },
+  mounted() {
+    this.drawBarChart()
+  },
+  destroyed() {
+    let myChart = this.$echarts.init(document.getElementById(this.context.id))
+    window.addEventListener('resize', function () {
+      myChart.resize();
+    })
+  }
 }
 </script>
 

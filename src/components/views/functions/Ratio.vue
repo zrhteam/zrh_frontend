@@ -8,7 +8,7 @@
   <!--各致因阶段的隐患数量占比情况-->
   <!--各分布区域的隐患数量占比情况-->
   <el-card class="box-card-t " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 2%">
+           style="background-color: transparent; height: 100%; margin: 1%">
     <div style="display: none">
       {{ getData }}
     </div>

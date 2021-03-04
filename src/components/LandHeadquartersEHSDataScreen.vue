@@ -158,6 +158,11 @@ export default {
         this.$store.dispatch('get_headquarter/getHeadProjectRank')
       }
     }
+    //  查看该用户是否有授权图表
+    let param5 = new URLSearchParams();
+    param5.append('user_name', this.$store.state.get_login.user_name);
+    this.$store.commit('get_login/changeNameParam', {params: param5})
+    this.$store.dispatch('get_login/getGrantInfo')
     //在页面加载时读取sessionStorage里的状态信息
     sessionStorage.getItem("headMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("headMsg"))));
     //在页面刷新时将vuex里的信息保存到sessionStorage里

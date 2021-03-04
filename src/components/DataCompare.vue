@@ -14,9 +14,9 @@
             <el-radio v-model="radio" label="4">检查</el-radio>
           </el-radio-group>
         </el-col>
-        <el-col :span="6" style="height: 100%">
+        <el-col :span="6" style="height: 100%; vertical-align: middle;padding-top: 8%">
           <el-button size="mini" round
-                     style="z-index: 9; right: 10%; top: 33%; background-color: transparent; color: #ffffff; position: absolute"
+                     style="z-index: 9; right: 10%; background-color: transparent; color: #ffffff; position: absolute"
                      @click="submit">提交
           </el-button>
         </el-col>
@@ -26,6 +26,7 @@
         <el-col :span="12" style="height: 100%">
           <el-row style="height: 100%">
             <Tree
+                ref="tree1"
                 :treeObj="treeObj"
                 :show-checkbox="true"
                 @handleNodeClick="handleTrNodeClick"
@@ -47,10 +48,28 @@
       </el-row>
     </el-col>
     <el-col :span="16" style="height: 100%; flex-direction: row; overflow-x: scroll">
-      <el-col :span="24" class="level4" style="height: 15%; vertical-align: middle; padding-top: %" v-if="isShow">
+      <el-col :span="24" class="level4" style="height: 15%; vertical-align: middle; padding-top: 4%" v-if="isShow">
         <!--        <div class="level4" style="; padding-left: 10px">-->
-        <p>object1:{{ this.obj1 }}</p>
-        <p>object2:{{ this.obj2 }}</p>
+        <el-popover
+            placement="top-start"
+            title="object1"
+            width="400"
+            trigger="hover">
+          <span style="color: #ffffff">{{ obj1 }}</span>
+          <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">object1
+          </el-button>
+        </el-popover>
+        <el-popover
+            placement="top-start"
+            title="object2"
+            width="400"
+            trigger="hover"
+            style="color: #ffffff">
+          <span style="color: #ffffff">{{ obj2 }}</span>
+          <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">object2
+          </el-button>
+        </el-popover>
+
         <!--        </div>-->
       </el-col>
       <el-col :span="8" style="height: 25%">
@@ -59,7 +78,8 @@
             :context="{
                     title:'检查次数对比',
                     id:'id_by_check',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></DoughnutChart>
       </el-col>
       <el-col :span="8" style="height: 25%">
@@ -68,7 +88,8 @@
             :context="{
                     title:'项目数量对比',
                     id:'id_by_prj',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></DoughnutChart>
       </el-col>
       <el-col :span="8" style="height: 25%">
@@ -77,7 +98,8 @@
             :context="{
                     title:'各风险等级隐患数量对比',
                     id:'id_risk_level',
-                    level: this.level}"></RiskLevelYear>
+                    level: this.level,
+                    flag: 'origin'}"></RiskLevelYear>
       </el-col>
       <el-col :span="8" style="height: 50%">
         <TopCompare
@@ -86,7 +108,8 @@
                     title:'前top分布区域隐患数量对比',
                     id1:'id_area_o1',
                     id2:'id_area_o2',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -96,7 +119,8 @@
                     title:'前top致因阶段隐患数量对比',
                     id1:'id_stage_o1',
                     id2:'id_stage_o2',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -106,7 +130,8 @@
                     title:'前top隐患数量对比',
                     id1:'id_risk_o1',
                     id2:'id_risk_o2',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -116,7 +141,8 @@
                     title:'隐患数量前top组件对比',
                     id1:'id_module_top1',
                     id2:'id_module_top2',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -126,7 +152,8 @@
                     title:'隐患数量前top设备对比',
                     id1:'id_equip_top1',
                     id2:'id_equip_top2',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></TopCompare>
       </el-col>
       <el-col :span="8" style="height: 50%">
@@ -136,7 +163,8 @@
                     title:'隐患数量前top系统对比',
                     id1:'id_system_top1',
                     id2:'id_system_top2',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></TopCompare>
       </el-col>
       <el-col :span="24" style="height: 50%">
@@ -146,7 +174,8 @@
                     title:'前top专业隐患数量对比',
                     id1:'id_major_o1',
                     id2:'id_major_o2',
-                    level: this.level}"
+                    level: this.level,
+                    flag: 'origin'}"
         ></DrillDown>
       </el-col>
     </el-col>
@@ -176,6 +205,11 @@ export default {
       obj1: this.$store.state.get_comparison.object1,
       obj2: this.$store.state.get_comparison.object2,
       isShow: false
+    }
+  },
+  watch: {
+    radio() {
+
     }
   },
   methods: {
@@ -220,10 +254,10 @@ export default {
       } else if (this.radio === '4') {
         this.level = 'check'
       }
-      if(this.obj1[this.obj1.length - 1] === ',') {
+      if (this.obj1[this.obj1.length - 1] === ',') {
         this.obj1 = this.obj1.substr(0, this.obj1.length - 1)
       }
-      if(this.obj2[this.obj2.length - 1] === ',') {
+      if (this.obj2[this.obj2.length - 1] === ',') {
         this.obj2 = this.obj2.substr(0, this.obj2.length - 1)
       }
       let param = new URLSearchParams();
