@@ -21,73 +21,232 @@
       </el-card>
     </el-row>
     <el-row id="prj_charts" style="height: 89%">
-      <el-col :span="24" style="height: 6%;">
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #ffffff; float: right"
-                   @click="outPrjDataScreen">返回
-        </el-button>
-      </el-col>
+      <el-row style="height: 100px;">
+        <el-col :span="4" style="height: 100%">
+          <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="数据大屏" name="first" :key=" 'first' " lazy>
+            </el-tab-pane>
+
+            <el-tab-pane label="授权页面" name="second" :key=" 'second' " lazy>
+            </el-tab-pane>
+
+            <!--         <el-tab-pane label="授权页面" name="second" :key=" 'second' " lazy>-->
+            <!--         </el-tab-pane>-->
+          </el-tabs>
+        </el-col>
+        <el-col :span="20" style="height: 100%; padding-top: 3%">
+          <el-button size="mini" round
+                     style="background-color: transparent; color: #ffffff; float: right;"
+                     @click="outPrjDataScreen">返回
+          </el-button>
+        </el-col>
+      </el-row>
       <div style="display: none">
         {{ getName }}
       </div>
-      <el-col :span="24" style="height: 92%;">
-        <el-row style="height: 85%;">
-          <el-col :span="10" style="height: 100%; margin-left: 10%">
-            <el-row style="height: 32%; margin-bottom: 1%">
-              <TopRisk
-                  :context="{
+      <!--      <el-col :span="24" style="height: 70%;">-->
+      <el-row v-if="isFirst" style="height: 86%;">
+        <el-col :span="10" style="height: 100%; margin-left: 10%">
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <TopRisk
+                :context="{
           title:'重复出现隐患列表',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'prj_risk',
           option:this.risk_option}"
-                  :top_data="this.$store.state.get_project.prj_risk_top"
-              ></TopRisk>
-            </el-row>
-            <el-row style="height: 32%; margin-bottom: 1%">
-              <TopRisk
-                  :context="{
+                :top_data="this.$store.state.get_project.prj_risk_top"
+            ></TopRisk>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <TopRisk
+                :context="{
                           title:'重复出现隐患列表',
                           label1:'隐患描述',
                           label2:'出现频率',
                           sign:'prj_other',
                           option:this.other_option}"
-                  :top_data="this.$store.state.get_project.prj_other_top"
-              ></TopRisk>
-            </el-row>
-            <el-row style="height: 32%; margin-bottom: 1%">
-              <Rules
-                  :context="{title:'最容易违反的法规标准',
+                :top_data="this.$store.state.get_project.prj_other_top"
+            ></TopRisk>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <Rules
+                :context="{title:'最容易违反的法规标准',
             top_data:this.prj_rule_name,
             label1:'违反次数',
             label2:'法规名称',
             label3:'条款号',
         }"></Rules>
-            </el-row>
-          </el-col>
-          <el-col :span="10" style="height: 100%;">
-            <el-row style="height: 32%; margin-bottom: 1%">
-              <TopName
-                  :context="{title:'最容易出现隐患的设备',
+          </el-row>
+        </el-col>
+        <el-col :span="10" style="height: 100%;">
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <TopName
+                :context="{title:'最容易出现隐患的设备',
             top_data:this.prj_device_name,
             label1:'系统名称',
             label2:'出现频率',
         }"></TopName>
-            </el-row>
-            <el-row style="height: 32%; margin-bottom: 1%">
-              <TopName
-                  :context="{title:'最容易出现隐患的组件',
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <TopName
+                :context="{title:'最容易出现隐患的组件',
             top_data:this.prj_unit_name,
             label1:'系统名称',
             label2:'出现频率',
         }"></TopName>
-            </el-row>
-            <el-row style="height: 32%; margin-bottom: 1%">
-              <UnsolvedImageList></UnsolvedImageList>
-            </el-row>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <UnsolvedImageList></UnsolvedImageList>
+          </el-row>
+        </el-col>
+      </el-row>
+      <el-row v-if="isSecond" style="height: 88%;">
+        <el-col :span="24" style="height: 100%; flex-direction: row; overflow-x: scroll">
+          <el-col :span="24" class="level4" style="min-height: 30px" v-if="isShow">
+            <!--        <div class="level4" style="; padding-left: 10px">-->
+            <el-popover
+                placement="top-start"
+                title="粒度"
+                width="400"
+                trigger="hover">
+              <span style="color: #ffffff">{{ level }}</span>
+              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">粒度
+              </el-button>
+            </el-popover>
+            <el-popover
+                placement="top-start"
+                title="object1"
+                width="400"
+                trigger="hover">
+              <span style="color: #ffffff">{{ obj1 }}</span>
+              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">
+                object1
+              </el-button>
+            </el-popover>
+            <el-popover
+                placement="top-start"
+                title="object2"
+                width="400"
+                trigger="hover"
+                style="color: #ffffff">
+              <span style="color: #ffffff">{{ obj2 }}</span>
+              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">
+                object2
+              </el-button>
+            </el-popover>
+
+            <!--        </div>-->
           </el-col>
-        </el-row>
-      </el-col>
+          <el-col :span="8" style="height: 25%">
+            <DoughnutChart
+                v-if="isShows[0]"
+                :context="{
+                    title:this.titles[0],
+                    id:'id_by_check',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></DoughnutChart>
+          </el-col>
+          <el-col :span="8" style="height: 25%">
+            <DoughnutChart
+                v-if="isShows[1]"
+                :context="{
+                    title:this.titles[1],
+                    id:'id_by_prj',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></DoughnutChart>
+          </el-col>
+          <el-col :span="8" style="height: 25%">
+            <RiskLevelYear
+                v-if="isShows[2]"
+                :context="{
+                    title:this.titles[2],
+                    id:'id_risk_level',
+                    level: this.level,
+                    flag: 'grant'}"></RiskLevelYear>
+          </el-col>
+          <el-col :span="8" style="height: 50%">
+            <TopCompare
+                v-if="isShows[3]"
+                :context="{
+                    title:this.titles[3],
+                    id1:'id_area_o1',
+                    id2:'id_area_o2',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></TopCompare>
+          </el-col>
+          <el-col :span="8" style="height: 50%">
+            <TopCompare
+                v-if="isShows[4]"
+                :context="{
+                    title:this.titles[4],
+                    id1:'id_stage_o1',
+                    id2:'id_stage_o2',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></TopCompare>
+          </el-col>
+          <el-col :span="8" style="height: 50%">
+            <TopCompare
+                v-if="isShows[5]"
+                :context="{
+                    title:this.titles[5],
+                    id1:'id_risk_o1',
+                    id2:'id_risk_o2',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></TopCompare>
+          </el-col>
+          <el-col :span="8" style="height: 50%">
+            <TopCompare
+                v-if="isShows[6]"
+                :context="{
+                    title:this.titles[6],
+                    id1:'id_module_top1',
+                    id2:'id_module_top2',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></TopCompare>
+          </el-col>
+          <el-col :span="8" style="height: 50%">
+            <TopCompare
+                v-if="isShows[7]"
+                :context="{
+                    title:this.titles[7],
+                    id1:'id_equip_top1',
+                    id2:'id_equip_top2',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></TopCompare>
+          </el-col>
+          <el-col :span="8" style="height: 50%">
+            <TopCompare
+                v-if="isShows[8]"
+                :context="{
+                    title:this.titles[8],
+                    id1:'id_system_top1',
+                    id2:'id_system_top2',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></TopCompare>
+          </el-col>
+          <el-col :span="24" style="height: 50%">
+            <DrillDown
+                v-if="isShows[9]"
+                :context="{
+                    title:this.titles[9],
+                    id1:'id_major_o1',
+                    id2:'id_major_o2',
+                    level: this.level,
+                    flag: 'grant'}"
+            ></DrillDown>
+          </el-col>
+        </el-col>
+      </el-row>
+      <!--      </el-col>-->
     </el-row>
     <CheckDataScreen id="check_charts" style="display: none"></CheckDataScreen>
   </el-row>
@@ -108,6 +267,9 @@ import TopName from "@/components/views/functions/TopName.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import Rules from "@/components/views/functions/Rules.vue";
+import DoughnutChart from "@/components/views/functions/DoughnutChart.vue";
+import TopCompare from "@/components/views/functions/TopCompare.vue";
+import DrillDown from "@/components/views/functions/DrillDown.vue";
 
 export default {
   name: "PrjOverview",
@@ -126,7 +288,10 @@ export default {
     CheckedProject,
     // PrjEHSDataAnalysis3,
     PrjIndex,
-    Tree
+    Tree,
+    DoughnutChart,
+    TopCompare,
+    DrillDown
   },
   methods: {
     filterNode(value, data) {
@@ -148,6 +313,19 @@ export default {
       // document.getElementById('prj_charts').style.width = "99%"
       // document.getElementById('check_charts').style.width = "500px"
       // document.getElementById('check_charts').style.width = "99%"
+    },
+    handleClick(tab, event) {
+      // console.log(tab, event)
+      if (tab.name === 'first') {
+        this.isFirst = true
+        this.isSecond = false
+      } else if (tab.name === 'second') {
+        this.isFirst = false
+        this.isSecond = true
+      }
+      setTimeout(function () {
+        document.getElementById('prj_small').style.display = 'block'
+      }, 100);
     },
   },
   data() {
@@ -204,12 +382,70 @@ export default {
       prj_sys_name: [],
       prj_device_name: [],
       prj_unit_name: [],
-      prj_rule_name: []
+      prj_rule_name: [],
+      activeName: 'first',
+      isFirst: true,
+      isSecond: false,
+      level: '',
+      obj1: '',
+      obj2: '',
+      titles: ['检查次数对比', "项目数量对比", '各风险等级隐患数量对比', '前top分布区域隐患数量对比', '前top致因阶段隐患数量对比', '前top隐患数量对比', '隐患数量前top组件对比', '隐患数量前top设备对比', '隐患数量前top系统对比', '前top专业隐患数量对比'],
+      isShow: false,
+      isShows: [false, false, false, false, false, false, false, false, false, false]
     };
   },
   computed: {
     getName() {
-      let data = this.$store.state.get_check.check_sys_name
+      let data = this.$store.state.get_login.grant_info.data
+      for (let i in data) {
+        for (let j in this.titles) {
+          if (data[i].title === this.titles[j]) {
+            this.isShow = true
+            this.isShows[j] = true
+            this.level = data[i].level
+            this.obj1 = data[i].object1
+            this.obj2 = data[i].object2
+            let param = new URLSearchParams();
+            param.append('level', data[i].level);
+            param.append('object1', data[i].object1);
+            param.append('object2', data[i].object2);
+            this.$store.commit('get_comparison/changeParams', {params: param})
+            this.$store.commit('get_comparison/changeObject1', {object1: data[i].object1})
+            this.$store.commit('get_comparison/changeObject2', {object2: data[i].object2})
+          }
+        }
+      }
+      if (this.isShows[0] == true) {
+        this.$store.dispatch('get_comparison/getCheckNumber')
+      }
+      if (this.isShows[1] == true) {
+        this.$store.dispatch('get_comparison/getProjectNumber')
+      }
+      if (this.isShows[2] == true) {
+        this.$store.dispatch('get_comparison/getRiskLevel')
+      }
+      if (this.isShows[3] == true) {
+        this.$store.dispatch('get_comparison/getAreaRisk')
+      }
+      if (this.isShows[4] == true) {
+        this.$store.dispatch('get_comparison/getStageRisk')
+      }
+      if (this.isShows[5] == true) {
+        this.$store.dispatch('get_comparison/getTopNumber')
+      }
+      if (this.isShows[6] == true) {
+        this.$store.dispatch('get_comparison/getUnitNumberTop')
+      }
+      if (this.isShows[7] == true) {
+        this.$store.dispatch('get_comparison/getDeviceNumberTop')
+      }
+      if (this.isShows[8] == true) {
+        this.$store.dispatch('get_comparison/getSystemNumberTop')
+      }
+      if (this.isShows[9] == true) {
+        this.$store.dispatch('get_comparison/getMajorRiskNumber')
+      }
+      data = this.$store.state.get_check.check_sys_name
       for (let i in data) {
         let obj = {
           name: '',

@@ -72,13 +72,9 @@ const mutations = {
     },
     //考虑权限对应等级所包含的总部、区域、项目和检查
     changeGrantData(state, data) {
-        // debugger
-        // console.log("change")
         state.grant_data = data
     },
     changeTreeData(state, data) {
-        // debugger
-        // console.log("change")
         state.tree_data = data.params
     },
     changeNowNode(state, data) {
@@ -87,20 +83,14 @@ const mutations = {
         state.now_node = data.params
     },
     changeExpandedKeys(state, data) {
-        // debugger
-        // console.log("change")
         state.expandedKeys = data.params
     },
 //    查询该用户下的授权数据
     changeGrantInfo(state, data) {
-        // debugger
-        // console.log("change")
         state.grant_info = data
     },
 //    查询需发送用户名
     changeNameParam(state, data) {
-        // debugger
-        // console.log("change")
         state.param_name = data.params
     },
 }

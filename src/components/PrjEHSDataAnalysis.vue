@@ -257,6 +257,11 @@ export default {
       // 基于项目级显示违反次数排名前10的法规、违反次数及其相关条款号和内容
       this.$store.dispatch('get_project/getProjectRules')
     }
+    //  查看该用户是否有授权图表
+    let param5 = new URLSearchParams();
+    param5.append('user_name', this.$store.state.get_login.user_name);
+    this.$store.commit('get_login/changeNameParam', {params: param5})
+    this.$store.dispatch('get_login/getGrantInfo')
     //在页面加载时读取sessionStorage里的状态信息
     sessionStorage.getItem("prjMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("prjMsg"))));
     //在页面刷新时将vuex里的信息保存到sessionStorage里
