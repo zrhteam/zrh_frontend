@@ -67,7 +67,7 @@
               <!--            <Region2_3></Region2_3>-->
               <TopRisk
                   :context="{
-          title:'重复出现隐患列表列表',
+          title:'重复出现隐患列表',
           label1:'隐患描述',
           label2:'出现频率',
           sign:'region_risk',

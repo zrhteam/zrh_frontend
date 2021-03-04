@@ -15,9 +15,17 @@
     <!--      </el-col>-->
     <!--    </el-row>-->
     <!--    <el-row style="height: 85%;">-->
+    <el-row style="height: 100px;">
+      <el-col :span="24" style="height: 100%; padding-top: 3%">
+        <el-button size="mini" round
+                   style="background-color: transparent; color: #ffffff; float: right;"
+                   @click="outPrjDataScreen">返回
+        </el-button>
+      </el-col>
+    </el-row>
     <el-col :span="20" style="height: 100%;">
       <el-row style="height: 85%;">
-        <el-col :span="12" style="height: 100%; margin-left: 6%">
+        <el-col :span="10" style="height: 100%; margin-left: 10%">
           <el-row style="height: 32%; margin-bottom: 1%">
             <TopRisk
                 :context="{
@@ -65,40 +73,6 @@
           </el-row>
         </el-col>
       </el-row>
-    </el-col>
-    <!--    </el-row>-->
-    <el-col :span="4" style="height: 100%;overflow: scroll">
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 6%; margin: 0; text-align: right">
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #ffffff; vertical-align: top; text-align: right"
-                   @click="outPrjDataScreen">返回
-        </el-button>
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 9%; margin: 0px 5px 5px 5px">
-        <label>可选择</label>
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-        <!--        <RiskLevelYear :context="{title:'检查累计年隐患数量（2）', id:'check_level_year'}"></RiskLevelYear>-->
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-
-      </el-card>
-      <el-card class="box-card " shadow="never"
-               style="background-color: transparent; height: 300px; margin: 0px 5px 5px 5px">
-
-
-      </el-card>
     </el-col>
   </el-col>
 </template>

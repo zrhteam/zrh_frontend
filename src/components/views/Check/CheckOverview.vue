@@ -1,5 +1,5 @@
 <template>
-  <el-col :span="20" style="height: 100%">
+  <el-col :span="19" style="height: 100%">
     <el-card class="box-card " shadow="never"
              style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
       <el-col :span="12" style="height: 100%">

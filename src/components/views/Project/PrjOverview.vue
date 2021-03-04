@@ -1,6 +1,4 @@
 <template>
-  <!--  <div></div>-->
-  <!--  第一行放标题-->
   <el-row style="height: 100%;">
     <PrjDataScreen id="prj_small" style="display: none"></PrjDataScreen>
     <el-row id="large1" class="" style="height: 10%;">
@@ -9,19 +7,23 @@
                  style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
           <h4>
             <span id="prj_title1"
-                 style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title1 }}</span>
+                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
+                title1
+              }}</span>
             <span id="prj_title2"
-                 style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title2 }}</span>
+                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
+                title2
+              }}</span>
             <span id="prj_title3"
-                 style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{ title3 }}</span>
+                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
+                title3
+              }}</span>
           </h4>
         </el-card>
       </el-col>
     </el-row>
-    <!--    第二行放图片-->
     <el-row id="large2" class="" style="height: 90%;">
-      <!--      第一列放树状图和缩略图-->
-      <el-col :span="4" class="" style="height: 100%">
+      <el-col :span="5" class="" style="height: 100%; padding-left: 2%; padding-top: 1.5%">
         <Tree
             :treeObj="treeObj"
             @handleNodeClick="handleTrNodeClick"
@@ -29,105 +31,181 @@
         <el-card class="box-card " shadow="never"
                  style="background-color: transparent; height: 10%; margin: 0px 5px 5px 5px">
           <el-button size="mini" round
-                     style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; position: absolute"
+                     style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; float: left"
                      @click="intoPrjDataScreen">展开
           </el-button>
-<!--          <PrjDataScreen id="small1"></PrjDataScreen>-->
+          <!--            <RegionDataScreen id="region_small1"></RegionDataScreen>-->
 
           <!--          <label>数据大屏缩略图</label>-->
         </el-card>
       </el-col>
-      <!--      第二列放pie、bar、table-->
-      <el-col id="prj_subpart" :span="20" style="height: 100%">
-        <el-card class="margin-box-card " shadow="never"
-                 style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
-          <el-col :span="12" style="height: 100%">
-            <el-row style="height: 30%">
-              <!--            第一列-->
-              <el-col :span="11" style="height: 100%; margin-left: 4.5%">
-                <CheckHistoryPerc></CheckHistoryPerc>
-              </el-col>
-              <!--            第2列-->
-              <el-col :span="11" style="height: 100%;width:46%">
-                <PerctangePerc
-                    :context="{
-                  title:'不同致因阶段隐患数量',
-                  type:'reason',
-                  id:'id_reason',
-                }"></PerctangePerc>
-              </el-col>
-
-            </el-row>
-            <el-row style="height: 30%">
-              <el-col :span="22" style="height: 100%; margin-left: 2%; margin-bottom: 2%; width: 100%">
-                <RiskLevelYear :context="{title:'项目年隐患数量（3）', id:'prj_level_year'}"></RiskLevelYear>
-              </el-col>
-            </el-row>
-            <el-row style="height: 30%">
-              <el-col :span="22" style="height: 100%; margin-left: 4%; width: 100%">
-                <div style="display: none">
-                  {{ getName }}
-                </div>
-                <TopName
-                    :context="{title:'最容易出现隐患的系统',
+      <el-col :span="19" id="prj_subpart" style="height: 100%; padding-right: 2.5%">
+        <!--地图+项目年隐患数量-->
+        <PrjIndex></PrjIndex>
+        <el-col :span="10" style="height: 100%;">
+          <el-row style="height: 100%">
+            <el-col :span="24" style="height: 29%; margin: 2% 0 2% 2%">
+              <TopName
+                  :context="{title:'最容易出现隐患的系统',
                   top_data:this.prj_sys_name,
                   label1:'系统名称',
                   label2:'出现频率',
                 }"></TopName>
-              </el-col>
-            </el-row>
-          </el-col>
-          <el-col :span="12" style="height: 100%">
-            <el-row style="height: 30%">
-              <!--            第3列-->
-              <el-col :span="11" style="height: 100%; width:46%">
-                <PerctangePerc
-                    :context="{
-                  title:'不同分布区域隐患数量',
-                  type:'region',
-                  id:'id_region',
-                 }"></PerctangePerc>
-              </el-col>
-
-              <!--            第4列-->
-              <el-col :span="11" style="height: 100%;width:46.5%">
-                <PerctangePerc
-                    :context="{
-                  title:'不同子系统隐患数量',
-                  type:'system',
-                  id:'id_system',
-                }"></PerctangePerc>
-              </el-col>
-            </el-row>
-            <el-row style="height: 30%; margin-bottom: 2%">
-              <el-col style="height: 100%">
-<!--                <RiskLevelYear :context="{title:'项目风险等级隐患数量', id:'check_level_year'}"></RiskLevelYear>-->
-                <CheckRiskLevel :context="{title:'隐患总量', id:'prj_risk_level'}"> </CheckRiskLevel>
-              </el-col>
-            </el-row>
-            <el-row style="height: 30%">
-              <el-col style="height: 100%">
-                <TopRisk
-                    :context="{
+            </el-col>
+            <el-col :span="24" style="height: 29%;margin: 2%">
+              <TopRisk
+                  :context="{
                     title:'隐患次数累计排名（prj10）',
                     label1:'隐患描述',
                     label2:'出现频率',
                     sign:'prj_other',
                     option:this.other_option}"
-                    :top_data="this.$store.state.get_project.prj_other_top"
-                ></TopRisk>
-              </el-col>
-            </el-row>
-          </el-col>
-
-        </el-card>
+                  :top_data="this.$store.state.get_project.prj_other_top"
+              ></TopRisk>
+            </el-col>
+            <el-col :span="24" style="height: 29%; margin: 2%">
+              <CheckRiskLevel :context="{title:'隐患总量', id:'prj_risk_level'}"></CheckRiskLevel>
+              <!--各等级隐患数量变化-->
+            </el-col>
+          </el-row>
+        </el-col>
       </el-col>
-      <!--      <PrjOverviewPart></PrjOverviewPart>-->
       <CheckOverview id="check_part"></CheckOverview>
     </el-row>
-    <!--    <RegionOverview id="region_part" style="display: none"></RegionOverview>-->
   </el-row>
-  <!--  <PrjDataScreen></PrjDataScreen>-->
+
+
+  <!--  第一行放标题-->
+  <!--  <el-row style="height: 100%;">-->
+  <!--    <PrjDataScreen id="prj_small" style="display: none"></PrjDataScreen>-->
+  <!--    <el-row id="large1" class="" style="height: 10%;">-->
+  <!--      <el-col :span="24" style="height: 100%">-->
+  <!--        <el-card class="title-box-card " shadow="never"-->
+  <!--                 style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">-->
+  <!--          <h4>-->
+  <!--            <span id="prj_title1"-->
+  <!--                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+  <!--                title1-->
+  <!--              }}</span>-->
+  <!--            <span id="prj_title2"-->
+  <!--                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+  <!--                title2-->
+  <!--              }}</span>-->
+  <!--            <span id="prj_title3"-->
+  <!--                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+  <!--                title3-->
+  <!--              }}</span>-->
+  <!--          </h4>-->
+  <!--        </el-card>-->
+  <!--      </el-col>-->
+  <!--    </el-row>-->
+  <!--    第二行放图片-->
+  <!--    <el-row id="large2" class="" style="height: 90%;">-->
+  <!--      &lt;!&ndash;      第一列放树状图和缩略图&ndash;&gt;-->
+  <!--      <el-col :span="4" class="" style="height: 100%">-->
+  <!--        <Tree-->
+  <!--            :treeObj="treeObj"-->
+  <!--            @handleNodeClick="handleTrNodeClick"-->
+  <!--        ></Tree>-->
+  <!--        <el-card class="box-card " shadow="never"-->
+  <!--                 style="background-color: transparent; height: 10%; margin: 0px 5px 5px 5px">-->
+  <!--          <el-button size="mini" round-->
+  <!--                     style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; position: absolute"-->
+  <!--                     @click="intoPrjDataScreen">展开-->
+  <!--          </el-button>-->
+  <!--          &lt;!&ndash;          <PrjDataScreen id="small1"></PrjDataScreen>&ndash;&gt;-->
+
+  <!--          &lt;!&ndash;          <label>数据大屏缩略图</label>&ndash;&gt;-->
+  <!--        </el-card>-->
+  <!--      </el-col>-->
+  <!--      第二列放pie、bar、table-->
+  <!--      <el-col id="prj_subpart" :span="20" style="height: 100%">-->
+  <!--        <el-card class="margin-box-card " shadow="never"-->
+  <!--                 style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">-->
+  <!--          <el-col :span="12" style="height: 100%">-->
+  <!--            <el-row style="height: 30%">-->
+  <!--              &lt;!&ndash;            第一列&ndash;&gt;-->
+  <!--              <el-col :span="11" style="height: 100%; margin-left: 4.5%">-->
+  <!--                <CheckHistoryPerc></CheckHistoryPerc>-->
+  <!--              </el-col>-->
+  <!--              &lt;!&ndash;            第2列&ndash;&gt;-->
+  <!--              <el-col :span="11" style="height: 100%;width:46%">-->
+  <!--                <PerctangePerc-->
+  <!--                    :context="{-->
+  <!--                  title:'不同致因阶段隐患数量',-->
+  <!--                  type:'reason',-->
+  <!--                  id:'id_reason',-->
+  <!--                }"></PerctangePerc>-->
+  <!--              </el-col>-->
+
+  <!--            </el-row>-->
+  <!--            <el-row style="height: 30%">-->
+  <!--              <el-col :span="22" style="height: 100%; margin-left: 2%; margin-bottom: 2%; width: 100%">-->
+  <!--                <RiskLevelYear :context="{title:'项目年隐患数量', id:'prj_level_year'}"></RiskLevelYear>-->
+  <!--              </el-col>-->
+  <!--            </el-row>-->
+  <!--            <el-row style="height: 30%">-->
+  <!--              <el-col :span="22" style="height: 100%; margin-left: 4%; width: 100%">-->
+  <!--                <div style="display: none">-->
+  <!--                  {{ getName }}-->
+  <!--                </div>-->
+  <!--                <TopName-->
+  <!--                    :context="{title:'最容易出现隐患的系统',-->
+  <!--                  top_data:this.prj_sys_name,-->
+  <!--                  label1:'系统名称',-->
+  <!--                  label2:'出现频率',-->
+  <!--                }"></TopName>-->
+  <!--              </el-col>-->
+  <!--            </el-row>-->
+  <!--          </el-col>-->
+  <!--          <el-col :span="12" style="height: 100%">-->
+  <!--            <el-row style="height: 30%">-->
+  <!--              &lt;!&ndash;            第3列&ndash;&gt;-->
+  <!--              <el-col :span="11" style="height: 100%; width:46%">-->
+  <!--                <PerctangePerc-->
+  <!--                    :context="{-->
+  <!--                  title:'不同分布区域隐患数量',-->
+  <!--                  type:'region',-->
+  <!--                  id:'id_region',-->
+  <!--                 }"></PerctangePerc>-->
+  <!--              </el-col>-->
+
+  <!--              &lt;!&ndash;            第4列&ndash;&gt;-->
+  <!--              <el-col :span="11" style="height: 100%;width:46.5%">-->
+  <!--                <PerctangePerc-->
+  <!--                    :context="{-->
+  <!--                  title:'不同子系统隐患数量',-->
+  <!--                  type:'system',-->
+  <!--                  id:'id_system',-->
+  <!--                }"></PerctangePerc>-->
+  <!--              </el-col>-->
+  <!--            </el-row>-->
+  <!--            <el-row style="height: 30%; margin-bottom: 2%">-->
+  <!--              <el-col style="height: 100%">-->
+  <!--                &lt;!&ndash;                <RiskLevelYear :context="{title:'项目风险等级隐患数量', id:'check_level_year'}"></RiskLevelYear>&ndash;&gt;-->
+  <!--                <CheckRiskLevel :context="{title:'隐患总量', id:'prj_risk_level'}"></CheckRiskLevel>-->
+  <!--              </el-col>-->
+  <!--            </el-row>-->
+  <!--            <el-row style="height: 30%">-->
+  <!--              <el-col style="height: 100%">-->
+  <!--                <TopRisk-->
+  <!--                    :context="{-->
+  <!--                    title:'隐患次数累计排名（prj10）',-->
+  <!--                    label1:'隐患描述',-->
+  <!--                    label2:'出现频率',-->
+  <!--                    sign:'prj_other',-->
+  <!--                    option:this.other_option}"-->
+  <!--                    :top_data="this.$store.state.get_project.prj_other_top"-->
+  <!--                ></TopRisk>-->
+  <!--              </el-col>-->
+  <!--            </el-row>-->
+  <!--          </el-col>-->
+
+  <!--        </el-card>-->
+  <!--      </el-col>-->
+  <!--      <CheckOverview id="check_part"></CheckOverview>-->
+  <!--    </el-row>-->
+  <!--  </el-row>-->
 </template>
 
 <script>
@@ -190,8 +268,12 @@ export default {
         document.getElementById('check_charts').style.height = "99%"
       }, 100)
       prj_small.style.width = "99%"
-      if(document.getElementById('prj_charts').style.display === 'none') {
+      if (document.getElementById('prj_charts').style.display === 'none') {
         document.getElementById('check_charts').style.display = 'block'
+      }
+      if (document.getElementById('prj_subpart').style.display === 'block') {
+        document.getElementById('check_charts').style.display = 'none'
+        document.getElementById('prj_charts').style.display = 'block'
       }
     },
     //PrjOverview.vue中的map_1首先被加载
@@ -238,7 +320,7 @@ export default {
       this.handleTreeNodeClick(data, node)
       this.$nextTick(() => {
         // if ((document.getElementById("large2").style.display === 'block') && (document.getElementById("prj_subpart").style.display === 'none')) {
-          document.getElementById("check_part").style.display = 'block'
+        document.getElementById("check_part").style.display = 'block'
         // }
       })
     }
