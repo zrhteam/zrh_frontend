@@ -214,7 +214,7 @@ export default {
 /*}*/
 
 .main {
-  background: url("../assets/login_bg.jpg") no-repeat;
+  /*background: url("../assets/login_bg.jpg") no-repeat;*/
   background-size: cover;
   margin: 0 auto;
   width: 100%;
