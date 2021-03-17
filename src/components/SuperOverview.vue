@@ -1,36 +1,25 @@
 <template>
   <div class="background" style="vertical-align: center">
-<!--    <img :src="imgSrc" width="100%" height="100%" alt="" />-->
-    <el-col :span="8" style="height: 100%">
-<!--      <div class="grid-content bg-purple">-->
-        <el-button type="primary" icon="el-icon-view" @click="enterDB" style="font-size: 30px; top: 60%;"></el-button>
-<!--      </div>-->
-    </el-col>
-    <el-col :span="4">
-<!--      <div class="grid-content bg-purple-light">-->
-        <el-dropdown @command="handleCommand">
-          <el-button type="primary" style="font-size: 30px; top: 60%;">
-            数据可视化系统<i class="el-icon-arrow-down el-icon--right"></i>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item v-for="(item, i) in headList" :command="item" @click="enterHead">{{ item }}
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-<!--      </div>-->
-    </el-col>
-    <!--    把数据分析和数据洞察分开-->
-    <el-col :span="4">
-      <div class="grid-content bg-purple">
-        <el-button type="primary" @click="enterDataAnalysis" style="font-size: 50px; top: 60%;">数据分析系统</el-button>
-      </div>
-    </el-col>
-    <el-col :span="8">
-      <div class="grid-content bg-purple">
-        <el-button type="primary" @click="enterDataInsight" style="font-size: 30px; top: 60%;">数据洞察系统</el-button>
-      </div>
-    </el-col>
-    </div>
+    <img :src="imgSrc1" @click="enterDB" alt=""
+         style="width:329px; height: 402px; left:244px; top:399px; z-index: 99; position: absolute"/>
+    <el-dropdown @command="handleCommand">
+      <el-button style="background-image: url(../assets/data_vis.png);
+left:-360px; top:343px;
+width: 330px;height: 353px;background-repeat:no-repeat ;
+background-size:330px 353px; border: 0;
+background-color: transparent;
+position: absolute">
+      </el-button>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item v-for="(item, i) in headList" :command="item" @click="enterHead">{{ item }}
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+    <img :src="imgSrc3" @click="enterDataAnalysis" alt=""
+         style="width:329px; height: 351px; left:959px; top:421px; z-index: 99; position: absolute"/>
+    <img :src="imgSrc4" @click="enterDataInsight" alt=""
+         style="width:329px; height: 402px; left:1316px; top:399px; z-index: 99; position: absolute"/>
+  </div>
 </template>
 
 <script>
@@ -39,7 +28,10 @@ export default {
   data() {
     return {
       headList: [],
-      imgSrc: require('../assets/home_page.png')
+      imgSrc1: require('../assets/db_vis.png'),
+      imgSrc2: require('../assets/data_vis.png'),
+      imgSrc3: require('../assets/data_analysis.png'),
+      imgSrc4: require('../assets/data_insight.png'),
     }
   },
   mounted() {
@@ -55,7 +47,7 @@ export default {
       return arr
     },
     enterDB() {
-      this.$router.push({path: '/'});//数据库可视化系统的地址待填
+      window.location.href = 'http://124.71.45.84:8085';//数据库可视化系统的
     },
     enterHead(head_name) {
       //得到选取的总部名称，进入相应总部页面
@@ -80,17 +72,15 @@ export default {
     },
     enterDataInsight() {
       this.$router.push({path: '/analyze'});
+    },
+    Click() {
+      alert("click")
     }
   }
 }
 </script>
 
 <style scoped>
-.background{
-    width:100%;
-    height:100%;  /**宽高100%是为了图片铺满屏幕 */
-    position: relative;
-}
 .background {
   background: url("../assets/home_page.png") no-repeat;
   background-size: cover;
@@ -99,4 +89,5 @@ export default {
   height: 100%;
   position: relative;
 }
+
 </style>
