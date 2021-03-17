@@ -87,7 +87,7 @@
               ></TopRisk>
               <!--各等级隐患数量变化-->
             </el-col>
-            <el-col :span="24" style="height: 29%; margin: 2%">
+            <el-col :span="24" style="height: 29%; margin: 2% 2% 2% 0">
               <Region1_4></Region1_4>
               <!--各等级隐患数量变化-->
             </el-col>

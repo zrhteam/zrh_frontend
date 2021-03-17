@@ -118,9 +118,12 @@ export default {
                   color: new echarts.graphic.LinearGradient(
                       0, 0, 0, 1,
                       [
-                        {offset: 0, color: '#77b5b8'},
+                        // {offset: 0, color: '#77b5b8'},
+                        // // {offset: 0.5, color: '#1f77a0'},
+                        // {offset: 1, color: '#107480'}
+                        {offset: 0, color: '#23dbdc'},
                         // {offset: 0.5, color: '#1f77a0'},
-                        {offset: 1, color: '#107480'}
+                        {offset: 1, color: '#1860b4'}
                       ]
                   )
                 }
@@ -162,7 +165,7 @@ export default {
             myChart.resize();
           });
         });
-      }else if (document.getElementById("r_risk_level")) {
+      } else if (document.getElementById("r_risk_level")) {
         this.$nextTick(() => {
           const dom = document.getElementById(document.getElementById("r_risk_level"))
           dom.innerHTML = '暂无数据'

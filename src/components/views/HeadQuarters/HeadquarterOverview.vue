@@ -17,7 +17,7 @@
                style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
             <h4>
               <span id="head_title1"
-                    style="color: #ffffff; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold;vertical-align: 45%; height: 100%">{{
+                    style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold;vertical-align: 45%; height: 100%">{{
                   title1
                 }}</span>
             </h4>
@@ -86,7 +86,7 @@
               ></TopRisk>
               <!--各等级隐患数量变化-->
             </el-col>
-            <el-col :span="24" style="height: 29%;margin: 2%">
+            <el-col :span="24" style="height: 29%;margin: 2% 2% 2% 0%">
               <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>
               <!--各等级隐患数量变化-->
             </el-col>
