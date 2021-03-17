@@ -1,7 +1,7 @@
 <template>
   <div class="background" style="vertical-align: center">
-    <img :src="imgSrc1" @click="enterDB" alt=""
-         style="width:329px; height: 402px; left:244px; top:399px; z-index: 99; position: absolute"/>
+    <img id="img1_bg" :src="imgSrc1" @click="enterDB" alt=""
+         style="width: 17.1%; left: 12.7%; top: 41.4%; z-index: 99; position: absolute;"/>
     <el-dropdown @command="handleCommand">
       <el-button style="background-image: url(../assets/data_vis.png);
 left:-360px; top:343px;
@@ -16,9 +16,9 @@ position: absolute">
       </el-dropdown-menu>
     </el-dropdown>
     <img :src="imgSrc3" @click="enterDataAnalysis" alt=""
-         style="width:329px; height: 351px; left:959px; top:421px; z-index: 99; position: absolute"/>
+         style="width: 17.1%; left: 50%; top: 43.5%; z-index: 99; position: absolute;"/>
     <img :src="imgSrc4" @click="enterDataInsight" alt=""
-         style="width:329px; height: 402px; left:1316px; top:399px; z-index: 99; position: absolute"/>
+         style="width: 17.1%; left: 68.5%; top: 41.4%; z-index: 99; position: absolute;"/>
   </div>
 </template>
 
