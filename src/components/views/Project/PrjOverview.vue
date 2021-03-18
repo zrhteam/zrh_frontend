@@ -55,7 +55,7 @@
             <el-col :span="24" style="height: 29%;margin: 2%">
               <TopRisk
                   :context="{
-                    title:'隐患次数累计排名（prj10）',
+                    title:'隐患次数累计排名',
                     label1:'隐患描述',
                     label2:'出现频率',
                     sign:'prj_other',

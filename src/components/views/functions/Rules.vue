@@ -14,6 +14,7 @@
           :default-sort="{prop: 'appear_time', order: 'descending'}"
           ref="table"
           height="300"
+          stripe
           style="width: 100%; color: #fff">
         <el-table-column
             property="appear_time"

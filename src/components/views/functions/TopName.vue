@@ -15,6 +15,7 @@
           :row-style="{height: '0'}"
           :default-sort="{prop: 'appear_time', order: 'descending'}"
           ref="table"
+          stripe
           height="300"
           style="width: 100%; color: #fff">
         <el-table-column
