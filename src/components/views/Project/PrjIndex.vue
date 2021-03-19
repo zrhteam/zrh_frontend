@@ -12,7 +12,6 @@
 <script>
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import elementResizeDetectorMaker from 'element-resize-detector'
-import * as d3 from "d3/dist/d3";
 import echarts from "echarts";
 
 export default {

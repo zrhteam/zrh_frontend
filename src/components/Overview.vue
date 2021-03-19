@@ -42,7 +42,6 @@
 import dataService from "@/service/dataService";
 import OverviewLeftSide from "@/components/views/overview/OverviewLeftSide.vue";
 import {mapState, mapGetters} from "vuex"
-import * as d3 from "d3/dist/d3.js";
 import Search from "@/components/views/overview/Search.vue";
 import Statistics from "@/components/views/overview/Statistics.vue";
 //在组件的created中提交dispatch，然后通过action调用一个封装好的axios

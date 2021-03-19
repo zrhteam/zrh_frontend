@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import * as d3 from "d3";
 // import dataService from "@/service/dataService";
 // import FireHazardIndex from "@/components/views/functions/FireHazardIndex.vue";
 // import ProjectIndex from "@/components/views/HeadQuarters/ProjectIndex.vue";

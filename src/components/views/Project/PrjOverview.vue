@@ -218,7 +218,6 @@ import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue"
 import CheckedProject from "@/components/views/Project/CheckedProject.vue";
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
 import PrjDataScreen from '@/components/views/Project/PrjDataScreen.vue'
-import * as d3 from "d3/dist/d3";
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
 import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import RegionOverview from "@/components/views/Region/RegionDataScreen.vue";
