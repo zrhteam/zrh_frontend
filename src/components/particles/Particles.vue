@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import particlesJs from "particles.js";
+  // import particlesJs from "particles.js";
   import particlesConfig from "./particles.json";
   export default {
     data() {
