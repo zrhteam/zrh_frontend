@@ -1,6 +1,7 @@
 <template>
   <!--  显示检查中各风险等级及其对应的隐患数量-->
   <!--  显示项目中各风险等级及其对应的隐患数量-->
+  <!--  显示总部中各风险等级及其对应的隐患数量-->
 
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 2% 4% 0% 0%">
@@ -17,6 +18,7 @@
     </div>
     <div id='check_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='check_risk_level'"></div>
     <div id='prj_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='prj_risk_level'"></div>
+    <div id='head_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='head_risk_level'"></div>
   </el-card>
 </template>
 
@@ -36,55 +38,32 @@ export default {
       let dataArray = []
       if (this.context.id === 'check_risk_level') {
         data = this.$store.state.get_check.check_risk_data;
-        console.log("累计2", data)
-        if ('risk_level' in data) {
-          data = data['risk_level']
-          let obj1 = {
-            name: '低风险',
-            count: 0
-          }
-          let obj2 = {
-            name: '中风险',
-            count: 0
-          }
-          let obj3 = {
-            name: '高风险',
-            count: 0
-          }
-          obj1.count = data['1']
-          obj2.count = data['2']
-          obj3.count = data['3']
-          dataArray.push(obj3)
-          dataArray.push(obj2)
-          dataArray.push(obj1)
-        }
       } else if (this.context.id === 'prj_risk_level') {
         data = this.$store.state.get_project.prj_risk_data;
-        if ('risk_level' in data) {
-          data = data['risk_level']
-          let obj1 = {
-            name: '低风险',
-            count: 0
-          }
-          let obj2 = {
-            name: '中风险',
-            count: 0
-          }
-          let obj3 = {
-            name: '高风险',
-            count: 0
-          }
-          // let obj = {
-          //   risk: '列总计',
-          //   num: 0
-          // }
-          obj1.count = data['1']
-          obj2.count = data['2']
-          obj3.count = data['3']
-          dataArray.push(obj3)
-          dataArray.push(obj2)
-          dataArray.push(obj1)
+      } else if (this.context.id === 'head_risk_level') {
+        data = this.$store.state.get_headquarter.risk_level_data;
+        console.log("aaa", data)
+      }
+      if ('risk_level' in data) {
+        data = data['risk_level']
+        let obj1 = {
+          name: '低风险',
+          count: 0
         }
+        let obj2 = {
+          name: '中风险',
+          count: 0
+        }
+        let obj3 = {
+          name: '高风险',
+          count: 0
+        }
+        obj1.count = data['1']
+        obj2.count = data['2']
+        obj3.count = data['3']
+        dataArray.push(obj3)
+        dataArray.push(obj2)
+        dataArray.push(obj1)
       }
       return dataArray
     }

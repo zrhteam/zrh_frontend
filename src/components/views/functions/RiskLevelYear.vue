@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {bar_option, bar_option2} from "@/utils/constants";
+import {line_option, bar_option2} from "@/utils/constants";
 import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
@@ -43,6 +43,9 @@ export default {
   props: ['context'],
   data() {
     return {
+      xdata: [],//封装x轴
+      series: [],//封装数据
+      legend: [],
       level_year: [],
       isShow: true,
       options: [],
@@ -55,35 +58,43 @@ export default {
         let myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.level_year
         if (this.context.id === 'id_risk_level') {
-          bar_option2["series"] = [
-            {
-              type: 'bar',
-              itemStyle: {
-                normal: {
-                  //柱形图圆角，初始化效果
-                  barBorderRadius: [10, 10, 0, 0],
-                  color: "#4992ff"
-                }
-              },
-              barMaxWidth: 40
-            },
-            {
-              type: 'bar',
-              itemStyle: {
-                normal: {
-                  //柱形图圆角，初始化效果
-                  barBorderRadius: [10, 10, 0, 0],
-                  color: '#05c091'
-                }
-              },
-              barMaxWidth: 40
-            }
-          ]
+          // bar_option2["series"] = [
+          //   {
+          //     type: 'bar',
+          //     itemStyle: {
+          //       normal: {
+          //         //柱形图圆角，初始化效果
+          //         barBorderRadius: [10, 10, 0, 0],
+          //         color: "#4992ff"
+          //       }
+          //     },
+          //     barMaxWidth: 40
+          //   },
+          //   {
+          //     type: 'bar',
+          //     itemStyle: {
+          //       normal: {
+          //         //柱形图圆角，初始化效果
+          //         barBorderRadius: [10, 10, 0, 0],
+          //         color: '#05c091'
+          //       }
+          //     },
+          //     barMaxWidth: 40
+          //   }
+          // ]
         }
-        bar_option2['dataset']['source'] = arr
-        if (arr.length != 0) {
-          myChart.setOption(bar_option2);
-          myChart.resize();
+
+        // bar_option2['dataset']['source'] = arr
+
+
+
+          line_option["xAxis"]["data"] = this.xdata
+          line_option["series"] = this.series
+          line_option["legend"]["data"] = this.legend
+          myChart.setOption(line_option);
+        // if (arr.length != 0) {
+        //   myChart.setOption(bar_option2);
+        //   myChart.resize();
           window.addEventListener('resize', function () {
             myChart.resize();
           })
@@ -95,35 +106,16 @@ export default {
               myChart.resize();
             });
           });
-        } else if (this.context.id) {
-          this.$nextTick(() => {
-            const dom = document.getElementById(this.context.id)
-            dom.innerHTML = '暂无数据'
-            dom.style.color = '#ffffff'
-            dom.style.fontSize = '14px'
-            dom.removeAttribute("_echarts_instance_")
-          })
-        }
+        // } else if (this.context.id) {
+        //   this.$nextTick(() => {
+        //     const dom = document.getElementById(this.context.id)
+        //     dom.innerHTML = '暂无数据'
+        //     dom.style.color = '#ffffff'
+        //     dom.style.fontSize = '14px'
+        //     dom.removeAttribute("_echarts_instance_")
+        //   })
+        // }
       })
-    },
-    sortNumber(attr, rev) {
-      if (rev == undefined) {
-        rev = 1;
-      } else {
-        rev = (rev) ? 1 : -1;
-      }
-
-      return function (a, b) {
-        a = a[attr];
-        b = b[attr];
-        if (a < b) {
-          return rev * -1;
-        }
-        if (a > b) {
-          return rev * 1;
-        }
-        return 0;
-      }
     },
     grantChart() {
       let params = new URLSearchParams();
@@ -172,18 +164,51 @@ export default {
         } else if (this.context.id == 'head_level_year') {
           data = this.$store.state.get_headquarter.risk_level_year
         }
-        let risk_level = ['risk_level', '高风险', '中风险', '低风险']
-        if (this.level_year.length === 0) {
-          this.level_year.push(risk_level)
-        }
+        let risk_level = ['风险总量', '低风险', '中风险', '高风险']
+        let xdata = []
+        let high_risk = []
+        let mid_risk = []
+        let low_risk = []
+        let sum_risk = []
         for (let i in data) {
-          let sub_arr = []
-          sub_arr.push(i)
+          xdata.push(i)
+          let temp = 0
           for (let j in data[i]) {
-            sub_arr.push(data[i][j])
+            if (j == '1') {
+              low_risk.push(data[i][j])
+              temp += data[i][j]
+            } else if (j == '2') {
+              mid_risk.push(data[i][j])
+              temp += data[i][j]
+            } else if (j == '3') {
+              high_risk.push(data[i][j])
+              temp += data[i][j]
+            }
           }
-          this.level_year.push(sub_arr)
+          sum_risk.push(temp)
         }
+        let series = [];
+        for (let i = 0; i < risk_level.length; i++) {
+          let obj = {
+            name: risk_level[i],
+            type: 'line',
+            stack: '总量',
+            data: []
+          }
+          if (i == 1) {
+            obj.data = low_risk
+          } else if (i == 2) {
+            obj.data = mid_risk
+          } else if (i == 3) {
+            obj.data = high_risk
+          } else if (i == 0) {
+            obj.data = sum_risk
+          }
+          series.push(obj)
+        }
+        this.xdata = xdata
+        this.series = series
+        this.legend = risk_level
       }
       if (this.context.flag === 'grant') {
         this.isShow = false

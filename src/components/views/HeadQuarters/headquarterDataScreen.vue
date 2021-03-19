@@ -56,19 +56,22 @@
           id: 'id_head_region'
         }"></Ratio>
       </el-col>
-      <el-col :span="12" style="height: 48%; margin-top: 1%">
+      <el-col :span="8" style="height: 48%; margin-top: 1%">
         <BarRank
             :context="{
           title:'各区域检查次数',
           id: 'id_head_rank1'}"
         ></BarRank>
       </el-col>
-      <el-col :span="12" style="height: 48%; margin-top: 1%">
+      <el-col :span="8" style="height: 48%; margin-top: 1%">
         <BarRank
             :context="{
           title:'各区域在管项目数量',
           id: 'id_head_rank2'}"
         ></BarRank>
+      </el-col>
+      <el-col :span="8" style="height: 48%; margin-top: 1%">
+        <CheckRiskLevel :context="{title:'隐患总量', id:'head_risk_level'}"></CheckRiskLevel>
       </el-col>
     </el-row>
     <el-row v-if="isSecond" style="height: 75%;">
@@ -229,6 +232,7 @@ import BarRank from "@/components/views/functions/BarRank.vue";
 import DoughnutChart from "@/components/views/functions/DoughnutChart.vue";
 import TopCompare from "@/components/views/functions/TopCompare.vue";
 import DrillDown from "@/components/views/functions/DrillDown.vue";
+import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
 
 export default {
   name: "headquarterOverview",
@@ -243,7 +247,8 @@ export default {
     HighRiskImages,
     Tree,
     TopRisk,
-    TopName
+    TopName,
+    CheckRiskLevel
   },
   methods: {
     outHeadDataScreen() {

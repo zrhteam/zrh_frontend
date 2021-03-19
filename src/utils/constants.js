@@ -277,5 +277,58 @@ export const pie_option = {
 
             }
         ]
-    }
-;
+    };
+//折线图堆叠
+export const line_option = {
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        textStyle: {
+            color: '#ffffff'
+        },
+        data: []
+    },
+    grid: {
+        left: '3%',
+        right: '1%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: [],
+        axisLabel: {
+            interval: 0,
+            textStyle: {
+                fontSize: 10
+            }
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#ffffff',
+                fontSize: 8
+            }
+        }
+    },
+    yAxis: {
+        type: 'value',
+        axisLine: {
+            lineStyle: {
+                color: '#ffffff'
+            }
+        },
+        axisLabel: {
+            // textStyle: {
+            //   fontSize: 10
+            // }
+        }
+    },
+    series: []
+}

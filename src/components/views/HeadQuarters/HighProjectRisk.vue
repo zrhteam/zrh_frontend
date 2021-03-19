@@ -47,7 +47,6 @@ export default {
   computed: {
     getNumberHistogram() {
       let data = this.$store.state.get_headquarter.risk_number_rank
-      console.log("高风险区域", data)
       let arr = []
       for (let i in data) {
         let obj = {
@@ -60,72 +59,66 @@ export default {
       }
       arr.sort(this.sortNumber('count', true))
       let option = {
-        tooltip: {},
         dataset: {
-          dimensions: ['name', 'count'],
+          // dimensions: ['name', 'count'],
           source: arr
         },
+         tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow',
+            }
+        },
+        grid: {containLabel: true},
         xAxis: {
-          type: 'category',
+          name: 'amount',
           axisLabel: {
-            // interval: 0,
-            rotate: 0,
+            interval: 0,
             textStyle: {
               fontSize: 10
-            },
+            }
           },
           axisLine: {
             lineStyle: {
               color: '#ffffff',
-              fontSize: 6
+              fontSize: 8
             }
           }
         },
         yAxis: {
+          type: 'category',
           axisLine: {
             lineStyle: {
               color: '#ffffff'
             }
-          }
+          },
         },
         series: [
           {
             type: 'bar',
+            encode: {
+              // Map the "amount" column to X axis.
+              x: 'count',
+              // Map the "product" column to Y axis
+              y: 'name'
+            },
             itemStyle: {
               normal: {
                 //柱形图圆角，初始化效果
-                barBorderRadius: [10, 10, 0, 0],
+                barBorderRadius: [0, 10, 10, 0],
                 color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
+                    1, 0, 0, 0,
                     [
-                      // {offset: 0, color: '#77b5b8'},
-                      // // {offset: 0.5, color: '#1f77a0'},
-                      // {offset: 1, color: '#107480'}
-                         {offset: 0, color: '#23dbdc'},
-                            // {offset: 0.5, color: '#1f77a0'},
-                            {offset: 1, color: '#1860b4'}
+                      {offset: 0, color: '#23dbdc'},
+                      // {offset: 0.5, color: '#1f77a0'},
+                      {offset: 1, color: '#1860b4'}
                     ]
                 )
               }
             },
-            label: {
-              show: false,
-              position: 'top',
-              textStyle: {
-                fontSize: '7px',
-                color: '#fff'
-              },
-            },
             emphasis: {
               itemStyle: {
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: '#2378f7'},
-                      {offset: 0.7, color: '#2378f7'},
-                      {offset: 1, color: '#83bff6'}
-                    ]
-                )
+                color: '#40abc4'
               }
             },
             barMaxWidth: 40
@@ -134,10 +127,12 @@ export default {
       };
       return option
     },
-  },
+  }
+  ,
   updated() {
     this.drawBarChart()
-  },
+  }
+  ,
   mounted() {
     // document.getElementById('map_2').style.display = 'none'
     // document.getElementById('map_5').style.display = 'block'
@@ -173,14 +168,16 @@ export default {
     this.chinaConfigure();
 
     this.drawBarChart();
-  },
+  }
+  ,
   beforeDestroy() {
     if (!this.chart) {
       return;
     }
     this.chart.dispose();
     this.chart = null;
-  },
+  }
+  ,
   methods: {
     drawBarChart() {
       if (this.getNumberHistogram["dataset"]["source"].length != 0) {
@@ -199,7 +196,7 @@ export default {
             myChart.resize();
           });
         });
-      }else if('number_histogram'){
+      } else if ('number_histogram') {
         this.$nextTick(() => {
           const dom = document.getElementById('number_histogram')
           dom.innerHTML = '暂无数据'
@@ -208,7 +205,8 @@ export default {
           dom.removeAttribute("_echarts_instance_")
         })
       }
-    },
+    }
+    ,
     // loadMap() {//加载地图
     //   this.map = L.map("map_5", {
     //     center: [34, 107], // 地图中心
@@ -371,7 +369,8 @@ export default {
           }
         ]
       })
-    },
+    }
+    ,
     sortNumber(attr, rev) {
       if (rev == undefined) {
         rev = 1;
