@@ -242,9 +242,9 @@ export default {
       //筛选，默认发condition: stage,all top: 5
       let param4 = new URLSearchParams();
       param4.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-      param4.append('condition', 'risk_level');
-      param4.append('level', 'all');
+      param4.append('flag', 1);
       param4.append('top', 5);
+      param4.append('stage', '施工');
       this.$store.commit('get_project/changeParam4', {params: param4})
       //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
       this.$store.dispatch('get_project/getProjectOtherTop')

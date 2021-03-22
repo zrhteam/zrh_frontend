@@ -1,6 +1,9 @@
 <template>
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 1%">
+    <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
+      <span class="level4">{{ context.title }}</span>
+    </div>
     <!--不同致因阶段改用堆叠图-->
     <!--  总部级-->
     <div id="id_head_reason" style="height: 80%; width: 100%" v-if="context.id==='id_head_reason'">
@@ -8,17 +11,23 @@
     <!--  区域级-->
     <div id="id_region_reason" style="height: 80%; width: 100%" v-if="context.id==='id_region_reason'">
     </div>
+    <!--  检查级-->
+    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">
+    </div>
   </el-card>
 </template>
 
 <script>
 import elementResizeDetectorMaker from "element-resize-detector";
-import {pie_option} from "@/utils/constants";
 
 export default {
   name: "StackedHorizontalBar",
   data() {
-    return {}
+    return {
+      legend: [],
+      yAxis: [],
+      s_data: [],
+    }
   },
   props: ['context'],
   methods: {
@@ -27,30 +36,103 @@ export default {
         let myChart;
         myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
-        pie_option["series"][0]["data"] = arr
-        if (arr.length != 0) {
-          myChart.setOption(pie_option);
-          myChart.resize();
-          window.addEventListener('resize', function () {
-            myChart.resize();
-          })
-          const _this = this;
-          const erd = elementResizeDetectorMaker();
-          erd.listenTo(document.getElementById(this.context.id), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-        } else if (this.context.id) {
-          this.$nextTick(() => {
-            const dom = document.getElementById(this.context.id)
-            dom.innerHTML = '暂无数据'
-            dom.style.color = '#ffffff'
-            dom.style.fontSize = '14px'
-            dom.removeAttribute("_echarts_instance_")
-          })
+        let data = []
+        let r_data = []
+        // console.log('log', this.s_data)
+        let hang = this.s_data.length
+        let lie = this.s_data[0].length
+        for (let i = 0; i < lie; i++) {
+          let sub_r = []
+          for (let j = 0; j < hang; j++) {
+            sub_r.push(this.s_data[j][i])
+          }
+          r_data.push(sub_r)
         }
+        for (let i in r_data) {
+          let obj = {
+            name: this.legend[i],
+            type: 'bar',
+            stack: 'total',
+            label: {
+              show: true
+            },
+            emphasis: {
+              focus: 'series'
+            },
+            data: r_data[i],
+            itemStyle: {},
+          }
+          data.push(obj)
+        }
+        data[data.length - 1]["itemStyle"] = {
+          normal: {
+            //柱形图圆角，初始化效果
+            barBorderRadius: [0, 10, 10, 0],
+          }
+        }
+        let option = {
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // Use axis to trigger tooltip
+              type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
+            }
+          },
+          legend: {
+            data: this.legend,
+            textStyle: {
+              color: '#ffffff'
+            },
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            axisLine: {
+              lineStyle: {
+                color: '#ffffff'
+              }
+            },
+            type: 'value'
+          },
+          yAxis: {
+            axisLine: {
+              lineStyle: {
+                color: '#ffffff'
+              }
+            },
+            type: 'category',
+            data: this.yAxis
+          },
+          series: data
+        };
+
+
+        // if (arr.length != 0) {
+        myChart.setOption(option);
+        myChart.resize();
+        window.addEventListener('resize', function () {
+          myChart.resize();
+        })
+        const _this = this;
+        const erd = elementResizeDetectorMaker();
+        erd.listenTo(document.getElementById(this.context.id), element => {
+          _this.$nextTick(() => {
+            //监听到事件后执行的业务逻辑
+            myChart.resize();
+          });
+        });
+        // } else if (this.context.id) {
+        //   this.$nextTick(() => {
+        //     const dom = document.getElementById(this.context.id)
+        //     dom.innerHTML = '暂无数据'
+        //     dom.style.color = '#ffffff'
+        //     dom.style.fontSize = '14px'
+        //     dom.removeAttribute("_echarts_instance_")
+        //   })
+        // }
       })
     },
   },
@@ -58,11 +140,16 @@ export default {
     getData() {
       let data;
       let arr = [];
-      if ((this.context.id == 'id_region_reason') || (this.context.id == 'id_head_reason')) {
-        if (this.context.id == 'id_region_reason') {
+      let sub_arr = [];
+      let legend = [];
+      let yAxis = [];
+      let s_data = [];
+      if ((this.context.id == 'id_check_reason') || (this.context.id == 'id_region_reason') || (this.context.id == 'id_head_reason')) {
+        if (this.context.id == 'id_check_reason') {
+          data = this.$store.state.get_check.check_reason
+        } else if (this.context.id == 'id_region_reason') {
           data = this.$store.state.get_region.region_stage_ratio
         } else data = this.$store.state.get_headquarter.head_stage_ratio
-        console.log("aaaa", data)
         for (let i in data) {
           for (let j in data[i]) {
             let obj = {
@@ -70,7 +157,7 @@ export default {
               value: 0
             }
             let flag = false
-            arr.forEach(item => {
+            sub_arr.forEach(item => {
               if (item.name === j) {
                 item.value = item.value + data[i][j]
                 flag = true
@@ -79,27 +166,48 @@ export default {
             if (flag === false) {
               obj.name = j;
               obj.value = data[i][j];
-              arr.push(obj)
+              sub_arr.push(obj)
+              legend.push(j)
             }
           }
+          yAxis.push(i)
         }
+        for (let i in data) {
+          let sub_data = []
+          for (let k in legend) {
+            let flag = false
+            for (let j in data[i]) {
+              if (j == legend[k]) {
+                sub_data.push(data[i][j])
+                flag = true
+              }
+            }
+            if (flag == false) {
+              sub_data.push(0)
+            }
+          }
+          s_data.push(sub_data)
+        }
+
+        let sub_data = []
+        for (let k in legend) {
+          let flag = false
+          for (let j in sub_arr) {
+            if (sub_arr[j].name == legend[k]) {
+              sub_data.push(sub_arr[j].value)
+              flag = true
+            }
+          }
+          if (flag == false) {
+            sub_data.push(0)
+          }
+        }
+        s_data.push(sub_data)
       }
-      // let new_arr = []
-      // let obj = {
-      //   value: 0,
-      //   name: '其它'
-      // }
-      // for (let i = 0; i < arr.length; i++) {
-      //   if (i < 5) {
-      //     new_arr.push(arr[i])
-      //   } else {
-      //     obj.value += arr[i].value
-      //   }
-      // }
-      // if (obj.value > 0) {
-      //   new_arr.push(obj)
-      // }
-      return arr
+      yAxis.push("总计")
+      this.legend = legend
+      this.yAxis = yAxis
+      this.s_data = s_data
     },
   },
   updated() {

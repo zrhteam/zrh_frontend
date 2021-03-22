@@ -10,12 +10,18 @@
           </el-col>
           <!--            第2列-->
           <el-col :span="11" style="height: 100%;width:46%">
-            <PerctangePerc
+<!--            <PerctangePerc-->
+<!--                :context="{-->
+<!--              title:'不同致因阶段隐患数量',-->
+<!--              type:'reason',-->
+<!--              id:'id_check_reason',-->
+<!--            }"></PerctangePerc>-->
+            <StackedHorizontalBar
                 :context="{
               title:'不同致因阶段隐患数量',
               type:'reason',
               id:'id_check_reason',
-            }"></PerctangePerc>
+            }"></StackedHorizontalBar>
           </el-col>
         </el-row>
         <el-row style="height: 30%">
@@ -91,10 +97,12 @@ import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
 import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
+import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
   name: "CheckOverview",
   components: {
+    StackedHorizontalBar,
     TopRisk,
     CheckRiskLevel, TopName, RiskLevelYear, CheckRectification, CheckHighRisk, CheckRiskRatio, PerctangePerc},
   data(){

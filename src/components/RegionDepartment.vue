@@ -1,103 +1,103 @@
 <template>
   <!-- 商业地产事业部2020年巡检项目EHS大数据分析 -->
-<!--  <el-container>-->
-<!--    <el-header>-->
-<!--      <el-row>-->
-<!--        <el-col :span="24">-->
-<!--          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left; padding-top: 17px">-->
-<!--            <span>商业地产事业部2020年巡检项目EHS大数据分析</span>-->
-<!--          </div>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
-<!--    </el-header>-->
-<!--    <el-main>-->
-<!--&lt;!&ndash;      安全指数&ndash;&gt;-->
-<!--      <el-row class="boundary" type="flex">-->
-<!--        <el-col :span="10" class="boundary-B margin">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 280px">-->
-<!--            <el-row class="margin">-->
-<!--            <el-col :span = '24'>-->
-<!--              <div class = 'safety_index' style="height: 150px">-->
-<!--              </div>-->
-<!--            </el-col>-->
-<!--          </el-row>-->
-<!--          &lt;!&ndash;            各专业安全指数&ndash;&gt;-->
-<!--          <el-row class="margin">-->
-<!--            <el-col :span="6">-->
-<!--              <ProjectIndexView :context="{title:'消防指数', val:28.93}"></ProjectIndexView>-->
-<!--            </el-col>-->
-<!--            <el-col :span="6">-->
-<!--              <ProjectIndexView :context="{title:'电梯指数', val:76.83}"></ProjectIndexView>-->
-<!--            </el-col>-->
-<!--            <el-col :span="6">-->
-<!--              <ProjectIndexView :context="{title:'燃气指数', val:82.69}"></ProjectIndexView>-->
-<!--            </el-col>-->
-<!--            <el-col :span="6">-->
-<!--              <ProjectIndexView :context="{title:'电气指数', val:82.69}"></ProjectIndexView>-->
-<!--            </el-col>-->
-<!--          </el-row>-->
-<!--          </el-card>-->
+  <!--  <el-container>-->
+  <!--    <el-header>-->
+  <!--      <el-row>-->
+  <!--        <el-col :span="24">-->
+  <!--          <div id="title" class="grid-content bg-purple-dark level1" style="text-align: left; padding-top: 17px">-->
+  <!--            <span>商业地产事业部2020年巡检项目EHS大数据分析</span>-->
+  <!--          </div>-->
+  <!--        </el-col>-->
+  <!--      </el-row>-->
+  <!--    </el-header>-->
+  <!--    <el-main>-->
+  <!--&lt;!&ndash;      安全指数&ndash;&gt;-->
+  <!--      <el-row class="boundary" type="flex">-->
+  <!--        <el-col :span="10" class="boundary-B margin">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 280px">-->
+  <!--            <el-row class="margin">-->
+  <!--            <el-col :span = '24'>-->
+  <!--              <div class = 'safety_index' style="height: 150px">-->
+  <!--              </div>-->
+  <!--            </el-col>-->
+  <!--          </el-row>-->
+  <!--          &lt;!&ndash;            各专业安全指数&ndash;&gt;-->
+  <!--          <el-row class="margin">-->
+  <!--            <el-col :span="6">-->
+  <!--              <ProjectIndexView :context="{title:'消防指数', val:28.93}"></ProjectIndexView>-->
+  <!--            </el-col>-->
+  <!--            <el-col :span="6">-->
+  <!--              <ProjectIndexView :context="{title:'电梯指数', val:76.83}"></ProjectIndexView>-->
+  <!--            </el-col>-->
+  <!--            <el-col :span="6">-->
+  <!--              <ProjectIndexView :context="{title:'燃气指数', val:82.69}"></ProjectIndexView>-->
+  <!--            </el-col>-->
+  <!--            <el-col :span="6">-->
+  <!--              <ProjectIndexView :context="{title:'电气指数', val:82.69}"></ProjectIndexView>-->
+  <!--            </el-col>-->
+  <!--          </el-row>-->
+  <!--          </el-card>-->
 
 
-<!--        </el-col>-->
-<!--&lt;!&ndash;        已检查的项目数量&ndash;&gt;-->
-<!--        <el-col :span="4" class="boundary-B part1 margin">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 280px">-->
-<!--          </el-card>-->
+  <!--        </el-col>-->
+  <!--&lt;!&ndash;        已检查的项目数量&ndash;&gt;-->
+  <!--        <el-col :span="4" class="boundary-B part1 margin">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 280px">-->
+  <!--          </el-card>-->
 
-<!--        </el-col>-->
-<!--&lt;!&ndash;        各风险等级对应的隐患数量&ndash;&gt;-->
-<!--        <el-col :span="10" class="boundary-B part1 margin">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 280px">-->
-<!--            <Region1_4></Region1_4>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
+  <!--        </el-col>-->
+  <!--&lt;!&ndash;        各风险等级对应的隐患数量&ndash;&gt;-->
+  <!--        <el-col :span="10" class="boundary-B part1 margin">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 280px">-->
+  <!--            <Region1_4></Region1_4>-->
+  <!--          </el-card>-->
+  <!--        </el-col>-->
+  <!--      </el-row>-->
 
-<!--      <el-row class="boundary" tyep="flex">-->
-<!--&lt;!&ndash;        项目当前未整改高风险隐患列表&ndash;&gt;-->
-<!--        <el-col class="boundary-B part2 margin" :span="7">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 500px">-->
-<!--            <Region2_1></Region2_1>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
-<!--&lt;!&ndash;        未整改高风险隐患图片&ndash;&gt;-->
-<!--        <el-col class="boundary-B part2 margin" :span="8">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 500px">-->
-<!--            <Region2_2></Region2_2>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
-<!--&lt;!&ndash;各项目累计发现的隐患在各专业的分布&ndash;&gt;-->
-<!--        <el-col class="boundary-B part2 margin" :span="8">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 500px">-->
-<!--            <Region2_3></Region2_3>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
+  <!--      <el-row class="boundary" tyep="flex">-->
+  <!--&lt;!&ndash;        项目当前未整改高风险隐患列表&ndash;&gt;-->
+  <!--        <el-col class="boundary-B part2 margin" :span="7">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 500px">-->
+  <!--            <Region2_1></Region2_1>-->
+  <!--          </el-card>-->
+  <!--        </el-col>-->
+  <!--&lt;!&ndash;        未整改高风险隐患图片&ndash;&gt;-->
+  <!--        <el-col class="boundary-B part2 margin" :span="8">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 500px">-->
+  <!--            <Region2_2></Region2_2>-->
+  <!--          </el-card>-->
+  <!--        </el-col>-->
+  <!--&lt;!&ndash;各项目累计发现的隐患在各专业的分布&ndash;&gt;-->
+  <!--        <el-col class="boundary-B part2 margin" :span="8">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 500px">-->
+  <!--            <Region2_3></Region2_3>-->
+  <!--          </el-card>-->
+  <!--        </el-col>-->
+  <!--      </el-row>-->
 
-<!--      <el-row class="boundary" type="flex">-->
-<!--&lt;!&ndash;项目累计出现次数前10的隐患及其对应数量&ndash;&gt;-->
-<!--        <el-col :span="8" class="boundary-B part2 margin">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 570px">-->
-<!--            <Region3_1></Region3_1>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
-<!--&lt;!&ndash;项目安全指数排名&ndash;&gt;-->
-<!--        <el-col :span="8" class="boundary-B part2 margin">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 570px">-->
-<!--            <Region3_2></Region3_2>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
-<!--&lt;!&ndash;项目累计高风险数量排名&ndash;&gt;-->
-<!--        <el-col :span="8" class="boundary-B part2 margin">-->
-<!--          <el-card shadow="never" style="background-color: transparent; height: 570px">-->
-<!--            <Region3_3 ref="echarts"></Region3_3>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
+  <!--      <el-row class="boundary" type="flex">-->
+  <!--&lt;!&ndash;项目累计出现次数前10的隐患及其对应数量&ndash;&gt;-->
+  <!--        <el-col :span="8" class="boundary-B part2 margin">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 570px">-->
+  <!--            <Region3_1></Region3_1>-->
+  <!--          </el-card>-->
+  <!--        </el-col>-->
+  <!--&lt;!&ndash;项目安全指数排名&ndash;&gt;-->
+  <!--        <el-col :span="8" class="boundary-B part2 margin">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 570px">-->
+  <!--            <Region3_2></Region3_2>-->
+  <!--          </el-card>-->
+  <!--        </el-col>-->
+  <!--&lt;!&ndash;项目累计高风险数量排名&ndash;&gt;-->
+  <!--        <el-col :span="8" class="boundary-B part2 margin">-->
+  <!--          <el-card shadow="never" style="background-color: transparent; height: 570px">-->
+  <!--            <Region3_3 ref="echarts"></Region3_3>-->
+  <!--          </el-card>-->
+  <!--        </el-col>-->
 
-<!--      </el-row>-->
-<!--    </el-main>-->
-<!--  </el-container>-->
+  <!--      </el-row>-->
+  <!--    </el-main>-->
+  <!--  </el-container>-->
   <RegionOverview></RegionOverview>
 </template>
 
@@ -129,7 +129,7 @@ export default {
     ProjectIndexView,
     checkbox
   },
-  data(){
+  data() {
     return {
       region_name: '',
     }
@@ -159,9 +159,9 @@ export default {
     to.meta.keepAlive = false
   },
   methods: {
-    selfAdaption(){
+    selfAdaption() {
       let _this = this;
-      setTimeout(() =>{
+      setTimeout(() => {
         window.addEventListener('resize', function () {
           _this.$refs.echarts.resize();
         })
@@ -202,9 +202,9 @@ export default {
       //筛选，默认发condition: stage,all top: 5
       let param4 = new URLSearchParams();
       param4.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
-      param4.append('condition', 'risk_level');
-      param4.append('level', 'all');
+      param4.append('flag', 1);
       param4.append('top', 5);
+      param4.append('stage', '施工');
       this.$store.commit('get_region/changeParam4', {params: param4})
       //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
       this.$store.dispatch('get_region/getRegionOtherTop')
