@@ -1072,24 +1072,23 @@ function getCheckDangerProblem(param, callback) {
         })
 }
 
-//隐患描述筛选条件
 /*
-*FunctionName: getCheckDangerProblem
-* Purpose: 显示该次检查记录中存在的红线问题及导致其存在的原因
+*FunctionName: getDangerSelection
+* Purpose: 隐患描述筛选条件 四个层级条件一样
 * Parameter: null
-* Return: 专业、系统、风险等级。。。待整理
+* Return: 专业、系统、风险等级。。。
  */
-// function getDangerSelection(param, callback) {
-//     // const url = `${dataServerUrl}/check/check_unit`;
-//     const url = `${dataServerUrl}/check/check_danger_problem`;
-//     axios.post(url, param)
-//         .then(response => {
-//             callback(response.data)
-//         })
-//         .catch(error => {
-//             console.log(error)
-//         })
-// }
+function getDangerSelection(param, callback) {
+    // const url = `${dataServerUrl}/check/check_unit`;
+    const url = `${dataServerUrl}/headquarter/danger_selection`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 
 //data analysis
 /*
@@ -1467,6 +1466,7 @@ export default {
     getCheckUnit,
     getCheckNumber,
     getCheckDangerProblem,
+    getDangerSelection,
     getProjectNumber,
     getMajorRiskNumber,
     getSystemRiskNumber,

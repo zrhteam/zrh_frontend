@@ -140,6 +140,8 @@ export default {
       // window.addEventListener("beforeunload", () => {
       //   sessionStorage.setItem("userMsg", JSON.stringify(this.$store.state))
       // })
+      //  得到隐患描述的筛选条件
+      this.$store.dispatch('get_login/getDangerSelection')
     },
     forgetPsw() {
       this.$alert('忘记密码，请联系管理员XX，联系方式：XXX XXXX XXXX', '提示', {

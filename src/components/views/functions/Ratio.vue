@@ -1,11 +1,9 @@
 <template>
   <!--区域级-->
   <!--显示该区域各专业隐患占比情况-->
-  <!--根据隐患数量显示不同致因阶段的占比情况-->
   <!--根据隐患数量显示不同分布区域的占比情况-->
   <!--总部级-->
   <!--各专业隐患数量占比-->
-  <!--各致因阶段的隐患数量占比情况-->
   <!--各分布区域的隐患数量占比情况-->
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 1%">
@@ -28,13 +26,9 @@
     </div>
     <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">
     </div>
-    <div id="id_region_reason" style="height: 80%; width: 100%" v-if="context.id==='id_region_reason'">
-    </div>
     <div id="id_region_region" style="height: 80%; width: 100%" v-if="context.id==='id_region_region'">
     </div>
     <div id="id_head_major" style="height: 80%; width: 100%" v-if="context.id==='id_head_major'">
-    </div>
-    <div id="id_head_reason" style="height: 80%; width: 100%" v-if="context.id==='id_head_reason'">
     </div>
     <div id="id_head_region" style="height: 80%; width: 100%" v-if="context.id==='id_head_region'">
     </div>

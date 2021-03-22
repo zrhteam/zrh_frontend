@@ -11,19 +11,28 @@
   <!--总部  -->
   <!--显示在不同条件(专业/系统)下隐患数量排名前top的隐患  -->
   <!--显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患  -->
+  <!--  每一级的两个都合成一个了-->
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 2% 4% 2% 0%">
     <div class="level4">
       <span>{{ context.title }}</span>
-      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterCondition">
-        <el-option
-            v-for="item in context.option"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-        >
-        </el-option>
-      </el-select>
+      <!--      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterCondition">-->
+      <!--        <el-option-->
+      <!--            v-for="item in context.option"-->
+      <!--            :key="item.value"-->
+      <!--            :label="item.label"-->
+      <!--            :value="item.value"-->
+      <!--        >-->
+      <!--        </el-option>-->
+      <!--      </el-select>-->
+      <el-cascader
+          size="mini"
+          style="max-width: 8em;" @change="filterCondition"
+          ref="cascaderAddr"
+          :value="value"
+          :options="options"
+          :props="{ checkStrictly: true }"
+          clearable></el-cascader>
       <el-select v-model="top_value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterTop">
         <el-option
             v-for="item in top_option"
@@ -48,7 +57,7 @@
           stripe
           style="width: 99%; color: #fff; margin: 3px">
         <el-table-column
-             type='index'>
+            type='index'>
         </el-table-column>
         <el-table-column
             property="description"
@@ -74,7 +83,7 @@ export default {
   props: ['context', 'top_data'],
   data() {
     return {
-      value: "专业",
+      value: "施工",
       top_value: 5,
       top_option: [
         {
@@ -91,290 +100,294 @@ export default {
           key: 10
         }],
       sub_top_data: [],
-      data: this.top_data
+      data: this.top_data,
+      options: this.$store.state.get_login.danger_selection
     }
   },
   methods: {
     filterCondition() {
-      if (this.context.sign === 'check_risk') {
-        let param3 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param3.append('check_code', this.$store.state.get_check.check_code);
-        param3.append('condition', obj.key);
-        param3.append('top', this.top_value);
-        this.$store.commit('get_check/changeParam3', {params: param3})
-        this.$store.dispatch('get_check/getCheckRiskTop')
-      } else if (this.context.sign === 'check_other') {
+      const checkedNodes = this.$refs['cascaderAddr'].getCheckedNodes() // 获取当前点击的节点
+      this.value = checkedNodes[0].data.label
+      console.log(this.value)
+      if (this.context.sign === 'check_other') {
         let param4 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param4.append('check_code', this.$store.state.get_check.check_code);
-        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
-          param4.append('condition', 'risk_level');
-          param4.append('level', obj.key);
-        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
-          param4.append('condition', obj.key);
-          param4.append('level', 0);
-        }
         param4.append('top', this.top_value);
+        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        if (checkedNodes[0].level === 1) {
+          //致因阶段
+          if (checkedNodes[0].data.belong == 'stage') {
+            param4.append('flag', 1);
+          }
+          // 风险等级
+          else if (checkedNodes[0].data.belong == 'risk_level') {
+            param4.append('flag', 2);
+          }
+          // 专业
+          else if (checkedNodes[0].data.belong == 'major_name') {
+            param4.append('flag', 3);
+          }
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        } else if (checkedNodes[0].level === 2) {
+          //专业+系统
+          if (checkedNodes[0].data.belong == 'system_name') {
+            param4.append('flag', 4);
+          }
+          // 专业+区域
+          else if (checkedNodes[0].data.belong == 'area') {
+            param4.append('flag', 5);
+          }
+          param4.append(checkedNodes[0].parent.data.belong, checkedNodes[0].parent.data.label);
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        }
         this.$store.commit('get_check/changeParam4', {params: param4})
         this.$store.dispatch('get_check/getCheckOtherTop')
-      } else if (this.context.sign === 'prj_risk') {
-        let param3 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param3.append('project_name', this.$store.state.get_project.prj_name);
-        param3.append('condition', obj.key);
-        param3.append('top', this.top_value);
-        this.$store.commit('get_project/changeParam3', {params: param3})
-        this.$store.dispatch('get_project/getInitProjectRiskTop')
       } else if (this.context.sign === 'prj_other') {
         let param4 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param4.append('project_name', this.$store.state.get_project.prj_name);
-        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
-          param4.append('condition', 'risk_level');
-          param4.append('level', obj.key);
-        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
-          param4.append('condition', obj.key);
-          param4.append('level', 0);
-        }
         param4.append('top', this.top_value);
+        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        if (checkedNodes[0].level === 1) {
+          //致因阶段
+          if (checkedNodes[0].data.belong == 'stage') {
+            param4.append('flag', 1);
+          }
+          // 风险等级
+          else if (checkedNodes[0].data.belong == 'risk_level') {
+            param4.append('flag', 2);
+          }
+          // 专业
+          else if (checkedNodes[0].data.belong == 'major_name') {
+            param4.append('flag', 3);
+          }
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        } else if (checkedNodes[0].level === 2) {
+          //专业+系统
+          if (checkedNodes[0].data.belong == 'system_name') {
+            param4.append('flag', 4);
+          }
+          // 专业+区域
+          else if (checkedNodes[0].data.belong == 'area') {
+            param4.append('flag', 5);
+          }
+          param4.append(checkedNodes[0].parent.data.belong, checkedNodes[0].parent.data.label);
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        }
         this.$store.commit('get_project/changeParam4', {params: param4})
         this.$store.dispatch('get_project/getProjectOtherTop')
-      } else if (this.context.sign === 'region_risk') {
-        let param3 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param3.append('region_name', this.$store.state.get_region.region_name);
-        param3.append('condition', obj.key);
-        param3.append('top', this.top_value);
-        this.$store.commit('get_region/changeParam3', {params: param3})
-        this.$store.dispatch('get_region/getInitRegionNumberTop')
       } else if (this.context.sign === 'region_other') {
         let param4 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param4.append('region_name', this.$store.state.get_region.region_name);
-        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
-          param4.append('condition', 'risk_level');
-          param4.append('level', obj.key);
-        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
-          param4.append('condition', obj.key);
-          param4.append('level', 0);
-        }
         param4.append('top', this.top_value);
+        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        if (checkedNodes[0].level === 1) {
+          //致因阶段
+          if (checkedNodes[0].data.belong == 'stage') {
+            param4.append('flag', 1);
+          }
+          // 风险等级
+          else if (checkedNodes[0].data.belong == 'risk_level') {
+            param4.append('flag', 2);
+          }
+          // 专业
+          else if (checkedNodes[0].data.belong == 'major_name') {
+            param4.append('flag', 3);
+          }
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        } else if (checkedNodes[0].level === 2) {
+          //专业+系统
+          if (checkedNodes[0].data.belong == 'system_name') {
+            param4.append('flag', 4);
+          }
+          // 专业+区域
+          else if (checkedNodes[0].data.belong == 'area') {
+            param4.append('flag', 5);
+          }
+          param4.append(checkedNodes[0].parent.data.belong, checkedNodes[0].parent.data.label);
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        }
         this.$store.commit('get_region/changeParam4', {params: param4})
         this.$store.dispatch('get_region/getRegionOtherTop')
-      } else if (this.context.sign === 'head_risk') {
-        let param3 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param3.append('headquarter_name', this.$store.state.get_headquarter.head_name);
-        param3.append('condition', obj.key);
-        param3.append('top', this.top_value);
-        this.$store.commit('get_headquarter/changeParam3', {params: param3})
-        this.$store.dispatch('get_headquarter/getInitNumberTop')
       } else if (this.context.sign === 'head_other') {
         let param4 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
-        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
-          param4.append('condition', 'risk_level');
-          param4.append('level', obj.key);
-        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
-          param4.append('condition', obj.key);
-          param4.append('level', 0);
-        }
         param4.append('top', this.top_value);
+        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        if (checkedNodes[0].level === 1) {
+          //致因阶段
+          if (checkedNodes[0].data.belong == 'stage') {
+            param4.append('flag', 1);
+          }
+          // 风险等级
+          else if (checkedNodes[0].data.belong == 'risk_level') {
+            param4.append('flag', 2);
+          }
+          // 专业
+          else if (checkedNodes[0].data.belong == 'major_name') {
+            param4.append('flag', 3);
+          }
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        } else if (checkedNodes[0].level === 2) {
+          //专业+系统
+          if (checkedNodes[0].data.belong == 'system_name') {
+            param4.append('flag', 4);
+          }
+          // 专业+区域
+          else if (checkedNodes[0].data.belong == 'area') {
+            param4.append('flag', 5);
+          }
+          param4.append(checkedNodes[0].parent.data.belong, checkedNodes[0].parent.data.label);
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        }
         this.$store.commit('get_headquarter/changeParam4', {params: param4})
         this.$store.dispatch('get_headquarter/getHeadOtherNumberTop')
       }
     },
     filterTop() {
-      if (this.context.sign === 'check_risk') {
-        let param3 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-
-        param3.append('check_code', this.$store.state.get_check.check_code);
-        param3.append('condition', obj.key);
-        param3.append('top', this.top_value);
-        this.$store.commit('get_check/changeParam3', {params: param3})
-        this.$store.dispatch('get_check/getCheckRiskTop')
-      } else if (this.context.sign === 'check_other') {
+      const checkedNodes = this.$refs['cascaderAddr'].getCheckedNodes() // 获取当前点击的节点
+      console.log(checkedNodes)
+      console.log(checkedNodes[0].data.label) // 获取当前点击的节点的label
+      console.log(checkedNodes[0].pathLabels) // 获取由 label 组成的数组
+      if (this.context.sign === 'check_other') {
         let param4 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param4.append('check_code', this.$store.state.get_check.check_code);
-        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
-          param4.append('condition', 'risk_level');
-          param4.append('level', obj.key);
-        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
-          param4.append('condition', obj.key);
-          param4.append('level', 0);
-        }
         param4.append('top', this.top_value);
-        this.$store.commit('get_check/changeParam4', {params: param4})
-        this.$store.dispatch('get_check/getCheckOtherTop')
-      } else if (this.context.sign === 'prj_risk') {
-        let param3 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param3.append('project_name', this.$store.state.get_project.prj_name);
-        param3.append('condition', obj.key);
-        param3.append('top', this.top_value);
-        this.$store.commit('get_project/changeParam3', {params: param3})
-        this.$store.dispatch('get_project/getInitProjectRiskTop')
+        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        if (checkedNodes[0].level === 1) {
+          //致因阶段
+          if (checkedNodes[0].data.belong == 'stage') {
+            param4.append('flag', 1);
+          }
+          // 风险等级
+          else if (checkedNodes[0].data.belong == 'risk_level') {
+            param4.append('flag', 2);
+          }
+          // 专业
+          else if (checkedNodes[0].data.belong == 'major_name') {
+            param4.append('flag', 3);
+          }
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        } else if (checkedNodes[0].level === 2) {
+          //专业+系统
+          if (checkedNodes[0].data.belong == 'system_name') {
+            param4.append('flag', 4);
+          }
+          // 专业+区域
+          else if (checkedNodes[0].data.belong == 'area') {
+            param4.append('flag', 5);
+          }
+          this.$store.commit('get_check/changeParam4', {params: param4})
+          this.$store.dispatch('get_check/getCheckOtherTop')
+        }
       } else if (this.context.sign === 'prj_other') {
         let param4 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param4.append('project_name', this.$store.state.get_project.prj_name);
-        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
-          param4.append('condition', 'risk_level');
-          param4.append('level', obj.key);
-        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
-          param4.append('condition', obj.key);
-          param4.append('level', 0);
-        }
         param4.append('top', this.top_value);
+        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        if (checkedNodes[0].level === 1) {
+          //致因阶段
+          if (checkedNodes[0].data.belong == 'stage') {
+            param4.append('flag', 1);
+          }
+          // 风险等级
+          else if (checkedNodes[0].data.belong == 'risk_level') {
+            param4.append('flag', 2);
+          }
+          // 专业
+          else if (checkedNodes[0].data.belong == 'major_name') {
+            param4.append('flag', 3);
+          }
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        } else if (checkedNodes[0].level === 2) {
+          //专业+系统
+          if (checkedNodes[0].data.belong == 'system_name') {
+            param4.append('flag', 4);
+          }
+          // 专业+区域
+          else if (checkedNodes[0].data.belong == 'area') {
+            param4.append('flag', 5);
+          }
+          param4.append(checkedNodes[0].parent.data.belong, checkedNodes[0].parent.data.label);
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        }
         this.$store.commit('get_project/changeParam4', {params: param4})
         this.$store.dispatch('get_project/getProjectOtherTop')
-      } else if (this.context.sign === 'region_risk') {
-        let param3 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-
-        param3.append('region_name', this.$store.state.get_region.region_name);
-        param3.append('condition', obj.key);
-        param3.append('top', this.top_value);
-        this.$store.commit('get_region/changeParam3', {params: param3})
-        this.$store.dispatch('get_region/getInitRegionNumberTop')
       } else if (this.context.sign === 'region_other') {
         let param4 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param4.append('region_name', this.$store.state.get_region.region_name);
-        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
-          param4.append('condition', 'risk_level');
-          param4.append('level', obj.key);
-        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
-          param4.append('condition', obj.key);
-          param4.append('level', 0);
-        }
         param4.append('top', this.top_value);
+        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        if (checkedNodes[0].level === 1) {
+          //致因阶段
+          if (checkedNodes[0].data.belong == 'stage') {
+            param4.append('flag', 1);
+          }
+          // 风险等级
+          else if (checkedNodes[0].data.belong == 'risk_level') {
+            param4.append('flag', 2);
+          }
+          // 专业
+          else if (checkedNodes[0].data.belong == 'major_name') {
+            param4.append('flag', 3);
+          }
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        } else if (checkedNodes[0].level === 2) {
+          //专业+系统
+          if (checkedNodes[0].data.belong == 'system_name') {
+            param4.append('flag', 4);
+          }
+          // 专业+区域
+          else if (checkedNodes[0].data.belong == 'area') {
+            param4.append('flag', 5);
+          }
+          param4.append(checkedNodes[0].parent.data.belong, checkedNodes[0].parent.data.label);
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        }
         this.$store.commit('get_region/changeParam4', {params: param4})
         this.$store.dispatch('get_region/getRegionOtherTop')
-      } else if (this.context.sign === 'head_risk') {
-        let param3 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-
-        param3.append('headquarter_name', this.$store.state.get_headquarter.head_name);
-        param3.append('condition', obj.key);
-        param3.append('top', this.top_value);
-        this.$store.commit('get_headquarter/changeParam3', {params: param3})
-        this.$store.dispatch('get_headquarter/getInitNumberTop')
       } else if (this.context.sign === 'head_other') {
         let param4 = new URLSearchParams();
-        var obj = {};
-        //使用find()方法在下拉数据中根据value绑定的数据查找对象
-        let _this = this
-        obj = this.context.option.find(function (item) {
-          return item.value === _this.value;
-        })
-        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
-        if ((this.value === '低风险') || (this.value === '中风险') || (this.value === '高风险') || (this.value === '风险')) {
-          param4.append('condition', 'risk_level');
-          param4.append('level', obj.key);
-        } else if ((this.value === '致因阶段') || (this.value === '分布区域')) {
-          param4.append('condition', obj.key);
-          param4.append('level', 0);
-        }
         param4.append('top', this.top_value);
+        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        if (checkedNodes[0].level === 1) {
+          //致因阶段
+          if (checkedNodes[0].data.belong == 'stage') {
+            param4.append('flag', 1);
+          }
+          // 风险等级
+          else if (checkedNodes[0].data.belong == 'risk_level') {
+            param4.append('flag', 2);
+          }
+          // 专业
+          else if (checkedNodes[0].data.belong == 'major_name') {
+            param4.append('flag', 3);
+          }
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        } else if (checkedNodes[0].level === 2) {
+          //专业+系统
+          if (checkedNodes[0].data.belong == 'system_name') {
+            param4.append('flag', 4);
+          }
+          // 专业+区域
+          else if (checkedNodes[0].data.belong == 'area') {
+            param4.append('flag', 5);
+          }
+          param4.append(checkedNodes[0].parent.data.belong, checkedNodes[0].parent.data.label);
+          param4.append(checkedNodes[0].data.belong, checkedNodes[0].data.label);
+        }
         this.$store.commit('get_headquarter/changeParam4', {params: param4})
         this.$store.dispatch('get_headquarter/getHeadOtherNumberTop')
       }
-    },
+    }
+    ,
     updateList() {
       this.sub_top_data = this.getTopRisk
-      if ((this.context.sign === 'check_risk') || (this.context.sign === 'check_other') || (this.context.sign === 'prj_risk') || (this.context.sign === 'prj_other')) {
+      if ((this.context.sign === 'check_other') || (this.context.sign === 'prj_other')) {
         this.$nextTick(() => {
           // this.sub_top_data = this.getTopRisk
           if (document.getElementById('large1').style.display === 'none')
             document.getElementById('prj_small').style.display = 'block'
         });
-      } else if ((this.context.sign === 'region_risk') || (this.context.sign === 'region_other')) {
+      } else if (this.context.sign === 'region_other') {
         this.$nextTick(() => {
           // this.sub_top_data = this.getTopRisk
           if (document.getElementById('region_large1').style.display === 'none')
             document.getElementById('region_small').style.display = 'block'
         });
-      } else if ((this.context.sign === 'head_risk') || (this.context.sign === 'head_other')) {
+      } else if (this.context.sign === 'head_other') {
         this.$nextTick(() => {
           // this.sub_top_data = this.getTopRisk
           if (document.getElementById('head_large1').style.display === 'none')
@@ -386,104 +399,28 @@ export default {
   computed: {
     getTopRisk() {
       let arr = []
-      if (this.context.sign === 'check_risk') {
-        let data = this.$store.state.get_check.check_risk_top
-        arr = []
-        this.sub_top_data = []
-        for (let i in data) {
-          let obj = {
-            description: '',
-            belong: '',
-            appear_time: 0
-          }
-          // console.log("改变", this.$refs.top.value)
-          let value = this.value
-          let o = this.context.option.find(function (item) {
-            return value === item.value;
-          })
-          obj['description'] = i
-          obj['belong'] = data[i][o.key]
-          obj['appear_time'] = data[i].appear_time
-          arr.push(obj)
+      let data = ''
+      if (this.context.sign === 'check_other') {
+        data = this.$store.state.get_check.check_other_top
+      } else if (this.context.sign === 'prj_other') {
+        data = this.$store.state.get_project.prj_other_top
+      } else if (this.context.sign === 'region_other') {
+        data = this.$store.state.get_region.risk_other_top
+      } else if (this.context.sign === 'head_other') {
+        data = this.$store.state.get_headquarter.other_number_top
+      }
+      arr = []
+      this.sub_top_data = []
+      for (let i in data) {
+        let obj = {
+          description: '',
+          belong: '',
+          appear_time: 0
         }
-      } else if (this.context.sign === 'check_other') {
-        let data = this.$store.state.get_check.check_other_top
-        arr = []
-        this.sub_top_data = []
-        for (let i in data) {
-          let obj = {
-            description: '',
-            belong: '',
-            appear_time: 0
-          }
-          let value = this.value
-          let o = this.context.option.find(function (item) {
-            return value === item.value;
-          })
-          obj['belong'] = o.value
-          obj['appear_time'] = data[i].appear_time
-          arr.push(obj)
-          obj['description'] = i
-        }
-      } else if ((this.context.sign === 'prj_risk') || (this.context.sign === 'region_risk') || (this.context.sign === 'head_risk')) {
-        let data = ''
-        if (this.context.sign === 'prj_risk') {
-          data = this.$store.state.get_project.prj_risk_top
-        } else if (this.context.sign === 'region_risk') {
-          data = this.$store.state.get_region.risk_number_top
-        } else if (this.context.sign === 'head_risk') {
-          data = this.$store.state.get_headquarter.risk_number_top
-        }
-        arr = []
-        this.sub_top_data = []
-        for (let i in data) {
-          let obj = {
-            description: '',
-            belong: '',
-            appear_time: 0
-          }
-          // console.log("改变", this.$refs.top.value)
-          let value = this.value
-          let o = this.context.option.find(function (item) {
-            return value === item.value;
-          })
-          if ((this.context.sign === 'region_risk') || (this.context.sign === 'head_risk')) {
-            obj['description'] = i
-            obj['belong'] = data[i]['count'][o.key]
-            obj['appear_time'] = data[i]['count'].appear_time
-          } else if (this.context.sign === 'prj_risk') {
-            obj['description'] = i
-            obj['belong'] = data[i][o.key]
-            obj['appear_time'] = data[i].appear_time
-          }
-          arr.push(obj)
-        }
-      } else if ((this.context.sign === 'prj_other') || (this.context.sign === 'region_other') || (this.context.sign === 'head_other')) {
-        let data = ''
-        if (this.context.sign === 'prj_other') {
-          data = this.$store.state.get_project.prj_other_top
-        } else if (this.context.sign === 'region_other') {
-          data = this.$store.state.get_region.risk_other_top
-        } else if (this.context.sign === 'head_other') {
-          data = this.$store.state.get_headquarter.other_number_top
-        }
-        arr = []
-        this.sub_top_data = []
-        for (let i in data) {
-          let obj = {
-            description: '',
-            belong: '',
-            appear_time: 0
-          }
-          let value = this.value
-          let o = this.context.option.find(function (item) {
-            return value === item.value;
-          })
-          obj['belong'] = o.value
-          obj['appear_time'] = data[i].appear_time
-          arr.push(obj)
-          obj['description'] = i
-        }
+        obj['belong'] = this.value
+        obj['appear_time'] = data[i]
+        obj['description'] = i
+        arr.push(obj)
       }
       return arr
     }
@@ -509,11 +446,6 @@ export default {
     this.updateList()
   },
   created() {
-    if ((this.context.sign === 'check_risk') || (this.context.sign === 'prj_risk') || (this.context.sign === 'region_risk') || (this.context.sign === 'head_risk')) {
-      this.value = "专业"
-    } else if ((this.context.sign === 'check_other') || (this.context.sign === 'prj_other') || (this.context.sign === 'region_other') || (this.context.sign === 'head_other')) {
-      this.value = "风险"
-    }
   }
 }
 </script>

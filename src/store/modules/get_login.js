@@ -20,11 +20,13 @@ const state = {
 
     now_node: -1,
     expandedKeys: [],
-//    查询该用户下的授权数据
+    //查询该用户下的授权数据
     grant_info: {},
-//    查询需发送用户名
-    param_name: {}
+    //查询需发送用户名
+    param_name: {},
 
+    //四个层级都有的隐患描述的查询条件
+    danger_selection: []
 }
 
 //getters
@@ -55,7 +57,13 @@ const actions = {
         dataService.getGrantInfo(state.param_name, function (response) {
             context.commit('changeGrantInfo', response)
         })
-    }
+    },
+    //得到四个层级的隐患描述需要的筛选条件
+    getDangerSelection(context) {
+        dataService.getDangerSelection(state.param_name, function (response) {
+            context.commit('changeDangerSelection', response)
+        })
+    },
 }
 
 //mutations
@@ -92,6 +100,75 @@ const mutations = {
 //    查询需发送用户名
     changeNameParam(state, data) {
         state.param_name = data.params
+    },
+    //得到四个层级的隐患描述需要的筛选条件
+    changeDangerSelection(state, data) {
+        let arr = []
+        for (let i in data.data) {
+            if (i == 'major_name') {
+                for (let j in data.data[i]) {
+                    let obj = {
+                        value: '',
+                        label: '',
+                        belong: '',
+                        children: []
+                    }
+                    obj['value'] = j
+                    obj['label'] = j
+                    obj['belong'] = i
+                    for (let k in data.data[i][j]) {
+                        for (let l in data.data[i][j][k]) {
+                            let child_obj = {
+                                value: '',
+                                label: '',
+                                belong: '',
+                                children2: []
+                            }
+                            child_obj['value'] = data.data[i][j][k][l]
+                            child_obj['label'] = data.data[i][j][k][l]
+                            child_obj["belong"] = k
+                            obj['children'].push(child_obj)
+                        }
+                    }
+                    arr.push(obj)
+                }
+            } else if (i == 'risk_level') {
+                for (let j in data.data[i]) {
+                    let obj = {
+                        value: '',
+                        label: '',
+                        belong: '',
+                        children1: []
+                    }
+                    if (data.data[i][j] == 1) {
+                        obj['value'] = data.data[i][j]
+                        obj['label'] = '低风险'
+                    }else if (data.data[i][j] == 2) {
+                        obj['value'] = data.data[i][j]
+                        obj['label'] = '中风险'
+                    }else if (data.data[i][j] == 3) {
+                        obj['value'] = data.data[i][j]
+                        obj['label'] = '高风险'
+                    }
+                    obj["belong"] = i
+                    arr.push(obj)
+                }
+            } else if (i == 'stage') {
+                for (let j in data.data[i]) {
+                    let obj = {
+                        value: '',
+                        label: '',
+                        belong: '',
+                        children1: []
+                    }
+                    obj['value'] = data.data[i][j]
+                    obj['label'] = data.data[i][j]
+                    obj["belong"] = i
+                    arr.push(obj)
+                }
+            }
+        }
+        state.danger_selection = arr
     },
 }
 

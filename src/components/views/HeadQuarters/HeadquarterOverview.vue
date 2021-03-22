@@ -64,15 +64,15 @@
             <el-col :span="24" style="height: 29%; margin: 2% 0 2% 2%">
               <!--3维信息-->
               <!--            <Region2_3></Region2_3>-->
-              <TopRisk
-                  :context="{
-          title:'重复出现隐患列表',
-          label1:'隐患描述',
-          label2:'出现频率',
-          sign:'head_risk',
-          option:this.risk_option}"
-                  :top_data="this.$store.state.get_headquarter.risk_number_top"
-              ></TopRisk>
+<!--              <TopRisk-->
+<!--                  :context="{-->
+<!--          title:'重复出现隐患列表',-->
+<!--          label1:'隐患描述',-->
+<!--          label2:'出现频率',-->
+<!--          sign:'head_risk',-->
+<!--          option:this.risk_option}"-->
+<!--                  :top_data="this.$store.state.get_headquarter.risk_number_top"-->
+<!--              ></TopRisk>-->
             </el-col>
             <el-col :span="24" style="height: 29%;margin: 2%">
               <TopRisk

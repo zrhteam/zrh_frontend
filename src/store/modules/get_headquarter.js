@@ -303,7 +303,6 @@ const mutations = {
     },
     //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
     changeOtherNumberTop(state, data) {
-        // console.log("top", data)
         if (data.code === 10000) {
             state.other_number_top = data.data;
         } else {

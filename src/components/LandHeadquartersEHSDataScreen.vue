@@ -125,25 +125,25 @@ export default {
         //显示每个区域的高风险数量
         this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
 
-        //筛选，默认发condition: major, top: 5
-        let param3 = new URLSearchParams();
-        param3.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
-        param3.append('condition', 'major');
-        param3.append('top', 5);
-        this.$store.commit('get_headquarter/changeParam3', {params: param3})
-        //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
-        this.$store.dispatch('get_headquarter/getInitNumberTop')
+        // //筛选，默认发condition: major, top: 5
+        // let param3 = new URLSearchParams();
+        // param3.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
+        // param3.append('condition', 'major');
+        // param3.append('top', 5);
+        // this.$store.commit('get_headquarter/changeParam3', {params: param3})
+        // //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
+        // this.$store.dispatch('get_headquarter/getInitNumberTop')
         //按年份显示总部的高中低风险等级对应的隐患数量
         this.$store.dispatch('get_headquarter/getHeadRiskLevelYear')
 
         //筛选，默认发condition: stage,all top: 5
         let param4 = new URLSearchParams();
         param4.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
-        param4.append('condition', 'risk_level');
-        param4.append('level', 'all');
+        param4.append('flag', 1);
         param4.append('top', 5);
+        param4.append('stage', '施工');
         this.$store.commit('get_headquarter/changeParam4', {params: param4})
-        //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
+        //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患 变了
         this.$store.dispatch('get_headquarter/getHeadOtherNumberTop')
         //按照检查次数对区域排名
         this.$store.dispatch('get_headquarter/getHeadCheckRank')

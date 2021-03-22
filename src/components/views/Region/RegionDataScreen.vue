@@ -68,11 +68,12 @@
             }"></Ratio>
           </el-col>
           <el-col :span="11" style="height: 100%;margin-left:6%">
-            <Ratio
-                :context="{
-                title:'不同分布区域隐患数量',
-                id: 'id_region_region'
-            }"></Ratio>
+<!--            <Ratio-->
+<!--                :context="{-->
+<!--                title:'不同分布区域隐患数量',-->
+<!--                id: 'id_region_region'-->
+<!--            }"></Ratio>-->
+            <StackedHorizontalBar></StackedHorizontalBar>
           </el-col>
         </el-row>
       </el-col>
@@ -253,10 +254,12 @@ import BarRank from "@/components/views/functions/BarRank.vue";
 import DoughnutChart from "@/components/views/functions/DoughnutChart.vue";
 import TopCompare from "@/components/views/functions/TopCompare.vue";
 import DrillDown from "@/components/views/functions/DrillDown.vue";
+import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
   name: "RegionDataScreen",
   components: {
+    StackedHorizontalBar,
     BarRank,
     TopName,
     TopRisk,

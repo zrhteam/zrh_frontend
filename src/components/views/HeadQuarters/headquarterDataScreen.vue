@@ -43,11 +43,16 @@
         }"></Ratio>
       </el-col>
       <el-col :span="8" style="height: 48%; ">
-        <Ratio
+<!--        <Ratio-->
+<!--            :context="{-->
+<!--          title:'不同致因阶段隐患数量',-->
+<!--          id: 'id_head_reason'-->
+<!--        }"></Ratio>-->
+        <StackedHorizontalBar
             :context="{
           title:'不同致因阶段隐患数量',
           id: 'id_head_reason'
-        }"></Ratio>
+        }"></StackedHorizontalBar>
       </el-col>
       <el-col :span="8" style="height: 48%; width: 32.5%">
         <Ratio
@@ -233,10 +238,12 @@ import DoughnutChart from "@/components/views/functions/DoughnutChart.vue";
 import TopCompare from "@/components/views/functions/TopCompare.vue";
 import DrillDown from "@/components/views/functions/DrillDown.vue";
 import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
+import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
   name: "headquarterOverview",
   components: {
+    StackedHorizontalBar,
     DrillDown,
     TopCompare,
     DoughnutChart,
