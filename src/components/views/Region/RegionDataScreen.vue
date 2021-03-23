@@ -53,11 +53,16 @@
           ></BarRank>
         </el-row>
         <el-row style="height: 30%; margin:2% 0% 0 0">
-          <Ratio
+<!--          <Ratio-->
+<!--              :context="{-->
+<!--              title:'不同子系统隐患数量',-->
+<!--              id: 'id_region_system'-->
+<!--          }"></Ratio>-->
+          <BarRank
               :context="{
               title:'不同子系统隐患数量',
               id: 'id_region_system'
-          }"></Ratio>
+          }"></BarRank>
         </el-row>
         <el-row style="height: 30%;margin:3.2% 0% 0 0">
           <el-col :span="11" style="height: 100%;margin-left:1%">

@@ -186,51 +186,6 @@ export default {
             }
           }
         }
-      } else if (this.context.id == 'id_region_system') {
-        this.show = true
-        data = this.$store.state.get_region.region_sys_ratio
-        for (let i in data) {
-          for (let j in data[i]) {
-            let obj = {
-              name: '',
-              value: ''
-            }
-            obj['name'] = j;
-            obj['value'] = data[i][j]
-            arr.push(obj)
-          }
-        }
-
-        let major = []
-        let filter = []
-        let count = 0
-        for (let i in data) {
-          if (filter.indexOf(i) === -1) {
-            filter.push(i)
-            let obj = {
-              value: '',
-              label: ''
-            }
-            obj['value'] = count++;
-            obj['label'] = i
-            major.push(obj)
-          }
-        }
-        let obj = {
-          value: '',
-          label: ''
-        }
-        obj['value'] = '全部专业';
-        obj['label'] = '全部专业'
-        major.push(obj)
-        let old_major = this.$store.state.get_region.all_majors
-        if (old_major.length < major.length) {
-          this.$store.commit('get_region/changeAllMajors', {all_majors: major})
-          this.option = major
-        } else {
-          this.option = this.$store.state.get_region.all_majors
-        }
-        // console.log("看一下", data)
       }
       arr.sort(this.sortNumber('value', true))
       let new_arr = []
