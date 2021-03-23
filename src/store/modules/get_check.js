@@ -47,6 +47,9 @@ const state = {
     //显示在当前检查中隐患次数排名前10的组件名称
     check_unit_name: {},
 
+    //按专业分不同风险等级隐患数量
+    check_risk_level_ratio: {}
+
     // //展示当前未整改的高风险隐患列表
     // check_risk_list: {},
 }
@@ -210,6 +213,13 @@ const actions = {
         })
     },
 
+    //按专业分不同风险等级隐患数量
+    getCheckRiskLevelRatio(context) {
+        dataService.getCheckRiskLevelRatio(state.params, function (response) {
+            context.commit('changeCheckRiskLevelRatio', response)
+        })
+    },
+
     //得到当前未整改的高风险隐患列表
     // getCheckHighRisk(context) {
     //     dataService.getCheckHighRisk(state.params, function (response) {
@@ -367,6 +377,15 @@ const mutations = {
         if (data.code === 10000) {
             // console.log("check_top5", data.data)
             state.check_unit_name = data.data
+        } else {
+            alert("出错了")
+        }
+    },
+
+    //按专业分不同风险等级隐患数量
+    changeCheckRiskLevelRatio(state, data) {
+        if (data.code === 10000) {
+            state.check_risk_level_ratio = data.data;
         } else {
             alert("出错了")
         }

@@ -41,6 +41,10 @@ const state = {
     chartKey: 0,
 
 
+    //按专业分不同风险等级隐患数量
+    head_risk_level_ratio: {}
+
+
     // //总部整改率
     // rectification: {},
     //未整改高风险图片
@@ -209,6 +213,12 @@ const actions = {
         })
     },
 
+    //按专业分不同风险等级隐患数量
+    getHeadRiskLevelRatio(context) {
+        dataService.getHeadRiskLevelRatio(state.params, function (response) {
+            context.commit('changeHeadRiskLevelRatio', response)
+        })
+    },
 
 
     // //得到总部整改率
@@ -360,7 +370,18 @@ const mutations = {
         state.rank_by_prj = state.rank_by_prj.filter((item) => {
             return item.chartKey !== chartKey
         })
-    }
+    },
+
+    //按专业分不同风险等级隐患数量
+    changeHeadRiskLevelRatio(state, data) {
+        if (data.code === 10000) {
+            state.head_risk_level_ratio = data.data;
+        } else {
+            alert("出错了")
+        }
+    },
+
+
 
     // //考虑总部整改率变化
     // changeRectification(state, data) {

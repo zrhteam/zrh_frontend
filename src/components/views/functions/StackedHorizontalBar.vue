@@ -14,6 +14,16 @@
     <!--  检查级-->
     <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">
     </div>
+    <!--    新增的不同风险等级隐患数量-->
+    <!--    总部级-->
+<!--    <div id="id_head_risk" style="height: 80%; width: 100%" v-if="context.id==='id_head_risk'">-->
+<!--    </div>-->
+    <!--  区域级-->
+    <div id="id_region_risk" style="height: 80%; width: 100%" v-if="context.id==='id_region_risk'">
+    </div>
+    <!--  检查级-->
+<!--    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">-->
+<!--    </div>-->
   </el-card>
 </template>
 

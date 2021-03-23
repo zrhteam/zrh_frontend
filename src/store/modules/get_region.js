@@ -47,6 +47,9 @@ const state = {
     //根据隐患数量显示不同风险等级的占比情况
     region_level_ratio: {},
 
+    //按专业分不同风险等级隐患数量
+    region_risk_level_ratio: {}
+
 
     // //已检查项目
     // examine_number: null,
@@ -225,6 +228,13 @@ const actions = {
             context.commit('changeRegionAreaRatio', response)
         })
     },
+
+    //按专业分不同风险等级隐患数量
+    getRegionRiskLevelRatio(context) {
+        dataService.getRegionRiskLevelRatio(state.params, function (response) {
+            context.commit('changeRegionRiskLevelRatio', response)
+        })
+    },
     // //根据隐患数量显示不同风险等级的占比情况
     // getRegionLevelRatio(context) {
     //     dataService.getRegionLevelRatio(state.params, function (response) {
@@ -395,11 +405,20 @@ const mutations = {
             alert("出错了")
         }
     },
-    //根据隐患数量显示不同风险等级的占比情况
-    changeRegionLevelRatio(state, data) {
+    // //根据隐患数量显示不同风险等级的占比情况
+    // changeRegionLevelRatio(state, data) {
+    //     if (data.code === 10000) {
+    //         // console.log('high', data.data)
+    //         state.region_level_ratio = data.data;
+    //     } else {
+    //         alert("出错了")
+    //     }
+    // },
+
+    //按专业分不同风险等级隐患数量
+    changeRegionRiskLevelRatio(state, data) {
         if (data.code === 10000) {
-            // console.log('high', data.data)
-            state.region_level_ratio = data.data;
+            state.region_risk_level_ratio = data.data;
         } else {
             alert("出错了")
         }

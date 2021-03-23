@@ -285,6 +285,24 @@ function getHeadDangerProblem(param, callback) {
         })
 }
 
+//置地总部EHS数据大屏页面
+/*
+*FunctionName: getHeadDangerProblem
+* Purpose: 不同风险等级隐患数量
+* Parameter: head_name
+* Return: 返回该总部不同风险等级隐患数量的json文件
+ */
+function getHeadRiskLevelRatio(param, callback) {
+    const url = `${dataServerUrl}/headquarter/head_risk_level_ratio`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 //地产事业部页面
 /*
 *FunctionName: getRegionInitIndex
@@ -530,6 +548,24 @@ function getRegionAreaRatio(param, callback) {
  */
 function getRegionDangerProblem(param, callback) {
     const url = `${dataServerUrl}/region/region_danger_problem`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+//地产事业部页面
+/*
+*FunctionName: getRegionRiskLevelRatio
+* Purpose: 显示该区域不同风险等级隐患数量
+* Parameter: region_name
+* Return: 返回该区域不同风险等级隐患数量的json文件
+ */
+function getRegionRiskLevelRatio(param, callback) {
+    const url = `${dataServerUrl}/region/region_risk_level_ratio`;
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -811,6 +847,25 @@ function getProjectDangerProblem(param, callback) {
         })
 }
 
+//项目级页面
+/*
+*FunctionName: getProjectRiskLevelRatio
+* Purpose: 显示该区域不同风险等级隐患数量
+* Parameter: project_name
+* Return: 返回该区域不同风险等级隐患数量的json文件
+ */
+function getProjectRiskLevelRatio(param, callback) {
+    const url = `${dataServerUrl}/project/project_risk_level_ratio`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+
 //以下的对象是每一次检查***************************************
 
 //检查记录
@@ -1071,6 +1126,25 @@ function getCheckDangerProblem(param, callback) {
             console.log(error)
         })
 }
+
+//检查记录
+/*
+*FunctionName: getCheckRiskLevelRatio
+* Purpose: 显示该区域不同风险等级隐患数量
+* Parameter: region_name
+* Return: 返回该区域不同风险等级隐患数量的json文件
+ */
+function getCheckRiskLevelRatio(param, callback) {
+    const url = `${dataServerUrl}/check/check_risk_level_ratio`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 
 /*
 *FunctionName: getDangerSelection
@@ -1422,6 +1496,7 @@ export default {
     getHeadAreaRatio,
     getHeadProjectRank,
     getHeadDangerProblem,
+    getHeadRiskLevelRatio,
     getRegionInitIndex,
     getInitRegionRiskLevel,
     getRegionRiskLevelYear,
@@ -1436,6 +1511,7 @@ export default {
     getRegionStageRatio,
     getRegionAreaRatio,
     getRegionDangerProblem,
+    getRegionRiskLevelRatio,
     getInitProjectIndex,
     getInitProjectRiskLevel,
     getProjectRiskLevelYear,
@@ -1451,6 +1527,7 @@ export default {
     getProjectUnitNumber,
     getProjectRules,
     getProjectDangerProblem,
+    getProjectRiskLevelRatio,
     getCheckRiskLevel,
     getCheckLevelYear,
     getCheckRiskRatio,
@@ -1466,6 +1543,7 @@ export default {
     getCheckUnit,
     getCheckNumber,
     getCheckDangerProblem,
+    getCheckRiskLevelRatio,
     getDangerSelection,
     getProjectNumber,
     getMajorRiskNumber,

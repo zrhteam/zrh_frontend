@@ -54,6 +54,9 @@ const state = {
     // 基于项目级显示违反次数排名前10的法规、违反次数及其相关条款号和内容
     prj_rule: {},
 
+    //按专业分不同风险等级隐患数量
+    prj_risk_level_ratio: {}
+
     // //基于项目级展示历次检查隐患数量变化的情况
     // prj_number_change: {},
     //
@@ -243,6 +246,13 @@ const actions = {
     getProjectRules(context) {
         dataService.getProjectRules(state.params, function (response) {
             context.commit('changePrjRules', response)
+        })
+    },
+
+    //按专业分不同风险等级隐患数量
+    getProjectRiskLevelRatio(context) {
+        dataService.getProjectRiskLevelRatio(state.params, function (response) {
+            context.commit('changeProjectRiskLevelRatio', response)
         })
     },
 
@@ -436,6 +446,15 @@ const mutations = {
         if (data.code === 10000) {
             // console.log("top5", data.data)
             state.prj_rule = data.data
+        } else {
+            alert("出错了")
+        }
+    },
+
+    //按专业分不同风险等级隐患数量
+    changeProjectRiskLevelRatio(state, data) {
+        if (data.code === 10000) {
+            state.prj_risk_level_ratio = data.data;
         } else {
             alert("出错了")
         }
