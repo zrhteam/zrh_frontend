@@ -256,6 +256,8 @@ export default {
       this.$store.dispatch('get_project/getProjectUnitNumber')
       // 基于项目级显示违反次数排名前10的法规、违反次数及其相关条款号和内容
       this.$store.dispatch('get_project/getProjectRules')
+      // 按专业不同风险等级隐患数量
+      this.$store.dispatch('get_project/getProjectRiskLevelRatio')
     }
     //  查看该用户是否有授权图表
     let param5 = new URLSearchParams();

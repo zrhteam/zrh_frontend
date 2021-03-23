@@ -230,6 +230,8 @@ export default {
       this.$store.dispatch('get_region/getRegionAreaRatio')
       //根据隐患数量显示不同风险等级的占比情况
       // this.$store.dispatch('get_region/getRegionLevelRatio')
+      // 按专业不同风险等级隐患数量
+      this.$store.dispatch('get_region/getRegionRiskLevelRatio')
     }
     //  查看该用户是否有授权图表
     let param5 = new URLSearchParams();

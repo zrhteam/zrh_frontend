@@ -48,6 +48,9 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_headquarter/getHeadAreaRatio')
         // 展示按照项目数量对区域排名
         this.$store.dispatch('get_headquarter/getHeadProjectRank')
+
+         // 按专业不同风险等级隐患数量
+        this.$store.dispatch('get_headquarter/getHeadRiskLevelRatio')
     };
     Vue.prototype.regionNodeClick = function (region_name) {//全局函数2,点击树形控件的区域，查询该区域的大屏信息
         let param = new URLSearchParams();
@@ -108,6 +111,9 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_region/getRegionAreaRatio')
         //根据隐患数量显示不同风险等级的占比情况
         // this.$store.dispatch('get_region/getRegionLevelRatio')
+
+         // 按专业不同风险等级隐患数量
+        this.$store.dispatch('get_region/getRegionRiskLevelRatio')
     };
     Vue.prototype.prjNodeClick = function (project_name) {//全局函数3,点击树形控件的项目，查询该项目的大屏信息
         let param = new URLSearchParams();
@@ -175,6 +181,9 @@ exports.install = function (Vue, options) {
         // setTimeout(function () {
         //   this.map.panTo(new L.LatLng(34, 107));
         // }, 100)
+
+         // 按专业不同风险等级隐患数量
+        this.$store.dispatch('get_project/getProjectRiskLevelRatio')
     };
     Vue.prototype.checkNodeClick = function (check_code) {//全局函数4,点击树形控件的检查，查询该检查的大屏信息
         let param1 = new URLSearchParams();
@@ -255,6 +264,9 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_check/getCheckDevice')
         //显示在当前检查中隐患次数排名前10的组件名称
         this.$store.dispatch('get_check/getCheckUnit')
+
+         // 按专业不同风险等级隐患数量
+        this.$store.dispatch('get_check/getCheckRiskLevelRatio')
     };
     Vue.prototype.handleTreeNodeClick = function (data, node) {//全局函数5,点击树形控件，查看页面权限，决定页面展示
         if (this.$store.state.get_login.grant_data.data.user_grant === '项目') {

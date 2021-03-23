@@ -155,6 +155,8 @@ export default {
         this.$store.dispatch('get_headquarter/getHeadAreaRatio')
         // 展示按照项目数量对区域排名
         this.$store.dispatch('get_headquarter/getHeadProjectRank')
+        // 按专业不同风险等级隐患数量
+        this.$store.dispatch('get_headquarter/getHeadRiskLevelRatio')
       }
     }
     //  查看该用户是否有授权图表

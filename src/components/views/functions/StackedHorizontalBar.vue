@@ -213,6 +213,9 @@ export default {
           }
         }
         s_data.push(sub_data)
+      }else if(this.context.id == 'id_region_risk') {
+        data = this.$store.state.get_region.region_risk_level_ratio
+        console.log("aaaa", data)
       }
       yAxis.push("总计")
       this.legend = legend

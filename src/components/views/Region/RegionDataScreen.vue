@@ -66,11 +66,6 @@
         </el-row>
         <el-row style="height: 30%;margin:3.2% 0% 0 0">
           <el-col :span="11" style="height: 100%;margin-left:1%">
-<!--            <Ratio-->
-<!--                :context="{-->
-<!--                title:'不同致因阶段隐患数量',-->
-<!--                id: 'id_region_reason'-->
-<!--            }"></Ratio>-->
             <StackedHorizontalBar
                 :context="{
                 title:'不同致因阶段隐患数量',
@@ -91,11 +86,20 @@
           <RiskLevelYear :context="{title:'年度隐患数量', id:'region_level_year'}"></RiskLevelYear>
         </el-row>
         <el-row style="height: 30%;margin:2% 0% 0 0">
-          <Ratio
+          <el-col :span="11" style="height: 100%;margin-left:1%">
+            <Ratio
               :context="{
               title:'不同专业隐患数量',
               id: 'id_region_major'
           }"></Ratio>
+          </el-col>
+          <el-col :span="11" style="height: 100%;margin-left:6%">
+            <StackedHorizontalBar
+              :context="{
+              title:'不同风险等级隐患数量',
+              id: 'id_region_risk'
+          }"></StackedHorizontalBar>
+          </el-col>
         </el-row>
         <el-row style="height: 30%;margin:2% 0% 0 0">
           <Region2_2></Region2_2>
