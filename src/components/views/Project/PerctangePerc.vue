@@ -15,21 +15,24 @@
         </el-option>
       </el-select>
     </div>
-    <!--    <div id="bar_chart" style="height: 80%; width: 100%">-->
-    <!--      &lt;!&ndash;        占比（可筛选专业）柱状图&ndash;&gt;-->
-
-    <!--    </div>-->
-    <!--        占比（可筛选专业）柱状图-->
-    <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">
-    </div>
-    <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">
-    </div>
+<!--    项目-->
+<!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
+<!--    筛选专业条件下属于不同分布区域的隐患数量-->
+<!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
+<!--    检查-->
+<!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
+<!--    筛选专业条件下属于不同分布区域的隐患数量-->
+<!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
+<!--    <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">-->
+<!--    </div>-->
+<!--    <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">-->
+<!--    </div>-->
     <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">
     </div>
-    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">
-    </div>
-    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">
-    </div>
+<!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
+<!--    </div>-->
+<!--    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">-->
+<!--    </div>-->
     <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">
     </div>
   </el-card>

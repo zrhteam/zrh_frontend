@@ -1,8 +1,8 @@
 <template>
   <el-col :span="19" style="height: 100%">
     <el-card class="box-card " shadow="never"
-             style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px">
-      <el-col :span="12" style="height: 100%">
+             style="background-color: transparent; height: 98%; margin: 0px 2px 2px 2px;">
+      <el-col :span="12" style="height: 100%; flex-direction: row; overflow-x: scroll">
         <el-row style="height: 30%">
           <!--            第一列-->
           <el-col :span="11" style="height: 100%; margin-left: 4.5%">
@@ -10,12 +10,12 @@
           </el-col>
           <!--            第2列-->
           <el-col :span="11" style="height: 100%;width:46%">
-<!--            <PerctangePerc-->
-<!--                :context="{-->
-<!--              title:'不同致因阶段隐患数量',-->
-<!--              type:'reason',-->
-<!--              id:'id_check_reason',-->
-<!--            }"></PerctangePerc>-->
+            <!--            <PerctangePerc-->
+            <!--                :context="{-->
+            <!--              title:'不同致因阶段隐患数量',-->
+            <!--              type:'reason',-->
+            <!--              id:'id_check_reason',-->
+            <!--            }"></PerctangePerc>-->
             <StackedHorizontalBar
                 :context="{
               title:'不同致因阶段隐患数量',
@@ -35,11 +35,20 @@
               {{ getName }}
             </div>
             <TopName
-            :context="{title:'最容易出现隐患的系统',
+                :context="{title:'最容易出现隐患的系统',
             top_data:this.sys_name,
             label1:'系统名称',
             label2:'出现频率',
         }"></TopName>
+          </el-col>
+        </el-row>
+        <el-row style="height: 30%">
+          <el-col :span="22" style="height: 100%; margin-left: 2%; margin-bottom: 2%; width: 100%">
+            <StackedHorizontalBar
+                  :context="{
+              title:'不同风险等级隐患数量',
+              id: 'id_check_risk'
+          }"></StackedHorizontalBar>
           </el-col>
         </el-row>
       </el-col>
@@ -57,12 +66,17 @@
 
           <!--            第4列-->
           <el-col :span="11" style="height: 100%;width:46.5%">
-            <PerctangePerc
+            <!--            <PerctangePerc-->
+            <!--                :context="{-->
+            <!--                  title:'不同子系统隐患数量',-->
+            <!--                  type:'system',-->
+            <!--                  id:'id_check_system',-->
+            <!--                }"></PerctangePerc>-->
+            <BarRank
                 :context="{
-                  title:'不同子系统隐患数量',
-                  type:'system',
-                  id:'id_check_system',
-                }"></PerctangePerc>
+              title:'不同子系统隐患数量',
+              id: 'id_check_system'
+          }"></BarRank>
           </el-col>
         </el-row>
         <el-row style="height: 30%; margin-bottom: 2%">
@@ -73,14 +87,14 @@
         <el-row style="height: 30%">
           <el-col style="height: 100%">
             <TopRisk
-            :context="{
+                :context="{
                   title:'重复出现隐患',
                   label1:'隐患描述',
                   label2:'出现频率',
                   sign:'check_other',
                   option:this.other_option}"
-            :top_data="this.$store.state.get_check.check_other_top"
-        ></TopRisk>
+                :top_data="this.$store.state.get_check.check_other_top"
+            ></TopRisk>
           </el-col>
         </el-row>
       </el-col>
@@ -98,14 +112,17 @@ import TopName from "@/components/views/functions/TopName.vue";
 import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
+import BarRank from "@/components/views/functions/BarRank.vue";
 
 export default {
   name: "CheckOverview",
   components: {
+    BarRank,
     StackedHorizontalBar,
     TopRisk,
-    CheckRiskLevel, TopName, RiskLevelYear, CheckRectification, CheckHighRisk, CheckRiskRatio, PerctangePerc},
-  data(){
+    CheckRiskLevel, TopName, RiskLevelYear, CheckRectification, CheckHighRisk, CheckRiskRatio, PerctangePerc
+  },
+  data() {
     return {
       sys_name: [],
       other_option: [{

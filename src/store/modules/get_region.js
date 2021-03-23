@@ -418,6 +418,7 @@ const mutations = {
     //按专业分不同风险等级隐患数量
     changeRegionRiskLevelRatio(state, data) {
         if (data.code === 10000) {
+            console.log("1111", data)
             state.region_risk_level_ratio = data.data;
         } else {
             alert("出错了")

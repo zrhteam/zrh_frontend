@@ -11,19 +11,25 @@
     <!--  区域级-->
     <div id="id_region_reason" style="height: 80%; width: 100%" v-if="context.id==='id_region_reason'">
     </div>
+    <!--  项目级-->
+    <div id="id_project_reason" style="height: 80%; width: 100%" v-if="context.id==='id_project_reason'">
+    </div>
     <!--  检查级-->
     <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">
     </div>
     <!--    新增的不同风险等级隐患数量-->
     <!--    总部级-->
-<!--    <div id="id_head_risk" style="height: 80%; width: 100%" v-if="context.id==='id_head_risk'">-->
-<!--    </div>-->
+    <!--    <div id="id_head_risk" style="height: 80%; width: 100%" v-if="context.id==='id_head_risk'">-->
+    <!--    </div>-->
     <!--  区域级-->
     <div id="id_region_risk" style="height: 80%; width: 100%" v-if="context.id==='id_region_risk'">
     </div>
-    <!--  检查级-->
-<!--    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">-->
-<!--    </div>-->
+    <!--    项目级-->
+    <div id="id_project_risk" style="height: 80%; width: 100%" v-if="context.id==='id_project_risk'">
+    </div>
+    <!--      检查级-->
+    <div id="id_check_risk" style="height: 80%; width: 100%" v-if="context.id==='id_check_risk'">
+    </div>
   </el-card>
 </template>
 
@@ -49,22 +55,28 @@ export default {
         let data = []
         let r_data = []
         // console.log('log', this.s_data)
+        //转置
         let hang = this.s_data.length
-        let lie = this.s_data[0].length
-        for (let i = 0; i < lie; i++) {
-          let sub_r = []
-          for (let j = 0; j < hang; j++) {
-            sub_r.push(this.s_data[j][i])
+        if (hang > 0) {
+          let lie = this.s_data[0].length
+          for (let i = 0; i < lie; i++) {
+            let sub_r = []
+            for (let j = 0; j < hang; j++) {
+              sub_r.push(this.s_data[j][i])
+            }
+            r_data.push(sub_r)
           }
-          r_data.push(sub_r)
         }
+        console.log("cha", r_data)
         for (let i in r_data) {
           let obj = {
             name: this.legend[i],
             type: 'bar',
             stack: 'total',
             label: {
-              show: true
+              show: true,
+              fontWeight: 200,
+              fontSize: 8
             },
             emphasis: {
               focus: 'series'
@@ -74,10 +86,12 @@ export default {
           }
           data.push(obj)
         }
-        data[data.length - 1]["itemStyle"] = {
-          normal: {
-            //柱形图圆角，初始化效果
-            barBorderRadius: [0, 10, 10, 0],
+        if (data.length > 0) {
+          data[data.length - 1]["itemStyle"] = {
+            normal: {
+              //柱形图圆角，初始化效果
+              barBorderRadius: [0, 10, 10, 0],
+            }
           }
         }
         let option = {
@@ -154,9 +168,11 @@ export default {
       let legend = [];
       let yAxis = [];
       let s_data = [];
-      if ((this.context.id == 'id_check_reason') || (this.context.id == 'id_region_reason') || (this.context.id == 'id_head_reason')) {
+      if ((this.context.id == 'id_check_reason') || (this.context.id == 'id_project_reason') || (this.context.id == 'id_region_reason') || (this.context.id == 'id_head_reason')) {
         if (this.context.id == 'id_check_reason') {
           data = this.$store.state.get_check.check_reason
+        } else if (this.context.id == 'id_project_reason') {
+          data = this.$store.state.get_project.prj_reason
         } else if (this.context.id == 'id_region_reason') {
           data = this.$store.state.get_region.region_stage_ratio
         } else data = this.$store.state.get_headquarter.head_stage_ratio
@@ -213,11 +229,80 @@ export default {
           }
         }
         s_data.push(sub_data)
-      }else if(this.context.id == 'id_region_risk') {
-        data = this.$store.state.get_region.region_risk_level_ratio
-        console.log("aaaa", data)
+      } else if ((this.context.id == 'id_region_risk') || (this.context.id == 'id_project_risk') || (this.context.id == 'id_check_risk')) {
+        if (this.context.id == 'id_region_risk')
+          data = this.$store.state.get_region.region_risk_level_ratio
+        else if (this.context.id == 'id_project_risk') {
+          data = this.$store.state.get_project.prj_risk_level_ratio
+        }
+        else if (this.context.id == 'id_check_risk') {
+          data = this.$store.state.get_check.check_risk_level_ratio
+        }
+        for (let i in data) {
+          for (let j in data[i]) {
+            let obj = {
+              name: '',
+              value: 0
+            }
+            let flag = false
+            sub_arr.forEach(item => {
+              if (item.name === j) {
+                item.value = item.value + data[i][j]
+                flag = true
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              obj.value = data[i][j];
+              sub_arr.push(obj)
+              legend.push(j)
+            }
+          }
+          yAxis.push(i)
+        }
+        for (let i in data) {
+          let sub_data = []
+          for (let k in legend) {
+            let flag = false
+            for (let j in data[i]) {
+              if (j == legend[k]) {
+                sub_data.push(data[i][j])
+                flag = true
+              }
+            }
+            if (flag == false) {
+              sub_data.push(0)
+            }
+          }
+          s_data.push(sub_data)
+        }
+
+        let sub_data = []
+        let t_legend = []
+        for (let k in legend) {
+          let flag = false
+          for (let j in sub_arr) {
+            if (sub_arr[j].name == legend[k]) {
+              sub_data.push(sub_arr[j].value)
+              flag = true
+            }
+          }
+          if (flag == false) {
+            sub_data.push(0)
+          }
+          if (k == 0) {
+            t_legend.push('低风险')
+          } else if (k == 1) {
+            t_legend.push('中风险')
+          } else if (k == 2) {
+            t_legend.push('高风险')
+          }
+        }
+        legend = t_legend
+        s_data.push(sub_data)
       }
       yAxis.push("总计")
+
       this.legend = legend
       this.yAxis = yAxis
       this.s_data = s_data

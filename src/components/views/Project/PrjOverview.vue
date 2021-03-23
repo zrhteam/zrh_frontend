@@ -273,6 +273,9 @@ export default {
       if (document.getElementById('prj_subpart').style.display === 'block') {
         document.getElementById('check_charts').style.display = 'none'
         document.getElementById('prj_charts').style.display = 'block'
+      }else if (document.getElementById('check_part').style.display === 'block') {
+        document.getElementById('check_charts').style.display = 'block'
+        document.getElementById('prj_charts').style.display = 'none'
       }
     },
     //PrjOverview.vue中的map_1首先被加载

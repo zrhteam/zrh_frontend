@@ -2,9 +2,15 @@
   <!--  总部级-->
   <!--  按照检查次数对区域排名-->
   <!--  展示按照项目数量对区域排名-->
+
   <!--  区域级-->
   <!--  属于同一总部该区域内每个项目的高风险隐患数量-->
   <!--  返回该区域每个项目的检查次数-->
+  <!--  不同子系统隐患数量-->
+
+  <!--  项目级-->
+  <!--  不同子系统隐患数量-->
+  <!--  检查级-->
   <!--  不同子系统隐患数量-->
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%; margin: 1%">
@@ -32,6 +38,10 @@
     <div id="id_region_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank2'">
     </div>
     <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">
+    </div>
+    <div id="id_project_system" style="height: 80%; width: 100%" v-if="context.id==='id_project_system'">
+    </div>
+    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">
     </div>
   </el-card>
 </template>
@@ -95,10 +105,22 @@ export default {
       } else {
         param2.append('major', obj.label);
       }
-      param2.append('region_name', this.$store.state.get_region.region_name);
-      this.$store.commit('get_region/changeParam2', {params: param2})
-      //显示该区域不同专业下各系统隐患占比情况
-      this.$store.dispatch('get_region/getRegionSystemRatio')
+      if (this.context.id == 'id_region_system') {
+        param2.append('region_name', this.$store.state.get_region.region_name);
+        this.$store.commit('get_region/changeParam2', {params: param2})
+        //显示该区域不同专业下各系统隐患占比情况
+        this.$store.dispatch('get_region/getRegionSystemRatio')
+      }else if (this.context.id == 'id_project_system') {
+        param2.append('project_name', this.$store.state.get_project.prj_name);
+        this.$store.commit('get_project/changeParam2', {params: param2})
+        //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
+        this.$store.dispatch('get_project/getInitProjectSystem')
+      }else if (this.context.id == 'id_check_system') {
+        //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
+        param2.append('check_code', this.$store.state.get_check.check_code);
+        this.$store.commit('get_check/changeParam2', {params: param2})
+        this.$store.dispatch('get_check/getCheckMajorSystem')
+      }
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
@@ -154,9 +176,14 @@ export default {
           obj['count'] = data[i].count
           arr.push(obj)
         }
-      } else if (this.context.id == 'id_region_system') {
+      } else if ((this.context.id == 'id_region_system') || (this.context.id == 'id_project_system') || (this.context.id == 'id_check_system')) {
         this.show = true
-        data = this.$store.state.get_region.region_sys_ratio
+        if (this.context.id == 'id_region_system')
+          data = this.$store.state.get_region.region_sys_ratio
+        else if (this.context.id == 'id_project_system')
+          data = this.$store.state.get_project.prj_system
+        else if (this.context.id == 'id_check_system')
+          data = this.$store.state.get_check.check_system
         for (let i in data) {
           for (let j in data[i]) {
             let obj = {
