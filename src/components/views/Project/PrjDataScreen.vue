@@ -44,19 +44,23 @@
       <div style="display: none">
         {{ getName }}
       </div>
-      <!--      <el-col :span="24" style="height: 70%;">-->
-      <el-row v-if="isFirst" style="height: 86%;">
-        <el-col :span="10" style="height: 100%; margin-left: 10%">
+      <!--            <el-col :span="24" style="height: 70%;">-->
+      <el-row v-if="isFirst" style="height: 80%; flex-direction: row; overflow-x: scroll">
+        <!--      <el-col v-if="isFirst" style="height: 86%;">-->
+        <!--        <el-col :span="2" style="height: 100%; padding-top: 12%">-->
+        <!--          <el-button size="mini" circle icon="el-icon-arrow-left"-->
+        <!--                     style="background-color: transparent; color: #ffffff; float: left;"-->
+        <!--                     @click="preFirst">-->
+        <!--          </el-button>-->
+        <!--        </el-col>-->
+        <!--        <el-col :span="20" id="aa1" style="height: 100%;">-->
+        <el-col :span="12" style="height: 100%;">
           <el-row style="height: 32%; margin-bottom: 1%">
-            <TopRisk
+            <BarRank
                 :context="{
-          title:'重复出现隐患列表',
-          label1:'隐患描述',
-          label2:'出现频率',
-          sign:'prj_risk',
-          option:this.risk_option}"
-                :top_data="this.$store.state.get_project.prj_risk_top"
-            ></TopRisk>
+              title:'不同子系统隐患数量',
+              id: 'id_project_system'
+          }"></BarRank>
           </el-row>
           <el-row style="height: 32%; margin-bottom: 1%">
             <TopRisk
@@ -79,25 +83,59 @@
         }"></Rules>
           </el-row>
         </el-col>
-        <el-col :span="10" style="height: 100%;">
+        <el-col :span="12" style="height: 100%;">
           <el-row style="height: 32%; margin-bottom: 1%">
-            <TopName
-                :context="{title:'最容易出现隐患的设备',
+            <el-col :span="11" style="height: 100%;margin-left:1%">
+              <TopName
+                  :context="{title:'最容易出现隐患的设备',
             top_data:this.prj_device_name,
-            label1:'系统名称',
+            label1:'设备名称',
             label2:'出现频率',
         }"></TopName>
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <TopName
-                :context="{title:'最容易出现隐患的组件',
+            </el-col>
+            <el-col :span="11" style="height: 100%;margin-left:6%">
+              <TopName
+                  :context="{title:'最容易出现隐患的组件',
             top_data:this.prj_unit_name,
-            label1:'系统名称',
+            label1:'组件名称',
             label2:'出现频率',
         }"></TopName>
+            </el-col>
           </el-row>
           <el-row style="height: 32%; margin-bottom: 1%">
-            <UnsolvedImageList></UnsolvedImageList>
+            <StackedHorizontalBar
+                :context="{
+              title:'不同致因阶段隐患数量',
+              type:'reason',
+              id:'id_project_reason',
+            }"></StackedHorizontalBar>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <el-col :span="11" style="height: 100%;margin-left:1%">
+              <!--            不同专业隐患数量-->
+              <CheckHistoryPerc></CheckHistoryPerc>
+            </el-col>
+            <el-col :span="11" style="height: 100%;margin-left:6%">
+              <UnsolvedImageList></UnsolvedImageList>
+            </el-col>
+          </el-row>
+          <el-row style="height: 32%; margin-bottom: 1%">
+            <el-col :span="11" style="height: 100%;margin-left:1%">
+              <!--            不同专业隐患数量-->
+              <PerctangePerc
+                  :context="{
+                  title:'不同分布区域隐患数量',
+                  type:'region',
+                  id:'id_region',
+                 }"></PerctangePerc>
+            </el-col>
+            <el-col :span="11" style="height: 100%;margin-left:6%">
+              <StackedHorizontalBar
+                  :context="{
+              title:'不同风险等级隐患数量',
+              id: 'id_project_risk'
+          }"></StackedHorizontalBar>
+            </el-col>
           </el-row>
         </el-col>
       </el-row>
@@ -270,10 +308,14 @@ import Rules from "@/components/views/functions/Rules.vue";
 import DoughnutChart from "@/components/views/functions/DoughnutChart.vue";
 import TopCompare from "@/components/views/functions/TopCompare.vue";
 import DrillDown from "@/components/views/functions/DrillDown.vue";
+import BarRank from "@/components/views/functions/BarRank.vue";
+import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    StackedHorizontalBar,
+    BarRank,
     Rules,
     RiskLevelYear,
     TopRisk,
@@ -327,6 +369,24 @@ export default {
         document.getElementById('prj_small').style.display = 'block'
       }, 100);
     },
+    // preFirst() {
+    //   for(let i=0; i<this.firstArr.length; i++) {
+    //     if(this.firstArr[i] == true) {
+    //       this.firstArr[i] = false
+    //       this.firstArr[(i + this.firstArr.length - 1) % this.firstArr.length] = true
+    //       break
+    //     }
+    //   }
+    // },
+    // nextFirst() {
+    //   for(let i=0; i<this.firstArr.length; i++) {
+    //     if(this.firstArr[i] == true) {
+    //       this.firstArr[i] = false
+    //       this.firstArr[(i + 1) % this.firstArr.length] = true
+    //       break
+    //     }
+    //   }
+    // }
   },
   data() {
     return {
@@ -391,7 +451,8 @@ export default {
       obj2: '',
       titles: ['检查次数对比', "项目数量对比", '各风险等级隐患数量对比', '前top分布区域隐患数量对比', '前top致因阶段隐患数量对比', '前top隐患数量对比', '隐患数量前top组件对比', '隐患数量前top设备对比', '隐患数量前top系统对比', '前top专业隐患数量对比'],
       isShow: false,
-      isShows: [false, false, false, false, false, false, false, false, false, false]
+      isShows: [false, false, false, false, false, false, false, false, false, false],
+      firstArr: [true, false]
     };
   },
   computed: {
@@ -528,6 +589,7 @@ export default {
       }
 
       data = this.$store.state.get_project.prj_rule
+      console.log('topdata', data)
       for (let i in data) {
         let obj = {
           appear_time: 0,
