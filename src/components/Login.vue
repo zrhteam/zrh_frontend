@@ -160,10 +160,24 @@ export default {
         //项目级权限
         if (data.data.user_grant == '项目') {
           this.$router.push({path: '/prj_data_analysis'});
+          let data = {
+            label: this.$store.state.get_login.grant_data.data.project_tag
+          }
+          let node = {
+            level: 3
+          }
+          this.handleTreeNodeClick(data, node)
           // this.$router.push({path: '/register'});
         }// 区域级权限
         else if (data.data.user_grant == '区域') {
           this.$router.push({path: '/region_department'});
+          let data = {
+            label: this.$store.state.get_login.grant_data.data.region_tag
+          }
+          let node = {
+            level: 2
+          }
+          this.handleTreeNodeClick(data, node)
         }// 总部级权限
         else if (data.data.user_grant == '总部') {
           this.$router.push({path: '/land_headquarters'});

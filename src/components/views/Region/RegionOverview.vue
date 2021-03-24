@@ -113,7 +113,6 @@ import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
 import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
-// import HeadquarterOverview from "@/components/views/HeadQuarters/HeadquarterOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue"
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 

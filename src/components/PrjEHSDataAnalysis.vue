@@ -186,84 +186,84 @@ export default {
     to.meta.keepAlive = false
   },
   created() {
-    if (!sessionStorage.getItem("prjMsg")) {
-      let param = new URLSearchParams();
-      param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-      this.$store.commit('get_project/changeParams', {params: param})
-      //项目名称也需要封装
-      this.$store.commit('get_project/changePrjName', {prj_name: this.$store.state.get_login.grant_data.data.project_tag})
-      // this.$store.commit('get_login/changeParams',{params: params})
-      // this.$store.state.get_project.params = param
-
-      // // this.$store.dispatch('get_project/getInitProjectRectification')
-      // this.$store.dispatch('get_project/getInitProjectNumberChange')
-      // // 当前未整改高风险隐患列表
-      // this.$store.dispatch('get_project/getInitPrjRisk')
-
-
-      //显示项目的整体危险指数以及各专业的危险指数
-      // this.$store.dispatch('get_project/getInitProjectIndex')
-      //显示项目中各风险等级及其对应的隐患数量
-      this.$store.dispatch('get_project/getInitProjectRiskLevel')
-      //显示项目中各风险等级及其对应的隐患数量,按年份
-      this.$store.dispatch('get_project/getProjectRiskLevelYear')
-      //基于项目级展示不同专业隐患占比情况
-      this.$store.dispatch('get_project/getInitProjectHistoryPerception')
-
-      //筛选，默认发top: 5
-      let param5 = new URLSearchParams();
-      param5.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-      param5.append('top', 5);
-      this.$store.commit('get_project/changeParam5', {params: param5})
-      //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
-      this.$store.dispatch('get_project/getInitProjectImage')
-
-      //以下三项筛选专业，默认发全部传all
-      let param2 = new URLSearchParams();
-      param2.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-      param2.append('major', 'all');
-      this.$store.commit('get_project/changeParam2', {params: param2})
-      //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
-      this.$store.dispatch('get_project/getInitProjectSystem')
-      //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
-      this.$store.dispatch('get_project/getInitProjectReason')
-      //基于项目级显示在不同专业情况下，隐患区域分布的情况
-      this.$store.dispatch('get_project/getInitProjectRegionDistribution')
-
-      //筛选，默认发condition: major, top: 5
-      let param3 = new URLSearchParams();
-      param3.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-      param3.append('condition', 'major');
-      param3.append('top', 5);
-      this.$store.commit('get_project/changeParam3', {params: param3})
-      //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
-      this.$store.dispatch('get_project/getInitProjectRiskTop')
-
-      //筛选，默认发condition: stage,all top: 5
-      let param4 = new URLSearchParams();
-      param4.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-      param4.append('flag', 1);
-      param4.append('top', 5);
-      param4.append('stage', '施工');
-      this.$store.commit('get_project/changeParam4', {params: param4})
-      //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
-      this.$store.dispatch('get_project/getProjectOtherTop')
-      //基于项目级隐患次数排名前10的系统名称
-      this.$store.dispatch('get_project/getProjectSystemNumber')
-      //基于项目级隐患次数排名前10的设备名称
-      this.$store.dispatch('get_project/getProjectDeviceNumber')
-      //基于项目级隐患次数排名前10的组件名称
-      this.$store.dispatch('get_project/getProjectUnitNumber')
-      // 基于项目级显示违反次数排名前10的法规、违反次数及其相关条款号和内容
-      this.$store.dispatch('get_project/getProjectRules')
-      // 按专业不同风险等级隐患数量
-      this.$store.dispatch('get_project/getProjectRiskLevelRatio')
-    }
-    //  查看该用户是否有授权图表
-    let param5 = new URLSearchParams();
-    param5.append('user_name', this.$store.state.get_login.user_name);
-    this.$store.commit('get_login/changeNameParam', {params: param5})
-    this.$store.dispatch('get_login/getGrantInfo')
+    // if (!sessionStorage.getItem("prjMsg")) {
+    //   let param = new URLSearchParams();
+    //   param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    //   this.$store.commit('get_project/changeParams', {params: param})
+    //   //项目名称也需要封装
+    //   this.$store.commit('get_project/changePrjName', {prj_name: this.$store.state.get_login.grant_data.data.project_tag})
+    //   // this.$store.commit('get_login/changeParams',{params: params})
+    //   // this.$store.state.get_project.params = param
+    //
+    //   // // this.$store.dispatch('get_project/getInitProjectRectification')
+    //   // this.$store.dispatch('get_project/getInitProjectNumberChange')
+    //   // // 当前未整改高风险隐患列表
+    //   // this.$store.dispatch('get_project/getInitPrjRisk')
+    //
+    //
+    //   //显示项目的整体危险指数以及各专业的危险指数
+    //   // this.$store.dispatch('get_project/getInitProjectIndex')
+    //   //显示项目中各风险等级及其对应的隐患数量
+    //   this.$store.dispatch('get_project/getInitProjectRiskLevel')
+    //   //显示项目中各风险等级及其对应的隐患数量,按年份
+    //   this.$store.dispatch('get_project/getProjectRiskLevelYear')
+    //   //基于项目级展示不同专业隐患占比情况
+    //   this.$store.dispatch('get_project/getInitProjectHistoryPerception')
+    //
+    //   //筛选，默认发top: 5
+    //   let param5 = new URLSearchParams();
+    //   param5.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    //   param5.append('top', 5);
+    //   this.$store.commit('get_project/changeParam5', {params: param5})
+    //   //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
+    //   this.$store.dispatch('get_project/getInitProjectImage')
+    //
+    //   //以下三项筛选专业，默认发全部传all
+    //   let param2 = new URLSearchParams();
+    //   param2.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    //   param2.append('major', 'all');
+    //   this.$store.commit('get_project/changeParam2', {params: param2})
+    //   //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
+    //   this.$store.dispatch('get_project/getInitProjectSystem')
+    //   //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
+    //   this.$store.dispatch('get_project/getInitProjectReason')
+    //   //基于项目级显示在不同专业情况下，隐患区域分布的情况
+    //   this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+    //
+    //   //筛选，默认发condition: major, top: 5
+    //   let param3 = new URLSearchParams();
+    //   param3.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    //   param3.append('condition', 'major');
+    //   param3.append('top', 5);
+    //   this.$store.commit('get_project/changeParam3', {params: param3})
+    //   //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
+    //   this.$store.dispatch('get_project/getInitProjectRiskTop')
+    //
+    //   //筛选，默认发condition: stage,all top: 5
+    //   let param4 = new URLSearchParams();
+    //   param4.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    //   param4.append('flag', 1);
+    //   param4.append('top', 5);
+    //   param4.append('stage', '施工');
+    //   this.$store.commit('get_project/changeParam4', {params: param4})
+    //   //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
+    //   this.$store.dispatch('get_project/getProjectOtherTop')
+    //   //基于项目级隐患次数排名前10的系统名称
+    //   this.$store.dispatch('get_project/getProjectSystemNumber')
+    //   //基于项目级隐患次数排名前10的设备名称
+    //   this.$store.dispatch('get_project/getProjectDeviceNumber')
+    //   //基于项目级隐患次数排名前10的组件名称
+    //   this.$store.dispatch('get_project/getProjectUnitNumber')
+    //   // 基于项目级显示违反次数排名前10的法规、违反次数及其相关条款号和内容
+    //   this.$store.dispatch('get_project/getProjectRules')
+    //   // 按专业不同风险等级隐患数量
+    //   this.$store.dispatch('get_project/getProjectRiskLevelRatio')
+    // }
+    // //  查看该用户是否有授权图表
+    // let param5 = new URLSearchParams();
+    // param5.append('user_name', this.$store.state.get_login.user_name);
+    // this.$store.commit('get_login/changeNameParam', {params: param5})
+    // this.$store.dispatch('get_login/getGrantInfo')
     //在页面加载时读取sessionStorage里的状态信息
     sessionStorage.getItem("prjMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("prjMsg"))));
     //在页面刷新时将vuex里的信息保存到sessionStorage里
