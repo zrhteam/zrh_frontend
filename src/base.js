@@ -333,8 +333,12 @@ exports.install = function (Vue, options) {
         } else if (this.$store.state.get_login.grant_data.data.user_grant === '总部') {
             if (node.level == 1) {//总部=》总部
                 this.headNodeClick(data.label)
-                document.getElementById('head_quarter').style.display = 'block'
-                document.getElementById('region_part').style.display = 'none'
+                setTimeout(() => {
+                    document.getElementById('head_title1').innerHTML = data.label
+                    document.getElementById('head_title2').innerHTML = data.label
+                    document.getElementById('head_quarter').style.display = 'block'
+                    document.getElementById('region_part').style.display = 'none'
+                }, 200);
             } else if (node.level == 2) {//总部=》区域
                 this.regionNodeClick(data.label)
                 //修改可视化系统首页标题

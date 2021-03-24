@@ -1,11 +1,11 @@
 <template>
-  <el-row class="region_data_screen" style="height: 100%;">
+  <el-row style="height: 100%;">
     <el-row style="height: 10%">
       <el-card class="title-box-card" shadow="never"
                style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px;">
         <h4>
           <span id="head_title2"
-                style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; vertical-align: 45%; height: 100%">{{
+                style="">{{
               title1
             }}</span>
         </h4>
@@ -241,7 +241,7 @@ import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
 import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
-  name: "headquarterOverview",
+  name: "headquarterDataScreen",
   components: {
     StackedHorizontalBar,
     DrillDown,
@@ -416,4 +416,12 @@ export default {
 </script>
 
 <style scoped>
+#head_title2 {
+   color: #c4bcbc;
+   font-family:Microsoft YaHei;
+   font-size: 0.6em;
+   font-weight: bold;
+   vertical-align: 45%;
+   height: 100%
+}
 </style>

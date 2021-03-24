@@ -54,7 +54,6 @@ export default {
         let arr = this.getData
         let data = []
         let r_data = []
-        // console.log('log', this.s_data)
         //转置
         let hang = this.s_data.length
         if (hang > 0) {

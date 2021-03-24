@@ -275,7 +275,6 @@ export default {
     //   return this.map
     // },
     chinaConfigure() {
-      console.log(this.userJson)
       let myChart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
       window.onresize = myChart.resize("auto", "auto");
       myChart.setOption({ // 进行相关配置

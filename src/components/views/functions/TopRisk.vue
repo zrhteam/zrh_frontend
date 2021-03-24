@@ -108,7 +108,6 @@ export default {
     filterCondition() {
       const checkedNodes = this.$refs['cascaderAddr'].getCheckedNodes() // 获取当前点击的节点
       this.value = checkedNodes[0].data.label
-      console.log(this.value)
       if (this.context.sign === 'check_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
@@ -241,9 +240,9 @@ export default {
     },
     filterTop() {
       const checkedNodes = this.$refs['cascaderAddr'].getCheckedNodes() // 获取当前点击的节点
-      console.log(checkedNodes)
-      console.log(checkedNodes[0].data.label) // 获取当前点击的节点的label
-      console.log(checkedNodes[0].pathLabels) // 获取由 label 组成的数组
+      // console.log(checkedNodes)
+      // console.log(checkedNodes[0].data.label) // 获取当前点击的节点的label
+      // console.log(checkedNodes[0].pathLabels) // 获取由 label 组成的数组
       if (this.context.sign === 'check_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);

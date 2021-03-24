@@ -127,7 +127,6 @@ export default {
           data = this.$store.state.get_region.region_major_ratio
         } else {
           data = this.$store.state.get_headquarter.head_major_ratio
-          console.log("log", data)
         }
         for (let i in data) {
           let obj = {

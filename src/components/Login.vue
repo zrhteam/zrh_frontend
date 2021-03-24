@@ -75,13 +75,9 @@
 
 <script>
 import axios from 'axios'
-import particlesJs from '../components/particles/Particles.vue'
 
 export default {
   name: 'Login',
-  components: {
-    Particles: particlesJs
-  },
   data() {
     return {
       // isShow: true,
@@ -171,6 +167,14 @@ export default {
         }// 总部级权限
         else if (data.data.user_grant == '总部') {
           this.$router.push({path: '/land_headquarters'});
+          let data = {
+            label: this.$store.state.get_login.grant_data.data.headquarter_tag
+          }
+          let node = {
+            level: 1
+          }
+          // this.$router.push({path: '/land_headquarters'});
+          this.handleTreeNodeClick(data, node)
           // this.$router.push({path: '/register'});
         }// 超级用户权限
         else if (data.data.user_grant == '超级用户') {
