@@ -12,10 +12,10 @@ import DataCompare from "@/components/DataCompare.vue";//对应数据分析那�
 const routerOptions = [
     {path: '/', component: 'Login', meta: {keepAlive: false}},
     {path: '/login', component: 'Login'},
-    {path: '/particles', component: 'Particles'},
     {path: '/register', component: 'Register'},
     {path: '/overview', component: 'Overview'},
-    {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen', meta: {keepAlive: false}},
+    // {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen', meta: {keepAlive: false}},
+    {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
     {path: '/region_department', component: 'RegionDepartment', meta: {keepAlive: false}},
     {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis', meta: {keepAlive: false}},
     {path: '/analyze', component: 'Analyze', meta: {keepAlive:false}},

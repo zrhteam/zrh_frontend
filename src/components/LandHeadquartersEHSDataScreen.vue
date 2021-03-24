@@ -94,13 +94,23 @@ export default {
           _this.$refs.echarts.resize();
         })
       }, 10)
+    },
+    goBack() {
+      this.$router.replace({path: '/super_overview'});
+      // this.$router.push({path: '/'});
+      // this.$router.go(-1)
+      //replace替换原路由，作用是避免回退死循环
     }
   },
   mounted() {
     this.selfAdaption();
+    if (window.history && window.history.pushState) {
+      history.pushState(null, null, document.URL);
+      window.addEventListener('popstate', this.goBack, false);
+    }
   },
-  beforeRouteLeave(to, from, next) {
-    to.meta.keepAlive = false
+  destroyed() {
+    window.removeEventListener('popstate', this.goBack, false);
   },
   created() {
     if (!sessionStorage.getItem("headMsg")) {

@@ -146,9 +146,6 @@ export default {
       window.history.back()
     }
   },
-  destroyed() {
-    window.removeEventListener('popstate', this.goBack, false)
-  },
   data() {
     return {
       // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
@@ -198,12 +195,6 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
-    }
-  },
-  mounted() {
-    if (window.history && window.history.pushState) {
-      history.pushState(null, null, document.URL)
-      window.addEventListener('popstate', this.back, false)
     }
   },
   created() {
