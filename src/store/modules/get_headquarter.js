@@ -42,7 +42,10 @@ const state = {
 
 
     //按专业分不同风险等级隐患数量
-    head_risk_level_ratio: {}
+    head_risk_level_ratio: {},
+
+    //红线
+    head_danger_problem: {},
 
 
     // //总部整改率
@@ -220,6 +223,13 @@ const actions = {
         })
     },
 
+    //红线
+    getHeadDangerProblem(context) {
+        dataService.getHeadDangerProblem(state.params, function (response) {
+            context.commit('changeHeadDangerProblem', response)
+        })
+    },
+
 
     // //得到总部整改率
     // getInitRectification(context) {
@@ -376,6 +386,16 @@ const mutations = {
     changeHeadRiskLevelRatio(state, data) {
         if (data.code === 10000) {
             state.head_risk_level_ratio = data.data;
+        } else {
+            alert("出错了")
+        }
+    },
+
+    //红线
+    changeHeadDangerProblem(state, data) {
+        if (data.code === 10000) {
+            state.head_danger_problem = data.data;
+            console.log("head_hongxian", data.data)
         } else {
             alert("出错了")
         }

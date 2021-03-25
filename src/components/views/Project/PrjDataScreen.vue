@@ -589,7 +589,6 @@ export default {
       }
 
       data = this.$store.state.get_project.prj_rule
-      console.log('topdata', data)
       for (let i in data) {
         let obj = {
           appear_time: 0,

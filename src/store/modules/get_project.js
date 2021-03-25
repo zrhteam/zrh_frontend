@@ -55,7 +55,10 @@ const state = {
     prj_rule: {},
 
     //按专业分不同风险等级隐患数量
-    prj_risk_level_ratio: {}
+    prj_risk_level_ratio: {},
+
+    //红线
+    prj_danger_problem: {}
 
     // //基于项目级展示历次检查隐患数量变化的情况
     // prj_number_change: {},
@@ -253,6 +256,13 @@ const actions = {
     getProjectRiskLevelRatio(context) {
         dataService.getProjectRiskLevelRatio(state.params, function (response) {
             context.commit('changeProjectRiskLevelRatio', response)
+        })
+    },
+
+    //红线
+    getProjectDangerProblem(context) {
+        dataService.getProjectDangerProblem(state.params, function (response) {
+            context.commit('changeProjectDangerProblem', response)
         })
     },
 
@@ -455,6 +465,16 @@ const mutations = {
     changeProjectRiskLevelRatio(state, data) {
         if (data.code === 10000) {
             state.prj_risk_level_ratio = data.data;
+        } else {
+            alert("出错了")
+        }
+    },
+
+    //红线
+    changeProjectDangerProblem(state, data) {
+        if (data.code === 10000) {
+            state.project_danger_problem = data.data;
+            console.log('project_hongxian', data.data)
         } else {
             alert("出错了")
         }

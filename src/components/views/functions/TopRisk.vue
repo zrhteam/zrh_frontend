@@ -421,7 +421,6 @@ export default {
         arr.push(obj)
       }
       this.options = this.$store.state.get_login.danger_selection
-      console.log("arr", arr)
       return arr
     }
   },

@@ -66,7 +66,6 @@ export default {
             r_data.push(sub_r)
           }
         }
-        console.log("cha", r_data)
         for (let i in r_data) {
           let obj = {
             name: this.legend[i],

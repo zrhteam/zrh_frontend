@@ -37,7 +37,7 @@ export default {
   computed: {
     getImage() {
       let data = this.$store.state.get_region.images.image_list;
-      console.log('original', data)
+      // console.log('original', data)
       for (let i in data) {
         let obj = {
           url: '',
@@ -51,7 +51,7 @@ export default {
         //   this.img_list.push(obj)
         // }
       }
-      console.log('results', this.img_list)
+      // console.log('results', this.img_list)
     },
   }
 }

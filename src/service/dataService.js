@@ -287,7 +287,7 @@ function getHeadDangerProblem(param, callback) {
 
 //置地总部EHS数据大屏页面
 /*
-*FunctionName: getHeadDangerProblem
+*FunctionName: getHeadRiskLevelRatio
 * Purpose: 不同风险等级隐患数量
 * Parameter: head_name
 * Return: 返回该总部不同风险等级隐患数量的json文件

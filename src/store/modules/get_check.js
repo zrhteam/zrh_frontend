@@ -48,7 +48,10 @@ const state = {
     check_unit_name: {},
 
     //按专业分不同风险等级隐患数量
-    check_risk_level_ratio: {}
+    check_risk_level_ratio: {},
+
+    //红线
+    check_danger_problem: {}
 
     // //展示当前未整改的高风险隐患列表
     // check_risk_list: {},
@@ -220,6 +223,13 @@ const actions = {
         })
     },
 
+    //红线
+    getCheckDangerProblem(context) {
+        dataService.getCheckDangerProblem(state.params, function (response) {
+            context.commit('changeCheckDangerProblem', response)
+        })
+    },
+
     //得到当前未整改的高风险隐患列表
     // getCheckHighRisk(context) {
     //     dataService.getCheckHighRisk(state.params, function (response) {
@@ -386,6 +396,16 @@ const mutations = {
     changeCheckRiskLevelRatio(state, data) {
         if (data.code === 10000) {
             state.check_risk_level_ratio = data.data;
+        } else {
+            alert("出错了")
+        }
+    },
+
+    //红线
+    changeCheckDangerProblem(state, data) {
+        if (data.code === 10000) {
+            state.check_danger_problem = data.data;
+            console.log('check_hongxian', data.data)
         } else {
             alert("出错了")
         }

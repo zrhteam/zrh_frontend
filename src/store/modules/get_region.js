@@ -48,7 +48,10 @@ const state = {
     region_level_ratio: {},
 
     //按专业分不同风险等级隐患数量
-    region_risk_level_ratio: {}
+    region_risk_level_ratio: {},
+
+    //红线
+    region_danger_problem: {}
 
 
     // //已检查项目
@@ -235,6 +238,13 @@ const actions = {
             context.commit('changeRegionRiskLevelRatio', response)
         })
     },
+
+    //红线
+    getRegionDangerProblem(context) {
+        dataService.getRegionDangerProblem(state.params, function (response) {
+            context.commit('changeRegionDangerProblem', response)
+        })
+    },
     // //根据隐患数量显示不同风险等级的占比情况
     // getRegionLevelRatio(context) {
     //     dataService.getRegionLevelRatio(state.params, function (response) {
@@ -418,8 +428,17 @@ const mutations = {
     //按专业分不同风险等级隐患数量
     changeRegionRiskLevelRatio(state, data) {
         if (data.code === 10000) {
-            console.log("1111", data)
             state.region_risk_level_ratio = data.data;
+        } else {
+            alert("出错了")
+        }
+    },
+
+    //红线
+    changeRegionDangerProblem(state, data) {
+        if (data.code === 10000) {
+            state.region_danger_problem = data.data;
+            console.log('region_hongxian', data.data)
         } else {
             alert("出错了")
         }
