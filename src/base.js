@@ -49,7 +49,7 @@ exports.install = function (Vue, options) {
         // 展示按照项目数量对区域排名
         this.$store.dispatch('get_headquarter/getHeadProjectRank')
 
-         // 按专业不同风险等级隐患数量
+        // 按专业不同风险等级隐患数量
         this.$store.dispatch('get_headquarter/getHeadRiskLevelRatio')
     };
     Vue.prototype.regionNodeClick = function (region_name) {//全局函数2,点击树形控件的区域，查询该区域的大屏信息
@@ -112,7 +112,7 @@ exports.install = function (Vue, options) {
         //根据隐患数量显示不同风险等级的占比情况
         // this.$store.dispatch('get_region/getRegionLevelRatio')
 
-         // 按专业不同风险等级隐患数量
+        // 按专业不同风险等级隐患数量
         this.$store.dispatch('get_region/getRegionRiskLevelRatio')
     };
     Vue.prototype.prjNodeClick = function (project_name) {//全局函数3,点击树形控件的项目，查询该项目的大屏信息
@@ -182,7 +182,7 @@ exports.install = function (Vue, options) {
         //   this.map.panTo(new L.LatLng(34, 107));
         // }, 100)
 
-         // 按专业不同风险等级隐患数量
+        // 按专业不同风险等级隐患数量
         this.$store.dispatch('get_project/getProjectRiskLevelRatio')
     };
     Vue.prototype.checkNodeClick = function (check_code) {//全局函数4,点击树形控件的检查，查询该检查的大屏信息
@@ -265,7 +265,7 @@ exports.install = function (Vue, options) {
         //显示在当前检查中隐患次数排名前10的组件名称
         this.$store.dispatch('get_check/getCheckUnit')
 
-         // 按专业不同风险等级隐患数量
+        // 按专业不同风险等级隐患数量
         this.$store.dispatch('get_check/getCheckRiskLevelRatio')
     };
     Vue.prototype.handleTreeNodeClick = function (data, node) {//全局函数5,点击树形控件，查看页面权限，决定页面展示
@@ -274,12 +274,14 @@ exports.install = function (Vue, options) {
                 alert("您没有权限")
             } else if (node.level == 3) {
                 this.prjNodeClick(data.label)
-                document.getElementById('prj_subpart').style.display = 'block'
-                document.getElementById('check_part').style.display = 'none'
-                document.getElementById('map_1').style.display = 'none'
-                document.getElementById('map_2').style.display = 'block'
-                document.getElementById('prj_charts').style.display = 'block'
-                document.getElementById('check_charts').style.display = 'none'
+                setTimeout(() => {
+                    document.getElementById('prj_subpart').style.display = 'block'
+                    document.getElementById('check_part').style.display = 'none'
+                    document.getElementById('map_1').style.display = 'none'
+                    document.getElementById('map_2').style.display = 'block'
+                    document.getElementById('prj_charts').style.display = 'block'
+                    document.getElementById('check_charts').style.display = 'none'
+                }, 200);
             } else if (node.level == 4) {
                 this.checkNodeClick(data.label)
                 //首先要判断当前是在数据大屏页面还是在主页面
@@ -302,8 +304,10 @@ exports.install = function (Vue, options) {
                 alert("您没有权限")
             } else if (node.level == 2) {
                 this.regionNodeClick(data.label)
-                document.getElementById('region').style.display = 'block'
-                document.getElementById('prj_part').style.display = 'none'
+                setTimeout(() => {
+                    document.getElementById('region').style.display = 'block'
+                    document.getElementById('prj_part').style.display = 'none'
+                }, 200);
             } else if (node.level == 3) {//区域=》项目
                 this.prjNodeClick(data.label)
                 //修改可视化系统首页标题
@@ -352,6 +356,7 @@ exports.install = function (Vue, options) {
                 document.getElementById('region_part').style.display = 'block'
                 document.getElementById('region').style.display = 'block'
                 document.getElementById('prj_part').style.display = 'none'
+
                 //为了画出多边形，要重新封装该区域的数据
                 let r_p = [];
                 for (let i in data['children']) {

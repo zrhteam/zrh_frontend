@@ -80,7 +80,7 @@
 <script>
 export default {
   name: "TopRisk",
-  props: ['context', 'top_data'],
+  props: ['context'],
   data() {
     return {
       value: "施工",
@@ -100,7 +100,6 @@ export default {
           key: 10
         }],
       sub_top_data: [],
-      data: this.top_data,
       options: this.$store.state.get_login.danger_selection
     }
   },
@@ -111,7 +110,7 @@ export default {
       if (this.context.sign === 'check_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
-        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        param4.append('check_code', this.$store.state.get_check.check_code);
         if (checkedNodes[0].level === 1) {
           //致因阶段
           if (checkedNodes[0].data.belong == 'stage') {
@@ -143,7 +142,7 @@ export default {
       } else if (this.context.sign === 'prj_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
-        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        param4.append('project_name', this.$store.state.get_project.prj_name);
         if (checkedNodes[0].level === 1) {
           //致因阶段
           if (checkedNodes[0].data.belong == 'stage') {
@@ -175,7 +174,7 @@ export default {
       } else if (this.context.sign === 'region_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
-        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        param4.append('region_name', this.$store.state.get_region.region_name);
         if (checkedNodes[0].level === 1) {
           //致因阶段
           if (checkedNodes[0].data.belong == 'stage') {
@@ -246,7 +245,7 @@ export default {
       if (this.context.sign === 'check_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
-        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        param4.append('check_code', this.$store.state.get_check.check_code);
         if (checkedNodes[0].level === 1) {
           //致因阶段
           if (checkedNodes[0].data.belong == 'stage') {
@@ -276,7 +275,7 @@ export default {
       } else if (this.context.sign === 'prj_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
-        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        param4.append('project_name', this.$store.state.get_project.prj_name);
         if (checkedNodes[0].level === 1) {
           //致因阶段
           if (checkedNodes[0].data.belong == 'stage') {
@@ -308,7 +307,7 @@ export default {
       } else if (this.context.sign === 'region_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
-        param4.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+        param4.append('region_name', this.$store.state.get_region.region_name);
         if (checkedNodes[0].level === 1) {
           //致因阶段
           if (checkedNodes[0].data.belong == 'stage') {
@@ -370,8 +369,7 @@ export default {
         this.$store.commit('get_headquarter/changeParam4', {params: param4})
         this.$store.dispatch('get_headquarter/getHeadOtherNumberTop')
       }
-    }
-    ,
+    },
     updateList() {
       this.sub_top_data = this.getTopRisk
       if ((this.context.sign === 'check_other') || (this.context.sign === 'prj_other')) {
@@ -397,6 +395,7 @@ export default {
   },
   computed: {
     getTopRisk() {
+      // debugger
       let arr = []
       let data = ''
       if (this.context.sign === 'check_other') {
@@ -421,6 +420,8 @@ export default {
         obj['description'] = i
         arr.push(obj)
       }
+      this.options = this.$store.state.get_login.danger_selection
+      console.log("arr", arr)
       return arr
     }
   },
@@ -443,8 +444,6 @@ export default {
   },
   updated() {
     this.updateList()
-  },
-  created() {
   }
 }
 </script>
