@@ -1,31 +1,4 @@
 <template>
-  <!--	<div id="login">-->
-  <!--		<div id="loginForm">-->
-  <!--			<div class="login">-->
-  <!--				<div class="login-top">-->
-  <!--					登录-->
-  <!--				</div>-->
-  <!--				<div class="login-center clearfix">-->
-  <!--					<div class="login-center-img"><img src="../assets/name.png" /></div>-->
-  <!--					<div class="login-center-input">-->
-  <!--						<input id="username" type="text" name="username" v-model="username" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'" />-->
-  <!--						<div class="login-center-input-text">用户名</div>-->
-  <!--					</div>-->
-  <!--				</div>-->
-  <!--				<div class="login-center clearfix">-->
-  <!--					<div class="login-center-img"><img src="../assets/password.png" /></div>-->
-  <!--					<div class="login-center-input">-->
-  <!--						<input id="password" type="password" name="password" v-model="password" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'" />-->
-  <!--						<div class="login-center-input-text">密码</div>-->
-  <!--					</div>-->
-  <!--				</div>-->
-  <!--				<div id="loginBtn" class="login-button" @click="login">-->
-  <!--					登录-->
-  <!--				</div>-->
-  <!--			</div>-->
-  <!--		</div>-->
-  <!--		<Particles></Particles>-->
-  <!--	</div>-->
   <div class="main">
 
     <div class="header">
@@ -149,14 +122,47 @@ export default {
       this.$store.commit('get_login/changeNameParam', {params: _this.username})
       //  得到隐患描述的筛选条件
       this.$store.dispatch('get_login/getDangerSelection')
-      alert(this.checked)
-      debugger
+      //判断复选框是否被勾选 勾选则调用配置cookie方法
+      if (_this.checked == true) {
+        //传入账号名，密码，和保存天数3个参数
+        _this.setCookie(_this.username, _this.password, 7);
+      } else {
+        //清空Cookie
+        _this.clearCookie();
+      }
     },
     forgetPsw() {
       this.$alert('忘记密码，请联系管理员XX，联系方式：XXX XXXX XXXX', '提示', {
         confirmButtonText: '确定',
         type: 'warning'
       })
+    },
+    //设置cookie
+    setCookie(c_name, c_pwd, exdays) {
+      var exdate = new Date(); //获取时间
+      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); //保存的天数
+      //字符串拼接cookie
+      window.document.cookie = "userName" + "=" + c_name + ";path=/;expires=" + exdate.toGMTString();
+      window.document.cookie = "userPwd" + "=" + c_pwd + ";path=/;expires=" + exdate.toGMTString();
+    },
+    //读取cookie
+    getCookie: function () {
+      if (document.cookie.length > 0) {
+        var arr = document.cookie.split('; '); //这里显示的格式需要切割一下自己可输出看下
+        for (var i = 0; i < arr.length; i++) {
+          var arr2 = arr[i].split('='); //再次切割
+          //判断查找相对应的值
+          if (arr2[0] == 'userName') {
+            this.username = arr2[1]; //保存到保存数据的地方
+          } else if (arr2[0] == 'userPwd') {
+            this.password = arr2[1];
+          }
+        }
+      }
+    },
+    //清除cookie
+    clearCookie: function () {
+      this.setCookie("", "", -1); //修改2值都为空，天数为负1天就好了
     }
   },
   computed: {
@@ -214,6 +220,9 @@ export default {
       }
 
     }
+  },
+  mounted() {
+    this.getCookie();
   },
   created() {
     // this.username = 'headquarter1';
@@ -389,7 +398,8 @@ export default {
 el-input::-webkit-input-placeholder {
   color: #1072b5 !important;
 }
-/deep/input::-webkit-input-placeholder{
+
+/deep/ input::-webkit-input-placeholder {
   color: #1072b5 !important;
   -webkit-text-fill-color: #1072b5 !important;
 }
@@ -429,6 +439,7 @@ el-input::-webkit-input-placeholder {
   height: 0.8rem;
   border: none;
 }
+
 .el-button {
   width: 100% !important;
   height: 0.45rem !important;
@@ -437,25 +448,32 @@ el-input::-webkit-input-placeholder {
   margin-left: 0px !important;
 }
 
-.el-input--prefix >>>.el-input__inner {
+.el-input--prefix >>> .el-input__inner {
   border-color: #0e5ca0 !important;
   border: 2px solid;
 }
 
+.el-input >>> .el-input__inner {
+  color: #1072b5 !important;
+}
+
 /deep/ .el-checkbox__inner {
-    border-radius: 0;
-    background-color:transparent;
-    border-color: #1072b5;
-  }
-  /deep/ .el-checkbox {
-    color: #1072b5;
-  }
-  /deep/ .el-checkbox__input.is-checked + .el-checkbox__label {
-    color: #18bff0;
-  }
-  /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
-    background-color: #18bff0;
-    border-color: #18bff0;
-  }
+  border-radius: 0;
+  background-color: transparent;
+  border-color: #1072b5;
+}
+
+/deep/ .el-checkbox {
+  color: #1072b5;
+}
+
+/deep/ .el-checkbox__input.is-checked + .el-checkbox__label {
+  color: #18bff0;
+}
+
+/deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: #18bff0;
+  border-color: #18bff0;
+}
 
 </style>
