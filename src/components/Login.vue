@@ -30,9 +30,9 @@
 
     <div class="header">
       <!--      <div class="header-center fl">-->
-      <div class="header-title">
-        登录界面
-      </div>
+      <!--      <div class="header-title">-->
+      <!--        登录界面-->
+      <!--      </div>-->
       <!--      <div class="header-title" v-show="isShow">-->
       <!--        登录界面-->
       <!--      </div>-->
@@ -50,22 +50,31 @@
       <div class="content-right">
         <div class="right-infp">
           <div class="right-infp-name">
-            <input type="text" name="username" v-model="username" placeholder="请输入用户名" maxlength="12" required=""
-                   value="">
+            <span style="float: left; font-size: 24px; color: #05e2ec">登录</span>
           </div>
           <div class="right-infp-name">
-            <input type="password" name="password" v-model="password" placeholder="请输入密码" autocomplete="off">
+            <el-input prefix-icon="el-icon-minus" class="username" type="text" name="username" v-model="username"
+                      placeholder="请输入用户名" maxlength="12" required=""
+                      value=""></el-input>
+          </div>
+          <div class="right-infp-name">
+            <el-input prefix-icon="el-icon-clock" class="password" type="password" name="password" v-model="password"
+                      placeholder="请输入用户密码" autocomplete="off"></el-input>
+          </div>
+          <div class="right-infp-name" style="line-height: 0.8rem; vertical: middle">
+            <el-checkbox v-model="checked" style="float: left">记住密码</el-checkbox>
+            <button class="pwd_btn" type="text" @click="forgetPsw">忘记密码</button>
           </div>
 
-          <div class="right-infp-btn">
+          <div class="right-infp-login">
             <!--            <button class="btn" v-show="isShow" @click="hasGrantLogin">登录</button>-->
             <!--            <button class="btn" v-show="!isShow">注册</button>-->
-            <button class="btn" @click="hasGrantLogin">登录</button>
+            <el-button class="btn" @click="hasGrantLogin" style="color: #0a447b">登录</el-button>
           </div>
           <div class="bottom">
             <!--            <el-button class="register_btn" type="text" v-show="isShow" @click="jumpToLogin">注册</el-button>-->
             <!--            <el-button class="register_btn" type="text" v-show="!isShow" @click="jumpToLogin">登录</el-button>-->
-            <el-button class="pwd_btn" type="text" @click="forgetPsw">忘记密码</el-button>
+
           </div>
         </div>
       </div>
@@ -82,7 +91,8 @@ export default {
     return {
       // isShow: true,
       username: '',
-      password: ''
+      password: '',
+      checked: false
     }
   },
   methods: {
@@ -136,8 +146,11 @@ export default {
       // window.addEventListener("beforeunload", () => {
       //   sessionStorage.setItem("userMsg", JSON.stringify(this.$store.state))
       // })
+      this.$store.commit('get_login/changeNameParam', {params: _this.username})
       //  得到隐患描述的筛选条件
       this.$store.dispatch('get_login/getDangerSelection')
+      alert(this.checked)
+      debugger
     },
     forgetPsw() {
       this.$alert('忘记密码，请联系管理员XX，联系方式：XXX XXXX XXXX', '提示', {
@@ -207,8 +220,8 @@ export default {
     // this.username = 'region1';
     // this.username = 'project1';
     // this.password = '123456';
-    this.username = 'boss';
-    this.password = 'iamboss';
+    // this.username = 'boss';
+    // this.password = 'iamboss';
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
@@ -234,7 +247,7 @@ export default {
 /*}*/
 
 .main {
-  /*background: url("../assets/login_bg.jpg") no-repeat;*/
+  background: url("../assets/login_bg.png") no-repeat;
   background-size: cover;
   margin: 0 auto;
   width: 100%;
@@ -250,7 +263,7 @@ export default {
 
 .header {
   width: 50%;
-  height: 1.2rem;
+  height: 2.2rem;
   position: relative;
   margin: 0 auto;
 }
@@ -260,21 +273,21 @@ export default {
   color: #ffffff;
   font-size: .4rem;
   text-shadow: 0 0 .3rem #00d8ff;
-  line-height: 1.05rem;
+  line-height: 2.25rem;
 }
 
-.header .header-img {
-  background: url("../assets/login_head.gif") no-repeat center center;
-  background-size: 100%;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: .8rem;
-}
+/*.header .header-img {*/
+/*  background: url("../assets/login_head.gif") no-repeat center center;*/
+/*  background-size: 100%;*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*  position: absolute;*/
+/*  top: .8rem;*/
+/*}*/
 
 .content {
-  width: 12rem;
-  height: 7rem;
+  width: 14rem;
+  height: 8rem;
   /*background: green;*/
   margin: 1rem auto 0 auto;
   /*border: 1px solid green;*/
@@ -282,14 +295,16 @@ export default {
 
 .content .content-left {
   width: 6.2rem;
-  height: 5.8rem;
+  height: 6.2rem;
   /*border: 1px solid red;*/
-  background: url("../assets/login_d.png") no-repeat;
+  /*background: url("../assets/login_aaa.png") no-repeat;*/
   background-size: 100% 100%;
   padding: 0.4rem 0;
   box-sizing: border-box;
   margin-right: 2%;
   float: left;
+  z-index: -99;
+  opacity: 0.7;
 }
 
 @-webkit-keyframes rotation {
@@ -310,9 +325,9 @@ export default {
 }
 
 .content .content-right {
-  width: 5.4rem;
+  width: 6.8rem;
   height: 5.8rem;
-  background: url("../assets/login_e.png") no-repeat;
+  /*background: url("../assets/login_e.png") no-repeat;*/
   background-size: 100% 100%;
   float: right;
   position: relative;
@@ -321,58 +336,65 @@ export default {
 
 .right-infp {
   width: 4rem;
-  height: 3rem;
+  height: 5rem;
   margin: auto auto;
   /* border: 1px solid red;*/
   vertical-align: center;
   position: absolute;
-  top: 1.6rem;
+  top: 1rem;
   left: 0.9rem;
 }
 
 .right-infp-name {
-  background: url("../assets/login_b.png") no-repeat;
+  /*background: url("../assets/login_b.png") no-repeat;*/
   width: 100%;
-  height: 0.5rem;
-  background-size: 100% 100%;
+  /*height: 0.5rem;*/
+  /*background-size: 100% 100%;*/
   line-height: 0.45rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.1rem;
   position: relative;
+  vertical-align: center;
 }
 
 .right-infp-name input {
   width: 85%;
-  border: none;
+  /*border: none;*/
+  /*border-color: #0e62c3;*/
   box-sizing: border-box;
   height: 0.5rem;
-  margin-left: 0.5rem;
+  margin-left: 2.5rem;
   line-height: 0.4rem;
   background: none !important;
   color: #00eaff;
-  padding-left: 0.15rem;
+  padding-left: 2.15rem;
   /*box-shadow: 0 0 1px #00eaff;*/
   outline: none;
   -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
   position: absolute;
   display: block;
   margin-right: auto;
+  text-align: center;
 }
 
-input::-webkit-input-placeholder {
-  color: #ccc;
+.right-infp-name .password {
+  background: url("../assets/login_lock.png") left center no-repeat;
+  background-size: 0.4rem;
 }
 
-.right-infp-btn {
-  background: url("../assets/login_a.png") no-repeat;
-  width: 100%;
-  height: 0.5rem;
-  background-size: 100% 100%;
-  line-height: 0.5rem;
-  margin-bottom: 0.4rem;
-  position: relative;
+.right-infp-name .username {
+  background: url("../assets/login_user.png") left center no-repeat;
+  background-size: 0.4rem;
 }
 
-.right-infp-btn .btn {
+el-input::-webkit-input-placeholder {
+  color: #1072b5 !important;
+}
+/deep/input::-webkit-input-placeholder{
+  color: #1072b5 !important;
+  -webkit-text-fill-color: #1072b5 !important;
+}
+
+.right-infp-login .btn {
   width: 95%;
   border: none;
   box-sizing: border-box;
@@ -383,7 +405,7 @@ input::-webkit-input-placeholder {
   background: none;
   outline: none;
   color: #fff;
-  position: absolute;
+  position: relative;
   display: block;
   margin-right: auto;
 }
@@ -393,29 +415,47 @@ input::-webkit-input-placeholder {
   height: 0.5rem;
 }
 
-.register_btn {
-  line-height: 0.3rem;
-  background: none !important;
-  color: #ffffff;
-  /*box-shadow: 0 0 1px #00eaff;*/
-  outline: none;
-  /*-webkit-tap-highlight-color:rgba(255,0,0,0);*/
-  position: absolute;
-  display: block;
-  margin-left: 0px;
-  margin-right: auto;
-}
-
 .pwd_btn {
-  line-height: 0.3rem;
+  line-height: 19px;
   background: none !important;
-  color: #ffffff;
+  color: #1072b5;
   /*box-shadow: 0 0 1px #00eaff;*/
   outline: none;
   /*-webkit-tap-highlight-color:rgba(255,0,0,0);*/
   float: right;
   display: block;
   margin-right: auto;
+  vertical-align: middle;
+  height: 0.8rem;
+  border: none;
 }
+.el-button {
+  width: 100% !important;
+  height: 0.45rem !important;
+  background: #1adcff !important;
+  border: none;
+  margin-left: 0px !important;
+}
+
+.el-input--prefix >>>.el-input__inner {
+  border-color: #0e5ca0 !important;
+  border: 2px solid;
+}
+
+/deep/ .el-checkbox__inner {
+    border-radius: 0;
+    background-color:transparent;
+    border-color: #1072b5;
+  }
+  /deep/ .el-checkbox {
+    color: #1072b5;
+  }
+  /deep/ .el-checkbox__input.is-checked + .el-checkbox__label {
+    color: #18bff0;
+  }
+  /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
+    background-color: #18bff0;
+    border-color: #18bff0;
+  }
 
 </style>
