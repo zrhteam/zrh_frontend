@@ -1,5 +1,28 @@
 <template>
   <div class="background" style="vertical-align: center">
+    <el-row>
+      <el-col :span="20" style="height: 6.25rem; ">
+        <div style="height: 100%; display: none">
+        </div>
+      </el-col>
+      <el-col :span="4" style="height: 6.25rem; ">
+        <el-col :span="14" style="height: 6.25rem; ">
+          <div style="height: 100%; top:50%;">
+           <span style="font-size: 2rem; color: #18bff0; position: relative; top: 25%;">
+              {{ nowTime }}
+           </span>
+          </div>
+        </el-col>
+        <el-col :span="10" style="height: 6.25rem; color: #1072b5; font-size: 0.6rem;">
+          <el-row style="top: 35%; right: 3rem">
+            <span>{{ nowWeek }}</span>
+          </el-row>
+          <el-row style="top: 35%; right: 3rem">
+            <span>{{ nowDate }}</span>
+          </el-row>
+        </el-col>
+      </el-col>
+    </el-row>
     <img id="img1_bg" :src="imgSrc1" @click="enterDB" alt=""
          style="width: 17.1%; left: 12.7%; top: 41.4%; z-index: 99; position: absolute;"/>
     <el-dropdown @command="handleCommand">
@@ -32,6 +55,10 @@ export default {
       imgSrc2: require('../assets/data_vis.png'),
       imgSrc3: require('../assets/data_analysis.png'),
       imgSrc4: require('../assets/data_insight.png'),
+      timer: null,
+      nowWeek: "",
+      nowDate: "",
+      nowTime: "",
     }
   },
   mounted() {
@@ -40,6 +67,9 @@ export default {
       history.pushState(null, null, document.URL);
       window.addEventListener('popstate', this.goBack, false);
     }
+    this.timer = setInterval(() => {
+      this.setNowTimes();
+    }, 1000);
   },
   methods: {
     getHeadList() {
@@ -85,7 +115,43 @@ export default {
       // this.$router.go(-1)
       // this.$router.push({path: '/'});
       //replace替换原路由，作用是避免回退死循环
-    }
+    },
+    setNowTimes() {
+      let myDate = new Date();
+      // console.log(myDate)
+      let wk = myDate.getDay();
+      let yy = String(myDate.getFullYear());
+      let mm = myDate.getMonth() + 1;
+      let dd = String(
+          myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate()
+      );
+      let hou = String(
+          myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours()
+      );
+      let min = String(
+          myDate.getMinutes() < 10
+              ? "0" + myDate.getMinutes()
+              : myDate.getMinutes()
+      );
+      let sec = String(
+          myDate.getSeconds() < 10
+              ? "0" + myDate.getSeconds()
+              : myDate.getSeconds()
+      );
+      let weeks = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let week = weeks[wk];
+      this.nowDate = yy + "." + mm + "." + dd
+      this.nowTime = hou + ":" + min + ":" + sec;
+      this.nowWeek = week;
+    },
   },
   destroyed() {
     window.removeEventListener('popstate', this.goBack, false);
@@ -103,7 +169,8 @@ export default {
 
 <style scoped>
 .background {
-  background: url("../assets/home_page.png") no-repeat;
+  /*background: url("../assets/home_page.png") no-repeat;*/
+  background: url("../assets/system_select.png") no-repeat;
   background-size: cover;
   margin: 0 auto;
   width: 100%;

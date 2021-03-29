@@ -154,11 +154,6 @@ export default {
     }
   },
   computed: {
-    // 得到累计隐患数量
-    getNumberChange() {
-      let data = this.$store.state.get_project.prj_number_change;
-      // console.log(data)
-    },
   },
   methods: {
     goBack() {
@@ -181,9 +176,13 @@ export default {
       myChart = this.$echarts.init(document.getElementById('pie2'));
       myChart.resize();
     };
+    if (window.history && window.history.pushState) {
+      history.pushState(null, null, document.URL);
+      window.addEventListener('popstate', this.goBack, false);
+    }
   },
-  beforeRouteLeave(to, from, next) {
-    to.meta.keepAlive = false
+  destroyed() {
+    window.removeEventListener('popstate', this.goBack, false);
   },
   created() {
     // if (!sessionStorage.getItem("prjMsg")) {

@@ -429,6 +429,7 @@ export default {
     const table = this.$refs.table
     // 拿到表格中承载数据的div元素
     const divData = table.bodyWrapper
+    let _this = this
     // 拿到元素后，对元素进行定时增加距离顶部距离，实现滚动效果(此配置为每100毫秒移动1像素)
     setInterval(() => {
       // 元素自增距离顶部1像素

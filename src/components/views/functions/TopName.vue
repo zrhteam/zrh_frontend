@@ -16,7 +16,7 @@
           :default-sort="{prop: 'appear_time', order: 'descending'}"
           ref="table"
           stripe
-          height="300"
+          height="2.5rem"
           style="width: 100%; color: #fff">
         <el-table-column
              type='index'>
@@ -52,8 +52,14 @@ export default {
       if (divData.clientHeight + divData.scrollTop == divData.scrollHeight) {
         // 重置table距离顶部距离
         divData.scrollTop = 0
+
+      //   let temp = this.context.top_data.shift()
+      // this.context.top_data.push(temp)
       }
     }, 100)
+    // setInterval(() => {
+    //
+    // }, 1000)
   }
 }
 </script>
