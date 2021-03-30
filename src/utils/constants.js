@@ -30,6 +30,9 @@ export const bar_option = {
                 color: '#ffffff',
                 fontSize: 8
             }
+        },
+        splitLine: {
+            show: false
         }
     },
     yAxis: {
@@ -44,6 +47,9 @@ export const bar_option = {
             //   fontSize: 10
             // }
         },
+        splitLine: {
+            show: false
+        }
     },
     grid: {
         left: 35,
@@ -154,6 +160,9 @@ export const bar_option2 = {
                 color: '#ffffff',
                 fontSize: 8
             }
+        },
+        splitLine: {
+            show: false
         }
     },
     yAxis: {
@@ -166,6 +175,9 @@ export const bar_option2 = {
             // textStyle: {
             //   fontSize: 10
             // }
+        },
+        splitLine: {
+            show: false
         }
     },
 };
@@ -315,6 +327,9 @@ export const line_option = {
                 color: '#ffffff',
                 fontSize: 8
             }
+        },
+        splitLine: {
+            show: false
         }
     },
     yAxis: {
@@ -328,6 +343,9 @@ export const line_option = {
             // textStyle: {
             //   fontSize: 10
             // }
+        },
+        splitLine: {
+            show: false
         }
     },
     series: []

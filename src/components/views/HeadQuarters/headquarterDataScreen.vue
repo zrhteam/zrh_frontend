@@ -62,18 +62,18 @@
         }"></Ratio>
       </el-col>
       <el-col :span="8" style="height: 48%; margin-top: 1%">
-        <BarRank
-            :context="{
-          title:'各区域检查次数',
-          id: 'id_head_rank1'}"
-        ></BarRank>
+<!--        <BarRank-->
+<!--            :context="{-->
+<!--          title:'各区域检查次数',-->
+<!--          id: 'id_head_rank1'}"-->
+<!--        ></BarRank>-->
       </el-col>
       <el-col :span="8" style="height: 48%; margin-top: 1%">
-        <BarRank
-            :context="{
-          title:'各区域在管项目数量',
-          id: 'id_head_rank2'}"
-        ></BarRank>
+<!--        <BarRank-->
+<!--            :context="{-->
+<!--          title:'各区域在管项目数量',-->
+<!--          id: 'id_head_rank2'}"-->
+<!--        ></BarRank>-->
       </el-col>
       <el-col :span="8" style="height: 48%; margin-top: 1%">
         <CheckRiskLevel :context="{title:'隐患总量', id:'head_risk_level'}"></CheckRiskLevel>

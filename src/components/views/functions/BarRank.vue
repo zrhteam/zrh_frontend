@@ -13,21 +13,21 @@
   <!--  检查级-->
   <!--  不同子系统隐患数量-->
   <el-card class="box-card-t " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 1%">
+           style="background-color: transparent; height: 100%;">
     <div style="display: none">
       {{ getData }}
     </div>
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
-      <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"
-                 @change="filterMajor">
-        <el-option
-            v-for="item in option"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-        </el-option>
-      </el-select>
+<!--      <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"-->
+<!--                 @change="filterMajor">-->
+<!--        <el-option-->
+<!--            v-for="item in option"-->
+<!--            :key="item.value"-->
+<!--            :label="item.label"-->
+<!--            :value="item.value">-->
+<!--        </el-option>-->
+<!--      </el-select>-->
     </div>
     <div id="id_head_rank1" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank1'">
     </div>
@@ -55,7 +55,7 @@ export default {
   props: ['context'],
   data() {
     return {
-      option: ''
+      option: '',
     }
   },
   methods: {

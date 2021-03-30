@@ -1,48 +1,31 @@
 <template>
-  <el-col :span="10" class="" style="height: 100%">
-    <!--    <el-card class="box-card " shadow="never"-->
-    <!--             style="background-color: transparent; height: 67%; margin: 0px 5px 5px 5px">-->
-    <!--          放地图-->
-    <div class="map_container" style="height: 66%; width: 100%; z-index:1; background-color: transparent">
-      <!--        <div id="map_5"-->
-      <!--             style="pointer-events:inherit; height: 100%; width: 100%;"></div>-->
-      <div :style="{height:'100%',width:'100%'}" ref="map_5"></div>
+  <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
+  <el-card class="box-card-t " shadow="never"
+           style="background-color: transparent; height: 100%;">
+    <div class="level4" style="display: block; margin-top: 0.5%">
+      <span>各区域高风险数量</span>
     </div>
-    <!--    </el-card>-->
-    <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
-    <el-card class="box-card-t " shadow="never"
-             style="background-color: transparent; height: 30%; margin: 2%">
-      <div class="level4" style="display: block; margin-top: 0.5%">
-        <span>各区域高风险数量</span>
-      </div>
-      <!--      <div id="mydiv2">-->
-      <div style="display: none">
-        {{ getNumberHistogram }}
-      </div>
-      <!--        <svg></svg>-->
-      <div id="number_histogram" style="height: 90%; width: 100%"></div>
-      <!--      </div>-->
+    <!--      <div id="mydiv2">-->
+    <div style="display: none">
+      {{ getNumberHistogram }}
+    </div>
+    <!--        <svg></svg>-->
+    <div id="number_histogram" style="height: 90%; width: 100%"></div>
+    <!--      </div>-->
 
-    </el-card>
-  </el-col>
+  </el-card>
 
 </template>
 
 <script>
 // import * as d3 from "d3/dist/d3";
 import elementResizeDetectorMaker from "element-resize-detector";
-// import * as d3 from "d3/dist/d3";
 import echarts from "echarts";
-//   import '../../node_modules/echarts/map/js/world.js'
-import '../../../../node_modules/echarts/map/js/china.js'
 
 export default {
   name: "HighProjectRisk",
-  props: ["userJson"],
   data() {
-    return {
-      chart: null
-    }
+    return {}
   },
   computed: {
     getNumberHistogram() {
@@ -63,11 +46,11 @@ export default {
           // dimensions: ['name', 'count'],
           source: arr
         },
-         tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-            }
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          }
         },
         grid: {containLabel: true},
         xAxis: {
@@ -83,6 +66,9 @@ export default {
               color: '#ffffff',
               fontSize: 8
             }
+          },
+          splitLine: {
+            show: false
           }
         },
         yAxis: {
@@ -92,6 +78,9 @@ export default {
               color: '#ffffff'
             }
           },
+          splitLine: {
+            show: false
+          }
         },
         series: [
           {
@@ -121,7 +110,8 @@ export default {
                 color: '#40abc4'
               }
             },
-            barMaxWidth: 40
+            // barMaxWidth: 20,
+            barCategoryGap: '10',
           }
         ]
       };
@@ -163,48 +153,39 @@ export default {
     //     })
     //   }
     // });
-    this.chinaConfigure();
 
     this.drawBarChart();
-  }
-  ,
-  beforeDestroy() {
-    if (!this.chart) {
-      return;
-    }
-    this.chart.dispose();
-    this.chart = null;
-  }
-  ,
+  },
   methods: {
     drawBarChart() {
-      if (this.getNumberHistogram["dataset"]["source"].length != 0) {
-        let myChart = this.$echarts.init(document.getElementById('number_histogram'))
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(this.getNumberHistogram);
-        myChart.resize();
-        window.addEventListener('resize', function () {
+      this.$nextTick(_ => {
+        if (this.getNumberHistogram["dataset"]["source"].length != 0) {
+          let myChart = this.$echarts.init(document.getElementById('number_histogram'))
+          // 使用刚指定的配置项和数据显示图表。
+          myChart.setOption(this.getNumberHistogram);
           myChart.resize();
-        })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById("risk_rank"), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
+          window.addEventListener('resize', function () {
             myChart.resize();
+          })
+          const _this = this;
+          const erd = elementResizeDetectorMaker();
+          erd.listenTo(document.getElementById("risk_rank"), element => {
+            _this.$nextTick(() => {
+              //监听到事件后执行的业务逻辑
+              myChart.resize();
+            });
           });
-        });
-      } else if ('number_histogram') {
-        this.$nextTick(() => {
-          const dom = document.getElementById('number_histogram')
-          dom.innerHTML = '暂无数据'
-          dom.style.color = '#ffffff'
-          dom.style.fontSize = '14px'
-          dom.removeAttribute("_echarts_instance_")
-        })
-      }
-    }
-    ,
+        } else if ('number_histogram') {
+          this.$nextTick(() => {
+            const dom = document.getElementById('number_histogram')
+            dom.innerHTML = '暂无数据'
+            dom.style.color = '#ffffff'
+            dom.style.fontSize = '14px'
+            dom.removeAttribute("_echarts_instance_")
+          })
+        }
+      })
+    },
     // loadMap() {//加载地图
     //   this.map = L.map("map_5", {
     //     center: [34, 107], // 地图中心
@@ -272,102 +253,6 @@ export default {
     //
     //   return this.map
     // },
-    chinaConfigure() {
-      let myChart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
-      window.onresize = myChart.resize("auto", "auto");
-      myChart.setOption({ // 进行相关配置
-        opacity: 0,
-        tooltip: {}, // 鼠标移到图里面的浮动提示框
-        dataRange: {
-          show: false,
-          min: 0,
-          max: 1000,
-          text: ['High', 'Low'],
-          realtime: true,
-          calculable: true,
-          color: ['orangered', 'yellow', 'lightskyblue']
-        },
-        geo: { // 这个是重点配置区
-          map: 'china', // 表示中国地图
-          roam: true,
-          label: {
-            normal: {
-              show: true, // 是否显示对应地名
-              textStyle: {
-                color: 'rgba(0,0,0,0.4)'
-              }
-            }
-          },
-          itemStyle: {
-            normal: {
-              // borderColor: 'rgba(0, 0, 0, 0.2)'
-              areaColor: "#0d0059",
-              borderColor: "#389dff",
-              borderWidth: 0.5
-            },
-            emphasis: {
-              // areaColor: null,
-              // shadowOffsetX: 0,
-              // shadowOffsetY: 0,
-              // shadowBlur: 20,
-              // borderWidth: 0,
-              // shadowColor: 'rgba(0, 0, 0, 0.5)'
-              areaColor: "#17008d",
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              shadowBlur: 5,
-              borderWidth: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)"
-            }
-          }
-        },
-        series: [{
-          type: 'scatter',
-          coordinateSystem: 'geo', // 对应上方配置
-          // itemStyle: {
-          //   normal: {
-          //     areaColor: "#0d0059",
-          //     borderColor: "#389dff",
-          //     borderWidth: 0.5
-          //   },
-          //   emphasis: {
-          //     areaColor: "#17008d",
-          //     shadowOffsetX: 0,
-          //     shadowOffsetY: 0,
-          //     shadowBlur: 5,
-          //     borderWidth: 0,
-          //     shadowColor: "rgba(0, 0, 0, 0.5)"
-          //   }
-          // }
-        },
-          {
-            name: '启动次数', // 浮动框的标题
-            type: 'map',
-            geoIndex: 0,
-            data: [{
-              "name": "北京",
-              "value": 599
-            }, {
-              "name": "上海",
-              "value": 142
-            }, {
-              "name": "黑龙江",
-              "value": 44
-            }, {
-              "name": "深圳",
-              "value": 92
-            }, {
-              "name": "湖北",
-              "value": 810
-            }, {
-              "name": "四川",
-              "value": 453
-            }]
-          }
-        ]
-      })
-    }
-    ,
     sortNumber(attr, rev) {
       if (rev == undefined) {
         rev = 1;
@@ -387,6 +272,12 @@ export default {
         return 0;
       }
     }
+  },
+  destroyed() {
+    let myChart = this.$echarts.init(document.getElementById('number_histogram'))
+    window.addEventListener('resize', function () {
+      myChart.resize();
+    })
   }
 }
 </script>

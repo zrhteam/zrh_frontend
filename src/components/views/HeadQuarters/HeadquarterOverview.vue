@@ -2,7 +2,7 @@
   <el-row style="height: 100%;">
     <el-row style="height: 100%;" id="head_quarter">
       <headquarterDataScreen id="head_small" style="display: none"></headquarterDataScreen>
-      <el-row id="head_large1" class="" style="height: 10%;">
+      <el-row id="head_large1" class="" style="height: 1.25rem;">
         <!--        <el-col :span="4" style="height: 100%">-->
         <!--          <el-card class="title-box-card" shadow="never"-->
         <!--                   style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">-->
@@ -65,38 +65,43 @@
           <!--          <label>数据大屏缩略图</label>-->
           <!--          </el-card>-->
         </el-col>
+        <el-row class="el-row" type="flex" style="height: 66%">
+          <el-col :span="12" class="">
+            <HeadquarterMap></HeadquarterMap>
+          </el-col>
+          <el-col :span="12" class="">
+            <el-col :span="12" class="" style="height: 50%">
+              <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>
+            </el-col>
+            <el-col :span="12" class="" style="height: 50%">
+              <HighProjectRisk></HighProjectRisk>
+            </el-col>
+            <el-col :span="12" class="" style="height: 50%">
+              <BarRank
+                  :context="{
+          title:'各区域检查次数',
+          id: 'id_head_rank1'}"
+              ></BarRank>
+            </el-col>
+            <el-col :span="12" class="" style="height: 50%">
+              <BarRank
+                  :context="{
+          title:'各区域在管项目数量',
+          id: 'id_head_rank2'}"
+              ></BarRank>
+            </el-col>
+          </el-col>
+          <!--          <HighProjectRisk></HighProjectRisk>-->
+        </el-row>
+        <el-row class="el-row" type="flex">
+        </el-row>
         <!--地图+高风险隐患数量排名-->
-        <HighProjectRisk></HighProjectRisk>
+        <!--        <HighProjectRisk></HighProjectRisk>-->
         <!--      </el-col>-->
         <!--        <el-col :span="10" id="head_part" style="height: 100%">-->
-        <el-col :span="9" style="height: 100%; padding-right: 2.5%">
+        <el-col :span="10" style="height: 100%; padding-right: 2.5%">
           <el-row style="height: 100%">
-            <!--            <label>chart</label>-->
-            <!--          <el-row style="height: 42%">-->
-            <!--          <el-col :span="12" style="height: 42%">-->
-            <!--            &lt;!&ndash;            已整改项目数量&ndash;&gt;-->
-            <!--          </el-col>-->
-            <!--          <el-col :span="12" style="height: 42%">-->
-            <!--            <el-card class="box-card " shadow="never"-->
-            <!--                     style="background-color: transparent; height: 90%; left: 10%; top: 10%">-->
-            <!--              &lt;!&ndash;          当前未整改高风险隐患列表&ndash;&gt;-->
-            <!--              <Region2_1></Region2_1>-->
-            <!--            </el-card>-->
-            <!--          </el-col>-->
-            <!--          </el-row>-->
-            <!--                    <el-row style="height: 42%">-->
             <el-col :span="24" style="height: 29%; margin: 2% 0 2% 2%">
-              <!--3维信息-->
-              <!--            <Region2_3></Region2_3>-->
-              <!--              <TopRisk-->
-              <!--                  :context="{-->
-              <!--          title:'重复出现隐患列表',-->
-              <!--          label1:'隐患描述',-->
-              <!--          label2:'出现频率',-->
-              <!--          sign:'head_risk',-->
-              <!--          option:this.risk_option}"-->
-              <!--                  :top_data="this.$store.state.get_headquarter.risk_number_top"-->
-              <!--              ></TopRisk>-->
             </el-col>
             <el-col :span="24" style="height: 29%;margin: 2%">
               <TopRisk
@@ -111,7 +116,7 @@
               <!--各等级隐患数量变化-->
             </el-col>
             <el-col :span="24" style="height: 29%;margin: 2% 2% 2% 0%">
-              <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>
+              <!--              <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>-->
               <!--各等级隐患数量变化-->
             </el-col>
             <!--                    </el-row>-->
@@ -133,10 +138,14 @@ import RegionOverview from "@/components/views/Region/RegionOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
+import HeadquarterMap from "@/components/views/HeadQuarters/HeadquarterMap.vue";
+import BarRank from "@/components/views/functions/BarRank.vue";
 
 export default {
   name: "HeadquarterOverview",
   components: {
+    BarRank,
+    HeadquarterMap,
     RiskLevelYear,
     TopRisk,
     RegionOverview,
@@ -286,6 +295,6 @@ export default {
   background-image: -webkit-linear-gradient(bottom, #04aaff, #45c3ff, #87dcfe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing:8px;
+  letter-spacing: 8px;
 }
 </style>
