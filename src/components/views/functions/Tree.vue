@@ -1,35 +1,38 @@
 <template>
-  <el-card class="box-card-list " shadow="never"
-           style="background-color: transparent; height:88%; margin: 0px 5px 5px 5px">
+  <div>
     <el-input
+        prefix-icon="el-icon-search"
         placeholder="输入关键字进行过滤"
-        v-model="filterText"
-        size="mini">
+        v-model="filterText">
     </el-input>
-    <div style="height: 80%">
-      <el-scrollbar style="height: 100%">
-        <el-tree
-            class="filter-tree"
-            :data="data"
-            node-key="id"
-            :props="defaultProps"
-            @node-click="handleNodeClick"
-            @check="handleCheck"
-            :default-expanded-keys="expandedKeys"
-            :filter-node-method="filterNode"
-            accordion
-            :show-checkbox="showCheckbox"
-            highlight-current
-            @node-expand="treeExpand"
-            :expand-on-click-node="true"
-            ref="modelTree">
+    <el-card class="box-card-list" shadow="never"
+             style="background-color: transparent; height: 96%">
+
+      <div style="height: 80%; margin-top: 0.15rem">
+        <el-scrollbar style="height: 100%">
+          <el-tree
+              class="filter-tree"
+              :data="data"
+              node-key="id"
+              :props="defaultProps"
+              @node-click="handleNodeClick"
+              @check="handleCheck"
+              :default-expanded-keys="expandedKeys"
+              :filter-node-method="filterNode"
+              accordion
+              :show-checkbox="showCheckbox"
+              highlight-current
+              @node-expand="treeExpand"
+              :expand-on-click-node="true"
+              ref="modelTree">
                                 <span class="span-ellipsis" slot-scope="{ node, data }">
                                   <span :title="node.label">{{ node.label }}</span>
                                 </span>
-        </el-tree>
-      </el-scrollbar>
-    </div>
-  </el-card>
+          </el-tree>
+        </el-scrollbar>
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <script>
@@ -231,4 +234,47 @@ export default {
   text-overflow: ellipsis;
   display: block;
 }
+
+.el-input {
+  display: block !important;
+  width: 2.25rem !important;
+  /*height: 0.5rem !important;*/
+  border-color: #1bcff2 !important;
+}
+
+.el-card__body {
+  padding: 0px !important;
+}
+
+.el-input >>> .el-input__inner {
+  /*height: 0.75rem !important;*/
+  color: #1bcff2 !important;
+  border-color: #1bcff2 !important;
+  border: 2px solid;
+}
+
+el-input::-webkit-input-placeholder {
+  color: #1bcff2 !important;
+}
+
+/deep/ input::-webkit-input-placeholder {
+  color: #1bcff2 !important;
+  -webkit-text-fill-color: #1bcff2 !important;
+}
+
+.el-input .el-input--prefix {
+  height: 0.5rem !important;
+  color: #1bcff2;
+}
+
+/*i .el-input__icon >>> .el-icon-search::before {*/
+/*  color: #1bcff2 !important;*/
+/*}*/
+
+
+.el-icon-search:before {
+  content: "\e608";
+  color: #1bcff2 !important;
+}
+
 </style>

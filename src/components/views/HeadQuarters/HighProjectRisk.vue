@@ -127,12 +127,10 @@ export default {
       };
       return option
     },
-  }
-  ,
+  },
   updated() {
     this.drawBarChart()
-  }
-  ,
+  },
   mounted() {
     // document.getElementById('map_2').style.display = 'none'
     // document.getElementById('map_5').style.display = 'block'

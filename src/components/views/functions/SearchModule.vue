@@ -134,7 +134,6 @@ export default {
 	    width: 100%;
 	    height: 100%;
 	    position: relative;
-	    background-image: url(../../particles/bg.jpg);
 	    background-position: 50% 50%;
 	    background-size: cover;
 	    background-repeat: no-repeat;

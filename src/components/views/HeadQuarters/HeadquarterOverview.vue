@@ -15,31 +15,55 @@
         <el-col :span="24" style="height: 100%">
           <div class="title-box-card " shadow="never"
                style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
-            <h4>
+            <el-col :span="4" style="height: 100%; ">
+              <div style="height: 100%; display: none">
+              </div>
+            </el-col>
+            <el-col :span="16" style="height: 100%;">
+              <h4>
               <span id="head_title1"
                     style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold;vertical-align: 45%; height: 100%; width: 100% ;text-align: center">{{
                   title1
                 }}</span>
-            </h4>
+              </h4>
+            </el-col>
+            <el-col :span="4" style="height: 1.25rem; position: relative; float:right">
+              <el-col :span="14" style="height: 100%; ">
+                <div style="height: 100%;">
+                  <span style="font-size: 0.4rem; color: #18bff0; bottom:0.35rem; position: relative;">
+                    {{ nowTime }}
+                  </span>
+                </div>
+              </el-col>
+              <el-col :span="10" style="height: 100%; color: #1072b5; font-size: 0.12rem;">
+                <el-row style="top: 35%; right: 0.6rem">
+                  <span>{{ nowWeek }}</span>
+                </el-row>
+                <el-row style="top: 35%; right: 0.6rem">
+                  <span>{{ nowDate }}</span>
+                </el-row>
+              </el-col>
+            </el-col>
           </div>
         </el-col>
       </el-row>
       <el-row id="head_large2" class="" style="height: 90%;">
-        <el-col :span="5" class="" style="height: 100%; padding-left: 2%; padding-top: 1.5%">
+        <el-col :span="2" class="" style="height: 100%;">
           <Tree
               :treeObj="treeObj"
               @handleNodeClick="handleTrNodeClick"
+              style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 5px;"
           ></Tree>
-          <el-card class="box-card " shadow="never"
-                   style="background-color: transparent; height: 10%; margin: 0px 5px 5px 5px">
-            <el-button size="mini" round
-                       style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; float: left"
-                       @click="intoHeadDataScreen">展开
-            </el-button>
-<!--            <headquarterDataScreen id="head_small1"></headquarterDataScreen>-->
+          <!--          <el-card class="box-card " shadow="never"-->
+          <!--                   style="background-color: transparent; height: 10%; margin: 0px 5px 5px 5px">-->
+          <el-button size="small" round
+                     style="width: 110%; z-index: 9; left: 12%; background-color: #2070dd; color: #ffffff; font-size: 0.26rem; font-weight: bold; float: left; letter-spacing:20px; text-indent: 20px;"
+                     @click="intoHeadDataScreen">展开
+          </el-button>
+          <!--            <headquarterDataScreen id="head_small1"></headquarterDataScreen>-->
 
-            <!--          <label>数据大屏缩略图</label>-->
-          </el-card>
+          <!--          <label>数据大屏缩略图</label>-->
+          <!--          </el-card>-->
         </el-col>
         <!--地图+高风险隐患数量排名-->
         <HighProjectRisk></HighProjectRisk>
@@ -64,15 +88,15 @@
             <el-col :span="24" style="height: 29%; margin: 2% 0 2% 2%">
               <!--3维信息-->
               <!--            <Region2_3></Region2_3>-->
-<!--              <TopRisk-->
-<!--                  :context="{-->
-<!--          title:'重复出现隐患列表',-->
-<!--          label1:'隐患描述',-->
-<!--          label2:'出现频率',-->
-<!--          sign:'head_risk',-->
-<!--          option:this.risk_option}"-->
-<!--                  :top_data="this.$store.state.get_headquarter.risk_number_top"-->
-<!--              ></TopRisk>-->
+              <!--              <TopRisk-->
+              <!--                  :context="{-->
+              <!--          title:'重复出现隐患列表',-->
+              <!--          label1:'隐患描述',-->
+              <!--          label2:'出现频率',-->
+              <!--          sign:'head_risk',-->
+              <!--          option:this.risk_option}"-->
+              <!--                  :top_data="this.$store.state.get_headquarter.risk_number_top"-->
+              <!--              ></TopRisk>-->
             </el-col>
             <el-col :span="24" style="height: 29%;margin: 2%">
               <TopRisk
@@ -144,7 +168,48 @@ export default {
     },
     back() {
       window.history.back()
-    }
+    },
+    setNowTimes() {
+      let myDate = new Date();
+      // console.log(myDate)
+      let wk = myDate.getDay();
+      let yy = String(myDate.getFullYear());
+      let mm = myDate.getMonth() + 1;
+      let dd = String(
+          myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate()
+      );
+      let hou = String(
+          myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours()
+      );
+      let min = String(
+          myDate.getMinutes() < 10
+              ? "0" + myDate.getMinutes()
+              : myDate.getMinutes()
+      );
+      let sec = String(
+          myDate.getSeconds() < 10
+              ? "0" + myDate.getSeconds()
+              : myDate.getSeconds()
+      );
+      let weeks = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let week = weeks[wk];
+      this.nowDate = yy + "." + mm + "." + dd
+      this.nowTime = hou + ":" + min + ":" + sec;
+      this.nowWeek = week;
+    },
+  },
+  mounted() {
+    this.timer = setInterval(() => {
+      this.setNowTimes();
+    }, 1000);
   },
   data() {
     return {
@@ -162,7 +227,7 @@ export default {
       },
       map_width: 0,
       map_height: 0,
-      timer: '',
+      // timer: '',
       input: 'test',
       defaultProps: {
         children: 'children',
@@ -195,6 +260,10 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
+      timer: null,
+      nowWeek: "",
+      nowDate: "",
+      nowTime: "",
     }
   },
   created() {
@@ -207,5 +276,16 @@ export default {
 #map {
   width: 100%;
   height: calc(100vh);
+}
+
+.el-button {
+  border: none !important;
+}
+
+#head_title1 {
+  background-image: -webkit-linear-gradient(bottom, #04aaff, #45c3ff, #87dcfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing:8px;
 }
 </style>
