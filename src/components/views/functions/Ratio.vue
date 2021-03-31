@@ -10,7 +10,7 @@
     <div style="display: none">
       {{ getData }}
     </div>
-    <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
+    <div class="level4" style="padding-top: 15px; padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
       <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"
                  @change="filterMajor">
@@ -22,6 +22,7 @@
         </el-option>
       </el-select>
     </div>
+    <div class="title-line" style=""></div>
     <div id="id_region_major" style="height: 80%; width: 100%" v-if="context.id==='id_region_major'">
     </div>
     <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">

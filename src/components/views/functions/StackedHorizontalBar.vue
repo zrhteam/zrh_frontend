@@ -1,9 +1,10 @@
 <template>
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%;">
-    <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
+    <div class="level4" style="padding-top: 15px; padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
     </div>
+    <div class="title-line" style=""></div>
     <!--不同致因阶段改用堆叠图-->
     <!--  总部级-->
     <div id="id_head_reason" style="height: 80%; width: 100%" v-if="context.id==='id_head_reason'">

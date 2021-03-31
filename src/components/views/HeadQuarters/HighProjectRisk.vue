@@ -2,9 +2,10 @@
   <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%;">
-    <div class="level4" style="display: block; margin-top: 0.5%">
+    <div class="level4" style="padding-top: 15px; padding-bottom: 5px; padding-left: 10px">
       <span>各区域高风险数量</span>
     </div>
+    <div class="title-line" style=""></div>
     <!--      <div id="mydiv2">-->
     <div style="display: none">
       {{ getNumberHistogram }}
@@ -21,6 +22,7 @@
 // import * as d3 from "d3/dist/d3";
 import elementResizeDetectorMaker from "element-resize-detector";
 import echarts from "echarts";
+import {bar_option3} from "@/utils/constants";
 
 export default {
   name: "HighProjectRisk",
@@ -41,81 +43,8 @@ export default {
         arr.push(obj)
       }
       arr.sort(this.sortNumber('count', true))
-      let option = {
-        dataset: {
-          // dimensions: ['name', 'count'],
-          source: arr
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow',
-          }
-        },
-        grid: {containLabel: true},
-        xAxis: {
-          name: 'amount',
-          axisLabel: {
-            interval: 0,
-            textStyle: {
-              fontSize: 10
-            }
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#ffffff',
-              fontSize: 8
-            }
-          },
-          splitLine: {
-            show: false
-          }
-        },
-        yAxis: {
-          type: 'category',
-          axisLine: {
-            lineStyle: {
-              color: '#ffffff'
-            }
-          },
-          splitLine: {
-            show: false
-          }
-        },
-        series: [
-          {
-            type: 'bar',
-            encode: {
-              // Map the "amount" column to X axis.
-              x: 'count',
-              // Map the "product" column to Y axis
-              y: 'name'
-            },
-            itemStyle: {
-              normal: {
-                //柱形图圆角，初始化效果
-                barBorderRadius: [0, 10, 10, 0],
-                color: new echarts.graphic.LinearGradient(
-                    1, 0, 0, 0,
-                    [
-                      {offset: 0, color: '#23dbdc'},
-                      // {offset: 0.5, color: '#1f77a0'},
-                      {offset: 1, color: '#1860b4'}
-                    ]
-                )
-              }
-            },
-            emphasis: {
-              itemStyle: {
-                color: '#40abc4'
-              }
-            },
-            // barMaxWidth: 20,
-            barCategoryGap: '10',
-          }
-        ]
-      };
-      return option
+      bar_option3["dataset"]["source"] = arr
+      return arr
     },
   },
   updated() {
@@ -159,10 +88,10 @@ export default {
   methods: {
     drawBarChart() {
       this.$nextTick(_ => {
-        if (this.getNumberHistogram["dataset"]["source"].length != 0) {
+        if (this.getNumberHistogram.length != 0) {
           let myChart = this.$echarts.init(document.getElementById('number_histogram'))
           // 使用刚指定的配置项和数据显示图表。
-          myChart.setOption(this.getNumberHistogram);
+          myChart.setOption(bar_option3);
           myChart.resize();
           window.addEventListener('resize', function () {
             myChart.resize();
@@ -185,6 +114,13 @@ export default {
           })
         }
       })
+    },
+    fontSize(res) {
+      let docEl = document.documentElement,
+          clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      if (!clientWidth) return;
+      let fontSize = 100 * (clientWidth / 1920);
+      return res * fontSize;
     },
     // loadMap() {//加载地图
     //   this.map = L.map("map_5", {

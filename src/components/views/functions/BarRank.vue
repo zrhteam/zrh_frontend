@@ -17,7 +17,7 @@
     <div style="display: none">
       {{ getData }}
     </div>
-    <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
+    <div class="level4" style="padding-top: 15px; padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
       <!--      <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"-->
       <!--                 @change="filterMajor">-->
@@ -29,6 +29,7 @@
       <!--        </el-option>-->
       <!--      </el-select>-->
     </div>
+    <div class="title-line" style=""></div>
     <div id="id_head_rank1" style="height: 90%; width: 100%" v-if="context.id==='id_head_rank1'">
     </div>
     <div id="id_head_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank2'">
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-import {bar_option} from "@/utils/constants";
+import {bar_option, bar_option3} from "@/utils/constants";
 import elementResizeDetectorMaker from "element-resize-detector";
 import echarts from "echarts";
 
@@ -68,81 +69,8 @@ export default {
         if (arr.length != 0) {
           arr.sort(this.sortNumber('count', true))
           if (this.context.id == 'id_head_rank1') {
-            let option = {
-              dataset: {
-                // dimensions: ['name', 'count'],
-                source: arr
-              },
-              tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                  type: 'shadow',
-                }
-              },
-              grid: {containLabel: true},
-              xAxis: {
-                name: 'amount',
-                axisLabel: {
-                  interval: 0,
-                  textStyle: {
-                    fontSize: 10
-                  }
-                },
-                axisLine: {
-                  lineStyle: {
-                    color: '#ffffff',
-                    fontSize: 8
-                  }
-                },
-                splitLine: {
-                  show: false
-                }
-              },
-              yAxis: {
-                type: 'category',
-                axisLine: {
-                  lineStyle: {
-                    color: '#ffffff'
-                  }
-                },
-                splitLine: {
-                  show: false
-                }
-              },
-              series: [
-                {
-                  type: 'bar',
-                  encode: {
-                    // Map the "amount" column to X axis.
-                    x: 'count',
-                    // Map the "product" column to Y axis
-                    y: 'name'
-                  },
-                  itemStyle: {
-                    normal: {
-                      //柱形图圆角，初始化效果
-                      barBorderRadius: [0, 10, 10, 0],
-                      color: new echarts.graphic.LinearGradient(
-                          1, 0, 0, 0,
-                          [
-                            {offset: 0, color: '#23dbdc'},
-                            // {offset: 0.5, color: '#1f77a0'},
-                            {offset: 1, color: '#1860b4'}
-                          ]
-                      )
-                    }
-                  },
-                  emphasis: {
-                    itemStyle: {
-                      color: '#40abc4'
-                    }
-                  },
-                  // barMaxWidth: 20,
-                  barCategoryGap: '10',
-                }
-              ]
-            };
-            myChart.setOption(option);
+            bar_option3["dataset"]["source"] = arr
+            myChart.setOption(bar_option3);
           } else {
             bar_option['dataset']['source'] = arr
             bar_option["xAxis"]["axisLabel"]["rotate"] = 0

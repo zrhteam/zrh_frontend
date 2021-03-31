@@ -1,3 +1,14 @@
+//字体自适应
+import echarts from "echarts";
+
+function fontSize(res) {
+    let docEl = document.documentElement,
+        clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (!clientWidth) return;
+    let fontSize = 100 * (clientWidth / 1920);
+    return res * fontSize;
+}
+
 //此处存放所有全局变量
 //针对 bar chart 的 option
 export const bar_option = {
@@ -12,7 +23,7 @@ export const bar_option = {
             interval: 0,
             rotate: 45,
             textStyle: {
-                fontSize: 10
+                fontSize: fontSize(0.1)
             },
             formatter: function (params) {
                 let val = "";
@@ -27,8 +38,8 @@ export const bar_option = {
         },
         axisLine: {
             lineStyle: {
-                color: '#ffffff',
-                fontSize: 8
+                color: '#058ddb',
+                fontSize: fontSize(0.08)
             }
         },
         splitLine: {
@@ -38,24 +49,25 @@ export const bar_option = {
     yAxis: {
         axisLine: {
             lineStyle: {
-                color: '#ffffff'
+                color: '#058ddb',
+                fontSize: fontSize(0.08)
             }
         },
         axisLabel: {
-            margin: 2
-            // textStyle: {
-            //   fontSize: 10
-            // }
+            margin: 2,
+            textStyle: {
+                fontSize: fontSize(0.1)
+            }
         },
         splitLine: {
             show: false
         }
     },
     grid: {
-        left: 35,
-        x2: '2%',
-        y: '10%',
-        y2: '50%'
+        left: fontSize(0.25),
+        top: fontSize(0.25),
+        right: fontSize(0.55),
+        bottom: fontSize(0.55),
     },
     series: [
         {
@@ -89,7 +101,7 @@ export const bar_option = {
                 }
             },
             // barMaxWidth: 40,
-            barCategoryGap: '10',
+            barCategoryGap: toString(fontSize(0.10)),
         }
     ]
 };
@@ -98,7 +110,7 @@ export const bar_option2 = {
     legend: {
         textStyle: {
             color: '#ffffff',
-            fontSize: 12
+            fontSize: fontSize(0.1)
         },
         left: 6
     },
@@ -107,9 +119,10 @@ export const bar_option2 = {
         source: []
     },
     grid: {
-        left: 55,
-        y: '30%',
-        y2: '20%'
+        left: fontSize(0.25),
+        top: fontSize(0.25),
+        right: fontSize(0.55),
+        bottom: fontSize(0.55),
     },
     // Declare several bar series, each will be mapped
     // to a column of dataset.source by default.
@@ -123,7 +136,7 @@ export const bar_option2 = {
                     color: "#4992ff"
                 }
             },
-            barMaxWidth: 40
+            barMaxWidth: fontSize(0.40)
         },
         {
             type: 'bar',
@@ -134,7 +147,7 @@ export const bar_option2 = {
                     color: '#58d9f9'
                 }
             },
-            barMaxWidth: 40
+            barMaxWidth: fontSize(0.40)
         },
         {
             type: 'bar',
@@ -145,7 +158,7 @@ export const bar_option2 = {
                     color: '#05c091'
                 }
             },
-            barMaxWidth: 40
+            barMaxWidth: fontSize(0.40)
         }
     ],
     xAxis: {
@@ -154,13 +167,13 @@ export const bar_option2 = {
             interval: 0,
             rotate: 45,
             textStyle: {
-                fontSize: 10
+                fontSize: fontSize(0.1)
             }
         },
         axisLine: {
             lineStyle: {
                 color: '#ffffff',
-                fontSize: 8
+                fontSize: fontSize(0.08)
             }
         },
         splitLine: {
@@ -170,18 +183,116 @@ export const bar_option2 = {
     yAxis: {
         axisLine: {
             lineStyle: {
-                color: '#ffffff'
+                color: '#ffffff',
+                fontSize: fontSize(0.08)
             }
         },
         axisLabel: {
-            // textStyle: {
-            //   fontSize: 10
-            // }
+            textStyle: {
+                fontSize: fontSize(0.1)
+            }
         },
         splitLine: {
             show: false
         }
     },
+};
+//针对纵向bar
+export const bar_option3 = {
+    dataset: {
+        // dimensions: ['name', 'count'],
+        source: []
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow',
+        }
+    },
+    grid: {
+        left: fontSize(0.25),
+        top: fontSize(0.25),
+        right: fontSize(0.55),
+        bottom: fontSize(0.55),
+        containLabel: true
+    },
+    xAxis: {
+        name: 'amount',
+        axisLabel: {
+            interval: 0,
+            textStyle: {
+                fontSize: fontSize(0.10),
+                color: '#058ddb'
+            }
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#058ddb',
+                fontSize: fontSize(0.08)
+            },
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        }
+    },
+    yAxis: {
+        type: 'category',
+        axisLine: {
+            lineStyle: {
+                color: '#058ddb',
+                fontSize: fontSize(0.08)
+            },
+            show: false
+        },
+        axisLabel: {
+            textStyle: {
+                fontSize: fontSize(0.10)
+            }
+        },
+        axisTick: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        }
+    },
+    series: [
+        {
+            type: 'bar',
+            encode: {
+                // Map the "amount" column to X axis.
+                x: 'count',
+                // Map the "product" column to Y axis
+                y: 'name'
+            },
+            itemStyle: {
+                normal: {
+                    //柱形图圆角，初始化效果
+                    barBorderRadius: [0, 10, 10, 0],
+                    color: new echarts.graphic.LinearGradient(
+                        1, 0, 0, 0,
+                        [
+                            {offset: 0, color: '#23dbdc'},
+                            // {offset: 0.5, color: '#1f77a0'},
+                            {offset: 1, color: '#1860b4'}
+                        ]
+                    )
+                }
+            },
+            emphasis: {
+                itemStyle: {
+                    color: '#40abc4'
+                }
+            },
+            // barMaxWidth: 20,
+            // barCategoryGap: toString(fontSize(0.18)),
+            barCategoryGap: fontSize(0.18),
+        }
+    ]
 };
 let _this = this
 //针对 pie chart 的 option
@@ -191,10 +302,10 @@ export const pie_option = {
     },
     legend: {
         orient: 'vertical',
-        left: '10',
+        left: toString(fontSize(0.10)),
         textStyle: {
             color: '#ffffff',
-            fontSize: 12
+            fontSize: fontSize(0.1)
         },
     },
     // legend: {
@@ -223,7 +334,7 @@ export const pie_option = {
                     // formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
                     formatter(v) {
                         let text = v.name + ':' + v.value
-                        return text = `${text.slice(0, v.name.length+1)}\n${text.slice(v.name.length+1)}`
+                        return text = `${text.slice(0, v.name.length + 1)}\n${text.slice(v.name.length + 1)}`
                         // if (text.length < 8) {
                         //     return text;
                         // } else if (text.length > 8 && text.length <= 16) {
@@ -241,7 +352,7 @@ export const pie_option = {
             data: [],
             itemStyle: {
                 emphasis: {
-                    shadowBlur: 10,
+                    shadowBlur: fontSize(0.10),
                     shadowOffsetX: 0,
                     // shadowColor: 'rgba(0, 0, 0, 0.5)'
                 },
@@ -301,17 +412,15 @@ export const line_option = {
     },
     legend: {
         textStyle: {
-            color: '#ffffff'
+            color: '#058ddb'
         },
         data: []
     },
     grid: {
-        // left: '3%',
-        // right: '1%',
-        // bottom: '3%',
-        left: 55,
-        y: '30%',
-        y2: '20%',
+        left: fontSize(0.25),
+        top: fontSize(0.45),
+        right: fontSize(0.55),
+        bottom: fontSize(0.25),
         containLabel: true
     },
     toolbox: {
@@ -326,13 +435,14 @@ export const line_option = {
         axisLabel: {
             interval: 0,
             textStyle: {
-                fontSize: 10
+                color: '#058ddb',
+                fontSize: fontSize(0.1)
             }
         },
         axisLine: {
             lineStyle: {
-                color: '#ffffff',
-                fontSize: 8
+                color: '#058ddb',
+                fontSize: fontSize(0.08)
             }
         },
         splitLine: {
@@ -343,13 +453,15 @@ export const line_option = {
         type: 'value',
         axisLine: {
             lineStyle: {
-                color: '#ffffff'
+                color: '#058ddb',
+                fontSize: fontSize(0.08)
             }
         },
         axisLabel: {
-            // textStyle: {
-            //   fontSize: 10
-            // }
+            textStyle: {
+                color: '#058ddb',
+                fontSize: fontSize(0.1)
+            }
         },
         splitLine: {
             show: false

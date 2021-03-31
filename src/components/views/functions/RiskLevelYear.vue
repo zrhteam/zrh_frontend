@@ -9,7 +9,7 @@
     <div style="display: none">
       {{ getRiskLevelYear }}
     </div>
-    <div class="text item level4" style="padding-top: 15px; padding-bottom: 15px">
+    <div class="text item level4" style="padding-top: 15px; padding-bottom: 5px">
       <span>{{ context.title }}</span>
       <el-button type="text" @click="dropGrantChart" v-if="!isShow && context.id==='id_risk_level'"
                  style="float: right; vertical-align: middle">取消授权
@@ -25,6 +25,7 @@
         </el-option>
       </el-select>
     </div>
+    <div class="title-line" style=""></div>
     <div id='check_level_year' style="height: 80%; width: 100%;" v-if="context.id==='check_level_year'"></div>
     <div id='prj_level_year' style="height: 80%; width: 100%;" v-if="context.id==='prj_level_year'"></div>
     <div id='region_level_year' style="height: 80%; width: 100%;" v-if="context.id==='region_level_year'"></div>

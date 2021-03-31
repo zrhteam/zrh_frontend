@@ -70,20 +70,20 @@
             <HeadquarterMap></HeadquarterMap>
           </el-col>
           <el-col :span="12" class="">
-            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.1rem">
+            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
               <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>
             </el-col>
-            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.1rem">
+            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
               <HighProjectRisk></HighProjectRisk>
             </el-col>
-            <el-col :span="12" class="" style="height: 50%;">
+            <el-col :span="12" class="" style="height: 50%; padding-top: 0.05rem">
               <BarRank
                   :context="{
           title:'各区域检查次数',
           id: 'id_head_rank1'}"
               ></BarRank>
             </el-col>
-            <el-col :span="12" class="" style="height: 50%">
+            <el-col :span="12" class="" style="height: 50%; padding-top: 0.05rem">
               <BarRank
                   :context="{
           title:'各区域在管项目数量',
