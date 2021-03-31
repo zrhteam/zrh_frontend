@@ -65,18 +65,18 @@
           <!--          <label>数据大屏缩略图</label>-->
           <!--          </el-card>-->
         </el-col>
-        <el-row class="el-row" type="flex" style="height: 66%">
+        <el-row class="el-row" :gutter="10" type="flex" style="height: 60%; margin-top: 0.6rem; padding-left: 0.3rem">
           <el-col :span="12" class="">
             <HeadquarterMap></HeadquarterMap>
           </el-col>
           <el-col :span="12" class="">
-            <el-col :span="12" class="" style="height: 50%">
+            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.1rem">
               <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>
             </el-col>
-            <el-col :span="12" class="" style="height: 50%">
+            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.1rem">
               <HighProjectRisk></HighProjectRisk>
             </el-col>
-            <el-col :span="12" class="" style="height: 50%">
+            <el-col :span="12" class="" style="height: 50%;">
               <BarRank
                   :context="{
           title:'各区域检查次数',
@@ -93,7 +93,28 @@
           </el-col>
           <!--          <HighProjectRisk></HighProjectRisk>-->
         </el-row>
-        <el-row class="el-row" type="flex">
+        <el-row class="el-row" :gutter="10" type="flex" style="height: 30%; margin-top: 0.2rem; padding-left: 0.3rem">
+          <el-col :span="6" style="height: 100%;">
+            <Ratio
+                :context="{
+          title:'不同专业隐患数量',
+          id: 'id_head_major',
+        }"></Ratio>
+          </el-col>
+          <el-col :span="12" style="height: 100%;">
+            <StackedHorizontalBar
+                :context="{
+          title:'不同致因阶段隐患数量',
+          id: 'id_head_reason'
+        }"></StackedHorizontalBar>
+          </el-col>
+          <el-col :span="6" style="height: 100%;">
+            <Ratio
+                :context="{
+          title:'不同分布区域隐患数量',
+          id: 'id_head_region'
+        }"></Ratio>
+          </el-col>
         </el-row>
         <!--地图+高风险隐患数量排名-->
         <!--        <HighProjectRisk></HighProjectRisk>-->
@@ -140,10 +161,14 @@ import TopRisk from "@/components/views/functions/TopRisk.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import HeadquarterMap from "@/components/views/HeadQuarters/HeadquarterMap.vue";
 import BarRank from "@/components/views/functions/BarRank.vue";
+import Ratio from "@/components/views/functions/Ratio.vue";
+import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
   name: "HeadquarterOverview",
   components: {
+    StackedHorizontalBar,
+    Ratio,
     BarRank,
     HeadquarterMap,
     RiskLevelYear,

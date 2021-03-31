@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card-t " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 1%">
+           style="background-color: transparent; height: 100%;">
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
     </div>

@@ -36,11 +36,11 @@
         {{ getName }}
       </div>
       <el-col :span="8" style="height: 48%; margin-left:0.5%">
-        <Ratio
-            :context="{
-          title:'不同专业隐患数量',
-          id: 'id_head_major',
-        }"></Ratio>
+<!--        <Ratio-->
+<!--            :context="{-->
+<!--          title:'不同专业隐患数量',-->
+<!--          id: 'id_head_major',-->
+<!--        }"></Ratio>-->
       </el-col>
       <el-col :span="8" style="height: 48%; ">
 <!--        <Ratio-->
@@ -48,18 +48,18 @@
 <!--          title:'不同致因阶段隐患数量',-->
 <!--          id: 'id_head_reason'-->
 <!--        }"></Ratio>-->
-        <StackedHorizontalBar
-            :context="{
-          title:'不同致因阶段隐患数量',
-          id: 'id_head_reason'
-        }"></StackedHorizontalBar>
+<!--        <StackedHorizontalBar-->
+<!--            :context="{-->
+<!--          title:'不同致因阶段隐患数量',-->
+<!--          id: 'id_head_reason'-->
+<!--        }"></StackedHorizontalBar>-->
       </el-col>
       <el-col :span="8" style="height: 48%; width: 32.5%">
-        <Ratio
-            :context="{
-          title:'不同分布区域隐患数量',
-          id: 'id_head_region'
-        }"></Ratio>
+<!--        <Ratio-->
+<!--            :context="{-->
+<!--          title:'不同分布区域隐患数量',-->
+<!--          id: 'id_head_region'-->
+<!--        }"></Ratio>-->
       </el-col>
       <el-col :span="8" style="height: 48%; margin-top: 1%">
 <!--        <BarRank-->

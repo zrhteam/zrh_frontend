@@ -20,7 +20,7 @@ export const bar_option = {
                 if (params.length > show) {
                     val = params.substr(0, show) + '...';
                     return val;
-                }else {
+                } else {
                     return params;
                 }
             }
@@ -60,6 +60,7 @@ export const bar_option = {
     series: [
         {
             type: 'bar',
+            encode: null,
             itemStyle: {
                 normal: {
                     //柱形图圆角，初始化效果
@@ -87,7 +88,8 @@ export const bar_option = {
                     // )
                 }
             },
-            barMaxWidth: 40
+            // barMaxWidth: 40,
+            barCategoryGap: '10',
         }
     ]
 };
@@ -181,115 +183,117 @@ export const bar_option2 = {
         }
     },
 };
+let _this = this
 //针对 pie chart 的 option
 export const pie_option = {
-        tooltip: {
-            formatter: '{b}:{c} ({d}%)'
+    tooltip: {
+        formatter: '{b}:{c} ({d}%)'
+    },
+    legend: {
+        orient: 'vertical',
+        left: '10',
+        textStyle: {
+            color: '#ffffff',
+            fontSize: 12
         },
-        legend: {
-            orient: 'vertical',
-            left: '10',
-            textStyle: {
-                color: '#ffffff',
-                fontSize: 12
-            }
-        },
-        // legend: {
-        //   type: "scroll",
-        //   orient: 'vertical',
-        //   top: 20,
-        //   right: '2%',
-        //   textStyle:{
-        //     color: '#fff',
-        //     fontSize: 12
-        //   },
-        //   // data: arr.name
-        // },
+    },
+    // legend: {
+    //   type: "scroll",
+    //   orient: 'vertical',
+    //   top: 20,
+    //   right: '2%',
+    //   textStyle:{
+    //     color: '#fff',
+    //     fontSize: 12
+    //   },
+    //   // data: arr.name
+    // },
 
-        series: [
-            {
-                type: 'pie',
-                radius: '60%',
-                center: ['60%', '60%'],
-                // minAngle: 5, //最小的扇区角度
-                // startAngle: 45, //起始角度
-                label: {
-                    normal: {
-                        show: true,
-                        color: '#fff',
-                        // formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
-                        formatter(v) {
-                            let text = v.name + ':' + v.value
-                            if (text.length < 6) {
-                                return text;
-                            } else if (text.length > 6 && text.length <= 12) {
-                                return text = `${text.slice(0, 6)}\n${text.slice(6)}`
-                            } else if (text.length > 12 && text.length <= 18) {
-                                return text = `${text.slice(0, 6)}\n${text.slice(6, 12)}\n${text.slice(12)}`
-                            } else if (text.length > 18 && text.length <= 24) {
-                                return text = `${text.slice(0, 6)}\n${text.slice(6, 12)}\n${text.slice(12, 18)}\n${text.slice(18)}`
-                            } else if (text.length > 24) {
-                                return text = `${text.slice(0, 6)}\n${text.slice(6, 12)}\n${text.slice(12, 18)}\n${text.slice(8, 24)}\n${text.slice(24)}`
-                            }
-                        },
-                    }
-                },
-                data: [],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        // shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    },
-                    normal: {
-                        color: function (params) {
-                            //自定义颜色
-                            let colorList = [
-                                '#3d5bfb', '#7c00ff', '#11aeff', '#27e0a6', '#00c800', '#e8395d',
-                            ];
-                            return colorList[params.dataIndex]
-                        },
-                        //渐变色
-                        //     color: function (params) {
-                        //         let colorList = [
-                        //             {
-                        //                 c1: '#fce5ca',
-                        //                 c2: '#ff9d62'
-                        //             },
-                        //             {
-                        //                 c1: '#63e587',
-                        //                 c2: '#5fe2e4'
-                        //             },
-                        //             {
-                        //                 c1: '#db6400',
-                        //                 c2: '#ceb895'
-                        //             },
-                        //             {
-                        //                 c1: '#e8e87e',
-                        //                 c2: '#a1a170'
-                        //             },
-                        //             {
-                        //                 c1: '#007965',
-                        //                 c2: '#b1e2da'
-                        //             },
-                        //             {
-                        //                 c1: '#7c9473',
-                        //                 c2: '#d6efc7'
-                        //             }];
-                        //         return new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
-                        //             offset: 0,
-                        //             color: colorList[(params.dataIndex) % colorList.length].c1
-                        //         }, {
-                        //             offset: 1,
-                        //             color: colorList[(params.dataIndex) % colorList.length].c2
-                        //         }])
+    series: [
+        {
+            type: 'pie',
+            radius: '60%',
+            center: ['60%', '60%'],
+            // minAngle: 5, //最小的扇区角度
+            // startAngle: 45, //起始角度
+            label: {
+                normal: {
+                    show: true,
+                    color: '#fff',
+                    // formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
+                    formatter(v) {
+                        let text = v.name + ':' + v.value
+                        return text = `${text.slice(0, v.name.length+1)}\n${text.slice(v.name.length+1)}`
+                        // if (text.length < 8) {
+                        //     return text;
+                        // } else if (text.length > 8 && text.length <= 16) {
+                        //     return text = `${text.slice(0, 8)}\n${text.slice(8)}`
+                        // } else if (text.length > 16 && text.length <= 24) {
+                        //     return text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(24)}`
+                        // } else if (text.length > 18 && text.length <= 24) {
+                        //     return text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(16, 24)}\n${text.slice(24)}`
+                        // } else if (text.length > 24) {
+                        //     return text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(16, 24)}\n${text.slice(24, 32)}\n${text.slice(32)}`
                         // }
-                    }
+                    },
+                }
+            },
+            data: [],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    // shadowColor: 'rgba(0, 0, 0, 0.5)'
                 },
+                normal: {
+                    color: function (params) {
+                        //自定义颜色
+                        let colorList = [
+                            '#3d5bfb', '#7c00ff', '#11aeff', '#27e0a6', '#00c800', '#e8395d',
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    //渐变色
+                    //     color: function (params) {
+                    //         let colorList = [
+                    //             {
+                    //                 c1: '#fce5ca',
+                    //                 c2: '#ff9d62'
+                    //             },
+                    //             {
+                    //                 c1: '#63e587',
+                    //                 c2: '#5fe2e4'
+                    //             },
+                    //             {
+                    //                 c1: '#db6400',
+                    //                 c2: '#ceb895'
+                    //             },
+                    //             {
+                    //                 c1: '#e8e87e',
+                    //                 c2: '#a1a170'
+                    //             },
+                    //             {
+                    //                 c1: '#007965',
+                    //                 c2: '#b1e2da'
+                    //             },
+                    //             {
+                    //                 c1: '#7c9473',
+                    //                 c2: '#d6efc7'
+                    //             }];
+                    //         return new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                    //             offset: 0,
+                    //             color: colorList[(params.dataIndex) % colorList.length].c1
+                    //         }, {
+                    //             offset: 1,
+                    //             color: colorList[(params.dataIndex) % colorList.length].c2
+                    //         }])
+                    // }
+                }
+            },
 
-            }
-        ]
-    };
+        }
+    ]
+};
 //折线图堆叠
 export const line_option = {
     tooltip: {
@@ -302,9 +306,12 @@ export const line_option = {
         data: []
     },
     grid: {
-        left: '3%',
-        right: '1%',
-        bottom: '3%',
+        // left: '3%',
+        // right: '1%',
+        // bottom: '3%',
+        left: 55,
+        y: '30%',
+        y2: '20%',
         containLabel: true
     },
     toolbox: {

@@ -19,17 +19,17 @@
     </div>
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
-<!--      <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"-->
-<!--                 @change="filterMajor">-->
-<!--        <el-option-->
-<!--            v-for="item in option"-->
-<!--            :key="item.value"-->
-<!--            :label="item.label"-->
-<!--            :value="item.value">-->
-<!--        </el-option>-->
-<!--      </el-select>-->
+      <!--      <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"-->
+      <!--                 @change="filterMajor">-->
+      <!--        <el-option-->
+      <!--            v-for="item in option"-->
+      <!--            :key="item.value"-->
+      <!--            :label="item.label"-->
+      <!--            :value="item.value">-->
+      <!--        </el-option>-->
+      <!--      </el-select>-->
     </div>
-    <div id="id_head_rank1" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank1'">
+    <div id="id_head_rank1" style="height: 90%; width: 100%" v-if="context.id==='id_head_rank1'">
     </div>
     <div id="id_head_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank2'">
     </div>
@@ -49,6 +49,7 @@
 <script>
 import {bar_option} from "@/utils/constants";
 import elementResizeDetectorMaker from "element-resize-detector";
+import echarts from "echarts";
 
 export default {
   name: "BarRank",
@@ -66,10 +67,90 @@ export default {
         let arr = this.getData
         if (arr.length != 0) {
           arr.sort(this.sortNumber('count', true))
-          bar_option['dataset']['source'] = arr
-          bar_option["xAxis"]["axisLabel"]["rotate"] = 45
-          bar_option["grid"]["y2"] = '30%'
-          myChart.setOption(bar_option);
+          if (this.context.id == 'id_head_rank1') {
+            let option = {
+              dataset: {
+                // dimensions: ['name', 'count'],
+                source: arr
+              },
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                  type: 'shadow',
+                }
+              },
+              grid: {containLabel: true},
+              xAxis: {
+                name: 'amount',
+                axisLabel: {
+                  interval: 0,
+                  textStyle: {
+                    fontSize: 10
+                  }
+                },
+                axisLine: {
+                  lineStyle: {
+                    color: '#ffffff',
+                    fontSize: 8
+                  }
+                },
+                splitLine: {
+                  show: false
+                }
+              },
+              yAxis: {
+                type: 'category',
+                axisLine: {
+                  lineStyle: {
+                    color: '#ffffff'
+                  }
+                },
+                splitLine: {
+                  show: false
+                }
+              },
+              series: [
+                {
+                  type: 'bar',
+                  encode: {
+                    // Map the "amount" column to X axis.
+                    x: 'count',
+                    // Map the "product" column to Y axis
+                    y: 'name'
+                  },
+                  itemStyle: {
+                    normal: {
+                      //柱形图圆角，初始化效果
+                      barBorderRadius: [0, 10, 10, 0],
+                      color: new echarts.graphic.LinearGradient(
+                          1, 0, 0, 0,
+                          [
+                            {offset: 0, color: '#23dbdc'},
+                            // {offset: 0.5, color: '#1f77a0'},
+                            {offset: 1, color: '#1860b4'}
+                          ]
+                      )
+                    }
+                  },
+                  emphasis: {
+                    itemStyle: {
+                      color: '#40abc4'
+                    }
+                  },
+                  // barMaxWidth: 20,
+                  barCategoryGap: '10',
+                }
+              ]
+            };
+            myChart.setOption(option);
+          } else {
+            bar_option['dataset']['source'] = arr
+            bar_option["xAxis"]["axisLabel"]["rotate"] = 0
+            bar_option["grid"]["y2"] = '30%'
+            bar_option["series"][0]["barCategoryGap"] = '50'
+            myChart.setOption(bar_option);
+          }
+
           myChart.resize();
           window.addEventListener('resize', function () {
             myChart.resize();
@@ -110,12 +191,12 @@ export default {
         this.$store.commit('get_region/changeParam2', {params: param2})
         //显示该区域不同专业下各系统隐患占比情况
         this.$store.dispatch('get_region/getRegionSystemRatio')
-      }else if (this.context.id == 'id_project_system') {
+      } else if (this.context.id == 'id_project_system') {
         param2.append('project_name', this.$store.state.get_project.prj_name);
         this.$store.commit('get_project/changeParam2', {params: param2})
         //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
         this.$store.dispatch('get_project/getInitProjectSystem')
-      }else if (this.context.id == 'id_check_system') {
+      } else if (this.context.id == 'id_check_system') {
         //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
         param2.append('check_code', this.$store.state.get_check.check_code);
         this.$store.commit('get_check/changeParam2', {params: param2})
