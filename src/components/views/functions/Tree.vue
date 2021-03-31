@@ -254,6 +254,7 @@ export default {
 }
 
 el-input::-webkit-input-placeholder {
+  font-size: 0.1rem;
   color: #1bcff2 !important;
 }
 
@@ -265,6 +266,10 @@ el-input::-webkit-input-placeholder {
 .el-input .el-input--prefix {
   height: 0.5rem !important;
   color: #1bcff2;
+}
+
+/deep/.el-input--prefix .el-input__inner {
+  padding-left: 30px !important;
 }
 
 /*i .el-input__icon >>> .el-icon-search::before {*/

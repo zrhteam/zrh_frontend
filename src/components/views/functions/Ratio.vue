@@ -57,6 +57,15 @@ export default {
         myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
         pie_option["series"][0]["data"] = arr
+        pie_option["legend"]["formatter"] = function (params) {
+          var legendIndex = 0;
+          arr.forEach(function (v, i) {
+            if (v.name == params) {
+              legendIndex = i;
+            }
+          });
+          return params + " " + arr[legendIndex].value;
+        }
         if (arr.length != 0) {
           myChart.setOption(pie_option);
           myChart.resize();

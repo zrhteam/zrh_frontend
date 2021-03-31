@@ -75,7 +75,7 @@ export default {
             label: {
               show: true,
               fontWeight: 200,
-              fontSize: 8
+              fontSize: this.fontSize(0.08)
             },
             emphasis: {
               focus: 'series'
@@ -107,27 +107,34 @@ export default {
             },
           },
           grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
+            left: this.fontSize(0.25),
+            top: this.fontSize(0.45),
+            right: this.fontSize(0.55),
+            bottom: this.fontSize(0.15),
             containLabel: true
           },
           xAxis: {
             axisLine: {
               lineStyle: {
-                color: '#ffffff'
+                color: '#058ddb'
               }
             },
-            type: 'value'
+            type: 'value',
+            splitLine: {
+              show: false
+            }
           },
           yAxis: {
             axisLine: {
               lineStyle: {
-                color: '#ffffff'
+                color: '#058ddb'
               }
             },
             type: 'category',
-            data: this.yAxis
+            data: this.yAxis,
+            splitLine: {
+              show: false
+            }
           },
           series: data
         };
@@ -158,6 +165,13 @@ export default {
         // }
       })
     },
+    fontSize(res) {
+      let docEl = document.documentElement,
+          clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      if (!clientWidth) return;
+      let fontSize = 100 * (clientWidth / 1920);
+      return res * fontSize;
+    }
   },
   computed: {
     getData() {
@@ -233,8 +247,7 @@ export default {
           data = this.$store.state.get_region.region_risk_level_ratio
         else if (this.context.id == 'id_project_risk') {
           data = this.$store.state.get_project.prj_risk_level_ratio
-        }
-        else if (this.context.id == 'id_check_risk') {
+        } else if (this.context.id == 'id_check_risk') {
           data = this.$store.state.get_check.check_risk_level_ratio
         }
         for (let i in data) {

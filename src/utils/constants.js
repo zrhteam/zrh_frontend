@@ -294,7 +294,7 @@ export const bar_option3 = {
         }
     ]
 };
-let _this = this
+
 //针对 pie chart 的 option
 export const pie_option = {
     tooltip: {
@@ -307,6 +307,7 @@ export const pie_option = {
             color: '#ffffff',
             fontSize: fontSize(0.1)
         },
+        formatter: null
     },
     // legend: {
     //   type: "scroll",
@@ -329,7 +330,7 @@ export const pie_option = {
             // startAngle: 45, //起始角度
             label: {
                 normal: {
-                    show: true,
+                    show: false,
                     color: '#fff',
                     // formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
                     formatter(v) {
@@ -348,6 +349,9 @@ export const pie_option = {
                         // }
                     },
                 }
+            },
+            labelLine: {
+                show: false
             },
             data: [],
             itemStyle: {
