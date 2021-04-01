@@ -2,7 +2,7 @@
   <!--每个项目历次检查的指数，放到项目级默认下的地图下面-->
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%;">
-    <div class="level4" style="padding-top: 15px; padding-bottom: 5px; padding-left: 10px">
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
       <span>各区域高风险数量</span>
     </div>
     <div class="title-line" style=""></div>

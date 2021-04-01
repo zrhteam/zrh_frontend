@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%;">
-    <div class="level4" style="padding-top: 15px; padding-bottom: 5px; padding-left: 10px">
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
     </div>
     <div class="title-line" style=""></div>
@@ -112,7 +112,7 @@ export default {
             left: this.fontSize(0.25),
             top: this.fontSize(0.45),
             right: this.fontSize(0.55),
-            bottom: this.fontSize(0.15),
+            bottom: this.fontSize(0.25),
             containLabel: true
           },
           xAxis: {

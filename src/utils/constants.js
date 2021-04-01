@@ -66,7 +66,8 @@ export const bar_option = {
         left: fontSize(0.25),
         top: fontSize(0.25),
         right: fontSize(0.55),
-        bottom: fontSize(0.55),
+        bottom: fontSize(0.25),
+        containLabel: true
     },
     series: [
         {
@@ -99,7 +100,7 @@ export const bar_option = {
                     // )
                 }
             },
-            barCategoryGap: fontSize(0.46),
+            barCategoryGap: fontSize(0.40),
         },
     ]
 };
@@ -122,7 +123,8 @@ export const bar_option2 = {
         left: fontSize(0.25),
         top: fontSize(0.25),
         right: fontSize(0.55),
-        bottom: fontSize(0.55),
+        bottom: fontSize(0.25),
+        containLabel: true
     },
     // Declare several bar series, each will be mapped
     // to a column of dataset.source by default.
@@ -213,7 +215,7 @@ export const bar_option3 = {
         left: fontSize(0.25),
         top: fontSize(0.25),
         right: fontSize(0.55),
-        bottom: fontSize(0.55),
+        bottom: fontSize(0.50),
         containLabel: true
     },
     xAxis: {

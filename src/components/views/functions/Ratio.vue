@@ -10,7 +10,7 @@
     <div style="display: none">
       {{ getData }}
     </div>
-    <div class="level4" style="padding-top: 15px; padding-bottom: 5px; padding-left: 10px">
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
       <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"
                  @change="filterMajor">
