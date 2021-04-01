@@ -54,7 +54,6 @@ export const bar_option = {
             }
         },
         axisLabel: {
-            margin: 2,
             textStyle: {
                 fontSize: fontSize(0.1)
             }
@@ -100,19 +99,20 @@ export const bar_option = {
                     // )
                 }
             },
-            // barMaxWidth: 40,
-            barCategoryGap: toString(fontSize(0.10)),
-        }
+            barCategoryGap: fontSize(0.46),
+        },
     ]
 };
 //对于一个x量对应三个bar
 export const bar_option2 = {
     legend: {
         textStyle: {
-            color: '#ffffff',
-            fontSize: fontSize(0.1)
+            color: '#058ddb',
+            fontSize: fontSize(0.1),
+            itemHeight: fontSize(0.10),
+            itemGap: fontSize(0.10),
         },
-        left: 6
+        left: fontSize(0.06)
     },
     tooltip: {},
     dataset: {
@@ -290,7 +290,7 @@ export const bar_option3 = {
             },
             // barMaxWidth: 20,
             // barCategoryGap: toString(fontSize(0.18)),
-            barCategoryGap: fontSize(0.18),
+            barCategoryGap: fontSize(0.13),
         }
     ]
 };
@@ -302,25 +302,16 @@ export const pie_option = {
     },
     legend: {
         orient: 'vertical',
+        icon: "circle",
+        itemHeight: fontSize(0.10),
+        itemGap: fontSize(0.10),
         left: toString(fontSize(0.10)),
         textStyle: {
-            color: '#ffffff',
+            color: '#058ddb',
             fontSize: fontSize(0.1)
         },
         formatter: null
     },
-    // legend: {
-    //   type: "scroll",
-    //   orient: 'vertical',
-    //   top: 20,
-    //   right: '2%',
-    //   textStyle:{
-    //     color: '#fff',
-    //     fontSize: 12
-    //   },
-    //   // data: arr.name
-    // },
-
     series: [
         {
             type: 'pie',
@@ -418,7 +409,9 @@ export const line_option = {
         textStyle: {
             color: '#058ddb'
         },
-        data: []
+        data: [],
+        itemHeight: fontSize(0.10),
+        itemGap: fontSize(0.10),
     },
     grid: {
         left: fontSize(0.25),

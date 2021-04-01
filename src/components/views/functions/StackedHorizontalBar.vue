@@ -103,8 +103,10 @@ export default {
           legend: {
             data: this.legend,
             textStyle: {
-              color: '#ffffff'
+              color: '#058ddb'
             },
+            itemHeight: this.fontSize(0.10),
+            itemGap: this.fontSize(0.10),
           },
           grid: {
             left: this.fontSize(0.25),

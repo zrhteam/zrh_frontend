@@ -28,18 +28,18 @@
               </h4>
             </el-col>
             <el-col :span="4" style="height: 1.25rem; position: relative; float:right">
-              <el-col :span="14" style="height: 100%; ">
+              <el-col :span="12" :offset="3" style="height: 100%; ">
                 <div style="height: 100%;">
                   <span style="font-size: 0.4rem; color: #18bff0; bottom:0.35rem; position: relative;">
                     {{ nowTime }}
                   </span>
                 </div>
               </el-col>
-              <el-col :span="10" style="height: 100%; color: #1072b5; font-size: 0.12rem;">
-                <el-row style="top: 35%; right: 0.6rem">
+              <el-col :span="9" style="height: 100%; color: #1072b5; font-size: 0.12rem;">
+                <el-row style="top: 35%; position: relative;">
                   <span>{{ nowWeek }}</span>
                 </el-row>
-                <el-row style="top: 35%; right: 0.6rem">
+                <el-row style="top: 35%; position: relative;">
                   <span>{{ nowDate }}</span>
                 </el-row>
               </el-col>

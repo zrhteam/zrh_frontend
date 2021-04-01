@@ -75,7 +75,7 @@ export default {
             bar_option['dataset']['source'] = arr
             bar_option["xAxis"]["axisLabel"]["rotate"] = 0
             bar_option["grid"]["y2"] = '30%'
-            bar_option["series"][0]["barCategoryGap"] = '50'
+            // bar_option["series"][0]["barCategoryGap"] = '50'
             myChart.setOption(bar_option);
           }
 
