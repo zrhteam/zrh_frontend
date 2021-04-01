@@ -116,33 +116,6 @@
         }"></Ratio>
           </el-col>
         </el-row>
-        <!--地图+高风险隐患数量排名-->
-        <!--        <HighProjectRisk></HighProjectRisk>-->
-        <!--      </el-col>-->
-        <!--        <el-col :span="10" id="head_part" style="height: 100%">-->
-        <el-col :span="10" style="height: 100%; padding-right: 2.5%">
-          <el-row style="height: 100%">
-            <el-col :span="24" style="height: 29%; margin: 2% 0 2% 2%">
-            </el-col>
-            <el-col :span="24" style="height: 29%;margin: 2%">
-              <TopRisk
-                  :context="{
-                  title:'重复出现隐患列表',
-                  label1:'隐患描述',
-                  label2:'出现频率',
-                  sign:'head_other',
-                  option:this.other_option}"
-                  :top_data="this.$store.state.get_headquarter.other_number_top"
-              ></TopRisk>
-              <!--各等级隐患数量变化-->
-            </el-col>
-            <el-col :span="24" style="height: 29%;margin: 2% 2% 2% 0%">
-              <!--              <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>-->
-              <!--各等级隐患数量变化-->
-            </el-col>
-            <!--                    </el-row>-->
-          </el-row>
-        </el-col>
       </el-row>
 
     </el-row>

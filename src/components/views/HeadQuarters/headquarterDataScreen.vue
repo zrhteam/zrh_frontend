@@ -36,6 +36,14 @@
         {{ getName }}
       </div>
       <el-col :span="8" style="height: 48%; margin-left:0.5%">
+        <TopRisk
+                  :context="{
+                  title:'重复出现隐患列表',
+                  label1:'隐患描述',
+                  label2:'出现频率',
+                  sign:'head_other'}"
+                  :top_data="this.$store.state.get_headquarter.other_number_top"
+              ></TopRisk>
 <!--        <Ratio-->
 <!--            :context="{-->
 <!--          title:'不同专业隐患数量',-->
