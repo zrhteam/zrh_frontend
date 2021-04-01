@@ -66,7 +66,7 @@ export const bar_option = {
         left: fontSize(0.25),
         top: fontSize(0.25),
         right: fontSize(0.55),
-        bottom: fontSize(0.25),
+        bottom: fontSize(0.35),
         containLabel: true
     },
     series: [
@@ -101,6 +101,7 @@ export const bar_option = {
                 }
             },
             barCategoryGap: fontSize(0.40),
+            barMaxWidth: fontSize(0.20)
         },
     ]
 };
@@ -123,7 +124,7 @@ export const bar_option2 = {
         left: fontSize(0.25),
         top: fontSize(0.25),
         right: fontSize(0.55),
-        bottom: fontSize(0.25),
+        bottom: fontSize(0.35),
         containLabel: true
     },
     // Declare several bar series, each will be mapped
@@ -138,7 +139,7 @@ export const bar_option2 = {
                     color: "#4992ff"
                 }
             },
-            barMaxWidth: fontSize(0.40)
+            barMaxWidth: fontSize(0.20)
         },
         {
             type: 'bar',
@@ -149,7 +150,7 @@ export const bar_option2 = {
                     color: '#58d9f9'
                 }
             },
-            barMaxWidth: fontSize(0.40)
+            barMaxWidth: fontSize(0.20)
         },
         {
             type: 'bar',
@@ -160,7 +161,7 @@ export const bar_option2 = {
                     color: '#05c091'
                 }
             },
-            barMaxWidth: fontSize(0.40)
+            barMaxWidth: fontSize(0.20)
         }
     ],
     xAxis: {
@@ -215,7 +216,7 @@ export const bar_option3 = {
         left: fontSize(0.25),
         top: fontSize(0.25),
         right: fontSize(0.55),
-        bottom: fontSize(0.50),
+        bottom: fontSize(0.60),
         containLabel: true
     },
     xAxis: {
@@ -290,7 +291,7 @@ export const bar_option3 = {
                     color: '#40abc4'
                 }
             },
-            // barMaxWidth: 20,
+            barMaxWidth: fontSize(0.2),
             // barCategoryGap: toString(fontSize(0.18)),
             barCategoryGap: fontSize(0.13),
         }
@@ -310,7 +311,9 @@ export const pie_option = {
         left: toString(fontSize(0.10)),
         textStyle: {
             color: '#058ddb',
-            fontSize: fontSize(0.1)
+            fontSize: fontSize(0.1),
+            itemHeight: fontSize(0.10),
+            itemGap: fontSize(0.10),
         },
         formatter: null
     },
@@ -318,7 +321,7 @@ export const pie_option = {
         {
             type: 'pie',
             radius: '60%',
-            center: ['60%', '60%'],
+            center: ['50%', '50%'],
             // minAngle: 5, //最小的扇区角度
             // startAngle: 45, //起始角度
             label: {
@@ -402,14 +405,17 @@ export const pie_option = {
         }
     ]
 };
-//折线图堆叠
+//折线图
 export const line_option = {
     tooltip: {
         trigger: 'axis'
     },
     legend: {
         textStyle: {
-            color: '#058ddb'
+            color: '#058ddb',
+            fontSize: fontSize(0.1),
+            itemHeight: fontSize(0.10),
+            itemGap: fontSize(0.10),
         },
         data: [],
         itemHeight: fontSize(0.10),
@@ -419,7 +425,7 @@ export const line_option = {
         left: fontSize(0.25),
         top: fontSize(0.45),
         right: fontSize(0.55),
-        bottom: fontSize(0.25),
+        bottom: fontSize(0.35),
         containLabel: true
     },
     toolbox: {

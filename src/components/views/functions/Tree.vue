@@ -251,6 +251,7 @@ export default {
   color: #1bcff2 !important;
   border-color: #1bcff2 !important;
   border: 2px solid;
+  font-size: 0.1rem !important;
 }
 
 el-input::-webkit-input-placeholder {
