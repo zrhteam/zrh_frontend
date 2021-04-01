@@ -24,7 +24,7 @@ import elementResizeDetectorMaker from 'element-resize-detector'
 import base from './base'//引用
 
 Vue.config.productionTip = false
-Vue.L = Vue.prototype.$L = L;
+// Vue.L = Vue.prototype.$L = L;
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$echartsGL = echartsGL;
 Vue.use(base);//将全局函数当做插件来进行注册
