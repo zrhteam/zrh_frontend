@@ -25,9 +25,11 @@
     </el-row>
     <img id="img1_bg" :src="imgSrc1" @click="enterDB" alt=""
          style="width: 17.1%; left: 12.7%; top: 41.4%; z-index: 99; position: absolute;"/>
-    <el-dropdown @command="handleCommand">
+    <img id="img2_bg" :src="imgSrc2" alt=""
+         style="width: 17.1%; left: 31.3%; top: 43.5%; z-index: 1; position: absolute;"/>
+    <el-dropdown @command="handleCommand" style="z-index: 2">
       <el-button style="background-image: url(../assets/data_vis.png);
-left:-360px; top:343px;
+left:-4.5rem; top:2.8rem;
 width: 330px;height: 353px;background-repeat:no-repeat ;
 background-size:330px 353px; border: 0;
 background-color: transparent;

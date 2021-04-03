@@ -425,14 +425,14 @@ export const line_option = {
         left: fontSize(0.25),
         top: fontSize(0.45),
         right: fontSize(0.55),
-        bottom: fontSize(0.35),
+        bottom: fontSize(0.25),
         containLabel: true
     },
-    toolbox: {
-        feature: {
-            saveAsImage: {}
-        }
-    },
+    // toolbox: {
+    //     feature: {
+    //         saveAsImage: {}
+    //     }
+    // },
     xAxis: {
         type: 'category',
         boundaryGap: false,

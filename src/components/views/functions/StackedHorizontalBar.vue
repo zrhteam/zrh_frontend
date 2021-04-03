@@ -50,125 +50,136 @@ export default {
   methods: {
     drawBarChart() {
       this.$nextTick(_ => {
-        let myChart;
-        myChart = this.$echarts.init(document.getElementById(this.context.id))
-        let arr = this.getData
-        let data = []
-        let r_data = []
-        //转置
-        let hang = this.s_data.length
-        if (hang > 0) {
-          let lie = this.s_data[0].length
-          for (let i = 0; i < lie; i++) {
-            let sub_r = []
-            for (let j = 0; j < hang; j++) {
-              sub_r.push(this.s_data[j][i])
-            }
-            r_data.push(sub_r)
-          }
-        }
-        for (let i in r_data) {
-          let obj = {
-            name: this.legend[i],
-            type: 'bar',
-            stack: 'total',
-            label: {
-              show: true,
-              fontWeight: 200,
-              fontSize: this.fontSize(0.08)
-            },
-            emphasis: {
-              focus: 'series'
-            },
-            data: r_data[i],
-            itemStyle: {},
-          }
-          data.push(obj)
-        }
-        if (data.length > 0) {
-          data[data.length - 1]["itemStyle"] = {
-            normal: {
-              //柱形图圆角，初始化效果
-              barBorderRadius: [0, 10, 10, 0],
-            }
-          }
-        }
-        let option = {
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // Use axis to trigger tooltip
-              type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
-            }
-          },
-          legend: {
-            data: this.legend,
-            textStyle: {
-            color: '#058ddb',
-            fontSize: this.fontSize(0.1),
-            itemHeight: this.fontSize(0.10),
-            itemGap: this.fontSize(0.10),
-        },
-            itemHeight: this.fontSize(0.10),
-            itemGap: this.fontSize(0.10),
-          },
-          grid: {
-            left: this.fontSize(0.25),
-            top: this.fontSize(0.45),
-            right: this.fontSize(0.55),
-            bottom: this.fontSize(0.25),
-            containLabel: true
-          },
-          xAxis: {
-            axisLine: {
-              lineStyle: {
-                color: '#058ddb'
+            let myChart;
+            myChart = this.$echarts.init(document.getElementById(this.context.id))
+            let arr = this.getData
+            let data = []
+            let r_data = []
+            //转置
+            let hang = this.s_data.length
+            if (hang > 0) {
+              let lie = this.s_data[0].length
+              for (let i = 0; i < lie; i++) {
+                let sub_r = []
+                for (let j = 0; j < hang; j++) {
+                  sub_r.push(this.s_data[j][i])
+                }
+                r_data.push(sub_r)
               }
-            },
-            type: 'value',
-            splitLine: {
-              show: false
             }
-          },
-          yAxis: {
-            axisLine: {
-              lineStyle: {
-                color: '#058ddb'
+            for (let i in r_data) {
+              let obj = {
+                name: this.legend[i],
+                type: 'bar',
+                stack: 'total',
+                label: {
+                  normal: {
+                    show: true,
+                    formatter: function (params) {
+                      if (params.value < Math.ceil(500)) {
+                        return '';
+                      } else {
+                        return params.value;
+                      }
+                    },
+                    fontWeight: 200,
+                    fontSize: this.fontSize(0.10),
+                    color: "#ffffff"
+                  },
+                },
+                emphasis: {
+                  focus: 'series'
+                },
+                data: r_data[i],
+                itemStyle: {},
               }
-            },
-            type: 'category',
-            data: this.yAxis,
-            splitLine: {
-              show: false
+              data.push(obj)
             }
-          },
-          series: data
-        };
+            // if (data.length > 0) {
+            //   data[data.length - 1]["itemStyle"] = {
+            //     normal: {
+            //       //柱形图圆角，初始化效果
+            //       barBorderRadius: [0, 10, 10, 0],
+            //     }
+            //   }
+            // }
+            let option = {
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // Use axis to trigger tooltip
+                  type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
+                }
+              },
+              legend: {
+                data: this.legend,
+                textStyle: {
+                  color: '#058ddb',
+                  fontSize: this.fontSize(0.1),
+                  itemHeight: this.fontSize(0.10),
+                  itemGap: this.fontSize(0.10),
+                },
+                itemHeight: this.fontSize(0.10),
+                itemGap: this.fontSize(0.10),
+              },
+              grid: {
+                left: this.fontSize(0.25),
+                top: this.fontSize(0.45),
+                right: this.fontSize(0.55),
+                bottom: this.fontSize(0.25),
+                containLabel: true
+              },
+              xAxis: {
+                axisLine: {
+                  lineStyle: {
+                    color: '#058ddb'
+                  }
+                },
+                type: 'value',
+                splitLine: {
+                  show: false
+                }
+              },
+              yAxis: {
+                axisLine: {
+                  lineStyle: {
+                    color: '#058ddb'
+                  }
+                },
+                type: 'category',
+                data: this.yAxis,
+                splitLine: {
+                  show: false
+                }
+              },
+              series: data
+            };
 
 
-        // if (arr.length != 0) {
-        myChart.setOption(option);
-        myChart.resize();
-        window.addEventListener('resize', function () {
-          myChart.resize();
-        })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById(this.context.id), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
+            // if (arr.length != 0) {
+            myChart.setOption(option);
             myChart.resize();
-          });
-        });
-        // } else if (this.context.id) {
-        //   this.$nextTick(() => {
-        //     const dom = document.getElementById(this.context.id)
-        //     dom.innerHTML = '暂无数据'
-        //     dom.style.color = '#ffffff'
-        //     dom.style.fontSize = '14px'
-        //     dom.removeAttribute("_echarts_instance_")
-        //   })
-        // }
-      })
+            window.addEventListener('resize', function () {
+              myChart.resize();
+            })
+            const _this = this;
+            const erd = elementResizeDetectorMaker();
+            erd.listenTo(document.getElementById(this.context.id), element => {
+              _this.$nextTick(() => {
+                //监听到事件后执行的业务逻辑
+                myChart.resize();
+              });
+            });
+            // } else if (this.context.id) {
+            //   this.$nextTick(() => {
+            //     const dom = document.getElementById(this.context.id)
+            //     dom.innerHTML = '暂无数据'
+            //     dom.style.color = '#ffffff'
+            //     dom.style.fontSize = '14px'
+            //     dom.removeAttribute("_echarts_instance_")
+            //   })
+            // }
+          }
+      )
     },
     fontSize(res) {
       let docEl = document.documentElement,

@@ -47,12 +47,12 @@
           </div>
         </el-col>
       </el-row>
-      <el-row id="head_large2" class="" style="height: 90%;">
+      <el-row id="head_large2" class="" style="height: 86%;">
         <el-col :span="2" class="" style="height: 100%;">
           <Tree
               :treeObj="treeObj"
               @handleNodeClick="handleTrNodeClick"
-              style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 5px;"
+              style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
           ></Tree>
           <!--          <el-card class="box-card " shadow="never"-->
           <!--                   style="background-color: transparent; height: 10%; margin: 0px 5px 5px 5px">-->
@@ -93,7 +93,7 @@
           </el-col>
           <!--          <HighProjectRisk></HighProjectRisk>-->
         </el-row>
-        <el-row class="el-row" :gutter="10" type="flex" style="height: 30%; margin-top: 0.2rem; padding-left: 0.3rem">
+        <el-row class="el-row" :gutter="10" type="flex" style="height: 35%; margin-top: 0.2rem; padding-left: 0.3rem">
           <el-col :span="6" style="height: 100%;">
             <Ratio
                 :context="{

@@ -3,7 +3,7 @@
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%;">
     <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
-      <span>各区域高风险数量</span>
+      <span class="level4">各区域高风险数量</span>
     </div>
     <div class="title-line" style=""></div>
     <!--      <div id="mydiv2">-->

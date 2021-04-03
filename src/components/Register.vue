@@ -242,66 +242,247 @@
 <!--}-->
 <!--</style>-->
 <template>
-  <div>
-    <span>{{nowWeek}}</span>
-    <span>{{nowDate}}</span>
-    <span>{{nowTime}}</span>
-  </div>
+<div>
+  <el-row :gutter="20"  class="el-row" >
+    <el-col :span="8"  class="el-col" >
+      <el-card class="el-card" >
+        <div slot="header" class="clearfix">
+          <span>item.appname</span>
+        </div>
+        <div >
+          <div class="text item">
+            <div class="item_tag" >
+              <span >用户标签：</span>
+            </div>
+            <div class="item_desr">
+              <span > item.tag</span>
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>搜索标签：</span>
+            </div>
+            <div class="item_desr">
+              item.seatag}}
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>短信签名：</span>
+            </div>
+            <div class="item_desr">
+              <span>
+                 item.wxname}}
+              </span>
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>客服QQ：</span>
+            </div>
+            <div class="item_desr">
+              item.qq}}
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>商务合作：</span>
+            </div>
+            <div class="item_desr">
+              item.buscoo}}
+            </div>
+          </div>
+        </div>
+      </el-card>
+    </el-col>
+    <el-col :span="8">
+      <el-card class="box-card" >
+        <div class="el-card__body mid">
+          <el-button  icon="el-icon-circle-plus" circle></el-button>
+          <el-button style="margin-left: 0;color: #505458" type="text">添加APP</el-button>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20"  class="el-row" type="flex" >
+    <el-col :span="8"  class="el-col" >
+      <el-card class="el-card" >
+        <div slot="header" class="clearfix">
+          <span>item.appname</span>
+        </div>
+        <div >
+          <div class="text item">
+            <div class="item_tag" >
+              <span >用户标签：</span>
+            </div>
+            <div class="item_desr">
+              <span > item.tag</span>
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>搜索标签：</span>
+            </div>
+            <div class="item_desr">
+              item.seatag}}
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>短信签名：</span>
+            </div>
+            <div class="item_desr">
+              <span>
+                 item.wxname}}
+              </span>
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>客服QQ：</span>
+            </div>
+            <div class="item_desr">
+              item.qq}}
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>商务合作：</span>
+            </div>
+            <div class="item_desr">
+              item.buscoo}}
+            </div>
+          </div>
+        </div>
+      </el-card>
+    </el-col>
+    <el-col :span="8">
+      <el-card class="box-card" style="min-height: 200px;" align="middle" onclick="">
+        <div class="el-card__body mid">
+          <el-button  icon="el-icon-circle-plus" circle></el-button>
+          <el-button style="margin-left: 0;color: #505458" type="text">添加APP</el-button>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20"  class="el-row" type="flex" >
+    <el-col :span="8"  class="el-col" >
+      <el-card class="el-card" >
+        <div slot="header" class="clearfix">
+          <span>item.appname</span>
+        </div>
+        <div >
+          <div class="text item">
+            <div class="item_tag" >
+              <span >用户标签：</span>
+            </div>
+            <div class="item_desr">
+              <span > item.tag</span>
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>搜索标签：</span>
+            </div>
+            <div class="item_desr">
+              item.seatag}}
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>短信签名：</span>
+            </div>
+            <div class="item_desr">
+              <span>
+                 item.wxname}}
+              </span>
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>客服QQ：</span>
+            </div>
+            <div class="item_desr">
+              item.qq}}
+            </div>
+          </div>
+          <div class="text item">
+            <div class="item_tag">
+              <span>商务合作：</span>
+            </div>
+            <div class="item_desr">
+              item.buscoo}}
+            </div>
+          </div>
+        </div>
+      </el-card>
+    </el-col>
+    <el-col :span="8">
+      <el-card class="box-card" style="min-height: 200px;" align="middle" onclick="">
+        <div class="el-card__body mid">
+          <el-button  icon="el-icon-circle-plus" circle></el-button>
+          <el-button style="margin-left: 0;color: #505458" type="text">添加APP</el-button>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
+</div>
 </template>
+<style type="text/css">
+  .all{
+    margin-top: -30px;
+    word-break: break-all;
+    height: 100%;
+  }
+  .mid{
+    margin-top: 25%;
+    height: 50%;
+  }
+  .mid_item{
+    justify-content: center;
+    align-items: center;
+  }
+  .item {
+    margin-bottom: 10px;
+  }
+  .item_tag{
+    float:left;
+    text-align:left;
+  }
+  .item_desr{
+    margin-left: 40%;
+    min-height: 30px;
+    text-align:left;
+  }
+  .text {
+    width: 100%;
+    font-size: 12px;
+    font-family: "Microsoft YaHei";
+    color: #909399;
+  }
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
 
-<script>
-export default {
-  data() {
-    return {
-      timer: null,
-      nowWeek: "",
-      nowDate: "",
-      nowTime: "",
-    };
-  },
-  mounted() {
-    var _this = this;
-    this.timer = setInterval(() => {
-      this.setNowTimes();
-    }, 1000);
-  },
-  methods: {
-    setNowTimes() {
-      let myDate = new Date();
-      // console.log(myDate)
-      let wk = myDate.getDay();
-      let yy = String(myDate.getFullYear());
-      let mm = myDate.getMonth() + 1;
-      let dd = String(
-        myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate()
-      );
-      let hou = String(
-        myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours()
-      );
-      let min = String(
-        myDate.getMinutes() < 10
-          ? "0" + myDate.getMinutes()
-          : myDate.getMinutes()
-      );
-      let sec = String(
-        myDate.getSeconds() < 10
-          ? "0" + myDate.getSeconds()
-          : myDate.getSeconds()
-      );
-      let weeks = [
-        "星期日",
-        "星期一",
-        "星期二",
-        "星期三",
-        "星期四",
-        "星期五",
-        "星期六",
-      ];
-      let week = weeks[wk];
-      this.nowDate = yy + "年" + mm + "月" + dd + "日"
-      this.nowTime = hou + ":" + min + ":" + sec;
-      this.nowWeek = week;
-    },
-  },
-};
-</script>
+  .el-card {
+    min-width: 100%;
+    margin-right: 20px;
+    /*transition: all .5s;*/
+  }
+  .el-card:hover{
+    margin-top: -5px;
+  }
+  .el-row {
+    margin-bottom: 20px;
+  }
+  .el-col {
+    border-radius: 4px;
+    align-items: stretch;
+    margin-bottom: 40px;
+  }
+</style>
