@@ -266,12 +266,12 @@ export const bar_option3 = {
     series: [
         {
             type: 'bar',
-            encode: {
-                // Map the "amount" column to X axis.
-                x: 'count',
-                // Map the "product" column to Y axis
-                y: 'name'
-            },
+            // encode: {
+            //     // Map the "amount" column to X axis.
+            //     x: 'count',
+            //     // Map the "product" column to Y axis
+            //     y: 'name'
+            // },
             itemStyle: {
                 normal: {
                     //柱形图圆角，初始化效果

@@ -88,7 +88,7 @@ export default {
         })
         const _this = this;
         const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById('check_risk_level'), element => {
+        erd.listenTo(document.getElementById(this.context.id), element => {
           _this.$nextTick(() => {
             myChart.resize();
           });

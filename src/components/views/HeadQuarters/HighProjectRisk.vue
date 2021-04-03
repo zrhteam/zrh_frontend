@@ -98,7 +98,7 @@ export default {
           })
           const _this = this;
           const erd = elementResizeDetectorMaker();
-          erd.listenTo(document.getElementById("risk_rank"), element => {
+          erd.listenTo(document.getElementById("number_histogram"), element => {
             _this.$nextTick(() => {
               //监听到事件后执行的业务逻辑
               myChart.resize();
