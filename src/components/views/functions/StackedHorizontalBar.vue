@@ -129,8 +129,16 @@ export default {
                 containLabel: true
               },
               xAxis: {
+                axisLabel: {
+                  interval: 0,
+                  textStyle: {
+                    color: '#058ddb',
+                    fontSize: this.fontSize(0.1)
+                  }
+                },
                 axisLine: {
                   lineStyle: {
+                    fontSize: this.fontSize(0.08),
                     color: '#058ddb'
                   }
                 },
@@ -140,9 +148,17 @@ export default {
                 }
               },
               yAxis: {
+                axisLabel: {
+                  interval: 0,
+                  textStyle: {
+                    color: '#058ddb',
+                    fontSize: this.fontSize(0.1)
+                  }
+                },
                 axisLine: {
                   lineStyle: {
-                    color: '#058ddb'
+                    color: '#058ddb',
+                    fontSize: this.fontSize(0.08)
                   }
                 },
                 type: 'category',

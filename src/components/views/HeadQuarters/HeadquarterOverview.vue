@@ -16,8 +16,9 @@
           <div class="title-box-card " shadow="never"
                style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
             <el-col :span="4" style="height: 100%; ">
-              <div style="height: 100%; display: none">
-              </div>
+              <el-col :span="6" :offset="14" style="height: 100%;">
+                <div style="font-size: 0.3rem; color: #1fedfc; top:0.46rem; position: relative">{{ getRiskSum }}</div>
+              </el-col>
             </el-col>
             <el-col :span="16" style="height: 100%;">
               <h4>
@@ -218,6 +219,18 @@ export default {
       this.setNowTimes();
     }, 1000);
   },
+  computed: {
+    getRiskSum() {
+      let data = this.$store.state.get_headquarter.risk_level_year
+      let risk_num = 0;
+      for(let i in data) {
+        for(let j in data[i]) {
+          risk_num += data[i][j]
+        }
+      }
+      return risk_num
+    }
+  },
   data() {
     return {
       // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
@@ -241,32 +254,6 @@ export default {
         label: 'label'
       },
       title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
-      risk_option: [{
-        value: '专业',
-        key: 'major'
-      }, {
-        value: '系统',
-        key: 'system'
-      }],
-      other_option: [{
-        value: '高风险',
-        key: 3
-      }, {
-        value: '中风险',
-        key: 2
-      }, {
-        value: '低风险',
-        key: 1
-      }, {
-        value: '风险',
-        key: 'all'
-      }, {
-        value: '致因阶段',
-        key: 'stage'
-      }, {
-        value: '分布区域',
-        key: 'area'
-      }],
       timer: null,
       nowWeek: "",
       nowDate: "",

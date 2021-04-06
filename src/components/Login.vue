@@ -26,7 +26,7 @@
             <span style="float: left; font-size: 24px; color: #05e2ec">登录</span>
           </div>
           <div class="right-infp-name">
-            <el-input prefix-icon="el-icon-minus" class="username" type="text" name="username" v-model="username"
+            <el-input prefix-icon="el-icon-my-user" class="username" type="text" name="username" v-model="username"
                       placeholder="请输入用户名" maxlength="12" required=""
                       value=""></el-input>
           </div>
@@ -475,5 +475,6 @@ el-input::-webkit-input-placeholder {
   background-color: #18bff0;
   border-color: #18bff0;
 }
+
 
 </style>

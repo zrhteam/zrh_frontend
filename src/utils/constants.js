@@ -220,7 +220,7 @@ export const bar_option3 = {
         containLabel: true
     },
     xAxis: {
-        name: 'amount',
+        type: 'value',
         axisLabel: {
             interval: 0,
             textStyle: {
