@@ -287,16 +287,17 @@ export default {
   },
   methods: {
     outRegionDataScreen() {
-      let large1 = document.getElementById('region_large1');
-      large1.style.display = 'block'
-      large1.style.width = "500px"
-      large1.style.width = "99%"
-      let large2 = document.getElementById('region_large2');
-      large2.style.display = 'block'
-      large2.style.width = "500px"
-      large2.style.width = "99%"
-      let prj_small = document.getElementById('region_small');
-      prj_small.style.display = 'none'
+      // let large1 = document.getElementById('region_large1');
+      // large1.style.display = 'block'
+      // large1.style.width = "500px"
+      // large1.style.width = "99%"
+      // let large2 = document.getElementById('region_large2');
+      // large2.style.display = 'block'
+      // large2.style.width = "500px"
+      // large2.style.width = "99%"
+      // let prj_small = document.getElementById('region_small');
+      // prj_small.style.display = 'none'
+      this.$emit('outRegionDataScreen')
     },
     handleClick(tab, event) {
       // console.log(tab, event)

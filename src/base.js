@@ -61,8 +61,8 @@ exports.install = function (Vue, options) {
         this.$store.commit('get_region/changeParams', {params: param})
         //区域名称也需要封装
         this.$store.commit('get_region/changeRegionName', {region_name: region_name})
-        //显示该区域整体安全指数以及各专业安全指数
-        this.$store.dispatch('get_region/getRegionInitIndex')
+        //显示该区域整体安全指数以及各专业安全指数，已删除
+        // this.$store.dispatch('get_region/getRegionInitIndex')
         //显示该区域各风险等级对应的隐患数量
         this.$store.dispatch('get_region/getInitRegionRiskLevel')
         //按照年份显示该区域各等级风险对应的隐患数量
@@ -91,8 +91,8 @@ exports.install = function (Vue, options) {
         this.$store.commit('get_region/changeParam4', {params: param4})
         //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
         this.$store.dispatch('get_region/getRegionOtherTop')
-        //显示按照安全指数排名后的 项目名称
-        this.$store.dispatch('get_region/getInitRegionSafetyIndex')
+        //显示按照安全指数排名后的 项目名称，已删除
+        // this.$store.dispatch('get_region/getInitRegionSafetyIndex')
         //显示按照隐累计高风险患数量排名后的项目名称 (原来的项目累计高风险数量排名)
         this.$store.dispatch('get_region/getInitRegionRiskRank')
         // //基于该区域每个项目的检查次数对项目排名
