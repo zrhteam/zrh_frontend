@@ -98,7 +98,7 @@
   <!--      </el-row>-->
   <!--    </el-main>-->
   <!--  </el-container>-->
-  <RegionOverview></RegionOverview>
+  <RegionOverview class="region-overview"></RegionOverview>
 </template>
 
 <script>
@@ -241,7 +241,16 @@ export default {
 </script>
 
 <style scoped>
-@import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");
+/*@import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");*/
+
+.region-overview {
+  background: url("../assets/head_overview_bg.png") no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  width: 100%;
+  height: 90%;
+  position: relative;
+}
 
 #title {
   text-align: left;

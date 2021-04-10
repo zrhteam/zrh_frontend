@@ -10,10 +10,10 @@
 </template>
 
 <script>
-    // import BaseScatterChart from "@/components/mychart/BaseScatterChart/BaseScatterChartIndex.vue";
-    import BaseScatterChart from "@/components/mychart/baseScatterChart/BaseScatterChartIndex.vue";
-    // import RefChart from "@/components/mychart/RefChart/RefChartIndex.vue";
-    import RefChart from "@/components/mychart/refChart/RefChartIndex.vue";
+    import BaseScatterChart from "@/components/mychart/BaseScatterChart/BaseScatterChartIndex.vue";
+    // import BaseScatterChart from "@/components/mychart/baseScatterChart/BaseScatterChartIndex.vue";
+    import RefChart from "@/components/mychart/RefChart/RefChartIndex.vue";
+    // import RefChart from "@/components/mychart/refChart/RefChartIndex.vue";
     import {mapGetters} from "vuex";
 
     export default {

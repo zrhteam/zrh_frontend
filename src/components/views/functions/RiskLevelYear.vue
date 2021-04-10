@@ -26,12 +26,13 @@
       </el-select>
     </div>
     <div class="title-line" style=""></div>
-    <div id='check_level_year' style="height: 80%; width: 100%;" v-if="context.id==='check_level_year'"></div>
-    <div id='prj_level_year' style="height: 80%; width: 100%;" v-if="context.id==='prj_level_year'"></div>
-    <div id='region_level_year' style="height: 80%; width: 100%;" v-if="context.id==='region_level_year'"></div>
-    <div id='head_level_year' style="height: 80%; width: 100%;" v-if="context.id==='head_level_year'"></div>
-    <!--    两个对象之间各风险等级隐患数量的对比-->
-    <div id='id_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='id_risk_level'"></div>
+    <div ref='echartContainer' style="height: 80%; width: 100%;"/>
+<!--    <div id='check_level_year' style="height: 80%; width: 100%;" v-if="context.id==='check_level_year'"></div>-->
+<!--    <div id='prj_level_year' style="height: 80%; width: 100%;" v-if="context.id==='prj_level_year'"></div>-->
+<!--    <div id='region_level_year' style="height: 80%; width: 100%;" v-if="context.id==='region_level_year'"></div>-->
+<!--    <div id='head_level_year' style="height: 80%; width: 100%;" v-if="context.id==='head_level_year'"></div>-->
+<!--    &lt;!&ndash;    两个对象之间各风险等级隐患数量的对比&ndash;&gt;-->
+<!--    <div id='id_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='id_risk_level'"></div>-->
   </el-card>
 </template>
 
@@ -50,73 +51,66 @@ export default {
       level_year: [],
       isShow: true,
       options: [],
-      value: []
+      value: [],
+      echartContainer: null,
+      myChart: null,
+      renderSign: false,
     }
   },
   methods: {
     drawBarChart() {
-      this.$nextTick(_ => {
-        let myChart = this.$echarts.init(document.getElementById(this.context.id))
-        let arr = this.level_year
-        if (this.context.id === 'id_risk_level') {
-          // bar_option2["series"] = [
-          //   {
-          //     type: 'bar',
-          //     itemStyle: {
-          //       normal: {
-          //         //柱形图圆角，初始化效果
-          //         barBorderRadius: [10, 10, 0, 0],
-          //         color: "#4992ff"
-          //       }
-          //     },
-          //     barMaxWidth: 40
-          //   },
-          //   {
-          //     type: 'bar',
-          //     itemStyle: {
-          //       normal: {
-          //         //柱形图圆角，初始化效果
-          //         barBorderRadius: [10, 10, 0, 0],
-          //         color: '#05c091'
-          //       }
-          //     },
-          //     barMaxWidth: 40
-          //   }
-          // ]
-        }
+      let arr = this.level_year
+      if (this.context.id === 'id_risk_level') {
+        // bar_option2["series"] = [
+        //   {
+        //     type: 'bar',
+        //     itemStyle: {
+        //       normal: {
+        //         //柱形图圆角，初始化效果
+        //         barBorderRadius: [10, 10, 0, 0],
+        //         color: "#4992ff"
+        //       }
+        //     },
+        //     barMaxWidth: 40
+        //   },
+        //   {
+        //     type: 'bar',
+        //     itemStyle: {
+        //       normal: {
+        //         //柱形图圆角，初始化效果
+        //         barBorderRadius: [10, 10, 0, 0],
+        //         color: '#05c091'
+        //       }
+        //     },
+        //     barMaxWidth: 40
+        //   }
+        // ]
+      }
 
-        // bar_option2['dataset']['source'] = arr
+      // bar_option2['dataset']['source'] = arr
 
 
 
-          line_option["xAxis"]["data"] = this.xdata
-          line_option["series"] = this.series
-          line_option["legend"]["data"] = this.legend
-          myChart.setOption(line_option);
-        // if (arr.length != 0) {
-        //   myChart.setOption(bar_option2);
-        //   myChart.resize();
-          window.addEventListener('resize', function () {
-            myChart.resize();
-          })
-          const _this = this;
-          const erd = elementResizeDetectorMaker();
-          erd.listenTo(document.getElementById(this.context.id), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-        // } else if (this.context.id) {
-        //   this.$nextTick(() => {
-        //     const dom = document.getElementById(this.context.id)
-        //     dom.innerHTML = '暂无数据'
-        //     dom.style.color = '#ffffff'
-        //     dom.style.fontSize = '14px'
-        //     dom.removeAttribute("_echarts_instance_")
-        //   })
-        // }
-      })
+        line_option["xAxis"]["data"] = this.xdata
+        line_option["series"] = this.series
+        line_option["legend"]["data"] = this.legend
+        this.myChart.setOption(line_option);
+      // if (arr.length != 0) {
+      //   myChart.setOption(bar_option2);
+      //   myChart.resize();
+      //   window.addEventListener('resize', function () {
+      //     this.myChart.resize();
+      //   })
+
+      // } else if (this.context.id) {
+      //   this.$nextTick(() => {
+      //     const dom = document.getElementById(this.context.id)
+      //     dom.innerHTML = '暂无数据'
+      //     dom.style.color = '#ffffff'
+      //     dom.style.fontSize = '14px'
+      //     dom.removeAttribute("_echarts_instance_")
+      //   })
+      // }
     },
     grantChart() {
       let params = new URLSearchParams();
@@ -131,6 +125,11 @@ export default {
     },
     dropGrantChart() {
       // this.isShow = !this.isShow
+    }
+  },
+  watch: {
+    renderSign () {
+      this.drawBarChart()
     }
   },
   computed: {
@@ -232,19 +231,20 @@ export default {
       } else if (this.context.flag === 'origin') {
         this.isShow = true
       }
+      this.renderSign = !this.renderSign
     },
   },
-  updated() {
-    this.drawBarChart()
-  },
+  // updated() {
+  //   this.drawBarChart()
+  // },
   mounted() {
-    this.drawBarChart();
+    this.echartContainer = this.$refs.echartContainer;
+    this.myChart = this.$echarts.init(this.echartContainer)
   },
   destroyed() {
-    let myChart = this.$echarts.init(document.getElementById(this.context.id))
-    window.addEventListener('resize', function () {
-      myChart.resize();
-    })
+    // window.addEventListener('resize', function () {
+    //   this.myChart.resize();
+    // })
   }
 }
 </script>
