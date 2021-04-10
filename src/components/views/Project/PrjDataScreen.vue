@@ -56,11 +56,11 @@
         <!--        <el-col :span="20" id="aa1" style="height: 100%;">-->
         <el-col :span="12" style="height: 100%;">
           <el-row style="height: 32%; margin-bottom: 1%">
-            <BarRank
-                :context="{
-              title:'不同子系统隐患数量',
-              id: 'id_project_system'
-          }"></BarRank>
+<!--            <BarRank-->
+<!--                :context="{-->
+<!--              title:'不同子系统隐患数量',-->
+<!--              id: 'id_project_system'-->
+<!--          }"></BarRank>-->
           </el-row>
           <el-row style="height: 32%; margin-bottom: 1%">
             <TopRisk
@@ -68,8 +68,7 @@
                           title:'重复出现隐患列表',
                           label1:'隐患描述',
                           label2:'出现频率',
-                          sign:'prj_other',
-                          option:this.other_option}"
+                          sign:'prj_other'}"
                 :top_data="this.$store.state.get_project.prj_other_top"
             ></TopRisk>
           </el-row>
@@ -103,17 +102,17 @@
             </el-col>
           </el-row>
           <el-row style="height: 32%; margin-bottom: 1%">
-            <StackedHorizontalBar
-                :context="{
-              title:'不同致因阶段隐患数量',
-              type:'reason',
-              id:'id_project_reason',
-            }"></StackedHorizontalBar>
+<!--            <StackedHorizontalBar-->
+<!--                :context="{-->
+<!--              title:'不同致因阶段隐患数量',-->
+<!--              type:'reason',-->
+<!--              id:'id_project_reason',-->
+<!--            }"></StackedHorizontalBar>-->
           </el-row>
           <el-row style="height: 32%; margin-bottom: 1%">
             <el-col :span="11" style="height: 100%;margin-left:1%">
               <!--            不同专业隐患数量-->
-              <CheckHistoryPerc></CheckHistoryPerc>
+<!--              <CheckHistoryPerc></CheckHistoryPerc>-->
             </el-col>
             <el-col :span="11" style="height: 100%;margin-left:6%">
               <UnsolvedImageList></UnsolvedImageList>
@@ -122,19 +121,19 @@
           <el-row style="height: 32%; margin-bottom: 1%">
             <el-col :span="11" style="height: 100%;margin-left:1%">
               <!--            不同专业隐患数量-->
-              <PerctangePerc
-                  :context="{
-                  title:'不同分布区域隐患数量',
-                  type:'region',
-                  id:'id_region',
-                 }"></PerctangePerc>
+<!--              <PerctangePerc-->
+<!--                  :context="{-->
+<!--                  title:'不同分布区域隐患数量',-->
+<!--                  type:'region',-->
+<!--                  id:'id_region',-->
+<!--                 }"></PerctangePerc>-->
             </el-col>
             <el-col :span="11" style="height: 100%;margin-left:6%">
-              <StackedHorizontalBar
-                  :context="{
-              title:'不同风险等级隐患数量',
-              id: 'id_project_risk'
-          }"></StackedHorizontalBar>
+<!--              <StackedHorizontalBar-->
+<!--                  :context="{-->
+<!--              title:'不同风险等级隐患数量',-->
+<!--              id: 'id_project_risk'-->
+<!--          }"></StackedHorizontalBar>-->
             </el-col>
           </el-row>
         </el-col>
@@ -407,38 +406,6 @@ export default {
       device_name: [],
       unit_name: [],
       rule_name: [],
-      risk_option: [{
-        value: '专业',
-        key: 'major'
-      }, {
-        value: '系统',
-        key: 'system'
-      }, {
-        value: '设备',
-        key: 'equipment'
-      }, {
-        value: '组件',
-        key: 'module'
-      }],
-      other_option: [{
-        value: '高风险',
-        key: 3
-      }, {
-        value: '中风险',
-        key: 2
-      }, {
-        value: '低风险',
-        key: 1
-      }, {
-        value: '风险',
-        key: 'all'
-      }, {
-        value: '致因阶段',
-        key: 'stage'
-      }, {
-        value: '分布区域',
-        key: 'area'
-      }],
       prj_sys_name: [],
       prj_device_name: [],
       prj_unit_name: [],

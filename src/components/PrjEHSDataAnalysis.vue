@@ -129,7 +129,7 @@
 
   <!--    </el-main>-->
   <!--  </el-container>-->
-  <PrjOverview></PrjOverview>
+  <PrjOverview class="prj_overview"></PrjOverview>
   <!--<PrjDataScreen></PrjDataScreen>-->
   <!--  -->
 
@@ -153,8 +153,7 @@ export default {
       elevator_index: ''
     }
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     goBack() {
       this.$router.push({path: '/'});
@@ -180,6 +179,18 @@ export default {
       history.pushState(null, null, document.URL);
       window.addEventListener('popstate', this.goBack, false);
     }
+    window.addEventListener("unload", () => {
+      this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
+    })
+
+    $(document).ready(function () {
+      var whei = $(window).width()
+      $("html").css({fontSize: whei / 24});
+      $(window).resize(function () {
+        var whei = $(window).width();
+        $("html").css({fontSize: whei / 24})
+      });
+    });
   },
   destroyed() {
     window.removeEventListener('popstate', this.goBack, false);
@@ -269,12 +280,32 @@ export default {
     window.addEventListener("beforeunload", () => {
       sessionStorage.setItem("prjMsg", JSON.stringify(this.$store.state))
     })
+    // alert(this.$store.state.get_login.grant_data.data.project_tag)
+    // this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
+
+    // $(document).ready(function () {
+    //   var whei = $(window).width()
+    //   $("html").css({fontSize: whei / 24});
+    //   $(window).resize(function () {
+    //     var whei = $(window).width();
+    //     $("html").css({fontSize: whei / 24})
+    //   });
+    // });
   }
 }
 </script>
 
 <style scoped>
 @import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");
+
+.prj_overview {
+  background: url("../assets/head_overview_bg.png") no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  width: 100%;
+  height: 90%;
+  position: relative;
+}
 
 #title {
   text-align: left;

@@ -125,6 +125,8 @@ exports.install = function (Vue, options) {
         let param = new URLSearchParams();
         param.append('project_name', project_name);
         this.$store.commit('get_project/changeParams', {params: param})
+
+
         //项目名称也需要封装
         this.$store.commit('get_project/changePrjName', {prj_name: project_name})
         //显示项目中各风险等级及其对应的隐患数量

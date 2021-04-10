@@ -1,13 +1,14 @@
 <template>
   <el-card class="box-card-t" shadow="never"
-           style="background-color: transparent; height: 100%; margin-top: 2%">
+           style="background-color: transparent; height: 100%;">
     <div style="display: none;">
       {{ getPrjHistoryPerception }}
     </div>
-    <div class="level4">
+    <div class="text item level4" style="padding-bottom: 5px">
       <span>不同专业隐患数量</span>
     </div>
-    <div id="pie2" style="height: 95%; width: 100%"></div>
+    <div class="title-line" style=""></div>
+    <div id="pie2" style="height: 80%; width: 100%"></div>
     <!--          历次检查累计隐患专业占比 饼图-->
   </el-card>
 </template>
@@ -18,11 +19,10 @@ import {pie_option} from "@/utils/constants";
 
 export default {
   name: "CheckHistoryPerc",
-  // data() {
-  //   return {
-  //     screenWidth: document.body.clientWidth,
-  //   }
-  // },
+  data() {
+    return {
+    }
+  },
   computed: {
     getPrjHistoryPerception() {
       let data = this.$store.state.get_project.prj_history_prec;
@@ -37,9 +37,7 @@ export default {
         obj.value = data[i]
         arr_major.push(obj)
       }
-      // console.log(arr_major)
-      pie_option['series'][0]['data'] = arr_major
-      return pie_option
+      return arr_major
     }
   },
   updated() {
@@ -58,10 +56,21 @@ export default {
   },
   methods: {
     drawPieChart() {
-      if (this.getPrjHistoryPerception["series"][0]["data"].length != 0) {
+      pie_option['series'][0]['data'] = this.getPrjHistoryPerception
+      let arr = this.getPrjHistoryPerception
+      pie_option["legend"]["formatter"] = function (params) {
+          var legendIndex = 0;
+          arr.forEach(function (v, i) {
+            if (v.name == params) {
+              legendIndex = i;
+            }
+          });
+          return params + " " + arr[legendIndex].value;
+        }
+      if (pie_option["series"][0]["data"].length != 0) {
         let myChart = this.$echarts.init(document.getElementById('pie2'))
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(this.getPrjHistoryPerception);
+        myChart.setOption(pie_option);
         myChart.resize();
         window.addEventListener('resize', function () {
           myChart.resize();
@@ -74,15 +83,15 @@ export default {
             myChart.resize();
           });
         });
-      }else if (document.getElementById("pie2")) {
-          this.$nextTick(() => {
-            const dom = document.getElementById(document.getElementById("pie2"))
-            dom.innerHTML = '暂无数据'
-            dom.style.color = '#ffffff'
-            dom.style.fontSize = '14px'
-            dom.removeAttribute("_echarts_instance_")
-          })
-        }
+      } else if (document.getElementById("pie2")) {
+        this.$nextTick(() => {
+          const dom = document.getElementById(document.getElementById("pie2"))
+          dom.innerHTML = '暂无数据'
+          dom.style.color = '#ffffff'
+          dom.style.fontSize = '14px'
+          dom.removeAttribute("_echarts_instance_")
+        })
+      }
     }
   }
 }

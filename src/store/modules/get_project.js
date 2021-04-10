@@ -167,101 +167,101 @@ const actions = {
     //     })
     // },
     //显示项目的整体危险指数以及各专业的危险指数
-    getInitProjectIndex(context) {
-        dataService.getInitProjectIndex(state.params, function (response) {
-            context.commit('changePrjIndex', response)
-        })
-    },
+    // getInitProjectIndex(context) {
+    //     dataService.getInitProjectIndex(state.params, function (response) {
+    //         context.commit('changePrjIndex', response)
+    //     })
+    // },
     //显示项目中各风险等级及其对应的隐患数量
     getInitProjectRiskLevel(context) {
-        dataService.getInitProjectRiskLevel(state.params, function (response) {
+        dataService.getInitProjectRiskLevel(context.state.params, function (response) {
             context.commit('changePrjRiskLevel', response)
         })
     },
     //显示项目中各风险等级及其对应的隐患数量,按年份
     getProjectRiskLevelYear(context) {
-        dataService.getProjectRiskLevelYear(state.params, function (response) {
+        dataService.getProjectRiskLevelYear(context.state.params, function (response) {
             context.commit('changePrjLevelYear', response)
         })
     },
     //基于项目级展示不同专业隐患占比情况
     getInitProjectHistoryPerception(context) {
-        dataService.getInitProjectHistoryPerception(state.params, function (response) {
+        dataService.getInitProjectHistoryPerception(context.state.params, function (response) {
             context.commit('changePrjHistoryPerception', response)
         })
     },
     //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
     getInitProjectImage(context) {
-        dataService.getInitProjectImage(state.param5, function (response) {
+        dataService.getInitProjectImage(context.state.param5, function (response) {
             // console.log(response)
             context.commit('changePrjImage', response)
         })
     },
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
     getInitProjectSystem(context) {
-        dataService.getInitProjectSystem(state.param2, function (response) {
+        dataService.getInitProjectSystem(context.state.param2, function (response) {
             context.commit('changePrjSystem', response)
         })
     },
     //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
     getInitProjectReason(context) {
-        dataService.getInitProjectReason(state.param2, function (response) {
+        dataService.getInitProjectReason(context.state.param2, function (response) {
             context.commit('changePrjReason', response)
         })
     },
     //基于项目级显示在不同专业情况下，隐患区域分布的情况
     getInitProjectRegionDistribution(context) {
-        dataService.getInitProjectRegionDistribution(state.param2, function (response) {
+        dataService.getInitProjectRegionDistribution(context.state.param2, function (response) {
             context.commit('changePrjRegion', response)
         })
     },
     //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
     getInitProjectRiskTop(context) {
-        dataService.getInitProjectRiskTop(state.param3, function (response) {
+        dataService.getInitProjectRiskTop(context.state.param3, function (response) {
             context.commit('changePrjRiskTop', response)
         })
     },
     //基于项目级显示在不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述
     getProjectOtherTop(context) {
-        dataService.getProjectOtherTop(state.param4, function (response) {
+        dataService.getProjectOtherTop(context.state.param4, function (response) {
             context.commit('changePrjOtherTop', response)
         })
     },
     //基于项目级隐患次数排名前10的系统名称
     getProjectSystemNumber(context) {
-        dataService.getProjectSystemNumber(state.params, function (response) {
+        dataService.getProjectSystemNumber(context.state.params, function (response) {
             context.commit('changePrjSystemNumber', response)
         })
     },
     //基于项目级隐患次数排名前10的设备名称
     getProjectDeviceNumber(context) {
-        dataService.getProjectDeviceNumber(state.params, function (response) {
+        dataService.getProjectDeviceNumber(context.state.params, function (response) {
             context.commit('changePrjDeviceNumber', response)
         })
     },
     //基于项目级隐患次数排名前10的组件名称
     getProjectUnitNumber(context) {
-        dataService.getProjectUnitNumber(state.params, function (response) {
+        dataService.getProjectUnitNumber(context.state.params, function (response) {
             context.commit('changePrjUnitNumber', response)
         })
     },
     // 基于项目级显示违反次数排名前10的法规、违反次数及其相关条款号和内容
     getProjectRules(context) {
-        dataService.getProjectRules(state.params, function (response) {
+        dataService.getProjectRules(context.state.params, function (response) {
             context.commit('changePrjRules', response)
         })
     },
 
     //按专业分不同风险等级隐患数量
-    getProjectRiskLevelRatio(context) {
-        dataService.getProjectRiskLevelRatio(state.params, function (response) {
+    getProjectRiskLevelRatio(context) {debugger
+        dataService.getProjectRiskLevelRatio(context.state.params, function (response) {
             context.commit('changeProjectRiskLevelRatio', response)
         })
     },
 
     //红线
     getProjectDangerProblem(context) {
-        dataService.getProjectDangerProblem(state.params, function (response) {
+        dataService.getProjectDangerProblem(context.state.params, function (response) {
             context.commit('changeProjectDangerProblem', response)
         })
     },
@@ -464,6 +464,7 @@ const mutations = {
     //按专业分不同风险等级隐患数量
     changeProjectRiskLevelRatio(state, data) {
         if (data.code === 10000) {
+            console.log("top5", data.data)
             state.prj_risk_level_ratio = data.data;
         } else {
             alert("出错了")

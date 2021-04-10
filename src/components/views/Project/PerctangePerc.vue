@@ -1,20 +1,21 @@
 <template>
   <el-card class="box-card-t " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 2% 0% 2% 1%;">
+           style="background-color: transparent; height: 100%;">
     <div style="display: none">
       {{ getData }}
     </div>
-    <div class="level4">
-      <span>{{ context.title }}</span>
-      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 25%;" @change="filterMajor">
-        <el-option
-            v-for="item in option"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-        </el-option>
-      </el-select>
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
+      <span class="level4">{{ context.title }}</span>
+<!--      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 25%;" @change="filterMajor">-->
+<!--        <el-option-->
+<!--            v-for="item in option"-->
+<!--            :key="item.value"-->
+<!--            :label="item.label"-->
+<!--            :value="item.value">-->
+<!--        </el-option>-->
+<!--      </el-select>-->
     </div>
+    <div class="title-line" style=""></div>
 <!--    项目-->
 <!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
 <!--    筛选专业条件下属于不同分布区域的隐患数量-->
@@ -118,37 +119,38 @@ export default {
       } else {
         param2.append('major', obj.label);
       }
-      if (this.context.id == 'id_check_reason') {
-        //该检查中在筛选专业条件下属于不同致因阶段的隐患数量
-        param2.append('check_code', this.$store.state.get_check.check_code);
-        this.$store.commit('get_check/changeParam2', {params: param2})
-        this.$store.dispatch('get_check/getCheckMajorStage')
-      } else if (this.context.id == 'id_check_region') {
+      // if (this.context.id == 'id_check_reason') {
+      //   //该检查中在筛选专业条件下属于不同致因阶段的隐患数量
+      //   param2.append('check_code', this.$store.state.get_check.check_code);
+      //   this.$store.commit('get_check/changeParam2', {params: param2})
+      //   this.$store.dispatch('get_check/getCheckMajorStage')
+      // } else
+        if (this.context.id == 'id_check_region') {
         //该检查中在筛选专业条件下属于不同分布区域的隐患数量
         param2.append('check_code', this.$store.state.get_check.check_code);
         this.$store.commit('get_check/changeParam2', {params: param2})
         this.$store.dispatch('get_check/getCheckMajorArea')
-      } else if (this.context.id == 'id_check_system') {
+      //} else if (this.context.id == 'id_check_system') {
         //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
-        param2.append('check_code', this.$store.state.get_check.check_code);
-        this.$store.commit('get_check/changeParam2', {params: param2})
-        this.$store.dispatch('get_check/getCheckMajorSystem')
-      } else if (this.context.id == 'id_reason') {
-        //该项目中在筛选专业条件下属于不同致因阶段的隐患数量
-        param2.append('project_name', this.$store.state.get_project.prj_name);
-        this.$store.commit('get_project/changeParam2', {params: param2})
-        this.$store.dispatch('get_project/getInitProjectReason')
+      //   param2.append('check_code', this.$store.state.get_check.check_code);
+      //   this.$store.commit('get_check/changeParam2', {params: param2})
+      //   this.$store.dispatch('get_check/getCheckMajorSystem')
+      // } else if (this.context.id == 'id_reason') {
+      //   //该项目中在筛选专业条件下属于不同致因阶段的隐患数量
+      //   param2.append('project_name', this.$store.state.get_project.prj_name);
+      //   this.$store.commit('get_project/changeParam2', {params: param2})
+      //   this.$store.dispatch('get_project/getInitProjectReason')
       } else if (this.context.id == 'id_region') {
         //该项目中在筛选专业条件下属于不同分布区域的隐患数量
         param2.append('project_name', this.$store.state.get_project.prj_name);
         this.$store.commit('get_project/changeParam2', {params: param2})
         this.$store.dispatch('get_project/getInitProjectRegionDistribution')
-      } else if (this.context.id == 'id_system') {
-        //该项目中在筛选专业条件下属于不同隐患子系统的隐患数量
-        param2.append('project_name', this.$store.state.get_project.prj_name);
-        this.$store.commit('get_project/changeParam2', {params: param2})
-        this.$store.dispatch('get_project/getInitProjectSystem')
-      }
+      }// else if (this.context.id == 'id_system') {
+      //   //该项目中在筛选专业条件下属于不同隐患子系统的隐患数量
+      //   param2.append('project_name', this.$store.state.get_project.prj_name);
+      //   this.$store.commit('get_project/changeParam2', {params: param2})
+      //   this.$store.dispatch('get_project/getInitProjectSystem')
+      // }
     }
   },
   computed: {

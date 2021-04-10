@@ -1,6 +1,7 @@
 <template>
   <el-card class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%;">
+    <div style="display: none"> {{ getData }}</div>
     <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
     </div>
@@ -92,6 +93,7 @@ export default {
                 },
                 data: r_data[i],
                 itemStyle: {},
+                barCategoryGap: this.fontSize(0.8 / hang),
               }
               data.push(obj)
             }
