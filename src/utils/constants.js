@@ -12,15 +12,25 @@ function fontSize(res) {
 //此处存放所有全局变量
 //针对 bar chart 的 option
 export const bar_option = {
-    tooltip: {},
-    dataset: {
-        dimensions: ['name', 'count'],
-        source: []
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow',
+        }
     },
+    dataset: [{
+        dimensions: ['name', 'count'],
+        source: [],
+    },{
+        transform: {
+            type: 'sort',
+            config: { dimension: 'count', order: 'desc' }
+        },
+    }],
     xAxis: {
         type: 'category',
         axisLabel: {
-            interval: 0,
+            // interval: 0,
             rotate: 45,
             textStyle: {
                 fontSize: fontSize(0.1)

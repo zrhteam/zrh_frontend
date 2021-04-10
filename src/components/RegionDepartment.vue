@@ -156,6 +156,14 @@ export default {
       history.pushState(null, null, document.URL);
       window.addEventListener('popstate', this.goBack, false);
     }
+     $(document).ready(function () {
+      var whei = $(window).width()
+      $("html").css({fontSize: whei / 24});
+      $(window).resize(function () {
+        var whei = $(window).width();
+        $("html").css({fontSize: whei / 24})
+      });
+    });
   },
   destroyed() {
     window.removeEventListener('popstate', this.goBack, false);

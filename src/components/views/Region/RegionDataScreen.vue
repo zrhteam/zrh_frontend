@@ -53,31 +53,26 @@
           ></BarRank>
         </el-row>
         <el-row style="height: 30%; margin:2% 0% 0 0">
-<!--          <Ratio-->
+<!--          <BarRank-->
 <!--              :context="{-->
 <!--              title:'不同子系统隐患数量',-->
 <!--              id: 'id_region_system'-->
-<!--          }"></Ratio>-->
-          <BarRank
-              :context="{
-              title:'不同子系统隐患数量',
-              id: 'id_region_system'
-          }"></BarRank>
+<!--          }"></BarRank>-->
         </el-row>
         <el-row style="height: 30%;margin:3.2% 0% 0 0">
           <el-col :span="11" style="height: 100%;margin-left:1%">
-            <StackedHorizontalBar
-                :context="{
-                title:'不同致因阶段隐患数量',
-                id: 'id_region_reason'}"
-            ></StackedHorizontalBar>
+<!--            <StackedHorizontalBar-->
+<!--                :context="{-->
+<!--                title:'不同致因阶段隐患数量',-->
+<!--                id: 'id_region_reason'}"-->
+<!--            ></StackedHorizontalBar>-->
           </el-col>
           <el-col :span="11" style="height: 100%;margin-left:6%">
-            <Ratio
-                :context="{
-                title:'不同分布区域隐患数量',
-                id: 'id_region_region'
-            }"></Ratio>
+<!--            <Ratio-->
+<!--                :context="{-->
+<!--                title:'不同分布区域隐患数量',-->
+<!--                id: 'id_region_region'-->
+<!--            }"></Ratio>-->
           </el-col>
         </el-row>
       </el-col>
@@ -87,18 +82,18 @@
         </el-row>
         <el-row style="height: 30%;margin:2% 0% 0 0">
           <el-col :span="11" style="height: 100%;margin-left:1%">
-            <Ratio
-              :context="{
-              title:'不同专业隐患数量',
-              id: 'id_region_major'
-          }"></Ratio>
+<!--            <Ratio-->
+<!--              :context="{-->
+<!--              title:'不同专业隐患数量',-->
+<!--              id: 'id_region_major'-->
+<!--          }"></Ratio>-->
           </el-col>
           <el-col :span="11" style="height: 100%;margin-left:6%">
-            <StackedHorizontalBar
-              :context="{
-              title:'不同风险等级隐患数量',
-              id: 'id_region_risk'
-          }"></StackedHorizontalBar>
+<!--            <StackedHorizontalBar-->
+<!--              :context="{-->
+<!--              title:'不同风险等级隐患数量',-->
+<!--              id: 'id_region_risk'-->
+<!--          }"></StackedHorizontalBar>-->
           </el-col>
         </el-row>
         <el-row style="height: 30%;margin:2% 0% 0 0">

@@ -75,10 +75,12 @@ export default {
         let arr = this.getData
         if (arr.length != 0) {
           arr.sort(this.sortNumber('count', true))
-          if (this.context.id == 'id_head_rank1' || this.context.id == 'id_project_system') {
-            if(this.context.id == 'id_project_system') {
+          if (this.context.id == 'id_head_rank1' || this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
+            if(this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1'|| this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
               bar_option3["grid"]["bottom"] = this.fontSize(0.30)
               bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8/arr.length)
+            // }else if(this.context.id == 'id_region_rank2') {
+            //   bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8/arr.length)
             }
             bar_option3["dataset"]["source"] = arr
             myChart.setOption(bar_option3);
