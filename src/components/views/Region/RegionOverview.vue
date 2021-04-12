@@ -139,12 +139,12 @@
           </el-row>
         </el-col>
 
-        <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>
+<!--        <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>-->
       </el-row>
 
       <!--    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>-->
     </el-row>
-    <!--    <PrjOverview id="prj_part" style=""></PrjOverview>-->
+        <PrjOverview id="prj_part" style=""></PrjOverview>
   </el-row>
   <!--    </div>-->
 </template>
