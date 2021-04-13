@@ -20,12 +20,12 @@ export const bar_option = {
     },
     dataset: [{
         dimensions: ['name', 'count'],
-        source: [],
-    },{
+        source: []
+    }, {
         transform: {
             type: 'sort',
             config: { dimension: 'count', order: 'desc' }
-        },
+        }
     }],
     xAxis: {
         type: 'category',
@@ -338,22 +338,12 @@ export const pie_option = {
                 normal: {
                     show: false,
                     color: '#fff',
-                    // formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
-                    formatter(v) {
-                        let text = v.name + ':' + v.value
-                        return text = `${text.slice(0, v.name.length + 1)}\n${text.slice(v.name.length + 1)}`
-                        // if (text.length < 8) {
-                        //     return text;
-                        // } else if (text.length > 8 && text.length <= 16) {
-                        //     return text = `${text.slice(0, 8)}\n${text.slice(8)}`
-                        // } else if (text.length > 16 && text.length <= 24) {
-                        //     return text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(24)}`
-                        // } else if (text.length > 18 && text.length <= 24) {
-                        //     return text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(16, 24)}\n${text.slice(24)}`
-                        // } else if (text.length > 24) {
-                        //     return text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(16, 24)}\n${text.slice(24, 32)}\n${text.slice(32)}`
-                        // }
-                    },
+                    formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
+                    // formatter(v) {
+                    //     let text = v.name + ':' + v.value
+                    //     console.log("qqq", `${text.slice(0, v.name.length + 1)}\n${text.slice(v.name.length + 1, text.length + 1)}`)
+                    //     return text = `${text.slice(0, v.name.length + 1)}\n${text.slice(v.name.length + 1, text.length + 1)}`
+                    // },
                 }
             },
             labelLine: {

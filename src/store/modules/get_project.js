@@ -253,7 +253,7 @@ const actions = {
     },
 
     //按专业分不同风险等级隐患数量
-    getProjectRiskLevelRatio(context) {debugger
+    getProjectRiskLevelRatio(context) {
         dataService.getProjectRiskLevelRatio(context.state.params, function (response) {
             context.commit('changeProjectRiskLevelRatio', response)
         })

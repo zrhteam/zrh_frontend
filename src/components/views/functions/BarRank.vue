@@ -73,19 +73,31 @@ export default {
         let myChart;
         myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
+        var compare = function (obj1, obj2) {
+          var val1 = obj1.count;
+          var val2 = obj2.count;
+          if (val1 < val2) {
+            return -1;
+          } else if (val1 > val2) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
         if (arr.length != 0) {
           arr.sort(this.sortNumber('count', true))
+          // arr.sort(compare)
           if (this.context.id == 'id_head_rank1' || this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
-            if(this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1'|| this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
+            if (this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
               bar_option3["grid"]["bottom"] = this.fontSize(0.30)
-              bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8/arr.length)
-            // }else if(this.context.id == 'id_region_rank2') {
-            //   bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8/arr.length)
+              bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8 / arr.length)
+              // }else if(this.context.id == 'id_region_rank2') {
+              //   bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8/arr.length)
             }
             bar_option3["dataset"]["source"] = arr
             myChart.setOption(bar_option3);
           } else {
-            bar_option['dataset']['source'] = arr
+            bar_option["dataset"][0]["source"] = arr
             bar_option["xAxis"]["axisLabel"]["rotate"] = 0
             bar_option["grid"]["y2"] = '30%'
             // bar_option["series"][0]["barCategoryGap"] = '50'

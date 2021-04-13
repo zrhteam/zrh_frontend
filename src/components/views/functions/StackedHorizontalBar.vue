@@ -100,10 +100,6 @@ export default {
                 },
                 barCategoryGap: this.fontSize(0.8 / hang),
               }
-              console.log("qqq", document.getElementsByClassName("risk"))
-              document.getElementByClass = function () {
-
-              }
               if(this.legend[i] == "高风险" || this.legend[i] == "中风险" || this.legend[i] == "低风险") {
                 obj["itemStyle"]["normal"]["color"] = color[i]
               }

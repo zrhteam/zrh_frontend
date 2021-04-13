@@ -56,6 +56,7 @@ export default {
         let myChart;
         myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
+        let _this = this
         pie_option["series"][0]["data"] = arr
         pie_option["legend"]["formatter"] = function (params) {
           var legendIndex = 0;
@@ -68,6 +69,27 @@ export default {
         }
         if (arr.length != 0) {
           myChart.setOption(pie_option);
+
+          myChart.on("click", pieConsole);
+
+          function pieConsole(param) {
+            console.log(param.value);
+            console.log(param.name);
+            let param2 = new URLSearchParams();
+            let _this1 = _this
+            if (_this.context.id == 'id_region_major'){
+              param2.append('major', param.name);
+              param2.append('region_name', _this1.$store.state.get_region.region_name);
+              //该检查中在不同专业下属于不同隐患子系统的隐患数量
+              _this1.$store.commit('get_region/changeParam2', {params: param2})
+              //显示该区域不同专业下各系统隐患占比情况
+              _this1.$store.dispatch('get_region/getRegionSystemRatio')
+              //根据隐患数量显示不同分布区域的占比情况
+              // _this1.$store.dispatch('get_region/getRegionAreaRatio')
+            }else if(_this.context.id == 'id_head_major') {
+
+            }
+          }
           myChart.resize();
           window.addEventListener('resize', function () {
             myChart.resize();
