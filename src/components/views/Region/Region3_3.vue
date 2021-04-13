@@ -61,7 +61,6 @@ export default {
         arr.push(obj)
       }//for
       arr.sort(this.sortNumber('count', true))
-      console.log(arr)
       bar_option["dataset"]["source"] = arr
       bar_option["series"]["barMaxWidth"] = 20
       bar_option["xAxis"]["axisLabel"]["rotate"] = 20

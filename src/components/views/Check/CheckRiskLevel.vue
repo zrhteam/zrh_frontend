@@ -42,7 +42,6 @@ export default {
         data = this.$store.state.get_project.prj_risk_data;
       } else if (this.context.id === 'head_risk_level') {
         data = this.$store.state.get_headquarter.risk_level_data;
-        console.log("aaa", data)
       }
       if ('risk_level' in data) {
         data = data['risk_level']

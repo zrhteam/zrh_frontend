@@ -27,17 +27,17 @@
     </div>
     <div class="title-line" style=""></div>
     <div ref='echartContainer' style="height: 80%; width: 100%;"/>
-<!--    <div id='check_level_year' style="height: 80%; width: 100%;" v-if="context.id==='check_level_year'"></div>-->
-<!--    <div id='prj_level_year' style="height: 80%; width: 100%;" v-if="context.id==='prj_level_year'"></div>-->
-<!--    <div id='region_level_year' style="height: 80%; width: 100%;" v-if="context.id==='region_level_year'"></div>-->
-<!--    <div id='head_level_year' style="height: 80%; width: 100%;" v-if="context.id==='head_level_year'"></div>-->
-<!--    &lt;!&ndash;    两个对象之间各风险等级隐患数量的对比&ndash;&gt;-->
-<!--    <div id='id_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='id_risk_level'"></div>-->
+    <!--    <div id='check_level_year' style="height: 80%; width: 100%;" v-if="context.id==='check_level_year'"></div>-->
+    <!--    <div id='prj_level_year' style="height: 80%; width: 100%;" v-if="context.id==='prj_level_year'"></div>-->
+    <!--    <div id='region_level_year' style="height: 80%; width: 100%;" v-if="context.id==='region_level_year'"></div>-->
+    <!--    <div id='head_level_year' style="height: 80%; width: 100%;" v-if="context.id==='head_level_year'"></div>-->
+    <!--    &lt;!&ndash;    两个对象之间各风险等级隐患数量的对比&ndash;&gt;-->
+    <!--    <div id='id_risk_level' style="height: 80%; width: 100%;" v-if="context.id==='id_risk_level'"></div>-->
   </el-card>
 </template>
 
 <script>
-import {line_option, bar_option2} from "@/utils/constants";
+import {line_option, bar_option2, bar_option} from "@/utils/constants";
 import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
@@ -55,6 +55,7 @@ export default {
       echartContainer: null,
       myChart: null,
       renderSign: false,
+      bar_data: []
     }
   },
   methods: {
@@ -90,11 +91,12 @@ export default {
       // bar_option2['dataset']['source'] = arr
 
 
-
-        line_option["xAxis"]["data"] = this.xdata
-        line_option["series"] = this.series
-        line_option["legend"]["data"] = this.legend
-        this.myChart.setOption(line_option);
+      // line_option["xAxis"]["data"] = this.xdata
+      // line_option["series"] = this.series
+      // line_option["legend"]["data"] = this.legend
+      // this.myChart.setOption(line_option);
+      bar_option["dataset"][0]["source"] = this.bar_data
+      this.myChart.setOption(bar_option);
       // if (arr.length != 0) {
       //   myChart.setOption(bar_option2);
       //   myChart.resize();
@@ -128,7 +130,7 @@ export default {
     }
   },
   watch: {
-    renderSign () {
+    renderSign() {
       this.drawBarChart()
     }
   },
@@ -164,51 +166,104 @@ export default {
         } else if (this.context.id == 'head_level_year') {
           data = this.$store.state.get_headquarter.risk_level_year
         }
-        let risk_level = ['风险总量', '低风险', '中风险', '高风险']
-        let xdata = []
-        let high_risk = []
-        let mid_risk = []
-        let low_risk = []
-        let sum_risk = []
+        let myDate = new Date();
+        let yy = String(myDate.getFullYear());
+        this.bar_data = []
         for (let i in data) {
-          xdata.push(i)
-          let temp = 0
-          for (let j in data[i]) {
-            if (j == '1') {
-              low_risk.push(data[i][j])
-              temp += data[i][j]
-            } else if (j == '2') {
-              mid_risk.push(data[i][j])
-              temp += data[i][j]
-            } else if (j == '3') {
-              high_risk.push(data[i][j])
-              temp += data[i][j]
+          if (i == yy) {
+            let obj = {
+              name: '风险总量',
+              count: 0
             }
+            for (let j in data[i]) {
+              let sub_obj = {
+                name: '',
+                count: 0
+              }
+              if (j == '1') {
+                sub_obj.name = '低风险'
+                sub_obj.count = data[i][j]
+                obj.count += data[i][j]
+              } else if (j == '2') {
+                sub_obj.name = '中风险'
+                sub_obj.count = data[i][j]
+                obj.count += data[i][j]
+              } else if (j == '3') {
+                sub_obj.name = '高风险'
+                sub_obj.count = data[i][j]
+                obj.count += data[i][j]
+              }
+              this.bar_data.push(sub_obj)
+            }
+            this.bar_data.push(obj)
+          }else {
+            let obj2 = {
+              name: '低风险',
+              count: 0
+            }
+            this.bar_data.push(obj2)
+            let obj3 = {
+              name: '中风险',
+              count: 0
+            }
+            this.bar_data.push(obj3)
+            let obj4 = {
+              name: '高风险',
+              count: 0
+            }
+            this.bar_data.push(obj4)
+            let obj1 = {
+              name: '风险总量',
+              count: 0
+            }
+            this.bar_data.push(obj1)
           }
-          sum_risk.push(temp)
         }
-        let series = [];
-        for (let i = 0; i < risk_level.length; i++) {
-          let obj = {
-            name: risk_level[i],
-            type: 'line',
-            stack: '总量',
-            data: []
-          }
-          if (i == 1) {
-            obj.data = low_risk
-          } else if (i == 2) {
-            obj.data = mid_risk
-          } else if (i == 3) {
-            obj.data = high_risk
-          } else if (i == 0) {
-            obj.data = sum_risk
-          }
-          series.push(obj)
-        }
-        this.xdata = xdata
-        this.series = series
-        this.legend = risk_level
+        // let risk_level = ['风险总量', '低风险', '中风险', '高风险']
+        // let xdata = []
+        // let high_risk = []
+        // let mid_risk = []
+        // let low_risk = []
+        // let sum_risk = []
+        // for (let i in data) {
+        //   xdata.push(i)
+        //   let temp = 0
+        //   for (let j in data[i]) {
+        //     if (j == '1') {
+        //       low_risk.push(data[i][j])
+        //       temp += data[i][j]
+        //     } else if (j == '2') {
+        //       mid_risk.push(data[i][j])
+        //       temp += data[i][j]
+        //     } else if (j == '3') {
+        //       high_risk.push(data[i][j])
+        //       temp += data[i][j]
+        //     }
+        //   }
+        //   sum_risk.push(temp)
+        // }
+        // let series = [];
+        // for (let i = 0; i < risk_level.length; i++) {
+        //   let obj = {
+        //     name: risk_level[i],
+        //     type: 'line',
+        //     stack: '总量',
+        //     data: []
+        //   }
+        //   if (i == 1) {
+        //     obj.data = low_risk
+        //   } else if (i == 2) {
+        //     obj.data = mid_risk
+        //   } else if (i == 3) {
+        //     obj.data = high_risk
+        //   } else if (i == 0) {
+        //     obj.data = sum_risk
+        //   }
+        //   series.push(obj)
+        // }
+        // this.xdata = xdata
+        // this.series = series
+        // this.legend = risk_level
       }
       if (this.context.flag === 'grant') {
         this.isShow = false
