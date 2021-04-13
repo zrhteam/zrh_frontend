@@ -137,95 +137,95 @@ const actions = {
 
     //在当前检查中，不同风险等级的隐患数量
     getCheckRiskLevel(context) {
-        dataService.getCheckRiskLevel(state.params, function (response) {
+        dataService.getCheckRiskLevel(context.state.params, function (response) {
             context.commit('changeCheckRiskLevel', response)
         })
     },
     //在当前检查中，不同风险等级的隐患数量 按年份
     getCheckLevelYear(context) {
-        dataService.getCheckLevelYear(state.params, function (response) {
+        dataService.getCheckLevelYear(context.state.params, function (response) {
             context.commit('changeCheckLevelYear', response)
         })
     },
     //在当前检查中，不同专业隐患占比情况
     getCheckRiskRatio(context) {
-        dataService.getCheckRiskRatio(state.params, function (response) {
+        dataService.getCheckRiskRatio(context.state.params, function (response) {
             context.commit('changeCheckRiskRatio', response)
         })
     },
     //在当前检查中，得到当前未整改高风险隐患图片
     getCheckHighImage(context) {
-        dataService.getCheckHighImage(state.params, function (response) {
+        dataService.getCheckHighImage(context.state.params, function (response) {
             // console.log(response)
             context.commit('changeCheckHighImage', response)
         })
     },
     //展示在当前检查中，不同隐患子系统下的隐患数量
     getCheckMajorSystem(context) {
-        dataService.getCheckMajorSystem(state.param2, function (response) {
+        dataService.getCheckMajorSystem(context.state.param2, function (response) {
             // console.log(response)
             context.commit('changeCheckMajorSystem', response)
         })
     },
     //在当前检查中，在不同专业情况下，隐患区域分布的情况
     getCheckMajorArea(context) {
-        dataService.getCheckMajorArea(state.param2, function (response) {
+        dataService.getCheckMajorArea(context.state.param2, function (response) {
             context.commit('changeCheckMajorArea', response)
         })
     },
     //在当前检查中，在不同专业时，不同致因阶段的隐患数量
     getCheckMajorStage(context) {
-        dataService.getCheckMajorStage(state.param2, function (response) {
+        dataService.getCheckMajorStage(context.state.param2, function (response) {
             context.commit('changeCheckMajorStage', response)
         })
     },
     //得到检查中不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述及其出现次数
     getCheckRiskTop(context) {
-        dataService.getCheckRiskTop(state.param3, function (response) {
+        dataService.getCheckRiskTop(context.state.param3, function (response) {
             context.commit('changeCheckRiskTop', response)
         })
     },
     //得到检查中不同筛选条件（风险等级/致因阶段/分布区域）下，出现次数排名前top的隐患描述及其出现次数
     getCheckOtherTop(context) {
-        dataService.getCheckOtherTop(state.param4, function (response) {
+        dataService.getCheckOtherTop(context.state.param4, function (response) {
             context.commit('changeCheckOtherTop', response)
         })
     },
     //在当前检查中，显示违反次数排名前10的法规、违反次数及其相关条款号和内容
     getCheckRule(context) {
-        dataService.getCheckRule(state.params, function (response) {
+        dataService.getCheckRule(context.state.params, function (response) {
             context.commit('changeCheckRule', response)
         })
     },
     //在当前检查中，显示隐患次数排名前10的系统名称
     getCheckSystem(context) {
-        dataService.getCheckSystem(state.params, function (response) {
+        dataService.getCheckSystem(context.state.params, function (response) {
             context.commit('changeCheckSystem', response)
         })
     },
     //在当前检查中，显示隐患次数排名前10的设备名称
     getCheckDevice(context) {
-        dataService.getCheckDevice(state.params, function (response) {
+        dataService.getCheckDevice(context.state.params, function (response) {
             context.commit('changeCheckDevice', response)
         })
     },
     //在当前检查中，显示隐患次数排名前10的组件名称
     getCheckUnit(context) {
-        dataService.getCheckUnit(state.params, function (response) {
+        dataService.getCheckUnit(context.state.params, function (response) {
             context.commit('changeCheckUnit', response)
         })
     },
 
     //按专业分不同风险等级隐患数量
     getCheckRiskLevelRatio(context) {
-        dataService.getCheckRiskLevelRatio(state.params, function (response) {
+        dataService.getCheckRiskLevelRatio(context.state.params, function (response) {
             context.commit('changeCheckRiskLevelRatio', response)
         })
     },
 
     //红线
     getCheckDangerProblem(context) {
-        dataService.getCheckDangerProblem(state.params, function (response) {
+        dataService.getCheckDangerProblem(context.state.params, function (response) {
             context.commit('changeCheckDangerProblem', response)
         })
     },

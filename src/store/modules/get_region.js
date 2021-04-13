@@ -146,87 +146,87 @@ const getters = {
 const actions = {
     //显示该区域整体安全指数以及各专业安全指数
     getRegionInitIndex(context) {
-        dataService.getRegionInitIndex(state.params, function (response) {
+        dataService.getRegionInitIndex(context.state.params, function (response) {
             context.commit('changeRegionIndex', response)
         })
     },
     //显示该区域各风险等级对应的隐患数量
     getInitRegionRiskLevel(context) {
-        dataService.getInitRegionRiskLevel(state.params, function (response) {
+        dataService.getInitRegionRiskLevel(context.state.params, function (response) {
             context.commit('changeRiskLevelData', response)
         })
     },
     //按照年份显示该区域各等级风险对应的隐患数量
     getRegionRiskLevelYear(context) {
-        dataService.getRegionRiskLevelYear(state.params, function (response) {
+        dataService.getRegionRiskLevelYear(context.state.params, function (response) {
             context.commit('changeRiskLevelYear', response)
         })
     },
     //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
     getInitRegionImage(context) {
-        dataService.getInitRegionImage(state.params, function (response) {
+        dataService.getInitRegionImage(context.state.params, function (response) {
             context.commit('changeImage', response)
         })
     },
     //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
     getInitRegionNumberTop(context) {
-        dataService.getInitRegionNumberTop(state.param3, function (response) {
+        dataService.getInitRegionNumberTop(context.state.param3, function (response) {
             //console.log(response)
             context.commit('changeNumberTop', response)
         })
     },
     //显示在不同筛选条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患描述
     getRegionOtherTop(context) {
-        dataService.getRegionOtherTop(state.param4, function (response) {
+        dataService.getRegionOtherTop(context.state.param4, function (response) {
             //console.log(response)
             context.commit('changeOtherTop', response)
         })
     },
     //显示按照安全指数排名后的 项目名称
     getInitRegionSafetyIndex(context) {
-        dataService.getInitRegionSafetyIndex(state.params, function (response) {
+        dataService.getInitRegionSafetyIndex(context.state.params, function (response) {
             //console.log(response)
             context.commit('changeRegionSafetyIndex', response)
         })
     },
     //显示按照隐累计高风险患数量排名后的项目名称 (原来的项目累计高风险数量排名)
     getInitRegionRiskRank(context) {
-        dataService.getInitRegionRiskRank(state.params, function (response) {
+        dataService.getInitRegionRiskRank(context.state.params, function (response) {
             //console.log(response)
             context.commit('changeHighRiskRank', response)
         })
     },
     //基于该区域每个项目的检查次数对项目排名
     getRegionCheckRank(context) {
-        dataService.getRegionCheckRank(state.params, function (response) {
+        dataService.getRegionCheckRank(context.state.params, function (response) {
             //console.log(response)
             context.commit('changeRegionCheckRank', response)
         })
     },
     //显示该区域各专业隐患占比情况
     getRegionMajorRatio(context) {
-        dataService.getRegionMajorRatio(state.params, function (response) {
+        dataService.getRegionMajorRatio(context.state.params, function (response) {
             //console.log(response)
             context.commit('changeRegionMajorRatio', response)
         })
     },
     //显示该区域不同专业下各系统隐患占比情况
     getRegionSystemRatio(context) {
-        dataService.getRegionSystemRatio(state.param2, function (response) {
+        dataService.getRegionSystemRatio(context.state.param2, function (response) {
             //console.log(response)
             context.commit('changeRegionSysRatio', response)
         })
     },
     //根据隐患数量显示不同致因阶段的占比情况
     getRegionStageRatio(context) {
-        dataService.getRegionStageRatio(state.params, function (response) {
+        dataService.getRegionStageRatio(context.state.params, function (response) {
             //console.log(response)
             context.commit('changeRegionStageRatio', response)
         })
     },
     //根据隐患数量显示不同分布区域的占比情况
     getRegionAreaRatio(context) {
-        dataService.getRegionAreaRatio(state.params, function (response) {
+        dataService.getRegionAreaRatio(context.state.params, function (response) {
             //console.log(response)
             context.commit('changeRegionAreaRatio', response)
         })
@@ -234,14 +234,14 @@ const actions = {
 
     //按专业分不同风险等级隐患数量
     getRegionRiskLevelRatio(context) {
-        dataService.getRegionRiskLevelRatio(state.params, function (response) {
+        dataService.getRegionRiskLevelRatio(context.state.params, function (response) {
             context.commit('changeRegionRiskLevelRatio', response)
         })
     },
 
     //红线
     getRegionDangerProblem(context) {
-        dataService.getRegionDangerProblem(state.params, function (response) {
+        dataService.getRegionDangerProblem(context.state.params, function (response) {
             context.commit('changeRegionDangerProblem', response)
         })
     },

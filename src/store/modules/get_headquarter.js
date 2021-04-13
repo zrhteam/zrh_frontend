@@ -143,89 +143,89 @@ const getters = {
 const actions = {
     //显示整个总部检查后的总体危险指数以及各专业对应的危险指数
     getInitIndexData(context) {
-        dataService.getInitIndexData(state.params, function (response) {
+        dataService.getInitIndexData(context.state.params, function (response) {
             // console.log(response)
             context.commit('changeIndexData', response)
         })
     },
     //展示总部各风险等级及其对应的隐患数量
     getInitRiskLevelData(context) {
-        dataService.getInitRiskLevelData(state.params, function (response) {
+        dataService.getInitRiskLevelData(context.state.params, function (response) {
             context.commit('changeRiskLevelData', response)
         })
     },
     //根据风险指数对区域进行排序
     getInitRiskIndexData(context) {
-        dataService.getInitRiskIndexData(state.params, function (response) {
+        dataService.getInitRiskIndexData(context.state.params, function (response) {
             // console.log(response)
             context.commit('changeRiskIndexData', response)
         })
     },
     //显示每个区域的高风险数量
     getInitRiskNumberRank(context) {
-        dataService.getInitRiskNumberRank(state.params, function (response) {
+        dataService.getInitRiskNumberRank(context.state.params, function (response) {
             context.commit('changeRiskNumberRank', response)
         })
     },
     //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
     getInitNumberTop(context) {
-        dataService.getInitNumberTop(state.param3, function (response) {
+        dataService.getInitNumberTop(context.state.param3, function (response) {
             context.commit('changeNumberTop', response)
         })
     },
     //按年份显示总部的高中低风险等级对应的隐患数量
     getHeadRiskLevelYear(context) {
-        dataService.getHeadRiskLevelYear(state.params, function (response) {
+        dataService.getHeadRiskLevelYear(context.state.params, function (response) {
             context.commit('changeHeadRiskLevelYear', response)
         })
     },
     //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
     getHeadOtherNumberTop(context) {
-        dataService.getHeadOtherNumberTop(state.param4, function (response) {
+        dataService.getHeadOtherNumberTop(context.state.param4, function (response) {
             context.commit('changeOtherNumberTop', response)
         })
     },
     //按照检查次数对区域排名
     getHeadCheckRank(context) {
-        dataService.getHeadCheckRank(state.params, function (response) {
+        dataService.getHeadCheckRank(context.state.params, function (response) {
             context.commit('changeHeadCheckRank', response)
         })
     },
     //各专业隐患数量占比
     getHeadMajorRatio(context) {
-        dataService.getHeadMajorRatio(state.params, function (response) {
+        dataService.getHeadMajorRatio(context.state.params, function (response) {
             context.commit('changeHeadMajorRatio', response)
         })
     },
     // 各致因阶段的隐患数量占比情况
     getHeadStageRatio(context) {
-        dataService.getHeadStageRatio(state.params, function (response) {
+        dataService.getHeadStageRatio(context.state.params, function (response) {
             context.commit('changeHeadStageRatio', response)
         })
     },
     // 各分布区域的隐患数量占比情况
     getHeadAreaRatio(context) {
-        dataService.getHeadAreaRatio(state.params, function (response) {
+        dataService.getHeadAreaRatio(context.state.params, function (response) {
             context.commit('changeHeadAreaRatio', response)
         })
     },
     // 展示按照项目数量对区域排名
     getHeadProjectRank(context) {
-        dataService.getHeadProjectRank(state.params, function (response) {
+        dataService.getHeadProjectRank(context.state.params, function (response) {
             context.commit('changeHeadProjectRank', response)
         })
     },
 
     //按专业分不同风险等级隐患数量
     getHeadRiskLevelRatio(context) {
-        dataService.getHeadRiskLevelRatio(state.params, function (response) {
+        dataService.getHeadRiskLevelRatio(context.state.params, function (response) {
             context.commit('changeHeadRiskLevelRatio', response)
         })
     },
 
     //红线
     getHeadDangerProblem(context) {
-        dataService.getHeadDangerProblem(state.params, function (response) {
+        dataService.getHeadDangerProblem(context.state.params, function (response) {
             context.commit('changeHeadDangerProblem', response)
         })
     },
