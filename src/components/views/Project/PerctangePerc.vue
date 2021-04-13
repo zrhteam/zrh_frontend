@@ -6,34 +6,34 @@
     </div>
     <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
-<!--      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 25%;" @change="filterMajor">-->
-<!--        <el-option-->
-<!--            v-for="item in option"-->
-<!--            :key="item.value"-->
-<!--            :label="item.label"-->
-<!--            :value="item.value">-->
-<!--        </el-option>-->
-<!--      </el-select>-->
+      <!--      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 25%;" @change="filterMajor">-->
+      <!--        <el-option-->
+      <!--            v-for="item in option"-->
+      <!--            :key="item.value"-->
+      <!--            :label="item.label"-->
+      <!--            :value="item.value">-->
+      <!--        </el-option>-->
+      <!--      </el-select>-->
     </div>
     <div class="title-line" style=""></div>
-<!--    项目-->
-<!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
-<!--    筛选专业条件下属于不同分布区域的隐患数量-->
-<!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
-<!--    检查-->
-<!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
-<!--    筛选专业条件下属于不同分布区域的隐患数量-->
-<!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
-<!--    <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">-->
-<!--    </div>-->
-<!--    <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">-->
-<!--    </div>-->
+    <!--    项目-->
+    <!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
+    <!--    筛选专业条件下属于不同分布区域的隐患数量-->
+    <!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
+    <!--    检查-->
+    <!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
+    <!--    筛选专业条件下属于不同分布区域的隐患数量-->
+    <!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
+    <!--    <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">-->
+    <!--    </div>-->
+    <!--    <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">-->
+    <!--    </div>-->
     <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">
     </div>
-<!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
-<!--    </div>-->
-<!--    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">-->
-<!--    </div>-->
+    <!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
+    <!--    </div>-->
+    <!--    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">-->
+    <!--    </div>-->
     <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">
     </div>
   </el-card>
@@ -62,8 +62,17 @@ export default {
         // bar_option["xAxis"]["axisLabel"]["rotate"] = 45
         // myChart.setOption(bar_option);
         // console.log("arr", arr)
-        if(arr.length != 0) {
+        if (arr.length != 0) {
           pie_option['series'][0]['data'] = arr
+          pie_option["legend"]["formatter"] = function (params) {
+            var legendIndex = 0;
+            arr.forEach(function (v, i) {
+              if (v.name == params) {
+                legendIndex = i;
+              }
+            });
+            return params + " " + arr[legendIndex].value;
+          }
           myChart.setOption(pie_option);
           myChart.resize();
           window.addEventListener('resize', function () {
@@ -77,7 +86,7 @@ export default {
               myChart.resize();
             });
           });
-        }else if (this.context.id) {
+        } else if (this.context.id) {
           this.$nextTick(() => {
             const dom = document.getElementById(this.context.id)
             dom.innerHTML = '暂无数据'
@@ -125,21 +134,21 @@ export default {
       //   this.$store.commit('get_check/changeParam2', {params: param2})
       //   this.$store.dispatch('get_check/getCheckMajorStage')
       // } else
-        if (this.context.id == 'id_check_region') {
+      if (this.context.id == 'id_check_region') {
         //该检查中在筛选专业条件下属于不同分布区域的隐患数量
         param2.append('check_code', this.$store.state.get_check.check_code);
         this.$store.commit('get_check/changeParam2', {params: param2})
         this.$store.dispatch('get_check/getCheckMajorArea')
-      //} else if (this.context.id == 'id_check_system') {
+        //} else if (this.context.id == 'id_check_system') {
         //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
-      //   param2.append('check_code', this.$store.state.get_check.check_code);
-      //   this.$store.commit('get_check/changeParam2', {params: param2})
-      //   this.$store.dispatch('get_check/getCheckMajorSystem')
-      // } else if (this.context.id == 'id_reason') {
-      //   //该项目中在筛选专业条件下属于不同致因阶段的隐患数量
-      //   param2.append('project_name', this.$store.state.get_project.prj_name);
-      //   this.$store.commit('get_project/changeParam2', {params: param2})
-      //   this.$store.dispatch('get_project/getInitProjectReason')
+        //   param2.append('check_code', this.$store.state.get_check.check_code);
+        //   this.$store.commit('get_check/changeParam2', {params: param2})
+        //   this.$store.dispatch('get_check/getCheckMajorSystem')
+        // } else if (this.context.id == 'id_reason') {
+        //   //该项目中在筛选专业条件下属于不同致因阶段的隐患数量
+        //   param2.append('project_name', this.$store.state.get_project.prj_name);
+        //   this.$store.commit('get_project/changeParam2', {params: param2})
+        //   this.$store.dispatch('get_project/getInitProjectReason')
       } else if (this.context.id == 'id_region') {
         //该项目中在筛选专业条件下属于不同分布区域的隐患数量
         param2.append('project_name', this.$store.state.get_project.prj_name);
@@ -303,17 +312,17 @@ export default {
       arr.sort(this.sortNumber('value', true))
       let new_arr = []
       let obj = {
-          value: 0,
-          name: '其它'
-        }
-      for(let ii = 0; ii < arr.length; ii++) {
-        if(ii < 5) {
+        value: 0,
+        name: '其它'
+      }
+      for (let ii = 0; ii < arr.length; ii++) {
+        if (ii < 5) {
           new_arr.push(arr[ii])
-        }else {
+        } else {
           obj.value += arr[ii].value
         }
       }
-      if(obj.value > 0) {
+      if (obj.value > 0) {
         new_arr.push(obj)
       }
       return new_arr
