@@ -24,13 +24,13 @@
     <!--    <div id="id_head_risk" style="height: 80%; width: 100%" v-if="context.id==='id_head_risk'">-->
     <!--    </div>-->
     <!--  区域级-->
-    <div id="id_region_risk" style="height: 80%; width: 100%" v-if="context.id==='id_region_risk'">
+    <div class="risk" id="id_region_risk" style="height: 80%; width: 100%" v-if="context.id==='id_region_risk'">
     </div>
     <!--    项目级-->
-    <div id="id_project_risk" style="height: 80%; width: 100%" v-if="context.id==='id_project_risk'">
+    <div class="risk" id="id_project_risk" style="height: 80%; width: 100%" v-if="context.id==='id_project_risk'">
     </div>
     <!--      检查级-->
-    <div id="id_check_risk" style="height: 80%; width: 100%" v-if="context.id==='id_check_risk'">
+    <div class="risk" id="id_check_risk" style="height: 80%; width: 100%" v-if="context.id==='id_check_risk'">
     </div>
   </el-card>
 </template>
@@ -56,6 +56,7 @@ export default {
             let arr = this.getData
             let data = []
             let r_data = []
+            let color = ['#80e6ca', '#ecb534', '#ff0000']
             //转置
             let hang = this.s_data.length
             if (hang > 0) {
@@ -92,8 +93,19 @@ export default {
                   focus: 'series'
                 },
                 data: r_data[i],
-                itemStyle: {},
+                itemStyle: {
+                  normal: {
+                    color: null,
+                  }
+                },
                 barCategoryGap: this.fontSize(0.8 / hang),
+              }
+              console.log("qqq", document.getElementsByClassName("risk"))
+              document.getElementByClass = function () {
+
+              }
+              if(this.legend[i] == "高风险" || this.legend[i] == "中风险" || this.legend[i] == "低风险") {
+                obj["itemStyle"]["normal"]["color"] = color[i]
               }
               data.push(obj)
             }
