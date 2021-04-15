@@ -46,7 +46,7 @@ export default {
     return {
       show: false,
       value: '全部专业',
-      option: ''
+      option: '',
     }
   },
   props: ['context'],
@@ -84,10 +84,9 @@ export default {
               _this1.$store.commit('get_region/changeParam2', {params: param2})
               //显示该区域不同专业下各系统隐患占比情况
               _this1.$store.dispatch('get_region/getRegionSystemRatio')
-              //根据隐患数量显示不同分布区域的占比情况
+              //根据隐患数量显示不同分布区域的占比情况 全发自己做筛选
               // _this1.$store.dispatch('get_region/getRegionAreaRatio')
             }else if(_this.context.id == 'id_head_major') {
-
             }
           }
           myChart.resize();

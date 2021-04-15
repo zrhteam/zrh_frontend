@@ -30,20 +30,21 @@
       <!--      </el-select>-->
     </div>
     <div class="title-line" style=""></div>
-    <div id="id_head_rank1" style="height: 90%; width: 100%" v-if="context.id==='id_head_rank1'">
-    </div>
-    <div id="id_head_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank2'">
-    </div>
-    <div id="id_region_rank1" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank1'">
-    </div>
-    <div id="id_region_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank2'">
-    </div>
-    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">
-    </div>
-    <div id="id_project_system" style="height: 80%; width: 100%" v-if="context.id==='id_project_system'">
-    </div>
-    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">
-    </div>
+    <div ref='barEchartContainer' style="height: 80%; width: 100%;"/>
+<!--    <div id="id_head_rank1" style="height: 90%; width: 100%" v-if="context.id==='id_head_rank1'">-->
+<!--    </div>-->
+<!--    <div id="id_head_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank2'">-->
+<!--    </div>-->
+<!--    <div id="id_region_rank1" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank1'">-->
+<!--    </div>-->
+<!--    <div id="id_region_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank2'">-->
+<!--    </div>-->
+<!--    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">-->
+<!--    </div>-->
+<!--    <div id="id_project_system" style="height: 80%; width: 100%" v-if="context.id==='id_project_system'">-->
+<!--    </div>-->
+<!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
+<!--    </div>-->
   </el-card>
 </template>
 
@@ -58,6 +59,8 @@ export default {
   data() {
     return {
       option: '',
+      barEchartContainer: null,
+      myChart: null
     }
   },
   methods: {
@@ -70,92 +73,77 @@ export default {
     },
     drawBarChart() {
       this.$nextTick(_ => {
-        let myChart;
-        myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
-        var compare = function (obj1, obj2) {
-          var val1 = obj1.count;
-          var val2 = obj2.count;
-          if (val1 < val2) {
-            return -1;
-          } else if (val1 > val2) {
-            return 1;
-          } else {
-            return 0;
-          }
-        }
         if (arr.length != 0) {
           arr.sort(this.sortNumber('count', true))
-          // arr.sort(compare)
           if (this.context.id == 'id_head_rank1' || this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
             if (this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
-              bar_option3["grid"]["bottom"] = this.fontSize(0.30)
+              bar_option3["grid"]["bottom"] = 0
               bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8 / arr.length)
               // }else if(this.context.id == 'id_region_rank2') {
               //   bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8/arr.length)
             }
             bar_option3["dataset"]["source"] = arr
-            myChart.setOption(bar_option3);
+            this.myChart.setOption(bar_option3);
           } else {
             bar_option["dataset"][0]["source"] = arr
             bar_option["xAxis"]["axisLabel"]["rotate"] = 0
             bar_option["grid"]["y2"] = '30%'
             // bar_option["series"][0]["barCategoryGap"] = '50'
-            myChart.setOption(bar_option);
+            this.myChart.setOption(bar_option);
           }
-
-          myChart.resize();
+          this.myChart.resize();
           window.addEventListener('resize', function () {
-            myChart.resize();
+            this.myChart.resize();
           })
           const _this = this;
           const erd = elementResizeDetectorMaker();
-          erd.listenTo(document.getElementById(this.context.id), element => {
+          erd.listenTo(this.barEchartContainer, element => {
             _this.$nextTick(() => {
               //监听到事件后执行的业务逻辑
-              myChart.resize();
+              _this.myChart.resize();
             });
           });
-        } else if (this.context.id) {
-          this.$nextTick(() => {
-            const dom = document.getElementById(this.context.id)
-            dom.innerHTML = '暂无数据'
-            dom.style.color = '#ffffff'
-            dom.style.fontSize = '14px'
-            dom.removeAttribute("_echarts_instance_")
-          })
+        // } else if (this.context.id) {
+        //   this.$nextTick(() => {
+        //     const dom = document.getElementById(this.context.id)
+        //     dom.innerHTML = '暂无数据'
+        //     dom.style.color = '#ffffff'
+        //     dom.style.fontSize = '14px'
+        //     dom.removeAttribute("_echarts_instance_")
+        //   })
         }
       })
     },
-    filterMajor(value) {
-      let param2 = new URLSearchParams();
-      var obj = {};
-      //使用find()方法在下拉数据中根据value绑定的数据查找对象
-      obj = this.option.find(function (item) {
-        return item.value === value;
-      })
-      if (obj.label === '全部专业') {
-        param2.append('major', 'all');
-      } else {
-        param2.append('major', obj.label);
-      }
-      if (this.context.id == 'id_region_system') {
-        param2.append('region_name', this.$store.state.get_region.region_name);
-        this.$store.commit('get_region/changeParam2', {params: param2})
-        //显示该区域不同专业下各系统隐患占比情况
-        this.$store.dispatch('get_region/getRegionSystemRatio')
-      } else if (this.context.id == 'id_project_system') {
-        param2.append('project_name', this.$store.state.get_project.prj_name);
-        this.$store.commit('get_project/changeParam2', {params: param2})
-        //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
-        this.$store.dispatch('get_project/getInitProjectSystem')
-      } else if (this.context.id == 'id_check_system') {
-        //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
-        param2.append('check_code', this.$store.state.get_check.check_code);
-        this.$store.commit('get_check/changeParam2', {params: param2})
-        this.$store.dispatch('get_check/getCheckMajorSystem')
-      }
-    },
+    // filterMajor(value) {
+    //   let param2 = new URLSearchParams();
+    //   var obj = {};
+    //   //使用find()方法在下拉数据中根据value绑定的数据查找对象
+    //   obj = this.option.find(function (item) {
+    //     return item.value === value;
+    //   })
+    //   if (obj.label === '全部专业') {
+    //     param2.append('major', 'all');
+    //   } else {
+    //     param2.append('major', obj.label);
+    //   }
+    //   if (this.context.id == 'id_region_system') {
+    //     param2.append('region_name', this.$store.state.get_region.region_name);
+    //     this.$store.commit('get_region/changeParam2', {params: param2})
+    //     //显示该区域不同专业下各系统隐患占比情况
+    //     this.$store.dispatch('get_region/getRegionSystemRatio')
+    //   } else if (this.context.id == 'id_project_system') {
+    //     param2.append('project_name', this.$store.state.get_project.prj_name);
+    //     this.$store.commit('get_project/changeParam2', {params: param2})
+    //     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
+    //     this.$store.dispatch('get_project/getInitProjectSystem')
+    //   } else if (this.context.id == 'id_check_system') {
+    //     //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
+    //     param2.append('check_code', this.$store.state.get_check.check_code);
+    //     this.$store.commit('get_check/changeParam2', {params: param2})
+    //     this.$store.dispatch('get_check/getCheckMajorSystem')
+    //   }
+    // },
     sortNumber(attr, rev) {
       if (rev == undefined) {
         rev = 1;
@@ -266,7 +254,9 @@ export default {
     this.drawBarChart()
   },
   mounted() {
-    this.drawBarChart()
+    // this.drawBarChart()
+    this.barEchartContainer = this.$refs.barEchartContainer;
+    this.myChart = this.$echarts.init(this.barEchartContainer)
   },
 }
 </script>

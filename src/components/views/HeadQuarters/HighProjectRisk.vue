@@ -11,7 +11,7 @@
       {{ getNumberHistogram }}
     </div>
     <!--        <svg></svg>-->
-    <div id="number_histogram" style="height: 90%; width: 100%"></div>
+    <div id="number_histogram" style="height: 80%; width: 100%"></div>
     <!--      </div>-->
 
   </el-card>

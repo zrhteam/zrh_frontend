@@ -31,7 +31,7 @@ export const bar_option = {
         type: 'category',
         axisLabel: {
             // interval: 0,
-            rotate: 45,
+            // rotate: 45,
             textStyle: {
                 fontSize: fontSize(0.1)
             },
@@ -226,7 +226,7 @@ export const bar_option3 = {
         left: fontSize(0.25),
         top: fontSize(0.25),
         right: fontSize(0.55),
-        bottom: fontSize(0.60),
+        bottom: fontSize(0.40),
         containLabel: true
     },
     xAxis: {

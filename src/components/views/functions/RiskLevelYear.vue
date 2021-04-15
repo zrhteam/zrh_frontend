@@ -11,6 +11,15 @@
     </div>
     <div class="text item level4" style="padding-bottom: 5px">
       <span class="level4">{{ context.title }}</span>
+      <el-select v-model="year" placeholder="请选择" size="mini" style="max-width: 8em;"
+                 @change="filterYear">
+        <el-option
+            v-for="item in year_option"
+            :key="item"
+            :label="item"
+            :value="item">
+        </el-option>
+      </el-select>
       <el-button type="text" @click="dropGrantChart" v-if="!isShow && context.id==='id_risk_level'"
                  style="float: right; vertical-align: middle">取消授权
       </el-button>
@@ -55,38 +64,15 @@ export default {
       echartContainer: null,
       myChart: null,
       renderSign: false,
-      bar_data: []
+      bar_data: [],
+      year: '',
+      year_option: [],
+      year_copy: ''
     }
   },
   methods: {
     drawBarChart() {
       let arr = this.level_year
-      if (this.context.id === 'id_risk_level') {
-        // bar_option2["series"] = [
-        //   {
-        //     type: 'bar',
-        //     itemStyle: {
-        //       normal: {
-        //         //柱形图圆角，初始化效果
-        //         barBorderRadius: [10, 10, 0, 0],
-        //         color: "#4992ff"
-        //       }
-        //     },
-        //     barMaxWidth: 40
-        //   },
-        //   {
-        //     type: 'bar',
-        //     itemStyle: {
-        //       normal: {
-        //         //柱形图圆角，初始化效果
-        //         barBorderRadius: [10, 10, 0, 0],
-        //         color: '#05c091'
-        //       }
-        //     },
-        //     barMaxWidth: 40
-        //   }
-        // ]
-      }
 
       // bar_option2['dataset']['source'] = arr
 
@@ -127,6 +113,9 @@ export default {
     },
     dropGrantChart() {
       // this.isShow = !this.isShow
+    },
+    filterYear(value) {
+      this.year_copy = value
     }
   },
   watch: {
@@ -168,9 +157,21 @@ export default {
         }
         let myDate = new Date();
         let yy = String(myDate.getFullYear());
+        if(this.year_copy != '') {
+          yy = this.year_copy
+        }
+        console.log(this.year_copy)
         this.bar_data = []
+        let flag = false
+        if (data[yy] == undefined) {
+          flag = true
+        }
+        this.year_option = []
         for (let i in data) {
-          if (i == yy) {
+          this.year_option.push(i)
+        }
+        for (let i in data) {
+          if (i == yy || flag == true) {
             let obj = {
               name: '风险总量',
               count: 0
@@ -195,30 +196,15 @@ export default {
               }
               this.bar_data.push(sub_obj)
             }
-            this.bar_data.push(obj)
-          }else {
-            let obj2 = {
-              name: '低风险',
-              count: 0
+            if (obj.count == 0) {
+              flag = true
+            } else {
+              this.bar_data.push(obj)
+              this.year = i
             }
-            this.bar_data.push(obj2)
-            let obj3 = {
-              name: '中风险',
-              count: 0
-            }
-            this.bar_data.push(obj3)
-            let obj4 = {
-              name: '高风险',
-              count: 0
-            }
-            this.bar_data.push(obj4)
-            let obj1 = {
-              name: '风险总量',
-              count: 0
-            }
-            this.bar_data.push(obj1)
           }
         }
+
         // let risk_level = ['风险总量', '低风险', '中风险', '高风险']
         // let xdata = []
         // let high_risk = []
