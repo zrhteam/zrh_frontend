@@ -1,6 +1,5 @@
 <template>
-    <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: transparent">
-      <div :style="{height:'100%',width:'100%'}" ref="map_2"></div>
+    <div style="height: 100%; width: 100%; z-index:1; background-color: transparent">
       <model-fbx :backgroundAlpha="0"
                  src='img/xitongpiantou_new.fbx'></model-fbx>
     </div>
@@ -26,8 +25,5 @@ export default {
 </script>
 
 <style scoped>
-#map_1 {
-  width: 100%;
-  height: calc(100vh);
-}
+
 </style>
