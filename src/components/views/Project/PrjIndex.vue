@@ -1,8 +1,8 @@
 <template>
     <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: transparent">
       <div :style="{height:'100%',width:'100%'}" ref="map_2"></div>
-<!--      <model-fbx :backgroundAlpha="0"-->
-<!--                 src='img/vanke.fbx'></model-fbx>-->
+      <model-fbx :backgroundAlpha="0"
+                 src='img/xitongpiantou_new.fbx'></model-fbx>
     </div>
 </template>
 
