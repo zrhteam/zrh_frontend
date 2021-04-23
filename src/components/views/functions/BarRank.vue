@@ -89,6 +89,7 @@ export default {
             bar_option["dataset"][0]["source"] = arr
             bar_option["xAxis"]["axisLabel"]["rotate"] = 0
             bar_option["grid"]["y2"] = '30%'
+            bar_option["series"][0]["barCategoryGap"] = String(this.fontSize(3 / arr.length))
             // bar_option["series"][0]["barCategoryGap"] = '50'
             this.myChart.setOption(bar_option);
           }

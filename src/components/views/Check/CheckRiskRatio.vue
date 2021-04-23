@@ -1,13 +1,14 @@
 <template>
-  <el-card class="box-card boundary-C" shadow="never"
-           style="background-color: transparent; height: 100%; left: 10%; top: 10%">
+  <el-card class="box-card-t" shadow="never"
+           style="background-color: transparent; height: 100%;">
     <div style="display: none">
       {{ getCheckHistoryPerception }}
     </div>
-    <div class="level4">
-      <span>不同专业隐患数量</span>
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
+      <span class="level4">不同专业隐患数量</span>
     </div>
-    <div id="pie2_2" style="height: 100%; width: 100%"></div>
+    <div class="title-line" style=""></div>
+    <div id="pie2_2" style="height: 80%; width: 100%"></div>
     <!--          本次检查累计隐患专业占比 饼图-->
   </el-card>
 </template>
@@ -33,8 +34,8 @@ export default {
         arr_major.push(obj)
       }
       // console.log(arr_major)
-      pie_option['series'][0]['data'] = arr_major
-      return pie_option
+      // pie_option['series'][0]['data'] = arr_major
+      return arr_major
     }
   },
   updated() {
@@ -53,10 +54,46 @@ export default {
   },
   methods: {
     drawPieChart() {
-      if (this.getCheckHistoryPerception['series'][0]["data"].length != 0) {
+      let arr = this.getCheckHistoryPerception
+      if (arr.length != 0) {
+        pie_option['series'][0]['data'] = arr
+        pie_option["legend"]["formatter"] = function (params) {
+          var legendIndex = 0;
+          arr.forEach(function (v, i) {
+            if (v.name == params) {
+              legendIndex = i;
+            }
+          });
+          return params + " " + arr[legendIndex].value;
+        }
         let myChart = this.$echarts.init(document.getElementById('pie2_2'))
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(this.getCheckHistoryPerception);
+        myChart.setOption(pie_option);
+        myChart.on("click", pieConsole);
+
+        function pieConsole(param) {
+          //     获取data长度
+          console.log(pie_option.series[0].data.length);
+          //      获取地N个data的值
+          // 　　alert(option.series[0].data[i]);
+          //     获取series中param.dataIndex事件对应的值
+          console.log(param.value);
+          console.log(param.name);
+          let param2 = new URLSearchParams();
+          param2.append('check_code', _this.$store.state.get_check.check_code);
+          param2.append('major', param.name);
+          _this.$store.commit('get_check/changeParam2', {params: param2})
+          //该检查中在不同专业下属于不同隐患子系统的隐患数量
+          _this.$store.dispatch('get_check/getCheckMajorSystem')
+          //该检查中在不同专业情况下，隐患区域分布的情况
+          _this.$store.dispatch('get_check/getCheckMajorArea')
+
+          // console.log(pie_option.series[param.seriesIndex].data[param.dataIndex].value);
+          // console.log(pie_option.series[param.seriesIndex].data[param.dataIndex].name);
+          // 　　clickFunc(param.dataIndex);//执行点击效果,触发相应js函数
+          //param具体包含的方法见 https://blog.csdn.net/allenjay11/article/details/76033232
+        }
+
         myChart.resize();
         window.addEventListener('resize', function () {
           myChart.resize();
