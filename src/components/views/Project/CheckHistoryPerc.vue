@@ -86,6 +86,7 @@ export default {
           param2.append('project_name', _this.$store.state.get_project.prj_name);
           param2.append('major', param.name);
           _this.$store.commit('get_project/changeParam2', {params: param2})
+          _this.$store.commit('get_project/changeFilterMajor', {data: param.name})
           //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
           _this.$store.dispatch('get_project/getInitProjectSystem')
           //基于项目级显示在不同专业情况下，隐患区域分布的情况

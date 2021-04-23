@@ -83,6 +83,7 @@ export default {
           param2.append('check_code', _this.$store.state.get_check.check_code);
           param2.append('major', param.name);
           _this.$store.commit('get_check/changeParam2', {params: param2})
+          _this.$store.commit('get_check/changeFilterMajor', {data: param.name})
           //该检查中在不同专业下属于不同隐患子系统的隐患数量
           _this.$store.dispatch('get_check/getCheckMajorSystem')
           //该检查中在不同专业情况下，隐患区域分布的情况

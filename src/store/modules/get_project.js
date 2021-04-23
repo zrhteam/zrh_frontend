@@ -29,6 +29,8 @@ const state = {
     param2: {},
     //筛选专业,封装所有专业
     all_majors: [],
+    //封装查询的专业，是初始的全部专业还是某专业
+    filter_major: '',
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
     prj_system: {},
     //基于项目级显示在不同专业情况下在不同致因阶段的隐患数量
@@ -368,7 +370,10 @@ const mutations = {
     changeAllMajors(state, data) {
         state.all_majors = data.all_majors
     },
-
+     //封装查询的专业，是初始的全部专业还是某专业
+    changeFilterMajor(state, data) {
+        state.filter_major = data.data
+    },
     //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
     changePrjSystem(state, data) {
         if (data.code === 10000) {

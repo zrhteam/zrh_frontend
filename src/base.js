@@ -150,6 +150,8 @@ exports.install = function (Vue, options) {
         let param2 = new URLSearchParams();
         param2.append('project_name', project_name);
         param2.append('major', 'all');
+        //封装查询的专业，是初始的全部专业还是某专业
+        this.$store.commit('get_project/changeFilterMajor',{data: "全部专业"})
         this.$store.commit('get_project/changeParam2', {params: param2})
         //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
         this.$store.dispatch('get_project/getInitProjectSystem')
@@ -220,6 +222,8 @@ exports.install = function (Vue, options) {
         let param2 = new URLSearchParams();
         param2.append('check_code', check_code);
         param2.append('major', 'all');
+        //封装查询的专业，是初始的全部专业还是某专业
+        this.$store.commit('get_check/changeFilterMajor',{data: "全部专业"})
         //该检查中在不同专业下属于不同隐患子系统的隐患数量
         this.$store.commit('get_check/changeParam2', {params: param2})
         this.$store.dispatch('get_check/getCheckMajorSystem')

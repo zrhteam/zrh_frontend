@@ -79,7 +79,7 @@
               <!--              ></BarRank>-->
               <PerctangePerc
                   :context="{
-                    title:'不同分布区域隐患数量',
+                    title:'不同分布区域隐患数量'+'-'+filter_major,
                     id:'id_region',
                    }"></PerctangePerc>
             </el-col>
@@ -91,7 +91,7 @@
               <!--              ></BarRank>-->
               <BarRank
                   :context="{
-              title:'不同子系统隐患数量',
+              title:'不同子系统隐患数量'+'-'+filter_major,
               id: 'id_project_system'
           }"></BarRank>
             </el-col>
@@ -337,6 +337,9 @@ export default {
     //得到树形控件的内容 还负责封装了地理位置信息
     this.treeObj = this.$store.state.get_login.grant_data.data.value
   },
+  updated() {
+    this.filter_major = this.$store.state.get_project.filter_major
+  },
   computed: {
     getName() {
       let data = this.$store.state.get_project.prj_sys_name
@@ -404,6 +407,7 @@ export default {
       nowWeek: "",
       nowDate: "",
       nowTime: "",
+      filter_major: ''
     };
   },
   created() {

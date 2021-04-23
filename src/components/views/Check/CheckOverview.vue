@@ -10,7 +10,7 @@
       <el-col :span="6" class="">
         <PerctangePerc
               :context="{
-                  title:'不同分布区域隐患数量',
+                  title:'不同分布区域隐患数量'+'-'+filter_major,
                   type:'region',
                   id:'id_check_region',
                  }"></PerctangePerc>
@@ -31,7 +31,7 @@
       <el-col :span="8" class="">
         <BarRank
               :context="{
-              title:'不同子系统隐患数量',
+              title:'不同子系统隐患数量'+'-'+filter_major,
               id: 'id_check_system'
           }"></BarRank>
       </el-col>
@@ -140,6 +140,7 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
+      filter_major: ''
     }
   },
   computed: {
@@ -155,7 +156,10 @@ export default {
         this.sys_name.push(obj)
       }
     }
-  }
+  },
+  updated() {
+    this.filter_major = this.$store.state.get_check.filter_major
+  },
 }
 </script>
 

@@ -82,8 +82,7 @@ export default {
               param2.append('region_name', _this1.$store.state.get_region.region_name);
               //该检查中在不同专业下属于不同隐患子系统的隐患数量
               _this1.$store.commit('get_region/changeParam2', {params: param2})
-              let filter_major = param.name
-              _this1.$store.commit('get_region/changeFilterMajor', {data: filter_major})
+              _this1.$store.commit('get_region/changeFilterMajor', {data: param.name})
               //显示该区域不同专业下各系统隐患占比情况
               _this1.$store.dispatch('get_region/getRegionSystemRatio')
               //根据隐患数量显示不同分布区域的占比情况 全发自己做筛选
