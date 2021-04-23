@@ -107,14 +107,14 @@
             <el-col :span="7" style="height: 100%; width: 100%;">
               <Ratio
                   :context="{
-                title:'不同分布区域隐患数量',
+                title:'不同分布区域隐患数量'+'-'+filter_major,
                 id: 'id_region_region'
             }"></Ratio>
             </el-col>
             <el-col :span="7" style="height: 100%; width: 100%;">
               <BarRank
                   :context="{
-              title:'不同子系统隐患数量',
+              title:'不同子系统隐患数量'+'-'+filter_major,
               id: 'id_region_system'
           }"></BarRank>
             </el-col>
@@ -255,6 +255,9 @@ export default {
       this.setNowTimes();
     }, 1000);
   },
+  updated() {
+    this.filter_major = this.$store.state.get_region.filter_major
+  },
   data() {
     return {
       // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
@@ -309,6 +312,7 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
+      filter_major: this.$store.state.get_region.filter_major
     }
   },
   created() {

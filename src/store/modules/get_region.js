@@ -38,6 +38,8 @@ const state = {
     param2: {},
     //筛选专业,封装所有专业
     all_majors: [],
+    //封装查询的专业，是初始的全部专业还是某专业
+    filter_major: '',
     //显示该区域不同专业下各系统隐患占比情况
     region_sys_ratio: {},
     //根据隐患数量显示不同致因阶段的占比情况
@@ -355,7 +357,6 @@ const mutations = {
     //显示按照隐累计高风险患数量排名后的项目名称 (原来的项目累计高风险数量排名)
     changeHighRiskRank(state, data) {
         if (data.code === 10000) {
-            console.log('high', data.data)
             state.high_risk_rank = data.data;
         } else {
             alert("出错了")
@@ -373,7 +374,6 @@ const mutations = {
     //显示该区域各专业隐患占比情况
     changeRegionMajorRatio(state, data) {
         if (data.code === 10000) {
-            // console.log('high', data.data)
             state.region_major_ratio = data.data;
         } else {
             alert("出错了")
@@ -387,6 +387,10 @@ const mutations = {
     //筛选专业，封装所有专业
     changeAllMajors(state, data) {
         state.all_majors = data.all_majors
+    },
+    //封装查询的专业，是初始的全部专业还是某专业
+    changeFilterMajor(state, data) {
+        state.filter_major = data.data
     },
     //显示该区域不同专业下各系统隐患占比情况
     changeRegionSysRatio(state, data) {

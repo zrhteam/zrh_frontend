@@ -106,6 +106,8 @@ exports.install = function (Vue, options) {
         param2.append('major', 'all');
         //该检查中在不同专业下属于不同隐患子系统的隐患数量
         this.$store.commit('get_region/changeParam2', {params: param2})
+        //封装查询的专业，是初始的全部专业还是某专业
+        this.$store.commit('get_region/changeFilterMajor',{data: "全部专业"})
         //显示该区域不同专业下各系统隐患占比情况
         this.$store.dispatch('get_region/getRegionSystemRatio')
         //根据隐患数量显示不同致因阶段的占比情况
