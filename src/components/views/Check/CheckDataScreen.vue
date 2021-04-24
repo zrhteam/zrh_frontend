@@ -32,8 +32,7 @@
           title:'重复出现隐患',
           label1:'隐患描述',
           label2:'出现频率',
-          sign:'check_risk',
-          option:this.risk_option}"
+          sign:'check_other'}"
                 :top_data="this.$store.state.get_check.check_risk_top"
             ></TopRisk>
           </el-row>
@@ -60,14 +59,14 @@
           <div style="display: none">
             {{ getName }}
           </div>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <TopName
-                :context="{title:'最容易出现隐患的设备', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <TopName
-                :context="{title:'最容易出现隐患的组件', top_data:this.unit_name, label1:'组件名称', label2:'出现频率'}"></TopName>
-          </el-row>
+<!--          <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--            <TopName-->
+<!--                :context="{title:'最容易出现隐患的设备', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>-->
+<!--          </el-row>-->
+<!--          <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--            <TopName-->
+<!--                :context="{title:'最容易出现隐患的组件', top_data:this.unit_name, label1:'组件名称', label2:'出现频率'}"></TopName>-->
+<!--          </el-row>-->
           <el-row style="height: 32%; margin-bottom: 1%">
             <CheckHighImage></CheckHighImage>
           </el-row>
@@ -96,19 +95,19 @@ export default {
       // title3: this.$store.state.get_login.grant_data.data.project_tag,
       // fit: 'fill',
       // url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
-      risk_option: [{
-        value: '专业',
-        key: 'major'
-      }, {
-        value: '系统',
-        key: 'system'
-      }, {
-        value: '设备',
-        key: 'equipment'
-      }, {
-        value: '组件',
-        key: 'module'
-      }],
+      // risk_option: [{
+      //   value: '专业',
+      //   key: 'major'
+      // }, {
+      //   value: '系统',
+      //   key: 'system'
+      // }, {
+      //   value: '设备',
+      //   key: 'equipment'
+      // }, {
+      //   value: '组件',
+      //   key: 'module'
+      // }],
       sys_name: [],
       device_name: [],
       unit_name: [],

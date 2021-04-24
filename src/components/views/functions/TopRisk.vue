@@ -13,8 +13,8 @@
   <!--显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患  -->
   <!--  每一级的两个都合成一个了-->
   <el-card class="box-card-t " shadow="never"
-           style="background-color: transparent; height: 100%; margin: 2% 4% 2% 0%">
-    <div class="level4">
+           style="background-color: transparent; height: 100%;">
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
       <span>{{ context.title }}</span>
       <!--      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterCondition">-->
       <!--        <el-option-->
@@ -462,4 +462,24 @@ export default {
 
   background-color: transparent;
 }
+
+/deep/ .el-cascader--mini {
+  line-height: 0.25rem;
+}
+
+/deep/ .el-input--suffix {
+  height: 0.25rem;
+  line-height: 0.25rem;
+}
+
+/deep/ .el-input__inner{
+  height: 0.25rem;
+  line-height: 0.25rem;
+}
+
+/deep/ .el-input__icon{
+  height: 0.25rem;
+  line-height: 0.25rem;
+}
+
 </style>

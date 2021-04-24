@@ -291,5 +291,22 @@ export default {
 </script>
 
 <style scoped>
+/deep/ .el-cascader--mini {
+  line-height: 0.25rem;
+}
 
+/deep/ .el-input--suffix {
+  height: 0.25rem;
+  line-height: 0.25rem;
+}
+
+/deep/ .el-input__inner{
+  height: 0.25rem;
+  line-height: 0.25rem;
+}
+
+/deep/ .el-input__icon{
+  height: 0.25rem;
+  line-height: 0.25rem;
+}
 </style>

@@ -157,7 +157,9 @@
       <!--          </el-row>-->
       <!--        </el-col>-->
       <!--      </el-col>-->
-      <CheckOverview id="check_part"></CheckOverview>
+      <el-col :span="22" id="check_part" style="height: 100%;">
+        <CheckOverview></CheckOverview>
+      </el-col>
     </el-row>
   </el-row>
 </template>

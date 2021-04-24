@@ -4,8 +4,8 @@
     <div style="display: none;">
       {{ getPrjHistoryPerception }}
     </div>
-    <div class="text item level4" style="padding-bottom: 5px">
-      <span>不同专业隐患数量</span>
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
+      <span class="level4">不同专业隐患数量</span>
     </div>
     <div class="title-line" style=""></div>
     <div id="pie2" style="height: 80%; width: 100%"></div>

@@ -1,23 +1,24 @@
 <template>
-<el-card class="box-card-t " shadow="never"
+  <el-card id="check_img_height" class="box-card-t " shadow="never"
            style="background-color: transparent; height: 100%;">
     <div style="display: none">
       {{ getPrjImage }}
     </div>
-    <div class="grid-content bg-purple">
-      <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
-        <span>高风险隐患</span>
-      </div>
-      <div
-          style="color: rgb(247, 10, 10); font-family: Avenir; font-weight: bold; font-style: normal; line-height: normal; font-size: 52px;">
-        <!--              图片播放-->
-
-        <el-carousel indicator-position="none" :interval="3000">
-          <el-carousel-item v-for="item in img_list">
-            <img :src="item.url" alt/>
-          </el-carousel-item>
-        </el-carousel>
-      </div>
+    <!--      <div class="level4" style="padding-bottom: 5px; padding-left: 10px">-->
+    <!--        <span class="level4">高风险隐患</span>-->
+    <!--      </div>-->
+    <!--      <div class="title-line" style=""></div>-->
+    <div style="height: 80%">
+      <!--              图片播放-->
+      <el-carousel indicator-position="none" :interval="3000" :height="dataHeight">
+        <el-carousel-item v-for="item in img_list">
+<!--          <img :src="item.url" alt style="height: 80%"/>-->
+          <el-image
+              style="width: 100%; height: 75%"
+              :src="item.url"
+              :fit="fill"></el-image>
+        </el-carousel-item>
+      </el-carousel>
     </div>
   </el-card>
 </template>
@@ -28,6 +29,12 @@ export default {
   data() {
     return {
       img_list: []
+    }
+  },
+  props: {
+    dataHeight: {
+      type: String,
+      default: '3.5rem'
     }
   },
   computed: {
