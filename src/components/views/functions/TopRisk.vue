@@ -55,7 +55,7 @@
           ref="table"
           height="200"
           stripe
-          style="width: 99%; color: #fff; margin: 3px">
+          style="width: 99%; color: #fff; margin: 3px; font-size: 0.06rem">
         <el-table-column
             type='index'>
         </el-table-column>

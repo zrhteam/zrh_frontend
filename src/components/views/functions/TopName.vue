@@ -17,7 +17,7 @@
           ref="table"
           stripe
           height="2.5rem"
-          style="width: 100%; color: #fff">
+          style="width: 100%; color: #fff; font-size: 0.06rem">
         <el-table-column
              type='index'>
         </el-table-column>

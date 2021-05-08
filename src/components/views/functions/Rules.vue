@@ -15,7 +15,7 @@
           ref="table"
           height="300"
           stripe
-          style="width: 100%; color: #fff">
+          style="width: 100%; color: #fff; font-size: 0.06rem">
         <el-table-column
             property="appear_time"
             :label="context.label1" width="100%">
