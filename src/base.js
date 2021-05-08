@@ -45,6 +45,13 @@ exports.install = function (Vue, options) {
         // 各致因阶段的隐患数量占比情况
         this.$store.dispatch('get_headquarter/getHeadStageRatio')
         // 各分布区域的隐患数量占比情况
+        let param2 = new URLSearchParams();
+        param2.append('headquarter_name', headquarter_name);
+        param2.append('major', 'all');
+        //该检查中在不同专业下属于不同隐患子系统的隐患数量
+        this.$store.commit('get_headquarter/changeParam2', {params: param2})
+        //封装查询的专业，是初始的全部专业还是某专业
+        this.$store.commit('get_headquarter/changeFilterMajor',{data: "全部专业"})
         this.$store.dispatch('get_headquarter/getHeadAreaRatio')
         // 展示按照项目数量对区域排名
         this.$store.dispatch('get_headquarter/getHeadProjectRank')
@@ -369,8 +376,8 @@ exports.install = function (Vue, options) {
                 document.getElementById('region_title1').innerHTML = document.getElementById('head_title1').innerHTML
                 document.getElementById('region_title2').innerHTML = data.label
                 //修改数据大屏页面标题
-                document.getElementById('region_title1_1').innerHTML = document.getElementById('head_title1').innerHTML
-                document.getElementById('region_title2_1').innerHTML = data.label
+                // document.getElementById('region_title1_1').innerHTML = document.getElementById('head_title1').innerHTML
+                // document.getElementById('region_title2_1').innerHTML = data.label
                 //首先要判断当前是在数据大屏页面还是在主页面=>不需要再判断了，大屏页面不要树形控件
                 document.getElementById('head_quarter').style.display = 'none'
                 document.getElementById('region_part').style.display = 'block'
@@ -378,16 +385,16 @@ exports.install = function (Vue, options) {
                 document.getElementById('prj_part').style.display = 'none'
 
                 //为了画出多边形，要重新封装该区域的数据
-                let r_p = [];
-                for (let i in data['children']) {
-                    // alert(data['children'][i])
-                    console.log(data['children'][i]['pos'])
-                }
-                var container = L.DomUtil.get('map_3');
-                if (container != null) {
-                    container._leaflet_id = null;
-                }
-                this.map = new L.map("map_3");
+                // let r_p = [];
+                // for (let i in data['children']) {
+                //     // alert(data['children'][i])
+                //     console.log(data['children'][i]['pos'])
+                // }
+                // var container = L.DomUtil.get('map_3');
+                // if (container != null) {
+                //     container._leaflet_id = null;
+                // }
+                // this.map = new L.map("map_3");
                 // this.map.setView([30,30], 6)
                 // this.map = L.map("map_3", {
                 //   center: [34, 107], // 地图中心
@@ -448,17 +455,18 @@ exports.install = function (Vue, options) {
                 document.getElementById('region_part').style.display = 'block'
                 document.getElementById('region').style.display = 'block'
                 document.getElementById('prj_part').style.display = 'none'
+
                 //为了画出多边形，要重新封装该区域的数据
-                let r_p = [];
-                for (let i in data['children']) {
-                    // alert(data['children'][i])
-                    console.log(data['children'][i]['pos'])
-                }
-                var container = L.DomUtil.get('map_3');
-                if (container != null) {
-                    container._leaflet_id = null;
-                }
-                this.map = new L.map("map_3");
+                // let r_p = [];
+                // for (let i in data['children']) {
+                //     // alert(data['children'][i])
+                //     console.log(data['children'][i]['pos'])
+                // }
+                // var container = L.DomUtil.get('map_3');
+                // if (container != null) {
+                //     container._leaflet_id = null;
+                // }
+                // this.map = new L.map("map_3");
                 // this.map.setView([30,30], 6)
                 // this.map = L.map("map_3", {
                 //   center: [34, 107], // 地图中心

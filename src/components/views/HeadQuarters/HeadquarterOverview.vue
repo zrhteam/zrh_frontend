@@ -112,7 +112,7 @@
           <el-col :span="6" style="height: 100%;">
             <Ratio
                 :context="{
-          title:'不同分布区域隐患数量',
+          title:'不同分布区域隐患数量'+'-'+filter_major,
           id: 'id_head_region'
         }"></Ratio>
           </el-col>
@@ -231,6 +231,9 @@ export default {
       return risk_num
     }
   },
+  updated() {
+    this.filter_major = this.$store.state.get_headquarter.filter_major
+  },
   data() {
     return {
       // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
@@ -258,6 +261,7 @@ export default {
       nowWeek: "",
       nowDate: "",
       nowTime: "",
+      filter_major: ""
     }
   },
   created() {

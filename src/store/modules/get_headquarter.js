@@ -31,6 +31,11 @@ const state = {
     rank_by_check: {},
     //各专业隐患数量占比
     head_major_ratio: {},
+
+    //筛选专业
+    param2: {},
+    //封装查询的专业，是初始的全部专业还是某专业
+    filter_major: '',
     // 各致因阶段的隐患数量占比情况
     head_stage_ratio: {},
     // 各分布区域的隐患数量占比情况
@@ -205,7 +210,7 @@ const actions = {
     },
     // 各分布区域的隐患数量占比情况
     getHeadAreaRatio(context) {
-        dataService.getHeadAreaRatio(context.state.params, function (response) {
+        dataService.getHeadAreaRatio(context.state.param2, function (response) {
             context.commit('changeHeadAreaRatio', response)
         })
     },
@@ -355,6 +360,14 @@ const mutations = {
         } else {
             alert("出错了")
         }
+    },
+    //筛选专业
+    changeParam2(state, data) {
+        state.param2 = data.params
+    },
+    //封装查询的专业，是初始的全部专业还是某专业
+    changeFilterMajor(state, data) {
+        state.filter_major = data.data
     },
     // 各分布区域的隐患数量占比情况
     changeHeadAreaRatio(state, data) {

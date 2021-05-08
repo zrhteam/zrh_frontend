@@ -86,6 +86,13 @@ export default {
               //根据隐患数量显示不同分布区域的占比情况 全发自己做筛选
               _this1.$store.dispatch('get_region/getRegionAreaRatio')
             }else if(_this.context.id == 'id_head_major') {
+              param2.append('major', param.name);
+              param2.append('headquarter_name', _this1.$store.state.get_headquarter.head_name);
+              //该检查中在不同专业下属于不同隐患子系统的隐患数量
+              _this1.$store.commit('get_headquarter/changeParam2', {params: param2})
+              _this1.$store.commit('get_headquarter/changeFilterMajor', {data: param.name})
+              //根据隐患数量显示不同分布区域的占比情况
+              _this1.$store.dispatch('get_headquarter/getHeadAreaRatio')
             }
           }
           myChart.resize();
