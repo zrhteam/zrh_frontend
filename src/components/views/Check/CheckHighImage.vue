@@ -11,12 +11,11 @@
     <div style="height: 80%">
       <!--              图片播放-->
       <el-carousel indicator-position="none" :interval="3000" :height="dataHeight">
-        <el-carousel-item v-for="item in img_list">
-<!--          <img :src="item.url" alt style="height: 80%"/>-->
-          <el-image
-              style="width: 100%; height: 75%"
-              :src="item.url"
-              :fit="fill"></el-image>
+        <el-carousel-item v-for='item in img_list'>
+          <div style="height: 80%">
+            <img :src='item.url' alt style="height: 100%"/>
+            <div style="font-size: 8px; color: #058ddb; padding: 0">{{ item.note }}</div>
+          </div>
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -34,7 +33,7 @@ export default {
   props: {
     dataHeight: {
       type: String,
-      default: '3.5rem'
+      default: '3.2rem'
     }
   },
   computed: {
@@ -48,12 +47,13 @@ export default {
 
       for (let i in data) {
         let obj = {
-          url: ''
+          url: '',
+          note: ''
         }
-        obj.url = 'http://' + data[i]
+        obj['url'] = 'http://' + data[i]['image_url']
+        obj['note'] = data[i]['check_name'] + ": " + data[i]['note']
         this.img_list.push(obj)
       }
-      console.log(this.img_list)
     },
   }
 }

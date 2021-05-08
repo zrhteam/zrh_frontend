@@ -73,8 +73,6 @@ export default {
           myChart.on("click", pieConsole);
 
           function pieConsole(param) {
-            console.log(param.value);
-            console.log(param.name);
             let param2 = new URLSearchParams();
             let _this1 = _this
             if (_this.context.id == 'id_region_major'){
@@ -86,7 +84,7 @@ export default {
               //显示该区域不同专业下各系统隐患占比情况
               _this1.$store.dispatch('get_region/getRegionSystemRatio')
               //根据隐患数量显示不同分布区域的占比情况 全发自己做筛选
-              // _this1.$store.dispatch('get_region/getRegionAreaRatio')
+              _this1.$store.dispatch('get_region/getRegionAreaRatio')
             }else if(_this.context.id == 'id_head_major') {
             }
           }

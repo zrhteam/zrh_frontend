@@ -228,7 +228,7 @@ const actions = {
     },
     //根据隐患数量显示不同分布区域的占比情况
     getRegionAreaRatio(context) {
-        dataService.getRegionAreaRatio(context.state.params, function (response) {
+        dataService.getRegionAreaRatio(context.state.param2, function (response) {
             //console.log(response)
             context.commit('changeRegionAreaRatio', response)
         })
@@ -413,7 +413,6 @@ const mutations = {
     //根据隐患数量显示不同分布区域的占比情况
     changeRegionAreaRatio(state, data) {
         if (data.code === 10000) {
-            // console.log('high', data.data)
             state.region_area_ratio = data.data;
         } else {
             alert("出错了")
