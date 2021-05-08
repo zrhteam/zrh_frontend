@@ -250,7 +250,6 @@ export default {
       },
       map_width: 0,
       map_height: 0,
-      // timer: '',
       input: 'test',
       defaultProps: {
         children: 'children',

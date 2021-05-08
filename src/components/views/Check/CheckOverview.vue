@@ -155,11 +155,12 @@ export default {
         value: '分布区域',
         key: 'area'
       }],
-      filter_major: ''
+      filter_major: '',
     }
   },
   computed: {
     getName() {
+      this.filter_major = this.$store.state.get_check.filter_major
       let data = this.$store.state.get_check.check_sys_name
       this.sys_name = []
       for (let i in data) {
@@ -183,7 +184,6 @@ export default {
         obj['appear_time'] = data[i].appear_time
         this.device_name.push(obj)
       }
-      console.log("log1", this.device_name)
       data = this.$store.state.get_check.check_unit_name
       this.unit_name = []
       for (let i in data) {
@@ -195,7 +195,6 @@ export default {
         obj['appear_time'] = data[i].appear_time
         this.unit_name.push(obj)
       }
-
     }
   },
   updated() {

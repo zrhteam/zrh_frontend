@@ -48,6 +48,8 @@ export default {
     setInterval(() => {
       // 元素自增距离顶部1像素
       divData.scrollTop += 1
+      // let temp = this.context.top_data.shift()
+      // this.context.top_data.push(temp)
       // 判断元素是否滚动到底部(可视高度+距离顶部=整个高度)
       if (divData.clientHeight + divData.scrollTop == divData.scrollHeight) {
         // 重置table距离顶部距离

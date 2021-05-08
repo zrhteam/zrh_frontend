@@ -15,25 +15,25 @@ exports.install = function (Vue, options) {
         //显示每个区域的高风险数量
         this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
 
-        //筛选，默认发condition: major, top: 5
+        //筛选，默认发condition: major, top: 10
         let param3 = new URLSearchParams();
         param3.append('headquarter_name', headquarter_name);
         param3.append('condition', 'major');
-        param3.append('top', 5);
+        param3.append('top', 10);
         this.$store.commit('get_headquarter/changeParam3', {params: param3})
         //显示在不同条件(专业/系统)下隐患数量排名前top的隐患
         this.$store.dispatch('get_headquarter/getInitNumberTop')
         //按年份显示总部的高中低风险等级对应的隐患数量
         this.$store.dispatch('get_headquarter/getHeadRiskLevelYear')
 
-        //筛选，默认发condition: stage,all top: 5
+        //筛选，默认发condition: stage,all top: 10
         let param4 = new URLSearchParams();
         param4.append('headquarter_name', headquarter_name);
         // param4.append('condition', 'risk_level');
         // param4.append('level', 'all');
-        // param4.append('top', 5);
+        // param4.append('top', 10);
         param4.append('flag', 1);
-        param4.append('top', 5);
+        param4.append('top', 10);
         param4.append('stage', '施工');
         this.$store.commit('get_headquarter/changeParam4', {params: param4})
         //显示在不同条件（风险等级/致因阶段/分布区域）下隐患数量排名前top的隐患
@@ -77,20 +77,20 @@ exports.install = function (Vue, options) {
         //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
         this.$store.dispatch('get_region/getInitRegionImage')
 
-        //筛选，默认发condition: major, top: 5
+        //筛选，默认发condition: major, top: 10
         let param3 = new URLSearchParams();
         param3.append('region_name', region_name);
         param3.append('condition', 'major');
-        param3.append('top', 5);
+        param3.append('top', 10);
         this.$store.commit('get_region/changeParam3', {params: param3})
         //显示在不同筛选条件（专业/系统）下隐患数量排名前top的隐患描述
         this.$store.dispatch('get_region/getInitRegionNumberTop')
 
-        //筛选，默认发condition: stage,all top: 5
+        //筛选，默认发condition: stage,all top: 10
         let param4 = new URLSearchParams();
         param4.append('region_name', region_name);
         param4.append('flag', 1);
-        param4.append('top', 5);
+        param4.append('top', 10);
         param4.append('stage', '施工');
         // param4.append('condition', 'risk_level');
         // param4.append('level', 'all');
@@ -167,20 +167,20 @@ exports.install = function (Vue, options) {
         //基于项目级显示在不同专业情况下，隐患区域分布的情况
         this.$store.dispatch('get_project/getInitProjectRegionDistribution')
 
-        //筛选，默认发condition: major, top: 5
+        //筛选，默认发condition: major, top: 10
         let param3 = new URLSearchParams();
         param3.append('project_name', project_name);
         param3.append('condition', 'major');
-        param3.append('top', 5);
+        param3.append('top', 10);
         this.$store.commit('get_project/changeParam3', {params: param3})
         //基于项目级显示在不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述
         this.$store.dispatch('get_project/getInitProjectRiskTop')
 
-        //筛选，默认发condition: stage,all top: 5
+        //筛选，默认发condition: stage,all top: 10
         let param4 = new URLSearchParams();
         param4.append('project_name', project_name);
         param4.append('flag', 1);
-        param4.append('top', 5);
+        param4.append('top', 10);
         param4.append('stage', '施工');
         // param4.append('condition', 'risk_level');
         // param4.append('level', 'all');
@@ -259,21 +259,21 @@ exports.install = function (Vue, options) {
         // major.push(obj)
         // this.$store.commit('get_check/changeAllMajors', {all_majors: major})
 
-        //筛选，默认发condition: major, top: 5
+        //筛选，默认发condition: major, top: 10
         let param3 = new URLSearchParams();
         param3.append('check_code', check_code);
         param3.append('condition', 'major');
-        param3.append('top', 5);
+        param3.append('top', 10);
         this.$store.commit('get_check/changeParam3', {params: param3})
         //在当前检查中，不同筛选条件（专业/系统/设备/组件）下，出现次数排名前top的隐患描述及其出现次数
         this.$store.dispatch('get_check/getCheckRiskTop')
 
-        //筛选，默认发condition: stage,all top: 5
+        //筛选，默认发condition: stage,all top: 10
         let param4 = new URLSearchParams();
         param4.append('check_code', check_code);
         param4.append('flag', 1);
-        param4.append('top', 5);
-        param4.append('stage', '施工');
+        param4.append('top', 10);
+        param4.append('stage', '运营');
         // param4.append('condition', 'risk_level');
         // param4.append('level', 'all');
         // param4.append('top', 5);
