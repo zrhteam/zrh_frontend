@@ -10,7 +10,7 @@
       {{ getRiskLevelYear }}
     </div>
     <div class="text item level4" style="padding-bottom: 5px">
-      <span class="level4">{{ context.title }}</span>
+      <span class="level4" style="padding-right: 5px">{{ context.title }}</span>
       <el-select v-model="year" placeholder="请选择" size="mini" style="max-width: 8em;"
                  @change="filterYear">
         <el-option
