@@ -28,7 +28,7 @@
                style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
             <el-col :span="4" style="height: 100%; ">
               <el-col :span="6" :offset="14" style="height: 100%;">
-                <div style="font-size: 0.3rem; color: #1fedfc; top:0.46rem; position: relative">{{ getRiskSum }}</div>
+                <div style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.36rem; position: relative">{{ getRiskSum }}</div>
               </el-col>
             </el-col>
             <el-col :span="16" style="height: 100%;">
