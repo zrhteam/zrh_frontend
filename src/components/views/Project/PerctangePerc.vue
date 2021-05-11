@@ -24,18 +24,19 @@
     <!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
     <!--    筛选专业条件下属于不同分布区域的隐患数量-->
     <!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
-    <!--    <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">-->
-    <!--    </div>-->
-    <!--    <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">-->
-    <!--    </div>-->
-    <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">
-    </div>
+<!--        <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">-->
+<!--        </div>-->
+<!--        <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">-->
+<!--        </div>-->
+<!--    <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">-->
+<!--    </div>-->
     <!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
     <!--    </div>-->
     <!--    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">-->
     <!--    </div>-->
-    <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">
-    </div>
+<!--    <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">-->
+<!--    </div>-->
+    <div ref='echartContainer' style="height: 80%; width: 100%;"/>
   </el-card>
 </template>
 
@@ -49,21 +50,26 @@ export default {
   data() {
     return {
       value: '',
-      option: ''
+      option: '',
+      echartContainer: null,
+      myChart: null,
+      renderSign: false,
+      pie_data:[]
     }
   },
   methods: {
     drawBarChart() {
-      this.$nextTick(_ => {
-        let myChart;
-        myChart = this.$echarts.init(document.getElementById(this.context.id))
-        let arr = this.getData
+      // this.$nextTick(_ => {
+        // let myChart;
+        // myChart = this.$echarts.init(document.getElementById(this.context.id))
+        // let arr = this.getData
         // bar_option['dataset']['source'] = arr
         // bar_option["xAxis"]["axisLabel"]["rotate"] = 45
         // myChart.setOption(bar_option);
         // console.log("arr", arr)
-        if (arr.length != 0) {
-          pie_option['series'][0]['data'] = arr
+        // if (arr.length != 0) {
+      let arr = this.pie_data
+          pie_option['series'][0]['data'] = this.pie_data
           pie_option["legend"]["formatter"] = function (params) {
             var legendIndex = 0;
             arr.forEach(function (v, i) {
@@ -73,29 +79,29 @@ export default {
             });
             return params + " " + arr[legendIndex].value;
           }
-          myChart.setOption(pie_option);
-          myChart.resize();
-          window.addEventListener('resize', function () {
-            myChart.resize();
-          })
-          const _this = this;
-          const erd = elementResizeDetectorMaker();
-          erd.listenTo(document.getElementById(this.context.id), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-        } else if (this.context.id) {
-          this.$nextTick(() => {
-            const dom = document.getElementById(this.context.id)
-            dom.innerHTML = '暂无数据'
-            dom.style.color = '#ffffff'
-            dom.style.fontSize = '14px'
-            dom.removeAttribute("_echarts_instance_")
-          })
-        }
-      })
+          this.myChart.setOption(pie_option);
+          // this.myChart.resize();
+          // window.addEventListener('resize', function () {
+          //   this.myChart.resize();
+          // })
+          // const _this = this;
+          // const erd = elementResizeDetectorMaker();
+          // erd.listenTo(document.getElementById(this.context.id), element => {
+          //   _this.$nextTick(() => {
+          //     //监听到事件后执行的业务逻辑
+          //     myChart.resize();
+          //   });
+          // });
+        // } else if (this.context.id) {
+        //   this.$nextTick(() => {
+        //     const dom = document.getElementById(this.context.id)
+        //     dom.innerHTML = '暂无数据'
+        //     dom.style.color = '#ffffff'
+        //     dom.style.fontSize = '14px'
+        //     dom.removeAttribute("_echarts_instance_")
+        //   })
+        // }
+      // })
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
@@ -311,28 +317,40 @@ export default {
       }
       arr.sort(this.sortNumber('value', true))
       let new_arr = []
+      this.pie_data = []
       let obj = {
         value: 0,
         name: '其它'
       }
       for (let ii = 0; ii < arr.length; ii++) {
         if (ii < 5) {
+          this.pie_data.push(arr[ii])
           new_arr.push(arr[ii])
         } else {
           obj.value += arr[ii].value
         }
       }
       if (obj.value > 0) {
+        this.pie_data.push(arr[ii])
         new_arr.push(obj)
       }
-      return new_arr
+      console.log("aaaa", this.pie_data)
+      this.renderSign = !this.renderSign
+      // return new_arr
     },
   },
-  updated() {
-    this.drawBarChart()
+  watch: {
+    renderSign() {
+      this.drawBarChart()
+    }
   },
+  // updated() {
+  //   this.drawBarChart()
+  // },
   mounted() {
-    this.drawBarChart();
+    // this.drawBarChart();
+    this.echartContainer = this.$refs.echartContainer;
+    this.myChart = this.$echarts.init(this.echartContainer)
   },
   created() {
     this.value = '全部专业'

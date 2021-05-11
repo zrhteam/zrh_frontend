@@ -76,12 +76,12 @@ export default {
 
         function pieConsole(param) {
           //     获取data长度
-          console.log(pie_option.series[0].data.length);
+          // console.log(pie_option.series[0].data.length);
           //      获取地N个data的值
           // 　　alert(option.series[0].data[i]);
           //     获取series中param.dataIndex事件对应的值
-          console.log(param.value);
-          console.log(param.name);
+          // console.log(param.value);
+          // console.log(param.name);
           let param2 = new URLSearchParams();
           param2.append('project_name', _this.$store.state.get_project.prj_name);
           param2.append('major', param.name);

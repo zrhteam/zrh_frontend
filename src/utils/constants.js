@@ -334,6 +334,7 @@ export const pie_option = {
             center: ['50%', '50%'],
             // minAngle: 5, //最小的扇区角度
             // startAngle: 45, //起始角度
+            hoverAnimation:false,
             label: {
                 normal: {
                     show: false,
