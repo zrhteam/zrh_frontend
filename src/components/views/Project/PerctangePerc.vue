@@ -230,7 +230,6 @@ export default {
         if (this.context.id == 'id_region')
           data = this.$store.state.get_project.prj_region
         else data = this.$store.state.get_check.check_region
-        debugger
         for (let i in data) {
           for (let j in data[i]) {
             let obj = {
