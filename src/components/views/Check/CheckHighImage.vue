@@ -10,11 +10,11 @@
     <!--      <div class="title-line" style=""></div>-->
     <div style="height: 80%">
       <!--              图片播放-->
-      <el-carousel indicator-position="none" :interval="3000" :height="dataHeight">
+      <el-carousel indicator-position="none" :interval="300000" :height="dataHeight">
         <el-carousel-item v-for='item in img_list'>
-          <div style="height: 80%">
-            <img :src='item.url' alt style="height: 100%"/>
-            <div style="font-size: 8px; color: #058ddb; padding: 0">{{ item.note }}</div>
+          <div style="height: 84%">
+            <el-image :src='item.url' alt style="height: 95%"/>
+            <div style="height: 5%;font-size: 8px; color: #058ddb; padding: 0">{{ item.note }}</div>
           </div>
         </el-carousel-item>
       </el-carousel>
@@ -33,7 +33,7 @@ export default {
   props: {
     dataHeight: {
       type: String,
-      default: '3.2rem'
+      default: '3rem'
     }
   },
   computed: {

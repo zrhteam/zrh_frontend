@@ -230,6 +230,7 @@ export default {
         if (this.context.id == 'id_region')
           data = this.$store.state.get_project.prj_region
         else data = this.$store.state.get_check.check_region
+        debugger
         for (let i in data) {
           for (let j in data[i]) {
             let obj = {
@@ -331,10 +332,9 @@ export default {
         }
       }
       if (obj.value > 0) {
-        this.pie_data.push(arr[ii])
+        this.pie_data.push(obj)
         new_arr.push(obj)
       }
-      console.log("aaaa", this.pie_data)
       this.renderSign = !this.renderSign
       // return new_arr
     },

@@ -119,7 +119,8 @@ export const bar_option = {
 export const bar_option2 = {
     legend: {
         textStyle: {
-            color: '#058ddb',
+            // color: '#058ddb',
+            color: '#ffffff',
             fontSize: fontSize(0.1),
             itemHeight: fontSize(0.10),
             itemGap: fontSize(0.10),
@@ -318,9 +319,10 @@ export const pie_option = {
         icon: "circle",
         itemHeight: fontSize(0.10),
         itemGap: fontSize(0.10),
-        left: toString(fontSize(0.10)),
+        left: fontSize(0.2),
         textStyle: {
-            color: '#058ddb',
+            // color: '#058ddb',
+            color: '#ffffff',
             fontSize: fontSize(0.1),
             itemHeight: fontSize(0.10),
             itemGap: fontSize(0.10),
@@ -413,7 +415,8 @@ export const line_option = {
     },
     legend: {
         textStyle: {
-            color: '#058ddb',
+            // color: '#058ddb',
+            color: '#ffffff',
             fontSize: fontSize(0.1),
             itemHeight: fontSize(0.10),
             itemGap: fontSize(0.10),
