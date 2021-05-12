@@ -68,7 +68,7 @@ export default {
     drawBarChart() {
       this.$nextTick(_ => {
             let myChart = this.$echarts.init(document.getElementById(this.context.id1))
-            bar_option['dataset']['source'] = this.major_o1
+            bar_option['dataset'][0]['source'] = this.major_o1
             myChart.setOption(bar_option);
 
             let data = this.$store.state.get_comparison.by_major
@@ -108,7 +108,7 @@ export default {
 
             setTimeout(() => {
               myChart = this.$echarts.init(document.getElementById(this.context.id2))
-              bar_option['dataset']['source'] = this.major_o2
+              bar_option['dataset'][0]['source'] = this.major_o2
               myChart.setOption(bar_option);
               myChart.on('click', function (params) {
               let sys = []
@@ -149,7 +149,7 @@ export default {
     nextDrawBarChart(id, arr) {
       this.$nextTick(_ => {
             let myChart = this.$echarts.init(document.getElementById(id))
-            bar_option['dataset']['source'] = arr
+            bar_option['dataset'][0]['source'] = arr
             myChart.setOption(bar_option);
 
             let data = this.$store.state.get_comparison.by_major

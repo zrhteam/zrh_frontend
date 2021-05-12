@@ -95,10 +95,11 @@ export default {
   methods: {
     drawBarChart() {
       this.$nextTick(_ => {
+        debugger
             let myChart = this.$echarts.init(document.getElementById(this.context.id1))
-            bar_option["grid"]["y2"] = '50%'
+            bar_option["grid"]["bottom"] = '40%'
             bar_option["xAxis"]["axisLabel"]["rotate"] = 20
-            bar_option['dataset']['source'] = this.o1
+            bar_option['dataset'][0]['source'] = this.o1
             myChart.setOption(bar_option);
             myChart.resize();
             window.addEventListener('resize', function () {
@@ -115,7 +116,7 @@ export default {
 
             setTimeout(() => {
               myChart = this.$echarts.init(document.getElementById(this.context.id2))
-              bar_option['dataset']['source'] = this.o2
+              bar_option['dataset'][0]['source'] = this.o2
               myChart.setOption(bar_option);
               myChart.resize();
               window.addEventListener('resize', function () {
@@ -226,90 +227,90 @@ export default {
   },
   mounted() {
     this.drawBarChart()
-    const self = this;//因为箭头函数会改变this指向，指向windows。所以先把this保存
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.area_chart1);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.area_chart2);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.stage_chart1);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.stage_chart2);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.risk_chart1);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.risk_chart2);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.module_chart1);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.module_chart2);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.equip_chart1);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.equip_chart2);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.system_chart1);
-        self.chart.resize()
-      })
-    }, 10)
-    setTimeout(() => {
-      window.addEventListener('resize', function () {
-        self.chart = self.$echarts.init(self.$refs.system_chart2);
-        self.chart.resize()
-      })
-    }, 10)
+    // const self = this;//因为箭头函数会改变this指向，指向windows。所以先把this保存
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.area_chart1);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.area_chart2);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.stage_chart1);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.stage_chart2);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.risk_chart1);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.risk_chart2);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.module_chart1);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.module_chart2);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.equip_chart1);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.equip_chart2);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.system_chart1);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
+    // setTimeout(() => {
+    //   window.addEventListener('resize', function () {
+    //     self.chart = self.$echarts.init(self.$refs.system_chart2);
+    //     self.chart.resize()
+    //   })
+    // }, 10)
   },
-  destroyed() {
-    let myChart = this.$echarts.init(document.getElementById(this.context.id1))
-    window.removeEventListener('resize', function () {
-      myChart.resize();
-    })
-    myChart = this.$echarts.init(document.getElementById(this.context.id2))
-    window.removeEventListener('resize', function () {
-      myChart.resize();
-    })
-  }
+  // destroyed() {
+  //   let myChart = this.$echarts.init(document.getElementById(this.context.id1))
+  //   window.removeEventListener('resize', function () {
+  //     myChart.resize();
+  //   })
+  //   myChart = this.$echarts.init(document.getElementById(this.context.id2))
+  //   window.removeEventListener('resize', function () {
+  //     myChart.resize();
+  //   })
+  // }
 }
 </script>
 

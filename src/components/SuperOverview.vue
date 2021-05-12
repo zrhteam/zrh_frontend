@@ -104,7 +104,8 @@ export default {
       this.$router.push({path: '/data_compare'});
     },
     enterDataInsight() {
-      this.$router.push({path: '/analyze'});
+      // this.$router.push({path: '/analyze'});
+      this.$router.push({path: '/data_compare'});
     },
     Click() {
       alert("click")
