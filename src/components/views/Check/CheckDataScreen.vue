@@ -59,14 +59,6 @@
           <div style="display: none">
             {{ getName }}
           </div>
-<!--          <el-row style="height: 32%; margin-bottom: 1%">-->
-<!--            <TopName-->
-<!--                :context="{title:'最容易出现隐患的设备', top_data:this.device_name, label1:'设备名称', label2:'出现频率'}"></TopName>-->
-<!--          </el-row>-->
-<!--          <el-row style="height: 32%; margin-bottom: 1%">-->
-<!--            <TopName-->
-<!--                :context="{title:'最容易出现隐患的组件', top_data:this.unit_name, label1:'组件名称', label2:'出现频率'}"></TopName>-->
-<!--          </el-row>-->
           <el-row style="height: 32%; margin-bottom: 1%">
             <CheckHighImage></CheckHighImage>
           </el-row>
