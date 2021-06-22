@@ -1,10 +1,10 @@
 <template>
-  <div style="height: 100%">
+<div style="height: 100%">
     <div>{{ getData }}</div>
     <el-row style="height: 10%" class="boundary-A">
       <div class="absolute-layer" style="width: 544px; height: 56px; left: 0px; top: 0px;">
         <div class="title" style="width: 544px; height: 56px; font-size: 39px;">
-          总部隐患大屏
+          区域隐患大屏
         </div>
       </div>
     </el-row>
@@ -34,7 +34,7 @@ import HeadMap from "@/components/views/BigScreen/HeadMap.vue";
 import DangerNumber from "@/components/views/BigScreen/DangerNumber.vue";
 
 export default {
-  name: "NewHeadScreen",
+name: "NewRegionScreen",
   components: {DangerNumber, HeadMap},
   computed: {
     getData() {
@@ -63,69 +63,19 @@ export default {
   },
   created() {
     let param = new URLSearchParams();
-    param.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
+    param.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
     this.$store.commit('get_screen/changeParams', {params: param})
-    this.$store.dispatch('get_screen/getHeadScreenRiskNumber')
-    this.$store.dispatch('get_screen/getHeadScreenRiskNumberRank')
-    this.$store.dispatch('get_screen/getHeadScreenMajorNumber')
-    this.$store.dispatch('get_screen/getHeadScreenCheckNumberRank')
-    this.$store.dispatch('get_screen/getHeadScreenMajorStageInfo')
-    this.$store.dispatch('get_screen/getHeadScreenAreaNumber')
-    this.$store.dispatch('get_screen/getHeadScreenTable')
+    this.$store.dispatch('get_screen/getRegionScreenRiskNumber')
+    this.$store.dispatch('get_screen/getRegionScreenRNRank')
+    this.$store.dispatch('get_screen/getRegionScreenMajorNumber')
+    this.$store.dispatch('get_screen/getRegionScreenCNRank')
+    this.$store.dispatch('get_screen/getRegionScreenMajorStageInfo')
+    this.$store.dispatch('get_screen/getRegionScreenAreaNumber')
+    this.$store.dispatch('get_screen/getRegionScreenTable')
   }
 }
 </script>
 
 <style scoped>
-.boundary-A {
-  border: 1px dashed #fff
-}
-
-.absolute-layer {
-  position: absolute !important;
-  z-index: 0;
-  transform: rotate(0deg);
-  opacity: 1;
-  pointer-events: none;
-}
-
-.title {
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: rgb(255, 255, 255);
-  font-weight: bold;
-  font-family: 'Microsoft Yahei';
-  writing-mode: horizontal-tb;
-  letter-spacing: 0px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.card-label {
-  pointer-events: auto;
-  background-image: url("../assets/card-title.png");
-  border-radius: 0px;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.card-title {
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: rgb(255, 255, 255);
-  font-weight: normal;
-  font-family: "Microsoft Yahei";
-  writing-mode: horizontal-tb;
-  letter-spacing: 0px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
 
 </style>

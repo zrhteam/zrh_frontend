@@ -228,13 +228,16 @@ export default {
       prj_small.style.width = "99%"
       if (document.getElementById('prj_charts').style.display === 'none') {
         document.getElementById('check_charts').style.display = 'block'
+        this.$router.push({path: '/new_check_screen'});
       }
       if (document.getElementById('prj_subpart').style.display === 'block') {
         document.getElementById('check_charts').style.display = 'none'
         document.getElementById('prj_charts').style.display = 'block'
+        this.$router.push({path: '/new_project_screen'});
       } else if (document.getElementById('check_part').style.display === 'block') {
         document.getElementById('check_charts').style.display = 'block'
         document.getElementById('prj_charts').style.display = 'none'
+        this.$router.push({path: '/new_check_screen'});
       }
     },
     //PrjOverview.vue中的map_1首先被加载

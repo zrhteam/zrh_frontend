@@ -10,6 +10,8 @@ import SuperOverview from "@/components/SuperOverview.vue";//对应超级用户�
 import DataCompare from "@/components/DataCompare.vue";//对应数据分析那一块
 //由于数据大屏拷贝链接直接展示的功能，为每个数据大屏各开一个链接
 import NewHeadScreen from "@/components/NewHeadScreen.vue";
+import NewRegionScreen from "@/components/NewRegionScreen.vue";
+import NewProjectScreen from "@/components/NewProjectScreen.vue";
 import NewCheckScreen from "@/components/NewCheckScreen.vue";
 const routerOptions = [
     {path: '/', component: 'Login', meta: {keepAlive: false}},
@@ -24,6 +26,8 @@ const routerOptions = [
     {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive:false}},
     {path: '/data_compare', component: 'DataCompare', meta: {keepAlive:false}},
     {path: '/new_head_screen', component: 'NewHeadScreen'},
+    {path: '/new_region_screen', component: 'NewRegionScreen'},
+    {path: '/new_project_screen', component: 'NewProjectScreen'},
     {path: '/new_check_screen', component: 'NewCheckScreen'},
     {path: '*', component: 'NotFound'}
 ]
@@ -47,6 +51,8 @@ const router = new Router({
         {path: '/super_overview', component: 'SuperOverview'},
         {path: '/data_compare', component: 'DataCompare'},
         {path: '/new_head_screen', component: 'NewHeadScreen'},
+        {path: '/new_region_screen', component: 'NewRegionScreen'},
+        {path: '/new_project_screen', component: 'NewProjectScreen'},
         {path: '/new_check_screen', component: 'NewCheckScreen'},
         {path: '*', component: 'NotFound'}
     ]

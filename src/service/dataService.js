@@ -1738,7 +1738,7 @@ function getProjectScreenRiskNumber(param, callback) {
  * Parameter: pid, type
  * Return: 几种图表数据中的一种 (json)
  */
-function getProjectScreenRNRanK(param, callback) {
+function getProjectScreenRNRank(param, callback) {
     const url = `${dataServerUrl}/project_ls/project_ls_risk_num_rank`
     axios.post(url, param)
         .then(response => {
@@ -1790,7 +1790,7 @@ function getProjectScreenStageRatio(param, callback) {
  * Return: 几种图表数据中的一种 (json)
  */
 function getProjectScreenHighRiskNote(param, callback) {
-    const url = `${dataServerUrl}/project_ls/project_ls_stage_ratio`
+    const url = `${dataServerUrl}/project_ls/project_ls_high_risk_note`
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -1853,7 +1853,7 @@ function getCheckScreenRiskNumber(param, callback) {
 
 /*
  * FunctionName: getCheckScreenRNRank RiskNumber
- * Purpose: 检查数据大屏高中低风险的数量
+ * Purpose: 检查数据大屏不同专业的隐患数量
  * Parameter: pid, type
  * Return: 几种图表数据中的一种 (json)
  */
@@ -2053,7 +2053,7 @@ export default {
     getRegionScreenAreaNumber,
     getRegionScreenTable,
     getProjectScreenRiskNumber,
-    getProjectScreenRNRanK,
+    getProjectScreenRNRank,
     getProjectScreenRiskLevel,
     getProjectScreenStageRatio,
     getProjectScreenHighRiskNote,

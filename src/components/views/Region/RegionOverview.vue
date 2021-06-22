@@ -205,7 +205,8 @@ export default {
       // region_small.style.width = "500px"
       // region_small.style.width = "99%"
 
-      this.showDataScreen = true
+      // this.showDataScreen = true
+      this.$router.push({path: '/new_region_screen'});
     },
     outRegionDataScreen() {
       this.showDataScreen = false

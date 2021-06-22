@@ -188,9 +188,8 @@
 
 <script>
 import CheckScreenCarousel from "@/components/views/Check/CheckScreenCarousel.vue";
-
 export default {
-  name: "NewCheckScreen",
+name: "NewProjectScreen",
   components: {CheckScreenCarousel},
   data() {
     return {
@@ -233,7 +232,6 @@ export default {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
-
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
@@ -271,15 +269,15 @@ export default {
   },
   created() {
     let param = new URLSearchParams();
-    param.append('check_code', this.$store.state.get_check.check_code);
+    param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
     this.$store.commit('get_screen/changeParams', {params: param})
-    this.$store.dispatch('get_screen/getCheckScreenRiskNumber')
-    this.$store.dispatch('get_screen/getCheckScreenRNRank')
-    this.$store.dispatch('get_screen/getCheckScreenRiskLevel')
-    this.$store.dispatch('get_screen/getCheckScreenStageRatio')
-    this.$store.dispatch('get_screen/getCheckScreenHighRiskNote')
-    this.$store.dispatch('get_screen/getCheckScreenPictureNote')
-    this.$store.dispatch('get_screen/getCheckScreenTable')
+    this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
+    this.$store.dispatch('get_screen/getProjectScreenRNRank')
+    this.$store.dispatch('get_screen/getProjectScreenRiskLevel')
+    this.$store.dispatch('get_screen/getProjectScreenStageRatio')
+    this.$store.dispatch('get_screen/getProjectScreenHighRiskNote')
+    this.$store.dispatch('get_screen/getProjectScreenPictureNote')
+    this.$store.dispatch('get_screen/getProjectScreenTable')
   }
 }
 </script>
