@@ -156,14 +156,15 @@ export default {
   },
   methods: {
     intoHeadDataScreen() {
-      let head_large1 = document.getElementById('head_large1');
-      head_large1.style.display = 'none'
-      let head_large2 = document.getElementById('head_large2');
-      head_large2.style.display = 'none'
-      let head_small = document.getElementById('head_small');
-      head_small.style.display = 'block'
-      head_small.style.width = "500px"
-      head_small.style.width = "99%"
+      // let head_large1 = document.getElementById('head_large1');
+      // head_large1.style.display = 'none'
+      // let head_large2 = document.getElementById('head_large2');
+      // head_large2.style.display = 'none'
+      // let head_small = document.getElementById('head_small');
+      // head_small.style.display = 'block'
+      // head_small.style.width = "500px"
+      // head_small.style.width = "99%"
+      this.$router.push({path: '/new_head_screen'});
       document.getElementById('region_part').style.display = 'none'
     },
     intoDataAnalysis() {

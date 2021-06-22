@@ -241,12 +241,12 @@
 <!--  /*//   position: absolute;*/-->
 <!--}-->
 <!--</style>-->
-<template>
-<SubRegister></SubRegister>
-</template>
-<script>
-import SubRegister from "@/components/views/SubRegister.vue";
-export default {
-  components: {SubRegister}
-}
-</script>
+<!--<template>-->
+<!--<SubRegister></SubRegister>-->
+<!--</template>-->
+<!--<script>-->
+<!--import SubRegister from "@/components/views/SubRegister.vue";-->
+<!--export default {-->
+<!--  components: {SubRegister}-->
+<!--}-->
+<!--</script>-->

@@ -25,6 +25,7 @@ import get_region from '@/store/modules/get_region';
 import get_login from '@/store/modules/get_login'
 import get_check from '@/store/modules/get_check'
 import get_comparison from '@/store/modules/get_comparison'
+import get_screen from '@/store/modules/get_screen'
 
 Vue.use(Vuex)
 
@@ -39,7 +40,8 @@ export default new Vuex.Store({
         get_region,
         get_login,
         get_check,
-        get_comparison
+        get_comparison,
+        get_screen
     },
     strict: debug
 })
