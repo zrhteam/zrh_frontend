@@ -5,7 +5,7 @@
         {{ getPrjImage }}
       </div>
       <div class="title-wrapper">
-        {{major_name}}专业-实时隐患图片
+        {{ major_name }}专业-实时隐患图片
       </div>
     </div>
     <div class="slide">
@@ -13,7 +13,10 @@
         <el-carousel indicator-position="none" :interval="300000" :height="dataHeight">
           <el-carousel-item v-for='item in img_list'>
             <div style="height: 84%">
-              <div style="position: absolute; width: 100%; min-height: 20px; opacity: 1; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3">{{ item.note }}</div>
+              <div
+                  style="position: absolute; width: 100%; min-height: 20px; opacity: 1; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3">
+                {{ item.note }}
+              </div>
               <el-image :src='item.url' alt style="height: 95%"/>
             </div>
           </el-carousel-item>
@@ -43,8 +46,64 @@ export default {
   },
   computed: {
     getPrjImage() {
-      let data = this.$store.state.get_screen.projects_picture_note;
+      let data
       if (this.context.sign == "project-fire") {
+        data = this.$store.state.get_screen.projects_picture_note;
+      } else if (this.context.sign == "check-fire") {
+        data = this.$store.state.get_screen.checks_picture_note;
+      }
+      if (this.context.sign == "project-fire" || this.context.sign == "check-fire") {
+        for (let i in data['消防专业']) {
+          let obj = {
+            url: '',
+            note: ''
+          }
+          obj['url'] = 'http://' + data['消防专业'][i]['image_url']
+          obj['note'] = data['消防专业'][i]['note']
+          this.img_list.push(obj)
+        }
+      }
+
+      if (this.context.sign == "project-lift") {
+        data = this.$store.state.get_screen.projects_picture_note;
+      } else if (this.context.sign == "check-lift") {
+        data = this.$store.state.get_screen.checks_picture_note;
+      }
+      if (this.context.sign == "project-lift" || this.context.sign == "check-lift") {
+        for (let i in data['电梯专业']) {
+          let obj = {
+            url: '',
+            note: ''
+          }
+          obj['url'] = 'http://' + data['电梯专业'][i]['image_url']
+          obj['note'] = data['电梯专业'][i]['note']
+          this.img_list.push(obj)
+        }
+      }
+
+      if (this.context.sign == "project-electric") {
+        data = this.$store.state.get_screen.projects_picture_note;
+      } else if (this.context.sign == "check-electric") {
+        data = this.$store.state.get_screen.checks_picture_note;
+      }
+      if (this.context.sign == "project-electric" || this.context.sign == "check-electric") {
+        for (let i in data['电气专业']) {
+          let obj = {
+            url: '',
+            note: ''
+          }
+          obj['url'] = 'http://' + data['电气专业'][i]['image_url']
+          obj['note'] = data['电气专业'][i]['note']
+          this.img_list.push(obj)
+        }
+      }
+
+      if (this.context.sign == "project-fuel") {
+        data = this.$store.state.get_screen.projects_picture_note;
+      } else if (this.context.sign == "check-fuel") {
+        data = this.$store.state.get_screen.checks_picture_note;
+      }
+      if (this.context.sign == "project-fuel" || this.context.sign == "check-fuel") {
         for (let i in data['燃气专业']) {
           let obj = {
             url: '',

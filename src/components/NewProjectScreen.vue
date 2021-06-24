@@ -45,7 +45,8 @@
             </div>
             <div class="counter-container">
               <span class="numbers" style="color:rgb(255, 139, 0); font-size: 0.32rem">
-                <NumCounter :value=this.mid_risk class="text-color-blue nums" style="color: rgb(255, 139, 0)"></NumCounter>
+                <NumCounter :value=this.mid_risk class="text-color-blue nums"
+                            style="color: rgb(255, 139, 0)"></NumCounter>
               </span>
               <span class="suffix" style="font-size: 0.2rem">例</span>
             </div>
@@ -86,7 +87,8 @@
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
                   <span class="numbers" style="font-size: 0.32rem">
-                    <NumCounter :value=this.fire_num class="text-color-blue nums"></NumCounter></span>
+                    <NumCounter :value=this.fire_num class="text-color-blue nums"></NumCounter>
+                  </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
                 </div>
               </div>
@@ -181,36 +183,38 @@
           </div>
         </el-row>
         <el-row style="height: 36%" class="boundary-A">
-          <StageRatio></StageRatio>
+          <StageRatio
+          :context="{sign: 'project-stage'}"></StageRatio>
         </el-row>
       </el-col>
-      <el-col :span="6" class="boundary-A" :offset="12" style="height: 75%">
-        <el-row style="height: 32%" class="boundary-A">
-          <div
-              class="risk-wrapper" style="height: 0.45rem; left: 0px; top: 0px;">
+      <el-col :span=" 6
+          " class="boundary-A" :offset="12" style="height: 75%">
+          <el-row style="height: 32%" class="boundary-A">
             <div
-                style="width: 4.7rem; height: 0.45rem; pointer-events: auto; border: none; border-radius: 10px 10px 0px 0px; background: rgb(255, 255, 255); backdrop-filter: blur(30px);">
+                class="risk-wrapper" style="height: 0.45rem; left: 0px; top: 0px;">
+              <div
+                  style="width: 4.7rem; height: 0.45rem; pointer-events: auto; border: none; border-radius: 10px 10px 0px 0px; background: rgb(255, 255, 255); backdrop-filter: blur(30px);">
+              </div>
             </div>
-          </div>
-          <div
-              class="risk-wrapper" style="height: 0.35rem; left: 12px; top: 0.1rem;">
             <div
-                style="width: 25px; height: 25px; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b7df2458e43133e6310d7302df79b2dc.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
-          </div>
-          <div
-              class="risk-wrapper" style="height: 0.35rem; left: 48px; top: 0.1rem;">
-            <div
-                style="width: 4.7rem; height: 0.35rem; pointer-events: auto; display: flex; align-items: center; justify-content: flex-start; color: rgb(255, 0, 0); font-weight: bold; font-family: 'Microsoft Yahei'; font-size: 0.2rem; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-              实时高风险隐患警告
+                class="risk-wrapper" style="height: 0.35rem; left: 12px; top: 0.1rem;">
+              <div
+                  style="width: 25px; height: 25px; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b7df2458e43133e6310d7302df79b2dc.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
             </div>
-          </div>
-          <div
-              style="position: absolute; width: 4.7rem; height: 1.65rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
-            <HighRiskNote :noteList="noteList" :tableHeight="tableHeight" :noteHeader="noteHeader">
-            </HighRiskNote>
-          </div>
+            <div
+                class="risk-wrapper" style="height: 0.35rem; left: 48px; top: 0.1rem;">
+              <div
+                  style="width: 4.7rem; height: 0.35rem; pointer-events: auto; display: flex; align-items: center; justify-content: flex-start; color: rgb(255, 0, 0); font-weight: bold; font-family: 'Microsoft Yahei'; font-size: 0.2rem; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                实时高风险隐患警告
+              </div>
+            </div>
+            <div
+                style="position: absolute; width: 4.7rem; height: 1.65rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
+              <HighRiskNote :noteList="noteList" :tableHeight="tableHeight" :noteHeader="noteHeader">
+              </HighRiskNote>
+            </div>
 
-        </el-row>
+          </el-row>
       </el-col>
       <el-col :span="24" class="boundary-A" style="height: 25%">
         <div class="record">
@@ -299,7 +303,8 @@ export default {
       noteHeader: [
         // {prop: 'position', label: '隐患位置', width: "80"},
         {prop: 'note', label: '隐患描述', width: "350"}
-      ]
+      ],
+      num_flag: false
     }
   },
   computed: {
@@ -326,31 +331,35 @@ export default {
     this.mid_risk = data.risk_level_ratio['2']
     this.low_risk = data.risk_level_ratio['1']
 
-    //自定义字符串,用于拼接标签
-    var numStr = "";
-    //自定义数组
-    var numArr = [];
-    var num = this.$store.state.get_screen.projects_risk_num.risk_num
-    while (num / 10) {
-      numArr.unshift(num % 10)
-      num = Math.floor(num / 10)
-    }
-    /****forEach循环****/
-    numArr.forEach(e => {
-      numStr += `<span class="number">${e}</span>`;
-    })
-    //拼接完字符串数组后用innerHTML把它渲染到页面中
-    document.getElementById("real-number").innerHTML = numStr
-    let numbers = document.getElementsByClassName("number")
-    if (numbers) {
-      for (let i = 0; i < numbers.length; i++) {
-        let number = numbers[i]
-        number.style.backgroundColor = '#ff6300'
-        number.style.display = 'inline-block'
-        number.style.fontWeight = 'bolder'
-        number.style.marginRight = '0.15rem'
-        number.style.borderRadius = '6px'
-
+    if (this.num_flag == false) {
+      //自定义字符串,用于拼接标签
+      var numStr = "";
+      //自定义数组
+      var numArr = [];
+      var num = this.$store.state.get_screen.projects_risk_num.risk_num
+      if (typeof (num) == "number") {
+        this.num_flag = true
+        while (num / 10) {
+          numArr.unshift(num % 10)
+          num = Math.floor(num / 10)
+        }
+        /****forEach循环****/
+        numArr.forEach(e => {
+          numStr += `<span class="number">${e}</span>`;
+        })
+        //拼接完字符串数组后用innerHTML把它渲染到页面中
+        document.getElementById("real-number").innerHTML = numStr
+        let numbers = document.getElementsByClassName("number")
+        if (numbers) {
+          for (let i = 0; i < numbers.length; i++) {
+            let number = numbers[i]
+            number.style.backgroundColor = '#ff6300'
+            number.style.display = 'inline-block'
+            number.style.fontWeight = 'bolder'
+            number.style.marginRight = '0.15rem'
+            number.style.borderRadius = '6px'
+          }
+        }
       }
     }
 
@@ -375,11 +384,11 @@ export default {
   },
   methods: {
     cellClassName({row, column, rowIndex, columnIndex}) {
-      if(column.property == 'note')
+      if (column.property == 'note')
         return "CellNote"
-      else if(column.property == 'rule_name')
+      else if (column.property == 'rule_name')
         return "CellRule"
-      else if(column.property == 'clause_contact')
+      else if (column.property == 'clause_contact')
         return "CellClauseContact"
     },
     setNowTimes() {
@@ -599,27 +608,27 @@ export default {
 
 }
 
-/deep/ .el-table td .cell{
+/deep/ .el-table td .cell {
   overflow: hidden;
   z-index: 2;
 }
 
-/deep/ .CellNote{
+/deep/ .CellNote {
   overflow: hidden;
   white-space: nowrap;
 }
 
-/deep/ .CellRule{
+/deep/ .CellRule {
   overflow: hidden;
   white-space: nowrap;
 }
 
-/deep/ .CellClauseContact{
+/deep/ .CellClauseContact {
   overflow: hidden;
   white-space: nowrap;
 }
 
-/deep/ .CellNote .cell{
+/deep/ .CellNote .cell {
   overflow: hidden;
   white-space: nowrap;
   animation: 3s wordsLoop1 linear infinite normal;
@@ -649,7 +658,7 @@ export default {
   }
 }
 
-/deep/ .CellRule .cell{
+/deep/ .CellRule .cell {
   overflow: hidden;
   white-space: nowrap;
   animation: 3s wordsLoop2 linear infinite normal;
@@ -678,7 +687,7 @@ export default {
   }
 }
 
-/deep/ .CellClauseContact .cell{
+/deep/ .CellClauseContact .cell {
   overflow: hidden;
   white-space: nowrap;
   animation: 3s wordsLoop3 linear infinite normal;

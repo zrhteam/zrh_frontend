@@ -356,7 +356,7 @@ const actions = {
     // 不同专业的隐患数量
     getCheckScreenRNRank(context) {
         dataService.getCheckScreenRNRank(context.state.params, function (response) {
-            context.commit('changeChecksRNRank', response)
+            context.commit('changeChecksMajorNumber', response)
         })
     },
     // 高中低风险的数量

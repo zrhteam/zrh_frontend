@@ -11,6 +11,7 @@
 
 export default {
   name: "StageRatio",
+  props: ['context'],
   data() {
     return {
       rosePie: null,
@@ -21,7 +22,12 @@ export default {
   },
   computed: {
     getRoseData() {
-      let data = this.$store.state.get_screen.projects_stage_ratio
+      let data
+      if(this.context.sign == 'project-stage') {
+        data = this.$store.state.get_screen.projects_stage_ratio
+      }else if(this.context.sign == 'check-stage') {
+        data = this.$store.state.get_screen.checks_stage_ratio
+      }
       let arr = []
       for (let i in data) {
         let obj = {

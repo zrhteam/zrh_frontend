@@ -1910,7 +1910,7 @@ function getCheckScreenStageRatio(param, callback) {
  * Return: 几种图表数据中的一种 (json)
  */
 function getCheckScreenHighRiskNote(param, callback) {
-    const url = `${dataServerUrl}/check_ls/check_ls_stage_ratio`
+    const url = `${dataServerUrl}/check_ls/check_ls_high_risk_note`
     axios.post(url, param)
         .then(response => {
             callback(response.data)
