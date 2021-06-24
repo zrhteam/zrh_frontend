@@ -1,0 +1,116 @@
+<template>
+  <div>
+    <div class="main-title">
+      <div style="display: none">
+        {{ getPrjImage }}
+      </div>
+      <div class="title-wrapper">
+        {{major_name}}专业-实时隐患图片
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-wrapper">
+        <el-carousel indicator-position="none" :interval="300000" :height="dataHeight">
+          <el-carousel-item v-for='item in img_list'>
+            <div style="height: 84%">
+              <div style="position: absolute; width: 100%; min-height: 20px; opacity: 1; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3">{{ item.note }}</div>
+              <el-image :src='item.url' alt style="height: 95%"/>
+            </div>
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "MajorPicture",
+  data() {
+    return {
+      img_list: [],
+      major_name: this.context.name
+    }
+  },
+  props: {
+    dataHeight: {
+      type: String,
+      default: '2rem'
+    },
+    context: {
+      type: Object
+    }
+  },
+  computed: {
+    getPrjImage() {
+      let data = this.$store.state.get_screen.projects_picture_note;
+      if (this.context.sign == "project-fire") {
+        for (let i in data['燃气专业']) {
+          let obj = {
+            url: '',
+            note: ''
+          }
+          obj['url'] = 'http://' + data['燃气专业'][i]['image_url']
+          obj['note'] = data['燃气专业'][i]['note']
+          this.img_list.push(obj)
+        }
+      }
+
+    },
+  }
+}
+</script>
+
+<style scoped>
+.main-title {
+  position: absolute;
+  width: 300px;
+  height: 0.5rem;
+  z-index: 0;
+  transform: rotate(0deg);
+  opacity: 1;
+  pointer-events: none;
+  left: 1px;
+  top: 0px;
+}
+
+.title-wrapper {
+  width: 300px;
+  height: 0.5rem;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: rgb(255, 99, 0);
+  font-weight: bold;
+  font-family: "Microsoft Yahei";
+  font-size: 0.2rem;
+  writing-mode: horizontal-tb;
+  letter-spacing: 0px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  width: 270px;
+  height: 180px;
+  z-index: 0;
+  transform: rotate(0deg);
+  opacity: 1;
+  pointer-events: none;
+  left: 0px;
+  top: 0.5rem;
+}
+
+.slide-wrapper {
+  width: 5rem;
+  height: 180px;
+  pointer-events: auto;
+  font-size: 12px;
+  font-family: "Microsoft Yahei";
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+</style>

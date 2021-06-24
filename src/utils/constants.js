@@ -24,7 +24,7 @@ export const bar_option = {
     }, {
         transform: {
             type: 'sort',
-            config: { dimension: 'count', order: 'desc' }
+            config: {dimension: 'count', order: 'desc'}
         }
     }],
     xAxis: {
@@ -336,7 +336,7 @@ export const pie_option = {
             center: ['50%', '50%'],
             // minAngle: 5, //最小的扇区角度
             // startAngle: 45, //起始角度
-            hoverAnimation:false,
+            hoverAnimation: false,
             label: {
                 normal: {
                     show: false,

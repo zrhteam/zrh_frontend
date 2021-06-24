@@ -468,6 +468,10 @@ const mutations = {
     changeProjectsRiskLevel(state, data) {
         state.projects_risk_level = data.data
     },
+    // stage（致因阶段）的占比
+    changeProjectsStageRatio(state, data) {
+        state.projects_stage_ratio = data.data
+    },
     // 高风险的隐患描述 前20
     changeProjectsHighRiskNote(state, data) {
         state.projects_high_risk_note = data.data

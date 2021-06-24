@@ -4,9 +4,10 @@
       <!--      <el-col :span="24">-->
       <div
           style="position: absolute !important; width: 700px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
-        <div class="title" >实时隐患监控大屏</div>
+        <div class="title">{{ project_name }}实时隐患监控大屏</div>
       </div>
-      <div style="position: absolute !important; width: 300px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 50px;">
+      <div
+          style="position: absolute !important; width: 300px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 50px;">
         <div class="date">{{ nowDate }} {{ nowTime }}</div>
       </div>
       <!--      </el-col>-->
@@ -20,7 +21,7 @@
             <div class="counter-container">
               <span class="prefix" style="font-size: 0.32rem">累计</span>
               <!--            写一个循环的number-->
-              <div id="real-number" style="font-size: 0.32rem">
+              <div id="real-number" style="font-size: 0.45rem">
               </div>
               <span class="suffix" style="font-size: 0.32rem">例</span>
             </div>
@@ -31,7 +32,9 @@
               高风险
             </div>
             <div class="counter-container">
-              <span class="numbers" style="color:rgb(255, 10, 10); font-size: 0.32rem">12</span>
+              <span class="numbers" style="color:rgb(255, 10, 10); font-size: 0.32rem">
+                <NumCounter :value=this.high_risk class="text-color-blue nums"></NumCounter>
+              </span>
               <span class="suffix" style="font-size: 0.2rem">例</span>
             </div>
           </div>
@@ -41,7 +44,9 @@
               中风险
             </div>
             <div class="counter-container">
-              <span class="numbers" style="color:rgb(255, 139, 0); font-size: 0.32rem">12</span>
+              <span class="numbers" style="color:rgb(255, 139, 0); font-size: 0.32rem">
+                <NumCounter :value=this.mid_risk class="text-color-blue nums" style="color: rgb(255, 139, 0)"></NumCounter>
+              </span>
               <span class="suffix" style="font-size: 0.2rem">例</span>
             </div>
           </div>
@@ -51,7 +56,9 @@
               低风险
             </div>
             <div class="counter-container">
-              <span class="numbers" style="color: rgb(10, 166, 255); font-size: 0.32rem">12</span>
+              <span class="numbers" style="color: rgb(10, 166, 255); font-size: 0.32rem">
+                <NumCounter :value=this.low_risk class="text-color-blue nums"></NumCounter>
+              </span>
               <span class="suffix" style="font-size: 0.2rem">例</span>
             </div>
           </div>
@@ -78,7 +85,8 @@
                   style="position: absolute !important; width: 92px; height: 43px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 75px; top: 26px;">
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">12</span>
+                  <span class="numbers" style="font-size: 0.32rem">
+                    <NumCounter :value=this.fire_num class="text-color-blue nums"></NumCounter></span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
                 </div>
               </div>
@@ -105,7 +113,9 @@
                   style="position: absolute !important; width: 92px; height: 43px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 75px; top: 26px;">
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">12</span>
+                  <span class="numbers" style="font-size: 0.32rem">
+                    <NumCounter :value=this.lift_num class="text-color-blue nums"></NumCounter>
+                  </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
                 </div>
               </div>
@@ -132,7 +142,9 @@
                   style="position: absolute !important; width: 92px; height: 43px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 75px; top: 26px;">
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">12</span>
+                  <span class="numbers" style="font-size: 0.32rem">
+                    <NumCounter :value=this.electric_num class="text-color-blue nums"></NumCounter>
+                  </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
                 </div>
               </div>
@@ -159,63 +171,176 @@
                   style="position: absolute !important; width: 92px; height: 43px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 75px; top: 26px;">
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">12</span>
+                  <span class="numbers" style="font-size: 0.32rem">
+                    <NumCounter :value=this.fuel_num class="text-color-blue nums"></NumCounter>
+                  </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
                 </div>
               </div>
             </div>
           </div>
         </el-row>
-        <el-row style="height: 36%" class="boundary-A"></el-row>
+        <el-row style="height: 36%" class="boundary-A">
+          <StageRatio></StageRatio>
+        </el-row>
       </el-col>
       <el-col :span="6" class="boundary-A" :offset="12" style="height: 75%">
-        <el-row style="height: 32%" class="boundary-A"></el-row>
+        <el-row style="height: 32%" class="boundary-A">
+          <div
+              class="risk-wrapper" style="height: 0.45rem; left: 0px; top: 0px;">
+            <div
+                style="width: 4.7rem; height: 0.45rem; pointer-events: auto; border: none; border-radius: 10px 10px 0px 0px; background: rgb(255, 255, 255); backdrop-filter: blur(30px);">
+            </div>
+          </div>
+          <div
+              class="risk-wrapper" style="height: 0.35rem; left: 12px; top: 0.1rem;">
+            <div
+                style="width: 25px; height: 25px; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b7df2458e43133e6310d7302df79b2dc.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+          </div>
+          <div
+              class="risk-wrapper" style="height: 0.35rem; left: 48px; top: 0.1rem;">
+            <div
+                style="width: 4.7rem; height: 0.35rem; pointer-events: auto; display: flex; align-items: center; justify-content: flex-start; color: rgb(255, 0, 0); font-weight: bold; font-family: 'Microsoft Yahei'; font-size: 0.2rem; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+              实时高风险隐患警告
+            </div>
+          </div>
+          <div
+              style="position: absolute; width: 4.7rem; height: 1.65rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
+            <HighRiskNote :noteList="noteList" :tableHeight="tableHeight" :noteHeader="noteHeader">
+            </HighRiskNote>
+          </div>
+
+        </el-row>
       </el-col>
       <el-col :span="24" class="boundary-A" style="height: 25%">
-        <div class="grid-content bg-purple"></div>
+        <div class="record">
+          <div class="record-wrapper">
+            <RecordList2 ref="rl" :recordList="recordList" :tableHeight="tableHeight"
+                         :tableHeader="tableHeader" :cellClassName="cellClassName"></RecordList2>
+          </div>
+        </div>
       </el-col>
     </el-col>
     <el-col :span="5" class="boundary-A" style="height: 90%">
       <el-row style="height: 25%" class="boundary-A">
-        <CheckScreenCarousel></CheckScreenCarousel>
+        <MajorPicture
+            :context="{
+              sign: 'project-fire',
+              name: '消防'
+            }"
+        ></MajorPicture>
       </el-row>
-      <el-row style="height: 25%" class="boundary-A"></el-row>
-      <el-row style="height: 25%" class="boundary-A"></el-row>
-      <el-row style="height: 25%" class="boundary-A"></el-row>
+      <el-row style="height: 25%" class="boundary-A">
+        <MajorPicture
+            :context="{
+              sign: 'project-lift',
+              name: '电梯'
+            }"
+        ></MajorPicture>
+      </el-row>
+      <el-row style="height: 25%" class="boundary-A">
+        <MajorPicture
+            :context="{
+              sign: 'project-electric',
+              name: '电气'
+            }"
+        ></MajorPicture>
+      </el-row>
+      <el-row style="height: 25%" class="boundary-A">
+        <MajorPicture
+            :context="{
+              sign: 'project-fuel',
+              name: '燃气'
+            }"
+        ></MajorPicture>
+      </el-row>
     </el-col>
   </div>
 </template>
 
 <script>
-import CheckScreenCarousel from "@/components/views/Check/CheckScreenCarousel.vue";
+import MajorPicture from "@/components/views/BigScreen/MajorPicture.vue";
+import RecordList2 from "@/components/views/BigScreen/RecordList2.vue";
+import HighRiskNote from "@/components/views/BigScreen/HighRiskNote.vue";
+import StageRatio from "@/components/views/BigScreen/StageRatio.vue";
+import NumCounter from "@/components/views/BigScreen/NumCounter.vue";
+
 export default {
-name: "NewProjectScreen",
-  components: {CheckScreenCarousel},
+  name: "NewProjectScreen",
+  components: {NumCounter, StageRatio, HighRiskNote, RecordList2, MajorPicture},
   data() {
     return {
+      project_name: this.$store.state.get_project.prj_name,
       timer: null,
       nowDate: "",
       nowTime: "",
+      high_risk: 0,
+      mid_risk: 0,
+      low_risk: 0,
+      tableHeight: '100%',
+      tableHeader: [
+        {prop: 'create_time', label: '录入时间', width: "150"},
+        {prop: 'recorder', label: '录入人员', width: "80"},
+        {prop: 'position', label: '隐患位置', width: "90"},
+        {prop: 'system_name', label: '系统类型', width: "100"},
+        {prop: 'major_name', label: '所属专业', width: "90"},
+        {prop: 'note', label: '问题描述', width: "170"},
+        {prop: 'risk_level', label: '风险等级', width: "80"},
+        {prop: 'stage', label: '致因阶段', width: "80"},
+        {prop: 'area', label: '分布区域', width: "80"},
+        {prop: 'rule_name', label: '法规名称', width: "180"},
+        {prop: 'clause', label: '相关条款', width: "80"},
+        {prop: 'clause_contact', label: '条款内容'},
+      ],
+      fire_num: 0,
+      lift_num: 0,
+      electric_num: 0,
+      fuel_num: 0,
+      noteHeader: [
+        // {prop: 'position', label: '隐患位置', width: "80"},
+        {prop: 'note', label: '隐患描述', width: "350"}
+      ]
+    }
+  },
+  computed: {
+    recordList() {
+      let data = this.$store.state.get_screen.projects_table
+      return data['record_list']
+    },
+    noteList() {
+      let data = this.$store.state.get_screen.projects_high_risk_note['note_list']
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          note: ''
+        }
+        obj.note = data[i]
+        arr.push(obj)
+      }
+      return arr
     }
   },
   mounted() {
+    let data = this.$store.state.get_screen.projects_risk_level
+    this.high_risk = data.risk_level_ratio['3']
+    this.mid_risk = data.risk_level_ratio['2']
+    this.low_risk = data.risk_level_ratio['1']
+
     //自定义字符串,用于拼接标签
-    var loveStr = "";
-
+    var numStr = "";
     //自定义数组
-    var loveArr = ['喜爱一个人需要理由吗？', '需要吗？', '不需要吗？'];
-
+    var numArr = [];
+    var num = this.$store.state.get_screen.projects_risk_num.risk_num
+    while (num / 10) {
+      numArr.unshift(num % 10)
+      num = Math.floor(num / 10)
+    }
     /****forEach循环****/
-    loveArr.forEach(e => {
-      loveStr += `<span class="number">${e}</span>`;
-
-      // loveStr += `<div>${e}</div>`;
-      //   document.getElementById("#real-number").append('<span class="number">'+e+'</span>')
+    numArr.forEach(e => {
+      numStr += `<span class="number">${e}</span>`;
     })
-    console.log(loveStr)
-
     //拼接完字符串数组后用innerHTML把它渲染到页面中
-    document.getElementById("real-number").innerHTML = loveStr
+    document.getElementById("real-number").innerHTML = numStr
     let numbers = document.getElementsByClassName("number")
     if (numbers) {
       for (let i = 0; i < numbers.length; i++) {
@@ -228,6 +353,13 @@ name: "NewProjectScreen",
 
       }
     }
+
+    data = this.$store.state.get_screen.projects_risk_num_rank
+    this.fire_num = data["消防专业"]
+    this.lift_num = data["电梯专业"]
+    this.electric_num = data["电气专业"]
+    this.fuel_num = data["燃气专业"]
+
 
     this.timer = setInterval(() => {
       this.setNowTimes();
@@ -242,6 +374,14 @@ name: "NewProjectScreen",
     });
   },
   methods: {
+    cellClassName({row, column, rowIndex, columnIndex}) {
+      if(column.property == 'note')
+        return "CellNote"
+      else if(column.property == 'rule_name')
+        return "CellRule"
+      else if(column.property == 'clause_contact')
+        return "CellClauseContact"
+    },
     setNowTimes() {
       let myDate = new Date();
       // console.log(myDate)
@@ -284,7 +424,7 @@ name: "NewProjectScreen",
 
 <style scoped>
 .boundary-A {
-  border: 1px dashed #fff
+  /*border: 1px dashed #fff*/
 }
 
 .level2 {
@@ -331,12 +471,12 @@ name: "NewProjectScreen",
 .number {
   background-color: #ff6300;
   display: inline-block;
-  /*letter-spacing: 0.02em;*/
-  /*text-indent: 0.02em;*/
-  /*height: auto;*/
-  /*line-height: normal;*/
+  letter-spacing: 0.02em;
+  text-indent: 0.02em;
+  height: auto;
+  line-height: normal;
   font-weight: bolder;
-  margin-right: 0.15em;
+  margin-right: 0.10em;
   border-radius: 6px;
 }
 
@@ -411,5 +551,159 @@ name: "NewProjectScreen",
   font-size: 0.2rem;
   color: #ffffff;
   display: flex;
+}
+
+.record {
+  position: absolute;
+  width: 19rem;
+  height: 22%;
+  z-index: 0;
+  transform: rotate(0deg);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.record-wrapper {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  overflow: hidden;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: "Microsoft Yahei";
+  transform: translateZ(0px);
+}
+
+.risk-wrapper {
+  position: absolute;
+  width: 4.7rem;
+  z-index: 0;
+  transform: rotate(0deg);
+  opacity: 1;
+  pointer-events: none;
+}
+
+/*最外层透明*/
+/deep/ .el-table, /deep/ .el-table__expanded-cell {
+
+  background-color: transparent;
+}
+
+/* 表格内背景颜色 */
+/deep/ .el-table th,
+/deep/ .el-table tr,
+/deep/ .el-table td {
+
+  background-color: transparent;
+  color: #ffffff;
+
+}
+
+/deep/ .el-table td .cell{
+  overflow: hidden;
+  z-index: 2;
+}
+
+/deep/ .CellNote{
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/deep/ .CellRule{
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/deep/ .CellClauseContact{
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/deep/ .CellNote .cell{
+  overflow: hidden;
+  white-space: nowrap;
+  animation: 3s wordsLoop1 linear infinite normal;
+  display: inline-block;
+  z-index: -1;
+}
+
+@keyframes wordsLoop1 {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-60px);
+    -webkit-transform: translateX(-60px);
+  }
+}
+
+@-webkit-keyframes wordsLoop1 {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-60px);
+    -webkit-transform: translateX(-60px);
+  }
+}
+
+/deep/ .CellRule .cell{
+  overflow: hidden;
+  white-space: nowrap;
+  animation: 3s wordsLoop2 linear infinite normal;
+  display: inline-block;
+}
+
+@keyframes wordsLoop2 {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-80px);
+    -webkit-transform: translateX(-80px);
+  }
+}
+
+@-webkit-keyframes wordsLoop2 {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-80px);
+    -webkit-transform: translateX(-80px);
+  }
+}
+
+/deep/ .CellClauseContact .cell{
+  overflow: hidden;
+  white-space: nowrap;
+  animation: 3s wordsLoop3 linear infinite normal;
+  display: inline-block;
+}
+
+@keyframes wordsLoop3 {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-80px);
+    -webkit-transform: translateX(-80px);
+  }
+}
+
+@-webkit-keyframes wordsLoop3 {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-80px);
+    -webkit-transform: translateX(-80px);
+  }
 }
 </style>

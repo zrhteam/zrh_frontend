@@ -242,11 +242,14 @@
 <!--}-->
 <!--</style>-->
 <!--<template>-->
-<!--<SubRegister></SubRegister>-->
+<!--  <SubRegister :value="100" class="text-color-blue nums"-->
+<!--  ></SubRegister>-->
 <!--</template>-->
+
 <!--<script>-->
 <!--import SubRegister from "@/components/views/SubRegister.vue";-->
+
 <!--export default {-->
-<!--  components: {SubRegister}-->
+<!--  components: {SubRegister},-->
 <!--}-->
 <!--</script>-->

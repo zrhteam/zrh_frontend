@@ -20,7 +20,7 @@
             <div class="counter-container">
               <span class="prefix" style="font-size: 0.32rem">累计</span>
               <!--            写一个循环的number-->
-              <div id="real-number" style="font-size: 0.32rem">
+              <div id="check-real-number" style="font-size: 0.45rem">
               </div>
               <span class="suffix" style="font-size: 0.32rem">例</span>
             </div>
@@ -31,7 +31,7 @@
               高风险
             </div>
             <div class="counter-container">
-              <span class="numbers" style="color:rgb(255, 10, 10); font-size: 0.32rem">12</span>
+              <span class="numbers" style="color:rgb(255, 10, 10); font-size: 0.32rem">{{ high_risk }}</span>
               <span class="suffix" style="font-size: 0.2rem">例</span>
             </div>
           </div>
@@ -41,7 +41,7 @@
               中风险
             </div>
             <div class="counter-container">
-              <span class="numbers" style="color:rgb(255, 139, 0); font-size: 0.32rem">12</span>
+              <span class="numbers" style="color:rgb(255, 139, 0); font-size: 0.32rem">{{ mid_risk }}</span>
               <span class="suffix" style="font-size: 0.2rem">例</span>
             </div>
           </div>
@@ -51,7 +51,7 @@
               低风险
             </div>
             <div class="counter-container">
-              <span class="numbers" style="color: rgb(10, 166, 255); font-size: 0.32rem">12</span>
+              <span class="numbers" style="color: rgb(10, 166, 255); font-size: 0.32rem">{{ low_risk }}</span>
               <span class="suffix" style="font-size: 0.2rem">例</span>
             </div>
           </div>
@@ -177,7 +177,7 @@
     </el-col>
     <el-col :span="5" class="boundary-A" style="height: 90%">
       <el-row style="height: 25%" class="boundary-A">
-        <CheckScreenCarousel></CheckScreenCarousel>
+        <MajorPicture></MajorPicture>
       </el-row>
       <el-row style="height: 25%" class="boundary-A"></el-row>
       <el-row style="height: 25%" class="boundary-A"></el-row>
@@ -187,36 +187,45 @@
 </template>
 
 <script>
-import CheckScreenCarousel from "@/components/views/Check/CheckScreenCarousel.vue";
+import MajorPicture from "@/components/views/BigScreen/MajorPicture.vue";
 
 export default {
   name: "NewCheckScreen",
-  components: {CheckScreenCarousel},
+  components: {MajorPicture},
   data() {
     return {
       timer: null,
       nowDate: "",
       nowTime: "",
+      high_risk: 0,
+      mid_risk: 0,
+      low_risk: 0
     }
   },
   mounted() {
+    let data = this.$store.state.get_screen.checks_risk_level
+    this.high_risk = data.risk_level_ratio['3']
+    this.mid_risk = data.risk_level_ratio['2']
+    this.low_risk = data.risk_level_ratio['1']
+
     //自定义字符串,用于拼接标签
-    var loveStr = "";
-
+    var numStr = "";
     //自定义数组
-    var loveArr = ['喜爱一个人需要理由吗？', '需要吗？', '不需要吗？'];
-
+    var numArr = [];
+    console.log("1111", this.$store.state.get_screen.checks_risk_num)
+    debugger
+    var num = this.$store.state.get_screen.checks_risk_num['risk_num']
+    var num_copy = num
+    while (num_copy / 10) {
+      numArr.unshift(num_copy % 10)
+      num = Math.floor(num_copy / 10)
+    }
     /****forEach循环****/
-    loveArr.forEach(e => {
-      loveStr += `<span class="number">${e}</span>`;
-
-      // loveStr += `<div>${e}</div>`;
-      //   document.getElementById("#real-number").append('<span class="number">'+e+'</span>')
+    numArr.forEach(e => {
+      numStr += `<span class="number">${e}</span>`;
     })
-    console.log(loveStr)
-
     //拼接完字符串数组后用innerHTML把它渲染到页面中
-    document.getElementById("real-number").innerHTML = loveStr
+    document.getElementById("check-real-number").innerHTML = numStr
     let numbers = document.getElementsByClassName("number")
     if (numbers) {
       for (let i = 0; i < numbers.length; i++) {
@@ -233,7 +242,6 @@ export default {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
-
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
@@ -333,12 +341,12 @@ export default {
 .number {
   background-color: #ff6300;
   display: inline-block;
-  /*letter-spacing: 0.02em;*/
-  /*text-indent: 0.02em;*/
-  /*height: auto;*/
-  /*line-height: normal;*/
+  letter-spacing: 0.02em;
+  text-indent: 0.02em;
+  height: auto;
+  line-height: normal;
   font-weight: bolder;
-  margin-right: 0.15em;
+  margin-right: 0.10em;
   border-radius: 6px;
 }
 

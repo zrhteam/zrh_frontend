@@ -1739,7 +1739,7 @@ function getProjectScreenRiskNumber(param, callback) {
  * Return: 几种图表数据中的一种 (json)
  */
 function getProjectScreenRNRank(param, callback) {
-    const url = `${dataServerUrl}/project_ls/project_ls_risk_num_rank`
+    const url = `${dataServerUrl}/project_ls/project_ls_major_ratio`
     axios.post(url, param)
         .then(response => {
             callback(response.data)
@@ -1858,7 +1858,7 @@ function getCheckScreenRiskNumber(param, callback) {
  * Return: 几种图表数据中的一种 (json)
  */
 function getCheckScreenRNRank(param, callback) {
-    const url = `${dataServerUrl}/check_ls/check_ls_risk_num_rank`
+    const url = `${dataServerUrl}/check_ls/check_ls_major_ratio`
     axios.post(url, param)
         .then(response => {
             callback(response.data)
