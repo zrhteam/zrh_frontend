@@ -1,0 +1,136 @@
+<template>
+  <div>
+    <div class="absolute-layer" style="width: 372px; height: 37px; left: 0px; top: 0px;">
+      <div class="box1" style="width: 372px; height: 37px;">
+      </div>
+    </div>
+    <div class="absolute-layer" style="width: 300px; height: 56px; left: 50px; top: -8px;">
+      <div class="card-title" style="width: 300px; height: 56px; font-size: 0.2rem;">
+        {{this.riskName}}隐患数量
+      </div>
+    </div>
+    <div class="absolute-layer" style="width: 368px; height: 220px; left: 5px; top: 50px;">
+      <div class="box2" style="width: 368px; height: 220px;">
+        <div ref='riskNumberPie' style="height: 85%; width: 100%;"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import {pie_option2} from "@/utils/constants";
+
+export default {
+  name: "RiskNumber",
+  props: {
+    riskName: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    riskNumber: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    renderSign: {
+      type: Boolean,
+      default: function () {
+        return false
+      }
+    }
+  },
+  data() {
+    return {
+      riskNumberPie: null,
+      myChart: null,
+      renderSign: false,
+    }
+  },
+  methods: {
+    drawBarChart() {
+      let arr = this.riskNumber
+      this.renderSign = true
+      pie_option2["series"][0]["data"] = arr
+      pie_option2["series"][0]["itemStyle"]["normal"] = {
+        color: function (params) {
+          let colorList = [
+            '#ee5a24', '#ea2027', '#009432', '#00b3ff',
+            '#0652dd', '#f79f1f', '#ed4ccb', '#a55eea',
+            '#c8d4d9', '#16a085'
+          ];
+          return colorList[params.dataIndex % arr.length]
+        },
+      }
+      this.myChart.setOption(pie_option2);
+    }
+  },
+  mounted() {
+    this.riskNumberPie = this.$refs.riskNumberPie;
+    this.myChart = this.$echarts.init(this.riskNumberPie)
+
+    let chooseIndex = 0;//默认选中高亮模块索引 现在是默认第一条
+    setInterval(() => {
+      let len = this.riskNumber.length
+      this.myChart = this.$echarts.init(this.riskNumberPie)
+      this.myChart.dispatchAction({type: 'highlight', seriesIndex: 0, dataIndex: chooseIndex});
+      // 没用选中的取消高亮
+      this.myChart.dispatchAction({type: 'downplay', seriesIndex: 0, dataIndex: chooseIndex});
+      //选中某一条高亮
+      chooseIndex = (chooseIndex + 1) % len;
+      this.myChart.dispatchAction({type: 'highlight', seriesIndex: 0, dataIndex: chooseIndex});
+    }, 2000);
+  },
+  watch: {
+    renderSign() {
+      this.drawBarChart()
+    }
+  },
+}
+</script>
+
+<style scoped>
+.absolute-layer {
+  position: absolute !important;
+  z-index: 0;
+  transform: rotate(0deg
+  );
+  opacity: 1;
+  pointer-events: none;
+}
+
+.card-title {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: rgb(255, 255, 255);
+  font-weight: normal;
+  font-family: "Microsoft Yahei";
+  writing-mode: horizontal-tb;
+  letter-spacing: 0px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.box1 {
+  pointer-events: auto;
+  border-radius: 0px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("../../../assets/card-title.png");
+}
+
+.box2 {
+  pointer-events: auto;
+  border-radius: 0px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("../../../assets/screen_card.png");
+}
+</style>

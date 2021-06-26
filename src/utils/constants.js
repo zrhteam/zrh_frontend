@@ -214,7 +214,7 @@ export const bar_option2 = {
 //针对纵向bar
 export const bar_option3 = {
     dataset: {
-        // dimensions: ['name', 'count'],
+        dimensions: ['name', 'count'],
         source: []
     },
     tooltip: {
@@ -408,6 +408,46 @@ export const pie_option = {
         }
     ]
 };
+
+//针对 pie chart 的 环形图option
+export const pie_option2 = {
+    series: [
+        {
+            type: 'pie',
+            radius: ['55%', '70%'],
+            center: ['50%', '50%'],
+            label: {
+                color: '#fff',
+                formatter: '{d}% \n {b} ',
+                position: 'center',
+                show: false
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '14',
+                    color: '#ffffff'
+                }
+            },
+            itemStyle: {
+                borderRadius: 0,
+                normal: {
+                    color: function (params) {
+                        //自定义颜色
+                        let colorList = [
+                            '#ee5a24', '#ea2027', '#009432', '#00b3ff',
+                            '#0652dd', '#f79f1f', '#ed4ccb', '#a55eea',
+                            '#c8d4d9', '#16a085'
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                }
+            },
+            data: []
+        }
+    ]
+};
+
 //折线图
 export const line_option = {
     tooltip: {

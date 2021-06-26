@@ -1,30 +1,80 @@
 <template>
-  <div style="height: 100%">
-    <div>{{ getData }}</div>
+  <div style="height: 100%; background-color: #000000">
     <el-row style="height: 10%" class="boundary-A">
-      <div class="absolute-layer" style="width: 544px; height: 56px; left: 0px; top: 0px;">
-        <div class="title" style="width: 544px; height: 56px; font-size: 39px;">
-          总部隐患大屏
+      <div class="absolute-layer" style="width: 100%; height: 50%; left: 0px; top: 0px;">
+        <div class="header"
+             style="width: 100%; height: 100%; pointer-events: auto; border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;">
+        </div>
+      </div>
+      <div class="absolute-layer" style="width: 544px; height: 56px; left: 0px; top: 25%;">
+        <div class="title" style="width: 544px; height: 56px; font-size: 0.4rem;">
+          {{ head_name }}总部隐患大屏
+        </div>
+      </div>
+      <div class="absolute-layer" style="width: 544px; height: 56px; left: 19.5rem; top: 25%;">
+        <div class="title" style="width: 544px; height: 56px; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
+          {{ nowTime }}
+        </div>
+      </div>
+      <div class="absolute-layer" style="width: 544px; height: 56px; left: 20.5rem; top: 25%;">
+        <div class="title" style="width: 544px; height: 56px; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
+          {{ nowDate }}
+        </div>
+      </div>
+      <div class="absolute-layer" style="width: 544px; height: 56px; left: 22rem; top: 40%;">
+        <div class="zrh">
         </div>
       </div>
     </el-row>
     <el-col :span="5" class="boundary-A" style="height: 90%">
-      <el-row style="height: 40%" class="boundary-A">
-        <DangerNumber></DangerNumber>
+      <el-row style="height: 36.4%" class="boundary-A">
+        <DangerNumber :dangerData="dangerData" :renderSign="renderSign4"></DangerNumber>
       </el-row>
-      <el-row style="height: 30%" class="boundary-A"></el-row>
-      <el-row style="height: 30%" class="boundary-A"></el-row>
+      <el-row style="height: 31.3%" class="boundary-A">
+        <RegionRank :regionData="regionData" :renderSign="renderSign3"></RegionRank>
+      </el-row>
+      <el-row style="height: 31.3%" class="boundary-A">
+        <RiskNumber :riskName="riskName1" :riskNumber="majorRiskNumber" :renderSign="renderSign1"></RiskNumber>
+      </el-row>
     </el-col>
     <el-col :span="14" class="boundary-A" style="height: 90%">
       <el-row style="height: 75%" class="boundary-A">
         <HeadMap></HeadMap>
       </el-row>
-      <el-row style="height: 25%" class="boundary-A"></el-row>
+      <el-row style="height: 25%" class="boundary-A">
+        <div class="record">
+          <div class="record-wrapper">
+            <RecordList2 ref="rl" :recordList="recordList" :tableHeight="tableHeight"
+                         :tableHeader="tableHeader" :cellClassName="cellClassName"></RecordList2>
+          </div>
+        </div>
+      </el-row>
     </el-col>
     <el-col :span="5" class="boundary-A" style="height: 90%">
-      <el-row style="height: 35%" class="boundary-A"></el-row>
-      <el-row style="height: 35%" class="boundary-A"></el-row>
-      <el-row style="height: 30%" class="boundary-A"></el-row>
+      <el-row style="height: 35%" class="boundary-A">
+        <div class="absolute-layer" style="width: 372px; height: 37px; left: 0px; top: 0px;">
+          <div class="box1" style="width: 372px; height: 37px;">
+          </div>
+        </div>
+        <div class="absolute-layer" style="width: 300px; height: 56px; left: 50px; top: -8px;">
+          <div class="card-title" style="width: 300px; height: 56px; font-size: 0.2rem;">
+            项目隐患数量排名
+          </div>
+        </div>
+        <div class="absolute-layer" style="width: 368px; height: 220px; left: 5px; top: 50px;">
+          <div class="box2" style="width: 368px; height: 220px;">
+            <RecordList2 ref="rl2" :recordList="recordRank" :tableHeight="tableHeight"
+                         :tableHeader="tableHeader2"></RecordList2>
+          </div>
+        </div>
+      </el-row>
+      <el-row style="height: 35%" class="boundary-A">
+        <RiskByStage ref="rl3" :stageLegend="stageLegend" :stageyAxis="stageyAxis" :stageSdata="stageSdata"
+                     :renderSign="renderSign5"></RiskByStage>
+      </el-row>
+      <el-row style="height: 30%" class="boundary-A">
+        <RiskNumber :riskName="riskName2" :riskNumber="areaRiskNumber" :renderSign="renderSign2"></RiskNumber>
+      </el-row>
     </el-col>
   </div>
 </template>
@@ -32,26 +82,256 @@
 <script>
 import HeadMap from "@/components/views/BigScreen/HeadMap.vue";
 import DangerNumber from "@/components/views/BigScreen/DangerNumber.vue";
+import RegionRank from "@/components/views/BigScreen/RegionRank.vue";
+import RiskNumber from "@/components/views/BigScreen/RiskNumber.vue";
+import RecordList2 from "@/components/views/BigScreen/RecordList2.vue";
+import RiskByStage from "@/components/views/BigScreen/RiskByStage.vue";
 
 export default {
   name: "NewHeadScreen",
-  components: {DangerNumber, HeadMap},
+  components: {RiskByStage, RecordList2, RiskNumber, RegionRank, DangerNumber, HeadMap},
+  data() {
+    return {
+      timer: "",
+      nowDate: "",
+      nowTime: "",
+      tableHeight: '100%',
+      tableHeader: [
+        {prop: 'major_name', label: '所属专业', width: "90"},
+        {prop: 'note', label: '问题描述', width: "270"},
+        {prop: 'risk_level', label: '风险等级', width: "80"},
+        {prop: 'stage', label: '致因阶段', width: "80"},
+        {prop: 'area', label: '分布区域', width: "80"},
+        {prop: 'rule_name', label: '法规名称'},
+      ],
+      tableHeader2: [
+        {prop: 'rank', label: '', width: "60"},
+        {prop: 'check_name', label: '项目名称', width: "200"},
+        {prop: 'appear_time', label: '隐患数量', width: ""},
+      ],
+      renderSign1: false,
+      riskName1: "不同专业",
+      renderSign2: false,
+      riskName2: "不同分布区域",
+      renderSign3: false,
+      renderSign4: false,
+      renderSign5: false,
+      stageLegend: [],
+      stageyAxis: [],
+      head_name: this.$store.state.get_headquarter.head_name
+    }
+  },
+  methods: {
+    cellClassName({row, column, rowIndex, columnIndex}) {
+      if (column.property == 'note')
+        return "CellNote"
+    },
+    setNowTimes() {
+      let myDate = new Date();
+      // console.log(myDate)
+      let yy = String(myDate.getFullYear());
+      let mm = myDate.getMonth() + 1;
+      let dd = String(
+          myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate()
+      );
+      let hou = String(
+          myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours()
+      );
+      let min = String(
+          myDate.getMinutes() < 10
+              ? "0" + myDate.getMinutes()
+              : myDate.getMinutes()
+      );
+      let sec = String(
+          myDate.getSeconds() < 10
+              ? "0" + myDate.getSeconds()
+              : myDate.getSeconds()
+      );
+      this.nowDate = yy + "-" + mm + "-" + dd
+      this.nowTime = hou + ":" + min + ":" + sec;
+    },
+  },
   computed: {
-    getData() {
-
+    recordList() {
+      let data = this.$store.state.get_screen.heads_table
+      return data['record_list']
+    },
+    recordRank() {
+      let data = this.$store.state.get_screen.heads_check_num_rank
+      let arr = []
+      let len = 0
+      for (let i in data) {
+        len++
+      }
+      for (let i = 0; i < len; i++) {
+        for (let j in data) {
+          let obj = {
+            rank: 0,
+            appear_time: 0,
+            check_name: "",
+          }
+          if (i == data[j].rank) {
+            obj.rank = data[j].rank
+            obj.appear_time = data[j].appear_time
+            obj.check_name = j
+            arr.push(obj)
+          }
+        }
+      }
+      return arr
+    },
+    areaRiskNumber() {
+      let data = this.$store.state.get_screen.heads_area_num
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          value: 0
+        }
+        obj.name = i;
+        obj.value = data[i];
+        arr.push(obj)
+      }
+      if (arr.length > 0) this.renderSign2 = true
+      return arr
+    },
+    majorRiskNumber() {
+      let data = this.$store.state.get_screen.heads_major_num
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          value: 0
+        }
+        obj.name = i;
+        obj.value = data[i];
+        arr.push(obj)
+      }
+      if (arr.length > 0) this.renderSign1 = true
+      return arr
+    },
+    regionData() {
+      let data = this.$store.state.get_screen.heads_risk_num_rank
+      let arr = []
+      let len = 0
+      for (let i in data) {
+        len++
+      }
+      for (let i = 0; i < len; i++) {
+        for (let j in data) {
+          let obj = {
+            count: 0,
+            name: "",
+          }
+          if (i == data[j].rank) {
+            obj.count = data[j].appear_time
+            obj.name = j
+            arr.push(obj)
+          }
+        }
+      }
+      if (arr.length > 0) this.renderSign3 = true
+      return arr
+    },
+    dangerData() {
       let data = this.$store.state.get_screen.heads_risk_num
-      console.log(data)
+      if (data.risk_num != undefined) {
+        this.renderSign4 = true
+      }
+      let obj = {
+        sum: data.risk_num,
+        arr_num: []
+      }
+      let sub_obj = {
+        name: '低风险',
+        count: data['低'],
+      }
+      obj.arr_num.push(sub_obj)
+      sub_obj = {
+        name: '中风险',
+        count: data['中'],
+      }
+      obj.arr_num.push(sub_obj)
+      sub_obj = {
+        name: '高风险',
+        count: data['高'],
+      }
+      obj.arr_num.push(sub_obj)
+      return obj
+    },
+    stageSdata() {
+      let data = this.$store.state.get_screen.heads_major_stage_info
+      let sub_arr = [];
+      let legend = [];
+      let yAxis = [];
+      let s_data = [];
+      for (let i in data) {
+        for (let j in data[i]) {
+          let obj = {
+            name: '',
+            value: 0
+          }
+          let flag = false
+          sub_arr.forEach(item => {
+            if (item.name === j) {
+              item.value = item.value + data[i][j]
+              flag = true
+            }
+          })
+          if (flag === false) {
+            obj.name = j;
+            obj.value = data[i][j];
+            sub_arr.push(obj)
+            legend.push(j)
+          }
+        }
+        yAxis.push(i)
+      }
+      for (let i in data) {
+        let sub_data = []
+        for (let k in legend) {
+          let flag = false
+          for (let j in data[i]) {
+            if (j == legend[k]) {
+              sub_data.push(data[i][j])
+              flag = true
+            }
+          }
+          if (flag == false) {
+            sub_data.push(0)
+          }
+        }
+        s_data.push(sub_data)
+      }
 
-
-      data = this.$store.state.get_screen.heads_risk_num_rank
-      console.log(data)
-
-
-      data = this.$store.state.get_screen.heads_major_num
-      console.log(data)
+      let sub_data = []
+      for (let k in legend) {
+        let flag = false
+        for (let j in sub_arr) {
+          if (sub_arr[j].name == legend[k]) {
+            sub_data.push(sub_arr[j].value)
+            flag = true
+          }
+        }
+        if (flag == false) {
+          sub_data.push(0)
+        }
+      }
+      if (sub_data.length > 0) {
+        this.renderSign5 = true
+      }
+      s_data.push(sub_data)
+      yAxis.push("总计")
+      this.stageLegend = legend
+      this.stageyAxis = yAxis
+      return s_data
     }
   },
   mounted() {
+    this.timer = setInterval(() => {
+      this.setNowTimes();
+    }, 1000);
+
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
@@ -63,7 +343,9 @@ export default {
   },
   created() {
     let param = new URLSearchParams();
-    param.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
+    // param.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
+    param.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+    // param.append('headquarter_name', "华润置地");
     this.$store.commit('get_screen/changeParams', {params: param})
     this.$store.dispatch('get_screen/getHeadScreenRiskNumber')
     this.$store.dispatch('get_screen/getHeadScreenRiskNumberRank')
@@ -78,7 +360,7 @@ export default {
 
 <style scoped>
 .boundary-A {
-  border: 1px dashed #fff
+  /*border: 1px dashed #fff*/
 }
 
 .absolute-layer {
@@ -87,6 +369,20 @@ export default {
   transform: rotate(0deg);
   opacity: 1;
   pointer-events: none;
+}
+
+.header {
+  background-image: url('../assets/head_title.png');
+}
+
+.zrh {
+  width: 0.6rem;
+  height: 0.3rem;
+  pointer-events: auto;
+  background-image: url("../assets/zrh.png");
+  border-radius: 0px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .title {
@@ -104,13 +400,94 @@ export default {
   overflow: hidden;
 }
 
-.card-label {
+.record {
+  position: absolute;
+  width: 14rem;
+  height: 100%;
+  z-index: 0;
+  transform: rotate(0deg);
+  opacity: 1;
+  pointer-events: none;
+  left: 0px;
+  top: 0px;
+}
+
+.record-wrapper {
+  width: 100%;
+  height: 100%;
   pointer-events: auto;
-  background-image: url("../assets/card-title.png");
-  border-radius: 0px;
+  overflow: hidden;
+  background-color: transparent;
   cursor: pointer;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  font-family: "Microsoft Yahei";
+  transform: translateZ(0px);
+}
+
+/*最外层透明*/
+/deep/ .el-table, /deep/ .el-table__expanded-cell {
+
+  background-color: transparent;
+}
+
+/* 表格内背景颜色 */
+/deep/ .el-table th {
+
+  background-color: #052357;
+  border-color: #052357;
+
+}
+
+/* 表格内背景颜色 */
+/deep/ .el-table tr,
+/deep/ .el-table td {
+
+  background-color: transparent;
+  color: #ffffff;
+}
+
+/*自定义斑马线颜色*/
+/deep/ .el-table--striped .el-table__body tr.el-table__row--striped td {
+  background: #211a1a;
+}
+
+/deep/ .el-table td .cell {
+  overflow: hidden;
+  z-index: 2;
+}
+
+/deep/ .CellNote {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/deep/ .CellNote .cell {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: 3s wordsLoop1 linear infinite normal;
+  display: inline-block;
+  z-index: -1;
+}
+
+@keyframes wordsLoop1 {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-60px);
+    -webkit-transform: translateX(-60px);
+  }
+}
+
+@-webkit-keyframes wordsLoop1 {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-60px);
+    -webkit-transform: translateX(-60px);
+  }
 }
 
 .card-title {
@@ -128,4 +505,21 @@ export default {
   overflow: hidden;
 }
 
+.box1 {
+  pointer-events: auto;
+  border-radius: 0px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("../assets/card-title.png");
+}
+
+.box2 {
+  pointer-events: auto;
+  border-radius: 0px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("../assets/screen_card.png");
+}
 </style>

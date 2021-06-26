@@ -410,7 +410,7 @@ const mutations = {
     },
     // 隐患项目数量排行
     changeHeadsCheckNumberRank(state, data) {
-        state.heads_risk_num = data.data
+        state.heads_check_num_rank = data.data
     },
     // 不同专业下的不同致因阶段
     changeHeadsMajorStageInfo(state, data) {

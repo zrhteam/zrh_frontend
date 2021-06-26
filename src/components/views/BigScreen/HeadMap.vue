@@ -41,31 +41,6 @@ export default {
   ,
   methods: {
     drawBarChart() {
-      if (this.getNumberHistogram["dataset"]["source"].length != 0) {
-        let myChart = this.$echarts.init(document.getElementById('number_histogram'))
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(this.getNumberHistogram);
-        myChart.resize();
-        window.addEventListener('resize', function () {
-          myChart.resize();
-        })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById("risk_rank"), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
-            myChart.resize();
-          });
-        });
-      } else if ('number_histogram') {
-        this.$nextTick(() => {
-          const dom = document.getElementById('number_histogram')
-          dom.innerHTML = '暂无数据'
-          dom.style.color = '#ffffff'
-          dom.style.fontSize = '14px'
-          dom.removeAttribute("_echarts_instance_")
-        })
-      }
     },
     returnCountry() {
       this.$options.methods.chinaConfigure();
@@ -104,17 +79,18 @@ export default {
             itemStyle: {
               normal: {
                 // borderColor: 'rgba(0, 0, 0, 0.2)'
-                areaColor: "#0d0059",
+                areaColor: "#000000",
                 borderColor: "#389dff",
-                borderWidth: 0.5,
+                borderWidth: 1,
                 fontsize: 8
               },
               emphasis: {
-                areaColor: "#17008d",
+                areaColor: "#037399",
+                borderColor: "#12991f",
+                borderWidth: 5,
                 shadowOffsetX: 0,
                 shadowOffsetY: 0,
-                shadowBlur: 5,
-                borderWidth: 0,
+                shadowBlur: 4,
                 shadowColor: "rgba(0, 0, 0, 0.5)"
               }
             }
