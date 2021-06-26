@@ -275,7 +275,7 @@ const actions = {
     // 隐患项目数量排行
     getRegionScreenCNRank(context) {
         dataService.getRegionScreenCNRank(context.state.params, function (response) {
-            context.commit('changeRegionsCNRank', response)
+            context.commit('changeRegionsCheckNumberRank', response)
         })
     },
     // 不同专业下的不同致因阶段
@@ -440,7 +440,7 @@ const mutations = {
     },
     // 隐患项目数量排行
     changeRegionsCheckNumberRank(state, data) {
-        state.regions_risk_num = data.data
+        state.regions_check_num_rank = data.data
     },
     // 不同专业下的不同致因阶段
     changeRegionsMajorStageInfo(state, data) {
