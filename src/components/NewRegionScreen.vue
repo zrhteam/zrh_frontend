@@ -63,7 +63,8 @@ name: "NewRegionScreen",
   },
   created() {
     let param = new URLSearchParams();
-    param.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
+    // param.append('region_name', this.$store.state.get_login.grant_data.data.region_tag);
+    param.append('region_name', '华北区域');
     this.$store.commit('get_screen/changeParams', {params: param})
     this.$store.dispatch('get_screen/getRegionScreenRiskNumber')
     this.$store.dispatch('get_screen/getRegionScreenRNRank')

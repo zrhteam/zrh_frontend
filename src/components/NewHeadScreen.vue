@@ -6,22 +6,22 @@
              style="width: 100%; height: 100%; pointer-events: auto; border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;">
         </div>
       </div>
-      <div class="absolute-layer" style="width: 544px; height: 56px; left: 0px; top: 25%;">
-        <div class="title" style="width: 544px; height: 56px; font-size: 0.4rem;">
+      <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 0px; top: 25%;">
+        <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.4rem;">
           {{ head_name }}总部隐患大屏
         </div>
       </div>
-      <div class="absolute-layer" style="width: 544px; height: 56px; left: 19.5rem; top: 25%;">
-        <div class="title" style="width: 544px; height: 56px; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
+      <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 19.5rem; top: 25%;">
+        <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
           {{ nowTime }}
         </div>
       </div>
-      <div class="absolute-layer" style="width: 544px; height: 56px; left: 20.5rem; top: 25%;">
-        <div class="title" style="width: 544px; height: 56px; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
+      <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 20.5rem; top: 25%;">
+        <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
           {{ nowDate }}
         </div>
       </div>
-      <div class="absolute-layer" style="width: 544px; height: 56px; left: 22rem; top: 40%;">
+      <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 22rem; top: 40%;">
         <div class="zrh">
         </div>
       </div>
@@ -52,17 +52,17 @@
     </el-col>
     <el-col :span="5" class="boundary-A" style="height: 90%">
       <el-row style="height: 35%" class="boundary-A">
-        <div class="absolute-layer" style="width: 372px; height: 37px; left: 0px; top: 0px;">
-          <div class="box1" style="width: 372px; height: 37px;">
+        <div class="absolute-layer" style="width: 4.7rem; height: 0.45rem; left: 0px; top: 0px;">
+          <div class="box1" style="width: 4.7rem; height: 0.45rem;">
           </div>
         </div>
-        <div class="absolute-layer" style="width: 300px; height: 56px; left: 50px; top: -8px;">
-          <div class="card-title" style="width: 300px; height: 56px; font-size: 0.2rem;">
+        <div class="absolute-layer" style="width: 3.75rem; height: 0.7rem; left: 0.61rem; top: -0.1rem;">
+          <div class="card-title" style="width: 3.75rem; height: 0.7rem; font-size: 0.2rem;">
             项目隐患数量排名
           </div>
         </div>
-        <div class="absolute-layer" style="width: 368px; height: 220px; left: 5px; top: 50px;">
-          <div class="box2" style="width: 368px; height: 220px;">
+        <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
+          <div class="box2" style="width: 100%; height: 100%;">
             <RecordList2 ref="rl2" :recordList="recordRank" :tableHeight="tableHeight"
                          :tableHeader="tableHeader2"></RecordList2>
           </div>
@@ -343,7 +343,6 @@ export default {
   },
   created() {
     let param = new URLSearchParams();
-    // param.append('headquarter_name', this.$store.state.get_login.grant_data.data.headquarter_tag);
     param.append('headquarter_name', this.$store.state.get_headquarter.head_name);
     // param.append('headquarter_name', "华润置地");
     this.$store.commit('get_screen/changeParams', {params: param})

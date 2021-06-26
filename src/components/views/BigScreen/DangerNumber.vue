@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div class="absolute-layer" style="width: 372px; height: 37px; left: 0px; top: 0px;">
-      <div class="box1" style="width: 372px; height: 37px;">
+    <div class="absolute-layer" style="width: 4.7rem; height: 0.45rem; left: 0px; top: 0px;">
+      <div class="box1" style="width: 4.7rem; height: 0.45rem;">
       </div>
     </div>
-    <div class="absolute-layer" style="width: 300px; height: 56px; left: 50px; top: -8px;">
-      <div class="card-title" style="width: 300px; height: 56px; font-size: 0.2rem;">
+    <div class="absolute-layer" style="width: 3.75rem; height: 0.7rem; left: 0.62rem; top: -0.1rem;">
+      <div class="card-title" style="width: 3.75rem; height: 0.7rem; font-size: 0.2rem;">
         隐患数量
       </div>
     </div>
-    <div class="absolute-layer" style="width: 300px; height: 73px; left: 10px; top: 45px;">
+    <div class="absolute-layer" style="width: 3.75rem; height: 0.9rem; left: 0.13rem; top: 0.58rem;">
       <div class="sub-wrapper">
         <div class="title-container">截止目前已发现隐患</div>
         <div class="counter-container">{{ risk_num }}</div>
       </div>
     </div>
-    <div class="absolute-layer" style="width: 368px; height: 220px; left: 10px; top: 93px;">
-      <div class="box2" style="width: 368px; height: 220px;">
+    <div class="absolute-layer" style="width: 92%; height: 70%; left: 0.13rem; top: 1.16rem;">
+      <div class="box2" style="width: 100%; height: 100%;">
         <div ref='dangerNumBar' style="height: 85%; width: 100%;">
         </div>
       </div>
