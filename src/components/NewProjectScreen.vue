@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%">
+  <div class="project_screen" style="height: 100%;">
     <el-row style="height: 10%" class="boundary-A">
       <!--      <el-col :span="24">-->
       <div
@@ -22,6 +22,7 @@
               <span class="prefix" style="font-size: 0.32rem">累计</span>
               <!--            写一个循环的number-->
               <div id="real-number" style="font-size: 0.45rem">
+                {{ getNumber }}
               </div>
               <span class="suffix" style="font-size: 0.32rem">例</span>
             </div>
@@ -33,7 +34,7 @@
             </div>
             <div class="counter-container">
               <span class="numbers" style="color:rgb(255, 10, 10); font-size: 0.32rem">
-                <NumCounter :value=this.high_risk class="text-color-blue nums"></NumCounter>
+                <NumCounter :value=this.high_risk class="text-color-blue nums">{{ getRisk }}</NumCounter>
               </span>
               <span class="suffix" style="font-size: 0.2rem">例</span>
             </div>
@@ -87,7 +88,7 @@
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
                   <span class="numbers" style="font-size: 0.32rem">
-                    <NumCounter :value=this.fire_num class="text-color-blue nums"></NumCounter>
+                    <NumCounter :value=this.fire_num class="text-color-blue nums">{{ getMajor }}</NumCounter>
                   </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
                 </div>
@@ -184,37 +185,37 @@
         </el-row>
         <el-row style="height: 36%" class="boundary-A">
           <StageRatio
-          :context="{sign: 'project-stage'}"></StageRatio>
+              :context="{sign: 'project-stage'}"></StageRatio>
         </el-row>
       </el-col>
       <el-col :span=" 6
           " class="boundary-A" :offset="12" style="height: 75%">
-          <el-row style="height: 32%" class="boundary-A">
+        <el-row style="height: 32%" class="boundary-A">
+          <div
+              class="risk-wrapper" style="height: 0.45rem; left: 0px; top: 0px;">
             <div
-                class="risk-wrapper" style="height: 0.45rem; left: 0px; top: 0px;">
-              <div
-                  style="width: 4.7rem; height: 0.45rem; pointer-events: auto; border: none; border-radius: 10px 10px 0px 0px; background: rgb(255, 255, 255); backdrop-filter: blur(30px);">
-              </div>
+                style="width: 4.7rem; height: 0.45rem; pointer-events: auto; border: none; border-radius: 10px 10px 0px 0px; background: rgb(255, 255, 255); backdrop-filter: blur(30px);">
             </div>
+          </div>
+          <div
+              class="risk-wrapper" style="height: 0.35rem; left: 12px; top: 0.1rem;">
             <div
-                class="risk-wrapper" style="height: 0.35rem; left: 12px; top: 0.1rem;">
-              <div
-                  style="width: 25px; height: 25px; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b7df2458e43133e6310d7302df79b2dc.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
-            </div>
+                style="width: 25px; height: 25px; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b7df2458e43133e6310d7302df79b2dc.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+          </div>
+          <div
+              class="risk-wrapper" style="height: 0.35rem; left: 48px; top: 0.1rem;">
             <div
-                class="risk-wrapper" style="height: 0.35rem; left: 48px; top: 0.1rem;">
-              <div
-                  style="width: 4.7rem; height: 0.35rem; pointer-events: auto; display: flex; align-items: center; justify-content: flex-start; color: rgb(255, 0, 0); font-weight: bold; font-family: 'Microsoft Yahei'; font-size: 0.2rem; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                实时高风险隐患警告
-              </div>
+                style="width: 4.7rem; height: 0.35rem; pointer-events: auto; display: flex; align-items: center; justify-content: flex-start; color: rgb(255, 0, 0); font-weight: bold; font-family: 'Microsoft Yahei'; font-size: 0.2rem; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+              实时高风险隐患警告
             </div>
-            <div
-                style="position: absolute; width: 4.7rem; height: 1.65rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
-              <HighRiskNote :noteList="noteList" :tableHeight="tableHeight" :noteHeader="noteHeader">
-              </HighRiskNote>
-            </div>
+          </div>
+          <div
+              style="position: absolute; width: 4.7rem; height: 1.65rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
+            <HighRiskNote :noteList="noteList" :tableHeight="tableHeight" :noteHeader="noteHeader">
+            </HighRiskNote>
+          </div>
 
-          </el-row>
+        </el-row>
       </el-col>
       <el-col :span="24" class="boundary-A" style="height: 25%">
         <div class="record">
@@ -323,53 +324,58 @@ export default {
         arr.push(obj)
       }
       return arr
-    }
-  },
-  mounted() {
-    let data = this.$store.state.get_screen.projects_risk_level
-    this.high_risk = data.risk_level_ratio['3']
-    this.mid_risk = data.risk_level_ratio['2']
-    this.low_risk = data.risk_level_ratio['1']
-
-    if (this.num_flag == false) {
-      //自定义字符串,用于拼接标签
-      var numStr = "";
-      //自定义数组
-      var numArr = [];
+    },
+    getRisk() {
+      let data = this.$store.state.get_screen.projects_risk_level
+      this.high_risk = data.risk_level_ratio['3']
+      this.mid_risk = data.risk_level_ratio['2']
+      this.low_risk = data.risk_level_ratio['1']
+    },
+    getMajor() {
+      let data = this.$store.state.get_screen.projects_risk_num_rank
+      this.fire_num = data["消防专业"]
+      this.lift_num = data["电梯专业"]
+      this.electric_num = data["电气专业"]
+      this.fuel_num = data["燃气专业"]
+    },
+    getNumber() {
       var num = this.$store.state.get_screen.projects_risk_num.risk_num
-      if (typeof (num) == "number") {
-        this.num_flag = true
-        while (num / 10) {
-          numArr.unshift(num % 10)
-          num = Math.floor(num / 10)
-        }
-        /****forEach循环****/
-        numArr.forEach(e => {
-          numStr += `<span class="number">${e}</span>`;
-        })
-        //拼接完字符串数组后用innerHTML把它渲染到页面中
-        document.getElementById("real-number").innerHTML = numStr
-        let numbers = document.getElementsByClassName("number")
-        if (numbers) {
-          for (let i = 0; i < numbers.length; i++) {
-            let number = numbers[i]
-            number.style.backgroundColor = '#ff6300'
-            number.style.display = 'inline-block'
-            number.style.fontWeight = 'bolder'
-            number.style.marginRight = '0.15rem'
-            number.style.borderRadius = '6px'
+      if (this.num_flag == false) {
+        //自定义字符串,用于拼接标签
+        var numStr = "";
+        //自定义数组
+        var numArr = [];
+        var num_copy = num
+        if (typeof (num) == "number") {
+          this.num_flag = true
+          while (num_copy / 10) {
+            numArr.unshift(num_copy % 10)
+            num_copy = Math.floor(num_copy / 10)
           }
+          /****forEach循环****/
+          numArr.forEach(e => {
+            numStr += `<span class="number">${e}</span>`;
+          })
+          this.$nextTick(_ => {
+            //拼接完字符串数组后用innerHTML把它渲染到页面中
+            document.getElementById("real-number").innerHTML = numStr
+            let numbers = document.getElementsByClassName("number")
+            if (numbers) {
+              for (let i = 0; i < numbers.length; i++) {
+                let number = numbers[i]
+                number.style.backgroundColor = '#ff6300'
+                number.style.display = 'inline-block'
+                number.style.fontWeight = 'bolder'
+                number.style.marginRight = '0.15rem'
+                number.style.borderRadius = '6px'
+              }
+            }
+          })
         }
       }
     }
-
-    data = this.$store.state.get_screen.projects_risk_num_rank
-    this.fire_num = data["消防专业"]
-    this.lift_num = data["电梯专业"]
-    this.electric_num = data["电气专业"]
-    this.fuel_num = data["燃气专业"]
-
-
+  },
+  mounted() {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
@@ -381,6 +387,8 @@ export default {
         $("html").css({fontSize: whei / 24})
       });
     });
+
+
   },
   methods: {
     cellClassName({row, column, rowIndex, columnIndex}) {
@@ -419,6 +427,7 @@ export default {
   created() {
     let param = new URLSearchParams();
     param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    // param.append('project_name', '合肥欢乐颂');
     this.$store.commit('get_screen/changeParams', {params: param})
     this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
     this.$store.dispatch('get_screen/getProjectScreenRNRank')
@@ -434,6 +443,10 @@ export default {
 <style scoped>
 .boundary-A {
   /*border: 1px dashed #fff*/
+}
+
+.project_screen {
+  background-image: url("../assets/screen_bg2.jpg");
 }
 
 .level2 {
@@ -599,13 +612,24 @@ export default {
 }
 
 /* 表格内背景颜色 */
-/deep/ .el-table th,
+/deep/ .el-table th {
+
+  background-color: #873b0e;
+  border-color: #873b0e;
+
+}
+
+/* 表格内背景颜色 */
 /deep/ .el-table tr,
 /deep/ .el-table td {
 
   background-color: transparent;
   color: #ffffff;
+}
 
+/*自定义斑马线颜色*/
+/deep/ .el-table--striped .el-table__body tr.el-table__row--striped td {
+  background-color: rgba(44, 54, 67, 0.5);
 }
 
 /deep/ .el-table td .cell {

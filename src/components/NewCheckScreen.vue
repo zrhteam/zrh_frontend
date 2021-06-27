@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%">
+  <div class="check_screen" style="height: 100%">
     <el-row style="height: 10%" class="boundary-A">
       <!--      <el-col :span="24">-->
       <div
@@ -336,42 +336,45 @@ export default {
       this.lift_num = data["电梯专业"]
       this.electric_num = data["电气专业"]
       this.fuel_num = data["燃气专业"]
-    }
-  },
-  mounted() {
-    if (this.num_flag == false) {
-      //自定义字符串,用于拼接标签
-      var numStr = "";
-      //自定义数组
-      var numArr = [];
+    },
+    getNumber() {
       var num = this.$store.state.get_screen.checks_risk_num['risk_num']
-      var num_copy = num
-      if (typeof (num_copy) == "number") {
-        this.num_flag = true
-        while (num_copy / 10) {
-          numArr.unshift(num_copy % 10)
-          num_copy = Math.floor(num_copy / 10)
-        }
-        /****forEach循环****/
-        numArr.forEach(e => {
-          numStr += `<span class="number">${e}</span>`;
-        })
-        //拼接完字符串数组后用innerHTML把它渲染到页面中
-        document.getElementById("check-real-number").innerHTML = numStr
-        let numbers = document.getElementsByClassName("number")
-        if (numbers) {
-          for (let i = 0; i < numbers.length; i++) {
-            let number = numbers[i]
-            number.style.backgroundColor = '#ff6300'
-            number.style.display = 'inline-block'
-            number.style.fontWeight = 'bolder'
-            number.style.marginRight = '0.15rem'
-            number.style.borderRadius = '6px'
+      if (this.num_flag == false) {
+        //自定义字符串,用于拼接标签
+        var numStr = "";
+        //自定义数组
+        var numArr = [];
+        var num_copy = num
+        if (typeof (num_copy) == "number") {
+          this.num_flag = true
+          while (num_copy / 10) {
+            numArr.unshift(num_copy % 10)
+            num_copy = Math.floor(num_copy / 10)
           }
+          /****forEach循环****/
+          numArr.forEach(e => {
+            numStr += `<span class="number">${e}</span>`;
+          })
+          this.$nextTick(_ => {
+            //拼接完字符串数组后用innerHTML把它渲染到页面中
+            document.getElementById("check-real-number").innerHTML = numStr
+            let numbers = document.getElementsByClassName("number")
+            if (numbers) {
+              for (let i = 0; i < numbers.length; i++) {
+                let number = numbers[i]
+                number.style.backgroundColor = '#ff6300'
+                number.style.display = 'inline-block'
+                number.style.fontWeight = 'bolder'
+                number.style.marginRight = '0.15rem'
+                number.style.borderRadius = '6px'
+              }
+            }
+          })
         }
       }
     }
-
+  },
+  mounted() {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
@@ -420,7 +423,8 @@ export default {
   },
   created() {
     let param = new URLSearchParams();
-    param.append('check_code', this.$store.state.get_check.check_code);
+    // param.append('check_code', this.$store.state.get_check.check_code);
+    param.append('check_code', 'ZRH(ZB)-2007-L01-A04-000-15');
     this.$store.commit('get_screen/changeParams', {params: param})
     this.$store.dispatch('get_screen/getCheckScreenRiskNumber')
     this.$store.dispatch('get_screen/getCheckScreenRNRank')
@@ -434,8 +438,14 @@ export default {
 </script>
 
 <style scoped>
+
+
 .boundary-A {
   /*border: 1px dashed #fff*/
+}
+
+.check_screen {
+  background-image: url("../assets/screen_bg2.jpg");
 }
 
 .level2 {

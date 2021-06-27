@@ -23,9 +23,9 @@ export default {
   computed: {
     getRoseData() {
       let data
-      if(this.context.sign == 'project-stage') {
+      if (this.context.sign == 'project-stage') {
         data = this.$store.state.get_screen.projects_stage_ratio
-      }else if(this.context.sign == 'check-stage') {
+      } else if (this.context.sign == 'check-stage') {
         data = this.$store.state.get_screen.checks_stage_ratio
       }
       let arr = []
@@ -59,6 +59,7 @@ export default {
         tooltip: {
           formatter: '{d}%'
         },
+        animation:true,
         series: [
           {
             name: '面积模式',
@@ -94,6 +95,14 @@ export default {
   mounted() {
     this.rosePie = this.$refs.rosePie;
     this.myChart = this.$echarts.init(this.rosePie)
+    setInterval(() => {
+      var option1 = this.myChart.getOption();
+      this.myChart.clear();
+      this.myChart.setOption(option1);
+
+      this.rosePie = this.$refs.rosePie;
+      this.myChart = this.$echarts.init(this.rosePie)
+    }, 10000);
   },
   watch: {
     renderSign() {
