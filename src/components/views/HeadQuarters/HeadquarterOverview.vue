@@ -256,7 +256,8 @@ export default {
         children: 'children',
         label: 'label'
       },
-      title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
+      // title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
+      title1: this.$store.state.get_headquarter.head_name,
       timer: null,
       nowWeek: "",
       nowDate: "",
