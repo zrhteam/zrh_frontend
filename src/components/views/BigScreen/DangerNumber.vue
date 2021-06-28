@@ -138,8 +138,8 @@ export default {
             //     color: '#40abc4'
             //   }
             // },
-            barCategoryGap: fontSize(0.30),
-            barMaxWidth: fontSize(0.20),
+            barCategoryGap: this.fontSize(0.30),
+            barMaxWidth: this.fontSize(0.20),
             showBackground: true
           },
         ]
