@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import {bar_option} from "@/utils/constants";
 import echarts from "echarts";
 
 export default {
@@ -57,43 +56,94 @@ export default {
       let arr = this.dangerData.arr_num
       this.risk_num = this.dangerData.sum
       // this.renderSign = true
-      bar_option["tooltip"] = {}
-      bar_option["dataset"][0]["source"] = arr
-      bar_option["yAxis"]["axisLine"]["show"] = false
-      bar_option["yAxis"]["axisTick"] = false
-      bar_option["yAxis"]["splitLine"] = false
-      bar_option["yAxis"]["axisLabel"]["show"] = false
-      bar_option["xAxis"]["axisTick"] = false
-      bar_option["xAxis"]["axisLine"]["show"] = false
-      bar_option["xAxis"]["axisLabel"]["textStyle"]["color"] = "#ffffff"
-      bar_option["grid"] = {
-        left: this.fontSize(0.65),
-        top: this.fontSize(0.25),
-        right: this.fontSize(0.85),
-        bottom: this.fontSize(0.20),
-        containLabel: true
-      }
-      bar_option["series"][0]["itemStyle"] = {
-        normal: {
-          color: new echarts.graphic.LinearGradient(
-              0, 1, 0.6, 0.3,
-              [
-                {offset: 0, color: '#c16ad5'},
-                {offset: 0.3, color: '#9956cb'},
-                {offset: 0.6, color: '#7746c1'},
-                {offset: 1, color: '#3626af'}
-              ]
-          )
-        }
-      }
-      bar_option["series"][0]["label"] = {
-        show: true,
-        formatter: (a) => {
-          return a.count
+      let bar_option = {
+        tooltip: {},
+        dataset: [{
+          dimensions: ['name', 'count'],
+          source: arr
+        }, {
+          transform: {
+            type: 'sort',
+            config: {dimension: 'count', order: 'desc'}
+          }
+        }],
+        xAxis: {
+          type: 'category',
+          axisLabel: {
+            textStyle: {
+              fontSize: this.fontSize(0.1),
+              color: '#ffffff'
+            },
+            formatter: function (params) {
+              let val = "";
+              let show = 8;
+              if (params.length > show) {
+                val = params.substr(0, show) + '...';
+                return val;
+              } else {
+                return params;
+              }
+            },
+          },
+          axisLine: false,
+          splitLine: {
+            show: false
+          },
+          axisTick: false
         },
-      }
-      bar_option["series"][0]["barMaxWidth"] = this.fontSize(0.3)
-      bar_option["series"][0]["showBackground"] = true
+        yAxis: {
+          axisLine: {
+            lineStyle: {},
+            show: false
+          },
+          axisTick: false,
+          axisLabel: {
+            textStyle: {},
+            show: false
+          },
+          splitLine: false
+        },
+        grid: {
+          left: this.fontSize(0.65),
+          top: this.fontSize(0.25),
+          right: this.fontSize(0.85),
+          bottom: this.fontSize(0.20),
+          containLabel: true
+        },
+        series: [
+          {
+            type: 'bar',
+            encode: null,
+            itemStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(
+                    0, 1, 0.6, 0.3,
+                    [
+                      {offset: 0, color: '#c16ad5'},
+                      {offset: 0.3, color: '#9956cb'},
+                      {offset: 0.6, color: '#7746c1'},
+                      {offset: 1, color: '#3626af'}
+                    ]
+                )
+              }
+            },
+            label: {
+              show: true,
+              formatter: (a) => {
+                return a.count
+              }
+            },
+            // emphasis: {
+            //   itemStyle: {
+            //     color: '#40abc4'
+            //   }
+            // },
+            barCategoryGap: fontSize(0.30),
+            barMaxWidth: fontSize(0.20),
+            showBackground: true
+          },
+        ]
+      };
 
       this.myChart.setOption(bar_option);
     },

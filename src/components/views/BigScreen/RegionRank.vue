@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import {bar_option, bar_option3} from "@/utils/constants";
 import echarts from "echarts";
 
 export default {
@@ -49,31 +48,94 @@ export default {
     drawBarChart() {
       let arr = this.regionData
       this.renderSign = true
-      bar_option3["dataset"]["source"] = arr
-      bar_option3["yAxis"]["axisLabel"]["textStyle"]["color"] = '#ffffff'
-      bar_option3["xAxis"]["axisLabel"] = {
-        show: false
-      }
-      bar_option3["grid"] = {
-        left: this.fontSize(0.25),
-        top: this.fontSize(0.25),
-        right: this.fontSize(0.25),
-        bottom: this.fontSize(0.10),
-        containLabel: true
-      }
-      bar_option3["series"][0]["itemStyle"] = {
-        normal: {
-          barBorderRadius: [4, 4, 4, 4],
-          color: '#0a73ff'
-        }
-      }
-      bar_option3["series"][0]["label"] = {
-        show: true,
-        formatter: (a) => {
-          return a.count
+      let bar_option3 = {
+        dataset: {
+          dimensions: ['name', 'count'],
+          source: arr
         },
-      }
-      // bar_option3["series"][0]["showBackground"] = true
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          }
+        },
+        grid: {
+          left: this.fontSize(0.25),
+          top: this.fontSize(0.25),
+          right: this.fontSize(0.25),
+          bottom: this.fontSize(0.10),
+          containLabel: true
+        },
+        xAxis: {
+          type: 'value',
+          axisLabel: {
+            textStyle: {},
+            show: false
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#058ddb',
+              fontSize: this.fontSize(0.08)
+            },
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          }
+        },
+        yAxis: {
+          type: 'category',
+          axisLine: {
+            lineStyle: {
+              color: '#058ddb',
+              fontSize: this.fontSize(0.08)
+            },
+            show: false
+          },
+          axisLabel: {
+            textStyle: {
+              fontSize: this.fontSize(0.10),
+              color: '#ffffff'
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          }
+        },
+        series: [
+          {
+            type: 'bar',
+            itemStyle: {
+              normal: {
+                //柱形图圆角，初始化效果
+                barBorderRadius: [4, 4, 4, 4],
+                color: '#0a73ff'
+              }
+            },
+            emphasis: {
+              itemStyle: {
+                color: '#40abc4'
+              },
+              show: false
+            },
+            label: {
+              show: true,
+              formatter: (a) => {
+                return a.count
+              }
+            },
+            barMaxWidth: this.fontSize(0.2),
+            // barCategoryGap: toString(fontSize(0.18)),
+            barCategoryGap: this.fontSize(0.13),
+          }
+        ]
+      };
       this.myChart.setOption(bar_option3);
     },
     fontSize(res) {

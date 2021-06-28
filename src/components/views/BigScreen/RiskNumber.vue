@@ -6,7 +6,7 @@
     </div>
     <div class="absolute-layer" style="width: 3.75rem; height: 0.7rem; left: 0.61rem; top: -0.1rem;">
       <div class="card-title" style="width: 3.75rem; height: 0.7rem; font-size: 0.2rem;">
-        {{this.riskName}}隐患数量
+        {{ this.riskName }}隐患数量
       </div>
     </div>
     <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import {pie_option2} from "@/utils/constants";
 
 export default {
   name: "RiskNumber",
@@ -53,7 +52,43 @@ export default {
     drawBarChart() {
       let arr = this.riskNumber
       this.renderSign = true
-      pie_option2["series"][0]["data"] = arr
+      let pie_option2 = {
+        series: [
+          {
+            type: 'pie',
+            radius: ['55%', '70%'],
+            center: ['50%', '50%'],
+            label: {
+              color: '#fff',
+              formatter: '{d}% \n {b} ',
+              position: 'center',
+              show: false
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: '14',
+                color: '#ffffff'
+              }
+            },
+            itemStyle: {
+              borderRadius: 0,
+              normal: {
+                color: function (params) {
+                  //自定义颜色
+                  let colorList = [
+                    '#ee5a24', '#ea2027', '#009432', '#00b3ff',
+                    '#0652dd', '#f79f1f', '#ed4ccb', '#a55eea',
+                    '#c8d4d9', '#16a085'
+                  ];
+                  return colorList[params.dataIndex]
+                },
+              }
+            },
+            data: arr
+          }
+        ]
+      };
       pie_option2["series"][0]["itemStyle"]["normal"] = {
         color: function (params) {
           let colorList = [
