@@ -100,6 +100,10 @@ export default {
             coordinateSystem: 'geo', // 对应上方配置
           }]
         })
+
+        window.addEventListener("resize", () => {
+          myChart.resize();
+        });
       }
 
       //定义全国省份的数组

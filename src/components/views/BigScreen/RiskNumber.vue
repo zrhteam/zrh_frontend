@@ -45,7 +45,7 @@ export default {
     return {
       riskNumberPie: null,
       myChart: null,
-      renderSign: false,
+      // renderSign: false,
     }
   },
   methods: {
@@ -100,6 +100,10 @@ export default {
         },
       }
       this.myChart.setOption(pie_option2);
+
+      window.addEventListener("resize", () => {
+        this.myChart.resize();
+      });
     }
   },
   mounted() {

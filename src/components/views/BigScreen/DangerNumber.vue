@@ -47,7 +47,7 @@ export default {
     return {
       dangerNumBar: null,
       myChart: null,
-      renderSign: false,
+      // renderSign: false,
       risk_num: 0
     }
   },
@@ -146,6 +146,10 @@ export default {
       };
 
       this.myChart.setOption(bar_option);
+
+      window.addEventListener("resize", () => {
+        this.myChart.resize();
+      });
     },
     fontSize(res) {
       let docEl = document.documentElement,

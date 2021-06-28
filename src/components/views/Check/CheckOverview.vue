@@ -112,7 +112,6 @@
 <script>
 import CheckRiskRatio from "@/components/views/Check/CheckRiskRatio.vue";
 import CheckHighRisk from "@/components/views/Check/CheckHighRisk.vue";
-import CheckRectification from "@/components/views/Check/CheckRectification.vue";
 import PerctangePerc from '@/components/views/Project/PerctangePerc.vue'
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
@@ -129,7 +128,7 @@ export default {
     BarRank,
     StackedHorizontalBar,
     TopRisk,
-    CheckRiskLevel, TopName, RiskLevelYear, CheckRectification, CheckHighRisk, CheckRiskRatio, PerctangePerc
+    CheckRiskLevel, TopName, RiskLevelYear, CheckHighRisk, CheckRiskRatio, PerctangePerc
   },
   data() {
     return {

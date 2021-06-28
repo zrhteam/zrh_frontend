@@ -23,10 +23,8 @@
 <script>
 //import RiskDistribution from "@/components/views/functions/RiskDistribution.vue";
 
-import checkbox from "@/components/views/functions/checkbox.vue";
 export default {
   name: "Region2_3",
-  components: {checkbox},
   computed: {
     getRiskDistribution() {
       let data = this.$store.state.get_region.risk_distribution;

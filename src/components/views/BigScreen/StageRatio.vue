@@ -59,7 +59,7 @@ export default {
         tooltip: {
           formatter: '{d}%'
         },
-        animation:true,
+        animation: true,
         series: [
           {
             name: '面积模式',
@@ -90,6 +90,10 @@ export default {
         ]
       }
       this.myChart.setOption(pie_option);
+
+      window.addEventListener("resize", () => {
+        this.myChart.resize();
+      });
     }
   },
   mounted() {

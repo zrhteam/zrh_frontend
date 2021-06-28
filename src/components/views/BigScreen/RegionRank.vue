@@ -41,7 +41,6 @@ export default {
     return {
       rankBar: null,
       myChart: null,
-      renderSign: false,
     }
   },
   methods: {
@@ -137,6 +136,10 @@ export default {
         ]
       };
       this.myChart.setOption(bar_option3);
+
+      window.addEventListener("resize", () => {
+        this.myChart.resize();
+      });
     },
     fontSize(res) {
       let docEl = document.documentElement,

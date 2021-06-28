@@ -8,7 +8,7 @@
       :show-header="true"
       :cell-class-name="cellClassName"
       stripe
-      >
+  >
     <el-table-column v-for="(th, key) in tableHeader"
                      :key="key"
                      :prop="th.prop"
@@ -41,8 +41,10 @@ export default {
       default: '100%'
     },
     cellClassName: {
-      type: Object,
-      default: {}
+      type: Function,
+      default: function () {
+        return Function
+      }
     }
   },
   mounted() {
