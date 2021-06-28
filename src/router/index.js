@@ -27,7 +27,7 @@ const routerOptions = [
     {path: '/data_compare', component: 'DataCompare', meta: {keepAlive:false}},
     {path: '/new_head_screen', component: 'NewHeadScreen'},
     {path: '/new_region_screen', component: 'NewRegionScreen'},
-    {path: '/new_project_screen', component: 'NewProjectScreen'},
+    {path: '/new_project_screen/:id', component: 'NewProjectScreen'},
     {path: '/new_check_screen', component: 'NewCheckScreen'},
     {path: '*', component: 'NotFound'}
 ]

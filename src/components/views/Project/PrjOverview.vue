@@ -233,7 +233,7 @@ export default {
       if (document.getElementById('prj_subpart').style.display === 'block') {
         document.getElementById('check_charts').style.display = 'none'
         document.getElementById('prj_charts').style.display = 'block'
-        this.$router.push({path: '/new_project_screen'});
+        this.$router.push({path: `/new_project_screen/${this.$store.state.get_project.prj_name}`});
       } else if (document.getElementById('check_part').style.display === 'block') {
         document.getElementById('check_charts').style.display = 'block'
         document.getElementById('prj_charts').style.display = 'none'

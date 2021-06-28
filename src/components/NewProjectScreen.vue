@@ -424,18 +424,37 @@ export default {
       this.nowTime = hou + ":" + min + ":" + sec;
     },
   },
+  watch: {
+    $route: {
+      handler: function (route) {
+        let param = new URLSearchParams();
+        param.append('project_name', route.params.id);
+        this.$store.commit('get_screen/changeParams', {params: param})
+        this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
+        this.$store.dispatch('get_screen/getProjectScreenRNRank')
+        this.$store.dispatch('get_screen/getProjectScreenRiskLevel')
+        this.$store.dispatch('get_screen/getProjectScreenStageRatio')
+        this.$store.dispatch('get_screen/getProjectScreenHighRiskNote')
+        this.$store.dispatch('get_screen/getProjectScreenPictureNote')
+        this.$store.dispatch('get_screen/getProjectScreenTable')
+      },
+      immediate: true
+    }
+  },
   created() {
-    let param = new URLSearchParams();
-    param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    // let param = new URLSearchParams();
+    // // param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
     // param.append('project_name', '合肥欢乐颂');
-    this.$store.commit('get_screen/changeParams', {params: param})
-    this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
-    this.$store.dispatch('get_screen/getProjectScreenRNRank')
-    this.$store.dispatch('get_screen/getProjectScreenRiskLevel')
-    this.$store.dispatch('get_screen/getProjectScreenStageRatio')
-    this.$store.dispatch('get_screen/getProjectScreenHighRiskNote')
-    this.$store.dispatch('get_screen/getProjectScreenPictureNote')
-    this.$store.dispatch('get_screen/getProjectScreenTable')
+    // this.$store.commit('get_screen/changeParams', {params: param})
+    // this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
+    // this.$store.dispatch('get_screen/getProjectScreenRNRank')
+    // this.$store.dispatch('get_screen/getProjectScreenRiskLevel')
+    // this.$store.dispatch('get_screen/getProjectScreenStageRatio')
+    // this.$store.dispatch('get_screen/getProjectScreenHighRiskNote')
+    // this.$store.dispatch('get_screen/getProjectScreenPictureNote')
+    // this.$store.dispatch('get_screen/getProjectScreenTable')
+    // debugger
+    // console.log(this.$route.params)
   }
 }
 </script>
