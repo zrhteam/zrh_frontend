@@ -12,12 +12,14 @@
         </div>
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 19.5rem; top: 25%;">
-        <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
+        <div class="title"
+             style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
           {{ nowTime }}
         </div>
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 20.5rem; top: 25%;">
-        <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
+        <div class="title"
+             style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
           {{ nowDate }}
         </div>
       </div>
@@ -151,7 +153,8 @@ export default {
       this.nowTime = hou + ":" + min + ":" + sec;
     },
   },
-  computed: {recordList() {
+  computed: {
+    recordList() {
       let data = this.$store.state.get_screen.regions_table
       return data['record_list']
     },
@@ -341,18 +344,35 @@ export default {
       });
     });
   },
+  watch: {
+    $route: {
+      handler: function (route) {
+        let param = new URLSearchParams();
+        param.append('region_name', route.params.id);
+        this.$store.commit('get_screen/changeParams', {params: param})
+        this.$store.dispatch('get_screen/getRegionScreenRiskNumber')
+        this.$store.dispatch('get_screen/getRegionScreenRNRank')
+        this.$store.dispatch('get_screen/getRegionScreenMajorNumber')
+        this.$store.dispatch('get_screen/getRegionScreenCNRank')
+        this.$store.dispatch('get_screen/getRegionScreenMajorStageInfo')
+        this.$store.dispatch('get_screen/getRegionScreenAreaNumber')
+        this.$store.dispatch('get_screen/getRegionScreenTable')
+      },
+      immediate: true
+    }
+  },
   created() {
-    let param = new URLSearchParams();
-    param.append('region_name', this.$store.state.get_region.region_name);
-    // param.append('region_name', '华北区域');
-    this.$store.commit('get_screen/changeParams', {params: param})
-    this.$store.dispatch('get_screen/getRegionScreenRiskNumber')
-    this.$store.dispatch('get_screen/getRegionScreenRNRank')
-    this.$store.dispatch('get_screen/getRegionScreenMajorNumber')
-    this.$store.dispatch('get_screen/getRegionScreenCNRank')
-    this.$store.dispatch('get_screen/getRegionScreenMajorStageInfo')
-    this.$store.dispatch('get_screen/getRegionScreenAreaNumber')
-    this.$store.dispatch('get_screen/getRegionScreenTable')
+    // let param = new URLSearchParams();
+    // param.append('region_name', this.$store.state.get_region.region_name);
+    // // param.append('region_name', '华北区域');
+    // this.$store.commit('get_screen/changeParams', {params: param})
+    // this.$store.dispatch('get_screen/getRegionScreenRiskNumber')
+    // this.$store.dispatch('get_screen/getRegionScreenRNRank')
+    // this.$store.dispatch('get_screen/getRegionScreenMajorNumber')
+    // this.$store.dispatch('get_screen/getRegionScreenCNRank')
+    // this.$store.dispatch('get_screen/getRegionScreenMajorStageInfo')
+    // this.$store.dispatch('get_screen/getRegionScreenAreaNumber')
+    // this.$store.dispatch('get_screen/getRegionScreenTable')
   }
 }
 </script>

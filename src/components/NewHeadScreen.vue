@@ -12,12 +12,14 @@
         </div>
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 19.5rem; top: 25%;">
-        <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
+        <div class="title"
+             style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
           {{ nowTime }}
         </div>
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 20.5rem; top: 25%;">
-        <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
+        <div class="title"
+             style="width: 6.8rem; height: 0.7rem; font-size: 0.2rem; color: #adc3d5; font-weight: normal">
           {{ nowDate }}
         </div>
       </div>
@@ -341,18 +343,35 @@ export default {
       });
     });
   },
+  watch: {
+    $route: {
+      handler: function (route) {
+        let param = new URLSearchParams();
+        param.append('headquarter_name', route.params.id);
+        this.$store.commit('get_screen/changeParams', {params: param})
+        this.$store.dispatch('get_screen/getHeadScreenRiskNumber')
+        this.$store.dispatch('get_screen/getHeadScreenRiskNumberRank')
+        this.$store.dispatch('get_screen/getHeadScreenMajorNumber')
+        this.$store.dispatch('get_screen/getHeadScreenCheckNumberRank')
+        this.$store.dispatch('get_screen/getHeadScreenMajorStageInfo')
+        this.$store.dispatch('get_screen/getHeadScreenAreaNumber')
+        this.$store.dispatch('get_screen/getHeadScreenTable')
+      },
+      immediate: true
+    }
+  },
   created() {
-    let param = new URLSearchParams();
-    param.append('headquarter_name', this.$store.state.get_headquarter.head_name);
-    // param.append('headquarter_name', "华润置地");
-    this.$store.commit('get_screen/changeParams', {params: param})
-    this.$store.dispatch('get_screen/getHeadScreenRiskNumber')
-    this.$store.dispatch('get_screen/getHeadScreenRiskNumberRank')
-    this.$store.dispatch('get_screen/getHeadScreenMajorNumber')
-    this.$store.dispatch('get_screen/getHeadScreenCheckNumberRank')
-    this.$store.dispatch('get_screen/getHeadScreenMajorStageInfo')
-    this.$store.dispatch('get_screen/getHeadScreenAreaNumber')
-    this.$store.dispatch('get_screen/getHeadScreenTable')
+    // let param = new URLSearchParams();
+    // param.append('headquarter_name', this.$store.state.get_headquarter.head_name);
+    // // param.append('headquarter_name', "华润置地");
+    // this.$store.commit('get_screen/changeParams', {params: param})
+    // this.$store.dispatch('get_screen/getHeadScreenRiskNumber')
+    // this.$store.dispatch('get_screen/getHeadScreenRiskNumberRank')
+    // this.$store.dispatch('get_screen/getHeadScreenMajorNumber')
+    // this.$store.dispatch('get_screen/getHeadScreenCheckNumberRank')
+    // this.$store.dispatch('get_screen/getHeadScreenMajorStageInfo')
+    // this.$store.dispatch('get_screen/getHeadScreenAreaNumber')
+    // this.$store.dispatch('get_screen/getHeadScreenTable')
   }
 }
 </script>

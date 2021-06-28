@@ -421,18 +421,35 @@ export default {
       this.nowTime = hou + ":" + min + ":" + sec;
     },
   },
+  watch: {
+    $route: {
+      handler: function (route) {
+        let param = new URLSearchParams();
+        param.append('check_code', route.params.id);
+        this.$store.commit('get_screen/changeParams', {params: param})
+        this.$store.dispatch('get_screen/getCheckScreenRiskNumber')
+        this.$store.dispatch('get_screen/getCheckScreenRNRank')
+        this.$store.dispatch('get_screen/getCheckScreenRiskLevel')
+        this.$store.dispatch('get_screen/getCheckScreenStageRatio')
+        this.$store.dispatch('get_screen/getCheckScreenHighRiskNote')
+        this.$store.dispatch('get_screen/getCheckScreenPictureNote')
+        this.$store.dispatch('get_screen/getCheckScreenTable')
+      },
+      immediate: true
+    }
+  },
   created() {
-    let param = new URLSearchParams();
-    // param.append('check_code', this.$store.state.get_check.check_code);
-    param.append('check_code', 'ZRH(ZB)-2007-L01-A04-000-15');
-    this.$store.commit('get_screen/changeParams', {params: param})
-    this.$store.dispatch('get_screen/getCheckScreenRiskNumber')
-    this.$store.dispatch('get_screen/getCheckScreenRNRank')
-    this.$store.dispatch('get_screen/getCheckScreenRiskLevel')
-    this.$store.dispatch('get_screen/getCheckScreenStageRatio')
-    this.$store.dispatch('get_screen/getCheckScreenHighRiskNote')
-    this.$store.dispatch('get_screen/getCheckScreenPictureNote')
-    this.$store.dispatch('get_screen/getCheckScreenTable')
+    // let param = new URLSearchParams();
+    // // param.append('check_code', this.$store.state.get_check.check_code);
+    // param.append('check_code', 'ZRH(ZB)-2007-L01-A04-000-15');
+    // this.$store.commit('get_screen/changeParams', {params: param})
+    // this.$store.dispatch('get_screen/getCheckScreenRiskNumber')
+    // this.$store.dispatch('get_screen/getCheckScreenRNRank')
+    // this.$store.dispatch('get_screen/getCheckScreenRiskLevel')
+    // this.$store.dispatch('get_screen/getCheckScreenStageRatio')
+    // this.$store.dispatch('get_screen/getCheckScreenHighRiskNote')
+    // this.$store.dispatch('get_screen/getCheckScreenPictureNote')
+    // this.$store.dispatch('get_screen/getCheckScreenTable')
   }
 }
 </script>

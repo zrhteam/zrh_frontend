@@ -164,7 +164,7 @@ export default {
       // head_small.style.display = 'block'
       // head_small.style.width = "500px"
       // head_small.style.width = "99%"
-      this.$router.push({path: '/new_head_screen'});
+      this.$router.push({path: `/new_head_screen/${this.$store.state.get_headquarter.head_name}`});
       document.getElementById('region_part').style.display = 'none'
     },
     intoDataAnalysis() {

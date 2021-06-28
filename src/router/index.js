@@ -25,10 +25,10 @@ const routerOptions = [
     {path: '/analyze', component: 'Analyze', meta: {keepAlive:false}},
     {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive:false}},
     {path: '/data_compare', component: 'DataCompare', meta: {keepAlive:false}},
-    {path: '/new_head_screen', component: 'NewHeadScreen'},
-    {path: '/new_region_screen', component: 'NewRegionScreen'},
+    {path: '/new_head_screen/:id', component: 'NewHeadScreen'},
+    {path: '/new_region_screen/:id', component: 'NewRegionScreen'},
     {path: '/new_project_screen/:id', component: 'NewProjectScreen'},
-    {path: '/new_check_screen', component: 'NewCheckScreen'},
+    {path: '/new_check_screen/:id', component: 'NewCheckScreen'},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {
