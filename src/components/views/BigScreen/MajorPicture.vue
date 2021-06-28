@@ -12,12 +12,12 @@
       <div class="slide-wrapper">
         <el-carousel indicator-position="none" :interval="300000" :height="dataHeight">
           <el-carousel-item v-for='item in img_list'>
-            <div style="height: 84%">
+            <div style="height: 100%">
               <div
                   style="position: absolute; width: 100%; min-height: 20px; opacity: 1; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3">
                 {{ item.note }}
               </div>
-              <el-image :src='item.url' alt style="height: 95%"/>
+              <el-image :src='item.url' alt style="height: 100%"/>
             </div>
           </el-carousel-item>
         </el-carousel>
@@ -38,7 +38,7 @@ export default {
   props: {
     dataHeight: {
       type: String,
-      default: '2rem'
+      default: '2.2rem'
     },
     context: {
       type: Object

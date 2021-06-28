@@ -3,11 +3,11 @@
     <el-row style="height: 10%" class="boundary-A">
       <!--      <el-col :span="24">-->
       <div
-          style="position: absolute !important; width: 700px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
+          style="position: absolute !important; width: 8.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
         <div class="title">{{ project_name }}实时隐患监控大屏</div>
       </div>
       <div
-          style="position: absolute !important; width: 300px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 50px;">
+          style="position: absolute !important; width: 3.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem;">
         <div class="date">{{ nowDate }} {{ nowTime }}</div>
       </div>
       <!--      </el-col>-->
@@ -16,7 +16,7 @@
       <el-col :span="6" class="boundary-A" style="height: 75%">
         <el-row style="height: 32%" class="boundary-A">
           <div
-              style="width: 380px; height: 60%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 30px; top: 141px;">
+              style="width: 4.75rem; height: 60%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.375rem; top: 1.75rem;">
             <div class="level2">截止目前已发现隐患</div>
             <div class="counter-container">
               <span class="prefix" style="font-size: 0.32rem">累计</span>
@@ -28,7 +28,7 @@
             </div>
           </div>
           <div
-              style="position: absolute !important; width: 92px; height: 40%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px;">
+              style="position: absolute !important; width: 1.15rem; height: 40%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px;">
             <div class="risk-title">
               高风险
             </div>
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div
-              style="position: absolute !important; width: 92px; height: 40%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 150px;">
+              style="position: absolute !important; width: 1.15rem; height: 40%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 1.875rem;">
             <div class="risk-title">
               中风险
             </div>
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div
-              style="position: absolute !important; width: 92px; height: 40%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 309px;">
+              style="position: absolute !important; width: 1.15rem; height: 40%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 3.8625rem;">
             <div class="risk-title">
               低风险
             </div>
@@ -70,23 +70,23 @@
               style="position: absolute !important; width: 90%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0px;">
             <div class="major-card">
               <div
-                  style="position: absolute !important; width: 72px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 8px;">
+                  style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
-                     style="width: 72px; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
+                     style="width: 0.9rem; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
                   消防
                 </div>
               </div>
               <div
-                  style="position: absolute !important; width: 72px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 32px;">
+                  style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.4rem;">
                 <div class="risk-title"
-                     style="width: 72px; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
+                     style="width: 0.9rem; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
                   专业
                 </div>
               </div>
               <div
-                  style="position: absolute !important; width: 92px; height: 43px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 75px; top: 26px;">
+                  style="position: absolute !important; width: 1.15rem; height: 0.54rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.9375rem; top: 0.325rem;">
                 <div
-                    style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
+                    style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 43px; background-color: rgba(0, 0, 0, 0);">
                   <span class="numbers" style="font-size: 0.32rem">
                     <NumCounter :value=this.fire_num class="text-color-blue nums">{{ getMajor }}</NumCounter>
                   </span>
@@ -99,23 +99,23 @@
               style="position: absolute !important; width: 90%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 52%; top: 0px;">
             <div class="major-card">
               <div
-                  style="position: absolute !important; width: 72px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 8px;">
+                  style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
-                     style="width: 72px; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
+                     style="width: 0.9rem; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
                   电梯
                 </div>
               </div>
               <div
-                  style="position: absolute !important; width: 72px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 32px;">
+                  style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.4rem;">
                 <div class="risk-title"
-                     style="width: 72px; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
+                     style="width: 0.9rem; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
                   专业
                 </div>
               </div>
               <div
-                  style="position: absolute !important; width: 92px; height: 43px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 75px; top: 26px;">
+                  style="position: absolute !important; width: 1.15rem; height: 0.54rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.9375rem; top: 0.325rem;">
                 <div
-                    style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
+                    style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
                   <span class="numbers" style="font-size: 0.32rem">
                     <NumCounter :value=this.lift_num class="text-color-blue nums"></NumCounter>
                   </span>
@@ -125,26 +125,26 @@
             </div>
           </div>
           <div
-              style="position: absolute !important; width: 100%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 106px;">
+              style="position: absolute !important; width: 100%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 1.325rem;">
             <div class="major-card">
               <div
-                  style="position: absolute !important; width: 72px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 8px;">
+                  style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
-                     style="width: 72px; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
+                     style="width: 0.9rem; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
                   电气
                 </div>
               </div>
               <div
-                  style="position: absolute !important; width: 72px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 32px;">
+                  style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.4rem;">
                 <div class="risk-title"
-                     style="width: 72px; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
+                     style="width: 0.9rem; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
                   专业
                 </div>
               </div>
               <div
-                  style="position: absolute !important; width: 92px; height: 43px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 75px; top: 26px;">
+                  style="position: absolute !important; width: 1.15rem; height: 0.54rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.9375rem; top: 0.325rem;">
                 <div
-                    style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
+                    style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
                   <span class="numbers" style="font-size: 0.32rem">
                     <NumCounter :value=this.electric_num class="text-color-blue nums"></NumCounter>
                   </span>
@@ -154,26 +154,26 @@
             </div>
           </div>
           <div
-              style="position: absolute !important; width: 100%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 52%; top: 106px;">
+              style="position: absolute !important; width: 100%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 52%; top: 1.325rem;">
             <div class="major-card">
               <div
-                  style="position: absolute !important; width: 72px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 8px;">
+                  style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
-                     style="width: 72px; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
+                     style="width: 0.9rem; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
                   燃气
                 </div>
               </div>
               <div
-                  style="position: absolute !important; width: 72px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 32px;">
+                  style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.4rem;">
                 <div class="risk-title"
-                     style="width: 72px; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
+                     style="width: 0.9rem; height: 100%; pointer-events: auto; align-items: center; justify-content: center; color: rgb(255, 255, 255); writing-mode: horizontal-tb; letter-spacing: 0px;">
                   专业
                 </div>
               </div>
               <div
-                  style="position: absolute !important; width: 92px; height: 43px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 75px; top: 26px;">
+                  style="position: absolute !important; width: 1.15rem; height: 0.54rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.9375rem; top: 0.325rem;">
                 <div
-                    style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 92px; height: 43px; background-color: rgba(0, 0, 0, 0);">
+                    style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
                   <span class="numbers" style="font-size: 0.32rem">
                     <NumCounter :value=this.fuel_num class="text-color-blue nums"></NumCounter>
                   </span>
@@ -198,19 +198,19 @@
             </div>
           </div>
           <div
-              class="risk-wrapper" style="height: 0.35rem; left: 12px; top: 0.1rem;">
+              class="risk-wrapper" style="height: 0.35rem; left: 0.15rem; top: 0.1rem;">
             <div
-                style="width: 25px; height: 25px; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b7df2458e43133e6310d7302df79b2dc.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+                style="width: 0.31rem; height: 0.31rem; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b7df2458e43133e6310d7302df79b2dc.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
           </div>
           <div
-              class="risk-wrapper" style="height: 0.35rem; left: 48px; top: 0.1rem;">
+              class="risk-wrapper" style="height: 0.35rem; left: 0.6rem; top: 0.1rem;">
             <div
                 style="width: 4.7rem; height: 0.35rem; pointer-events: auto; display: flex; align-items: center; justify-content: flex-start; color: rgb(255, 0, 0); font-weight: bold; font-family: 'Microsoft Yahei'; font-size: 0.2rem; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
               实时高风险隐患警告
             </div>
           </div>
           <div
-              style="position: absolute; width: 4.7rem; height: 1.65rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
+              style="position: absolute; width: 4.7rem; height: 2.2rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
             <HighRiskNote :noteList="noteList" :tableHeight="tableHeight" :noteHeader="noteHeader">
             </HighRiskNote>
           </div>
@@ -356,21 +356,23 @@ export default {
           numArr.forEach(e => {
             numStr += `<span class="number">${e}</span>`;
           })
-          this.$nextTick(_ => {
-            //拼接完字符串数组后用innerHTML把它渲染到页面中
-            document.getElementById("real-number").innerHTML = numStr
-            let numbers = document.getElementsByClassName("number")
-            if (numbers) {
-              for (let i = 0; i < numbers.length; i++) {
-                let number = numbers[i]
-                number.style.backgroundColor = '#ff6300'
-                number.style.display = 'inline-block'
-                number.style.fontWeight = 'bolder'
-                number.style.marginRight = '0.15rem'
-                number.style.borderRadius = '6px'
+          setInterval(() => {
+            this.$nextTick(_ => {
+              //拼接完字符串数组后用innerHTML把它渲染到页面中
+              document.getElementById("real-number").innerHTML = numStr
+              let numbers = document.getElementsByClassName("number")
+              if (numbers) {
+                for (let i = 0; i < numbers.length; i++) {
+                  let number = numbers[i]
+                  number.style.backgroundColor = '#ff6300'
+                  number.style.display = 'inline-block'
+                  number.style.fontWeight = 'bolder'
+                  number.style.marginRight = '0.15rem'
+                  number.style.borderRadius = '6px'
+                }
               }
-            }
-          })
+            })
+          }, 200);
         }
       }
     }
@@ -387,8 +389,6 @@ export default {
         $("html").css({fontSize: whei / 24})
       });
     });
-
-
   },
   methods: {
     cellClassName({row, column, rowIndex, columnIndex}) {
@@ -496,8 +496,8 @@ export default {
   white-space: nowrap;
   justify-content: flex-start;
   font-family: "Microsoft Yahei";
-  width: 380px;
-  height: 30px;
+  width: 4.75rem;
+  height: 0.375rem;
   background-color: rgba(0, 0, 0, 0);
 }
 
@@ -551,7 +551,7 @@ export default {
   text-indent: 0.02em;
   height: auto;
   line-height: normal;
-  font-size: 30px;
+  font-size: 0.375rem;
   font-weight: bolder;
   letter-spacing: 0.02em;
   margin-right: 0em;
@@ -559,7 +559,7 @@ export default {
 }
 
 .major-card {
-  width: 180px;
+  width: 2.25rem;
   height: 100%;
   pointer-events: auto;
   background-image: url("../assets/check_screen_card.png");
@@ -570,7 +570,7 @@ export default {
 }
 
 .title {
-  width: 700px;
+  width: 8.75rem;
   height: 100%;
   pointer-events: auto;
   display: flex;
@@ -579,7 +579,7 @@ export default {
   color: rgb(255, 255, 255);
   font-weight: bold;
   font-family: "Microsoft Yahei";
-  font-size: 28px;
+  font-size: 0.35rem;
   writing-mode: horizontal-tb;
   letter-spacing: 0px;
   text-overflow: ellipsis;
