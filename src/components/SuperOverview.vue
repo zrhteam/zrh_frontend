@@ -24,9 +24,9 @@
       </el-col>
     </el-row>
     <img id="img1_bg" :src="imgSrc1" @click="enterDB" alt=""
-         style="width: 20.4%; left: 17.1%; top: 40.4%; z-index: 99; position: absolute;"/>
+         style="width: 17.1%; left: 12.7%; top: 41.4%; z-index: 99; position: absolute;"/>
     <img id="img2_bg" :src="imgSrc2" alt=""
-         style="width: 22.2%; left: 38.7%; top: 43.4%; z-index: 1; position: absolute;"/>
+         style="width: 17.1%; left: 31.3%; top: 44%; z-index: 1; position: absolute;"/>
     <el-dropdown @command="handleCommand" style="z-index: 2">
       <el-button style="background-image: url(../assets/data_vis.png);
 left:-4.5rem; top:2.8rem;
@@ -40,8 +40,10 @@ position: absolute">
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
+    <img :src="imgSrc3" @click="enterDataAnalysis" alt=""
+         style="width: 17.1%; left: 50%; top: 43.5%; z-index: 99; position: absolute;"/>
     <img :src="imgSrc4" @click="enterDataInsight" alt=""
-         style="width: 20.4%; left: 62.4%; top: 41.4%; z-index: 99; position: absolute;"/>
+         style="width: 17.1%; left: 68.5%; top: 41.4%; z-index: 99; position: absolute;"/>
   </div>
 </template>
 
@@ -53,11 +55,13 @@ export default {
       headList: [],
       imgSrc1: require('../assets/db_vis.png'),
       imgSrc2: require('../assets/data_vis.png'),
+      imgSrc3: require('../assets/data_analysis.png'),
       imgSrc4: require('../assets/data_insight.png'),
       timer: null,
       nowWeek: "",
       nowDate: "",
       nowTime: "",
+
     }
   },
   mounted() {
@@ -104,8 +108,7 @@ export default {
       this.$router.push({path: '/data_compare'});
     },
     enterDataInsight() {
-      // this.$router.push({path: '/analyze'});
-      this.$router.push({path: '/data_compare'});
+      this.$router.push({path: '/analyze'});
     },
     Click() {
       alert("click")
