@@ -30,7 +30,6 @@
 </template>
 
 <script>
-//import RegionNumberHistogram from "@/components/views/functions/RegionNumberHistogram.vue";
 // import * as d3 from "d3/dist/d3";
 import elementResizeDetectorMaker from "element-resize-detector";
 import {bar_option} from "@/utils/constants";

@@ -99,14 +99,6 @@ export default {
         window.addEventListener('resize', function () {
           myChart.resize();
         })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById("pie2_2"), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
-            myChart.resize();
-          });
-        });
       } else if (document.getElementById("pie2_2")) {
         this.$nextTick(() => {
           const dom = document.getElementById(document.getElementById("pie2_2"))

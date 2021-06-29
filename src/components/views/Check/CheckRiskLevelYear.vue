@@ -125,13 +125,6 @@ export default {
       window.addEventListener('resize', function () {
         myChart.resize();
       })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById('check_level_year'), element => {
-        _this.$nextTick(() => {
-          myChart.resize();
-        });
-      });
     }
   }
 }

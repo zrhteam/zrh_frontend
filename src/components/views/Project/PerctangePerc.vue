@@ -24,18 +24,18 @@
     <!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
     <!--    筛选专业条件下属于不同分布区域的隐患数量-->
     <!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
-<!--        <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">-->
-<!--        </div>-->
-<!--        <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">-->
-<!--        </div>-->
-<!--    <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">-->
-<!--    </div>-->
+    <!--        <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">-->
+    <!--        </div>-->
+    <!--        <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">-->
+    <!--        </div>-->
+    <!--    <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">-->
+    <!--    </div>-->
     <!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
     <!--    </div>-->
     <!--    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">-->
     <!--    </div>-->
-<!--    <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">-->
-<!--    </div>-->
+    <!--    <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">-->
+    <!--    </div>-->
     <div ref='echartContainer' style="height: 80%; width: 100%;"/>
   </el-card>
 </template>
@@ -54,53 +54,54 @@ export default {
       echartContainer: null,
       myChart: null,
       renderSign: false,
-      pie_data:[]
+      pie_data: []
     }
   },
   methods: {
     drawBarChart() {
       // this.$nextTick(_ => {
-        // let myChart;
-        // myChart = this.$echarts.init(document.getElementById(this.context.id))
-        // let arr = this.getData
-        // bar_option['dataset']['source'] = arr
-        // bar_option["xAxis"]["axisLabel"]["rotate"] = 45
-        // myChart.setOption(bar_option);
-        // console.log("arr", arr)
-        // if (arr.length != 0) {
+      // let myChart;
+      // myChart = this.$echarts.init(document.getElementById(this.context.id))
+      // let arr = this.getData
+      // bar_option['dataset']['source'] = arr
+      // bar_option["xAxis"]["axisLabel"]["rotate"] = 45
+      // myChart.setOption(bar_option);
+      // console.log("arr", arr)
+      // if (arr.length != 0) {
       let arr = this.pie_data
-          pie_option['series'][0]['data'] = this.pie_data
-          pie_option["legend"]["formatter"] = function (params) {
-            var legendIndex = 0;
-            arr.forEach(function (v, i) {
-              if (v.name == params) {
-                legendIndex = i;
-              }
-            });
-            return params + " " + arr[legendIndex].value;
+      pie_option['series'][0]['data'] = this.pie_data
+      pie_option["legend"]["formatter"] = function (params) {
+        var legendIndex = 0;
+        arr.forEach(function (v, i) {
+          if (v.name == params) {
+            legendIndex = i;
           }
-          this.myChart.setOption(pie_option);
-          // this.myChart.resize();
-          // window.addEventListener('resize', function () {
-          //   this.myChart.resize();
-          // })
-          // const _this = this;
-          // const erd = elementResizeDetectorMaker();
-          // erd.listenTo(document.getElementById(this.context.id), element => {
-          //   _this.$nextTick(() => {
-          //     //监听到事件后执行的业务逻辑
-          //     myChart.resize();
-          //   });
-          // });
-        // } else if (this.context.id) {
-        //   this.$nextTick(() => {
-        //     const dom = document.getElementById(this.context.id)
-        //     dom.innerHTML = '暂无数据'
-        //     dom.style.color = '#ffffff'
-        //     dom.style.fontSize = '14px'
-        //     dom.removeAttribute("_echarts_instance_")
-        //   })
-        // }
+        });
+        return params + " " + arr[legendIndex].value;
+      }
+      this.myChart.setOption(pie_option);
+      // this.myChart.resize();
+
+      window.addEventListener("resize", () => {
+        this.myChart.resize();
+      });
+      // const _this = this;
+      // const erd = elementResizeDetectorMaker();
+      // erd.listenTo(document.getElementById(this.context.id), element => {
+      //   _this.$nextTick(() => {
+      //     //监听到事件后执行的业务逻辑
+      //     myChart.resize();
+      //   });
+      // });
+      // } else if (this.context.id) {
+      //   this.$nextTick(() => {
+      //     const dom = document.getElementById(this.context.id)
+      //     dom.innerHTML = '暂无数据'
+      //     dom.style.color = '#ffffff'
+      //     dom.style.fontSize = '14px'
+      //     dom.removeAttribute("_echarts_instance_")
+      //   })
+      // }
       // })
     },
     sortNumber(attr, rev) {

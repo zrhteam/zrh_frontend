@@ -85,13 +85,6 @@ export default {
         window.addEventListener('resize', function () {
           myChart.resize();
         })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById(this.context.id), element => {
-          _this.$nextTick(() => {
-            myChart.resize();
-          });
-        });
       } else if (this.context.id) {
         this.$nextTick(() => {
           const dom = document.getElementById(this.context.id)

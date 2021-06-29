@@ -83,6 +83,9 @@ export default {
       // this.myChart.setOption(line_option);
       bar_option["dataset"][0]["source"] = this.bar_data
       this.myChart.setOption(bar_option);
+      window.addEventListener("resize", () => {
+        this.myChart.resize();
+      });
       // if (arr.length != 0) {
       //   myChart.setOption(bar_option2);
       //   myChart.resize();
@@ -282,11 +285,6 @@ export default {
     this.echartContainer = this.$refs.echartContainer;
     this.myChart = this.$echarts.init(this.echartContainer)
   },
-  destroyed() {
-    // window.addEventListener('resize', function () {
-    //   this.myChart.resize();
-    // })
-  }
 }
 </script>
 

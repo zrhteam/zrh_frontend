@@ -75,7 +75,7 @@ export default {
           function pieConsole(param) {
             let param2 = new URLSearchParams();
             let _this1 = _this
-            if (_this.context.id == 'id_region_major'){
+            if (_this.context.id == 'id_region_major') {
               param2.append('major', param.name);
               param2.append('region_name', _this1.$store.state.get_region.region_name);
               //该检查中在不同专业下属于不同隐患子系统的隐患数量
@@ -85,7 +85,7 @@ export default {
               _this1.$store.dispatch('get_region/getRegionSystemRatio')
               //根据隐患数量显示不同分布区域的占比情况 全发自己做筛选
               _this1.$store.dispatch('get_region/getRegionAreaRatio')
-            }else if(_this.context.id == 'id_head_major') {
+            } else if (_this.context.id == 'id_head_major') {
               param2.append('major', param.name);
               param2.append('headquarter_name', _this1.$store.state.get_headquarter.head_name);
               //该检查中在不同专业下属于不同隐患子系统的隐患数量
@@ -95,17 +95,10 @@ export default {
               _this1.$store.dispatch('get_headquarter/getHeadAreaRatio')
             }
           }
+
           myChart.resize();
-          window.addEventListener('resize', function () {
-            myChart.resize();
-          })
-          const _this = this;
-          const erd = elementResizeDetectorMaker();
-          erd.listenTo(document.getElementById(this.context.id), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
+          window.addEventListener("resize", () => {
+            this.myChart.resize();
           });
         } else if (this.context.id) {
           this.$nextTick(() => {

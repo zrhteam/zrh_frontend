@@ -100,7 +100,7 @@ export default {
                 },
                 barCategoryGap: this.fontSize(0.8 / hang),
               }
-              if(this.legend[i] == "高风险" || this.legend[i] == "中风险" || this.legend[i] == "低风险") {
+              if (this.legend[i] == "高风险" || this.legend[i] == "中风险" || this.legend[i] == "低风险") {
                 obj["itemStyle"]["normal"]["color"] = color[i]
               }
               data.push(obj)
@@ -184,17 +184,8 @@ export default {
 
             // if (arr.length != 0) {
             myChart.setOption(option);
-            myChart.resize();
-            window.addEventListener('resize', function () {
-              myChart.resize();
-            })
-            const _this = this;
-            const erd = elementResizeDetectorMaker();
-            erd.listenTo(document.getElementById(this.context.id), element => {
-              _this.$nextTick(() => {
-                //监听到事件后执行的业务逻辑
-                myChart.resize();
-              });
+            window.addEventListener("resize", () => {
+              this.myChart.resize();
             });
             // } else if (this.context.id) {
             //   this.$nextTick(() => {

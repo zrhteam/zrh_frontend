@@ -155,7 +155,6 @@ import Region3_3 from "@/components/views/Region/Region3_3.vue";
 import Region2_3 from "@/components/views/Region/Region2_3.vue";
 import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
-import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue"
 import TopRisk from "@/components/views/functions/TopRisk.vue";
@@ -172,7 +171,6 @@ export default {
     TopRisk,
     // HeadquarterOverview,
     PrjOverview,
-    PrjOverviewPart,
     Region1_4,
     Region2_1,
     Region2_3,

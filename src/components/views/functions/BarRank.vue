@@ -31,20 +31,20 @@
     </div>
     <div class="title-line" style=""></div>
     <div ref='barEchartContainer' style="height: 80%; width: 100%;"/>
-<!--    <div id="id_head_rank1" style="height: 90%; width: 100%" v-if="context.id==='id_head_rank1'">-->
-<!--    </div>-->
-<!--    <div id="id_head_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank2'">-->
-<!--    </div>-->
-<!--    <div id="id_region_rank1" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank1'">-->
-<!--    </div>-->
-<!--    <div id="id_region_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank2'">-->
-<!--    </div>-->
-<!--    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">-->
-<!--    </div>-->
-<!--    <div id="id_project_system" style="height: 80%; width: 100%" v-if="context.id==='id_project_system'">-->
-<!--    </div>-->
-<!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
-<!--    </div>-->
+    <!--    <div id="id_head_rank1" style="height: 90%; width: 100%" v-if="context.id==='id_head_rank1'">-->
+    <!--    </div>-->
+    <!--    <div id="id_head_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank2'">-->
+    <!--    </div>-->
+    <!--    <div id="id_region_rank1" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank1'">-->
+    <!--    </div>-->
+    <!--    <div id="id_region_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank2'">-->
+    <!--    </div>-->
+    <!--    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">-->
+    <!--    </div>-->
+    <!--    <div id="id_project_system" style="height: 80%; width: 100%" v-if="context.id==='id_project_system'">-->
+    <!--    </div>-->
+    <!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
+    <!--    </div>-->
   </el-card>
 </template>
 
@@ -94,25 +94,17 @@ export default {
             this.myChart.setOption(bar_option);
           }
           this.myChart.resize();
-          window.addEventListener('resize', function () {
+          window.addEventListener("resize", () => {
             this.myChart.resize();
-          })
-          const _this = this;
-          const erd = elementResizeDetectorMaker();
-          erd.listenTo(this.barEchartContainer, element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              _this.myChart.resize();
-            });
           });
-        // } else if (this.context.id) {
-        //   this.$nextTick(() => {
-        //     const dom = document.getElementById(this.context.id)
-        //     dom.innerHTML = '暂无数据'
-        //     dom.style.color = '#ffffff'
-        //     dom.style.fontSize = '14px'
-        //     dom.removeAttribute("_echarts_instance_")
-        //   })
+          // } else if (this.context.id) {
+          //   this.$nextTick(() => {
+          //     const dom = document.getElementById(this.context.id)
+          //     dom.innerHTML = '暂无数据'
+          //     dom.style.color = '#ffffff'
+          //     dom.style.fontSize = '14px'
+          //     dom.removeAttribute("_echarts_instance_")
+          //   })
         }
       })
     },

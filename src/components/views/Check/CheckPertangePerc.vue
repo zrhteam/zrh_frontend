@@ -48,28 +48,6 @@ export default {
         window.addEventListener('resize', function () {
           myChart.resize();
         })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-          erd.listenTo(document.getElementById("id_check_system"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-          erd.listenTo(document.getElementById("id_check_reason"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-          erd.listenTo(document.getElementById("id_check_region"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-      // })
-
     })
     },
     sortNumber(attr, rev) {

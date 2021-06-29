@@ -165,7 +165,6 @@
 </template>
 
 <script>
-import CheckedHistory from "@/components/views/Project/CheckedHistory.vue";
 import Granularity from "@/components/views/Project/Granularity.vue";
 import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
 import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
@@ -175,7 +174,6 @@ import CheckedProject from "@/components/views/Project/CheckedProject.vue";
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
 import PrjDataScreen from '@/components/views/Project/PrjDataScreen.vue'
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
-import PrjOverviewPart from "@/components/views/Project/PrjOverviewPart.vue";
 import RegionOverview from "@/components/views/Region/RegionDataScreen.vue";
 import Tree from "@/components/views/functions/Tree.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
@@ -193,14 +191,12 @@ export default {
     TopRisk,
     TopName,
     RegionOverview,
-    PrjOverviewPart,
     CheckOverview,
     Granularity,
     PerctangePerc,
     CheckHistoryPerc,
     UnsolvedList,
     UnsolvedImageList,
-    CheckedHistory,
     CheckedProject,
     // PrjEHSDataAnalysis3,
     PrjIndex,

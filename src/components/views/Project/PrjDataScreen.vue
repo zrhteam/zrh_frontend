@@ -290,7 +290,6 @@
 </template>
 
 <script>
-import CheckedHistory from "@/components/views/Project/CheckedHistory.vue";
 import Granularity from "@/components/views/Project/Granularity.vue";
 import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
 import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
@@ -325,7 +324,6 @@ export default {
     CheckHistoryPerc,
     UnsolvedList,
     UnsolvedImageList,
-    CheckedHistory,
     CheckedProject,
     // PrjEHSDataAnalysis3,
     PrjIndex,
