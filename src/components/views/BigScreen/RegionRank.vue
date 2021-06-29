@@ -46,17 +46,35 @@ export default {
   methods: {
     drawBarChart() {
       let arr = this.regionData
+      let data = []
+      let titlename = []
+      let max = 0
+      let max_arr = []
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].count > max) {
+          max = arr[i].count
+        }
+        data.push(arr[i].count)
+        titlename.push(arr[i].name)
+      }
+      for (let i = 0; i < arr.length; i++) {
+        // let obj = {
+        //   name: '',
+        //   count: 0
+        // }
+        // obj.name = arr[i].name
+        // obj.count = max
+        max_arr.push(max)
+      }
+      debugger
       this.renderSign = true
       let bar_option3 = {
-        dataset: {
-          dimensions: ['name', 'count'],
-          source: arr
-        },
+        // dataset: {
+        //   dimensions: ['name', 'count'],
+        //   source: arr
+        // },
         tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow',
-          }
+          show: false
         },
         grid: {
           left: this.fontSize(0.25),
@@ -67,71 +85,76 @@ export default {
         },
         xAxis: {
           type: 'value',
-          axisLabel: {
-            textStyle: {},
-            show: false
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#058ddb',
-              fontSize: this.fontSize(0.08)
-            },
-            show: false
-          },
-          axisTick: {
-            show: false
-          },
-          splitLine: {
-            show: false
-          }
+          show: false
         },
-        yAxis: {
-          type: 'category',
-          axisLine: {
-            lineStyle: {
-              color: '#058ddb',
-              fontSize: this.fontSize(0.08)
+        yAxis: [
+          {
+            type: 'category',
+            data: titlename,
+            axisLine: {
+              lineStyle: {
+                color: '#058ddb',
+                fontSize: this.fontSize(0.08)
+              },
+              show: false
             },
-            show: false
-          },
-          axisLabel: {
-            textStyle: {
-              fontSize: this.fontSize(0.10),
-              color: '#ffffff'
+            axisLabel: {
+              textStyle: {
+                fontSize: this.fontSize(0.10),
+                color: '#ffffff'
+              }
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              show: false
             }
           },
-          axisTick: {
-            show: false
-          },
-          splitLine: {
-            show: false
+          {
+            show: false,
+            data: titlename,
+            axisLabel: {
+              textStyle: {
+                fontSize: this.fontSize(0.08),
+                color: "#fff"
+              }
+            }
           }
-        },
+        ],
         series: [
           {
             type: 'bar',
+            data: data,
             itemStyle: {
               normal: {
                 //柱形图圆角，初始化效果
-                barBorderRadius: [4, 4, 4, 4],
+                barBorderRadius: [10, 10, 10, 10],
                 color: '#0a73ff'
-              }
-            },
-            emphasis: {
-              itemStyle: {
-                color: '#40abc4'
               },
-              show: false
             },
             label: {
               show: true,
               formatter: (a) => {
                 return a.count
-              }
+              },
+              fontSize: this.fontSize(0.10)
             },
             barMaxWidth: this.fontSize(0.2),
             // barCategoryGap: toString(fontSize(0.18)),
             barCategoryGap: this.fontSize(0.13),
+          },
+          {
+            type: 'bar',
+            data: max_arr,
+            yAxisIndex: 1,
+            itemStyle: {
+              color: 'none',
+              borderColor: '#272020',
+              capacity: 0.1,
+              barBorderRadius: 10,
+            },
+            barMaxWidth: this.fontSize(0.10),
           }
         ]
       };

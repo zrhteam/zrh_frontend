@@ -98,7 +98,7 @@ export default {
 
           myChart.resize();
           window.addEventListener("resize", () => {
-            this.myChart.resize();
+            myChart.resize();
           });
         } else if (this.context.id) {
           this.$nextTick(() => {

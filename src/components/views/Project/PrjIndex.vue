@@ -1,14 +1,16 @@
 <template>
-    <div style="height: 100%; width: 100%; z-index:1; background-color: transparent">
-      <model-fbx :backgroundAlpha="0"
-                 src='img/xitongpiantou_new.fbx'></model-fbx>
-    </div>
+  <div style="height: 100%; width: 100%; z-index:1; background-color: transparent">
+    <model-fbx :backgroundAlpha="0" :rotation="rotation"
+               @on-load="onLoad" src='img/xitongpiantou_new.fbx' :lights="[-0.1, 0.1, 1]"
+               :position="{ x: -80, y: 0, z: 0 }"
+               :scale="{ x: 1.2, y: 1.2, z: 1.2 }"></model-fbx>
+  </div>
 </template>
 
 <script>
 import elementResizeDetectorMaker from 'element-resize-detector'
 import echarts from "echarts";
-import { ModelFbx } from "vue-3d-model"
+import {ModelFbx} from "vue-3d-model"
 
 export default {
   name: "PrjIndex",
@@ -18,9 +20,26 @@ export default {
   props: ["userJson"],
   data() {
     return {
-      chart: null
+      rotation: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
     }
   },
+  methods: {
+    onLoad() {
+      this.rotate();
+    },
+    rotate() {
+      this.rotation.y += 0.01;
+
+      // requestAnimationFrame(this.rotate);
+      // this.position = {x: 0, y: 0, z: 0}
+    }
+  },
+  created() {
+  }
 }
 </script>
 

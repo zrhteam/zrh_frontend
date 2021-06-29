@@ -13,6 +13,7 @@ import NewHeadScreen from "@/components/NewHeadScreen.vue";
 import NewRegionScreen from "@/components/NewRegionScreen.vue";
 import NewProjectScreen from "@/components/NewProjectScreen.vue";
 import NewCheckScreen from "@/components/NewCheckScreen.vue";
+
 const routerOptions = [
     {path: '/', component: 'Login', meta: {keepAlive: false}},
     {path: '/login', component: 'Login'},
@@ -22,9 +23,9 @@ const routerOptions = [
     {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
     {path: '/region_department', component: 'RegionDepartment', meta: {keepAlive: false}},
     {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis', meta: {keepAlive: false}},
-    {path: '/analyze', component: 'Analyze', meta: {keepAlive:false}},
-    {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive:false}},
-    {path: '/data_compare', component: 'DataCompare', meta: {keepAlive:false}},
+    {path: '/analyze', component: 'Analyze', meta: {keepAlive: false}},
+    {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive: false}},
+    {path: '/data_compare', component: 'DataCompare', meta: {keepAlive: false}},
     {path: '/new_head_screen/:id', component: 'NewHeadScreen'},
     {path: '/new_region_screen/:id', component: 'NewRegionScreen'},
     {path: '/new_project_screen/:id', component: 'NewProjectScreen'},
@@ -38,24 +39,7 @@ const routes = routerOptions.map(route => {
     }
 })
 const router = new Router({
-    rous: [
-        {path: '/', component: 'Login'},
-        {path: '/login', component: 'Login'},
-        {path: '/particles', component: 'Particles'},
-        {path: '/register', component: 'Register'},
-        {path: '/overview', component: 'Overview'},
-        {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
-        {path: '/region_department', component: 'RegionDepartment'},
-        {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis'},
-        {path: '/analyze', component: 'Analyze'},
-        {path: '/super_overview', component: 'SuperOverview'},
-        {path: '/data_compare', component: 'DataCompare'},
-        {path: '/new_head_screen', component: 'NewHeadScreen'},
-        {path: '/new_region_screen', component: 'NewRegionScreen'},
-        {path: '/new_project_screen', component: 'NewProjectScreen'},
-        {path: '/new_check_screen', component: 'NewCheckScreen'},
-        {path: '*', component: 'NotFound'}
-    ]
+    rous: routerOptions
 })
 Vue.use(Router)
 router.beforeEach((to, from, next) => {
@@ -81,19 +65,7 @@ router.beforeEach((to, from, next) => {
     }
 })
 export default new Router({
-    routes,//: [
-//   {
-//     path: '/',
-//     name: 'home',
-//     component: Home
-//   },
-//   {
-//     path: '/about',
-//     name: 'about',
-//     component: () => import(/* webpackChunkName: "about" */ '@/views/SearchModule.vue')
-//     //component: About
-//    }//,
-// ],
+    routes,
     mode: 'history',
     base: process.env.BASE_URL
 })

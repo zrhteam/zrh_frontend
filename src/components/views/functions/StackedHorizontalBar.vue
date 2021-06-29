@@ -185,7 +185,7 @@ export default {
             // if (arr.length != 0) {
             myChart.setOption(option);
             window.addEventListener("resize", () => {
-              this.myChart.resize();
+              myChart.resize();
             });
             // } else if (this.context.id) {
             //   this.$nextTick(() => {
