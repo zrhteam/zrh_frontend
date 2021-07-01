@@ -102,7 +102,6 @@
 </template>
 
 <script>
-import ProjectIndexView from "@/components/views/Region/ProjectIndexView.vue";
 import Region1_4 from "@/components/views/Region/Region1_4.vue";
 import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import Region2_2 from "@/components/views/Region/Region2_2.vue";
@@ -123,7 +122,6 @@ export default {
     Region2_2,
     Region2_1,
     Region1_4,
-    ProjectIndexView,
   },
   data() {
     return {

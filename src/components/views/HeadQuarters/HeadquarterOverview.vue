@@ -52,9 +52,12 @@
         <el-col :span="2" class="" style="height: 100%;">
           <Tree
               :treeObj="treeObj"
+              :highlightCurrent="highlightCurrent"
+              :expandOnClickNode="expandOnClickNode"
+              :currentNodeKey="currentNodeKey"
               @handleNodeClick="handleTrNodeClick"
               style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
-          ></Tree>
+          >{{ getTreeData }}</Tree>
           <!--          <el-card class="box-card " shadow="never"-->
           <!--                   style="background-color: transparent; height: 10%; margin: 0px 5px 5px 5px">-->
           <el-button size="small" round
@@ -230,6 +233,9 @@ export default {
         }
       }
       return risk_num
+    },
+    getTreeData() {
+      this.treeObj = this.$store.state.get_login.grant_data.data.value
     }
   },
   updated() {
@@ -241,7 +247,10 @@ export default {
       fit: 'fill',
       url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
-      treeObj: {},
+      treeObj: this.$store.state.get_login.grant_data.data.value,
+      highlightCurrent: true,
+      expandOnClickNode: false,
+      currentNodeKey: 0,
       p_data: [],
       map: "",
       mapInfo: {},

@@ -7,7 +7,9 @@
              style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
           <el-col :span="4" style="height: 100%; ">
             <el-col :span="6" :offset="14" style="height: 100%;">
-              <div style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.36rem; position: relative">{{ getRiskSum }}</div>
+              <div style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.36rem; position: relative">
+                {{ getRiskSum }}
+              </div>
             </el-col>
           </el-col>
           <el-col :span="16" style="height: 100%;">
@@ -50,6 +52,9 @@
       <el-col :span="2" class="" style="height: 100%;">
         <Tree
             :treeObj="treeObj"
+            :highlightCurrent="highlightCurrent"
+            :expandOnClickNode="expandOnClickNode"
+            :currentNodeKey="currentNodeKey"
             @handleNodeClick="handleTrNodeClick"
             style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
         ></Tree>
@@ -372,6 +377,9 @@ export default {
       url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
       treeObj: this.$store.state.get_login.grant_data.data.value,
+      highlightCurrent: true,
+      expandOnClickNode: false,
+      currentNodeKey: 0,
       map: "",
       mapInfo: {},
       dataset: {},

@@ -21,22 +21,22 @@ export default {
   data() {
     return {
       rotation: {
-        x: 0,
+        x: 0.1,
         y: 0,
         z: 0
       },
     }
   },
   methods: {
-    onLoad() {
-      this.rotate();
-    },
-    rotate() {
-      this.rotation.y += 0.01;
-
-      // requestAnimationFrame(this.rotate);
-      // this.position = {x: 0, y: 0, z: 0}
-    }
+    // onLoad() {
+    //   this.rotate();
+    // },
+    // rotate() {
+    //   this.rotation.y += 0.01;
+    //
+    //   // requestAnimationFrame(this.rotate);
+    //   // this.position = {x: 0, y: 0, z: 0}
+    // }
   },
   created() {
   }

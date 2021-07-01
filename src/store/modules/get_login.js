@@ -15,10 +15,9 @@ const state = {
     tree_data: [],
 //    存已解析的经纬度 总部到区域的二维数组
     position: [],
-//
-//    针对项目级的position
 
     now_node: -1,
+    //默认展开的数组
     expandedKeys: [],
     //查询该用户下的授权数据
     grant_info: {},
