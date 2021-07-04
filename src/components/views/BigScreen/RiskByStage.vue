@@ -206,7 +206,7 @@ export default {
     this.drawBarChart()
   },
   watch: {
-    renderSign() {
+    stageSdata() {
       this.drawBarChart()
     }
   },

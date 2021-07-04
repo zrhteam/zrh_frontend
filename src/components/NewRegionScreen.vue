@@ -125,7 +125,7 @@ export default {
       renderSign6: false,
       stageLegend: [],
       stageyAxis: [],
-      region_name: this.$store.state.get_region.region_name
+      region_name: ""
     }
   },
   methods: {
@@ -459,6 +459,8 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
+        this.region_name = route.params.id
+
         let param = new URLSearchParams();
         param.append('region_name', route.params.id);
         this.$store.commit('get_screen/changeParams', {params: param})

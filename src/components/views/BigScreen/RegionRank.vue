@@ -73,7 +73,14 @@ export default {
         //   source: arr
         // },
         tooltip: {
-          show: false
+          show: true,
+          formatter(param) {
+            if(param.dataIndex != 0 && param.data < max)
+              return param.name + ":" + param.data
+            else if(param.dataIndex == 0){
+              return param.name + ":" + param.data
+            }
+          }
         },
         grid: {
           left: this.fontSize(0.25),
@@ -139,9 +146,9 @@ export default {
               },
               fontSize: this.fontSize(0.10)
             },
-            barMaxWidth: this.fontSize(0.12),
+            barMaxWidth: this.fontSize(0.10),
             // barCategoryGap: toString(fontSize(0.18)),
-            barCategoryGap: this.fontSize(0.13),
+            // barCategoryGap: this.fontSize(0.13),
           },
           {
             type: 'bar',
@@ -153,8 +160,15 @@ export default {
               capacity: 0.1,
               barBorderRadius: 10,
             },
-            barMaxWidth: this.fontSize(0.10),
-          }
+            label: {
+              show: false,
+              formatter: (a) => {
+                return a.count
+              },
+              fontSize: this.fontSize(0.10)
+            },
+            barMaxWidth: this.fontSize(0.08),
+          },
         ]
       };
       this.myChart.setOption(bar_option3);
@@ -177,7 +191,7 @@ export default {
     this.drawBarChart()
   },
   watch: {
-    renderSign() {
+    regionData() {
       this.drawBarChart()
     }
   },

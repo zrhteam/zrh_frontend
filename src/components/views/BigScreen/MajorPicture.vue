@@ -10,7 +10,7 @@
     </div>
     <div class="slide">
       <div class="slide-wrapper">
-        <el-carousel indicator-position="none" :interval="300000" :height="dataHeight">
+        <el-carousel indicator-position="none" :interval="3000" :height="dataHeight">
           <el-carousel-item v-for='item in img_list'>
             <div style="height: 100%">
               <div

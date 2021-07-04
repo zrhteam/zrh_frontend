@@ -12,10 +12,10 @@
       <!--              图片播放-->
       <el-carousel indicator-position="none" :interval="3000" :height="dataHeight">
         <el-carousel-item v-for='item in img_list'>
-          <div style="height: 88%">
+          <div style="height: 85%">
             <el-image :src='item.url' alt style="height: 100%"/>
           </div>
-          <div style="height: 0.4rem;font-size: 8px; color: #058ddb; padding: 0">{{ item.note }}</div>
+          <div style="height: 0.6rem;font-size: 8px; color: #058ddb; padding: 0">{{ item.note }}</div>
         </el-carousel-item>
       </el-carousel>
     </div>

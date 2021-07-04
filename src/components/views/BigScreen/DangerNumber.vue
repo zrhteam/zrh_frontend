@@ -165,7 +165,7 @@ export default {
     this.drawBarChart()
   },
   watch: {
-    renderSign() {
+    dangerData() {
       this.drawBarChart()
     }
   },

@@ -126,7 +126,7 @@ export default {
       renderSign6: false,
       stageLegend: [],
       stageyAxis: [],
-      head_name: this.$store.state.get_headquarter.head_name
+      head_name: ""
     }
   },
   methods: {
@@ -410,6 +410,8 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
+        this.head_name = route.params.id
+
         let param = new URLSearchParams();
         param.append('headquarter_name', route.params.id);
         this.$store.commit('get_screen/changeParams', {params: param})

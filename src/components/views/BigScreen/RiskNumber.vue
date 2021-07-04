@@ -125,7 +125,7 @@ export default {
     }, 2000);
   },
   watch: {
-    renderSign() {
+    riskNumber() {
       this.drawBarChart()
     }
   },

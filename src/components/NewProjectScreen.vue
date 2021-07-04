@@ -282,7 +282,7 @@ export default {
   components: {NumCounter, StageRatio, HighRiskNote, RecordList2, MajorPicture},
   data() {
     return {
-      project_name: this.$store.state.get_project.prj_name,
+      project_name: "",
       timer: null,
       nowDate: "",
       nowTime: "",
@@ -436,6 +436,8 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
+        this.project_name = route.params.id
+
         let param = new URLSearchParams();
         param.append('project_name', route.params.id);
         this.$store.commit('get_screen/changeParams', {params: param})
