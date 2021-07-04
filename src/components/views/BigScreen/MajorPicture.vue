@@ -14,7 +14,7 @@
           <el-carousel-item v-for='item in img_list'>
             <div style="height: 100%">
               <div
-                  style="position: absolute; width: 100%; min-height: 20px; opacity: 1; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3">
+                  style="position: absolute; width: 100%; min-height: 20px; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3; background-color: rgba(33, 32, 30, 0.5);">
                 {{ item.note }}
               </div>
               <el-image :src='item.url' alt style="height: 100%"/>

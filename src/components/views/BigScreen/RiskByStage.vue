@@ -11,7 +11,7 @@
     </div>
     <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
       <div class="box2" style="width: 100%; height: 100%;">
-        <div ref='rankBar' style="height: 85%; width: 100%;">
+        <div ref='rankBar' style="height: 95%; width: 100%;">
         </div>
       </div>
     </div>
@@ -129,13 +129,14 @@ export default {
           },
           itemHeight: this.fontSize(0.10),
           itemGap: this.fontSize(0.10),
+          type: "scroll",
           show: true
         },
         grid: {
           left: this.fontSize(0.45),
           top: this.fontSize(0.15),
           right: this.fontSize(0.55),
-          bottom: this.fontSize(0.25),
+          bottom: this.fontSize(0.35),
           containLabel: true
         },
         xAxis: {
@@ -202,6 +203,7 @@ export default {
   mounted() {
     this.rankBar = this.$refs.rankBar;
     this.myChart = this.$echarts.init(this.rankBar)
+    this.drawBarChart()
   },
   watch: {
     renderSign() {

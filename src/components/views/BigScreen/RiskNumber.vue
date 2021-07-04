@@ -11,7 +11,7 @@
     </div>
     <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
       <div class="box2" style="width: 100%; height: 100%;">
-        <div ref='riskNumberPie' style="height: 85%; width: 100%;"></div>
+        <div ref='riskNumberPie' style="height: 100%; width: 100%;"></div>
       </div>
     </div>
   </div>
@@ -109,6 +109,8 @@ export default {
   mounted() {
     this.riskNumberPie = this.$refs.riskNumberPie;
     this.myChart = this.$echarts.init(this.riskNumberPie)
+
+    this.drawBarChart()
 
     let chooseIndex = 0;//默认选中高亮模块索引 现在是默认第一条
     setInterval(() => {

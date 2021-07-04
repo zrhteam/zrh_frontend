@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="absolute-layer" style="width: 4.7rem; height: 0.45rem; left: 0px; top: 0px;">
-      <div class="box1" style="width: 4.7rem; height: 0.45rem;">
+      <div class="box1" style="width: 4.5rem; height: 0.45rem;">
       </div>
     </div>
     <div class="absolute-layer" style="width: 3.75rem; height: 0.7rem; left: 0.62rem; top: -0.1rem;">
@@ -15,9 +15,9 @@
         <div class="counter-container">{{ risk_num }}</div>
       </div>
     </div>
-    <div class="absolute-layer" style="width: 92%; height: 70%; left: 0.13rem; top: 1.16rem;">
+    <div class="absolute-layer" style="width: 92%; height: 64%; left: 0.10rem; top: 1.36rem;">
       <div class="box2" style="width: 100%; height: 100%;">
-        <div ref='dangerNumBar' style="height: 85%; width: 100%;">
+        <div ref='dangerNumBar' style="height: 100%; width: 100%;">
         </div>
       </div>
     </div>
@@ -107,7 +107,7 @@ export default {
           left: this.fontSize(0.65),
           top: this.fontSize(0.25),
           right: this.fontSize(0.85),
-          bottom: this.fontSize(0.20),
+          bottom: this.fontSize(0.10),
           containLabel: true
         },
         series: [
@@ -162,6 +162,7 @@ export default {
   mounted() {
     this.dangerNumBar = this.$refs.dangerNumBar;
     this.myChart = this.$echarts.init(this.dangerNumBar)
+    this.drawBarChart()
   },
   watch: {
     renderSign() {

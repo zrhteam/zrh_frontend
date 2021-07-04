@@ -5,6 +5,7 @@
       :height="tableHeight"
       :header-cell-style="{color: '#fff'}"
       :show-header="false"
+      border
   >
     <el-table-column v-for="(th, key) in noteHeader"
                      :key="key"

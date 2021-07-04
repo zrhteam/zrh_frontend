@@ -68,6 +68,8 @@ const state = {
     checks_picture_note: {},
     // 下方表格
     checks_table: {},
+
+    province_info: {},
 }
 
 //getters
@@ -206,6 +208,10 @@ const getters = {
     renderChecksTable(state) {
         return state.projects_table
     },
+
+    renderProvinceInfo(state) {
+        return state.province_info
+    }
 }
 
 const actions = {
@@ -389,6 +395,12 @@ const actions = {
             context.commit('changeChecksTable', response)
         })
     },
+
+    getProvinceInfo(context) {
+        dataService.getProvinceInfo(context.state.params, function (response) {
+            context.commit('changeProvinceInfo', response)
+        })
+    }
 }
 //mutations
 const mutations = {
@@ -514,6 +526,10 @@ const mutations = {
     changeChecksTable(state, data) {
         state.checks_table = data.data
     },
+
+    changeProvinceInfo(state, data) {
+        state.province_info = data.data
+    }
 }
 export default {
     namespaced: true,

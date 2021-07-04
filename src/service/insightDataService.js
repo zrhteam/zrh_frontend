@@ -98,10 +98,10 @@ function getAnalyzeTendencyProfession(callback) {
         })
 }
 
-//总部趋势图
+//总部隐患各风险等级占比
 /*
  * FunctionName: getAnalyzeRatioHeadquarter
- * Purpose:      总部趋势图
+ * Purpose:      总部隐患各风险等级占比
  * Parameter:    headquarter_name, major_name, start, end
  * Return:       json
  */
@@ -116,15 +116,15 @@ function getAnalyzeRatioHeadquarter(callback) {
         })
 }
 
-//区域趋势图
+//区域隐患各风险等级占比
 /*
- * FunctionName: getAnalyzeTendencyRegion
- * Purpose:      区域趋势图
+ * FunctionName: getAnalyzeRatioRegion
+ * Purpose:      区域隐患各风险等级占比
  * Parameter:    headquarter_name/region_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeTendencyRegion(callback) {
-    const url = `${dataServerUrl}/tendency_region`;
+function getAnalyzeRatioRegion(callback) {
+    const url = `${dataServerUrl}/ratio_region`;
     axios.post(url)
         .then(response => {
             callback(response.data)
@@ -134,15 +134,15 @@ function getAnalyzeTendencyRegion(callback) {
         })
 }
 
-//项目趋势图
+//项目隐患各风险等级占比
 /*
- * FunctionName: getAnalyzeTendencyProject
- * Purpose:      项目趋势图
+ * FunctionName: getAnalyzeRatioProject
+ * Purpose:      项目隐患各风险等级占比
  * Parameter:    headquarter_name/region_name/project_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeTendencyProject(callback) {
-    const url = `${dataServerUrl}/tendency_project`;
+function getAnalyzeRatioProject(callback) {
+    const url = `${dataServerUrl}/ratio_project`;
     axios.post(url)
         .then(response => {
             callback(response.data)
@@ -152,15 +152,15 @@ function getAnalyzeTendencyProject(callback) {
         })
 }
 
-//行业趋势图
+//行业隐患各风险等级占比
 /*
- * FunctionName: getAnalyzeTendencyProfession
- * Purpose:      行业趋势图
+ * FunctionName: getAnalyzeRatioProfession
+ * Purpose:      行业隐患各风险等级占比
  * Parameter:    Profession_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeTendencyProfession(callback) {
-    const url = `${dataServerUrl}/tendency_profession`;
+function getAnalyzeRatioProfession(callback) {
+    const url = `${dataServerUrl}/ratio_profession`;
     axios.post(url)
         .then(response => {
             callback(response.data)
@@ -168,4 +168,16 @@ function getAnalyzeTendencyProfession(callback) {
         .catch(error => {
             console.log(error)
         })
+}
+
+export default {
+    getAnalyzeRedlineData,
+    getAnalyzeTendencyHeadquarter,
+    getAnalyzeTendencyRegion,
+    getAnalyzeTendencyProject,
+    getAnalyzeTendencyProfession,
+    getAnalyzeRatioHeadquarter,
+    getAnalyzeRatioRegion,
+    getAnalyzeRatioProject,
+    getAnalyzeRatioProfession
 }

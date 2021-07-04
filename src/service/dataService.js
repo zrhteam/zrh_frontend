@@ -1716,6 +1716,23 @@ function getRegionScreenTable(param, callback) {
 }
 
 /*
+ * FunctionName: getProvinceInfo
+ * Purpose: 每个省当前已检查数量和隐患数量
+ * Parameter: null
+ * Return: (json)
+ */
+function getProvinceInfo(param, callback) {
+    const url = `${dataServerUrl}/province_info/province_check_and_record_num`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/*
  * FunctionName: getProjectScreenRiskNumber
  * Purpose: 项目数据大屏不同分布区域的隐患数量
  * Parameter: pid, type
@@ -2052,6 +2069,8 @@ export default {
     getRegionScreenMajorStageInfo,
     getRegionScreenAreaNumber,
     getRegionScreenTable,
+    getProvinceInfo,
+
     getProjectScreenRiskNumber,
     getProjectScreenRNRank,
     getProjectScreenRiskLevel,

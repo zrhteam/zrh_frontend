@@ -10,6 +10,13 @@
           style="position: absolute !important; width: 3.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem;">
         <div class="date">{{ nowDate }} {{ nowTime }}</div>
       </div>
+      <div style="position: absolute !important; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; width: 6.8rem; height: 0.7rem; left: 22rem; top: 40%;">
+        <div class="zrh">
+        </div>
+      </div>
+      <div style="position: absolute !important; width: 6.8rem; height: 0.7rem; left: 23.1rem; top: 40%;">
+        <el-button class="date" round size="mini" @click="quitProjectScreen" style="z-index: 999;top: 40%">退出</el-button>
+      </div>
       <!--      </el-col>-->
     </el-row>
     <el-col :span="19" class="boundary-A" style="height: 90%">
@@ -284,18 +291,17 @@ export default {
       low_risk: 0,
       tableHeight: '100%',
       tableHeader: [
-        {prop: 'create_time', label: '录入时间', width: "150"},
-        {prop: 'recorder', label: '录入人员', width: "80"},
-        {prop: 'position', label: '隐患位置', width: "90"},
-        {prop: 'system_name', label: '系统类型', width: "100"},
-        {prop: 'major_name', label: '所属专业', width: "90"},
-        {prop: 'note', label: '问题描述', width: "170"},
-        {prop: 'risk_level', label: '风险等级', width: "80"},
-        {prop: 'stage', label: '致因阶段', width: "80"},
-        {prop: 'area', label: '分布区域', width: "80"},
-        {prop: 'rule_name', label: '法规名称', width: "180"},
-        {prop: 'clause', label: '相关条款', width: "80"},
-        {prop: 'clause_contact', label: '条款内容'},
+          {prop: 'note', label: '问题描述', width: "170"},
+          {prop: 'risk_level', label: '风险等级', width: "80"},
+          {prop: 'position', label: '隐患位置', width: "90"},
+          {prop: 'major_name', label: '专业', width: "90"},
+          {prop: 'stage', label: '致因阶段', width: "80"},
+          {prop: 'area', label: '分布区域', width: "80"},
+          {prop: 'rule_name', label: '法规名称', width: "180"},
+          {prop: 'clause', label: '相关条款', width: "80"},
+          {prop: 'clause_contact', label: '条款内容'},
+          {prop: 'create_time', label: '录入时间', width: "150"},
+          {prop: 'recorder', label: '录入人员', width: "80"},
       ],
       fire_num: 0,
       lift_num: 0,
@@ -423,6 +429,9 @@ export default {
       this.nowDate = yy + "-" + mm + "-" + dd
       this.nowTime = hou + ":" + min + ":" + sec;
     },
+    quitProjectScreen() {
+      this.$router.push({path: '/prj_data_analysis'});
+    }
   },
   watch: {
     $route: {
@@ -671,91 +680,106 @@ export default {
   white-space: nowrap;
 }
 
-/deep/ .CellNote .cell {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: 3s wordsLoop1 linear infinite normal;
-  display: inline-block;
-  z-index: -1;
+/*/deep/ .CellNote .cell {*/
+/*  overflow: hidden;*/
+/*  white-space: nowrap;*/
+/*  animation: 3s wordsLoop1 linear infinite normal;*/
+/*  display: inline-block;*/
+/*  z-index: -1;*/
+/*}*/
+
+/*@keyframes wordsLoop1 {*/
+/*  0% {*/
+/*    transform: translateX(0px);*/
+/*    -webkit-transform: translateX(0px);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateX(-60px);*/
+/*    -webkit-transform: translateX(-60px);*/
+/*  }*/
+/*}*/
+
+/*@-webkit-keyframes wordsLoop1 {*/
+/*  0% {*/
+/*    transform: translateX(0px);*/
+/*    -webkit-transform: translateX(0px);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateX(-60px);*/
+/*    -webkit-transform: translateX(-60px);*/
+/*  }*/
+/*}*/
+
+/*/deep/ .CellRule .cell {*/
+/*  overflow: hidden;*/
+/*  white-space: nowrap;*/
+/*  animation: 3s wordsLoop2 linear infinite normal;*/
+/*  display: inline-block;*/
+/*}*/
+
+/*@keyframes wordsLoop2 {*/
+/*  0% {*/
+/*    transform: translateX(0px);*/
+/*    -webkit-transform: translateX(0px);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateX(-80px);*/
+/*    -webkit-transform: translateX(-80px);*/
+/*  }*/
+/*}*/
+
+/*@-webkit-keyframes wordsLoop2 {*/
+/*  0% {*/
+/*    transform: translateX(0px);*/
+/*    -webkit-transform: translateX(0px);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateX(-80px);*/
+/*    -webkit-transform: translateX(-80px);*/
+/*  }*/
+/*}*/
+
+/*/deep/ .CellClauseContact .cell {*/
+/*  overflow: hidden;*/
+/*  white-space: nowrap;*/
+/*  animation: 3s wordsLoop3 linear infinite normal;*/
+/*  display: inline-block;*/
+/*}*/
+
+/*@keyframes wordsLoop3 {*/
+/*  0% {*/
+/*    transform: translateX(0px);*/
+/*    -webkit-transform: translateX(0px);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateX(-80px);*/
+/*    -webkit-transform: translateX(-80px);*/
+/*  }*/
+/*}*/
+
+/*@-webkit-keyframes wordsLoop3 {*/
+/*  0% {*/
+/*    transform: translateX(0px);*/
+/*    -webkit-transform: translateX(0px);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateX(-80px);*/
+/*    -webkit-transform: translateX(-80px);*/
+/*  }*/
+/*}*/
+
+.zrh {
+  width: 1.029rem;
+  height: 0.3rem;
+  pointer-events: auto;
+  background-image: url("../assets/zrh.png");
+  border-radius: 0px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-@keyframes wordsLoop1 {
-  0% {
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-60px);
-    -webkit-transform: translateX(-60px);
-  }
-}
-
-@-webkit-keyframes wordsLoop1 {
-  0% {
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-60px);
-    -webkit-transform: translateX(-60px);
-  }
-}
-
-/deep/ .CellRule .cell {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: 3s wordsLoop2 linear infinite normal;
-  display: inline-block;
-}
-
-@keyframes wordsLoop2 {
-  0% {
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-80px);
-    -webkit-transform: translateX(-80px);
-  }
-}
-
-@-webkit-keyframes wordsLoop2 {
-  0% {
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-80px);
-    -webkit-transform: translateX(-80px);
-  }
-}
-
-/deep/ .CellClauseContact .cell {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: 3s wordsLoop3 linear infinite normal;
-  display: inline-block;
-}
-
-@keyframes wordsLoop3 {
-  0% {
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-80px);
-    -webkit-transform: translateX(-80px);
-  }
-}
-
-@-webkit-keyframes wordsLoop3 {
-  0% {
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-80px);
-    -webkit-transform: translateX(-80px);
-  }
+/deep/ .el-button{
+  background: transparent !important;
+  color: #ffffff;
 }
 </style>

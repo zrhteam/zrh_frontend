@@ -27,6 +27,9 @@
         <div class="zrh">
         </div>
       </div>
+      <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 23.1rem; top: 40%;">
+        <el-button class="title" round size="mini" @click="quitRegionScreen" style="z-index: 999;top: 40%">退出</el-button>
+      </div>
     </el-row>
     <el-col :span="5" class="boundary-A" style="height: 90%">
       <el-row style="height: 36.4%" class="boundary-A">
@@ -41,7 +44,7 @@
     </el-col>
     <el-col :span="14" class="boundary-A" style="height: 90%">
       <el-row style="height: 75%" class="boundary-A">
-        <HeadMap></HeadMap>
+        <HeadMap :provinceInfo="provinceInfo" :renderSign="renderSign6"></HeadMap>
       </el-row>
       <el-row style="height: 25%" class="boundary-A">
         <div class="record">
@@ -99,12 +102,13 @@ export default {
       nowTime: "",
       tableHeight: '100%',
       tableHeader: [
-        {prop: 'major_name', label: '所属专业', width: "90"},
         {prop: 'note', label: '问题描述', width: "270"},
         {prop: 'risk_level', label: '风险等级', width: "80"},
+        {prop: 'major_name', label: '专业', width: "90"},
         {prop: 'stage', label: '致因阶段', width: "80"},
         {prop: 'area', label: '分布区域', width: "80"},
         {prop: 'rule_name', label: '法规名称'},
+        {prop: 'clause_contact', label: '条款内容'},
       ],
       tableHeader2: [
         {prop: 'rank', label: '', width: "60"},
@@ -118,6 +122,7 @@ export default {
       renderSign3: false,
       renderSign4: false,
       renderSign5: false,
+      renderSign6: false,
       stageLegend: [],
       stageyAxis: [],
       region_name: this.$store.state.get_region.region_name
@@ -152,6 +157,61 @@ export default {
       this.nowDate = yy + "-" + mm + "-" + dd
       this.nowTime = hou + ":" + min + ":" + sec;
     },
+    quitRegionScreen() {
+      this.$router.push({path: '/region_department'});
+    },
+    provinceInfo() {
+      let data = this.$store.state.get_screen.province_info
+      let list = []
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          value: [],
+          label: {
+            normal: {
+              show: true,
+              formatter: function (params) {
+                return params.value[2];    //地图上展示文字 + 数值
+              },
+              fontSize: 10
+            }
+          },
+        }
+        obj.name = "项目数量"
+        obj.value.push(data[i].lng)
+        obj.value.push(data[i].lat)
+        obj.value.push(data[i].check_num)
+        arr.push(obj)
+      }
+      list.push(arr)
+      arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          value: [],
+          label: {
+            normal: {
+              show: true,
+              formatter: function (params) {
+                return params.value[2];    //地图上展示文字 + 数值
+              },
+              fontSize: 10
+            }
+          },
+        }
+        obj.name = "隐患数量"
+        obj.value.push(data[i].lng - 1)
+        obj.value.push(data[i].lat)
+        obj.value.push(data[i].record_num)
+        arr.push(obj)
+      }
+      list.push(arr)
+      if (arr.length > 0) {
+        this.renderSign6 = true
+      }
+      return list
+    }
   },
   computed: {
     recordList() {
@@ -328,6 +388,58 @@ export default {
       this.stageLegend = legend
       this.stageyAxis = yAxis
       return s_data
+    },
+    provinceInfo() {
+      let data = this.$store.state.get_screen.province_info
+      let list = []
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          value: [],
+          label: {
+            normal: {
+              show: true,
+              formatter: function (params) {
+                return params.value[2];    //地图上展示文字 + 数值
+              },
+              fontSize: 10
+            }
+          },
+        }
+        obj.name = "项目数量"
+        obj.value.push(data[i].lng)
+        obj.value.push(data[i].lat)
+        obj.value.push(data[i].check_num)
+        arr.push(obj)
+      }
+      list.push(arr)
+      arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          value: [],
+          label: {
+            normal: {
+              show: true,
+              formatter: function (params) {
+                return params.value[2];    //地图上展示文字 + 数值
+              },
+              fontSize: 10
+            }
+          },
+        }
+        obj.name = "隐患数量"
+        obj.value.push(data[i].lng - 1)
+        obj.value.push(data[i].lat)
+        obj.value.push(data[i].record_num)
+        arr.push(obj)
+      }
+      list.push(arr)
+      if (arr.length > 0) {
+        this.renderSign6 = true
+      }
+      return list
     }
   },
   mounted() {
@@ -357,6 +469,7 @@ export default {
         this.$store.dispatch('get_screen/getRegionScreenMajorStageInfo')
         this.$store.dispatch('get_screen/getRegionScreenAreaNumber')
         this.$store.dispatch('get_screen/getRegionScreenTable')
+        this.$store.dispatch('get_screen/getProvinceInfo')
       },
       immediate: true
     }
@@ -391,7 +504,7 @@ export default {
 }
 
 .zrh {
-  width: 0.6rem;
+  width: 1.029rem;
   height: 0.3rem;
   pointer-events: auto;
   background-image: url("../assets/zrh.png");
@@ -475,35 +588,35 @@ export default {
   white-space: nowrap;
 }
 
-/deep/ .CellNote .cell {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: 3s wordsLoop1 linear infinite normal;
-  display: inline-block;
-  z-index: -1;
-}
+/*/deep/ .CellNote .cell {*/
+/*  overflow: hidden;*/
+/*  white-space: nowrap;*/
+/*  animation: 3s wordsLoop1 linear infinite normal;*/
+/*  display: inline-block;*/
+/*  z-index: -1;*/
+/*}*/
 
-@keyframes wordsLoop1 {
-  0% {
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-60px);
-    -webkit-transform: translateX(-60px);
-  }
-}
+/*@keyframes wordsLoop1 {*/
+/*  0% {*/
+/*    transform: translateX(0px);*/
+/*    -webkit-transform: translateX(0px);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateX(-60px);*/
+/*    -webkit-transform: translateX(-60px);*/
+/*  }*/
+/*}*/
 
-@-webkit-keyframes wordsLoop1 {
-  0% {
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-60px);
-    -webkit-transform: translateX(-60px);
-  }
-}
+/*@-webkit-keyframes wordsLoop1 {*/
+/*  0% {*/
+/*    transform: translateX(0px);*/
+/*    -webkit-transform: translateX(0px);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateX(-60px);*/
+/*    -webkit-transform: translateX(-60px);*/
+/*  }*/
+/*}*/
 
 .card-title {
   pointer-events: auto;
@@ -536,5 +649,10 @@ export default {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: url("../assets/screen_card.png");
+}
+
+/deep/ .el-button{
+  background: transparent !important;
+  color: #ffffff;
 }
 </style>

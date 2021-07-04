@@ -26,6 +26,7 @@ import get_login from '@/store/modules/get_login'
 import get_check from '@/store/modules/get_check'
 import get_comparison from '@/store/modules/get_comparison'
 import get_screen from '@/store/modules/get_screen'
+import get_insight from '@/store/modules/get_insight'
 
 Vue.use(Vuex)
 
@@ -41,7 +42,8 @@ export default new Vuex.Store({
         get_login,
         get_check,
         get_comparison,
-        get_screen
+        get_screen,
+        get_insight
     },
     strict: debug
 })

@@ -99,6 +99,9 @@ export default {
   mounted() {
     this.rosePie = this.$refs.rosePie;
     this.myChart = this.$echarts.init(this.rosePie)
+
+    this.drawBarChart()
+
     setInterval(() => {
       var option1 = this.myChart.getOption();
       this.myChart.clear();

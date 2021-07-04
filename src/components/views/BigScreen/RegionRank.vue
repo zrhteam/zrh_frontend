@@ -11,7 +11,7 @@
     </div>
     <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
       <div class="box2" style="width: 100%; height: 100%;">
-        <div ref='rankBar' style="height: 85%; width: 100%;">
+        <div ref='rankBar' style="height: 100%; width: 100%;">
         </div>
       </div>
     </div>
@@ -66,7 +66,6 @@ export default {
         // obj.count = max
         max_arr.push(max)
       }
-      debugger
       this.renderSign = true
       let bar_option3 = {
         // dataset: {
@@ -80,7 +79,7 @@ export default {
           left: this.fontSize(0.25),
           top: this.fontSize(0.25),
           right: this.fontSize(0.25),
-          bottom: this.fontSize(0.10),
+          bottom: 0,
           containLabel: true
         },
         xAxis: {
@@ -140,7 +139,7 @@ export default {
               },
               fontSize: this.fontSize(0.10)
             },
-            barMaxWidth: this.fontSize(0.2),
+            barMaxWidth: this.fontSize(0.12),
             // barCategoryGap: toString(fontSize(0.18)),
             barCategoryGap: this.fontSize(0.13),
           },
@@ -175,6 +174,7 @@ export default {
   mounted() {
     this.rankBar = this.$refs.rankBar;
     this.myChart = this.$echarts.init(this.rankBar)
+    this.drawBarChart()
   },
   watch: {
     renderSign() {
