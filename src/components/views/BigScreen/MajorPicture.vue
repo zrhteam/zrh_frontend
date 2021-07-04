@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="slide">
-      <div class="slide-wrapper">
+      <div class="slide-wrapper" ref="major">
         <el-carousel indicator-position="none" :interval="3000" :height="dataHeight">
           <el-carousel-item v-for='item in img_list'>
             <div style="height: 100%">
@@ -52,6 +52,7 @@ export default {
       } else if (this.context.sign == "check-fire") {
         data = this.$store.state.get_screen.checks_picture_note;
       }
+
       if (this.context.sign == "project-fire" || this.context.sign == "check-fire") {
         for (let i in data['消防专业']) {
           let obj = {
@@ -114,7 +115,14 @@ export default {
           this.img_list.push(obj)
         }
       }
-
+      if (typeof (data.image_list) != undefined) {
+        if (this.img_list.length == 0) {
+          this.$nextTick(_ => {
+            this.$refs.major.innerHTML = '暂无数据'
+            // document.getElementById("major-picture").innerHTML
+          })
+        }
+      }
     },
   }
 }
