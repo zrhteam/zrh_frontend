@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 import {bar_option, pie_option} from "@/utils/constants.js";
 
 export default {

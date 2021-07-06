@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 import {pie_option} from "@/utils/constants";
 
 export default {

@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from 'element-resize-detector'
 import echarts from "echarts";
 import {ModelFbx} from "vue-3d-model"
 

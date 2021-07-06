@@ -20,7 +20,6 @@
 
 <script>
 // import * as d3 from "d3/dist/d3";
-import elementResizeDetectorMaker from "element-resize-detector";
 import echarts from "echarts";
 import {bar_option3} from "@/utils/constants";
 
@@ -93,17 +92,10 @@ export default {
           // 使用刚指定的配置项和数据显示图表。
           myChart.setOption(bar_option3);
           myChart.resize();
-          window.addEventListener('resize', function () {
+          window.addEventListener('resize', () => {
             myChart.resize();
           })
           const _this = this;
-          const erd = elementResizeDetectorMaker();
-          erd.listenTo(document.getElementById("number_histogram"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
         } else if ('number_histogram') {
           this.$nextTick(() => {
             const dom = document.getElementById('number_histogram')

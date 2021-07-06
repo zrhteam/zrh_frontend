@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "DoughnutChart",
@@ -102,17 +101,9 @@ export default {
         };
         myChart.setOption(option);
         myChart.resize();
-        window.addEventListener('resize', function () {
+        window.addEventListener('resize', () => {
           myChart.resize();
         })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById(this.context.id), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
-            myChart.resize();
-          });
-        });
       })
     },
     grantChart() {

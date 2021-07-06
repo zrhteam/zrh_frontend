@@ -299,7 +299,6 @@ export default {
 }
 
 .safety_index {
-  background-image: url('../components/svg/card-skin-2.svg');
   font-family: 'microsoft YaHei';
   height: 70px;
 }

@@ -1,5 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+// const Overview = resolve => {
+//     require.ensure(['../component/Overview.vue'], () => {
+//         resolve(require('../components/Overview.vue'))
+//     })
+// }
 import Overview from '../components/Overview.vue'
 import LandHeadquartersEHSDataScreen from "../components/LandHeadquartersEHSDataScreen.vue";
 import RegionDepartment from "@/components/RegionDepartment.vue";
@@ -13,6 +19,7 @@ import NewHeadScreen from "@/components/NewHeadScreen.vue";
 import NewRegionScreen from "@/components/NewRegionScreen.vue";
 import NewProjectScreen from "@/components/NewProjectScreen.vue";
 import NewCheckScreen from "@/components/NewCheckScreen.vue";
+import ProjectFireScreen from "@/components/ProjectFireScreen.vue";
 
 const routerOptions = [
     {path: '/', component: 'Login', meta: {keepAlive: false}},
@@ -30,6 +37,7 @@ const routerOptions = [
     {path: '/new_region_screen/:id', component: 'NewRegionScreen'},
     {path: '/new_project_screen/:id', component: 'NewProjectScreen'},
     {path: '/new_check_screen/:id', component: 'NewCheckScreen'},
+    {path: '/project_fire_screen/', component: 'ProjectFireScreen'},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {

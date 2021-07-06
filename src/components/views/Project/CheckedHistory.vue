@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 import {bar_option} from "@/utils/constants";
 
 export default {
@@ -52,17 +51,9 @@ export default {
       bar_option["xAxis"]["axisLabel"]["rotate"] = 0
       myChart.setOption(bar_option);
       myChart.resize();
-      window.addEventListener('resize', function () {
+      window.addEventListener('resize', () => {
         myChart.resize();
       })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById("history_chart"), element => {
-        _this.$nextTick(() => {
-          //监听到事件后执行的业务逻辑
-          myChart.resize();
-        });
-      });
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {

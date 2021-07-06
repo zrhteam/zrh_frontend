@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "Region1_4",
@@ -158,13 +157,6 @@ export default {
         window.addEventListener('resize', function () {
           myChart.resize();
         })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById('r_risk_level'), element => {
-          _this.$nextTick(() => {
-            myChart.resize();
-          });
-        });
       } else if (document.getElementById("r_risk_level")) {
         this.$nextTick(() => {
           const dom = document.getElementById(document.getElementById("r_risk_level"))

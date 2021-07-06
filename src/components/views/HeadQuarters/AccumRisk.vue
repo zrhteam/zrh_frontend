@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "AccumRisk",
@@ -177,13 +176,6 @@ export default {
       window.addEventListener('resize', function (){
         myChart.resize();
       })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById('r_risk_level'), element=>{
-        _this.$nextTick(() => {
-          myChart.resize();
-        });
-      });
     }
   }
 }

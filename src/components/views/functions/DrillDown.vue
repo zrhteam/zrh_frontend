@@ -48,7 +48,6 @@
 
 <script>
 import {bar_option} from "@/utils/constants";
-import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "DrillDown",
@@ -94,17 +93,10 @@ export default {
             })
 
             myChart.resize();
-            window.addEventListener('resize', function () {
+            window.addEventListener('resize', () => {
               myChart.resize();
             })
             _this = this;
-            const erd = elementResizeDetectorMaker();
-            erd.listenTo(document.getElementById(this.context.id1), element => {
-              _this.$nextTick(() => {
-                //监听到事件后执行的业务逻辑
-                myChart.resize();
-              });
-            });
 
             setTimeout(() => {
               myChart = this.$echarts.init(document.getElementById(this.context.id2))

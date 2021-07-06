@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 import {pie_option} from "@/utils/constants";
 
 export default {
@@ -98,16 +97,9 @@ export default {
         }
 
         myChart.resize();
-        window.addEventListener('resize', function () {
+        window.addEventListener('resize', () => {
           myChart.resize();
         })
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById("pie2"), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
-            myChart.resize();
-          });
-        });
       } else if (document.getElementById("pie2")) {
         this.$nextTick(() => {
           const dom = document.getElementById(document.getElementById("pie2"))

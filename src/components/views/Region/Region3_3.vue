@@ -31,7 +31,6 @@
 
 <script>
 // import * as d3 from "d3/dist/d3";
-import elementResizeDetectorMaker from "element-resize-detector";
 import {bar_option} from "@/utils/constants";
 import echarts from "echarts";
 //   import '../../node_modules/echarts/map/js/world.js'
@@ -113,14 +112,6 @@ export default {
         window.addEventListener('resize', function () {
           myChart.resize();
         })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        erd.listenTo(document.getElementById("risk_rank"), element => {
-          _this.$nextTick(() => {
-            //监听到事件后执行的业务逻辑
-            myChart.resize();
-          });
-        });
       } else if (document.getElementById("risk_rank")) {
         this.$nextTick(() => {
           const dom = document.getElementById(document.getElementById("risk_rank"))

@@ -47,7 +47,6 @@
 
 <script>
 import {line_option, bar_option2, bar_option} from "@/utils/constants";
-import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "RiskLevelYear",

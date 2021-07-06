@@ -50,7 +50,6 @@
 
 <script>
 import {bar_option, bar_option3} from "@/utils/constants";
-import elementResizeDetectorMaker from "element-resize-detector";
 import echarts from "echarts";
 
 export default {

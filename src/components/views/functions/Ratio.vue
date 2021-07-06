@@ -38,7 +38,6 @@
 
 <script>
 import {bar_option, pie_option} from "@/utils/constants";
-import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "Ratio",

@@ -1,9 +1,40 @@
 const path = require('path')
+const webpack = require('webpack')
 const express = require('express')
 const app = express()
 var apiRoutes = express.Router()
 app.use('/api', apiRoutes)
 
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
+
+function getPlugins() {
+    let plugins = []
+    // Ignore all locale files of moment.js
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    // // GitRevision.version()
+    // new webpack.DefinePlugin({
+    //     APP_VERSION: `"${require('./package.json').version}"`,
+    //     GIT_HASH: JSON.stringify('1.2'),
+    //     BUILD_DATE: buildDate
+    // })
+
+    // 配置压缩
+    new CompressionWebpackPlugin({
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        threshold: 10240,
+        minRatio: 0.8
+    })
+
+    //在合并 chunk 时，webpack 会尝试识别出具有重复模块的 chunk，并优先进行合并。任何模块都不会被合并到 entry   chunk 中，以免影响初始页面加载时间。
+    new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 5,
+        minChunkSize: 100
+    })
+
+    return plugins
+}
 
 module.exports = {
     publicPath: '/',//new
@@ -24,13 +55,72 @@ module.exports = {
     // webpack配置
     // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
     //chainWebpack: () => {},
-    chainWebpack: (config) => {},//update
+    chainWebpack:config=>{
+        //发布模式
+        config.when(process.env.NODE_ENV === 'production',config=>{
+            //entry找到默认的打包入口，调用clear则是删除默认的打包入口,add添加新的打包入口
+            config.entry('app').clear().add('./src/main.js')
+            //使用externals设置排除项
+            config.set('externals',{
+                vue: 'Vue',
+                vuex: 'Vuex',
+                echarts: 'echarts',
+                'element-ui': 'ElementUI',
+                'vue-cookies': 'cookies',
+                axios: 'axios',
+                'vue-router': 'Router',
+                "element-resize-detector": 'elementResizeDetectorMaker'
+            })
+        })
+        //开发模式
+        config.when(process.env.NODE_ENV === 'development',config=>{
+            config.entry('app').clear().add('./src/main.js')
+        })
+
+        // //发布模式
+        // config.when(process.env.NODE_ENV === 'production',config=>{
+        //     //entry找到默认的打包入口，调用clear则是删除默认的打包入口
+        //     //add添加新的打包入口
+        //     config.entry('app').clear().add('./src/main.js')
+        //
+        //     //使用externals设置排除项
+        //     config.set('externals',{
+        //         vue: 'Vue',
+        //         echarts: 'echarts',
+        //         vuex: 'Vuex',
+        //         // axios:'axios',
+        //         'element-ui': 'ElementUI',
+        //         // nprogress:'NProgress',
+        //         // 'vue-quill-editor':'VueQuillEditor'
+        //     })
+        // })
+    },
     //configureWebpack: () => {},
     configureWebpack: (config) => {
-        if(process.env.NODE_ENV === 'production'){
+        if (process.env.NODE_ENV === 'production') {
             config.mode = 'production'
+            // config.entry('app').clear().add('./src/main-prod.js');
+            // config.plugin('html').tap(args => {
+            //     args[0].isProd = true;
+            //     return args
+            // });
+            // config.set('externals', {
+            //     vue: 'Vue',
+            //     // 'vue-router': 'VueRouter',
+            //     // axios: 'axios',
+            //     // lodash: '_',
+            //     // echarts: 'echarts',
+            //     // nprogress: 'NProgress',
+            //     // 'vue-quill-editor': 'VueQuillEditor'
+            // })
         } else {
             config.mode = 'development'
+            // config.entry('app').clear().add('./src/main-dev.js');
+            // //定制开发模式标题
+            // config.plugin('html').tap(args => {
+            //     args[0].isProd = false;
+            //     return args
+            // })
         }
         Object.assign(config, {
             resolve: {
@@ -39,8 +129,10 @@ module.exports = {
                     '@c': path.resolve(__dirname, './src/components'),
                     '@v': path.resolve(__dirname, './src/components/views')
                 }
-            }
+            },
+            // plugins: getPlugins()
         })
+
     },//update
     // vue-loader 配置项
     // https://vue-loader.vuejs.org/en/options.html
@@ -79,7 +171,7 @@ module.exports = {
         //open: true,//自动弹出浏览器页面
         open: process.platform === 'darwin',
         // host: 'localhost',
-        public:'10.20.39.102:8085',
+        public: '10.20.39.102:8085',
         // public:'localhost:8080',
         host: '0.0.0.0',
         port: 8085,
@@ -133,6 +225,4 @@ module.exports = {
     pluginOptions: {
         // ...
     },
-
-
 }

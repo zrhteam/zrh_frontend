@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 import {bar_option} from "@/utils/constants";
 
 export default {
@@ -117,13 +116,6 @@ export default {
       window.addEventListener('resize', function (){
         myChart.resize();
       })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById('risk_level'), element=>{
-        _this.$nextTick(() => {
-          myChart.resize();
-        });
-      });
     }
   }
   // }

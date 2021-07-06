@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 import {bar_option} from "@/utils/constants";
 
 export default {

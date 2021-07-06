@@ -62,7 +62,6 @@
 
 <script>
 import {bar_option} from "@/utils/constants";
-import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "TopCompare",
@@ -102,18 +101,10 @@ export default {
             bar_option['dataset'][0]['source'] = this.o1
             myChart.setOption(bar_option);
             myChart.resize();
-            window.addEventListener('resize', function () {
+            window.addEventListener('resize', () => {
               myChart.resize();
             })
             const _this = this;
-            const erd = elementResizeDetectorMaker();
-            erd.listenTo(document.getElementById(this.context.id1), element => {
-              _this.$nextTick(() => {
-                //监听到事件后执行的业务逻辑
-                myChart.resize();
-              });
-            });
-
             setTimeout(() => {
               myChart = this.$echarts.init(document.getElementById(this.context.id2))
               bar_option['dataset'][0]['source'] = this.o2

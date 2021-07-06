@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 import echarts from "echarts";
 
 export default {

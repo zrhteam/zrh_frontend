@@ -186,7 +186,6 @@ i {
 }
 
 .chart-image-icon {
-  background-image: url('svg/card-skin-1.svg');
   font-family: 'microsoft YaHei';
 }
 

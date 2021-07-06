@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
 
 export default {
   name: "StackedHorizontalBar",

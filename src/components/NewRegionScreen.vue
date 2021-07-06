@@ -446,7 +446,6 @@ export default {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
-
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
