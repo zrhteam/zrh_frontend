@@ -8,6 +8,7 @@
 
 <script>
 import echarts from "echarts";
+import 'echarts/map/js/china'
 
 export default {
   name: "HeadMap",

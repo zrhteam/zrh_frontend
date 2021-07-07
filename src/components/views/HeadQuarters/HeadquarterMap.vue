@@ -11,6 +11,7 @@
 
 <script>
 import echarts from "echarts";
+import 'echarts/map/js/china'
 
 export default {
   name: "HeadquarterMap",
@@ -20,16 +21,12 @@ export default {
       chart: null
     }
   },
-  updated() {
-    this.drawBarChart()
-  },
   mounted() {
     setTimeout(() => {
       let mainHeight = this.$refs.map_5.offsetHeight
       $("#map").css("height", mainHeight + "px");
       this.$nextTick(() => {
         this.chinaConfigure();
-        this.drawBarChart();
       })
     })
   },
@@ -41,25 +38,6 @@ export default {
     this.chart = null;
   },
   methods: {
-    drawBarChart() {
-      if (this.getNumberHistogram["dataset"]["source"].length != 0) {
-        let myChart = this.$echarts.init(document.getElementById('number_histogram'))
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(this.getNumberHistogram);
-        myChart.resize();
-        window.addEventListener('resize', () => {
-          myChart.resize();
-        })
-      } else if ('number_histogram') {
-        this.$nextTick(() => {
-          const dom = document.getElementById('number_histogram')
-          dom.innerHTML = '暂无数据'
-          dom.style.color = '#ffffff'
-          dom.style.fontSize = '14px'
-          dom.removeAttribute("_echarts_instance_")
-        })
-      }
-    },
     returnCountry() {
       this.$options.methods.chinaConfigure();
     },
