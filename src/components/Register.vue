@@ -1,6 +1,6 @@
 <template>
   <div class="echarts">
-
+{{ getData }}
   </div>
 </template>
 <script>
@@ -12,22 +12,39 @@ export default {
       chart: null
     };
   },
+  computed: {
+    getData() {
+      console.log("111", this.$store.state.get_screen.projects_risk_num)
+      console.log("112", this.$store.state.get_screen.projects_risk_num_rank)
+    }
+  },
   created() {
+    // let param = new URLSearchParams();
+    // param.append('check_key', 'ZRH(ZB)-2007-L01-A04-000-15');
+    // param.append('flag', '3');
+    // param.append('start', '2000-1-3 00:00:00');
+    // param.append('end', '2022-1-3 00:00:00');
+    // this.$store.commit('get_insight/changeParams', {params: param})
+    // this.$store.dispatch('get_insight/getAnalyzeRedlineData')
+    // this.$store.dispatch('get_insight/getAnalyzeTendencyHeadquarter')
+    // this.$store.dispatch('get_insight/getAnalyzeTendencyRegion')
+    // this.$store.dispatch('get_insight/getAnalyzeTendencyProject')
+    // this.$store.dispatch('get_insight/getAnalyzeTendencyProfession')
+    // this.$store.dispatch('get_insight/getAnalyzeRatioHeadquarter')
+    // this.$store.dispatch('get_insight/getAnalyzeRatioRegion')
+    // this.$store.dispatch('get_insight/getAnalyzeRatioProject')
+    // this.$store.dispatch('get_insight/getAnalyzeRatioProfession')
     let param = new URLSearchParams();
-    param.append('check_key', 'ZRH(ZB)-2007-L01-A04-000-15');
-    param.append('flag', '3');
-    param.append('start', '2000-1-3 00:00:00');
-    param.append('end', '2022-1-3 00:00:00');
-    this.$store.commit('get_insight/changeParams', {params: param})
-    this.$store.dispatch('get_insight/getAnalyzeRedlineData')
-    this.$store.dispatch('get_insight/getAnalyzeTendencyHeadquarter')
-    this.$store.dispatch('get_insight/getAnalyzeTendencyRegion')
-    this.$store.dispatch('get_insight/getAnalyzeTendencyProject')
-    this.$store.dispatch('get_insight/getAnalyzeTendencyProfession')
-    this.$store.dispatch('get_insight/getAnalyzeRatioHeadquarter')
-    this.$store.dispatch('get_insight/getAnalyzeRatioRegion')
-    this.$store.dispatch('get_insight/getAnalyzeRatioProject')
-    this.$store.dispatch('get_insight/getAnalyzeRatioProfession')
+    // param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    param.append('project_name', '合肥欢乐颂');
+    this.$store.commit('get_screen/changeParams', {params: param})
+    this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
+    this.$store.dispatch('get_screen/getProjectScreenRNRank')
+    this.$store.dispatch('get_screen/getProjectScreenRiskLevel')
+    this.$store.dispatch('get_screen/getProjectScreenStageRatio')
+    this.$store.dispatch('get_screen/getProjectScreenHighRiskNote')
+    this.$store.dispatch('get_screen/getProjectScreenPictureNote')
+    this.$store.dispatch('get_screen/getProjectScreenTable')
   }
 }
 </script>
