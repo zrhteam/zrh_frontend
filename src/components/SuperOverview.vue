@@ -158,6 +158,7 @@ export default {
   },
   destroyed() {
     window.removeEventListener('popstate', this.goBack, false);
+    clearInterval(this.timer)
   },
   created() {
     //在页面加载时读取sessionStorage里的状态信息

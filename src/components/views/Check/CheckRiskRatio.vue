@@ -40,6 +40,11 @@ export default {
   updated() {
     this.drawPieChart()
   },
+  data() {
+    return {
+      myChart: null
+    }
+  },
   mounted() {
     // console.log(this.screenWidth)
     // const that = this
@@ -65,10 +70,14 @@ export default {
           });
           return params + " " + arr[legendIndex].value;
         }
-        let myChart = this.$echarts.init(document.getElementById('pie2_2'))
+
+        if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+          this.myChart.dispose() // 销毁
+        }
+        this.myChart = this.$echarts.init(document.getElementById('pie2_2'))
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(pie_option);
-        myChart.on("click", pieConsole);
+        this.myChart.setOption(pie_option);
+        this.myChart.on("click", pieConsole);
 
         function pieConsole(param) {
           //     获取data长度
@@ -94,9 +103,9 @@ export default {
           //param具体包含的方法见 https://blog.csdn.net/allenjay11/article/details/76033232
         }
 
-        myChart.resize();
+        this.myChart.resize();
         window.addEventListener('resize', function () {
-          myChart.resize();
+          this.myChart.resize();
         })
       } else if (document.getElementById("pie2_2")) {
         this.$nextTick(() => {
@@ -108,6 +117,18 @@ export default {
         })
       }
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener('resize', function () {
+      this.myChart.resize();
+    })
   }
 }
 </script>

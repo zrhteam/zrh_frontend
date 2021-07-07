@@ -22,11 +22,13 @@ export default {
   methods: {
     selfAdaption() {
       let _this = this;
-      setTimeout(() => {
-        window.addEventListener('resize', function () {
-          _this.$refs.echarts.resize();
-        })
+      let timer = setTimeout(() => {
+        window.addEventListener('resize', this.doResize, true)
       }, 10)
+      clearTimeout(timer)
+    },
+    doResize(){
+      this.$refs.echarts.resize();
     },
     goBack() {
       if (this.$store.state.get_login.grant_data.data.user_grant === '总部') {
@@ -48,11 +50,13 @@ export default {
     // window.addEventListener("onbeforeunload", () => {
     //   sessionStorage.setItem("headMsg", JSON.stringify(this.$store.state))
     //   alert(1)
-      setTimeout(() => {
+      var timer = setTimeout(() => {
         document.getElementById('head_quarter').style.display = 'block'
         document.getElementById('region_part').style.display = 'none'
       }, 200);
     // })
+    clearTimeout(timer)
+
 
     $(document).ready(function () {
       var whei = $(window).width()
@@ -65,6 +69,10 @@ export default {
   },
   destroyed() {
     window.removeEventListener('popstate', this.goBack, false);
+    window.removeEventListener('resize', this.doResize, true)
+    window.removeEventListener("beforeunload", () => {
+      sessionStorage.setItem("headMsg", JSON.stringify(this.$store.state))
+    })
   },
   created() {
     // if (!sessionStorage.getItem("headMsg")) {

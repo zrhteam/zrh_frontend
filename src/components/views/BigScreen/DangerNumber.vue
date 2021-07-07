@@ -160,6 +160,9 @@ export default {
     }
   },
   mounted() {
+    if(this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+      this.myChart.dispose() // 销毁
+    }
     this.dangerNumBar = this.$refs.dangerNumBar;
     this.myChart = this.$echarts.init(this.dangerNumBar)
     this.drawBarChart()
@@ -169,6 +172,18 @@ export default {
       this.drawBarChart()
     }
   },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+        this.myChart.resize();
+    });
+  }
 }
 </script>
 

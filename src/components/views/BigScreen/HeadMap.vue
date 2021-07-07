@@ -19,13 +19,14 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
+    var timer = setTimeout(() => {
       let mainHeight = this.$refs.map_5.offsetHeight
       $("#map").css("height", mainHeight + "px");
       this.$nextTick(() => {
         this.chinaConfigure();
       })
     })
+    clearTimeout(timer)
   },
   watch: {
     renderSign() {

@@ -19,7 +19,9 @@ import {pie_option} from "@/utils/constants";
 export default {
   name: "CheckHistoryPerc",
   data() {
-    return {}
+    return {
+      myChart: null
+    }
   },
   computed: {
     getPrjHistoryPerception() {
@@ -67,11 +69,14 @@ export default {
       }
       if (pie_option["series"][0]["data"].length != 0) {
         let _this = this
-        let myChart = this.$echarts.init(document.getElementById('pie2'))
+        if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+          this.myChart.dispose() // 销毁
+        }
+        this.myChart = this.$echarts.init(document.getElementById('pie2'))
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(pie_option);
+        this.myChart.setOption(pie_option);
 
-        myChart.on("click", pieConsole);
+        this.myChart.on("click", pieConsole);
 
         function pieConsole(param) {
           //     获取data长度
@@ -96,9 +101,9 @@ export default {
           //param具体包含的方法见 https://blog.csdn.net/allenjay11/article/details/76033232
         }
 
-        myChart.resize();
+        this.myChart.resize();
         window.addEventListener('resize', () => {
-          myChart.resize();
+          this.myChart.resize();
         })
       } else if (document.getElementById("pie2")) {
         this.$nextTick(() => {
@@ -110,6 +115,18 @@ export default {
         })
       }
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+        this.myChart.resize();
+      });
   }
 }
 </script>

@@ -55,26 +55,27 @@ export default {
     },
   },
   mounted() {
-    this.timer =setInterval(this.updateTable, 1000);
+    this.timer = setInterval(this.updateTable, 1000);
   },
   methods: {
-    updateTable(){
+    updateTable() {
       let first = this.noRectificationNumber[0];
       this.noRectificationNumber.shift();
       this.noRectificationNumber.push(first);
     },
-    beforeDestroy(){
-      clearInterval(this.timer);
-    },
-  }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
 }
 </script>
 
 <style scoped>
 /*最外层透明*/
-/deep/ .el-table, /deep/ .el-table__expanded-cell{
+/deep/ .el-table, /deep/ .el-table__expanded-cell {
   background-color: transparent;
 }
+
 /* 表格内背景颜色 */
 /deep/ .el-table th,
 /deep/ .el-table tr,

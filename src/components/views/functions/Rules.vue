@@ -50,13 +50,18 @@
 export default {
   name: "Rules",
   props: ['context'],
+  data(){
+    return {
+      timer: null
+    }
+  },
   mounted() {
     // 拿到表格挂载后的真实DOM
     const table = this.$refs.table
     // 拿到表格中承载数据的div元素
     const divData = table.bodyWrapper
     // 拿到元素后，对元素进行定时增加距离顶部距离，实现滚动效果(此配置为每100毫秒移动1像素)
-    setInterval(() => {
+    this.timer = setInterval(() => {
       // 元素自增距离顶部1像素
       divData.scrollTop += 1
       // 判断元素是否滚动到底部(可视高度+距离顶部=整个高度)
@@ -65,6 +70,9 @@ export default {
         divData.scrollTop = 0
       }
     }, 100)
+  },
+  destroyed() {
+    clearInterval(this.timer)
   }
 }
 </script>

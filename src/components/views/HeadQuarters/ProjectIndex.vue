@@ -19,7 +19,11 @@
 
 export default {
   name: "ProjectIndex",
-
+  data() {
+    return {
+      myChart: null
+    }
+  },
   computed: {
     // getNumberHistogram() {
     getIndexHistogram() {
@@ -47,7 +51,10 @@ export default {
   },
   methods: {
     drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('number_histogram1'))
+      if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+              this.myChart.dispose() // 销毁
+            }
+      this.myChart = this.$echarts.init(document.getElementById('number_histogram1'))
       // 使用刚指定的配置项和数据显示图表。
       let arr = this.getIndexHistogram
       let option = {
@@ -108,10 +115,10 @@ export default {
           }
         ]
       };
-      myChart.setOption(option);
-      myChart.resize();
+      this.myChart.setOption(option);
+      this.myChart.resize();
       window.addEventListener('resize', function () {
-        myChart.resize();
+        this.myChart.resize();
       })
     },
     sortNumber(attr, rev){
@@ -133,6 +140,18 @@ export default {
         return 0;
       }
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+      this.myChart.resize();
+    });
   }
 }
 </script>

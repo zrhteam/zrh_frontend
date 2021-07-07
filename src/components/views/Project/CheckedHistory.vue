@@ -16,6 +16,11 @@ import {bar_option} from "@/utils/constants";
 
 export default {
   name: "CheckedHistory",
+  data() {
+    return {
+      myChart: null
+    }
+  },
   computed: {
     getPrjHistory() {
       let data = this.$store.state.get_project.prj_number_change;
@@ -46,13 +51,16 @@ export default {
   methods: {
     drawBarChart() {
       // document.getElementById('history_chart').innerHTML = ''
-      let myChart = this.$echarts.init(document.getElementById('history_chart'))
+      if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+          this.myChart.dispose() // 销毁
+      }
+      this.myChart = this.$echarts.init(document.getElementById('history_chart'))
       bar_option['dataset']['source'] = this.getPrjHistory
       bar_option["xAxis"]["axisLabel"]["rotate"] = 0
-      myChart.setOption(bar_option);
-      myChart.resize();
+      this.myChart.setOption(bar_option);
+      this.myChart.resize();
       window.addEventListener('resize', () => {
-        myChart.resize();
+        this.myChart.resize();
       })
     },
     sortNumber(attr, rev) {
@@ -74,6 +82,18 @@ export default {
         return 0;
       }
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+        this.myChart.resize();
+      });
   }
 }
 </script>

@@ -46,12 +46,13 @@ export default {
       riskNumberPie: null,
       myChart: null,
       // renderSign: false,
+      timer: null
     }
   },
   methods: {
     drawBarChart() {
       let arr = this.riskNumber
-      this.renderSign = true
+      // this.renderSign = true
       let pie_option2 = {
         series: [
           {
@@ -107,13 +108,16 @@ export default {
     }
   },
   mounted() {
+    if(this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+      this.myChart.dispose() // 销毁
+    }
     this.riskNumberPie = this.$refs.riskNumberPie;
     this.myChart = this.$echarts.init(this.riskNumberPie)
 
     this.drawBarChart()
 
     let chooseIndex = 0;//默认选中高亮模块索引 现在是默认第一条
-    setInterval(() => {
+    this.timer = setInterval(() => {
       let len = this.riskNumber.length
       this.myChart = this.$echarts.init(this.riskNumberPie)
       this.myChart.dispatchAction({type: 'highlight', seriesIndex: 0, dataIndex: chooseIndex});
@@ -129,6 +133,19 @@ export default {
       this.drawBarChart()
     }
   },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    clearInterval(this.timer)
+    window.removeEventListener("resize", () => {
+        this.myChart.resize();
+      });
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <!--check这一部分和project这一部分可以用一个子组件-->
 <template>
-<el-card class="box-card " shadow="never"
+  <el-card class="box-card " shadow="never"
            style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getData }}
@@ -8,11 +8,11 @@
     <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
     </div>
-<!--    <div id="check_bar_chart" style="height: 80%; width: 100%">-->
-<!--      &lt;!&ndash;        占比（可筛选专业）柱状图&ndash;&gt;-->
+    <!--    <div id="check_bar_chart" style="height: 80%; width: 100%">-->
+    <!--      &lt;!&ndash;        占比（可筛选专业）柱状图&ndash;&gt;-->
 
-<!--    </div>-->
-  <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">
+    <!--    </div>-->
+    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">
     </div>
     <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">
     </div>
@@ -29,25 +29,28 @@ export default {
   props: ['context'],
   data() {
     return {
+      myChart: null
     }
   },
   methods: {
     drawBarChart() {
       this.$nextTick(_ => {
-        let myChart;
-        myChart = this.$echarts.init(document.getElementById(this.context.id))
+        if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+          this.myChart.dispose() // 销毁
+        }
+        this.myChart = this.$echarts.init(document.getElementById(this.context.id))
         // 使用刚指定的配置项和数据显示图表。
         let arr = this.getData
         // console.log("bar_arr", arr)
         // if (arr.length) {
-          bar_option['dataset']['source'] = arr
-          myChart.setOption(bar_option);
+        bar_option['dataset']['source'] = arr
+        this.myChart.setOption(bar_option);
         // }
-        myChart.resize();
+        this.myChart.resize();
         window.addEventListener('resize', function () {
-          myChart.resize();
+          this.myChart.resize();
         })
-    })
+      })
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
@@ -157,6 +160,18 @@ export default {
   // mounted() {
   //   this.drawBarChart()
   // }
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener('resize', function () {
+      this.myChart.resize();
+    })
+  }
 }
 </script>
 

@@ -221,11 +221,12 @@ export default {
       prj_small.style.width = "100%"
       document.getElementById('prj_charts').style.height = "500px"
       document.getElementById('check_charts').style.height = "500px"
-      setTimeout(function () {
+      let timer = setTimeout(function () {
         prj_small.style.width = "99%"
         document.getElementById('prj_charts').style.height = "99%"
         document.getElementById('check_charts').style.height = "99%"
       }, 100)
+      clearTimeout(timer)
       prj_small.style.width = "99%"
       if (document.getElementById('prj_charts').style.display === 'none') {
         document.getElementById('check_charts').style.display = 'block'
@@ -333,12 +334,13 @@ export default {
       this.setNowTimes();
     }, 1000);
 
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       document.getElementById('prj_subpart').style.display = 'block'
       document.getElementById('check_part').style.display = 'none'
       document.getElementById('prj_charts').style.display = 'block'
       document.getElementById('check_charts').style.display = 'none'
     }, 200);
+    clearTimeout(timer)
 
     //得到树形控件的内容 还负责封装了地理位置信息
     this.treeObj = this.$store.state.get_login.grant_data.data.value

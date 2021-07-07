@@ -362,9 +362,10 @@ export default {
         this.isFirst = false
         this.isSecond = true
       }
-      setTimeout(function () {
+      let timer = setTimeout(function () {
         document.getElementById('prj_small').style.display = 'block'
       }, 100);
+      clearTimeout(timer)
     },
     // preFirst() {
     //   for(let i=0; i<this.firstArr.length; i++) {

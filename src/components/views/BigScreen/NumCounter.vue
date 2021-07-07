@@ -17,8 +17,13 @@ export default {
       default: 0
     }
   },
+  data() {
+    return {
+      timer: null
+    }
+  },
   mounted() {
-    setInterval(() => {
+     this.timer = setInterval(() => {
       this.numberGrow(this.$refs.numberGrow)
     }, 10000);
   },
@@ -41,6 +46,9 @@ export default {
         ele.innerHTML = current.toString().replace(/(\d)(?=(?:\d{3}[+]?)+$)/g, '$1,')
       }, 50)
     }
+  },
+  destroyed() {
+    clearInterval(this.timer)
   }
 }
 </script>

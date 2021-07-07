@@ -16,11 +16,11 @@
 
 export default {
   name: "Region1_4",
-  // data() {
-  //   return {
-  //     riskLevelData: []
-  //   }
-  // },
+  data() {
+    return {
+      myChart: null
+    }
+  },
   computed: {
     getRiskLevelData() {
       let data = this.$store.state.get_region.risk_level_data;
@@ -72,7 +72,10 @@ export default {
   },
   methods: {
     drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('r_risk_level'))
+      if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+          this.myChart.dispose() // 销毁
+        }
+      this.myChart = this.$echarts.init(document.getElementById('r_risk_level'))
       let arr = this.getRiskLevelData
       if (arr.length) {
         let option = {
@@ -152,10 +155,10 @@ export default {
             }
           ]
         };
-        myChart.setOption(option);
-        myChart.resize();
+        this.myChart.setOption(option);
+        this.myChart.resize();
         window.addEventListener('resize', function () {
-          myChart.resize();
+          this.myChart.resize();
         })
       } else if (document.getElementById("r_risk_level")) {
         this.$nextTick(() => {
@@ -168,6 +171,18 @@ export default {
       }
 
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+        this.myChart.resize();
+      });
   }
 }
 </script>

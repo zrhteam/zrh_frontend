@@ -33,11 +33,11 @@
 
 export default {
   name: "AccumRisk",
-  // data() {
-  //   return {
-  //     riskLevelData: []
-  //   }
-  // },
+  data() {
+    return {
+      myChart: null
+    }
+  },
   computed: {
     getRiskLevelData() {
       let data = this.$store.state.get_headquarter.risk_level_data.risk_level;
@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     drawBarChart(){
-      let myChart = this.$echarts.init(document.getElementById('accum_risk'))
+      this.myChart = this.$echarts.init(document.getElementById('accum_risk'))
       let arr = this.getRiskLevelData
       if (arr.length) {
         let option = {
@@ -168,15 +168,25 @@ export default {
             }
           ]
         };
-        myChart.setOption(option);
-      }else{
-
+        this.myChart.setOption(option);
       }
-      myChart.resize();
+      this.myChart.resize();
       window.addEventListener('resize', function (){
-        myChart.resize();
+        this.myChart.resize();
       })
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener('resize', function (){
+        this.myChart.resize();
+      })
   }
 }
 </script>

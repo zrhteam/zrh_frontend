@@ -44,14 +44,17 @@ export default {
       legend: [],
       yAxis: [],
       s_data: [],
+      myChart: null,
     }
   },
   props: ['context'],
   methods: {
     drawBarChart() {
       this.$nextTick(_ => {
-            let myChart;
-            myChart = this.$echarts.init(document.getElementById(this.context.id))
+            // if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+            //   this.myChart.dispose() // 销毁
+            // }
+            this.myChart = this.$echarts.init(document.getElementById(this.context.id))
             let arr = this.getData
             let data = []
             let r_data = []
@@ -182,9 +185,11 @@ export default {
 
 
             // if (arr.length != 0) {
-            myChart.setOption(option);
+            this.myChart.setOption(option);
             window.addEventListener("resize", () => {
-              myChart.resize();
+               if(this.myChart){
+                 this.myChart.resize();
+               }
             });
             // } else if (this.context.id) {
             //   this.$nextTick(() => {
@@ -204,6 +209,11 @@ export default {
       if (!clientWidth) return;
       let fontSize = 100 * (clientWidth / 1920);
       return res * fontSize;
+    }
+  },
+  watch: {
+    s_data() {
+      this.drawBarChart()
     }
   },
   computed: {
@@ -347,18 +357,32 @@ export default {
         s_data.push(sub_data)
       }
       yAxis.push("总计")
-
       this.legend = legend
       this.yAxis = yAxis
       this.s_data = s_data
     },
   },
-  updated() {
-    this.drawBarChart()
-  },
+  // updated() {
+  //   this.drawBarChart()
+  // },
   mounted() {
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+          this.myChart.dispose() // 销毁
+        }
     this.drawBarChart();
   },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+      this.myChart.resize();
+    });
+  }
 }
 </script>
 

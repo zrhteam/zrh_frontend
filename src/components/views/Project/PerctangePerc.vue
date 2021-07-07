@@ -82,7 +82,9 @@ export default {
       // this.myChart.resize();
 
       window.addEventListener("resize", () => {
-        this.myChart.resize();
+         if(this.myChart){
+           this.myChart.resize();
+         }
       });
       // const _this = this;
       // const erd = elementResizeDetectorMaker();
@@ -348,11 +350,26 @@ export default {
   // },
   mounted() {
     // this.drawBarChart();
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+          this.myChart.dispose() // 销毁
+        }
     this.echartContainer = this.$refs.echartContainer;
     this.myChart = this.$echarts.init(this.echartContainer)
   },
   created() {
     this.value = '全部专业'
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+        this.myChart.resize();
+      });
   }
 }
 </script>

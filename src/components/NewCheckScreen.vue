@@ -463,6 +463,9 @@ export default {
     // this.$store.dispatch('get_screen/getCheckScreenHighRiskNote')
     // this.$store.dispatch('get_screen/getCheckScreenPictureNote')
     // this.$store.dispatch('get_screen/getCheckScreenTable')
+  },
+  destroyed() {
+    clearInterval(this.timer)
   }
 }
 </script>

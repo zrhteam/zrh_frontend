@@ -466,6 +466,9 @@ export default {
     // this.$store.dispatch('get_screen/getProjectScreenTable')
     // debugger
     // console.log(this.$route.params)
+  },
+  destroyed() {
+    clearInterval(this.timer)
   }
 }
 </script>

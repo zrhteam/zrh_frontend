@@ -39,8 +39,7 @@ export default {
     }
     this.chart.dispose();
     this.chart = null;
-  }
-  ,
+  },
   methods: {
     drawBarChart() {
       if (this.getNumberHistogram["dataset"]["source"].length != 0) {

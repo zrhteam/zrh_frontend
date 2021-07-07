@@ -28,7 +28,7 @@ import {bar_option} from "@/utils/constants";
 export default {
   name: "CheckRiskLevel",
   data() {
-    return {}
+    return {myChart: null}
   },
   props: ['context'],
   computed: {
@@ -74,15 +74,18 @@ export default {
 
   methods: {
     drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById(this.context.id))
+      if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+        this.myChart.dispose() // 销毁
+      }
+      this.myChart = this.$echarts.init(document.getElementById(this.context.id))
       let arr = this.getRiskLevelData
       bar_option["grid"]["y2"] = "20%"
       bar_option["dataset"]["source"] = arr
       if (arr.length != 0) {
-        myChart.setOption(bar_option);
-        myChart.resize();
+        this.myChart.setOption(bar_option);
+        this.myChart.resize();
         window.addEventListener('resize', function () {
-          myChart.resize();
+          this.myChart.resize();
         })
       } else if (this.context.id) {
         this.$nextTick(() => {
@@ -94,6 +97,18 @@ export default {
         })
       }
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener('resize', function () {
+      this.myChart.resize();
+    })
   }
 }
 </script>

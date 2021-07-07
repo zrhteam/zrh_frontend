@@ -33,13 +33,10 @@ import {bar_option} from "@/utils/constants";
 
 export default {
   name: "CheckedProject",
-  // data() {
-  //   return {
-  //     PrjRiskLevelData: []
-  //   }
-  // },
   data() {
-    return {}
+    return {
+      myChart: null
+    }
   },
   computed: {
     getPrjRiskLevelData() {
@@ -105,18 +102,33 @@ export default {
   // },
   methods: {
     drawBarChart(){
-      let myChart = this.$echarts.init(document.getElementById('risk_level'))
+      if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+          this.myChart.dispose() // 销毁
+      }
+      this.myChart = this.$echarts.init(document.getElementById('risk_level'))
       let arr = this.getPrjRiskLevelData
       // console.log("检查1",bar_option)
       // bar_option["dataset"]["dimensions"] = ['risk', 'num']
       bar_option["dataset"]["source"] = arr
       // console.log("检查2",bar_option)
-      myChart.setOption(bar_option);
-      myChart.resize();
+      this.myChart.setOption(bar_option);
+      this.myChart.resize();
       window.addEventListener('resize', function (){
-        myChart.resize();
+        this.myChart.resize();
       })
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+        this.myChart.resize();
+      });
   }
   // }
 }

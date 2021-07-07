@@ -439,6 +439,9 @@ export default {
     // this.$store.dispatch('get_screen/getHeadScreenMajorStageInfo')
     // this.$store.dispatch('get_screen/getHeadScreenAreaNumber')
     // this.$store.dispatch('get_screen/getHeadScreenTable')
+  },
+  destroyed() {
+    clearInterval(this.timer)
   }
 }
 </script>

@@ -17,7 +17,8 @@ export default {
       rosePie: null,
       myChart: null,
       renderSign: false,
-      pie_data: []
+      pie_data: [],
+      timer: null
     }
   },
   computed: {
@@ -97,12 +98,15 @@ export default {
     }
   },
   mounted() {
+    if(this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+      this.myChart.dispose() // 销毁
+    }
     this.rosePie = this.$refs.rosePie;
     this.myChart = this.$echarts.init(this.rosePie)
 
     this.drawBarChart()
 
-    setInterval(() => {
+    this.timer = setInterval(() => {
       var option1 = this.myChart.getOption();
       this.myChart.clear();
       this.myChart.setOption(option1);
@@ -116,6 +120,19 @@ export default {
       this.drawBarChart()
     }
   },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+        this.myChart.resize();
+      });
+    clearInterval(this.timer)
+  }
 }
 </script>
 

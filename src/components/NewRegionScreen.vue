@@ -487,6 +487,9 @@ export default {
     // this.$store.dispatch('get_screen/getRegionScreenMajorStageInfo')
     // this.$store.dispatch('get_screen/getRegionScreenAreaNumber')
     // this.$store.dispatch('get_screen/getRegionScreenTable')
+  },
+  destroyed() {
+    clearInterval(this.timer)
   }
 }
 </script>

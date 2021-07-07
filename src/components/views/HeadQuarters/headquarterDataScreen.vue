@@ -287,9 +287,10 @@ export default {
         this.isFirst = false
         this.isSecond = true
       }
-      setTimeout(function () {
+      let timer = setTimeout(function () {
         document.getElementById('head_small').style.display = 'block'
       }, 100);
+      clearTimeout(timer)
     }
   },
   computed: {

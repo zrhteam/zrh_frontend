@@ -244,6 +244,11 @@ export default {
     window.addEventListener("beforeunload", () => {
       sessionStorage.clear();
     })
+  },
+  destroyed() {
+    window.removeEventListener("beforeunload", () => {
+      sessionStorage.clear();
+    })
   }
 }
 </script>

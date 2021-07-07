@@ -179,6 +179,9 @@ export default {
   },
   destroyed() {
     window.removeEventListener('popstate', this.goBack, false);
+    window.removeEventListener("unload", () => {
+      this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
+    }, true)
   },
   created() {
     // if (!sessionStorage.getItem("prjMsg")) {

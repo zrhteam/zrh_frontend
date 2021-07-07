@@ -19,7 +19,8 @@ export default {
   name: "CheckRiskLevelYear",
   data() {
     return {
-      check_level_year: []
+      check_level_year: [],
+      myChart: null
     }
   },
   computed: {
@@ -46,7 +47,10 @@ export default {
       }
     },
     drawBarChart() {
-      let myChart = this.$echarts.init(document.getElementById('check_level_year'))
+      if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+        this.myChart.dispose() // 销毁
+      }
+      this.myChart = this.$echarts.init(document.getElementById('check_level_year'))
       let arr = this.check_level_year
       let option = {
         legend: {},
@@ -119,12 +123,24 @@ export default {
       };
 
       // bar_option["dataset"]["source"] = arr
-      myChart.setOption(option);
-      myChart.resize();
+      this.myChart.setOption(option);
+      this.myChart.resize();
       window.addEventListener('resize', function () {
-        myChart.resize();
+        this.myChart.resize();
       })
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener('resize', function () {
+      this.myChart.resize();
+    })
   }
 }
 </script>

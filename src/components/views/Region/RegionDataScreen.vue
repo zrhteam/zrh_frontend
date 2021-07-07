@@ -303,9 +303,10 @@ export default {
         this.isFirst = false
         this.isSecond = true
       }
-      setTimeout(function () {
+      let timer = setTimeout(function () {
         document.getElementById('region_small').style.display = 'block'
       }, 100);
+      clearTimeout(timer)
     },
     addScreen() {
       // let node2 = document.getElementById('test1')

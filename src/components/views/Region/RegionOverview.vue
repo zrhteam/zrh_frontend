@@ -154,7 +154,6 @@
 
 <script>
 import Region1_4 from "@/components/views/Region/Region1_4.vue";
-import Region3_3 from "@/components/views/Region/Region3_3.vue";
 import Region2_3 from "@/components/views/Region/Region2_3.vue";
 import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
@@ -177,7 +176,6 @@ export default {
     Region1_4,
     Region2_1,
     Region2_3,
-    Region3_3,
     RegionDataScreen,
     Tree,
     RiskLevelYear,

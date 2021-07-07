@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
+           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
     <div style="display: none">
       {{ getRiskNumberTop }}
     </div>
@@ -51,6 +51,7 @@ function sortNumber(attr, rev) {
     return 0;
   }
 }
+
 export default {
   name: "Region3_1",
   data() {
@@ -58,8 +59,8 @@ export default {
       riskNumberTop: [],
     }
   },
-    mounted() {
-    this.timer =setInterval(this.updateTable, 1000);
+  mounted() {
+    this.timer = setInterval(this.updateTable, 1000);
   },
   computed: {
     getRiskNumberTop() {
@@ -85,24 +86,25 @@ export default {
     }
   },
   methods: {
-    updateTable(){
+    updateTable() {
       let first = this.riskNumberTop[0];
       this.riskNumberTop.shift();
       this.riskNumberTop.push(first);
     },
-    beforeDestroy(){
-      clearInterval(this.timer);
-    },
-  }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
 }
 </script>
 
 <style scoped>
 /*最外层透明*/
-/deep/ .el-table, /deep/ .el-table__expanded-cell{
+/deep/ .el-table, /deep/ .el-table__expanded-cell {
 
   background-color: transparent;
 }
+
 /* 表格内背景颜色 */
 /deep/ .el-table th,
 /deep/ .el-table tr,

@@ -107,7 +107,6 @@ import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import Region2_2 from "@/components/views/Region/Region2_2.vue";
 import Region2_3 from "@/components/views/Region/Region2_3.vue";
 import Region3_1 from "@/components/views/Region/Region3_1.vue";
-import Region3_2 from "@/components/views/Region/Region3_2.vue";
 import Region3_3 from "@/components/views/Region/Region3_3.vue";
 import RegionOverview from "@/components/views/Region/RegionOverview.vue";
 
@@ -116,7 +115,6 @@ export default {
   components: {
     RegionOverview,
     Region3_3,
-    Region3_2,
     Region3_1,
     Region2_3,
     Region2_2,
@@ -131,11 +129,12 @@ export default {
   methods: {
     selfAdaption() {
       let _this = this;
-      setTimeout(() => {
+      let timer = setTimeout(() => {
         window.addEventListener('resize', function () {
           _this.$refs.echarts.resize();
         })
       }, 10)
+      clearTimeout(timer)
     },
     goBack() {
       this.$router.replace({path: '/'});
