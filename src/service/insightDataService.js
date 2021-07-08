@@ -3,7 +3,7 @@ import axios from 'axios'
 
 Vue.prototype.axios = axios
 
-const dataServerUrl
+const insightDataServiceUrl
     = "http://localhost:5000/api/analyze/insight_func";
 
 const $http = Vue.http;
@@ -15,9 +15,9 @@ const $http = Vue.http;
  * Parameter:    check_key, start, end, flag
  * Return:       红线json
  */
-function getAnalyzeRedlineData(callback) {
-    const url = `${dataServerUrl}/red_line`;
-    axios.post(url)
+function getAnalyzeRedlineData(params,callback) {
+    const url = `${insightDataServiceUrl}/red_line`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })
@@ -33,9 +33,9 @@ function getAnalyzeRedlineData(callback) {
  * Parameter:    headquarter_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeTendencyHeadquarter(callback) {
-    const url = `${dataServerUrl}/tendency_headquarter`;
-    axios.post(url)
+function getAnalyzeTendencyHeadquarter(params,callback) {
+    const url = `${insightDataServiceUrl}/tendency_headquarter`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })
@@ -51,9 +51,9 @@ function getAnalyzeTendencyHeadquarter(callback) {
  * Parameter:    headquarter_name/region_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeTendencyRegion(callback) {
-    const url = `${dataServerUrl}/tendency_region`;
-    axios.post(url)
+function getAnalyzeTendencyRegion(params,callback) {
+    const url = `${insightDataServiceUrl}/tendency_region`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })
@@ -69,9 +69,9 @@ function getAnalyzeTendencyRegion(callback) {
  * Parameter:    headquarter_name/region_name/project_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeTendencyProject(callback) {
-    const url = `${dataServerUrl}/tendency_project`;
-    axios.post(url)
+function getAnalyzeTendencyProject(params,callback) {
+    const url = `${insightDataServiceUrl}/tendency_project`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })
@@ -87,9 +87,9 @@ function getAnalyzeTendencyProject(callback) {
  * Parameter:    Profession_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeTendencyProfession(callback) {
-    const url = `${dataServerUrl}/tendency_profession`;
-    axios.post(url)
+function getAnalyzeTendencyProfession(params,callback) {
+    const url = `${insightDataServiceUrl}/tendency_profession`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })
@@ -105,9 +105,9 @@ function getAnalyzeTendencyProfession(callback) {
  * Parameter:    headquarter_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeRatioHeadquarter(callback) {
-    const url = `${dataServerUrl}/ratio_headquarter`;
-    axios.post(url)
+function getAnalyzeRatioHeadquarter(params,callback) {
+    const url = `${insightDataServiceUrl}/ratio_headquarter`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })
@@ -123,9 +123,9 @@ function getAnalyzeRatioHeadquarter(callback) {
  * Parameter:    headquarter_name/region_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeRatioRegion(callback) {
-    const url = `${dataServerUrl}/ratio_region`;
-    axios.post(url)
+function getAnalyzeRatioRegion(params,callback) {
+    const url = `${insightDataServiceUrl}/ratio_region`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })
@@ -141,9 +141,9 @@ function getAnalyzeRatioRegion(callback) {
  * Parameter:    headquarter_name/region_name/project_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeRatioProject(callback) {
-    const url = `${dataServerUrl}/ratio_project`;
-    axios.post(url)
+function getAnalyzeRatioProject(params,callback) {
+    const url = `${insightDataServiceUrl}/ratio_project`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })
@@ -159,9 +159,9 @@ function getAnalyzeRatioProject(callback) {
  * Parameter:    Profession_name, major_name, start, end
  * Return:       json
  */
-function getAnalyzeRatioProfession(callback) {
-    const url = `${dataServerUrl}/ratio_profession`;
-    axios.post(url)
+function getAnalyzeRatioProfession(params,callback) {
+    const url = `${insightDataServiceUrl}/ratio_profession`;
+    axios.post(url, params)
         .then(response => {
             callback(response.data)
         })

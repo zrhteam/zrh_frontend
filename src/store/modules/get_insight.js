@@ -3,7 +3,9 @@ import insightDataService from "@/service/insightDataService";
 
 const state = {
     // 向后端发送的数据
-    params: {},
+    params: {},     // 红线
+    params1: {},    // 趋势
+    params2: {},    // 隐患各风险等级占比
     // 15组红线数据
     red_line_data: {},
     // 总部趋势
@@ -28,6 +30,12 @@ const getters = {
     // 向后端发送的数据
     renderParams(state) {
         return state.params
+    },
+    renderParams1(state) {
+        return state.params1
+    },
+    renderParams2(state) {
+        return state.params2
     },
     // 15组红线数据
     renderRedLineData(state) {
@@ -76,49 +84,49 @@ const actions = {
     },
     // 总部趋势
     getAnalyzeTendencyHeadquarter(context) {
-        insightDataService.getAnalyzeTendencyHeadquarter(context.state.params, function (response) {
+        insightDataService.getAnalyzeTendencyHeadquarter(context.state.params1, function (response) {
             context.commit('changeAnalyzeTendencyHeadquarter', response)
         })
     },
     // 区域趋势
     getAnalyzeTendencyRegion(context) {
-        insightDataService.getAnalyzeTendencyRegion(context.state.params, function (response) {
+        insightDataService.getAnalyzeTendencyRegion(context.state.params1, function (response) {
             context.commit('changeAnalyzeTendencyRegion', response)
         })
     },
     // 项目趋势
     getAnalyzeTendencyProject(context) {
-        insightDataService.getAnalyzeTendencyProject(context.state.params, function (response) {
+        insightDataService.getAnalyzeTendencyProject(context.state.params1, function (response) {
             context.commit('changeAnalyzeTendencyProject', response)
         })
     },
     // 行业趋势
     getAnalyzeTendencyProfession(context) {
-        insightDataService.getAnalyzeTendencyProfession(context.state.params, function (response) {
+        insightDataService.getAnalyzeTendencyProfession(context.state.params1, function (response) {
             context.commit('changeAnalyzeTendencyProfession', response)
         })
     },
     // 总部 隐患各风险等级占比
     getAnalyzeRatioHeadquarter(context) {
-        insightDataService.getAnalyzeRatioHeadquarter(context.state.params, function (response) {
+        insightDataService.getAnalyzeRatioHeadquarter(context.state.params2, function (response) {
             context.commit('changeAnalyzeRatioHeadquarter', response)
         })
     },
     // 区域 隐患各风险等级占比
     getAnalyzeRatioRegion(context) {
-        insightDataService.getAnalyzeRatioRegion(context.state.params, function (response) {
+        insightDataService.getAnalyzeRatioRegion(context.state.params2, function (response) {
             context.commit('changeAnalyzeRatioRegion', response)
         })
     },
     // 项目 隐患各风险等级占比
     getAnalyzeRatioProject(context) {
-        insightDataService.getAnalyzeRatioProject(context.state.params, function (response) {
+        insightDataService.getAnalyzeRatioProject(context.state.params2, function (response) {
             context.commit('changeAnalyzeRatioProject', response)
         })
     },
     // 行业 隐患各风险等级占比
     getAnalyzeRatioProfession(context) {
-        insightDataService.getAnalyzeRatioProfession(context.state.params, function (response) {
+        insightDataService.getAnalyzeRatioProfession(context.state.params2, function (response) {
             context.commit('changeAnalyzeRatioProfession', response)
         })
     }
@@ -128,6 +136,12 @@ const mutations = {
     // 向后端发送的数据
     changeParams(state, data) {
         state.params = data.params
+    },
+    changeParams1(state, data) {
+        state.params1 = data.params1
+    },
+    changeParams2(state, data) {
+        state.params2 = data.params2
     },
     // 15组红线数据
     changeAnalyzeRedlineData(state, data) {
