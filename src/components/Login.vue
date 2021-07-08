@@ -216,7 +216,7 @@ export default {
           // this.$router.push({path: '/analyze'});
         }
       } else {
-        alert("出错了")
+        alert("用户名或密码错误")
       }
 
     }
