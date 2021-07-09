@@ -7,8 +7,13 @@
       :header-cell-style="{color: '#fff'}"
       :show-header="true"
       :cell-class-name="cellClassName"
+      :row-class-name="rowClassName"
       stripe
   >
+    <el-table-column v-if="this.showRank == 'true'" type="index"
+                     :width="60"
+                     align="left" style="overflow: hidden">
+    </el-table-column>
     <el-table-column v-for="(th, key) in tableHeader"
                      :key="key"
                      :prop="th.prop"
@@ -45,6 +50,18 @@ export default {
       default: function () {
         return Function
       }
+    },
+    rowClassName: {
+      type: Function,
+      default: function () {
+        return Function
+      }
+    },
+    showRank: {
+      type: String,
+      default: function () {
+        return 'false'
+      }
     }
   },
   mounted() {
@@ -53,16 +70,28 @@ export default {
     // 拿到表格中承载数据的div元素
     const divData = table.bodyWrapper
     // 拿到元素后，对元素进行定时增加距离顶部距离，实现滚动效果(此配置为每100毫秒移动1像素)
+    let flag = false
     setInterval(() => {
       // 元素自增距离顶部1像素
-      divData.scrollTop += 1
-      // 判断元素是否滚动到底部(可视高度+距离顶部=整个高度)
-      if (divData.clientHeight + divData.scrollTop == divData.scrollHeight) {
-        // 重置table距离顶部距离
+      let height = divData.offsetTop
+      divData.scrollTop += height
+      if (flag == true) {
         divData.scrollTop = 0
+        flag = false
       }
-    }, 100)
-  }
+      // 判断元素是否滚动到底部(可视高度+距离顶部=整个高度)
+      if (divData.clientHeight + divData.scrollTop > divData.scrollHeight) {
+        // 重置table距离顶部距离
+        // divData.scrollTop = 0
+        // divData.scrollTop += height
+        flag = true
+      }
+      // if (divData.scrollTop % divData.offsetTop == 0) {debugger
+      //   setTimeout(() => {
+      //   }, 1000)
+      // }
+    }, 1000)
+  },
 }
 </script>
 

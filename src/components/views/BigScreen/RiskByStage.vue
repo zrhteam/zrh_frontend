@@ -128,14 +128,14 @@ export default {
           },
           itemHeight: this.fontSize(0.10),
           itemGap: this.fontSize(0.10),
-          type: "scroll",
+          // type: "scroll",
           show: true
         },
         grid: {
-          left: this.fontSize(0.45),
+          left: this.fontSize(0.25),
           top: this.fontSize(0.15),
           right: this.fontSize(0.55),
-          bottom: this.fontSize(0.35),
+          bottom: this.fontSize(0.45),
           containLabel: true
         },
         xAxis: {

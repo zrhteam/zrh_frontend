@@ -26,7 +26,9 @@ import {bar_option3} from "@/utils/constants";
 export default {
   name: "HighProjectRisk",
   data() {
-    return {}
+    return {
+      myChart: null
+    }
   },
   computed: {
     getNumberHistogram() {
@@ -88,21 +90,21 @@ export default {
     drawBarChart() {
       this.$nextTick(_ => {
         if (this.getNumberHistogram.length != 0) {
-          let myChart = this.$echarts.init(document.getElementById('number_histogram'))
+          this.myChart = this.$echarts.init(document.getElementById('number_histogram'))
           // 使用刚指定的配置项和数据显示图表。
-          myChart.setOption(bar_option3);
-          myChart.resize();
+          this.myChart.setOption(bar_option3);
+          this.myChart.resize();
           window.addEventListener('resize', () => {
-            myChart.resize();
+            this.myChart.resize();
           })
           const _this = this;
         } else if ('number_histogram') {
           this.$nextTick(() => {
-            const dom = document.getElementById('number_histogram')
-            dom.innerHTML = '暂无数据'
-            dom.style.color = '#ffffff'
-            dom.style.fontSize = '14px'
-            dom.removeAttribute("_echarts_instance_")
+            this.myChart = document.getElementById('number_histogram')
+            this.myChart.innerHTML = '暂无数据'
+            this.myChart.style.color = '#ffffff'
+            this.myChart.style.fontSize = '14px'
+            this.myChart.removeAttribute("_echarts_instance_")
           })
         }
       })
@@ -202,9 +204,8 @@ export default {
     }
   },
   destroyed() {
-    let myChart = this.$echarts.init(document.getElementById('number_histogram'))
-    window.addEventListener('resize', function () {
-      myChart.resize();
+    window.removeEventListener('resize', function () {
+      this.myChart.resize();
     })
   }
 }

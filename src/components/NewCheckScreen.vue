@@ -4,7 +4,7 @@
       <!--      <el-col :span="24">-->
       <div
           style="position: absolute !important; width: 700px; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
-        <div class="title">检查实时隐患监控大屏</div>
+        <div class="title" style="width: 8.75rem; height: 100%;">检查实时隐患监控大屏</div>
       </div>
       <div
           style="position: absolute !important; width: 8.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem">
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div style="position: absolute !important; width: 6.8rem; height: 0.7rem; left: 23.1rem; top: 40%;">
-        <el-button class="date" round size="mini" @click="quitCheckScreen" style="z-index: 999;top: 40%">退出</el-button>
+        <el-button class="title" round size="mini" @click="quitCheckScreen" style="z-index: 999;top: 40%">退出</el-button>
       </div>
       <!--      </el-col>-->
     </el-row>
@@ -229,7 +229,8 @@
         <div class="record">
           <div class="record-wrapper">
             <RecordList2 ref="rl" :recordList="recordList" :tableHeight="tableHeight"
-                         :tableHeader="tableHeader" :cellClassName="cellClassName"></RecordList2>
+                         :tableHeader="tableHeader" :cellClassName="cellClassName" :rowClassName="rowClassName"
+                         showRank="true"></RecordList2>
           </div>
         </div>
       </el-col>
@@ -292,17 +293,17 @@ export default {
       low_risk: 0,
       tableHeight: '100%',
       tableHeader: [
-        {prop: 'note', label: '问题描述', width: "170"},
+        {prop: 'note', label: '问题描述', width: "260"},
         {prop: 'risk_level', label: '风险等级', width: "80"},
         {prop: 'position', label: '隐患位置', width: "90"},
         {prop: 'major_name', label: '专业', width: "90"},
         {prop: 'stage', label: '致因阶段', width: "80"},
         {prop: 'area', label: '分布区域', width: "80"},
-        {prop: 'rule_name', label: '法规名称', width: "180"},
+        {prop: 'rule_name', label: '法规名称', width: "260"},
         {prop: 'clause', label: '相关条款', width: "80"},
-        {prop: 'clause_contact', label: '条款内容'},
+        // {prop: 'clause_contact', label: '条款内容'},
         {prop: 'create_time', label: '录入时间', width: "150"},
-        {prop: 'recorder', label: '录入人员', width: "80"},
+        {prop: 'recorder', label: '录入人员'},
       ],
       fire_num: 0,
       lift_num: 0,
@@ -405,6 +406,13 @@ export default {
         return "CellRule"
       else if (column.property == 'clause_contact')
         return "CellClauseContact"
+    },
+    rowClassName(row) {
+      if (row.rowIndex % 2 == 0) {
+        return "even-stripe"
+      } else {
+        return "odd-stripe"
+      }
     },
     setNowTimes() {
       let myDate = new Date();
@@ -583,8 +591,6 @@ export default {
 }
 
 .title {
-  width: 700px;
-  height: 100%;
   pointer-events: auto;
   display: flex;
   align-items: center;
@@ -646,8 +652,8 @@ export default {
 /* 表格内背景颜色 */
 /deep/ .el-table th {
 
-  background-color: #873b0e;
-  border-color: #873b0e;
+  background-color: rgba(255, 99, 0, 0.5);
+  border-color: rgba(255, 99, 0, 0.5);
 
 }
 
@@ -659,14 +665,27 @@ export default {
   color: #ffffff;
 }
 
-/*自定义斑马线颜色*/
-/deep/ .el-table--striped .el-table__body tr.el-table__row--striped td {
-  background-color: rgba(44, 54, 67, 0.5);
+/*!*自定义斑马线颜色*!*/
+/*/deep/ .el-table--striped .el-table__body tr.el-table__row--striped td {*/
+/*  background-color: rgba(0, 0, 0, 0.3);*/
+/*}*/
+
+/deep/ .el-table--striped .el-table__body tr.el-table__row.even-stripe td {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/deep/ .el-table--striped .el-table__body tr.el-table__row--striped.odd-stripe td {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 /deep/ .el-table td .cell {
   overflow: hidden;
   z-index: 2;
+  font-size: 12px;
+  -webkit-transform-origin-x: 0; /*缩小后文字居左 */
+  -webkit-transform: scale(0.80); /* 关键*/
+  margin-right: 0;
+  padding-right: 0;
 }
 
 /deep/ .CellNote {
@@ -785,5 +804,11 @@ export default {
 /deep/ .el-button {
   background: transparent !important;
   color: #ffffff;
+  height: 0.3rem;
+}
+
+/deep/ .el-button span {
+  font-size: 12px;
+  text-align: center;
 }
 </style>

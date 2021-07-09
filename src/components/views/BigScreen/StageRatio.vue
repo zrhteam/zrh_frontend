@@ -49,9 +49,13 @@ export default {
       let pie_option = {
         legend: {
           top: 'bottom',
+          icon: 'circle',
+          itemHeight: this.fontSize(0.10),
+          itemGap: this.fontSize(0.10),
           formatter: null,
           textStyle: {
             color: '#ffffff',
+            fontSize: this.fontSize(0.1),
           },
         },
         toolbox: {
@@ -65,12 +69,17 @@ export default {
           {
             name: '面积模式',
             type: 'pie',
-            radius: ['45%', '70%'],
-            center: ['50%', '45%'],
+            radius: ['35%', '55%'],
+            center: ['50%', '40%'],
             roseType: 'area',
             label: {
               color: '#fff',
               formatter: '{d}% '
+            },
+            labelLine: {
+              normal: {
+                length: 3
+              }
             },
             itemStyle: {
               borderRadius: 0,
@@ -95,10 +104,17 @@ export default {
       window.addEventListener("resize", () => {
         this.myChart.resize();
       });
-    }
+    },
+    fontSize(res) {
+      let docEl = document.documentElement,
+          clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      if (!clientWidth) return;
+      let fontSize = 100 * (clientWidth / 1920);
+      return res * fontSize;
+    },
   },
   mounted() {
-    if(this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁
     }
     this.rosePie = this.$refs.rosePie;
@@ -129,8 +145,8 @@ export default {
   },
   destroyed() {
     window.removeEventListener("resize", () => {
-        this.myChart.resize();
-      });
+      this.myChart.resize();
+    });
     clearInterval(this.timer)
   }
 }

@@ -50,7 +50,7 @@
         <div class="record">
           <div class="record-wrapper">
             <RecordList2 ref="rl" :recordList="recordList" :tableHeight="tableHeight"
-                         :tableHeader="tableHeader" :cellClassName="cellClassName"></RecordList2>
+                         :tableHeader="tableHeader" :cellClassName="cellClassName" showRank="true"></RecordList2>
           </div>
         </div>
       </el-row>
@@ -69,7 +69,7 @@
         <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
           <div class="box2" style="width: 100%; height: 100%;">
             <RecordList2 ref="rl2" :recordList="recordRank" :tableHeight="tableHeight"
-                         :tableHeader="tableHeader2"></RecordList2>
+                         :tableHeader="tableHeader2" showRank="false"></RecordList2>
           </div>
         </div>
       </el-row>
@@ -585,6 +585,9 @@ export default {
 /deep/ .el-table td .cell {
   overflow: hidden;
   z-index: 2;
+  font-size: 12px;
+  -webkit-transform-origin-x: 0; /*缩小后文字居左 */
+  -webkit-transform: scale(0.80); /* 关键*/
 }
 
 /deep/ .CellNote {
@@ -658,5 +661,6 @@ export default {
 /deep/ .el-button{
   background: transparent !important;
   color: #ffffff;
+  height: 0.3rem;
 }
 </style>
