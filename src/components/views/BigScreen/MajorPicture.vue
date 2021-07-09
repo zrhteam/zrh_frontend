@@ -10,8 +10,8 @@
     </div>
     <div class="slide">
       <div class="slide-wrapper" ref="major">
-        <el-carousel indicator-position="none" :interval="3000" :height="dataHeight">
-          <el-carousel-item v-for='item in img_list'>
+        <el-carousel indicator-position="none" :interval="2000" :height="dataHeight">
+          <el-carousel-item v-for='item in img_list' :key="item.url">
             <div style="height: 100%">
               <div
                   style="position: absolute; width: 100%; min-height: 20px; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3; background-color: rgba(33, 32, 30, 0.5);">
@@ -21,6 +21,11 @@
             </div>
           </el-carousel-item>
         </el-carousel>
+<!--        <el-carousel indicator-position="outside" :height="dataHeight">-->
+<!--    <el-carousel-item v-for="item in 4" :key="item">-->
+<!--      <h3>{{ item }}</h3>-->
+<!--    </el-carousel-item>-->
+<!--  </el-carousel>-->
       </div>
     </div>
   </div>
@@ -54,6 +59,7 @@ export default {
       }
 
       if (this.context.sign == "project-fire" || this.context.sign == "check-fire") {
+        this.img_list = []
         for (let i in data['消防专业']) {
           let obj = {
             url: '',
@@ -71,6 +77,7 @@ export default {
         data = this.$store.state.get_screen.checks_picture_note;
       }
       if (this.context.sign == "project-lift" || this.context.sign == "check-lift") {
+        this.img_list = []
         for (let i in data['电梯专业']) {
           let obj = {
             url: '',
@@ -88,6 +95,7 @@ export default {
         data = this.$store.state.get_screen.checks_picture_note;
       }
       if (this.context.sign == "project-electric" || this.context.sign == "check-electric") {
+        this.img_list = []
         for (let i in data['电气专业']) {
           let obj = {
             url: '',
@@ -105,6 +113,7 @@ export default {
         data = this.$store.state.get_screen.checks_picture_note;
       }
       if (this.context.sign == "project-fuel" || this.context.sign == "check-fuel") {
+        this.img_list = []
         for (let i in data['燃气专业']) {
           let obj = {
             url: '',
@@ -115,7 +124,7 @@ export default {
           this.img_list.push(obj)
         }
       }
-      if (typeof (data.image_list) != undefined) {
+      if (typeof (data.image_list) != undefined) {debugger
         if (this.img_list.length == 0) {
           this.$nextTick(_ => {
             this.$refs.major.innerHTML = '暂无数据'

@@ -11,7 +11,7 @@
       stripe
   >
     <el-table-column v-if="this.showRank == 'true'" type="index"
-                     :width="60"
+                     :width="45"
                      align="left" style="overflow: hidden">
     </el-table-column>
     <el-table-column v-for="(th, key) in tableHeader"
@@ -80,7 +80,7 @@ export default {
         flag = false
       }
       // 判断元素是否滚动到底部(可视高度+距离顶部=整个高度)
-      if (divData.clientHeight + divData.scrollTop > divData.scrollHeight) {
+      if (divData.clientHeight + divData.scrollTop + 1 > divData.scrollHeight) {
         // 重置table距离顶部距离
         // divData.scrollTop = 0
         // divData.scrollTop += height

@@ -102,18 +102,19 @@ export default {
       nowTime: "",
       tableHeight: '100%',
       tableHeader: [
-        {prop: 'note', label: '问题描述', width: "270"},
+        {prop: 'note', label: '问题描述', width: "300"},
         {prop: 'risk_level', label: '风险等级', width: "80"},
-        {prop: 'major_name', label: '专业', width: "90"},
+        {prop: 'major_name', label: '专业', width: "80"},
         {prop: 'stage', label: '致因阶段', width: "80"},
         {prop: 'area', label: '分布区域', width: "80"},
-        {prop: 'rule_name', label: '法规名称'},
-        {prop: 'clause_contact', label: '条款内容'},
+        {prop: 'rule_name', label: '法规名称', width: "260"},
+        // {prop: 'clause_contact', label: '条款内容'},
+        {prop: 'clause', label: '相关条款'},
       ],
       tableHeader2: [
-        {prop: 'rank', label: '', width: "60"},
-        {prop: 'check_name', label: '项目名称', width: "200"},
-        {prop: 'appear_time', label: '隐患数量', width: ""},
+        {prop: 'rank', label: '', width: "45"},
+        {prop: 'appear_time', label: '隐患数量', width: "80"},
+        {prop: 'check_name', label: '项目名称'},
       ],
       renderSign1: false,
       riskName1: "不同专业",
@@ -588,6 +589,8 @@ export default {
   font-size: 12px;
   -webkit-transform-origin-x: 0; /*缩小后文字居左 */
   -webkit-transform: scale(0.80); /* 关键*/
+  margin-right: 0;
+  padding-right: 0;
 }
 
 /deep/ .CellNote {

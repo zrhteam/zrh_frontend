@@ -364,7 +364,7 @@ export default {
           numArr.forEach(e => {
             numStr += `<span class="number">${e}</span>`;
           })
-          setInterval(() => {
+          setTimeout(() => {
             this.$nextTick(_ => {
               //拼接完字符串数组后用innerHTML把它渲染到页面中
               document.getElementById("check-real-number").innerHTML = numStr
