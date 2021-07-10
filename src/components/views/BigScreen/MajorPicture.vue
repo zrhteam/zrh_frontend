@@ -2,7 +2,7 @@
   <div>
     <div class="main-title">
       <div style="display: none">
-<!--        {{ getPrjImage }}-->
+        <!--        {{ getPrjImage }}-->
       </div>
       <div class="title-wrapper">
         {{ major_name }}专业-实时隐患图片
@@ -44,9 +44,19 @@ export default {
       type: Object
     },
     pictureData: {
-      type: []
+      type: Array,
+      default: null
     }
   },
+  watch: {
+    pictureData() {
+      if (this.pictureData.length == 0) {
+        this.$nextTick(_ => {
+          this.$refs.major.innerHTML = '暂无数据'
+        })
+      }
+    }
+  }
 }
 </script>
 

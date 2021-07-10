@@ -164,7 +164,6 @@ export default {
         if(this.year_copy != '') {
           yy = this.year_copy
         }
-        console.log(this.year_copy)
         this.bar_data = []
         let flag = false
         if (data[yy] == undefined) {

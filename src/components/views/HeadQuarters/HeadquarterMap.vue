@@ -88,8 +88,8 @@ export default {
                 show: true, // 是否显示对应地名
                 textStyle: {
                   color: '#ffffff',
-                  fontsize: 6
-                }
+                  fontSize: 8
+                },
               }
             },
             itemStyle: {

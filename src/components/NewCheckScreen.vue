@@ -340,9 +340,11 @@ export default {
     },
     getRisk() {
       let data = this.$store.state.get_screen.checks_risk_level
-      this.high_risk = data.risk_level_ratio['3']
-      this.mid_risk = data.risk_level_ratio['2']
-      this.low_risk = data.risk_level_ratio['1']
+      if (typeof(data.risk_level_ratio) != "undefined") {
+        this.high_risk = data.risk_level_ratio['3']
+        this.mid_risk = data.risk_level_ratio['2']
+        this.low_risk = data.risk_level_ratio['1']
+      }
     },
     getMajor() {
       let data = this.$store.state.get_screen.checks_risk_num_rank

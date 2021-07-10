@@ -105,7 +105,9 @@ export default {
 
         this.myChart.resize();
         window.addEventListener('resize', function () {
-          this.myChart.resize();
+          if (this.myChart) {
+            this.myChart.resize();
+          }
         })
       } else if (document.getElementById("pie2_2")) {
         this.$nextTick(() => {

@@ -51,7 +51,7 @@ exports.install = function (Vue, options) {
         //该检查中在不同专业下属于不同隐患子系统的隐患数量
         this.$store.commit('get_headquarter/changeParam2', {params: param2})
         //封装查询的专业，是初始的全部专业还是某专业
-        this.$store.commit('get_headquarter/changeFilterMajor',{data: "全部专业"})
+        this.$store.commit('get_headquarter/changeFilterMajor', {data: "全部专业"})
         this.$store.dispatch('get_headquarter/getHeadAreaRatio')
         // 展示按照项目数量对区域排名
         this.$store.dispatch('get_headquarter/getHeadProjectRank')
@@ -117,7 +117,7 @@ exports.install = function (Vue, options) {
         //该检查中在不同专业下属于不同隐患子系统的隐患数量
         this.$store.commit('get_region/changeParam2', {params: param2})
         //封装查询的专业，是初始的全部专业还是某专业
-        this.$store.commit('get_region/changeFilterMajor',{data: "全部专业"})
+        this.$store.commit('get_region/changeFilterMajor', {data: "全部专业"})
         //显示该区域不同专业下各系统隐患占比情况
         this.$store.dispatch('get_region/getRegionSystemRatio')
         //根据隐患数量显示不同致因阶段的占比情况
@@ -161,7 +161,7 @@ exports.install = function (Vue, options) {
         param2.append('project_name', project_name);
         param2.append('major', 'all');
         //封装查询的专业，是初始的全部专业还是某专业
-        this.$store.commit('get_project/changeFilterMajor',{data: "全部专业"})
+        this.$store.commit('get_project/changeFilterMajor', {data: "全部专业"})
         this.$store.commit('get_project/changeParam2', {params: param2})
         //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
         this.$store.dispatch('get_project/getInitProjectSystem')
@@ -233,7 +233,7 @@ exports.install = function (Vue, options) {
         param2.append('check_code', check_code);
         param2.append('major', 'all');
         //封装查询的专业，是初始的全部专业还是某专业
-        this.$store.commit('get_check/changeFilterMajor',{data: "全部专业"})
+        this.$store.commit('get_check/changeFilterMajor', {data: "全部专业"})
         //该检查中在不同专业下属于不同隐患子系统的隐患数量
         this.$store.commit('get_check/changeParam2', {params: param2})
         this.$store.dispatch('get_check/getCheckMajorSystem')
@@ -318,8 +318,16 @@ exports.install = function (Vue, options) {
                 // if (document.getElementById("prj_small").style.display === 'none') {//在主页面
                 document.getElementById("prj_subpart").style.display = 'none'
                 document.getElementById("prj_charts").style.display = 'none'
+
                 document.getElementById("check_charts").style.display = 'block'
                 document.getElementById("check_part").style.display = 'block'
+                document.getElementById('prj_charts').style.height = "500px"
+                document.getElementById('check_charts').style.height = "500px"
+                setTimeout(function () {
+                    document.getElementById('check_charts').style.height = "99%"
+                    document.getElementById('check_part').style.height = "99%"
+                }, 100)
+
                 // } else {
                 //     document.getElementById("prj_subpart").style.display = 'none'
                 //     document.getElementById("prj_charts").style.display = 'none'
