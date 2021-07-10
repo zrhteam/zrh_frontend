@@ -2,7 +2,7 @@
   <div>
     <div class="main-title">
       <div style="display: none">
-        {{ getPrjImage }}
+<!--        {{ getPrjImage }}-->
       </div>
       <div class="title-wrapper">
         {{ major_name }}专业-实时隐患图片
@@ -11,7 +11,7 @@
     <div class="slide">
       <div class="slide-wrapper" ref="major">
         <el-carousel indicator-position="none" :interval="2000" :height="dataHeight">
-          <el-carousel-item v-for='item in img_list' :key="item.url">
+          <el-carousel-item v-for='item in pictureData' :key="item.url">
             <div style="height: 100%">
               <div
                   style="position: absolute; width: 100%; min-height: 20px; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3; background-color: rgba(33, 32, 30, 0.5);">
@@ -21,11 +21,6 @@
             </div>
           </el-carousel-item>
         </el-carousel>
-<!--        <el-carousel indicator-position="outside" :height="dataHeight">-->
-<!--    <el-carousel-item v-for="item in 4" :key="item">-->
-<!--      <h3>{{ item }}</h3>-->
-<!--    </el-carousel-item>-->
-<!--  </el-carousel>-->
       </div>
     </div>
   </div>
@@ -47,93 +42,11 @@ export default {
     },
     context: {
       type: Object
+    },
+    pictureData: {
+      type: []
     }
   },
-  computed: {
-    getPrjImage() {
-      let data
-      if (this.context.sign == "project-fire") {
-        data = this.$store.state.get_screen.projects_picture_note;
-      } else if (this.context.sign == "check-fire") {
-        data = this.$store.state.get_screen.checks_picture_note;
-      }
-
-      if (this.context.sign == "project-fire" || this.context.sign == "check-fire") {
-        this.img_list = []
-        for (let i in data['消防专业']) {
-          let obj = {
-            url: '',
-            note: ''
-          }
-          obj['url'] = 'http://' + data['消防专业'][i]['image_url']
-          obj['note'] = data['消防专业'][i]['note']
-          this.img_list.push(obj)
-        }
-      }
-
-      if (this.context.sign == "project-lift") {
-        data = this.$store.state.get_screen.projects_picture_note;
-      } else if (this.context.sign == "check-lift") {
-        data = this.$store.state.get_screen.checks_picture_note;
-      }
-      if (this.context.sign == "project-lift" || this.context.sign == "check-lift") {
-        this.img_list = []
-        for (let i in data['电梯专业']) {
-          let obj = {
-            url: '',
-            note: ''
-          }
-          obj['url'] = 'http://' + data['电梯专业'][i]['image_url']
-          obj['note'] = data['电梯专业'][i]['note']
-          this.img_list.push(obj)
-        }
-      }
-
-      if (this.context.sign == "project-electric") {
-        data = this.$store.state.get_screen.projects_picture_note;
-      } else if (this.context.sign == "check-electric") {
-        data = this.$store.state.get_screen.checks_picture_note;
-      }
-      if (this.context.sign == "project-electric" || this.context.sign == "check-electric") {
-        this.img_list = []
-        for (let i in data['电气专业']) {
-          let obj = {
-            url: '',
-            note: ''
-          }
-          obj['url'] = 'http://' + data['电气专业'][i]['image_url']
-          obj['note'] = data['电气专业'][i]['note']
-          this.img_list.push(obj)
-        }
-      }
-
-      if (this.context.sign == "project-fuel") {
-        data = this.$store.state.get_screen.projects_picture_note;
-      } else if (this.context.sign == "check-fuel") {
-        data = this.$store.state.get_screen.checks_picture_note;
-      }
-      if (this.context.sign == "project-fuel" || this.context.sign == "check-fuel") {
-        this.img_list = []
-        for (let i in data['燃气专业']) {
-          let obj = {
-            url: '',
-            note: ''
-          }
-          obj['url'] = 'http://' + data['燃气专业'][i]['image_url']
-          obj['note'] = data['燃气专业'][i]['note']
-          this.img_list.push(obj)
-        }
-      }
-      if (typeof (data.image_list) != undefined) {debugger
-        if (this.img_list.length == 0) {
-          this.$nextTick(_ => {
-            this.$refs.major.innerHTML = '暂无数据'
-            // document.getElementById("major-picture").innerHTML
-          })
-        }
-      }
-    },
-  }
 }
 </script>
 

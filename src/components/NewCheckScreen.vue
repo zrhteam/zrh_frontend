@@ -242,7 +242,9 @@
               sign: 'check-fire',
               name: '消防'
             }"
-        ></MajorPicture>
+            :pictureData="fireData"
+        >
+        </MajorPicture>
       </el-row>
       <el-row style="height: 25%" class="boundary-A">
         <MajorPicture
@@ -250,6 +252,7 @@
               sign: 'check-lift',
               name: '电梯'
             }"
+            :pictureData="liftData"
         ></MajorPicture>
       </el-row>
       <el-row style="height: 25%" class="boundary-A">
@@ -258,6 +261,7 @@
               sign: 'check-electric',
               name: '电气'
             }"
+            :pictureData="electricData"
         ></MajorPicture>
       </el-row>
       <el-row style="height: 25%" class="boundary-A">
@@ -266,6 +270,7 @@
               sign: 'check-fuel',
               name: '燃气'
             }"
+            :pictureData="fuelData"
         ></MajorPicture>
       </el-row>
     </el-col>
@@ -313,7 +318,7 @@ export default {
         // {prop: 'position', label: '隐患位置', width: "80"},
         {prop: 'note', label: '隐患描述', width: "350"}
       ],
-      num_flag: false
+      num_flag: false,
     }
   },
   computed: {
@@ -345,6 +350,62 @@ export default {
       this.lift_num = data["电梯专业"]
       this.electric_num = data["电气专业"]
       this.fuel_num = data["燃气专业"]
+    },
+    fireData() {
+      let data = this.$store.state.get_screen.checks_picture_note;
+      let fire_list = []
+      for (let i in data['消防专业']) {
+        let obj = {
+          url: '',
+          note: ''
+        }
+        obj['url'] = 'http://' + data['消防专业'][i]['image_url']
+        obj['note'] = data['消防专业'][i]['note']
+        fire_list.push(obj)
+      }
+      return fire_list
+    },
+    liftData() {
+      let data = this.$store.state.get_screen.checks_picture_note;
+      let lift_list = []
+      for (let i in data['电梯专业']) {
+        let obj = {
+          url: '',
+          note: ''
+        }
+        obj['url'] = 'http://' + data['电梯专业'][i]['image_url']
+        obj['note'] = data['电梯专业'][i]['note']
+        lift_list.push(obj)
+      }
+      return lift_list
+    },
+    electricData() {
+      let data = this.$store.state.get_screen.checks_picture_note;
+      let electric_list = []
+      for (let i in data['电气专业']) {
+        let obj = {
+          url: '',
+          note: ''
+        }
+        obj['url'] = 'http://' + data['电气专业'][i]['image_url']
+        obj['note'] = data['电气专业'][i]['note']
+        electric_list.push(obj)
+      }
+      return electric_list
+    },
+    fuelData() {
+      let data = this.$store.state.get_screen.checks_picture_note;
+      let fuel_list = []
+      for (let i in data['燃气专业']) {
+        let obj = {
+          url: '',
+          note: ''
+        }
+        obj['url'] = 'http://' + data['燃气专业'][i]['image_url']
+        obj['note'] = data['燃气专业'][i]['note']
+        fuel_list.push(obj)
+      }
+      return fuel_list
     },
     getNumber() {
       var num = this.$store.state.get_screen.checks_risk_num.risk_num
