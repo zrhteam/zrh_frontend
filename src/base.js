@@ -59,8 +59,11 @@ exports.install = function (Vue, options) {
         // 按专业不同风险等级隐患数量
         this.$store.dispatch('get_headquarter/getHeadRiskLevelRatio')
 
-        //红线
-        this.$store.dispatch('get_headquarter/getHeadDangerProblem')
+        // //红线
+        // this.$store.dispatch('get_headquarter/getHeadDangerProblem')
+
+        // 总部下的项目名以及对应的经纬度
+        this.$store.dispatch('get_headquarter/getHeadProjectPosition')
     };
     Vue.prototype.regionNodeClick = function (region_name) {//全局函数2,点击树形控件的区域，查询该区域的大屏信息
         let param = new URLSearchParams();

@@ -392,9 +392,9 @@ export default {
       map_height: 0,
       timer: null,
       input: 'test',
-      title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
-      title2: this.$store.state.get_login.grant_data.data.region_tag,
-      title3: this.$store.state.get_login.grant_data.data.project_tag,
+      title1: this.$store.state.get_headquarter.head_name,
+      title2: this.$store.state.get_region.region_name,
+      title3: this.$store.state.get_project.prj_name,
       other_option: [{
         value: '高风险',
         key: 3

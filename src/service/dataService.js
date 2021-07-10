@@ -303,6 +303,24 @@ function getHeadRiskLevelRatio(param, callback) {
         })
 }
 
+//置地总部EHS数据大屏页面
+/*
+*FunctionName: getHeadProjectPosition
+* Purpose: 总部下的项目名以及对应的经纬度
+* Parameter: head_name
+* Return: 返回该总部不同风险等级隐患数量的json文件
+ */
+function getHeadProjectPosition(param, callback) {
+    const url = `${dataServerUrl}/headquarter/head_project_position`;
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 //地产事业部页面
 /*
 *FunctionName: getRegionInitIndex
@@ -1988,6 +2006,7 @@ export default {
     getHeadProjectRank,
     getHeadDangerProblem,
     getHeadRiskLevelRatio,
+    getHeadProjectPosition,
     getRegionInitIndex,
     getInitRegionRiskLevel,
     getRegionRiskLevelYear,

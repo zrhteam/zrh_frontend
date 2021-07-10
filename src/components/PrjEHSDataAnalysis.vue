@@ -156,7 +156,8 @@ export default {
   computed: {},
   methods: {
     goBack() {
-      this.$router.push({path: '/'});
+      // this.$router.push({path: '/'});
+      this.$router.go(-1)
     }
   },
   mounted() {

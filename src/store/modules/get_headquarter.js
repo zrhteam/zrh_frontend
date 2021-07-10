@@ -62,6 +62,9 @@ const state = {
     // //该总部下当前未整改的高风险隐患列表
     // risk_list: {},
     // data: []
+
+    // 总部下的项目名以及对应的经纬度
+    head_project_position: {}
 }
 
 //getters
@@ -123,7 +126,7 @@ const getters = {
         return key => {
             return state.rank_by_prj.find(item => item.chartKey === key)
         }
-    }
+    },
 
 
     // //承载变化的总部整改率
@@ -142,6 +145,11 @@ const getters = {
     // renderRiskList(state) {
     //     return state.risk_list;
     // }
+
+    // 总部下的项目名以及对应的经纬度
+    renderHeadProjectPosition(state) {
+        return state.head_area_ratio;
+    },
 }
 
 //actions
@@ -254,6 +262,13 @@ const actions = {
     //         context.commit('changeRiskLevelList', response)
     //     })
     // },
+
+    // 总部下的项目名以及对应的经纬度
+    getHeadProjectPosition(context) {
+        dataService.getHeadProjectPosition(state.params, function (response) {
+            context.commit('changeHeadProjectPosition', response)
+        })
+    },
 }
 
 //mutations
@@ -443,6 +458,15 @@ const mutations = {
     //         alert("出错了")
     //     }
     // },
+
+    // 总部下的项目名以及对应的经纬度
+    changeHeadProjectPosition(state, data) {
+        if (data.code === 10000) {
+            state.head_project_position = data.data;
+        } else {
+            alert("出错了")
+        }
+    },
 }
 
 export default {

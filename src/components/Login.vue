@@ -178,6 +178,9 @@ export default {
       if (data.code == 10000) {
         //项目级权限
         if (data.data.user_grant == '项目') {
+          this.$store.commit('get_project/changePrjName', {prj_name: this.$store.state.get_login.grant_data.data.project_tag})
+          this.$store.commit('get_region/changeRegionName', {region_name: this.$store.state.get_login.grant_data.data.region_tag})
+          this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
           this.$router.push({path: '/prj_data_analysis'});
           let data = {
             label: this.$store.state.get_login.grant_data.data.project_tag
@@ -189,6 +192,8 @@ export default {
           // this.$router.push({path: '/register'});
         }// 区域级权限
         else if (data.data.user_grant == '区域') {
+          this.$store.commit('get_region/changeRegionName', {region_name: this.$store.state.get_login.grant_data.data.region_tag})
+          this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
           this.$router.push({path: '/region_department'});
           let data = {
             label: this.$store.state.get_login.grant_data.data.region_tag
@@ -199,6 +204,7 @@ export default {
           this.handleTreeNodeClick(data, node)
         }// 总部级权限
         else if (data.data.user_grant == '总部') {
+          this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
           this.$router.push({path: '/land_headquarters'});
           let data = {
             label: this.$store.state.get_login.grant_data.data.headquarter_tag

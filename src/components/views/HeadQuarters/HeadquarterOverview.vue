@@ -57,7 +57,8 @@
               :currentNodeKey="currentNodeKey"
               @handleNodeClick="handleTrNodeClick"
               style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
-          >{{ getTreeData }}</Tree>
+          >{{ getTreeData }}
+          </Tree>
           <!--          <el-card class="box-card " shadow="never"-->
           <!--                   style="background-color: transparent; height: 10%; margin: 0px 5px 5px 5px">-->
           <el-button size="small" round
@@ -71,7 +72,7 @@
         </el-col>
         <el-row class="el-row" :gutter="10" type="flex" style="height: 60%; margin-top: 0.6rem; padding-left: 0.3rem">
           <el-col :span="12" class="">
-            <HeadquarterMap></HeadquarterMap>
+            <HeadquarterMap :projectInfo="projectInfo"></HeadquarterMap>
           </el-col>
           <el-col :span="12" class="">
             <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
@@ -227,8 +228,8 @@ export default {
     getRiskSum() {
       let data = this.$store.state.get_headquarter.risk_level_year
       let risk_num = 0;
-      for(let i in data) {
-        for(let j in data[i]) {
+      for (let i in data) {
+        for (let j in data[i]) {
           risk_num += data[i][j]
         }
       }
@@ -236,6 +237,21 @@ export default {
     },
     getTreeData() {
       this.treeObj = this.$store.state.get_login.grant_data.data.value
+    },
+    projectInfo() {
+      let data = this.$store.state.get_headquarter.head_project_position
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          name: '',
+          value: [],
+        }
+        obj.name = i
+        obj.value.push(data[i].lng)
+        obj.value.push(data[i].lat)
+        arr.push(obj)
+      }
+      return arr
     }
   },
   updated() {
