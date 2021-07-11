@@ -33,7 +33,7 @@ export default {
       let current = 0
       let start = 0
       let t = setInterval(() => {
-        start += step + 5
+        start += step + 3
         if (start >= this.value) {
           clearInterval(t)
           start = this.value

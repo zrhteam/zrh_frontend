@@ -6,27 +6,26 @@
         <div class="level2">{{ majorName }}发现隐患</div>
         <div class="counter-container">
           <!--            写一个循环的number-->
-          <div id="real-number" style="font-size: 0.45rem">
-            {{ getNumber }}
+          <div id="number" style="font-size: 0.45rem">
           </div>
           <span class="suffix" style="font-size: 0.30rem">例</span>
         </div>
       </div>
     </div>
     <div class="absolute"
-        style="width: 1.15rem; height: 40%; left: 0.5rem; top: 1.3rem">
+         style="width: 1.15rem; height: 40%; left: 0.5rem; top: 1.3rem">
       <div class="risk-title">
         高风险
       </div>
       <div class="counter-container">
               <span class="numbers" style="color:rgb(255, 10, 10); font-size: 0.32rem">
-                <NumCounter :value=this.high_risk class="text-color-blue nums">{{ getRisk }}</NumCounter>
+                <NumCounter :value=this.high_risk class="text-color-blue nums"></NumCounter>
               </span>
         <span class="suffix" style="font-size: 0.2rem">例</span>
       </div>
     </div>
     <div class="absolute"
-        style="width: 1.15rem; height: 40%; left: 3.8rem; top: 1.3rem">
+         style="width: 1.15rem; height: 40%; left: 3.8rem; top: 1.3rem">
       <div class="risk-title">
         中风险
       </div>
@@ -39,7 +38,7 @@
       </div>
     </div>
     <div class="absolute"
-        style="width: 1.15rem; height: 40%; left: 6.9rem; top: 1.3rem">
+         style="width: 1.15rem; height: 40%; left: 6.9rem; top: 1.3rem">
       <div class="risk-title">
         低风险
       </div>
@@ -51,7 +50,8 @@
       </div>
     </div>
     <div class="absolute" style="width: 97%; height: 69%; opacity: 0.2; left: 0.12rem; top: 2.2rem;">
-      <div style="width: 100%; height: 100%; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/1f15644ff8715c4013e43755c22e2abe.png'); border-radius: 0px; cursor: pointer; image-rendering: -webkit-optimize-contrast; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+      <div
+          style="width: 100%; height: 100%; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/1f15644ff8715c4013e43755c22e2abe.png'); border-radius: 0px; cursor: pointer; image-rendering: -webkit-optimize-contrast; background-repeat: no-repeat; background-size: 100% 100%;"></div>
     </div>
   </div>
 </template>
@@ -68,6 +68,12 @@ export default {
       default: function () {
         return ""
       }
+    },
+    OneMajorRiskData: {
+      type: Object,
+      default: function () {
+        return ""
+      }
     }
   },
   data() {
@@ -75,13 +81,20 @@ export default {
       timer: null,
       high_risk: 0,
       mid_risk: 0,
-      low_risk: 0
+      low_risk: 0,
+      num_flag: false
     }
   },
-  computed: {
-    getNumber() {
-      // var num = this.$store.state.get_screen.projects_risk_num.risk_num
-      var num
+  watch: {
+    OneMajorRiskData() {
+      this.getNumber(this.OneMajorRiskData.risk_num)
+      this.high_risk = this.OneMajorRiskData.risk_level_ratio['3']
+      this.mid_risk = this.OneMajorRiskData.risk_level_ratio['2']
+      this.low_risk = this.OneMajorRiskData.risk_level_ratio['1']
+    }
+  },
+  methods: {
+    getNumber(num) {
       if (this.num_flag == false) {
         //自定义字符串,用于拼接标签
         var numStr = "";
@@ -98,10 +111,10 @@ export default {
           numArr.forEach(e => {
             numStr += `<span class="number">${e}</span>`;
           })
-          this.timer = setInterval(() => {
+          this.timer = setTimeout(() => {
             this.$nextTick(_ => {
               //拼接完字符串数组后用innerHTML把它渲染到页面中
-              document.getElementById("real-number").innerHTML = numStr
+              document.getElementById("number").innerHTML = numStr
               let numbers = document.getElementsByClassName("number")
               if (numbers) {
                 for (let i = 0; i < numbers.length; i++) {
@@ -117,12 +130,6 @@ export default {
           }, 200);
         }
       }
-    },
-    getRisk() {
-      // let data = this.$store.state.get_screen.projects_risk_level
-      // this.high_risk = data.risk_level_ratio['3']
-      // this.mid_risk = data.risk_level_ratio['2']
-      // this.low_risk = data.risk_level_ratio['1']
     },
   },
   destroyed() {

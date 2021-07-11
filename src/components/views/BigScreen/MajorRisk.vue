@@ -141,10 +141,17 @@ export default {
         return ""
       }
     },
+    majorRiskData: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
   },
   data() {
     return {
       timer: null,
+      num_flag: false,
       fire_num: 0,
       lift_num: 0,
       electric_num: 0,
@@ -152,14 +159,19 @@ export default {
     }
   },
   watch: {
-    majorType() {alert(1)
+    majorType() {
       document.getElementById(value).style.backgroundImage = "url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/51e03f25363ef4f791943a5c383b29a0.png')";
+    },
+    majorRiskData(value) {
+      this.fire_num = value["消防专业"]
+      this.lift_num = value["电梯专业"]
+      this.electric_num = value["电气专业"]
+      this.fuel_num = value["燃气专业"]
     }
   },
   computed: {
     getNumber() {
-      // var num = this.$store.state.get_screen.projects_risk_num.risk_num
-      var num
+      var num = this.$store.state.get_screen.projectm_risk_num.risk_num
       if (this.num_flag == false) {
         //自定义字符串,用于拼接标签
         var numStr = "";
