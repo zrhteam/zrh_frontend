@@ -103,6 +103,7 @@ const mutations = {
     //得到四个层级的隐患描述需要的筛选条件
     changeDangerSelection(state, data) {
         let arr = []
+        let count = 1
         for (let i in data.data) {
             if (i == 'major_name') {
                 for (let j in data.data[i]) {
@@ -112,7 +113,7 @@ const mutations = {
                         belong: '',
                         children: []
                     }
-                    obj['value'] = j
+                    obj['value'] = count++
                     obj['label'] = j
                     obj['belong'] = i
                     for (let k in data.data[i][j]) {
@@ -123,7 +124,7 @@ const mutations = {
                                 belong: '',
                                 children2: []
                             }
-                            child_obj['value'] = data.data[i][j][k][l]
+                            child_obj['value'] = count++
                             child_obj['label'] = data.data[i][j][k][l]
                             child_obj["belong"] = k
                             obj['children'].push(child_obj)
@@ -140,13 +141,13 @@ const mutations = {
                         children1: []
                     }
                     if (data.data[i][j] == 1) {
-                        obj['value'] = data.data[i][j]
+                        obj['value'] = count++
                         obj['label'] = '低风险'
                     }else if (data.data[i][j] == 2) {
-                        obj['value'] = data.data[i][j]
+                        obj['value'] = count++
                         obj['label'] = '中风险'
                     }else if (data.data[i][j] == 3) {
-                        obj['value'] = data.data[i][j]
+                        obj['value'] = count++
                         obj['label'] = '高风险'
                     }
                     obj["belong"] = i
@@ -160,7 +161,7 @@ const mutations = {
                         belong: '',
                         children1: []
                     }
-                    obj['value'] = data.data[i][j]
+                    obj['value'] = count++
                     obj['label'] = data.data[i][j]
                     obj["belong"] = i
                     arr.push(obj)

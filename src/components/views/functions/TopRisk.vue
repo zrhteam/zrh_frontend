@@ -29,10 +29,11 @@
           size="mini"
           style="max-width: 8em;" @change="filterCondition"
           ref="cascaderAddr"
-          :value="value"
+          v-model="value" placeholder="请选择"
           :options="options"
+          :show-all-levels="false"
           :props="{ checkStrictly: true }"
-          clearable></el-cascader>
+      ></el-cascader>
       <el-select v-model="top_value" placeholder="请选择" size="mini" style="max-width: 8em;" @change="filterTop">
         <el-option
             v-for="item in top_option"
@@ -83,7 +84,7 @@ export default {
   props: ['context'],
   data() {
     return {
-      value: "运营",
+      value: [269],
       top_value: 10,
       top_option: [
         {
@@ -106,7 +107,7 @@ export default {
   methods: {
     filterCondition() {
       const checkedNodes = this.$refs['cascaderAddr'].getCheckedNodes() // 获取当前点击的节点
-      this.value = checkedNodes[0].data.label
+      // this.value = checkedNodes[0].data.label
       if (this.context.sign === 'check_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
@@ -236,12 +237,13 @@ export default {
         this.$store.commit('get_headquarter/changeParam4', {params: param4})
         this.$store.dispatch('get_headquarter/getHeadOtherNumberTop')
       }
+      this.sub_top_data = this.getTopRisk
     },
-    filterTop() {
-      const checkedNodes = this.$refs['cascaderAddr'].getCheckedNodes() // 获取当前点击的节点
+    filterTop(value) {
       // console.log(checkedNodes)
       // console.log(checkedNodes[0].data.label) // 获取当前点击的节点的label
       // console.log(checkedNodes[0].pathLabels) // 获取由 label 组成的数组
+      const checkedNodes = this.$refs['cascaderAddr'].getCheckedNodes() // 获取当前点击的节点
       if (this.context.sign === 'check_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
@@ -269,9 +271,10 @@ export default {
           else if (checkedNodes[0].data.belong == 'area') {
             param4.append('flag', 5);
           }
-          this.$store.commit('get_check/changeParam4', {params: param4})
-          this.$store.dispatch('get_check/getCheckOtherTop')
         }
+        this.$store.commit('get_check/changeParam4', {params: param4})
+        this.$store.dispatch('get_check/getCheckOtherTop')
+        this.sub_top_data = this.getTopRisk
       } else if (this.context.sign === 'prj_other') {
         let param4 = new URLSearchParams();
         param4.append('top', this.top_value);
@@ -395,7 +398,6 @@ export default {
   },
   computed: {
     getTopRisk() {
-      // debugger
       let arr = []
       let data = ''
       if (this.context.sign === 'check_other') {
@@ -472,12 +474,12 @@ export default {
   line-height: 0.25rem;
 }
 
-/deep/ .el-input__inner{
+/deep/ .el-input__inner {
   height: 0.25rem;
   line-height: 0.25rem;
 }
 
-/deep/ .el-input__icon{
+/deep/ .el-input__icon {
   height: 0.25rem;
   line-height: 0.25rem;
 }
