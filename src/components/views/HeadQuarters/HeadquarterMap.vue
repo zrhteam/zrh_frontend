@@ -59,7 +59,6 @@ export default {
       }
       obj.data = this.projectInfo
       seriesList.push(obj)
-      debugger
       // 图标
       const series = seriesList.map(v => {
         return {

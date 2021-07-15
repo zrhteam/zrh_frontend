@@ -116,7 +116,7 @@ export default {
 
     this.drawBarChart()
 
-    let chooseIndex = 0;//默认选中高亮模块索引 现在是默认第一条
+    let chooseIndex = 0;//默认选中高亮模块索引 现在是默认第一条, echart轮播
     this.timer = setInterval(() => {
       let len = this.riskNumber.length
       this.myChart = this.$echarts.init(this.riskNumberPie)

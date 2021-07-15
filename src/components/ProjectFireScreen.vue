@@ -3,7 +3,7 @@
     <el-row class="boundary-A" style="height: 10%">
       <div
           style="position: absolute !important; width: 8.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
-        <div class="title">{{ project_name }}消防专业</div>
+        <div class="title" style="width: 8.75rem;">{{ project_name }}{{major}}</div>
       </div>
       <div
           style="position: absolute !important; width: 3.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem;">
@@ -15,7 +15,8 @@
         </div>
       </div>
       <div style="position: absolute !important; width: 6.8rem; height: 0.7rem; left: 23.1rem; top: 40%;">
-        <el-button class="date" round size="mini" @click="quitProjectFireScreen" style="z-index: 999;top: 40%">退出
+        <el-button class="title" round size="mini" @click="quitProjectFireScreen"
+                   style="z-index: 999;top: 40%;">退出
         </el-button>
       </div>
     </el-row>
@@ -31,6 +32,8 @@
           <div class="absolute" style="width: 98%; height: 97%; right: 0.2rem; bottom: 0.2rem;">
             <div class="wrapper" id="risk-rank"/>
           </div>
+          <NowRiskRank :nowRiskRankData="nowRiskRankData"></NowRiskRank>
+
         </el-row>
       </el-col>
       <el-col class="boundary-A" :span="8" style="height: 100%;">
@@ -38,14 +41,14 @@
           <div class="absolute" style="width: 100%; height: 99%; left: 0px; bottom: 0.2rem;">
             <div class="wrapper" id="major-risk"/>
           </div>
-          <OneMajorRisk majorName="消防专业" :OneMajorRiskData="OneMajorRiskData"></OneMajorRisk>
+          <OneMajorRisk :majorName="major" :OneMajorRiskData="OneMajorRiskData"></OneMajorRisk>
         </el-row>
 
 
       </el-col>
       <el-col class="boundary-A" :span="8" style="height: 100%">
         <el-row style="height: 100%">
-          <CarouselCard></CarouselCard>
+          <CarouselCard :CarouselCardData="CarouselCardData"></CarouselCard>
         </el-row>
       </el-col>
     </el-row>
@@ -94,13 +97,15 @@ import OneMajorRisk from "@/components/views/BigScreen/OneMajorRisk.vue";
 import CarouselCard from "@/components/views/BigScreen/CarouselCard.vue";
 import RecordList2 from "@/components/views/BigScreen/RecordList2.vue";
 import HighRiskNote from "@/components/views/BigScreen/HighRiskNote.vue";
+import NowRiskRank from "@/components/views/BigScreen/NowRiskRank.vue";
 
 export default {
   name: "project_fire_screen",
-  components: {HighRiskNote, RecordList2, CarouselCard, OneMajorRisk, MajorRisk},
+  components: {NowRiskRank, HighRiskNote, RecordList2, CarouselCard, OneMajorRisk, MajorRisk},
   data() {
     return {
-      project_name: this.$store.state.get_project.prj_name,
+      project_name: '',
+      major: '',
       timer: null,
       nowDate: "",
       nowTime: "",
@@ -147,7 +152,7 @@ export default {
       return data['record_list']
     },
     noteList() {
-      let data = this.$store.state.get_screen.projectm_note_top
+      let data = this.$store.state.get_screen.projectm_high_risk
       let arr = []
       for (let i in data) {
         let obj = {
@@ -161,6 +166,215 @@ export default {
     OneMajorRiskData() {
       let data = this.$store.state.get_screen.projectm_info
       return data
+    },
+    nowRiskRankData() {
+      let data = this.$store.state.get_screen.projectm_note_top
+      let arr = []
+      for (let i in data) {
+        let obj = {
+          note: i,
+          appear_time: data[i].appear_time
+        }
+        arr.push(obj)
+      }
+      return arr
+    },
+    CarouselCardData() {
+      let arr = []
+      let data = this.$store.state.get_screen.projectm_risk_level_system_info
+      //  对于bar_data，先把所有的系统过滤出来
+      let system = []
+      system.push('risk_level')
+      let obj = {
+        bar_data: [],
+        pie_data: [],
+        title: '实时风险严重程度分析'
+      }
+      let sub_obj = {
+        name: '高风险',
+        value: 0
+      }
+      for (let i in data['3']) {
+        sub_obj.value += data['3'][i]
+        system.push(i)
+      }
+      obj.pie_data.push(sub_obj)
+      sub_obj = {
+        name: '中风险',
+        value: 0
+      }
+      for (let j in data['2']) {
+        sub_obj.value += data['2'][j]
+        if (typeof (data['3'][j]) == "undefined") {
+          system.push(j)
+        }
+      }
+      obj.pie_data.push(sub_obj)
+      sub_obj = {
+        name: '低风险',
+        value: 0
+      }
+      for (let i in data['1']) {
+        sub_obj.value += data['1'][i]
+        if ((typeof (data['3'][i]) == "undefined") && (typeof (data['2'][i]) == "undefined")) {
+          system.push(i)
+        }
+      }
+      obj.pie_data.push(sub_obj)
+      obj.bar_data.push(system)
+      let sub_arr = []
+      sub_arr.push('高风险')
+      for (let i = 1; i < system.length; i++) {
+        if (typeof (data['3'][system[i]]) == "undefined") {
+          // debugger
+          sub_arr.push(0)
+        } else {
+          sub_arr.push(data['3'][system[i]])
+        }
+      }
+      obj.bar_data.push(sub_arr)
+      sub_arr = []
+      sub_arr.push('中风险')
+      for (let i = 1; i < system.length; i++) {
+        if (typeof (data['2'][system[i]]) == "undefined") {
+          sub_arr.push(0)
+        } else {
+          sub_arr.push(data['2'][system[i]])
+        }
+      }
+      obj.bar_data.push(sub_arr)
+      sub_arr = []
+      sub_arr.push('低风险')
+      for (let i = 1; i < system.length; i++) {
+        if (typeof (data['1'][system[i]]) == "undefined") {
+          sub_arr.push(0)
+        } else {
+          sub_arr.push(data['1'][system[i]])
+        }
+      }
+      obj.bar_data.push(sub_arr)
+      arr.push(obj)
+
+      data = this.$store.state.get_screen.projectm_area_system_info
+      //  对于bar_data，先把所有的系统过滤出来
+      system = []
+      sub_arr = []
+      system.push('area')
+      obj = {
+        bar_data: [],
+        pie_data: [],
+        title: '实时风险所处区域分析'
+      }
+      for (var i in data) {
+        sub_obj = {
+          name: '',
+          value: 0
+        }
+        sub_obj.name = i
+        for (var j in data[i]) {
+          sub_obj.value += data[i][j]
+          let res = system.findIndex(ele => ele == j)
+          if (res <= -1) {
+            system.push(j)
+          }
+        }
+        sub_arr.push(i)
+        obj.pie_data.push(sub_obj)
+      }
+      obj.bar_data.push(system)
+      for (var i in data) {
+        sub_arr = []
+        sub_arr.push(i)
+        for (var j = 0; j < system.length; j++) {
+          if (typeof (data[i][system[j]]) == "undefined") {
+            sub_arr.push(0)
+          } else {
+            sub_arr.push(data[i][system[j]])
+          }
+        }
+        obj.bar_data.push(sub_arr)
+      }
+      arr.push(obj)
+
+      data = this.$store.state.get_screen.projectm_stage_system_info
+      //  对于bar_data，先把所有的系统过滤出来
+      system = []
+      sub_arr = []
+      system.push('stage')
+      obj = {
+        bar_data: [],
+        pie_data: [],
+        title: '实时风险致因阶段分析'
+      }
+      for (var i in data) {
+        sub_obj = {
+          name: '',
+          value: 0
+        }
+        sub_obj.name = i
+        for (var j in data[i]) {
+          sub_obj.value += data[i][j]
+          let res = system.findIndex(ele => ele == j)
+          if (res <= -1) {
+            system.push(j)
+          }
+        }
+        sub_arr.push(i)
+        obj.pie_data.push(sub_obj)
+      }
+      obj.bar_data.push(system)
+      for (var i in data) {
+        sub_arr = []
+        sub_arr.push(i)
+        for (var j = 0; j < system.length; j++) {
+          if (typeof (data[i][system[j]]) == "undefined") {
+            sub_arr.push(0)
+          } else {
+            sub_arr.push(data[i][system[j]])
+          }
+        }
+        obj.bar_data.push(sub_arr)
+      }
+      arr.push(obj)
+      return arr
+    }
+  },
+  watch: {
+    $route: {
+      handler: function (route) {
+        this.project_name = route.query.project_name
+        this.major = route.query.major
+        // let param = new URLSearchParams();
+        // param.append('project_name', route.params.id);
+        // this.$store.commit('get_screen/changeParams', {params: param})
+        // this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
+        // this.$store.dispatch('get_screen/getProjectScreenRNRank')
+        // this.$store.dispatch('get_screen/getProjectScreenRiskLevel')
+        // this.$store.dispatch('get_screen/getProjectScreenStageRatio')
+        // this.$store.dispatch('get_screen/getProjectScreenHighRiskNote')
+        // this.$store.dispatch('get_screen/getProjectScreenPictureNote')
+        // this.$store.dispatch('get_screen/getProjectScreenTable')
+
+
+        let param = new URLSearchParams();
+        // param.append('project_name', '合肥欢乐颂');
+        // param.append('project_name', '哈尔滨万象汇');
+        param.append('project_name', this.project_name);
+        this.$store.commit('get_screen/changeParams', {params: param})
+        // param.append('major_name', '消防专业')
+        param.append('major_name', this.major)
+        this.$store.commit('get_screen/changeProjectMajorParams', {projectm_params: param})
+        this.$store.dispatch('get_screen/getProjectMajorRiskNum')
+        this.$store.dispatch('get_screen/getProjectMajorMajorRatio')
+        this.$store.dispatch('get_screen/getProjectMajorNoteTop')
+        this.$store.dispatch('get_screen/getProjectMajorInfo')
+        this.$store.dispatch('get_screen/getProjectMajorStageSystemInfo')
+        this.$store.dispatch('get_screen/getProjectMajorRiskLevelSystemInfo')
+        this.$store.dispatch('get_screen/getProjectMajorAreaSystemInfo')
+        this.$store.dispatch('get_screen/getProjectMajorHighRisk')
+        this.$store.dispatch('get_screen/getProjectMajorTable')
+      },
+      immediate: true
     }
   },
   methods: {
@@ -189,7 +403,7 @@ export default {
       this.nowTime = hou + ":" + min + ":" + sec;
     },
     quitProjectFireScreen() {
-      // this.$router.push({path: '/land_headquarters'});
+      this.$router.push({path: `/new_project_screen/${this.project_name}`});
     },
     rowClassName(row) {
       if (row.rowIndex % 2 == 0) {
@@ -211,21 +425,22 @@ export default {
     clearInterval(this.timer)
   },
   created() {
-    let param = new URLSearchParams();
-    // param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-    param.append('project_name', '合肥欢乐颂');
-    this.$store.commit('get_screen/changeParams', {params: param})
-    param.append('major_name', '消防专业')
-    this.$store.commit('get_screen/changeProjectMajorParams', {projectm_params: param})
-    this.$store.dispatch('get_screen/getProjectMajorRiskNum')
-    this.$store.dispatch('get_screen/getProjectMajorMajorRatio')
-    this.$store.dispatch('get_screen/getProjectMajorNoteTop')
-    this.$store.dispatch('get_screen/getProjectMajorInfo')
-    this.$store.dispatch('get_screen/getProjectMajorStageSystemInfo')
-    this.$store.dispatch('get_screen/getProjectMajorRiskLevelSystemInfo')
-    this.$store.dispatch('get_screen/getProjectMajorAreaSystemInfo')
-    this.$store.dispatch('get_screen/getProjectMajorHighRisk')
-    this.$store.dispatch('get_screen/getProjectMajorTable')
+    // let param = new URLSearchParams();
+    // // param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
+    // // param.append('project_name', '合肥欢乐颂');
+    // param.append('project_name', '哈尔滨万象汇');
+    // this.$store.commit('get_screen/changeParams', {params: param})
+    // param.append('major_name', '消防专业')
+    // this.$store.commit('get_screen/changeProjectMajorParams', {projectm_params: param})
+    // this.$store.dispatch('get_screen/getProjectMajorRiskNum')
+    // this.$store.dispatch('get_screen/getProjectMajorMajorRatio')
+    // this.$store.dispatch('get_screen/getProjectMajorNoteTop')
+    // this.$store.dispatch('get_screen/getProjectMajorInfo')
+    // this.$store.dispatch('get_screen/getProjectMajorStageSystemInfo')
+    // this.$store.dispatch('get_screen/getProjectMajorRiskLevelSystemInfo')
+    // this.$store.dispatch('get_screen/getProjectMajorAreaSystemInfo')
+    // this.$store.dispatch('get_screen/getProjectMajorHighRisk')
+    // this.$store.dispatch('get_screen/getProjectMajorTable')
   }
 }
 </script>
@@ -236,7 +451,6 @@ export default {
 }
 
 .title {
-  width: 8.75rem;
   height: 100%;
   pointer-events: auto;
   display: flex;
@@ -363,5 +577,16 @@ export default {
   transform: rotate(0deg);
   opacity: 1;
   pointer-events: none;
+}
+
+/deep/ .el-button {
+  background: transparent !important;
+  color: #ffffff;
+  height: 0.3rem;
+}
+
+/deep/ .el-button span {
+  font-size: 12px;
+  text-align: center;
 }
 </style>

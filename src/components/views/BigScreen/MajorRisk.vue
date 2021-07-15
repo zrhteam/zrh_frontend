@@ -211,7 +211,8 @@ export default {
   },
   mounted() {
     this.$nextTick(_ => {
-      document.getElementById(this.majorType).style.backgroundImage = "url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/51e03f25363ef4f791943a5c383b29a0.png')";
+      document.getElementById(this.majorType).style.backgroundImage = 'url(' + require('../../../assets/major_card5.png') + ')'
+      // document.getElementById(this.majorType).style.backgroundImage = "url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/51e03f25363ef4f791943a5c383b29a0.png')";
     })
   },
   destroyed() {

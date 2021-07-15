@@ -78,6 +78,7 @@
           <div
               style="position: absolute !important; width: 90%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0px;">
             <div class="major-card">
+              <a @click="intoFireScreen" style="display: block; width: 100%; height: 100%;"></a>
               <div
                   style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
@@ -107,6 +108,7 @@
           <div
               style="position: absolute !important; width: 90%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 52%; top: 0px;">
             <div class="major-card">
+              <a @click="intoLiftScreen" style="display: block; width: 100%; height: 100%;"></a>
               <div
                   style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
@@ -136,6 +138,7 @@
           <div
               style="position: absolute !important; width: 100%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 1.325rem;">
             <div class="major-card">
+              <a @click="intoElectricScreen" style="display: block; width: 100%; height: 100%;"></a>
               <div
                   style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
@@ -165,6 +168,7 @@
           <div
               style="position: absolute !important; width: 100%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 52%; top: 1.325rem;">
             <div class="major-card">
+              <a @click="intoFuelScreen" style="display: block; width: 100%; height: 100%;"></a>
               <div
                   style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
@@ -504,7 +508,31 @@ export default {
     },
     quitProjectScreen() {
       this.$router.push({path: '/prj_data_analysis'});
-    }
+    },
+    intoFireScreen() {
+      var project_name = this.project_name
+      var major = "消防专业"
+      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
+      this.$router.push({path: '/project_fire_screen', query: {project_name: project_name, major: major}})
+    },
+    intoLiftScreen() {
+      var project_name = this.project_name
+      var major = "电梯专业"
+      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
+      this.$router.push({path: '/project_lift_screen', query: {project_name: project_name, major: major}})
+    },
+    intoElectricScreen() {
+      var project_name = this.project_name
+      var major = "电气专业"
+      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
+      this.$router.push({path: '/project_electric_screen', query: {project_name: project_name, major: major}})
+    },
+    intoFuelScreen() {
+      var project_name = this.project_name
+      var major = "燃气专业"
+      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
+      this.$router.push({path: '/project_fuel_screen', query: {project_name: project_name, major: major}})
+    },
   },
   watch: {
     $route: {
