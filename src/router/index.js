@@ -104,6 +104,6 @@ router.beforeEach((to, from, next) => {
 })
 export default new VueRouter({
     routes,
-    mode: 'history',
+    // mode: 'history',
     base: process.env.BASE_URL
 })

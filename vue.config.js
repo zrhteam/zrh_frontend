@@ -11,15 +11,13 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const productionGzipExtensions = ['js', 'css']
 
 module.exports = {
-    publicPath: '/',//new
+    publicPath: './',//new
     // 输出文件目录
     outputDir: 'dist',
     //outputDir: '../dist',
     // eslint-loader 是否在保存的时候检查
     //assetsDir: 'assets',//静态资源目录
     assetsDir: 'dist',
-    assetsDir: 'dist',
-    //assetsDir: './dist',
     lintOnSave: false,//是否开启eslint
     runtimeCompiler: false,
 
@@ -60,7 +58,6 @@ module.exports = {
                     algorithm: 'gzip',
                     test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
                     threshold: 10240,
-                    deleteOriginalAssets:true,
                     minRatio: 0.8
                 })
             );
@@ -85,9 +82,6 @@ module.exports = {
     // 生产环境是否生成 sourceMap 文件
     //productionSourceMap: true,
     productionSourceMap: false,//update
-    // //开启Gzip压缩
-    // productionGzip: true,
-    // productionGzipExtensions: ['js', 'css'],
     // css相关配置
     css: {
         //是否使用css分离插件 ExtractTextPlugin
@@ -161,4 +155,10 @@ module.exports = {
     pluginOptions: {
         // ...
     },
+    // build: {
+    //     index: path.resolve(__dirname, '../dist/index.html'),
+    //     assetsRoot: path.resolve(__dirname, '../dist'),
+    //     assetsSubDirectory: 'static',
+    //     assetsPublicPathL: './',
+    // }
 }
