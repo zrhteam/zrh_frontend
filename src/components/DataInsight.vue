@@ -1,13 +1,5 @@
 <template>
   <div class="DataInsight">
-
-    <el-col :span="6" style="height: 100%;">
-            <PieChart
-                :context="{
-          title:red_line_data[0].label,
-          id: 'id_red_line',
-        }"></PieChart>
-          </el-col>
     {{getRedLine}}
     {{getTendencyHead}}
     {{getTendencyRegion}}
@@ -17,12 +9,19 @@
     {{getRatioRegion}}
     {{getRatioProject}}
     {{getRatioProfession}}
-    {{red_line_data}}
+    {{ratio_head}}
+    <el-col :span="10" style="height: 100%;">
+            <PieChart
+                :context="{
+          title:red_line_data[0].label,
+          id: 'id_red_line',
+        }"></PieChart>
+          </el-col>
   </div>
 </template>
 
 <script>
-import PieChart from "@/components/views/functions/PieChartForDataInsight";
+import PieChart from "@/components/views/functions/PieChartForDataInsight.vue";
 
 export default {
   name: "DataInsight",
