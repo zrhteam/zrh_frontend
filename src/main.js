@@ -22,7 +22,6 @@ Vue.use(VueCookies)
 // Vue.use(echarts)
 // Vue.use(echartsGL)
 Vue.use(Vuex)
-Vue.use(base);//将全局函数当做插件来进行注册
 new Vue({
     el: '#app',
     router,

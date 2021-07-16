@@ -1,40 +1,14 @@
+const express = require('express')
+var compression = require('compression')
+var app = express()
+app.use(compression())
 const path = require('path')
 const webpack = require('webpack')
-const express = require('express')
-const app = express()
 var apiRoutes = express.Router()
 app.use('/api', apiRoutes)
 
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const productionGzipExtensions = ['js', 'css']
-
-function getPlugins() {
-    let plugins = []
-    // Ignore all locale files of moment.js
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-    // // GitRevision.version()
-    // new webpack.DefinePlugin({
-    //     APP_VERSION: `"${require('./package.json').version}"`,
-    //     GIT_HASH: JSON.stringify('1.2'),
-    //     BUILD_DATE: buildDate
-    // })
-
-    // 配置压缩
-    new CompressionWebpackPlugin({
-        algorithm: 'gzip',
-        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-        threshold: 10240,
-        minRatio: 0.8
-    })
-
-    //在合并 chunk 时，webpack 会尝试识别出具有重复模块的 chunk，并优先进行合并。任何模块都不会被合并到 entry   chunk 中，以免影响初始页面加载时间。
-    new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 5,
-        minChunkSize: 100
-    })
-
-    return plugins
-}
 
 module.exports = {
     publicPath: '/',//new
@@ -75,51 +49,23 @@ module.exports = {
         config.when(process.env.NODE_ENV === 'development', config => {
             config.entry('app').clear().add('./src/main.js')
         })
-
-        // //发布模式
-        // config.when(process.env.NODE_ENV === 'production',config=>{
-        //     //entry找到默认的打包入口，调用clear则是删除默认的打包入口
-        //     //add添加新的打包入口
-        //     config.entry('app').clear().add('./src/main.js')
-        //
-        //     //使用externals设置排除项
-        //     config.set('externals',{
-        //         vue: 'Vue',
-        //         echarts: 'echarts',
-        //         vuex: 'Vuex',
-        //         // axios:'axios',
-        //         'element-ui': 'ElementUI',
-        //         // nprogress:'NProgress',
-        //         // 'vue-quill-editor':'VueQuillEditor'
-        //     })
-        // })
     },
     //configureWebpack: () => {},
     configureWebpack: (config) => {
         if (process.env.NODE_ENV === 'production') {
             config.mode = 'production'
-            // config.entry('app').clear().add('./src/main-prod.js');
-            // config.plugin('html').tap(args => {
-            //     args[0].isProd = true;
-            //     return args
-            // });
-            // config.set('externals', {
-            //     vue: 'Vue',
-            //     // 'vue-router': 'VueRouter',
-            //     // axios: 'axios',
-            //     // lodash: '_',
-            //     // echarts: 'echarts',
-            //     // nprogress: 'NProgress',
-            //     // 'vue-quill-editor': 'VueQuillEditor'
-            // })
+            config.plugins.push(
+                new CompressionWebpackPlugin({
+                    asset: '[path].gz[query]', // 提示示compression-webpack-plugin@3.0.0的话asset改为filename
+                    algorithm: 'gzip',
+                    test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+                    threshold: 10240,
+                    deleteOriginalAssets:true,
+                    minRatio: 0.8
+                })
+            );
         } else {
             config.mode = 'development'
-            // config.entry('app').clear().add('./src/main-dev.js');
-            // //定制开发模式标题
-            // config.plugin('html').tap(args => {
-            //     args[0].isProd = false;
-            //     return args
-            // })
         }
         Object.assign(config, {
             resolve: {
@@ -139,6 +85,9 @@ module.exports = {
     // 生产环境是否生成 sourceMap 文件
     //productionSourceMap: true,
     productionSourceMap: false,//update
+    // //开启Gzip压缩
+    // productionGzip: true,
+    // productionGzipExtensions: ['js', 'css'],
     // css相关配置
     css: {
         //是否使用css分离插件 ExtractTextPlugin
@@ -169,12 +118,12 @@ module.exports = {
     devServer: {
         //open: true,//自动弹出浏览器页面
         open: process.platform === 'darwin',
+        compress: true,
         // host: 'localhost',
         // public:'localhost:8080',
         public: 'http://124.71.45.84:8080',
         host: '0.0.0.0',
         port: 8080,
-        //port: 8022,
         https: false,
         overlay: {//new 错误、警告在页面弹出
             warning: true,
@@ -208,29 +157,8 @@ module.exports = {
         } // 代理转发配置，用于调试环境
     },
 
-    // plugins: {//new
-    //     'autoprefixer': {browsers: 'last 5 version'}
-    // },
-    // before(app) {
-    //         //app.get('/test', (req, res) => {
-    //         //     res.json({
-    //         //         errno: 0,
-    //         //         data: test
-    //         //     })
-    //         // })
-    //     }
-    // },
     // 第三方插件配置
     pluginOptions: {
         // ...
     },
-    // externals: {
-    //     vue: 'Vue',
-    //     vuex: 'Vuex',
-    //     echarts: 'echarts',
-    //     'element-ui': 'ElementUI',
-    //     'vue-cookies': 'VueCookies',
-    //     axios: 'axios',
-    //     'vue-router': 'VueRouter',
-    // }
 }
