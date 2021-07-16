@@ -3,7 +3,7 @@
     <el-row class="boundary-A" style="height: 10%">
       <div
           style="position: absolute !important; width: 8.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
-        <div class="title" style="width: 8.75rem;">{{ project_name }}{{major}}</div>
+        <div class="title" style="width: 8.75rem;">{{ project_name }}{{ major }}</div>
       </div>
       <div
           style="position: absolute !important; width: 3.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem;">
@@ -26,7 +26,7 @@
           <div class="absolute" style="width: 98%; height: 97%; right: 0.2rem; bottom: 0.2rem;">
             <div class="wrapper" id="risk-wrapper"/>
           </div>
-          <MajorRisk majorType="fire-major" :majorRiskData="majorRiskData"></MajorRisk>
+          <MajorRisk majorType="lift-major" :majorRiskData="majorRiskData"></MajorRisk>
         </el-row>
         <el-row class="boundary-A" style="height: 50%;">
           <div class="absolute" style="width: 98%; height: 97%; right: 0.2rem; bottom: 0.2rem;">
@@ -100,7 +100,7 @@ import HighRiskNote from "@/components/views/BigScreen/HighRiskNote.vue";
 import NowRiskRank from "@/components/views/BigScreen/NowRiskRank.vue";
 
 export default {
-  name: "project_fire_screen",
+  name: "project_lift_screen",
   components: {NowRiskRank, HighRiskNote, RecordList2, CarouselCard, OneMajorRisk, MajorRisk},
   data() {
     return {

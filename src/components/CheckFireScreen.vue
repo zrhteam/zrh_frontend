@@ -3,7 +3,7 @@
     <el-row class="boundary-A" style="height: 10%">
       <div
           style="position: absolute !important; width: 8.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
-        <div class="title" style="width: 8.75rem;">{{ project_name }}{{major}}</div>
+        <div class="title" style="width: 8.75rem;">{{ check_code }}{{major}}</div>
       </div>
       <div
           style="position: absolute !important; width: 3.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem;">
@@ -104,7 +104,7 @@ export default {
   components: {NowRiskRank, HighRiskNote, RecordList2, CarouselCard, OneMajorRisk, MajorRisk},
   data() {
     return {
-      project_name: '',
+      check_code: '',
       major: '',
       timer: null,
       nowDate: "",
@@ -144,15 +144,15 @@ export default {
   },
   computed: {
     majorRiskData() {
-      let data = this.$store.state.get_screen.projectm_major_ratio
+      let data = this.$store.state.get_screen.checkm_major_ratio
       return data
     },
     recordList() {
-      let data = this.$store.state.get_screen.projectm_table
+      let data = this.$store.state.get_screen.checkm_table
       return data['record_list']
     },
     noteList() {
-      let data = this.$store.state.get_screen.projectm_high_risk
+      let data = this.$store.state.get_screen.checkm_high_risk
       let arr = []
       for (let i in data) {
         let obj = {
@@ -164,11 +164,11 @@ export default {
       return arr
     },
     OneMajorRiskData() {
-      let data = this.$store.state.get_screen.projectm_info
+      let data = this.$store.state.get_screen.checkm_info
       return data
     },
     nowRiskRankData() {
-      let data = this.$store.state.get_screen.projectm_note_top
+      let data = this.$store.state.get_screen.checkm_note_top
       let arr = []
       for (let i in data) {
         let obj = {
@@ -181,7 +181,7 @@ export default {
     },
     CarouselCardData() {
       let arr = []
-      let data = this.$store.state.get_screen.projectm_risk_level_system_info
+      let data = this.$store.state.get_screen.checkm_risk_level_system_info
       //  对于bar_data，先把所有的系统过滤出来
       let system = []
       system.push('risk_level')
@@ -255,7 +255,7 @@ export default {
       obj.bar_data.push(sub_arr)
       arr.push(obj)
 
-      data = this.$store.state.get_screen.projectm_area_system_info
+      data = this.$store.state.get_screen.checkm_area_system_info
       //  对于bar_data，先把所有的系统过滤出来
       system = []
       sub_arr = []
@@ -296,7 +296,7 @@ export default {
       }
       arr.push(obj)
 
-      data = this.$store.state.get_screen.projectm_stage_system_info
+      data = this.$store.state.get_screen.checkm_stage_system_info
       //  对于bar_data，先把所有的系统过滤出来
       system = []
       sub_arr = []
@@ -342,7 +342,7 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
-        this.project_name = route.query.project_name
+        this.check_code = route.query.check_code
         this.major = route.query.major
         // let param = new URLSearchParams();
         // param.append('project_name', route.params.id);
@@ -357,22 +357,20 @@ export default {
 
 
         let param = new URLSearchParams();
-        // param.append('project_name', '合肥欢乐颂');
-        // param.append('project_name', '哈尔滨万象汇');
-        param.append('project_name', this.project_name);
+        param.append('check_code', this.check_code);
         this.$store.commit('get_screen/changeParams', {params: param})
         // param.append('major_name', '消防专业')
         param.append('major_name', this.major)
-        this.$store.commit('get_screen/changeProjectMajorParams', {projectm_params: param})
-        this.$store.dispatch('get_screen/getProjectMajorRiskNum')
-        this.$store.dispatch('get_screen/getProjectMajorMajorRatio')
-        this.$store.dispatch('get_screen/getProjectMajorNoteTop')
-        this.$store.dispatch('get_screen/getProjectMajorInfo')
-        this.$store.dispatch('get_screen/getProjectMajorStageSystemInfo')
-        this.$store.dispatch('get_screen/getProjectMajorRiskLevelSystemInfo')
-        this.$store.dispatch('get_screen/getProjectMajorAreaSystemInfo')
-        this.$store.dispatch('get_screen/getProjectMajorHighRisk')
-        this.$store.dispatch('get_screen/getProjectMajorTable')
+        this.$store.commit('get_screen/changeCheckMajorParams', {checkm_params: param})
+        this.$store.dispatch('get_screen/getCheckMajorRiskNum')
+        this.$store.dispatch('get_screen/getCheckMajorMajorRatio')
+        this.$store.dispatch('get_screen/getCheckMajorNoteTop')
+        this.$store.dispatch('get_screen/getCheckMajorInfo')
+        this.$store.dispatch('get_screen/getCheckMajorStageSystemInfo')
+        this.$store.dispatch('get_screen/getCheckMajorRiskLevelSystemInfo')
+        this.$store.dispatch('get_screen/getCheckMajorAreaSystemInfo')
+        this.$store.dispatch('get_screen/getCheckMajorHighRisk')
+        this.$store.dispatch('get_screen/getCheckMajorTable')
       },
       immediate: true
     }

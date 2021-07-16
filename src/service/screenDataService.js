@@ -597,7 +597,7 @@ function getProjectMajorStageSystemInfo(param, callback) {
  * Return: 几种图表数据中的一种 (json)
  */
 function getProjectMajorRiskLevelSystemInfo(param, callback) {
-    const url = `${dataServerUrl}/project_major_ls/project_major_ls_stage_system_info`
+    const url = `${dataServerUrl}/project_major_ls/project_major_ls_risk_level_system_info`
     axios.post(url, param)
         .then(response => {
             callback(response.data)

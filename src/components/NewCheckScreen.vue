@@ -77,6 +77,7 @@
           <div
               style="position: absolute !important; width: 90%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0px;">
             <div class="major-card">
+              <a @click="intoFireScreen" style="display: block; width: 100%; height: 100%;"></a>
               <div
                   style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
@@ -106,6 +107,7 @@
           <div
               style="position: absolute !important; width: 90%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 52%; top: 0px;">
             <div class="major-card">
+              <a @click="intoLiftScreen" style="display: block; width: 100%; height: 100%;"></a>
               <div
                   style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
@@ -135,6 +137,7 @@
           <div
               style="position: absolute !important; width: 100%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 106px;">
             <div class="major-card">
+              <a @click="intoElectricScreen" style="display: block; width: 100%; height: 100%;"></a>
               <div
                   style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
@@ -164,6 +167,7 @@
           <div
               style="position: absolute !important; width: 100%; height: 48%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 52%; top: 106px;">
             <div class="major-card">
+              <a @click="intoFuelScreen" style="display: block; width: 100%; height: 100%;"></a>
               <div
                   style="position: absolute !important; width: 0.9rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.1rem;">
                 <div class="risk-title"
@@ -289,7 +293,7 @@ export default {
   components: {RecordList2, HighRiskNote, StageRatio, NumCounter, MajorPicture},
   data() {
     return {
-      check_code: this.$store.state.get_check.check_code,
+      check_code: '',
       timer: null,
       nowDate: "",
       nowTime: "",
@@ -503,11 +507,36 @@ export default {
     },
     quitCheckScreen() {
       this.$router.push({path: '/prj_data_analysis'});
-    }
+    },
+    intoFireScreen() {
+      var check_code = this.check_code
+      var major = "消防专业"
+      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
+      this.$router.push({path: '/check_fire_screen', query: {check_code: check_code, major: major}})
+    },
+    intoLiftScreen() {
+      var check_code = this.check_code
+      var major = "电梯专业"
+      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
+      this.$router.push({path: '/check_lift_screen', query: {check_code: check_code, major: major}})
+    },
+    intoElectricScreen() {
+      var check_code = this.check_code
+      var major = "电气专业"
+      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
+      this.$router.push({path: '/check_electric_screen', query: {check_code: check_code, major: major}})
+    },
+    intoFuelScreen() {
+      var check_code = this.check_code
+      var major = "燃气专业"
+      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
+      this.$router.push({path: '/check_fuel_screen', query: {check_code: check_code, major: major}})
+    },
   },
   watch: {
     $route: {
       handler: function (route) {
+        this.check_code = route.params.id
         let param = new URLSearchParams();
         param.append('check_code', route.params.id);
         this.$store.commit('get_screen/changeParams', {params: param})

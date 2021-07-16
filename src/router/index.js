@@ -21,6 +21,30 @@ import NewRegionScreen from "@/components/NewRegionScreen.vue";
 import NewProjectScreen from "@/components/NewProjectScreen.vue";
 import NewCheckScreen from "@/components/NewCheckScreen.vue";
 import ProjectFireScreen from "@/components/ProjectFireScreen.vue";
+import ProjectLiftScreen from "@/components/ProjectLiftScreen.vue";
+import ProjectElectricScreen from "@/components/ProjectElectricScreen.vue";
+import ProjectFuelScreen from "@/components/ProjectFuelScreen.vue";
+import CheckFireScreen from "@/components/CheckFireScreen.vue";
+
+// const Login = ()=>import('@/components/Login.vue')
+// // import Login from '@/components/Login.vue'
+// const Overview = ()=>import('@/components/Overview.vue')
+// const Register = ()=>import('@/components/Register.vue')
+//
+// const LandHeadquartersEHSDataScreen = ()=>import("../components/LandHeadquartersEHSDataScreen.vue")
+// const RegionDepartment = ()=>import("@/components/RegionDepartment.vue")
+// const PrjEHSDataAnalysis = ()=>import("@/components/PrjEHSDataAnalysis.vue")
+// const Analyze = ()=>import("@/components/Analyze.vue")//对应数据洞察
+// const NotFound = ()=>import('../components/NotFound.vue')
+// const SuperOverview = ()=>import("@/components/SuperOverview.vue")//对应超级用户登录系统后都独有的首页
+// const DataCompare = ()=>import("@/components/DataCompare.vue")//对应数据分析那一块
+// //由于数据大屏拷贝链接直接展示的功能，为每个数据大屏各开一个链接
+// const NewHeadScreen = ()=>import('@/components/NewHeadScreen.vue')
+// const NewRegionScreen = ()=>import("@/components/NewRegionScreen.vue")
+// const NewProjectScreen = ()=>import("@/components/NewProjectScreen.vue")
+// const NewCheckScreen = ()=>import("@/components/NewCheckScreen.vue")
+// const ProjectFireScreen = ()=>import("@/components/ProjectFireScreen.vue")
+
 
 const routerOptions = [
     {path: '/', component: 'Login', meta: {keepAlive: false}},
@@ -38,7 +62,11 @@ const routerOptions = [
     {path: '/new_region_screen/:id', component: 'NewRegionScreen'},
     {path: '/new_project_screen/:id', component: 'NewProjectScreen'},
     {path: '/new_check_screen/:id', component: 'NewCheckScreen'},
-    {path: '/project_fire_screen/', component: 'ProjectFireScreen'},
+    {path: '/project_fire_screen', component: 'ProjectFireScreen'},
+    {path: '/project_lift_screen', component: 'ProjectLiftScreen'},
+    {path: '/project_electric_screen', component: 'ProjectElectricScreen'},
+    {path: '/project_fuel_screen', component: 'ProjectFuelScreen'},
+    {path: '/check_fire_screen', component: 'CheckFireScreen'},
     {path: '/red_line_data', component: 'DataInsight'},
     {path: '*', component: 'NotFound'}
 ]

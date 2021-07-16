@@ -49,9 +49,24 @@
         <span class="suffix" style="font-size: 0.2rem">例</span>
       </div>
     </div>
-    <div class="absolute" style="width: 97%; height: 69%; opacity: 0.2; left: 0.12rem; top: 2.2rem;">
+    <div class="absolute" style="width: 97%; height: 69%; left: 0.12rem; top: 2.2rem;">
       <div
-          style="width: 100%; height: 100%; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/1f15644ff8715c4013e43755c22e2abe.png'); border-radius: 0px; cursor: pointer; image-rendering: -webkit-optimize-contrast; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+          style="width: 100%; height: 100%; pointer-events: auto; z-index: -1;; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/1f15644ff8715c4013e43755c22e2abe.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+      <div class="slide">
+        <div class="slide-wrapper" ref="major">
+          <el-carousel indicator-position="none" :interval="200000" :height="dataHeight">
+            <el-carousel-item v-for='item in image_list' :key="item.url">
+              <div style="height: 100%">
+                <div
+                    style="position: absolute; width: 100%; min-height: 20px; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3; background-color: rgba(33, 32, 30, 0.5);">
+                  {{ item.note }}
+                </div>
+                <el-image :src='item.url' alt style="height: 100%"/>
+              </div>
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -74,7 +89,11 @@ export default {
       default: function () {
         return ""
       }
-    }
+    },
+    dataHeight: {
+      type: String,
+      default: '5rem'
+    },
   },
   data() {
     return {
@@ -82,7 +101,8 @@ export default {
       high_risk: 0,
       mid_risk: 0,
       low_risk: 0,
-      num_flag: false
+      num_flag: false,
+      image_list: []
     }
   },
   watch: {
@@ -91,6 +111,21 @@ export default {
       this.high_risk = this.OneMajorRiskData.risk_level_ratio['3']
       this.mid_risk = this.OneMajorRiskData.risk_level_ratio['2']
       this.low_risk = this.OneMajorRiskData.risk_level_ratio['1']
+      if (this.OneMajorRiskData.image_list.length == 0) {
+        this.$nextTick(_ => {
+          this.$refs.major.innerHTML = '暂无数据'
+        })
+      }
+      let data = this.OneMajorRiskData.image_list
+      for (let i in data) {
+        let obj = {
+          url: '',
+          note: ''
+        }
+        obj['url'] = 'http://' + data[i]['image_url']
+        obj['note'] = data[i]['note']
+        this.image_list.push(obj)
+      }
     }
   },
   methods: {
@@ -217,5 +252,26 @@ export default {
   width: 100%;
 }
 
+.slide {
+  position: absolute;
+  width: 96%;
+  height: 100%;
+  z-index: 0;
+  transform: rotate(0deg);
+  opacity: 1;
+  pointer-events: none;
+  left: 0.2rem;
+  top: 0.2rem;
+}
+
+.slide-wrapper {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  font-size: 12px;
+  font-family: "Microsoft Yahei";
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
 
 </style>

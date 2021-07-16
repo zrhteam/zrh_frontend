@@ -26,7 +26,7 @@
           <div class="absolute" style="width: 98%; height: 97%; right: 0.2rem; bottom: 0.2rem;">
             <div class="wrapper" id="risk-wrapper"/>
           </div>
-          <MajorRisk majorType="fire-major" :majorRiskData="majorRiskData"></MajorRisk>
+          <MajorRisk majorType="electric-major" :majorRiskData="majorRiskData"></MajorRisk>
         </el-row>
         <el-row class="boundary-A" style="height: 50%;">
           <div class="absolute" style="width: 98%; height: 97%; right: 0.2rem; bottom: 0.2rem;">
@@ -100,7 +100,7 @@ import HighRiskNote from "@/components/views/BigScreen/HighRiskNote.vue";
 import NowRiskRank from "@/components/views/BigScreen/NowRiskRank.vue";
 
 export default {
-  name: "project_fire_screen",
+  name: "project_electric_screen",
   components: {NowRiskRank, HighRiskNote, RecordList2, CarouselCard, OneMajorRisk, MajorRisk},
   data() {
     return {
