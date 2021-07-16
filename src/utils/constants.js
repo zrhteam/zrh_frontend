@@ -518,3 +518,67 @@ export const line_option = {
     },
     series: []
 }
+
+export const pie_option_data_insight = {
+    tooltip: {
+        formatter: '{b}:{c} ({d}%)'
+    },
+    legend: {
+        orient: 'vertical',
+        icon: "circle",
+        itemHeight: fontSize(0.15),
+        itemGap: fontSize(0.2),
+        left: fontSize(0.2),
+        textStyle: {
+            // color: '#058ddb',
+            color: '#ffffff',
+            fontSize: fontSize(0.13),
+            itemHeight: fontSize(0.10),
+            itemGap: fontSize(0.10),
+        },
+        formatter: null
+    },
+    series: [
+        {
+            type: 'pie',
+            radius: '80%',
+            center: ['50%', '50%'],
+            // minAngle: 5, //最小的扇区角度
+            // startAngle: 45, //起始角度
+            hoverAnimation: false,
+            label: {
+                normal: {
+                    show: false,
+                    color: '#fff',
+                    formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
+                    // formatter(v) {
+                    //     let text = v.name + ':' + v.value
+                    //     console.log("qqq", `${text.slice(0, v.name.length + 1)}\n${text.slice(v.name.length + 1, text.length + 1)}`)
+                    //     return text = `${text.slice(0, v.name.length + 1)}\n${text.slice(v.name.length + 1, text.length + 1)}`
+                    // },
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: fontSize(0.10),
+                    shadowOffsetX: 0,
+                    // shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+                normal: {
+                    color: function (params) {
+                        //自定义颜色
+                        let colorList = [
+                            '#3d5bfb', '#7c00ff', '#11aeff', '#27e0a6', '#00c800', '#e8395d',
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            },
+
+        }
+    ]
+};
