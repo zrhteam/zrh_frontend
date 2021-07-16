@@ -15,8 +15,8 @@
 //         }
 //     }
 // })
-import Vue from 'vue'
-import Vuex from 'vuex'
+// import Vue from 'vue'
+// import Vuex from 'vuex'
 import get_analyze from "@/store/modules/get_analyze";
 import get_locations from './modules/get_locations'
 import get_headquarter from "./modules/get_headquarter";

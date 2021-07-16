@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 // import echarts from 'echarts'
 // import echartsGL from 'echarts-gl'
 // import 'es6-promise/auto'
@@ -6,8 +6,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import cookies from 'vue-cookies'
-import ElementUI from 'element-ui'
+import VueCookies from 'vue-cookies'
+// import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 import base from './base'//引用
 
@@ -17,12 +17,12 @@ Vue.prototype.$echarts = echarts;
 // Vue.prototype.$echartsGL = echartsGL;
 Vue.use(base);//将全局函数当做插件来进行注册
 
-Vue.use(cookies)
-Vue.use(ElementUI)
+Vue.use(VueCookies)
+// Vue.use(ElementUI)
 // Vue.use(echarts)
 // Vue.use(echartsGL)
-// Vue.use(Vuex)
-
+Vue.use(Vuex)
+Vue.use(base);//将全局函数当做插件来进行注册
 new Vue({
     el: '#app',
     router,

@@ -8,30 +8,29 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
-<!--    &lt;!&ndash;    引入思源字体&ndash;&gt;-->
-<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,300,400,500,700,900">-->
+    <!--    &lt;!&ndash;    引入思源字体&ndash;&gt;-->
+    <!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,300,400,500,700,900">-->
     <link href=/dist/css/app.48922444.css rel=preload as=style>
 
-<!--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.js"></script>-->
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!--    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js"></script>-->
+    <!--&lt;!&ndash;    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.runtime.min.js"></script>&ndash;&gt;-->
+    <!--&lt;!&ndash;    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.runtime.esm.js"></script>&ndash;&gt;-->
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>-->
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!--&lt;!&ndash;    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js"></script>&ndash;&gt;-->
     <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
-<!--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.4/vue.min.js"></script>-->
-    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0/echarts.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>
-    <script src="https://unpkg.com/vue-cookies@1.7.4/vue-cookies.js"></script>
+    <!--&lt;!&ndash;    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0/echarts.js"></script>&ndash;&gt;-->
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.9.0-rc.1/echarts.js"></script>-->
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.js"></script>-->
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>-->
+    <!--    <script src="https://unpkg.com/vue-cookies@1.7.4/vue-cookies.js"></script>-->
 
 
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/echarts-gl/1.1.1/echarts-gl.js"></script>-->
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.common.js"></script>-->
 
 
-
-<!--    <script src="https://cdn.bootcdn.net/ajax/libs/echarts-gl/1.1.1/echarts-gl.js"></script>-->
-<!--    <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.common.js"></script>-->
-
-
-    <link href=/dist/js/app.7ea1509b.js as=script defer>
-    <link href=/dist/js/chunk-vendors.772ddbee.js as=script defer>
+    <!--    <link href=/dist/js/app.7ea1509b.js as=script defer>-->
+    <!--    <link href=/dist/js/chunk-vendors.772ddbee.js as=script defer>-->
     <title>templates<%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body class="bg01">
@@ -56,7 +55,6 @@
     /*     background-repeat: no-repeat;*/
     /*     background-position: center center;*/
     /*     background-size: 100% 100%;*/
-    /*     background-image: url("../src/assets/bg01.png");*/
     /* }*/
 
     html, body {
@@ -65,10 +63,7 @@
         margin: 0;
         /*background-color: #0f1c30;*/
         /*background: linear-gradient(to right, #0c1461, #010c32);*/
-        /*background-image: url("/img/bg01.png");*/
         background-image: url("/img/bg.png");
-        /*background-image: url("/img/pageBg.png") ;*/
-        /*background-image: url("/img/pagebg2.jpg");*/
         background-repeat: no-repeat;
         background-size: 100% 100%;
         background-position: center center;
@@ -160,7 +155,6 @@
         background-repeat: no-repeat;
         background-position: 0 25%;
         /*background-image: url("/img/panel.png");*/
-        /*background-image: url("/img/title_bg.png");*/
     }
 
     .title-box-card .el-card__body {
@@ -227,7 +221,7 @@
     }
 
     .title-line {
-        border:thin solid #566fa9;
+        border: thin solid #566fa9;
         margin-left: 0.2rem;
         margin-right: 0.6rem
     }
@@ -261,7 +255,7 @@
 
     .el-popover {
         background: #062e48 !important;
-    /* 弹出框颜色*/
+        /* 弹出框颜色*/
     }
 
     /*弹出框标题*/
@@ -276,7 +270,7 @@
         color: #ffffff;
     }
 
-/*    按钮*/
+    /*    按钮*/
     .el-button {
         padding: 0;
         color: #ffffff;
@@ -290,10 +284,20 @@
         padding-left: 50px;
     }
 
-    table{
+    table {
         font-size: 0.1rem;
     }
 
 </style>
+<!--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>-->
+<!--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.runtime.esm.js"></script>-->
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.5/vue-router.js"></script>
+<script src="https://unpkg.com/vue-cookies@1.7.4/vue-cookies.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.9.0-rc.1/echarts.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>
 </body>
 </html>

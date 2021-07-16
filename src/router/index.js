@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+// import Vue from 'vue'
+// import VueRouter from 'vue-router'
 
 // const Overview = resolve => {
 //     require.ensure(['../component/Overview.vue'], () => {
@@ -76,10 +76,10 @@ const routes = routerOptions.map(route => {
         component: () => import(`@/components/${route.component}.vue`)
     }
 })
-const router = new Router({
+const router = new VueRouter({
     rous: routerOptions
 })
-Vue.use(Router)
+Vue.use(VueRouter)
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (router.app.$cookies.get("username") === "") {
@@ -102,7 +102,7 @@ router.beforeEach((to, from, next) => {
         }
     }
 })
-export default new Router({
+export default new VueRouter({
     routes,
     mode: 'history',
     base: process.env.BASE_URL

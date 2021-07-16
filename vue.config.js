@@ -55,25 +55,24 @@ module.exports = {
     // webpack配置
     // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
     //chainWebpack: () => {},
-    chainWebpack:config=>{
+    chainWebpack: config => {
         //发布模式
-        config.when(process.env.NODE_ENV === 'production',config=>{
+        config.when(process.env.NODE_ENV === 'production', config => {
             //entry找到默认的打包入口，调用clear则是删除默认的打包入口,add添加新的打包入口
             config.entry('app').clear().add('./src/main.js')
             //使用externals设置排除项
-            config.set('externals',{
+            config.set('externals', {
                 vue: 'Vue',
                 vuex: 'Vuex',
                 echarts: 'echarts',
                 'element-ui': 'ElementUI',
-                'vue-cookies': 'cookies',
+                'vue-cookies': 'VueCookies',
                 axios: 'axios',
-                'vue-router': 'Router',
-                "element-resize-detector": 'elementResizeDetectorMaker'
+                'vue-router': 'VueRouter',
             })
         })
         //开发模式
-        config.when(process.env.NODE_ENV === 'development',config=>{
+        config.when(process.env.NODE_ENV === 'development', config => {
             config.entry('app').clear().add('./src/main.js')
         })
 
@@ -225,4 +224,13 @@ module.exports = {
     pluginOptions: {
         // ...
     },
+    // externals: {
+    //     vue: 'Vue',
+    //     vuex: 'Vuex',
+    //     echarts: 'echarts',
+    //     'element-ui': 'ElementUI',
+    //     'vue-cookies': 'VueCookies',
+    //     axios: 'axios',
+    //     'vue-router': 'VueRouter',
+    // }
 }
