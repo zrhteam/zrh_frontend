@@ -1,5 +1,13 @@
 <template>
   <div class="DataInsight">
+
+    <el-col :span="6" style="height: 100%;">
+            <PieChart
+                :context="{
+          title:red_line_data[0].label,
+          id: 'id_red_line',
+        }"></PieChart>
+          </el-col>
     {{getRedLine}}
     {{getTendencyHead}}
     {{getTendencyRegion}}
@@ -9,14 +17,19 @@
     {{getRatioRegion}}
     {{getRatioProject}}
     {{getRatioProfession}}
-    {{tendency_project}}
+    {{red_line_data}}
   </div>
 </template>
 
 <script>
+import PieChart from "@/components/views/functions/PieChartForDataInsight";
+
 export default {
   name: "DataInsight",
   props: ["userJson"],
+  components: {
+    PieChart
+  },
   data() {
     return {
       // 15组红线数据
