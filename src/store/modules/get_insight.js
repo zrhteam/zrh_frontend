@@ -165,19 +165,19 @@ const mutations = {
     },
     // 总部 隐患各风险等级占比
     changeAnalyzeRatioHeadquarter(state, data) {
-        state.ratio_head = data.data
+        state.ratio_head = data
     },
     // 区域 隐患各风险等级占比
     changeAnalyzeRatioRegion(state, data) {
-        state.ratio_region = data.data
+        state.ratio_region = data
     },
     // 项目 隐患各风险等级占比
     changeAnalyzeRatioProject(state, data) {
-        state.ratio_project = data.data
+        state.ratio_project = data
     },
     // 行业 隐患各风险等级占比
     changeAnalyzeRatioProfession(state, data) {
-        state.ratio_profession = data.data
+        state.ratio_profession = data
     }
 }
 
