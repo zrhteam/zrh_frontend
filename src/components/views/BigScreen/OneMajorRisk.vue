@@ -168,7 +168,7 @@ export default {
     },
   },
   destroyed() {
-    this.timer = null
+    clearTimeout(this.timer)
   }
 }
 </script>

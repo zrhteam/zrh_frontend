@@ -193,11 +193,14 @@ export default {
       }
     }
   },
-  methods: {
+  data() {
+    return {
+      timer: null
+    }
   },
   mounted() {
     let flag = false
-    setInterval(() => {
+    this.timer = setInterval(() => {
       if (flag == false) {
         $(".element").css("transform", "rotateX(0deg)")
         flag = true
@@ -206,6 +209,9 @@ export default {
         flag = false
       }
     }, 5000)
+  },
+  destroyed() {
+    clearInterval(this.timer)
   }
 }
 </script>

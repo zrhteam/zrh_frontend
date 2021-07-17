@@ -32,7 +32,7 @@ export default {
       let step = parseInt((this.value) / (this.time * 50))
       let current = 0
       let start = 0
-      let t = setInterval(() => {
+      this.timer = setInterval(() => {
         start += step + 3
         if (start >= this.value) {
           clearInterval(t)

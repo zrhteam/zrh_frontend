@@ -57,7 +57,8 @@ export default {
       myPieChart: null,
       barChart: null,
       pieChart: null,
-      timer: null
+      timer1: null,
+      timer2: null,
     }
   },
   watch: {
@@ -253,7 +254,7 @@ export default {
     let chooseIndex1 = 0;//默认选中高亮模块索引 现在是默认第一条
     let chooseIndex2 = 0;
     let chooseIndex3 = 0;
-    this.timer = setInterval(() => {
+    this.timer1 = setInterval(() => {
       let len = this.CarouselCardData[0].pie_data.length
       this.myPieChart = this.$refs.myPieChart1;
       this.pieChart = this.$echarts.init(this.myPieChart)
@@ -304,7 +305,7 @@ export default {
     }, 2000);
 
     let count = 0
-    setInterval(() => {
+    this.timer2 = setInterval(() => {
       if (count == 0) {
         $("#element1").css("display", "block")
         $("#element2").css("transform", "translateX(100%)")
@@ -358,7 +359,8 @@ export default {
     this.pieChart = null;
   },
   destroyed() {
-    clearInterval(this.timer)
+    clearInterval(this.timer1)
+    clearInterval(this.timer2)
     window.removeEventListener("resize", () => {
       this.barChart.resize();
     });
@@ -366,6 +368,7 @@ export default {
     window.removeEventListener("resize", () => {
       this.pieChart.resize();
     });
+
   }
 }
 </script>

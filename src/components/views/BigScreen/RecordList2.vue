@@ -64,6 +64,11 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      timer: null
+    }
+  },
   mounted() {
     // 拿到表格挂载后的真实DOM
     const table = this.$refs.record_table
@@ -71,7 +76,7 @@ export default {
     const divData = table.bodyWrapper
     // 拿到元素后，对元素进行定时增加距离顶部距离，实现滚动效果(此配置为每100毫秒移动1像素)
     let flag = false
-    setInterval(() => {
+    this.timer = setInterval(() => {
       // 元素自增距离顶部1像素
       let height = divData.offsetTop
       divData.scrollTop += height
@@ -92,6 +97,9 @@ export default {
       // }
     }, 1000)
   },
+  destroyed() {
+    clearInterval(this.timer)
+  }
 }
 </script>
 

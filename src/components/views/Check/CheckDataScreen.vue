@@ -1,70 +1,70 @@
 <template>
   <el-col :span="24" style="height: 89%; ">
-    <!--    <el-row style="height: 10%;">-->
-    <!--      <el-col :span="18" style="height: 100%;">-->
-    <!--        <el-card class="title-box-card " shadow="never"-->
-    <!--                 style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px; top: 1%">-->
-    <!--          &lt;!&ndash;      <label style="color: #c4bcbc; font-family:宋体; height: 95% ">数据大屏</label>&ndash;&gt;-->
-    <!--          <label class="check_title1"-->
-    <!--                 style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>-->
-    <!--          <label class="check_title2"-->
-    <!--                 style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>-->
-    <!--          <label class="check_title3"-->
-    <!--                 style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>-->
-    <!--        </el-card>-->
-    <!--      </el-col>-->
-    <!--    </el-row>-->
-    <!--    <el-row style="height: 85%;">-->
-    <el-row style="height: 100px;">
-      <el-col :span="24" style="height: 100%; padding-top: 3%">
-        <el-button size="mini" round
-                   style="background-color: transparent; color: #ffffff; float: right;"
-                   @click="outPrjDataScreen">返回
-        </el-button>
-      </el-col>
-    </el-row>
-    <el-col :span="20" style="height: 100%;">
-      <el-row style="height: 85%;">
-        <el-col :span="10" style="height: 100%; margin-left: 10%">
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <TopRisk
-                :context="{
-          title:'重复出现隐患',
-          label1:'隐患描述',
-          label2:'出现频率',
-          sign:'check_other'}"
-                :top_data="this.$store.state.get_check.check_risk_top"
-            ></TopRisk>
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <Rules
-                :context="{title:'最容易违反的法规标准',
-            top_data:this.rule_name,
-            label1:'违反次数',
-            label2:'法规名称',
-            label3:'条款号',
-        }"></Rules>
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <Rules
-                :context="{title:'违反法规次数排名（prj14）',
-            top_data:this.rule_name,
-            label1:'违反次数',
-            label2:'法规名称',
-            label3:'条款号',
-        }"></Rules>
-          </el-row>
-        </el-col>
-        <el-col :span="10" style="height: 100%;">
-          <div style="display: none">
-            {{ getName }}
-          </div>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <CheckHighImage></CheckHighImage>
-          </el-row>
-        </el-col>
-      </el-row>
-    </el-col>
+<!--    &lt;!&ndash;    <el-row style="height: 10%;">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <el-col :span="18" style="height: 100%;">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <el-card class="title-box-card " shadow="never"&ndash;&gt;-->
+<!--    &lt;!&ndash;                 style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px; top: 1%">&ndash;&gt;-->
+<!--    &lt;!&ndash;          &lt;!&ndash;      <label style="color: #c4bcbc; font-family:宋体; height: 95% ">数据大屏</label>&ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;          <label class="check_title1"&ndash;&gt;-->
+<!--    &lt;!&ndash;                 style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title1 }}</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <label class="check_title2"&ndash;&gt;-->
+<!--    &lt;!&ndash;                 style="color: #c4bcbc; font-family:宋体; font-size: 1em; height: 80% ">{{ title2 }}</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <label class="check_title3"&ndash;&gt;-->
+<!--    &lt;!&ndash;                 style="color: #c4bcbc; font-family:宋体; font-size: 0.5em; height: 40% ">{{ title3 }}</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </el-card>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </el-col>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </el-row>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <el-row style="height: 85%;">&ndash;&gt;-->
+<!--    <el-row style="height: 100px;">-->
+<!--      <el-col :span="24" style="height: 100%; padding-top: 3%">-->
+<!--        <el-button size="mini" round-->
+<!--                   style="background-color: transparent; color: #ffffff; float: right;"-->
+<!--                   @click="outPrjDataScreen">返回-->
+<!--        </el-button>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
+<!--    <el-col :span="20" style="height: 100%;">-->
+<!--      <el-row style="height: 85%;">-->
+<!--        <el-col :span="10" style="height: 100%; margin-left: 10%">-->
+<!--          <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--            <TopRisk-->
+<!--                :context="{-->
+<!--          title:'重复出现隐患',-->
+<!--          label1:'隐患描述',-->
+<!--          label2:'出现频率',-->
+<!--          sign:'check_other'}"-->
+<!--                :top_data="this.$store.state.get_check.check_risk_top"-->
+<!--            ></TopRisk>-->
+<!--          </el-row>-->
+<!--          <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--            <Rules-->
+<!--                :context="{title:'最容易违反的法规标准',-->
+<!--            top_data:this.rule_name,-->
+<!--            label1:'违反次数',-->
+<!--            label2:'法规名称',-->
+<!--            label3:'条款号',-->
+<!--        }"></Rules>-->
+<!--          </el-row>-->
+<!--          <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--            <Rules-->
+<!--                :context="{title:'违反法规次数排名（prj14）',-->
+<!--            top_data:this.rule_name,-->
+<!--            label1:'违反次数',-->
+<!--            label2:'法规名称',-->
+<!--            label3:'条款号',-->
+<!--        }"></Rules>-->
+<!--          </el-row>-->
+<!--        </el-col>-->
+<!--        <el-col :span="10" style="height: 100%;">-->
+<!--          <div style="display: none">-->
+<!--            {{ getName }}-->
+<!--          </div>-->
+<!--          <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--            <CheckHighImage></CheckHighImage>-->
+<!--          </el-row>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--    </el-col>-->
   </el-col>
 </template>
 

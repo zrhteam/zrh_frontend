@@ -126,6 +126,11 @@ export default {
 
       initEcharts("china");
     },
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => {
+      this.pieChart.resize();
+    });
   }
 }
 </script>
