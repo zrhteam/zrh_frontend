@@ -10,26 +10,32 @@
     <div style="display: none">
       {{ getData }}
     </div>
-    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
-      <span class="level4" style="display:inline-block;width:200px;font-size:20px;">{{ context.title }}</span>
-      <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"
-                 @change="filterMajor">
-        <el-option
-            v-for="item in option"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-        </el-option>
-      </el-select>
+    <div class="level4">
+      <span class="level4" style="display:inline-block;width:600px; height: 10px;font-size:15px;">{{ context.title }}</span>
     </div>
-    <div class="title-line" style=""></div>
-    <div id="id_red_line" style="height: 150%; width: 100%" v-if="context.id==='id_red_line'">
-    </div>
+<!--    <div class="title-line" style=""></div>-->
+    <el-divider></el-divider>
+    <div id="id_red_line_1" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_1'"></div>
+    <div id="id_red_line_2" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_2'"></div>
+    <div id="id_red_line_3" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_3'"></div>
+    <div id="id_red_line_4" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_4'"></div>
+    <div id="id_red_line_5" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_5'"></div>
+    <div id="id_red_line_6" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_6'"></div>
+    <div id="id_red_line_7" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_7'"></div>
+    <div id="id_red_line_8" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_8'"></div>
+    <div id="id_red_line_9" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_9'"></div>
+    <div id="id_red_line_10" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_10'"></div>
+    <div id="id_red_line_11" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_11'"></div>
+    <div id="id_red_line_12" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_12'"></div>
+    <div id="id_red_line_13" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_13'"></div>
+    <div id="id_red_line_14" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_14'"></div>
+    <div id="id_red_line_15" style="height: 122%; width: 140%" v-if="context.id==='id_red_line_15'"></div>
   </el-card>
 </template>
 
 <script>
 import {pie_option_data_insight} from "@/utils/constants";
+import {round} from "echarts/src/util/number";
 
 export default {
   name: "PieChartForDataInsight",
@@ -56,16 +62,18 @@ export default {
               legendIndex = i;
             }
           });
-          return params + " " + arr[legendIndex].value;
+          return params + " " + round(arr[legendIndex].value*100,1,true)+"%";
         }
         if (arr.length !== 0) {
           myChart.setOption(pie_option_data_insight);
-
           myChart.on("click", pieConsole);
-
           function pieConsole(param) {
             let param2 = new URLSearchParams();
-            if (_this.context.id === 'id_red_line') {
+            if (_this.context.id === 'id_red_line_1'||_this.context.id === 'id_red_line_2'||_this.context.id === 'id_red_line_15'||
+            _this.context.id === 'id_red_line_3'||_this.context.id === 'id_red_line_4'||_this.context.id === 'id_red_line_5'||
+            _this.context.id === 'id_red_line_6'||_this.context.id === 'id_red_line_7'||_this.context.id === 'id_red_line_8'||
+            _this.context.id === 'id_red_line_9'||_this.context.id === 'id_red_line_10'||_this.context.id === 'id_red_line_11'||
+            _this.context.id === 'id_red_line_12'||_this.context.id === 'id_red_line_13'||_this.context.id === 'id_red_line_14') {
               param2.append('check_key', '华润置地/华东大区');
               param2.append('flag', '1');
               param2.append('start', '2020-3-1 00:00:00');
@@ -83,30 +91,15 @@ export default {
         } else if (this.context.id) {
           this.$nextTick(() => {
             const dom = document.getElementById(this.context.id)
-            dom.innerHTML = '暂无数据'
+            dom.innerHTML = '暂无数据'.bold()
             dom.style.color = '#ffffff'
-            dom.style.fontSize = '14px'
+            dom.style.width = '350px'
+            dom.style.height = '122px'
+            dom.style.fontSize = '15px'
             dom.removeAttribute("_echarts_instance_")
           })
         }
       })
-    },
-    filterMajor(value) {
-      let param2 = new URLSearchParams();
-      let obj = {};
-      //使用find()方法在下拉数据中根据value绑定的数据查找对象
-      obj = this.option.find(function (item) {
-        return item.value === value;
-      })
-      if (obj.label === '全部专业') {
-        param2.append('major', 'all');
-      } else {
-        param2.append('major', obj.label);
-      }
-      param2.append('region_name', this.$store.state.get_region.region_name);
-      this.$store.commit('get_region/changeParam2', {params: param2})
-      //显示该区域不同专业下各系统隐患占比情况
-      this.$store.dispatch('get_region/getRegionSystemRatio')
     },
     sortNumber(attr, rev) {
       if (rev === undefined) {
@@ -132,12 +125,16 @@ export default {
     getData() {
       let data;
       let arr = [];
-      if (this.context.id === 'id_red_line'){
+      if (this.context.id === 'id_red_line_1'||this.context.id === 'id_red_line_2'||this.context.id === 'id_red_line_3'||
+          this.context.id === 'id_red_line_4'||this.context.id === 'id_red_line_5'||this.context.id === 'id_red_line_6'||
+          this.context.id === 'id_red_line_7'||this.context.id === 'id_red_line_8'||this.context.id === 'id_red_line_9'||
+          this.context.id === 'id_red_line_10'||this.context.id === 'id_red_line_11'||this.context.id === 'id_red_line_12'||
+          this.context.id === 'id_red_line_13'||this.context.id === 'id_red_line_14'||this.context.id === 'id_red_line_15'){
         data = this.$store.state.get_insight.red_line_data
         // for (let i in data){
         //   console.log(i)
         // }
-        let str = "中庭区域消防广播故障"
+        let str = this.context.title
         let result_set = data[str].ratio
         for (let i in result_set) {
           let obj = {

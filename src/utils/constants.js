@@ -526,13 +526,13 @@ export const pie_option_data_insight = {
     legend: {
         orient: 'vertical',
         icon: "circle",
-        itemHeight: fontSize(0.15),
+        itemHeight: fontSize(0.12),
         itemGap: fontSize(0.2),
         left: fontSize(0.2),
         textStyle: {
             // color: '#058ddb',
             color: '#ffffff',
-            fontSize: fontSize(0.13),
+            fontSize: fontSize(0.12),
             itemHeight: fontSize(0.10),
             itemGap: fontSize(0.10),
         },
@@ -541,8 +541,8 @@ export const pie_option_data_insight = {
     series: [
         {
             type: 'pie',
-            radius: '80%',
-            center: ['50%', '50%'],
+            radius: '75%',
+            center: ['60%', '40%'],
             // minAngle: 5, //最小的扇区角度
             // startAngle: 45, //起始角度
             hoverAnimation: false,

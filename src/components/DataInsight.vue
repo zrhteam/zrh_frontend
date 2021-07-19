@@ -9,14 +9,141 @@
     {{getRatioRegion}}
     {{getRatioProject}}
     {{getRatioProfession}}
-    {{ratio_head}}
-    <el-col :span="10" style="height: 100%;">
-            <PieChart
-                :context="{
-          title:red_line_data[0].label,
-          id: 'id_red_line',
-        }"></PieChart>
-          </el-col>
+
+    <el-row :gutter="20">
+      <el-row><span class="level4" style="display:inline-block;height: 50px; width:1500px;font-size:35px;">红线问题</span></el-row>
+      <el-col :span="4" style="height: 1.25rem; position: relative; float:right">
+              <el-col :span="12" :offset="3" style="height: 100%; ">
+                <div style="height: 100%;">
+                  <span style="font-size: 2rem; color: #18bff0; bottom:0.35rem; position: relative;">
+                    {{ nowTime }}
+                  </span>
+                </div>
+              </el-col>
+              <el-col :span="9" style="height: 100%; color: #1072b5; font-size: 0.12rem;">
+                <el-row style="top: 35%; position: relative;">
+                  <span>{{ nowWeek }}</span>
+                </el-row>
+                <el-row style="top: 35%; position: relative;">
+                  <span>{{ nowDate }}</span>
+                </el-row>
+              </el-col>
+            </el-col>
+      <el-col :span="2"><div class="grid-content bg-purple">
+        <el-input :value="selected_filter_level" :disabled="true" placeholder="--" style="width: 80px ;min-height: 35px; font-size: 20px; color: #eeeeee" />
+      </div></el-col>
+      <el-col :span="5"><div class="grid-content bg-purple"><el-cascader
+          :props="optionProps"
+          :options="cascade_level_data"
+          placeholder="试试搜索：华润置地"
+          @change="handleCascadeChange"
+          style="width:400px"
+          clearable
+          filterable
+      ></el-cascader></div></el-col>
+      <el-col :span="5" :loading="true"><div>
+        <el-button type="primary" icon="el-icon-search" round @click="filterRedLine" >搜索</el-button>
+      </div></el-col>
+    </el-row>
+<!--    红线问题1-->
+    <el-col>
+      <el-row :span="4" style="height: 100%">
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                  :context="{
+             title:red_line_data[0].label,
+             id: 'id_red_line_1',
+           }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                  :context="{
+             title:red_line_data[1].label,
+             id: 'id_red_line_2',
+           }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                  :context="{
+             title:red_line_data[2].label,
+             id: 'id_red_line_3',
+           }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                  :context="{
+             title:red_line_data[3].label,
+             id: 'id_red_line_4',
+           }">
+        </PieChart>
+<!--      </el-row>-->
+<!--      <el-row>-->
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[4].label,
+              id: 'id_red_line_5',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[5].label,
+              id: 'id_red_line_6',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[6].label,
+              id: 'id_red_line_7',
+            }">
+        </PieChart>
+<!--      </el-row>-->
+<!--      <el-row>-->
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[7].label,
+              id: 'id_red_line_8',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[8].label,
+              id: 'id_red_line_9',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[9].label,
+              id: 'id_red_line_10',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[10].label,
+              id: 'id_red_line_11',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[11].label,
+              id: 'id_red_line_12',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[12].label,
+              id: 'id_red_line_13',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[13].label,
+              id: 'id_red_line_14',
+            }">
+        </PieChart>
+        <PieChart style="display:inline-block;width:375px;font-size:20px;"
+                    :context="{
+              title:red_line_data[14].label,
+              id: 'id_red_line_15',
+            }">
+        </PieChart>
+    </el-row>
+    </el-col>
   </div>
 </template>
 
@@ -31,6 +158,17 @@ export default {
   },
   data() {
     return {
+      optionProps: {
+        value: 'value',
+        label: 'label',
+        children: 'children',
+        checkStrictly: true,
+        expandTrigger: 'hover'
+      },
+      check_key: "",
+      flag: "0",
+      selected_filter_level: "",
+      cascade_level_data: [],
       // 15组红线数据
       // red_line_data: [
       //   {label:"消防管网末端无水比例达到百分之十及以上", total: 0.0, ratio: {}},
@@ -73,7 +211,11 @@ export default {
         ratio: {level_1: 0.0, level_2: 0.0, level_3: 0.0, major_level_1: 0.0, major_level_2: 0.0, major_level_3: 0.0}},
       // 行业 隐患各风险等级占比
       ratio_profession: {profession_name: '', major_name: '',
-        ratio: {level_1: 0.0, level_2: 0.0, level_3: 0.0, major_level_1: 0.0, major_level_2: 0.0, major_level_3: 0.0}}
+        ratio: {level_1: 0.0, level_2: 0.0, level_3: 0.0, major_level_1: 0.0, major_level_2: 0.0, major_level_3: 0.0}},
+      timer: null,
+      nowWeek: "",
+      nowDate: "",
+      nowTime: ""
     };
   },
   computed: {
@@ -202,7 +344,138 @@ export default {
       this.ratio_profession.ratio = data.ratio
     }
   },
+  methods: {
+    filterRedLine() {
+      let param_red_line = new URLSearchParams();
+      console.log(this.check_key)
+      console.log(this.flag)
+      param_red_line.append('check_key', this.check_key);
+      param_red_line.append('flag', this.flag);
+      param_red_line.append('start', '2020-3-1 00:00:00');
+      param_red_line.append('end', '2022-1-3 00:00:00');
+      this.$store.commit('get_insight/changeParams', {params: param_red_line});
+      this.$store.dispatch('get_insight/getAnalyzeRedlineData');
+    },
+    handleCascadeChange(value) {
+      console.log(value);
+        if (value.length === 1) {
+          this.selected_filter_level = "总部";
+        } else if (value.length === 2) {
+          this.selected_filter_level = "区域";
+        } else if (value.length === 3) {
+          this.selected_filter_level = "项目";
+        } else if (value.length === 4) {
+          this.selected_filter_level = "检查";
+        } else {
+          this.selected_filter_level = "--";
+        }
+        if(value.length !== 4){
+          this.check_key = value[0];
+          let cnt = 0;
+          for (let ele in value){
+            if(cnt !== 0){
+              this.check_key += "/" + value[ele];
+            }
+            cnt++;
+          }
+        }else {
+          this.check_key = value[3];
+        }
+
+        this.flag = value.length - 1;
+      },
+    setNowTimes() {
+      let myDate = new Date();
+      // console.log(myDate)
+      let wk = myDate.getDay();
+      let yy = String(myDate.getFullYear());
+      let mm = myDate.getMonth() + 1;
+      let dd = String(
+          myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate()
+      );
+      let hou = String(
+          myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours()
+      );
+      let min = String(
+          myDate.getMinutes() < 10
+              ? "0" + myDate.getMinutes()
+              : myDate.getMinutes()
+      );
+      let sec = String(
+          myDate.getSeconds() < 10
+              ? "0" + myDate.getSeconds()
+              : myDate.getSeconds()
+      );
+      let weeks = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let week = weeks[wk];
+      this.nowDate = yy + "." + mm + "." + dd
+      this.nowTime = hou + ":" + min + ":" + sec;
+      this.nowWeek = week;
+    }
+  },
+  mounted() {
+    this.timer = setInterval(() => {
+      this.setNowTimes();
+    }, 1000);
+  },
   created() {
+    const _this = this;
+    // this.axios.get('http://localhost:8081/new_zrh_data/get_level_data').then(function (resp) {
+    //     //回调函数中的this指的是回调
+    //     //把data数据赋给_this，即vue对象
+    //     var rec_data = resp.data;
+    //     console.log(rec_data);
+    //     var head_region = rec_data[0];
+    //     var region_project = rec_data[1];
+    //     var project_check = rec_data[2];
+    //     for (let ele in head_region) { // head
+    //       console.log(ele);
+    //       var head_child = [];
+    //       console.log(head_region[ele])
+    //       // for (let item in head_region[ele]){ // region
+    //       for (var item = 0; item < head_region[ele].length; item++) {
+    //         var cor_project = region_project[head_region[ele][item]];
+    //         console.log(cor_project)
+    //         var region_child = [];
+    //         // for (let ele_project in cor_project){ // project
+    //         for (var ele_project = 0; ele_project < cor_project.length; ele_project++) {
+    //           var cor_check = project_check[cor_project[ele_project]];
+    //           var project_child = [];
+    //           // for (let ele_check in cor_check){ // check
+    //           for (var ele_check = 0; ele_check < cor_check.length; ele_check++) {
+    //             project_child.push({
+    //               value: cor_check[ele_check],
+    //               label: cor_check[ele_check]
+    //               }
+    //             )
+    //           }
+    //           region_child.push({
+    //             value: cor_project[ele_project],
+    //             label: cor_project[ele_project],
+    //             children: project_child,
+    //           })
+    //         }
+    //         head_child.push({
+    //           value: head_region[ele][item],
+    //           label: head_region[ele][item],
+    //           children: region_child,
+    //         })
+    //       }
+    //       _this.cascade_level_data.push({
+    //         value: ele,
+    //         label: ele,
+    //         children: head_child,
+    //       });
+    //     }
+    //   });
     let param_red_line = new URLSearchParams();
     let param_tendency = new URLSearchParams();
     let param_ratio = new URLSearchParams();

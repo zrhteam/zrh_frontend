@@ -55,7 +55,8 @@ const routerOptions = [
     {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
     {path: '/region_department', component: 'RegionDepartment', meta: {keepAlive: false}},
     {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis', meta: {keepAlive: false}},
-    {path: '/analyze', component: 'Analyze', meta: {keepAlive: false}},
+    // {path: '/analyze', component: 'Analyze', meta: {keepAlive: false}},
+    {path: '/analyze', component: 'DataInsight', meta: {keepAlive: false}},
     {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive: false}},
     {path: '/data_compare', component: 'DataCompare', meta: {keepAlive: false}},
     {path: '/new_head_screen/:id', component: 'NewHeadScreen'},
@@ -67,7 +68,7 @@ const routerOptions = [
     {path: '/project_electric_screen', component: 'ProjectElectricScreen'},
     {path: '/project_fuel_screen', component: 'ProjectFuelScreen'},
     {path: '/check_fire_screen', component: 'CheckFireScreen'},
-    {path: '/red_line_data', component: 'DataInsight'},
+    // {path: '/red_line_data', component: 'DataInsight'},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {
