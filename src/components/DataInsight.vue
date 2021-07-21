@@ -149,7 +149,7 @@
 
 <script>
 import PieChart from "@/components/views/functions/PieChartForDataInsight.vue";
-
+import axios from "axios";
 export default {
   name: "DataInsight",
   props: ["userJson"],
@@ -428,54 +428,54 @@ export default {
   },
   created() {
     const _this = this;
-    // this.axios.get('http://localhost:8081/new_zrh_data/get_level_data').then(function (resp) {
-    //     //回调函数中的this指的是回调
-    //     //把data数据赋给_this，即vue对象
-    //     var rec_data = resp.data;
-    //     console.log(rec_data);
-    //     var head_region = rec_data[0];
-    //     var region_project = rec_data[1];
-    //     var project_check = rec_data[2];
-    //     for (let ele in head_region) { // head
-    //       console.log(ele);
-    //       var head_child = [];
-    //       console.log(head_region[ele])
-    //       // for (let item in head_region[ele]){ // region
-    //       for (var item = 0; item < head_region[ele].length; item++) {
-    //         var cor_project = region_project[head_region[ele][item]];
-    //         console.log(cor_project)
-    //         var region_child = [];
-    //         // for (let ele_project in cor_project){ // project
-    //         for (var ele_project = 0; ele_project < cor_project.length; ele_project++) {
-    //           var cor_check = project_check[cor_project[ele_project]];
-    //           var project_child = [];
-    //           // for (let ele_check in cor_check){ // check
-    //           for (var ele_check = 0; ele_check < cor_check.length; ele_check++) {
-    //             project_child.push({
-    //               value: cor_check[ele_check],
-    //               label: cor_check[ele_check]
-    //               }
-    //             )
-    //           }
-    //           region_child.push({
-    //             value: cor_project[ele_project],
-    //             label: cor_project[ele_project],
-    //             children: project_child,
-    //           })
-    //         }
-    //         head_child.push({
-    //           value: head_region[ele][item],
-    //           label: head_region[ele][item],
-    //           children: region_child,
-    //         })
-    //       }
-    //       _this.cascade_level_data.push({
-    //         value: ele,
-    //         label: ele,
-    //         children: head_child,
-    //       });
-    //     }
-    //   });
+    axios.get('http://localhost:8081/new_zrh_data/get_level_data').then(function (resp) {
+        //回调函数中的this指的是回调
+        //把data数据赋给_this，即vue对象
+        var rec_data = resp.data;
+        console.log(rec_data);
+        var head_region = rec_data[0];
+        var region_project = rec_data[1];
+        var project_check = rec_data[2];
+        for (let ele in head_region) { // head
+          console.log(ele);
+          var head_child = [];
+          console.log(head_region[ele])
+          // for (let item in head_region[ele]){ // region
+          for (var item = 0; item < head_region[ele].length; item++) {
+            var cor_project = region_project[head_region[ele][item]];
+            console.log(cor_project)
+            var region_child = [];
+            // for (let ele_project in cor_project){ // project
+            for (var ele_project = 0; ele_project < cor_project.length; ele_project++) {
+              var cor_check = project_check[cor_project[ele_project]];
+              var project_child = [];
+              // for (let ele_check in cor_check){ // check
+              for (var ele_check = 0; ele_check < cor_check.length; ele_check++) {
+                project_child.push({
+                  value: cor_check[ele_check],
+                  label: cor_check[ele_check]
+                  }
+                )
+              }
+              region_child.push({
+                value: cor_project[ele_project],
+                label: cor_project[ele_project],
+                children: project_child,
+              })
+            }
+            head_child.push({
+              value: head_region[ele][item],
+              label: head_region[ele][item],
+              children: region_child,
+            })
+          }
+          _this.cascade_level_data.push({
+            value: ele,
+            label: ele,
+            children: head_child,
+          });
+        }
+      });
     let param_red_line = new URLSearchParams();
     let param_tendency = new URLSearchParams();
     let param_ratio = new URLSearchParams();
