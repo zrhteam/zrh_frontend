@@ -25,6 +25,9 @@ import ProjectLiftScreen from "@/components/ProjectLiftScreen.vue";
 import ProjectElectricScreen from "@/components/ProjectElectricScreen.vue";
 import ProjectFuelScreen from "@/components/ProjectFuelScreen.vue";
 import CheckFireScreen from "@/components/CheckFireScreen.vue";
+import CheckLiftScreen from "@c/CheckLiftScreen.vue";
+import CheckFuelScreen from "@c/CheckFuelScreen.vue";
+import CheckElectricScreen from "@c/CheckElectricScreen.vue";
 
 // const Login = ()=>import('@/components/Login.vue')
 // // import Login from '@/components/Login.vue'
@@ -68,6 +71,9 @@ const routerOptions = [
     {path: '/project_electric_screen', component: 'ProjectElectricScreen'},
     {path: '/project_fuel_screen', component: 'ProjectFuelScreen'},
     {path: '/check_fire_screen', component: 'CheckFireScreen'},
+    {path: '/check_lift_screen', component: 'CheckLiftScreen'},
+    {path: '/check_electric_screen', component: 'CheckElectricScreen'},
+    {path: '/check_fuel_screen', component: 'CheckFuelScreen'},
     // {path: '/red_line_data', component: 'DataInsight'},
     {path: '*', component: 'NotFound'}
 ]
