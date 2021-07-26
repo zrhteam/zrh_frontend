@@ -100,7 +100,7 @@ import HighRiskNote from "@/components/views/BigScreen/HighRiskNote.vue";
 import NowRiskRank from "@/components/views/BigScreen/NowRiskRank.vue";
 
 export default {
-  name: "project_fire_screen",
+  name: "check_fire_screen",
   components: {NowRiskRank, HighRiskNote, RecordList2, CarouselCard, OneMajorRisk, MajorRisk},
   data() {
     return {
