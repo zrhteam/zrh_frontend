@@ -45,16 +45,17 @@ export default {
       yAxis: [],
       s_data: [],
       myChart: null,
+      renderSign: false
     }
   },
   props: ['context'],
   methods: {
     drawBarChart() {
-      this.$nextTick(_ => {
-            // if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
-            //   this.myChart.dispose() // 销毁
-            // }
-            this.myChart = this.$echarts.init(document.getElementById(this.context.id))
+      // this.$nextTick(_ => {
+      //       if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+      //         this.myChart.dispose() // 销毁
+      //       }
+      //       this.myChart = this.$echarts.init(document.getElementById(this.context.id))
             let arr = this.getData
             let data = []
             let r_data = []
@@ -200,8 +201,8 @@ export default {
             //     dom.removeAttribute("_echarts_instance_")
             //   })
             // }
-          }
-      )
+          // }
+      // )
     },
     fontSize(res) {
       let docEl = document.documentElement,
@@ -212,7 +213,10 @@ export default {
     }
   },
   watch: {
-    s_data() {
+    // s_data() {
+    //   this.drawBarChart()
+    // },
+    renderSign() {
       this.drawBarChart()
     }
   },
@@ -360,6 +364,7 @@ export default {
       this.legend = legend
       this.yAxis = yAxis
       this.s_data = s_data
+      this.renderSign = !this.renderSign
     },
   },
   // updated() {
@@ -369,6 +374,7 @@ export default {
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
           this.myChart.dispose() // 销毁
         }
+    this.myChart = this.$echarts.init(document.getElementById(this.context.id))
     this.drawBarChart();
   },
   beforeDestroy() {

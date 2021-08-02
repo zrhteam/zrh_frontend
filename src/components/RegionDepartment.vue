@@ -107,14 +107,12 @@ import Region2_1 from "@/components/views/Region/Region2_1.vue";
 import Region2_2 from "@/components/views/Region/Region2_2.vue";
 import Region2_3 from "@/components/views/Region/Region2_3.vue";
 import Region3_1 from "@/components/views/Region/Region3_1.vue";
-import Region3_3 from "@/components/views/Region/Region3_3.vue";
 import RegionOverview from "@/components/views/Region/RegionOverview.vue";
 
 export default {
   name: "RegionDepartment",
   components: {
     RegionOverview,
-    Region3_3,
     Region3_1,
     Region2_3,
     Region2_2,

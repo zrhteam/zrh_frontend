@@ -469,7 +469,6 @@ const mutations = {
     //按专业分不同风险等级隐患数量
     changeProjectRiskLevelRatio(state, data) {
         if (data.code === 10000) {
-            console.log("top5", data.data)
             state.prj_risk_level_ratio = data.data;
         } else {
             alert("出错了")
@@ -480,7 +479,6 @@ const mutations = {
     changeProjectDangerProblem(state, data) {
         if (data.code === 10000) {
             state.project_danger_problem = data.data;
-            console.log('project_hongxian', data.data)
         } else {
             alert("出错了")
         }

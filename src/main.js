@@ -3,6 +3,7 @@
 // import echartsGL from 'echarts-gl'
 // import 'es6-promise/auto'
 // import Vuex from 'vuex'
+import 'default-passive-events'
 import App from './App.vue'
 import router from './router'
 import store from './store'
