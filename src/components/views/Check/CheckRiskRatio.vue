@@ -109,7 +109,7 @@ export default {
         })
       } else if (document.getElementById("pie2_2")) {
         this.$nextTick(() => {
-          const dom = document.getElementById(document.getElementById("pie2_2"))
+          const dom = document.getElementById("pie2_2")
           dom.innerHTML = '暂无数据'
           dom.style.color = '#ffffff'
           dom.style.fontSize = '14px'

@@ -94,7 +94,9 @@ export default {
           }
           this.myChart.resize();
           window.addEventListener("resize", () => {
-            this.myChart.resize();
+            if (this.myChart != null) { // 如果不存在，就进行初始化
+              this.myChart.resize();
+            }
           });
           // } else if (this.context.id) {
           //   this.$nextTick(() => {
@@ -250,6 +252,16 @@ export default {
     this.barEchartContainer = this.$refs.barEchartContainer;
     this.myChart = this.$echarts.init(this.barEchartContainer)
   },
+  beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      this.myChart.resize();
+    });
+
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+      this.myChart.dispose() // 销毁
+    }
+    this.myChart = null
+  }
 }
 </script>
 

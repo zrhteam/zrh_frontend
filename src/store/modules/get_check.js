@@ -410,7 +410,7 @@ const mutations = {
     changeCheckDangerProblem(state, data) {
         if (data.code === 10000) {
             state.check_danger_problem = data.data;
-            console.log('check_hongxian', data.data)
+            // console.log('check_hongxian', data.data)
         } else {
             alert("出错了")
         }

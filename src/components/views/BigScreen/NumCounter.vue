@@ -23,28 +23,30 @@ export default {
     }
   },
   mounted() {
-     this.timer = setInterval(() => {
-      this.numberGrow(this.$refs.numberGrow)
+    this.timer = setInterval(() => {
+      this.$nextTick(_ => {
+        this.numberGrow(this.$refs.numberGrow)
+      })
     }, 10000);
   },
   methods: {
     numberGrow(ele) {
-      let step = parseInt((this.value) / (this.time * 50))
-      let current = 0
-      let start = 0
-      this.timer = setInterval(() => {
-        start += step + 3
-        if (start >= this.value) {
-          clearInterval(t)
-          start = this.value
-          t = null
-        }
-        if (current === start) {
-          return
-        }
-        current = start
-        ele.innerHTML = current.toString().replace(/(\d)(?=(?:\d{3}[+]?)+$)/g, '$1,')
-      }, 50)
+        let step = parseInt((this.value) / (this.time * 50))
+        let current = 0
+        let start = 0
+        this.timer = setInterval(() => {
+          start += step + 3
+          if (start >= this.value) {
+            clearInterval(this.timer)
+            start = this.value
+            this.timer = null
+          }
+          if (current === start) {
+            return
+          }
+          current = start
+          ele.innerHTML = current.toString().replace(/(\d)(?=(?:\d{3}[+]?)+$)/g, '$1,')
+        }, 50)
     }
   },
   destroyed() {

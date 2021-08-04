@@ -188,7 +188,9 @@ export default {
       this.myChart.setOption(option);
 
       window.addEventListener("resize", () => {
-        this.myChart.resize();
+        if (this.myChart != null) { // 如果不存在，就进行初始化
+          this.myChart.resize();
+        }
       });
     },
     fontSize(res) {

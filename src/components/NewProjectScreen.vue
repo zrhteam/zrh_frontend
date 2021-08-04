@@ -345,7 +345,7 @@ export default {
     },
     getRisk() {
       let data = this.$store.state.get_screen.projects_risk_level
-      if (typeof(data.risk_level_ratio) != "undefined") {
+      if (typeof (data.risk_level_ratio) != "undefined") {
         this.high_risk = data.risk_level_ratio['3']
         this.mid_risk = data.risk_level_ratio['2']
         this.low_risk = data.risk_level_ratio['1']
@@ -432,7 +432,8 @@ export default {
           numArr.forEach(e => {
             numStr += `<span class="number">${e}</span>`;
           })
-          setInterval(() => {
+
+          setTimeout(() => {
             this.$nextTick(_ => {
               //拼接完字符串数组后用innerHTML把它渲染到页面中
               document.getElementById("real-number").innerHTML = numStr

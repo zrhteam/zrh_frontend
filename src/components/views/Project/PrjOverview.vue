@@ -170,42 +170,26 @@
 </template>
 
 <script>
-import Granularity from "@/components/views/Project/Granularity.vue";
 import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
 import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
-import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
-import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
-import CheckedProject from "@/components/views/Project/CheckedProject.vue";
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
-import PrjDataScreen from '@/components/views/Project/PrjDataScreen.vue'
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
-import RegionOverview from "@/components/views/Region/RegionDataScreen.vue";
 import Tree from "@/components/views/functions/Tree.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
-import TopRisk from "@/components/views/functions/TopRisk.vue";
-import TopName from "@/components/views/functions/TopName.vue";
-import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
 import BarRank from "@/components/views/functions/BarRank.vue";
 import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
+import PrjDataScreen from "@v/Project/PrjDataScreen.vue";
 
 export default {
   name: "PrjOverview",
   components: {
-    CheckRiskLevel,
+    PrjDataScreen,
     RiskLevelYear,
-    TopRisk,
-    TopName,
-    RegionOverview,
     CheckOverview,
-    Granularity,
     PerctangePerc,
     CheckHistoryPerc,
-    UnsolvedList,
-    UnsolvedImageList,
-    CheckedProject,
     // PrjEHSDataAnalysis3,
     PrjIndex,
-    PrjDataScreen,
     Tree,
     BarRank,
     StackedHorizontalBar,
@@ -216,18 +200,18 @@ export default {
       large1.style.display = 'none'
       var large2 = document.getElementById('large2');
       large2.style.display = 'none'
-      var prj_small = document.getElementById('prj_small');
-      prj_small.style.display = 'block'
-      prj_small.style.width = "100%"
+      // var prj_small = document.getElementById('prj_small');
+      // prj_small.style.display = 'block'
+      // prj_small.style.width = "100%"
       document.getElementById('prj_charts').style.height = "500px"
       document.getElementById('check_charts').style.height = "500px"
       let timer = setTimeout(function () {
-        prj_small.style.width = "99%"
+        // prj_small.style.width = "99%"
         document.getElementById('prj_charts').style.height = "99%"
         document.getElementById('check_charts').style.height = "99%"
       }, 100)
       clearTimeout(timer)
-      prj_small.style.width = "99%"
+      // prj_small.style.width = "99%"
       if (document.getElementById('prj_charts').style.display === 'none') {
         document.getElementById('check_charts').style.display = 'block'
         this.$router.push({path: `/new_check_screen/${this.$store.state.get_check.check_code}`});
@@ -425,6 +409,9 @@ export default {
     // console.log('grant', this.$store.state.get_login.grant_data)
     //得到树形控件的内容 还负责封装了地理位置信息
     this.treeObj = this.$store.state.get_login.grant_data.data.value
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
 }
 </script>

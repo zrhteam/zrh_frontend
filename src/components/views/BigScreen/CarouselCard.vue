@@ -6,7 +6,7 @@
     <div class="absolute" style="width: 100%; height: 100%; overflow-x: hidden">
       <div id="element1">
         <div
-             style="width: 100%; height: 8%; margin-left: 0.25rem;">
+            style="width: 100%; height: 8%; margin-left: 0.25rem;">
           <div class="title-wrapper" style="width: 100%; height: 100%; "> 实时风险严重程度分析</div>
         </div>
         <div ref="myBarChart1" style="width: 100%; height: 41%">
@@ -16,7 +16,7 @@
       </div>
       <div id="element2">
         <div
-             style="width: 100%; height: 8%; margin-left: 0.25rem;">
+            style="width: 100%; height: 8%; margin-left: 0.25rem;">
           <div class="title-wrapper" style="width: 100%; height: 100%; "> 实时风险所处区域分析</div>
         </div>
         <div ref="myBarChart2" style="width: 100%; height: 50%">
@@ -26,7 +26,7 @@
       </div>
       <div id="element3">
         <div
-             style="width: 100%; height: 8%; margin-left: 0.25rem;">
+            style="width: 100%; height: 8%; margin-left: 0.25rem;">
           <div class="title-wrapper" style="width: 100%; height: 100%; "> 实时风险致因阶段分析</div>
         </div>
         <div ref="myBarChart3" style="width: 100%; height: 50%">
@@ -64,25 +64,54 @@ export default {
   watch: {
     CarouselCardData() {
 
+      if (this.barChart != null && this.barChart != "" && this.barChart != "undefined") {
+        this.barChart.dispose() // 销毁
+      }
+      if (this.pieChart != null && this.pieChart != "" && this.pieChart != "undefined") {
+        this.pieChart.dispose() // 销毁
+      }
+
       //拼接完字符串数组后用innerHTML把它渲染到页面中
       this.myBarChart = this.$refs.myBarChart1;
-      this.barChart = this.$echarts.init(this.myBarChart)
+      this.barChart = echarts.getInstanceByDom(this.myBarChart)
+      if (this.barChart == null) { // 如果不存在，就进行初始化
+        this.barChart = this.$echarts.init(this.myBarChart)
+      }
       this.myPieChart = this.$refs.myPieChart1;
-      this.pieChart = this.$echarts.init(this.myPieChart)
+      this.pieChart = echarts.getInstanceByDom(this.myPieChart)
+      if (this.pieChart == null) { // 如果不存在，就进行初始化
+        this.pieChart = this.$echarts.init(this.myPieChart)
+      }
+      // this.myBarChart = this.$refs.myBarChart1;
+      // this.barChart = this.$echarts.init(this.myBarChart)
+      // this.myPieChart = this.$refs.myPieChart1;
+      // this.pieChart = this.$echarts.init(this.myPieChart)
       this.drawChart(this.CarouselCardData[0])
 
       // this.barChart.dispose() // 销毁
       // this.pieChart.dispose() // 销毁
       this.myBarChart = this.$refs.myBarChart2;
-      this.barChart = this.$echarts.init(this.myBarChart)
+      this.barChart = echarts.getInstanceByDom(this.myBarChart)
+      if (this.barChart == null) { // 如果不存在，就进行初始化
+        this.barChart = this.$echarts.init(this.myBarChart)
+      }
       this.myPieChart = this.$refs.myPieChart2;
-      this.pieChart = this.$echarts.init(this.myPieChart)
+      this.pieChart = echarts.getInstanceByDom(this.myPieChart)
+      if (this.pieChart == null) { // 如果不存在，就进行初始化
+        this.pieChart = this.$echarts.init(this.myPieChart)
+      }
       this.drawChart(this.CarouselCardData[1])
 
       this.myBarChart = this.$refs.myBarChart3;
-      this.barChart = this.$echarts.init(this.myBarChart)
+      this.barChart = echarts.getInstanceByDom(this.myBarChart)
+      if (this.barChart == null) { // 如果不存在，就进行初始化
+        this.barChart = this.$echarts.init(this.myBarChart)
+      }
       this.myPieChart = this.$refs.myPieChart3;
-      this.pieChart = this.$echarts.init(this.myPieChart)
+      this.pieChart = echarts.getInstanceByDom(this.myPieChart)
+      if (this.pieChart == null) { // 如果不存在，就进行初始化
+        this.pieChart = this.$echarts.init(this.myPieChart)
+      }
       this.drawChart(this.CarouselCardData[2])
     }
   },
@@ -245,19 +274,19 @@ export default {
     },
   },
   mounted() {
-    if (this.barChart != null && this.barChart != "" && this.barChart != "undefined") {
-      this.barChart.dispose() // 销毁
-    }
-    if (this.pieChart != null && this.pieChart != "" && this.pieChart != "undefined") {
-      this.pieChart.dispose() // 销毁
-    }
     let chooseIndex1 = 0;//默认选中高亮模块索引 现在是默认第一条
     let chooseIndex2 = 0;
     let chooseIndex3 = 0;
     this.timer1 = setInterval(() => {
+
       let len = this.CarouselCardData[0].pie_data.length
+
       this.myPieChart = this.$refs.myPieChart1;
-      this.pieChart = this.$echarts.init(this.myPieChart)
+      this.pieChart = echarts.getInstanceByDom(this.myPieChart)
+      if (this.pieChart == null) { // 如果不存在，就进行初始化
+        this.pieChart = this.$echarts.init(this.myPieChart)
+      }
+
       // this.pieChart.dispatchAction({type: 'highlight', seriesIndex: 0, dataIndex: chooseIndex1});
       // 没用选中的取消高亮
       this.pieChart.dispatchAction({type: 'downplay', seriesIndex: 0, dataIndex: chooseIndex1});
@@ -273,7 +302,11 @@ export default {
 
       len = this.CarouselCardData[1].pie_data.length
       this.myPieChart = this.$refs.myPieChart2;
-      this.pieChart = this.$echarts.init(this.myPieChart)
+      this.pieChart = echarts.getInstanceByDom(this.myPieChart)
+      if (this.pieChart == null) { // 如果不存在，就进行初始化
+        this.pieChart = this.$echarts.init(this.myPieChart)
+      }
+
       this.pieChart.dispatchAction({type: 'highlight', seriesIndex: 0, dataIndex: chooseIndex2});
       // 没用选中的取消高亮
       this.pieChart.dispatchAction({type: 'downplay', seriesIndex: 0, dataIndex: chooseIndex2});
@@ -289,7 +322,11 @@ export default {
 
       len = this.CarouselCardData[2].pie_data.length
       this.myPieChart = this.$refs.myPieChart3;
-      this.pieChart = this.$echarts.init(this.myPieChart)
+      this.pieChart = echarts.getInstanceByDom(this.myPieChart)
+      if (this.pieChart == null) { // 如果不存在，就进行初始化
+        this.pieChart = this.$echarts.init(this.myPieChart)
+      }
+
       this.pieChart.dispatchAction({type: 'highlight', seriesIndex: 0, dataIndex: chooseIndex3});
       // 没用选中的取消高亮
       this.pieChart.dispatchAction({type: 'downplay', seriesIndex: 0, dataIndex: chooseIndex2});

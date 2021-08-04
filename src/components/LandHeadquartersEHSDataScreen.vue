@@ -67,7 +67,7 @@ export default {
       });
     });
   },
-  destroyed() {
+  beforeDestroy() {
     window.removeEventListener('popstate', this.goBack, false);
     window.removeEventListener('resize', this.doResize, true)
     window.removeEventListener("beforeunload", () => {

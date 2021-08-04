@@ -101,7 +101,8 @@ export default {
           key: 10
         }],
       sub_top_data: [],
-      options: this.$store.state.get_login.danger_selection
+      options: this.$store.state.get_login.danger_selection,
+      timer: null
     }
   },
   methods: {
@@ -433,7 +434,7 @@ export default {
     const divData = table.bodyWrapper
     let _this = this
     // 拿到元素后，对元素进行定时增加距离顶部距离，实现滚动效果(此配置为每100毫秒移动1像素)
-    setInterval(() => {
+    this.timer = setInterval(() => {
       // 元素自增距离顶部1像素
       divData.scrollTop += 1
       // 判断元素是否滚动到底部(可视高度+距离顶部=整个高度)
@@ -446,6 +447,9 @@ export default {
   },
   updated() {
     this.updateList()
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
 }
 </script>

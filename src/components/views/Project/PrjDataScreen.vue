@@ -44,293 +44,285 @@
       <div style="display: none">
         {{ getName }}
       </div>
-      <!--            <el-col :span="24" style="height: 70%;">-->
+                  <el-col :span="24" style="height: 70%;">
       <el-row v-if="isFirst" style="height: 80%; flex-direction: row; overflow-x: scroll">
-        <!--      <el-col v-if="isFirst" style="height: 86%;">-->
-        <!--        <el-col :span="2" style="height: 100%; padding-top: 12%">-->
-        <!--          <el-button size="mini" circle icon="el-icon-arrow-left"-->
-        <!--                     style="background-color: transparent; color: #ffffff; float: left;"-->
-        <!--                     @click="preFirst">-->
-        <!--          </el-button>-->
-        <!--        </el-col>-->
-        <!--        <el-col :span="20" id="aa1" style="height: 100%;">-->
-        <el-col :span="12" style="height: 100%;">
-          <el-row style="height: 32%; margin-bottom: 1%">
-<!--            <BarRank-->
-<!--                :context="{-->
-<!--              title:'不同子系统隐患数量',-->
-<!--              id: 'id_project_system'-->
-<!--          }"></BarRank>-->
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <TopRisk
-                :context="{
-                          title:'重复出现隐患列表',
-                          label1:'隐患描述',
-                          label2:'出现频率',
-                          sign:'prj_other'}"
-                :top_data="this.$store.state.get_project.prj_other_top"
-            ></TopRisk>
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <Rules
-                :context="{title:'最容易违反的法规标准',
-            top_data:this.prj_rule_name,
-            label1:'违反次数',
-            label2:'法规名称',
-            label3:'条款号',
-        }"></Rules>
-          </el-row>
-        </el-col>
-        <el-col :span="12" style="height: 100%;">
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <el-col :span="11" style="height: 100%;margin-left:1%">
-              <TopName
-                  :context="{title:'最容易出现隐患的设备',
-            top_data:this.prj_device_name,
-            label1:'设备名称',
-            label2:'出现频率',
-        }"></TopName>
+        <el-col v-if="isFirst" style="height: 86%;">
+<!--          <el-col :span="2" style="height: 100%; padding-top: 12%">-->
+<!--            <el-button size="mini" circle icon="el-icon-arrow-left"-->
+<!--                       style="background-color: transparent; color: #ffffff; float: left;"-->
+<!--                       @click="preFirst">-->
+<!--            </el-button>-->
+<!--          </el-col>-->
+<!--          <el-col :span="20" id="aa1" style="height: 100%;">-->
+<!--            <el-col :span="12" style="height: 100%;">-->
+<!--              <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--                &lt;!&ndash;            <BarRank&ndash;&gt;-->
+<!--                &lt;!&ndash;                :context="{&ndash;&gt;-->
+<!--                &lt;!&ndash;              title:'不同子系统隐患数量',&ndash;&gt;-->
+<!--                &lt;!&ndash;              id: 'id_project_system'&ndash;&gt;-->
+<!--                &lt;!&ndash;          }"></BarRank>&ndash;&gt;-->
+<!--              </el-row>-->
+<!--              <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--                <TopRisk-->
+<!--                    :context="{-->
+<!--                          title:'重复出现隐患列表',-->
+<!--                          label1:'隐患描述',-->
+<!--                          label2:'出现频率',-->
+<!--                          sign:'prj_other'}"-->
+<!--                    :top_data="this.$store.state.get_project.prj_other_top"-->
+<!--                ></TopRisk>-->
+<!--              </el-row>-->
+<!--              <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--                <Rules-->
+<!--                    :context="{title:'最容易违反的法规标准',-->
+<!--            top_data:this.prj_rule_name,-->
+<!--            label1:'违反次数',-->
+<!--            label2:'法规名称',-->
+<!--            label3:'条款号',-->
+<!--        }"></Rules>-->
+<!--              </el-row>-->
+<!--            </el-col>-->
+<!--            <el-col :span="12" style="height: 100%;">-->
+<!--              <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--                <el-col :span="11" style="height: 100%;margin-left:1%">-->
+<!--                  <TopName-->
+<!--                      :context="{title:'最容易出现隐患的设备',-->
+<!--            top_data:this.prj_device_name,-->
+<!--            label1:'设备名称',-->
+<!--            label2:'出现频率',-->
+<!--        }"></TopName>-->
+<!--                </el-col>-->
+<!--                <el-col :span="11" style="height: 100%;margin-left:6%">-->
+<!--                  <TopName-->
+<!--                      :context="{title:'最容易出现隐患的组件',-->
+<!--            top_data:this.prj_unit_name,-->
+<!--            label1:'组件名称',-->
+<!--            label2:'出现频率',-->
+<!--        }"></TopName>-->
+<!--                </el-col>-->
+<!--              </el-row>-->
+<!--              <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--                &lt;!&ndash;            <StackedHorizontalBar&ndash;&gt;-->
+<!--                &lt;!&ndash;                :context="{&ndash;&gt;-->
+<!--                &lt;!&ndash;              title:'不同致因阶段隐患数量',&ndash;&gt;-->
+<!--                &lt;!&ndash;              type:'reason',&ndash;&gt;-->
+<!--                &lt;!&ndash;              id:'id_project_reason',&ndash;&gt;-->
+<!--                &lt;!&ndash;            }"></StackedHorizontalBar>&ndash;&gt;-->
+<!--              </el-row>-->
+<!--              <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--                <el-col :span="11" style="height: 100%;margin-left:1%">-->
+<!--                  &lt;!&ndash;            不同专业隐患数量&ndash;&gt;-->
+<!--                  &lt;!&ndash;              <CheckHistoryPerc></CheckHistoryPerc>&ndash;&gt;-->
+<!--                </el-col>-->
+<!--                <el-col :span="11" style="height: 100%;margin-left:6%">-->
+<!--                  <UnsolvedImageList></UnsolvedImageList>-->
+<!--                </el-col>-->
+<!--              </el-row>-->
+<!--              <el-row style="height: 32%; margin-bottom: 1%">-->
+<!--                <el-col :span="11" style="height: 100%;margin-left:1%">-->
+<!--                  &lt;!&ndash;            不同专业隐患数量&ndash;&gt;-->
+<!--                  &lt;!&ndash;              <PerctangePerc&ndash;&gt;-->
+<!--                  &lt;!&ndash;                  :context="{&ndash;&gt;-->
+<!--                  &lt;!&ndash;                  title:'不同分布区域隐患数量',&ndash;&gt;-->
+<!--                  &lt;!&ndash;                  type:'region',&ndash;&gt;-->
+<!--                  &lt;!&ndash;                  id:'id_region',&ndash;&gt;-->
+<!--                  &lt;!&ndash;                 }"></PerctangePerc>&ndash;&gt;-->
+<!--                </el-col>-->
+<!--                <el-col :span="11" style="height: 100%;margin-left:6%">-->
+<!--                  &lt;!&ndash;              <StackedHorizontalBar&ndash;&gt;-->
+<!--                  &lt;!&ndash;                  :context="{&ndash;&gt;-->
+<!--                  &lt;!&ndash;              title:'不同风险等级隐患数量',&ndash;&gt;-->
+<!--                  &lt;!&ndash;              id: 'id_project_risk'&ndash;&gt;-->
+<!--                  &lt;!&ndash;          }"></StackedHorizontalBar>&ndash;&gt;-->
+<!--                </el-col>-->
+<!--              </el-row>-->
             </el-col>
-            <el-col :span="11" style="height: 100%;margin-left:6%">
-              <TopName
-                  :context="{title:'最容易出现隐患的组件',
-            top_data:this.prj_unit_name,
-            label1:'组件名称',
-            label2:'出现频率',
-        }"></TopName>
-            </el-col>
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-<!--            <StackedHorizontalBar-->
-<!--                :context="{-->
-<!--              title:'不同致因阶段隐患数量',-->
-<!--              type:'reason',-->
-<!--              id:'id_project_reason',-->
-<!--            }"></StackedHorizontalBar>-->
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <el-col :span="11" style="height: 100%;margin-left:1%">
-              <!--            不同专业隐患数量-->
-<!--              <CheckHistoryPerc></CheckHistoryPerc>-->
-            </el-col>
-            <el-col :span="11" style="height: 100%;margin-left:6%">
-              <UnsolvedImageList></UnsolvedImageList>
-            </el-col>
-          </el-row>
-          <el-row style="height: 32%; margin-bottom: 1%">
-            <el-col :span="11" style="height: 100%;margin-left:1%">
-              <!--            不同专业隐患数量-->
-<!--              <PerctangePerc-->
-<!--                  :context="{-->
-<!--                  title:'不同分布区域隐患数量',-->
-<!--                  type:'region',-->
-<!--                  id:'id_region',-->
-<!--                 }"></PerctangePerc>-->
-            </el-col>
-            <el-col :span="11" style="height: 100%;margin-left:6%">
-<!--              <StackedHorizontalBar-->
-<!--                  :context="{-->
-<!--              title:'不同风险等级隐患数量',-->
-<!--              id: 'id_project_risk'-->
-<!--          }"></StackedHorizontalBar>-->
-            </el-col>
-          </el-row>
-        </el-col>
       </el-row>
       <el-row v-if="isSecond" style="height: 88%;">
-        <el-col :span="24" style="height: 100%; flex-direction: row; overflow-x: scroll">
-          <el-col :span="24" class="level4" style="min-height: 30px" v-if="isShow">
-            <!--        <div class="level4" style="; padding-left: 10px">-->
-            <el-popover
-                placement="top-start"
-                title="粒度"
-                width="400"
-                trigger="hover">
-              <span style="color: #ffffff">{{ level }}</span>
-              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">粒度
-              </el-button>
-            </el-popover>
-            <el-popover
-                placement="top-start"
-                title="object1"
-                width="400"
-                trigger="hover">
-              <span style="color: #ffffff">{{ obj1 }}</span>
-              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">
-                object1
-              </el-button>
-            </el-popover>
-            <el-popover
-                placement="top-start"
-                title="object2"
-                width="400"
-                trigger="hover"
-                style="color: #ffffff">
-              <span style="color: #ffffff">{{ obj2 }}</span>
-              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">
-                object2
-              </el-button>
-            </el-popover>
+<!--        <el-col :span="24" style="height: 100%; flex-direction: row; overflow-x: scroll">-->
+<!--          <el-col :span="24" class="level4" style="min-height: 30px" v-if="isShow">-->
+<!--            &lt;!&ndash;        <div class="level4" style="; padding-left: 10px">&ndash;&gt;-->
+<!--            <el-popover-->
+<!--                placement="top-start"-->
+<!--                title="粒度"-->
+<!--                width="400"-->
+<!--                trigger="hover">-->
+<!--              <span style="color: #ffffff">{{ level }}</span>-->
+<!--              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">粒度-->
+<!--              </el-button>-->
+<!--            </el-popover>-->
+<!--            <el-popover-->
+<!--                placement="top-start"-->
+<!--                title="object1"-->
+<!--                width="400"-->
+<!--                trigger="hover">-->
+<!--              <span style="color: #ffffff">{{ obj1 }}</span>-->
+<!--              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">-->
+<!--                object1-->
+<!--              </el-button>-->
+<!--            </el-popover>-->
+<!--            <el-popover-->
+<!--                placement="top-start"-->
+<!--                title="object2"-->
+<!--                width="400"-->
+<!--                trigger="hover"-->
+<!--                style="color: #ffffff">-->
+<!--              <span style="color: #ffffff">{{ obj2 }}</span>-->
+<!--              <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">-->
+<!--                object2-->
+<!--              </el-button>-->
+<!--            </el-popover>-->
 
-            <!--        </div>-->
-          </el-col>
-          <el-col :span="8" style="height: 25%">
-            <DoughnutChart
-                v-if="isShows[0]"
-                :context="{
-                    title:this.titles[0],
-                    id:'id_by_check',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></DoughnutChart>
-          </el-col>
-          <el-col :span="8" style="height: 25%">
-            <DoughnutChart
-                v-if="isShows[1]"
-                :context="{
-                    title:this.titles[1],
-                    id:'id_by_prj',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></DoughnutChart>
-          </el-col>
-          <el-col :span="8" style="height: 25%">
-            <RiskLevelYear
-                v-if="isShows[2]"
-                :context="{
-                    title:this.titles[2],
-                    id:'id_risk_level',
-                    level: this.level,
-                    flag: 'grant'}"></RiskLevelYear>
-          </el-col>
-          <el-col :span="8" style="height: 50%">
-            <TopCompare
-                v-if="isShows[3]"
-                :context="{
-                    title:this.titles[3],
-                    id1:'id_area_o1',
-                    id2:'id_area_o2',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></TopCompare>
-          </el-col>
-          <el-col :span="8" style="height: 50%">
-            <TopCompare
-                v-if="isShows[4]"
-                :context="{
-                    title:this.titles[4],
-                    id1:'id_stage_o1',
-                    id2:'id_stage_o2',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></TopCompare>
-          </el-col>
-          <el-col :span="8" style="height: 50%">
-            <TopCompare
-                v-if="isShows[5]"
-                :context="{
-                    title:this.titles[5],
-                    id1:'id_risk_o1',
-                    id2:'id_risk_o2',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></TopCompare>
-          </el-col>
-          <el-col :span="8" style="height: 50%">
-            <TopCompare
-                v-if="isShows[6]"
-                :context="{
-                    title:this.titles[6],
-                    id1:'id_module_top1',
-                    id2:'id_module_top2',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></TopCompare>
-          </el-col>
-          <el-col :span="8" style="height: 50%">
-            <TopCompare
-                v-if="isShows[7]"
-                :context="{
-                    title:this.titles[7],
-                    id1:'id_equip_top1',
-                    id2:'id_equip_top2',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></TopCompare>
-          </el-col>
-          <el-col :span="8" style="height: 50%">
-            <TopCompare
-                v-if="isShows[8]"
-                :context="{
-                    title:this.titles[8],
-                    id1:'id_system_top1',
-                    id2:'id_system_top2',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></TopCompare>
-          </el-col>
-          <el-col :span="24" style="height: 50%">
-            <DrillDown
-                v-if="isShows[9]"
-                :context="{
-                    title:this.titles[9],
-                    id1:'id_major_o1',
-                    id2:'id_major_o2',
-                    level: this.level,
-                    flag: 'grant'}"
-            ></DrillDown>
-          </el-col>
-        </el-col>
+<!--            &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 25%">-->
+<!--            <DoughnutChart-->
+<!--                v-if="isShows[0]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[0],-->
+<!--                    id:'id_by_check',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></DoughnutChart>-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 25%">-->
+<!--            <DoughnutChart-->
+<!--                v-if="isShows[1]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[1],-->
+<!--                    id:'id_by_prj',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></DoughnutChart>-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 25%">-->
+<!--            <RiskLevelYear-->
+<!--                v-if="isShows[2]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[2],-->
+<!--                    id:'id_risk_level',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"></RiskLevelYear>-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 50%">-->
+<!--            <TopCompare-->
+<!--                v-if="isShows[3]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[3],-->
+<!--                    id1:'id_area_o1',-->
+<!--                    id2:'id_area_o2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></TopCompare>-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 50%">-->
+<!--            <TopCompare-->
+<!--                v-if="isShows[4]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[4],-->
+<!--                    id1:'id_stage_o1',-->
+<!--                    id2:'id_stage_o2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></TopCompare>-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 50%">-->
+<!--            <TopCompare-->
+<!--                v-if="isShows[5]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[5],-->
+<!--                    id1:'id_risk_o1',-->
+<!--                    id2:'id_risk_o2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></TopCompare>-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 50%">-->
+<!--            <TopCompare-->
+<!--                v-if="isShows[6]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[6],-->
+<!--                    id1:'id_module_top1',-->
+<!--                    id2:'id_module_top2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></TopCompare>-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 50%">-->
+<!--            <TopCompare-->
+<!--                v-if="isShows[7]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[7],-->
+<!--                    id1:'id_equip_top1',-->
+<!--                    id2:'id_equip_top2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></TopCompare>-->
+<!--          </el-col>-->
+<!--          <el-col :span="8" style="height: 50%">-->
+<!--            <TopCompare-->
+<!--                v-if="isShows[8]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[8],-->
+<!--                    id1:'id_system_top1',-->
+<!--                    id2:'id_system_top2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></TopCompare>-->
+<!--          </el-col>-->
+<!--          <el-col :span="24" style="height: 50%">-->
+<!--            <DrillDown-->
+<!--                v-if="isShows[9]"-->
+<!--                :context="{-->
+<!--                    title:this.titles[9],-->
+<!--                    id1:'id_major_o1',-->
+<!--                    id2:'id_major_o2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'grant'}"-->
+<!--            ></DrillDown>-->
+<!--          </el-col>-->
+<!--        </el-col>-->
       </el-row>
-      <!--      </el-col>-->
+      </el-col>
     </el-row>
-    <CheckDataScreen id="check_charts" style="display: none"></CheckDataScreen>
+    <div id="check_charts" style="display: none"></div>
   </el-row>
 </template>
 
 <script>
-import Granularity from "@/components/views/Project/Granularity.vue";
-import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
-import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
-import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
-import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
-import CheckedProject from "@/components/views/Project/CheckedProject.vue";
-import PrjIndex from "@/components/views/Project/PrjIndex.vue";
-import CheckDataScreen from "@/components/views/Check/CheckDataScreen.vue";
-import Tree from "@/components/views/functions/Tree.vue";
-import TopName from "@/components/views/functions/TopName.vue";
-import TopRisk from "@/components/views/functions/TopRisk.vue";
-import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
-import Rules from "@/components/views/functions/Rules.vue";
-import DoughnutChart from "@/components/views/functions/DoughnutChart.vue";
-import TopCompare from "@/components/views/functions/TopCompare.vue";
-import DrillDown from "@/components/views/functions/DrillDown.vue";
-import BarRank from "@/components/views/functions/BarRank.vue";
-import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
+// import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
+// import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
+// import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
+// import PrjIndex from "@/components/views/Project/PrjIndex.vue";
+// import Tree from "@/components/views/functions/Tree.vue";
+// import TopName from "@/components/views/functions/TopName.vue";
+// import TopRisk from "@/components/views/functions/TopRisk.vue";
+// import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
+// import Rules from "@/components/views/functions/Rules.vue";
+// import DoughnutChart from "@/components/views/functions/DoughnutChart.vue";
+// import TopCompare from "@/components/views/functions/TopCompare.vue";
+// import DrillDown from "@/components/views/functions/DrillDown.vue";
+// import BarRank from "@/components/views/functions/BarRank.vue";
+// import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
-  name: "PrjOverview",
+  name: "PrjDataScreen",
   components: {
-    StackedHorizontalBar,
-    BarRank,
-    Rules,
-    RiskLevelYear,
-    TopRisk,
-    TopName,
-    CheckDataScreen,
-    Granularity,
-    PerctangePerc,
-    CheckHistoryPerc,
-    UnsolvedList,
-    UnsolvedImageList,
-    CheckedProject,
-    // PrjEHSDataAnalysis3,
-    PrjIndex,
-    Tree,
-    DoughnutChart,
-    TopCompare,
-    DrillDown
+    // StackedHorizontalBar,
+    // BarRank,
+    // Rules,
+    // RiskLevelYear,
+    // TopRisk,
+    // TopName,
+    // PerctangePerc,
+    // CheckHistoryPerc,
+    // UnsolvedImageList,
+    // // PrjEHSDataAnalysis3,
+    // PrjIndex,
+    // Tree,
+    // DoughnutChart,
+    // TopCompare,
+    // DrillDown
   },
   methods: {
     filterNode(value, data) {

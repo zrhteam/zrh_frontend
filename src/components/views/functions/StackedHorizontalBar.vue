@@ -378,17 +378,15 @@ export default {
     this.drawBarChart();
   },
   beforeDestroy() {
-    if (!this.myChart) {
-      return;
-    }
-    this.myChart.dispose();
-    this.myChart = null;
-  },
-  destroyed() {
     window.removeEventListener("resize", () => {
       this.myChart.resize();
     });
-  }
+
+    if (this.myChart) {
+      this.myChart.dispose();
+    }
+    this.myChart = null;
+  },
 }
 </script>
 

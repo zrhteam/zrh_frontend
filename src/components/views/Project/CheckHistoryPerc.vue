@@ -103,11 +103,13 @@ export default {
 
         this.myChart.resize();
         window.addEventListener('resize', () => {
-          this.myChart.resize();
+          if (this.myChart != null) { // 如果不存在，就进行初始化
+            this.myChart.resize();
+          }
         })
       } else if (document.getElementById("pie2")) {
         this.$nextTick(() => {
-          const dom = document.getElementById(document.getElementById("pie2"))
+          const dom = document.getElementById("pie2")
           dom.innerHTML = '暂无数据'
           dom.style.color = '#ffffff'
           dom.style.fontSize = '14px'
@@ -125,8 +127,8 @@ export default {
   },
   destroyed() {
     window.removeEventListener("resize", () => {
-        this.myChart.resize();
-      });
+      this.myChart.resize();
+    });
   }
 }
 </script>

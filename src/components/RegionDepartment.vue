@@ -102,10 +102,6 @@
 </template>
 
 <script>
-import Region1_4 from "@/components/views/Region/Region1_4.vue";
-import Region2_1 from "@/components/views/Region/Region2_1.vue";
-import Region2_2 from "@/components/views/Region/Region2_2.vue";
-import Region2_3 from "@/components/views/Region/Region2_3.vue";
 import Region3_1 from "@/components/views/Region/Region3_1.vue";
 import RegionOverview from "@/components/views/Region/RegionOverview.vue";
 
@@ -114,10 +110,6 @@ export default {
   components: {
     RegionOverview,
     Region3_1,
-    Region2_3,
-    Region2_2,
-    Region2_1,
-    Region1_4,
   },
   data() {
     return {

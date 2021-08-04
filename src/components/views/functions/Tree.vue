@@ -161,7 +161,7 @@ export default {
 
       // 点击了一个节点，
       let temp_arr = this.keys
-      console.log("start", this.keys)
+      // console.log("start", this.keys)
       let last_node = 0
       // 第一次点击节点
       if (temp_arr.length == 0) {
@@ -210,7 +210,7 @@ export default {
       // this.$refs.modelTree.getCurrentKey()
       // this.$refs.modelTree.getCurrentNode()
       this.keys = temp_arr
-      console.log("end", this.keys)
+      // console.log("end", this.keys)
 
       this.$nextTick(function () {
         this.$refs.modelTree.setCurrentKey(null);

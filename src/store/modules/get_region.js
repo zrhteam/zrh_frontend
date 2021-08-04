@@ -314,7 +314,7 @@ const mutations = {
     //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
     changeImage(state, data) {
         if (data.code === 10000) {
-            console.log('image', data.data)
+            // console.log('image', data.data)
             state.images = data.data;
         } else {
             alert("出错了")
@@ -441,7 +441,7 @@ const mutations = {
     changeRegionDangerProblem(state, data) {
         if (data.code === 10000) {
             state.region_danger_problem = data.data;
-            console.log('region_hongxian', data.data)
+            // console.log('region_hongxian', data.data)
         } else {
             alert("出错了")
         }

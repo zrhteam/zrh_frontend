@@ -140,7 +140,9 @@ export default {
       this.myChart.setOption(bar_option3);
 
       window.addEventListener("resize", () => {
-        this.myChart.resize();
+        if (this.myChart != null) {
+          this.myChart.resize();
+        }
       });
     },
     fontSize(res) {

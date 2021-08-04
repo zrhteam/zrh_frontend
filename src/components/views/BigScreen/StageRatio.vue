@@ -101,9 +101,11 @@ export default {
       }
       this.myChart.setOption(pie_option);
 
-      window.addEventListener("resize", () => {
-        this.myChart.resize();
-      });
+      window.addEventListener('resize', () => {
+        if (this.myChart != null) {
+          this.myChart.resize();
+        }
+      })
     },
     fontSize(res) {
       let docEl = document.documentElement,
@@ -124,11 +126,14 @@ export default {
 
     this.timer = setInterval(() => {
       var option1 = this.myChart.getOption();
-      this.myChart.clear();
+      this.myChart = this.$echarts.getInstanceByDom(this.$refs.rosePie)
+      if (this.myChart == null) { // 如果不存在，就进行初始化
+        this.myChart = this.$echarts.init(this.rosePie)
+      }
       this.myChart.setOption(option1);
 
-      this.rosePie = this.$refs.rosePie;
-      this.myChart = this.$echarts.init(this.rosePie)
+      // this.rosePie = this.$refs.rosePie;
+      // this.myChart = this.$echarts.init(this.rosePie)
     }, 10000);
   },
   watch: {

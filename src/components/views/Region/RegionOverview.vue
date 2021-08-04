@@ -2,8 +2,8 @@
   <!--  <div>-->
   <el-row style="height: 100%;">
     <el-row id="region" style="height: 100%;">
-      <RegionDataScreen id="region_small" v-if="showDataScreen"
-                        @outRegionDataScreen="outRegionDataScreen"></RegionDataScreen>
+<!--      <RegionDataScreen id="region_small" v-if="showDataScreen"-->
+<!--                        @outRegionDataScreen="outRegionDataScreen"></RegionDataScreen>-->
       <el-row id="region_large1" v-if="!showDataScreen" class="" style="height: 1.25rem;">
         <!--      <el-col :span="4" style="height: 100%">-->
         <!--        <el-card class="title-box-card" shadow="never"-->
@@ -153,10 +153,6 @@
 </template>
 
 <script>
-import Region1_4 from "@/components/views/Region/Region1_4.vue";
-import Region2_3 from "@/components/views/Region/Region2_3.vue";
-import Region2_1 from "@/components/views/Region/Region2_1.vue";
-import RegionDataScreen from "@/components/views/Region/RegionDataScreen.vue";
 import PrjOverview from "@/components/views/Project/PrjOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue"
 import TopRisk from "@/components/views/functions/TopRisk.vue";
@@ -171,12 +167,7 @@ export default {
     StackedHorizontalBar,
     Ratio,
     TopRisk,
-    // HeadquarterOverview,
     PrjOverview,
-    Region1_4,
-    Region2_1,
-    Region2_3,
-    RegionDataScreen,
     Tree,
     RiskLevelYear,
     BarRank,
@@ -322,6 +313,9 @@ export default {
   },
   created() {
     this.treeObj = this.$store.state.get_login.grant_data.data.value
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <el-row style="height: 100%;">
     <el-row style="height: 100%;" id="head_quarter">
-      <headquarterDataScreen id="head_small" style="display: none"></headquarterDataScreen>
+<!--      <headquarterDataScreen id="head_small" style="display: none"></headquarterDataScreen>-->
       <el-row id="head_large1" class="" style="height: 1.25rem;">
         <!--        <el-col :span="4" style="height: 100%">-->
         <!--          <el-card class="title-box-card" shadow="never"-->
@@ -130,9 +130,7 @@
 
 <script>
 import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue";
-import AccumRisk from "@/components/views/HeadQuarters/AccumRisk.vue";
 import headquarterDataScreen from "@/components/views/HeadQuarters/headquarterDataScreen.vue";
-import CheckOverview from "@/components/views/Check/CheckOverview.vue";
 import RegionOverview from "@/components/views/Region/RegionOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
@@ -152,8 +150,6 @@ export default {
     RiskLevelYear,
     TopRisk,
     RegionOverview,
-    CheckOverview,
-    AccumRisk,
     HighProjectRisk,
     headquarterDataScreen,
     Tree
@@ -292,6 +288,9 @@ export default {
   },
   created() {
     this.treeObj = this.$store.state.get_login.grant_data.data.value
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
 }
 </script>

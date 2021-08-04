@@ -46,14 +46,13 @@ export default {
       show: false,
       value: '全部专业',
       option: '',
+      myChart: null,
     }
   },
   props: ['context'],
   methods: {
     drawBarChart() {
       this.$nextTick(_ => {
-        let myChart;
-        myChart = this.$echarts.init(document.getElementById(this.context.id))
         let arr = this.getData
         let _this = this
         pie_option["series"][0]["data"] = arr
@@ -67,9 +66,12 @@ export default {
           return params + " " + arr[legendIndex].value;
         }
         if (arr.length != 0) {
-          myChart.setOption(pie_option);
-
-          myChart.on("click", pieConsole);
+          this.myChart = echarts.getInstanceByDom(document.getElementById(this.context.id))
+          if (this.myChart == null) { // 如果不存在，就进行初始化
+            this.myChart = this.$echarts.init(document.getElementById(this.context.id))
+          }
+          this.myChart.setOption(pie_option);
+          this.myChart.on("click", pieConsole);
 
           function pieConsole(param) {
             let param2 = new URLSearchParams();
@@ -95,9 +97,12 @@ export default {
             }
           }
 
-          myChart.resize();
+          this.myChart.resize();
           window.addEventListener("resize", () => {
-            myChart.resize();
+            // this.myChart = echarts.getInstanceByDom(document.getElementById(this.context.id))
+            if (this.myChart != null) { // 如果不存在，就进行初始化
+              this.myChart.resize();
+            }
           });
         } else if (this.context.id) {
           this.$nextTick(() => {
@@ -240,6 +245,16 @@ export default {
   mounted() {
     this.drawBarChart();
   },
+  beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      this.myChart.resize();
+    });
+
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+      this.myChart.dispose() // 销毁
+    }
+    this.myChart = null
+  }
 }
 </script>
 

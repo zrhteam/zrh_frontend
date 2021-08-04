@@ -103,12 +103,14 @@ export default {
       this.myChart.setOption(pie_option2);
 
       window.addEventListener("resize", () => {
-        this.myChart.resize();
+        if (this.myChart != null) { // 如果不存在，就进行初始化
+          this.myChart.resize();
+        }
       });
     }
   },
   mounted() {
-    if(this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁
     }
     this.riskNumberPie = this.$refs.riskNumberPie;
@@ -119,7 +121,10 @@ export default {
     let chooseIndex = 0;//默认选中高亮模块索引 现在是默认第一条, echart轮播
     this.timer = setInterval(() => {
       let len = this.riskNumber.length
-      this.myChart = this.$echarts.init(this.riskNumberPie)
+      this.myChart = echarts.getInstanceByDom(this.riskNumberPie)
+      if (this.myChart == null) { // 如果不存在，就进行初始化
+        this.myChart = this.$echarts.init(this.riskNumberPie)
+      }
       this.myChart.dispatchAction({type: 'highlight', seriesIndex: 0, dataIndex: chooseIndex});
       // 没用选中的取消高亮
       this.myChart.dispatchAction({type: 'downplay', seriesIndex: 0, dataIndex: chooseIndex});
@@ -143,8 +148,8 @@ export default {
   destroyed() {
     clearInterval(this.timer)
     window.removeEventListener("resize", () => {
-        this.myChart.resize();
-      });
+      this.myChart.resize();
+    });
   }
 }
 </script>

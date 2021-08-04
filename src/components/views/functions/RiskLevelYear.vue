@@ -83,9 +83,9 @@ export default {
       bar_option["dataset"][0]["source"] = this.bar_data
       this.myChart.setOption(bar_option);
       window.addEventListener("resize", () => {
-         if(this.myChart){
-           this.myChart.resize();
-         }
+        if (this.myChart) {
+          this.myChart.resize();
+        }
       });
       // if (arr.length != 0) {
       //   myChart.setOption(bar_option2);
@@ -161,7 +161,7 @@ export default {
         }
         let myDate = new Date();
         let yy = String(myDate.getFullYear());
-        if(this.year_copy != '') {
+        if (this.year_copy != '') {
           yy = this.year_copy
         }
         this.bar_data = []
@@ -283,22 +283,20 @@ export default {
   // },
   mounted() {
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
-          this.myChart.dispose() // 销毁
-        }
+      this.myChart.dispose() // 销毁
+    }
     this.echartContainer = this.$refs.echartContainer;
     this.myChart = this.$echarts.init(this.echartContainer)
   },
   beforeDestroy() {
-    if (!this.myChart) {
-      return;
-    }
-    this.myChart.dispose();
-    this.myChart = null;
-  },
-  destroyed() {
     window.removeEventListener("resize", () => {
-        this.myChart.resize();
-      });
+      this.myChart.resize();
+    });
+
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+      this.myChart.dispose() // 销毁
+    }
+    this.myChart = null
   }
 }
 </script>
@@ -313,12 +311,12 @@ export default {
   line-height: 0.25rem;
 }
 
-/deep/ .el-input__inner{
+/deep/ .el-input__inner {
   height: 0.25rem;
   line-height: 0.25rem;
 }
 
-/deep/ .el-input__icon{
+/deep/ .el-input__icon {
   height: 0.25rem;
   line-height: 0.25rem;
 }

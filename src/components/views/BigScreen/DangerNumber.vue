@@ -148,7 +148,9 @@ export default {
       this.myChart.setOption(bar_option);
 
       window.addEventListener("resize", () => {
-        this.myChart.resize();
+        if (this.myChart != null) { // 如果不存在，就进行初始化
+          this.myChart.resize();
+        }
       });
     },
     fontSize(res) {
@@ -160,7 +162,7 @@ export default {
     }
   },
   mounted() {
-    if(this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁
     }
     this.dangerNumBar = this.$refs.dangerNumBar;
@@ -181,7 +183,7 @@ export default {
   },
   destroyed() {
     window.removeEventListener("resize", () => {
-        this.myChart.resize();
+      this.myChart.resize();
     });
   }
 }

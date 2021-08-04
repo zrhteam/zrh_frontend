@@ -95,7 +95,9 @@ export default {
           this.myChart.setOption(bar_option3);
           this.myChart.resize();
           window.addEventListener('resize', () => {
-            this.myChart.resize();
+            if (this.myChart != null) { // 如果不存在，就进行初始化
+              this.myChart.resize();
+            }
           })
           const _this = this;
         } else if ('number_histogram') {
@@ -203,10 +205,14 @@ export default {
       }
     }
   },
-  destroyed() {
+  beforeDestroy() {
     window.removeEventListener('resize', function () {
       this.myChart.resize();
     })
+    if (this.myChart) {
+      this.myChart.dispose();
+      this.myChart = null;
+    }
   }
 }
 </script>

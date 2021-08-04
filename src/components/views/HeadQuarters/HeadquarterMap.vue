@@ -18,17 +18,18 @@ export default {
   props: ["userJson", 'projectInfo'],
   data() {
     return {
-      chart: null
+      chart: null,
     }
   },
   mounted() {
-    setTimeout(() => {
+    var timer = setTimeout(() => {
       let mainHeight = this.$refs.map_5.offsetHeight
       $("#map").css("height", mainHeight + "px");
       this.$nextTick(() => {
         this.chinaConfigure();
       })
-    })
+    }, 100)
+    clearTimeout(timer)
   },
   watch: {
     projectInfo() {
@@ -36,11 +37,17 @@ export default {
     }
   },
   beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      this.chart.resize();
+    });
+
     if (!this.chart) {
       return;
     }
     this.chart.dispose();
     this.chart = null;
+
+    window.onresize = null
   },
   methods: {
     returnCountry() {
@@ -48,10 +55,10 @@ export default {
     },
     chinaConfigure() {
       // let myChart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
-      let myChart = echarts.init(document.getElementById("map")); //这里是为了获得容器所在位置
-      window.onresize = myChart.resize("auto", "auto");
+      this.chart = echarts.init(document.getElementById("map")); //这里是为了获得容器所在位置
+      window.onresize = this.chart.resize("auto", "auto");
 
-      initEcharts("china");
+      // initEcharts("china");
 
       const seriesList = []
       let obj = {
@@ -69,7 +76,7 @@ export default {
         };
       });
 
-      function initEcharts(map) {
+      function initEcharts(map, myChart) {
         myChart.setOption({ // 进行相关配置
           opacity: 0,
           tooltip: {
@@ -113,14 +120,14 @@ export default {
         })
         window.addEventListener("resize", () => {
           myChart.resize();
-        });
+        }, {passive: false});
       }
 
-      initEcharts("china");
+      initEcharts("china", this.chart);
 
       // 点击触发
-      myChart.on("click", param => {
-        if(typeof(param.data) != "undefined") {
+      this.chart.on("click", param => {
+        if (typeof (param.data) != "undefined") {
           var project_name = param.data.name;
           this.$router.push({path: '/prj_data_analysis'});
           let data = {
