@@ -61,14 +61,18 @@ export default {
       nowWeek: "",
       nowDate: "",
       nowTime: "",
-
+      doBack: null,
+      doStorage: null
     }
   },
   mounted() {
     this.headList = this.getHeadList()
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
-      window.addEventListener('popstate', this.goBack, false);
+      this.doBack = () => {
+        this.$router.replace({path: '/'});
+      }
+      window.addEventListener('popstate', this.doBack, false);
     }
     this.timer = setInterval(() => {
       this.setNowTimes();
@@ -110,15 +114,6 @@ export default {
     enterDataInsight() {
       this.$router.push({path: '/analyze'});
     },
-    Click() {
-      alert("click")
-    },
-    goBack() {
-      this.$router.replace({path: '/'});
-      // this.$router.go(-1)
-      // this.$router.push({path: '/'});
-      //replace替换原路由，作用是避免回退死循环
-    },
     setNowTimes() {
       let myDate = new Date();
       // console.log(myDate)
@@ -157,16 +152,18 @@ export default {
     },
   },
   destroyed() {
-    window.removeEventListener('popstate', this.goBack, false);
+    window.removeEventListener('popstate', this.doBack, false);
+    window.removeEventListener('beforeunload', this.doStorage);
     clearInterval(this.timer)
   },
   created() {
     //在页面加载时读取sessionStorage里的状态信息
     sessionStorage.getItem("superMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("superMsg"))));
     //在页面刷新时将vuex里的信息保存到sessionStorage里
-    window.addEventListener("beforeunload", () => {
+    this.doStorage = () => {
       sessionStorage.setItem("superMsg", JSON.stringify(this.$store.state))
-    })
+    }
+    window.addEventListener("beforeunload", this.doStorage)
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});

@@ -65,45 +65,11 @@ export default {
       // isShow: true,
       username: '',
       password: '',
-      checked: false
+      checked: false,
+      clearSession: null
     }
   },
   methods: {
-    login() {
-
-
-      // this.$router.push({path: '/region_department'});
-      // axios.post(`http://localhost:5000/api/login`, params)
-      //     .then((response) => {
-      //       var jsonObj = JSON.parse(JSON.stringify(response));
-      //       console.log(JSON.stringify(jsonObj));
-      //       console.log(response);
-      //       if (parseInt(response.data.code) === 200) {//如果成功了
-      //         this.$cookies.remove('username'),
-      //             this.$cookies.remove('password'),
-      //             this.$cookies.set("username", this.username, 30 * 60);
-      //         this.$cookies.set("password", this.password, 30 * 60);
-      //         this.$cookies.set("status", "logined", 30 * 60); // 设置cookie中存放的生命周期
-      //         let redirect = decodeURIComponent(
-      //             this.$route.query.redirect || "/search_module"
-      //         );
-      //         if (!redirect) {
-      //           redirect = '/login'
-      //         }
-      //         this.$router.push({path: redirect});
-      //         //alert(response.data.msg)
-      //         //window.location.href = 'http://localhost:5000/home'
-      //       } else {
-      //         alert(response.data.msg)
-      //       }
-      //     }).catch(function (error) {
-      //   console.log(error.response)
-      // })
-    },
-    // jumpToLogin() {
-    //   console.log("in jumpToLogin")
-    //   this.isShow = !this.isShow
-    // },
     hasGrantLogin() {
       let params = new URLSearchParams();
       params.append('username', this.username);
@@ -247,14 +213,13 @@ export default {
     });
     //在页面加载时读取sessionStorage里的状态信息
     sessionStorage.getItem("userMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("userMsg"))));
-    window.addEventListener("beforeunload", () => {
+    this.clearSession = () => {
       sessionStorage.clear();
-    })
+    }
+    window.addEventListener("beforeunload", this.clearSession)
   },
   destroyed() {
-    window.removeEventListener("beforeunload", () => {
-      sessionStorage.clear();
-    })
+    window.removeEventListener("beforeunload", this.clearSession)
   }
 }
 </script>
