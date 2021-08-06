@@ -98,7 +98,7 @@ export default {
       // large1.style.display = 'none'
       // var large2 = document.getElementById('large2');
       // large2.style.display = 'none'
-      this.$router.push({path: `/new_check_screen/${this.$store.state.get_check.check_code}`});
+      this.$router.push({path: `/new_check_screen`, query: {check_code: this.$store.state.get_check.check_code}});
     },
     handleTrNodeClick(data, node) {
       this.handleTreeNodeClick(data, node)

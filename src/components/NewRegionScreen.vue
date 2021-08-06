@@ -27,8 +27,11 @@
         <div class="zrh">
         </div>
       </div>
-      <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 23.1rem; top: 40%;">
-        <el-button class="title" round size="mini" @click="quitRegionScreen" style="z-index: 999;top: 40%">退出</el-button>
+      <div class="absolute-layer" style="width: 6.8rem; height: 0.3rem; left: 23.1rem; top: 40%;">
+        <el-button class="title" v-if="show" round size="mini" @click="quitRegionScreen" style="z-index: 999;top: 40%">退出</el-button>
+      </div>
+      <div style="position: absolute !important; width: 6.8rem; height: 0.3rem; left: 23.15rem; top: 10%;">
+        <a class="title" v-if="show" style="font-size: 0.1rem" @click="copyUrl()">复制链接</a>
       </div>
     </el-row>
     <el-col :span="5" class="boundary-A" style="height: 90%">
@@ -97,6 +100,7 @@ export default {
   components: {RiskByStage, RecordList2, RiskNumber, RegionRank, DangerNumber, HeadMap},
   data() {
     return {
+      show: true,
       timer: "",
       nowDate: "",
       nowTime: "",
@@ -133,6 +137,21 @@ export default {
     cellClassName({row, column, rowIndex, columnIndex}) {
       if (column.property == 'note')
         return "CellNote"
+    },
+    copyUrl() {
+      var url = window.location.href + `&id=1`
+      // 创建一个 Input标签
+      const cInput = document.createElement('input')
+      cInput.value = url
+      document.body.appendChild(cInput)
+      cInput.select() // 选取文本域内容;
+      // 执行浏览器复制命令
+      // 复制命令会将当前选中的内容复制到剪切板中（这里就是创建的input标签）
+      // Input要在正常的编辑状态下原生复制方法才会生效
+      document.execCommand('Copy')
+      this.$massage('success', '复制成功') // antd框架封装的通知,如使用别的UI框架，换掉这句
+      /// 复制成功后再将构造的标签 移除
+      cInput.remove()
     },
     setNowTimes() {
       let myDate = new Date();
@@ -459,10 +478,12 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
-        this.region_name = route.params.id
-
+        if(route.query.id != undefined & route.query.id == 1) {
+          this.show = false
+        }
+        this.region_name = route.query.region_name
         let param = new URLSearchParams();
-        param.append('region_name', route.params.id);
+        param.append('region_name', route.query.region_name);
         this.$store.commit('get_screen/changeParams', {params: param})
         this.$store.dispatch('get_screen/getRegionScreenRiskNumber')
         this.$store.dispatch('get_screen/getRegionScreenRNRank')

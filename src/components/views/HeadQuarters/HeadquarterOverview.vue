@@ -157,7 +157,7 @@ export default {
       // head_small.style.display = 'block'
       // head_small.style.width = "500px"
       // head_small.style.width = "99%"
-      this.$router.push({path: `/new_head_screen/${this.$store.state.get_headquarter.head_name}`});
+      this.$router.push({path: `/new_head_screen`, query: {headquarter_name: this.$store.state.get_headquarter.head_name}});
     },
     intoDataAnalysis() {
       var href = 'http://10.20.39.102:12001/test#/'

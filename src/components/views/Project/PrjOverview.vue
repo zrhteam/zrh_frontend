@@ -163,7 +163,7 @@ export default {
       large1.style.display = 'none'
       var large2 = document.getElementById('large2');
       large2.style.display = 'none'
-      this.$router.push({path: `/new_project_screen/${this.$store.state.get_project.prj_name}`});
+      this.$router.push({path: `/new_project_screen`, query: {project_name: this.$store.state.get_project.prj_name}});
     },
     handleTrNodeClick(data, node) {
       // console.log(data)

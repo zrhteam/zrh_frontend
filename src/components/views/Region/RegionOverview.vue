@@ -190,13 +190,28 @@ export default {
       // region_small.style.width = "99%"
 
       // this.showDataScreen = true
-      this.$router.push({path: `/new_region_screen/${this.$store.state.get_region.region_name}`});
+      this.$router.push({path: `/new_region_screen`, query: {region_name: this.$store.state.get_region.region_name}});
     },
     outRegionDataScreen() {
       this.showDataScreen = false
     },
     handleTrNodeClick(data, node) {
       this.handleTreeNodeClick(data, node)
+    },
+    copyUrl() {
+      var url = window.location.href + `&id=1`
+      // 创建一个 Input标签
+      const cInput = document.createElement('input')
+      cInput.value = url
+      document.body.appendChild(cInput)
+      cInput.select() // 选取文本域内容;
+      // 执行浏览器复制命令
+      // 复制命令会将当前选中的内容复制到剪切板中（这里就是创建的input标签）
+      // Input要在正常的编辑状态下原生复制方法才会生效
+      document.execCommand('Copy')
+      this.$massage('success', '复制成功') // antd框架封装的通知,如使用别的UI框架，换掉这句
+      /// 复制成功后再将构造的标签 移除
+      cInput.remove()
     },
     setNowTimes() {
       let myDate = new Date();

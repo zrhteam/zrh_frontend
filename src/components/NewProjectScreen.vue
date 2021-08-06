@@ -15,9 +15,12 @@
         <div class="zrh">
         </div>
       </div>
-      <div style="position: absolute !important; width: 6.8rem; height: 0.7rem; left: 23.1rem; top: 40%;">
-        <el-button class="title" round size="mini" @click="quitProjectScreen" style="z-index: 999;top: 40%">退出
+      <div style="position: absolute !important; width: 6.8rem; height: 0.3rem; left: 23.1rem; top: 40%;">
+        <el-button class="title" v-if="show" round size="mini" @click="quitProjectScreen" style="z-index: 999;top: 40%">退出
         </el-button>
+      </div>
+      <div style="position: absolute !important; width: 6.8rem; height: 0.3rem; left: 23.15rem; top: 10%;">
+        <a class="title" v-if="show" style="font-size: 0.1rem" @click="copyUrl()">复制链接</a>
       </div>
       <!--      </el-col>-->
     </el-row>
@@ -294,6 +297,7 @@ export default {
   components: {NumCounter, StageRatio, HighRiskNote, RecordList2, MajorPicture},
   data() {
     return {
+      show: true,
       project_name: "",
       timer: null,
       nowDate: "",
@@ -483,6 +487,21 @@ export default {
         return "odd-stripe"
       }
     },
+    copyUrl() {
+      var url = window.location.href + `&id=1`
+      // 创建一个 Input标签
+      const cInput = document.createElement('input')
+      cInput.value = url
+      document.body.appendChild(cInput)
+      cInput.select() // 选取文本域内容;
+      // 执行浏览器复制命令
+      // 复制命令会将当前选中的内容复制到剪切板中（这里就是创建的input标签）
+      // Input要在正常的编辑状态下原生复制方法才会生效
+      document.execCommand('Copy')
+      this.$massage('success', '复制成功') // antd框架封装的通知,如使用别的UI框架，换掉这句
+      /// 复制成功后再将构造的标签 移除
+      cInput.remove()
+    },
     setNowTimes() {
       let myDate = new Date();
       // console.log(myDate)
@@ -538,10 +557,12 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
-        this.project_name = route.params.id
-
+        if(route.query.id != undefined & route.query.id == 1) {
+          this.show = false
+        }
+        this.project_name = route.query.project_name
         let param = new URLSearchParams();
-        param.append('project_name', route.params.id);
+        param.append('project_name', route.query.project_name);
         this.$store.commit('get_screen/changeParams', {params: param})
         this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
         this.$store.dispatch('get_screen/getProjectScreenRNRank')
