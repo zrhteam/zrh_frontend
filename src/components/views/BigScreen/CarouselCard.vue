@@ -59,6 +59,7 @@ export default {
       pieChart: null,
       timer1: null,
       timer2: null,
+      timer3: null
     }
   },
   watch: {
@@ -343,14 +344,13 @@ export default {
 
     let count = 0
     this.timer2 = setInterval(() => {
-      var timer = null
       if (count == 0) {
         $("#element1").css("display", "block")
         $("#element2").css("transform", "translateX(100%)")
         $("#element2").css("left", "100%")
         $("#element3").css("display", "none")
         $("#element3").css("transform", "translateX(0%)")
-        timer = setTimeout(() => {
+        this.timer3 = setTimeout(() => {
           $("#element1").css("transform", "translateX(100%)")
         }, 1000)
         $("#element3").css("left", "-100%")
@@ -360,7 +360,7 @@ export default {
         $("#element1").css("left", "100%")
         $("#element2").css("display", "none")
         $("#element2").css("transform", "translateX(0%)")
-        timer = setTimeout(() => {
+        this.timer3 = setTimeout(() => {
           $("#element3").css("transform", "translateX(100%)")
         }, 1000)
         $("#element2").css("left", "-100%")
@@ -370,13 +370,12 @@ export default {
         $("#element3").css("left", "100%")
         $("#element1").css("display", "none")
         $("#element1").css("transform", "translateX(0%)")
-        timer = setTimeout(() => {
+        this.timer3 = setTimeout(() => {
           $("#element2").css("transform", "translateX(100%)")
         }, 1000)
         $("#element1").css("left", "-100%")
       }
       count = (count + 1) % 3
-      clearTimeout(timer)
     }, 4000)
     // $("#element2").css("transform", "translateX(100%)")
     //   setTimeout(() => {
@@ -386,6 +385,7 @@ export default {
   beforeDestroy() {
     clearInterval(this.timer1)
     clearInterval(this.timer2)
+    clearTimeout(this.timer3)
     window.removeEventListener("resize", () => {
       this.barChart.resize();
     });

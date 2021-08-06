@@ -527,7 +527,8 @@ export default {
       this.nowTime = hou + ":" + min + ":" + sec;
     },
     quitProjectScreen() {
-      this.$router.push({path: '/prj_data_analysis'});
+      // this.$router.push({path: '/prj_data_analysis'});
+      this.$router.go(-1);
     },
     intoFireScreen() {
       var project_name = this.project_name
@@ -595,7 +596,7 @@ export default {
 
     if (this.$el)
       delete this.$el.__vue__;
-    window.location.reload();
+    // window.location.reload();
   }
 }
 </script>

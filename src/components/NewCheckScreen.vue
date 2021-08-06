@@ -588,13 +588,13 @@ export default {
     // this.$store.dispatch('get_screen/getCheckScreenPictureNote')
     // this.$store.dispatch('get_screen/getCheckScreenTable')
   },
-  // destroyed() {
-  //   clearInterval(this.timer)
-  //
-  //   if (this.$el)
-  //     delete this.$el.__vue__;
-  //   window.location.reload();
-  // }
+  destroyed() {
+    clearInterval(this.timer)
+
+    // if (this.$el)
+    //   delete this.$el.__vue__;
+    // window.location.reload();
+  }
 }
 </script>
 

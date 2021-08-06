@@ -515,7 +515,7 @@ export default {
 
     if (this.$el)
       delete this.$el.__vue__;
-    window.location.reload();
+    // window.location.reload();
   }
 }
 </script>
