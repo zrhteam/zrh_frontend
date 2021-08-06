@@ -42,7 +42,8 @@ export default {
   },
   data() {
     return {
-      myChart: null
+      myChart: null,
+      doResize: null
     }
   },
   mounted() {
@@ -102,11 +103,12 @@ export default {
         }
 
         this.myChart.resize();
-        window.addEventListener('resize', function () {
+        this.doResize = () => {
           if (this.myChart) {
             this.myChart.resize();
           }
-        })
+        }
+        window.addEventListener('resize', this.doResize)
       } else if (document.getElementById("pie2_2")) {
         this.$nextTick(() => {
           const dom = document.getElementById("pie2_2")
@@ -126,9 +128,7 @@ export default {
     this.myChart = null;
   },
   destroyed() {
-    window.removeEventListener('resize', function () {
-      this.myChart.resize();
-    })
+    window.removeEventListener('resize', this.doResize)
   }
 }
 </script>

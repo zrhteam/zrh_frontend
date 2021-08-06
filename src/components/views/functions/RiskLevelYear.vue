@@ -20,19 +20,6 @@
             :value="item">
         </el-option>
       </el-select>
-      <el-button type="text" @click="dropGrantChart" v-if="!isShow && context.id==='id_risk_level'"
-                 style="float: right; vertical-align: middle">取消授权
-      </el-button>
-      <el-select size="mini" v-model="value" v-if="isShow && context.id==='id_risk_level'" filterable placeholder="授权"
-                 @change="grantChart"
-                 style="max-width: 6em; float: right">
-        <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-        </el-option>
-      </el-select>
     </div>
     <div class="title-line" style=""></div>
     <div ref='echartContainer' style="height: 80%; width: 100%;"/>
@@ -66,7 +53,8 @@ export default {
       bar_data: [],
       year: '',
       year_option: [],
-      year_copy: ''
+      year_copy: '',
+      doResize: null
     }
   },
   methods: {
@@ -82,11 +70,12 @@ export default {
       // this.myChart.setOption(line_option);
       bar_option["dataset"][0]["source"] = this.bar_data
       this.myChart.setOption(bar_option);
-      window.addEventListener("resize", () => {
+      this.doResize = () => {
         if (this.myChart) {
           this.myChart.resize();
         }
-      });
+      }
+      window.addEventListener("resize", this.doResize);
       // if (arr.length != 0) {
       //   myChart.setOption(bar_option2);
       //   myChart.resize();
@@ -130,150 +119,64 @@ export default {
   computed: {
     getRiskLevelYear() {
       let data;
-      if (this.context.id === 'id_risk_level') {
-        this.level_year = []
-        data = this.$store.state.get_comparison.by_risk_level
-        // data = this.$store.state.get_headquarter.risk_level_year
-        let obj = ['object']
-        let high = ['高风险']
-        let mid = ['中风险']
-        let low = ['低风险']
-        for (let i in data) {
-          obj.push(i)
-          high.push(data[i]['risk_level']['3'])
-          mid.push(data[i]['risk_level']['2'])
-          low.push(data[i]['risk_level']['1'])
-        }
-        this.level_year.push(obj)
-        this.level_year.push(high)
-        this.level_year.push(mid)
-        this.level_year.push(low)
-      } else {
-        this.level_year = []
-        if (this.context.id == 'check_level_year') {
-          data = this.$store.state.get_check.check_level_year
-        } else if (this.context.id == 'prj_level_year') {
-          data = this.$store.state.get_project.prj_level_year
-        } else if (this.context.id == 'region_level_year') {
-          data = this.$store.state.get_region.risk_level_year
-        } else if (this.context.id == 'head_level_year') {
-          data = this.$store.state.get_headquarter.risk_level_year
-        }
-        let myDate = new Date();
-        let yy = String(myDate.getFullYear());
-        if (this.year_copy != '') {
-          yy = this.year_copy
-        }
-        this.bar_data = []
-        let flag = false
-        if (data[yy] == undefined) {
-          flag = true
-        }
-        this.year_option = []
-        for (let i in data) {
-          this.year_option.push(i)
-        }
-        for (let i in data) {
-          if (i == yy || flag == true) {
-            let obj = {
-              name: '风险总量',
+
+      this.level_year = []
+      if (this.context.id == 'check_level_year') {
+        data = this.$store.state.get_check.check_level_year
+      } else if (this.context.id == 'prj_level_year') {
+        data = this.$store.state.get_project.prj_level_year
+      } else if (this.context.id == 'region_level_year') {
+        data = this.$store.state.get_region.risk_level_year
+      } else if (this.context.id == 'head_level_year') {
+        data = this.$store.state.get_headquarter.risk_level_year
+      }
+      let myDate = new Date();
+      let yy = String(myDate.getFullYear());
+      if (this.year_copy != '') {
+        yy = this.year_copy
+      }
+      this.bar_data = []
+      let flag = false
+      if (data[yy] == undefined) {
+        flag = true
+      }
+      this.year_option = []
+      for (let i in data) {
+        this.year_option.push(i)
+      }
+      for (let i in data) {
+        if (i == yy || flag == true) {
+          let obj = {
+            name: '风险总量',
+            count: 0
+          }
+          for (let j in data[i]) {
+            let sub_obj = {
+              name: '',
               count: 0
             }
-            for (let j in data[i]) {
-              let sub_obj = {
-                name: '',
-                count: 0
-              }
-              if (j == '1') {
-                sub_obj.name = '低风险'
-                sub_obj.count = data[i][j]
-                obj.count += data[i][j]
-              } else if (j == '2') {
-                sub_obj.name = '中风险'
-                sub_obj.count = data[i][j]
-                obj.count += data[i][j]
-              } else if (j == '3') {
-                sub_obj.name = '高风险'
-                sub_obj.count = data[i][j]
-                obj.count += data[i][j]
-              }
-              this.bar_data.push(sub_obj)
+            if (j == '1') {
+              sub_obj.name = '低风险'
+              sub_obj.count = data[i][j]
+              obj.count += data[i][j]
+            } else if (j == '2') {
+              sub_obj.name = '中风险'
+              sub_obj.count = data[i][j]
+              obj.count += data[i][j]
+            } else if (j == '3') {
+              sub_obj.name = '高风险'
+              sub_obj.count = data[i][j]
+              obj.count += data[i][j]
             }
-            if (obj.count == 0) {
-              flag = true
-            } else {
-              this.bar_data.push(obj)
-              this.year = i
-            }
+            this.bar_data.push(sub_obj)
+          }
+          if (obj.count == 0) {
+            flag = true
+          } else {
+            this.bar_data.push(obj)
+            this.year = i
           }
         }
-
-        // let risk_level = ['风险总量', '低风险', '中风险', '高风险']
-        // let xdata = []
-        // let high_risk = []
-        // let mid_risk = []
-        // let low_risk = []
-        // let sum_risk = []
-        // for (let i in data) {
-        //   xdata.push(i)
-        //   let temp = 0
-        //   for (let j in data[i]) {
-        //     if (j == '1') {
-        //       low_risk.push(data[i][j])
-        //       temp += data[i][j]
-        //     } else if (j == '2') {
-        //       mid_risk.push(data[i][j])
-        //       temp += data[i][j]
-        //     } else if (j == '3') {
-        //       high_risk.push(data[i][j])
-        //       temp += data[i][j]
-        //     }
-        //   }
-        //   sum_risk.push(temp)
-        // }
-        // let series = [];
-        // for (let i = 0; i < risk_level.length; i++) {
-        //   let obj = {
-        //     name: risk_level[i],
-        //     type: 'line',
-        //     stack: '总量',
-        //     data: []
-        //   }
-        //   if (i == 1) {
-        //     obj.data = low_risk
-        //   } else if (i == 2) {
-        //     obj.data = mid_risk
-        //   } else if (i == 3) {
-        //     obj.data = high_risk
-        //   } else if (i == 0) {
-        //     obj.data = sum_risk
-        //   }
-        //   series.push(obj)
-        // }
-        // this.xdata = xdata
-        // this.series = series
-        // this.legend = risk_level
-      }
-      if (this.context.flag === 'grant') {
-        this.isShow = false
-      } else if (this.context.flag === 'origin') {
-        this.isShow = true
-      }
-      data = this.$store.state.get_comparison.all_user_name
-      this.options = []
-      for (let i in data) {
-        let obj = {
-          value: '',
-          key: ''
-        }
-        obj.value = data[i]
-        obj.key = data[i]
-        this.options.push(obj)
-      }
-      if (this.context.flag === 'grant') {
-        this.isShow = false
-      } else if (this.context.flag === 'origin') {
-        this.isShow = true
       }
       this.renderSign = !this.renderSign
     },
@@ -289,9 +192,7 @@ export default {
     this.myChart = this.$echarts.init(this.echartContainer)
   },
   beforeDestroy() {
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
+    window.removeEventListener("resize", this.doResize);
 
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁

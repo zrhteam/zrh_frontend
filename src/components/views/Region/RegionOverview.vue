@@ -142,18 +142,13 @@
           </el-row>
         </el-col>
 
-<!--        <PrjOverviewPart id="prj_part" style="display: none"></PrjOverviewPart>-->
       </el-row>
-
-      <!--    <HeadquarterOverview id="head_up" style="display: none"></HeadquarterOverview>-->
     </el-row>
-        <PrjOverview id="prj_part" style=""></PrjOverview>
   </el-row>
   <!--    </div>-->
 </template>
 
 <script>
-import PrjOverview from "@/components/views/Project/PrjOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue"
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
@@ -167,7 +162,6 @@ export default {
     StackedHorizontalBar,
     Ratio,
     TopRisk,
-    PrjOverview,
     Tree,
     RiskLevelYear,
     BarRank,

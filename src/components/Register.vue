@@ -1,169 +1,260 @@
 <template>
-  <div class="echarts">
-{{ getData }}
+  <div>
+    <div class="projectCost">
+      <div class="container">
+        <div class="wrapper" v-for="(item,index) in list" :key="index">
+          <div class="roseChart"></div>
+        </div>
+      </div>
+    </div>
+    <div style="position: relative; width: 100px; height: 200px; left: 500px; overflow: hidden">
+      <div class="element1">
+        <div class="front">
+          123
+          <div class="table-bar">
+            <div class="light"></div>
+          </div>
+        </div>
+        <div class="back">
+          456
+          <div class="table-bar">
+            <div class="light"></div>
+          </div>
+        </div>
+      </div>
+      <div class="element2">
+        <div class="front">
+          123
+          <div class="table-bar">
+            <div class="light"></div>
+          </div>
+        </div>
+        <div class="back">
+          456
+          <div class="table-bar">
+            <div class="light"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" @click="Click">点击切换</button>
   </div>
 </template>
 <script>
 export default {
   name: "echarts",
-  props: ["userJson"],
   data() {
     return {
-      chart: null
-    };
-  },
-  computed: {
-    getData() {
-      console.log("111", this.$store.state.get_screen.projects_risk_num)
-      console.log("112", this.$store.state.get_screen.projects_risk_num_rank)
+      list: [ // 假数据
+        {
+          id: 1,
+          price: {
+            name: '项目一',
+            resData: [
+              {name: '订购费用', value: 12},
+              {name: '饲养费用', value: 18},
+              {name: '实验费用', value: 8},
+              {name: '其他费用', value: 10},
+            ]
+          }
+        }, {
+          id: 2,
+          price: {
+            name: '项目二',
+            resData: [
+              {name: '订购费用', value: 18},
+              {name: '饲养费用', value: 10},
+              {name: '实验费用', value: 20},
+              {name: '其他费用', value: 9},
+            ]
+          }
+        }
+      ]
     }
   },
-  created() {
-    // let param = new URLSearchParams();
-    // param.append('check_key', 'ZRH(ZB)-2007-L01-A04-000-15');
-    // param.append('flag', '3');
-    // param.append('start', '2000-1-3 00:00:00');
-    // param.append('end', '2022-1-3 00:00:00');
-    // this.$store.commit('get_insight/changeParams', {params: param})
-    // this.$store.dispatch('get_insight/getAnalyzeRedlineData')
-    // this.$store.dispatch('get_insight/getAnalyzeTendencyHeadquarter')
-    // this.$store.dispatch('get_insight/getAnalyzeTendencyRegion')
-    // this.$store.dispatch('get_insight/getAnalyzeTendencyProject')
-    // this.$store.dispatch('get_insight/getAnalyzeTendencyProfession')
-    // this.$store.dispatch('get_insight/getAnalyzeRatioHeadquarter')
-    // this.$store.dispatch('get_insight/getAnalyzeRatioRegion')
-    // this.$store.dispatch('get_insight/getAnalyzeRatioProject')
-    // this.$store.dispatch('get_insight/getAnalyzeRatioProfession')
-    let param = new URLSearchParams();
-    // param.append('project_name', this.$store.state.get_login.grant_data.data.project_tag);
-    param.append('project_name', '合肥欢乐颂');
-    this.$store.commit('get_screen/changeParams', {params: param})
-    this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
-    this.$store.dispatch('get_screen/getProjectScreenRNRank')
-    this.$store.dispatch('get_screen/getProjectScreenRiskLevel')
-    this.$store.dispatch('get_screen/getProjectScreenStageRatio')
-    this.$store.dispatch('get_screen/getProjectScreenHighRiskNote')
-    this.$store.dispatch('get_screen/getProjectScreenPictureNote')
-    this.$store.dispatch('get_screen/getProjectScreenTable')
+  methods: {
+    drawRose() {
+      var echarts = require("echarts");
+      var roseCharts = document.getElementsByClassName('roseChart'); // 对应地使用ByClassName
+      for (var i = 0; i < roseCharts.length; i++) { // 通过for循环，在相同class的dom内绘制元素
+        var myChart = echarts.init(roseCharts[i]);
+        myChart.setOption({
+          color: ["#4DFFFD", "#7B3FF6", "#1F6DFE", "#34A6FE"],
+          title: {
+            text: this.list[i].price.name,
+            left: '70',
+            top: 5,
+            textStyle: {
+              color: '#4DFFFD',
+              fontSize: 14,
+            }
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: "{b} : {c} ({d}%)"
+          },
+          legend: {
+            type: "scroll",
+            orient: "vartical",
+            top: "center",
+            right: '0px',
+            itemWidth: 16,
+            itemHeight: 8,
+            itemGap: 16,
+            textStyle: {
+              color: '#FFFFFF',
+              fontSize: 12,
+            },
+            data: ['订购费用', '饲养费用', '实验费用', '其他费用']
+          },
+          polar: {
+            center: ['36%', '56%'],
+          },
+          angleAxis: {
+            interval: 3, // 强制设置坐标轴分割间隔
+            type: 'category',
+            z: 10,
+            axisLine: {show: false},
+            axisLabel: {show: false},
+          },
+          radiusAxis: {
+            min: 10,
+            max: 1000,
+            interval: 200,
+            axisLine: {show: false},
+            axisLabel: {show: false},
+            splitLine: {
+              lineStyle: {
+                color: "#2277C3",
+                width: 1,
+                type: "solid"
+              }
+            }
+          },
+          calculable: true,
+          series: [
+            {
+              type: 'pie',
+              radius: ["10%", "14%"],
+              center: ['36%', '56%'],
+              hoverAnimation: false,
+              labelLine: {show: false},
+              data: [{
+                value: 0,
+                itemStyle: {
+                  normal: {
+                    color: "#809DF5"
+                  }
+                }
+              }]
+            }, {
+              stack: 'a',
+              type: 'pie',
+              radius: ['20%', '80%'],
+              center: ['36%', '56%'],
+              roseType: 'area',
+              zlevel: 10,
+              label: {show: false},
+              labelLine: {show: false},
+              data: this.list[i].price.resData // 渲染每个图表对应的数据
+            }]
+        })
+      }
+    },
+    Click() {
+      $(".element1").css("transform", "translateX(100%)")
+      setTimeout(() => {
+        $(".element2").css("transform", "translateX(100%)")
+      }, 2000)
+      // $(".element")[0].style.transform = rotateX(360deg)
+    }
+  },
+  mounted() {
+    this.drawRose()
   }
 }
 </script>
-<!--<template>-->
-<!--    <model-obj src="example/models/obj/LeePerrySmith.obj"></model-obj>-->
-<!--</template>-->
-<!--<script>-->
-<!--    import { ModelObj } from 'vue-3d-model'-->
+<style scoped>
+/*.scroll-content {*/
+/*  !/自定义滚动 间隔时间和方向*!*!*/
+/*  position: relative;*/
+/*  transition: top 0.825s; !/向上移动*!*!*/
+/*}*/
+/*.body {*/
+/*  width: 100%;*/
+/*  height: 100px;*/
+/*  overflow-y: hidden;*/
+/*  !/   position: absolute;*!*!*/
+/*}*/
+.projectCost {
+  margin-left: 40px;
+}
 
-<!--    export default {-->
-<!--        components: { ModelObj }-->
-<!--    }-->
+.container {
+  display: flex;
+  width: 680px;
+  height: 240px;
+  background-size: 100% 100%;
+  /*/ / background-image: url('../../../assets/images/projectTest/costDetail.png');*/
+}
 
+.wrapper {
+  margin-top: 20px;
+  width: 340px;
+  height: 180px;
+  border-right: 1px solid #0B61B3;
+}
 
-<!--<template>-->
-<!--  <div style="height:100%;width:100%">-->
-<!--    <div class="body" :style="view">-->
-<!--      <div class="scroll-content" :style="{top}" >-->
-<!--        <tr v-for="item in dutyRateData">-->
-<!--          <td>{{item.group}}</td>-->
-<!--          <td>{{item.bookNum}}</td>-->
-<!--          <td>{{item.sceneNum}}</td>-->
-<!--          <td>{{item.dutyRate}}</td>-->
-<!--        </tr>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</template>-->
+.roseChart {
+  width: 260px;
+  height: 180px;
+}
 
-<!--<script>-->
-<!--export default {-->
-<!--  props: {-->
-<!--    viewHeight: {//可视窗口-->
-<!--      type: [Number, String],-->
-<!--      default: "200px"-->
-<!--    },-->
-<!--    // animationTime: {//移动间隔-->
-<!--    //   type: [Number, String],-->
-<!--    //   default: "0.825s"-->
-<!--    // },-->
-<!--    // direction:{//移动方向-->
-<!--    //     type:String,-->
-<!--    //     default:top,-->
-<!--    // },-->
-<!--    moveDistance:{//移动距离-->
-<!--        type:Number,-->
-<!--        default:25-->
-<!--    }-->
-<!--  },-->
-<!--  data() {-->
-<!--    return {-->
-<!--      dutyRateData: [-->
-<!--        { group: "电工班1", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班2", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班3", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班4", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班5", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班6", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班7", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班8", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班9", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班10", bookNum: 3, sceneNum: 0, dutyRate: "88%" },-->
-<!--        { group: "电工班11", bookNum: 3, sceneNum: 0, dutyRate: "88%" }-->
-<!--      ],-->
-<!--      activeIndex: 0,-->
-<!--      view:'',-->
-<!--      count: 0,-->
-<!--    };-->
-<!--  },-->
-<!--  methods: {-->
+* {
+  margin: 0;
+  padding: 0;
+}
 
-<!--  },-->
-<!--  computed: {-->
-<!--    top() {-->
-<!--      return -this.activeIndex * this.moveDistance + "px"; //定义移动的单元高度-->
-<!--    },-->
+.element1, .element2 {
+  position: absolute;
+  color: #fff;
+  text-align: center;
+  line-height: 120px;
+  transform-style: preserve-3d;
+  transition: 1s;
+}
 
-<!--  },-->
-<!--  mounted() {-->
-<!--    this.view= {"height":this.viewHeight}-->
-<!--    setInterval(_ => {-->
-<!--      //自定义滚动 出勤率-->
-<!--      // if ( this.activeIndex < this.dutyRateData.length /* this.towerListArr.length */) {-->
-<!--        this.activeIndex += 1;-->
-<!--      // } else {-->
-<!--      //   this.activeIndex = 0;-->
-<!--      // }-->
-<!--      // if(this.activeIndex % 25 == 0) {-->
-<!--        let temp = this.dutyRateData[this.count%this.dutyRateData.length];-->
-<!--        this.dutyRateData.push(temp)-->
-<!--      this.count++;-->
-<!--      // }-->
-<!--    }, 500);-->
-<!--    // setInterval(_ => {-->
-<!--      //自定义滚动 出勤率-->
-<!--      // if ( this.activeIndex < this.dutyRateData.length /* this.towerListArr.length */) {-->
-<!--      // } else {-->
-<!--      //   this.activeIndex = 0;-->
-<!--      // }-->
-<!--      // if(this.activeIndex % 25 == 0) {-->
-<!--      // this.dutyRateData.shift()-->
-<!--      // }-->
-<!--    // }, 500);-->
-<!--  }-->
-<!--};-->
-<!--</script>-->
-<!--<style scoped>-->
-<!--.scroll-content {-->
-<!--  /*//自定义滚动 间隔时间和方向*/-->
-<!--  position: relative;-->
-<!--  transition: top 0.825s; /*//向上移动*/-->
-<!--}-->
-<!--.body {-->
-<!--  width: 100%;-->
-<!--  height: 100px;-->
-<!--  overflow-y: hidden;-->
-<!--  /*//   position: absolute;*/-->
-<!--}-->
-<!--</style>-->
+.element2 {
+  position: absolute;
+  left: -90px
+}
+
+.element1, .element2, .front, .back {
+  width: 90px;
+  height: 120px;
+  backface-visibility: hidden;
+}
+
+.front, .back {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.front {
+  background: #f00;
+}
+
+.back {
+  background: #0f0;
+  transform: rotateY(180deg);
+}
+
+.ele {
+  transform: rotateX(180deg);
+}
+</style>
 <!--<template>-->
 <!--  <SubRegister :value="100" class="text-color-blue nums"-->
 <!--  ></SubRegister>-->

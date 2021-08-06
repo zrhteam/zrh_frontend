@@ -1,5 +1,5 @@
 <template>
-  <el-row style="height: 100%;">
+  <el-row class="Check" style="height: 100%;">
     <el-row id="large1" class="" style="height: 1.25rem;">
       <el-col :span="24" style="height: 100%">
         <div class="title-box-card " shadow="never"
@@ -63,72 +63,7 @@
         </el-button>
       </el-col>
       <el-col :span="22" style="height: 100%;">
-        <el-row class="el-row" :gutter="10" type="flex" style="height: 60%; margin-top: 0.6rem; padding-left: 0.3rem">
-          <el-col :span="12" class="">
-            <PrjIndex></PrjIndex>
-          </el-col>
-          <el-col :span="12" class="">
-            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
-              <RiskLevelYear :context="{title:'年度隐患数量', id:'prj_level_year'}"></RiskLevelYear>
-            </el-col>
-            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
-              <!--              <HighProjectRisk></HighProjectRisk>-->
-              <CheckHistoryPerc></CheckHistoryPerc>
-            </el-col>
-            <el-col :span="12" class="" style="height: 50%; padding-top: 0.05rem">
-              <!--              <BarRank-->
-              <!--                  :context="{-->
-              <!--          title:'各区域检查次数',-->
-              <!--          id: 'id_head_rank1'}"-->
-              <!--              ></BarRank>-->
-              <PerctangePerc
-                  :context="{
-                    title:'不同分布区域隐患数量'+'-'+filter_major,
-                    id:'id_region',
-                   }"></PerctangePerc>
-            </el-col>
-            <el-col :span="12" class="" style="height: 50%; padding-top: 0.05rem">
-              <!--              <BarRank-->
-              <!--                  :context="{-->
-              <!--          title:'各区域在管项目数量',-->
-              <!--          id: 'id_head_rank2'}"-->
-              <!--              ></BarRank>-->
-              <BarRank
-                  :context="{
-              title:'不同子系统隐患数量'+'-'+filter_major,
-              id: 'id_project_system'
-          }"></BarRank>
-            </el-col>
-          </el-col>
-          <!--          <HighProjectRisk></HighProjectRisk>-->
-        </el-row>
-        <el-row class="el-row" :gutter="10" type="flex" style="height: 35%; margin-top: 0.2rem; padding-left: 0.3rem">
-          <el-col :span="12" style="height: 100%;">
-            <!--            <Ratio-->
-            <!--                :context="{-->
-            <!--          title:'不同专业隐患数量',-->
-            <!--          id: 'id_head_major',-->
-            <!--        }"></Ratio>-->
-            <StackedHorizontalBar
-                :context="{
-              title:'不同致因阶段隐患数量',
-              type:'reason',
-              id:'id_project_reason',
-            }"></StackedHorizontalBar>
-          </el-col>
-          <el-col :span="12" style="height: 100%;">
-            <!--            <StackedHorizontalBar-->
-            <!--                :context="{-->
-            <!--          title:'不同致因阶段隐患数量',-->
-            <!--          id: 'id_head_reason'-->
-            <!--        }"></StackedHorizontalBar>-->
-            <StackedHorizontalBar
-                :context="{
-                    title:'不同风险等级隐患数量',
-                    id: 'id_project_risk'
-                  }"></StackedHorizontalBar>
-          </el-col>
-        </el-row>
+        <CheckOverview></CheckOverview>
       </el-col>
     </el-row>
   </el-row>
@@ -145,7 +80,7 @@ import BarRank from "@/components/views/functions/BarRank.vue";
 import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
-  name: "PrjOverview",
+  name: "Check",
   components: {
     RiskLevelYear,
     CheckOverview,
@@ -159,21 +94,14 @@ export default {
   },
   methods: {
     intoPrjDataScreen() {
-      var large1 = document.getElementById('large1');
-      large1.style.display = 'none'
-      var large2 = document.getElementById('large2');
-      large2.style.display = 'none'
-      this.$router.push({path: `/new_project_screen/${this.$store.state.get_project.prj_name}`});
+      // var large1 = document.getElementById('large1');
+      // large1.style.display = 'none'
+      // var large2 = document.getElementById('large2');
+      // large2.style.display = 'none'
+      this.$router.push({path: `/new_check_screen/${this.$store.state.get_check.check_code}`});
     },
     handleTrNodeClick(data, node) {
-      // console.log(data)
-      // console.log(node)
       this.handleTreeNodeClick(data, node)
-      // this.$nextTick(() => {
-      //   // if ((document.getElementById("large2").style.display === 'block') && (document.getElementById("prj_subpart").style.display === 'none')) {
-      //   document.getElementById("check_part").style.display = 'block'
-      //   // }
-      // })
     },
     setNowTimes() {
       let myDate = new Date();
@@ -219,9 +147,26 @@ export default {
 
     //得到树形控件的内容 还负责封装了地理位置信息
     this.treeObj = this.$store.state.get_login.grant_data.data.value
-  },
-  updated() {
-    this.filter_major = this.$store.state.get_project.filter_major
+
+    if (window.history && window.history.pushState) {
+      history.pushState(null, null, document.URL);
+      this.doBack = () => {
+        this.$router.go(-1)
+      }
+      window.addEventListener('popstate', this.doBack, false);
+    }
+    // window.addEventListener("unload", () => {
+    //   this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
+    // })
+
+    $(document).ready(function () {
+      var whei = $(window).width()
+      $("html").css({fontSize: whei / 24});
+      $(window).resize(function () {
+        var whei = $(window).width();
+        $("html").css({fontSize: whei / 24})
+      });
+    });
   },
   computed: {
     getName() {
@@ -257,16 +202,10 @@ export default {
       highlightCurrent: true,
       expandOnClickNode: false,
       currentNodeKey: 0,
-      map: "",
-      mapInfo: {},
-      dataset: {},
       form: {
         name: '',
       },
-      map_width: 0,
-      map_height: 0,
       timer: null,
-      input: 'test',
       title1: this.$store.state.get_headquarter.head_name,
       title2: this.$store.state.get_region.region_name,
       title3: this.$store.state.get_project.prj_name,
@@ -274,24 +213,45 @@ export default {
       nowWeek: "",
       nowDate: "",
       nowTime: "",
-      filter_major: ''
+      doBack: null,
+      doStorage: null
     };
   },
   created() {
+    //在页面加载时读取sessionStorage里的状态信息
+    sessionStorage.getItem("checkMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("checkMsg"))));
+    //在页面刷新时将vuex里的信息保存到sessionStorage里
+    this.doStorage = () => {
+      sessionStorage.setItem("checkMsg", JSON.stringify(this.$store.state))
+    }
+    window.addEventListener("beforeunload", this.doStorage)
+
     // console.log('grant', this.$store.state.get_login.grant_data)
     //得到树形控件的内容 还负责封装了地理位置信息
     this.treeObj = this.$store.state.get_login.grant_data.data.value
   },
   beforeDestroy() {
     clearInterval(this.timer)
+
+    window.removeEventListener('popstate', this.doBack, false);
+    window.removeEventListener('beforeunload', this.doStorage);
+    // window.removeEventListener("unload", () => {
+    //   this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
+    // }, true)
+
+    this.$destroy(true);
   }
 }
 </script>
 
 <style scoped>
-#map {
+.Check {
+  background: url("../assets/head_overview_bg.png") no-repeat;
+  background-size: cover;
+  margin: 0 auto;
   width: 100%;
-  height: calc(100vh);
+  height: 90%;
+  position: relative;
 }
 
 .el-button {

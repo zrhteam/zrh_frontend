@@ -28,7 +28,10 @@ import {bar_option} from "@/utils/constants";
 export default {
   name: "CheckRiskLevel",
   data() {
-    return {myChart: null}
+    return {
+      myChart: null,
+      doResize: null
+    }
   },
   props: ['context'],
   computed: {
@@ -84,9 +87,10 @@ export default {
       if (arr.length != 0) {
         this.myChart.setOption(bar_option);
         this.myChart.resize();
-        window.addEventListener('resize', function () {
+        this.doResize = () => {
           this.myChart.resize();
-        })
+        }
+        window.addEventListener('resize', this.doResize)
       } else if (this.context.id) {
         this.$nextTick(() => {
           const dom = document.getElementById(this.context.id)
@@ -106,9 +110,7 @@ export default {
     this.myChart = null;
   },
   destroyed() {
-    window.removeEventListener('resize', function () {
-      this.myChart.resize();
-    })
+    window.removeEventListener('resize', this.doResize)
   }
 }
 </script>

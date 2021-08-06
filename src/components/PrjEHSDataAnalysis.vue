@@ -130,44 +130,36 @@
   <!--    </el-main>-->
   <!--  </el-container>-->
   <PrjOverview class="prj_overview"></PrjOverview>
-  <!--<PrjDataScreen></PrjDataScreen>-->
   <!--  -->
 
 </template>
 
 <script>
 import PrjOverview from '@/components/views/Project/PrjOverview.vue'
-import PrjDataScreen from "@/components/views/Project/PrjDataScreen.vue";
 
 export default {
   name: "PrjEHSDataAnalysis",
   components: {
     PrjOverview,
-    PrjDataScreen,
-
   },
   data() {
     return {
       prj_name: '',
-      safety_index: '',
-      elevator_index: ''
-    }
-  },
-  computed: {},
-  methods: {
-    goBack() {
-      // this.$router.push({path: '/'});
-      this.$router.go(-1)
+      doBack: null,
+      doStorage: null,
     }
   },
   mounted() {
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
-      window.addEventListener('popstate', this.goBack, false);
+      this.doBack = () => {
+        this.$router.go(-1)
+      }
+      window.addEventListener('popstate', this.doBack, false);
     }
-    window.addEventListener("unload", () => {
-      this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
-    })
+    // window.addEventListener("unload", () => {
+    //   this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
+    // })
 
     $(document).ready(function () {
       var whei = $(window).width()
@@ -179,10 +171,10 @@ export default {
     });
   },
   destroyed() {
-    window.removeEventListener('popstate', this.goBack, false);
-    window.removeEventListener("unload", () => {
-      this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
-    }, true)
+    window.removeEventListener('popstate', this.doBack, false);
+    window.removeEventListener('beforeunload', this.doStorage, false);
+
+    this.$destroy(true);
   },
   created() {
     // if (!sessionStorage.getItem("prjMsg")) {
@@ -266,9 +258,10 @@ export default {
     //在页面加载时读取sessionStorage里的状态信息
     sessionStorage.getItem("prjMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("prjMsg"))));
     //在页面刷新时将vuex里的信息保存到sessionStorage里
-    window.addEventListener("beforeunload", () => {
+    this.doStorage = () => {
       sessionStorage.setItem("prjMsg", JSON.stringify(this.$store.state))
-    })
+    }
+    window.addEventListener("beforeunload", this.doStorage)
     // alert(this.$store.state.get_login.grant_data.data.project_tag)
     // this.prjNodeClick(this.$store.state.get_login.grant_data.data.project_tag)
 

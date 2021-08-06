@@ -19,11 +19,12 @@ export default {
   },
   data() {
     return {
-      timer: null
+      timer1: null,
+      timer2: null
     }
   },
   mounted() {
-    this.timer = setInterval(() => {
+    this.timer1 = setInterval(() => {
       this.$nextTick(_ => {
         this.numberGrow(this.$refs.numberGrow)
       })
@@ -34,7 +35,7 @@ export default {
         let step = parseInt((this.value) / (this.time * 50))
         let current = 0
         let start = 0
-        this.timer = setInterval(() => {
+        this.timer2 = setInterval(() => {
           start += step + 3
           if (start >= this.value) {
             clearInterval(this.timer)
@@ -50,7 +51,8 @@ export default {
     }
   },
   destroyed() {
-    clearInterval(this.timer)
+    clearInterval(this.timer1)
+    clearInterval(this.timer2)
   }
 }
 </script>

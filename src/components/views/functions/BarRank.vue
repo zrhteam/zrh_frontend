@@ -59,7 +59,8 @@ export default {
     return {
       option: '',
       barEchartContainer: null,
-      myChart: null
+      myChart: null,
+      doResize: null
     }
   },
   methods: {
@@ -75,8 +76,8 @@ export default {
         let arr = this.getData
         if (arr.length != 0) {
           arr.sort(this.sortNumber('count', true))
-          if (this.context.id == 'id_head_rank1' || this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
-            if (this.context.id == 'id_project_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
+          if (this.context.id == 'id_head_rank1' || this.context.id == 'id_project_system' || this.context.id == 'id_check_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
+            if (this.context.id == 'id_project_system' || this.context.id == 'id_check_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
               bar_option3["grid"]["bottom"] = this.fontSize(0.35)
               bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8 / arr.length)
               // }else if(this.context.id == 'id_region_rank2') {
@@ -93,11 +94,12 @@ export default {
             this.myChart.setOption(bar_option);
           }
           this.myChart.resize();
-          window.addEventListener("resize", () => {
+          this.doResize = () => {
             if (this.myChart != null) { // 如果不存在，就进行初始化
               this.myChart.resize();
             }
-          });
+          }
+          window.addEventListener("resize", this.doResize);
           // } else if (this.context.id) {
           //   this.$nextTick(() => {
           //     const dom = document.getElementById(this.context.id)
@@ -248,14 +250,12 @@ export default {
     this.drawBarChart()
   },
   mounted() {
-    // this.drawBarChart()
+    this.drawBarChart()
     this.barEchartContainer = this.$refs.barEchartContainer;
     this.myChart = this.$echarts.init(this.barEchartContainer)
   },
   beforeDestroy() {
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
+    window.removeEventListener("resize", this.doResize);
 
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁

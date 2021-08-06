@@ -571,6 +571,10 @@ export default {
   },
   destroyed() {
     clearInterval(this.timer)
+
+    if (this.$el)
+      delete this.$el.__vue__;
+    window.location.reload();
   }
 }
 </script>

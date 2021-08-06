@@ -41,9 +41,9 @@ export default new Vuex.Store({
         get_region,
         get_login,
         get_check,
-        get_comparison,
+        // get_comparison,
         get_screen,
-        get_insight
+        // get_insight
     },
     strict: debug
 })

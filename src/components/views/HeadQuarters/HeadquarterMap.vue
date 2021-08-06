@@ -4,7 +4,7 @@
     <div class="map_container" style="height: 100%; width: 100%; z-index:1; background-color: transparent">
       <!--        <div id="map_5"-->
       <!--             style="pointer-events:inherit; height: 100%; width: 100%;"></div>-->
-      <div id="map" :style="{height:'100%',width:'100%'}" ref="map_5" @contextmenu="returnCountry()"></div>
+      <div id="map" :style="{height:'100%',width:'100%'}" ref="map_5"></div>
     </div>
   </el-card>
 </template>
@@ -19,17 +19,17 @@ export default {
   data() {
     return {
       chart: null,
+      timer: null
     }
   },
   mounted() {
-    var timer = setTimeout(() => {
+    this.timer = setTimeout(() => {
       let mainHeight = this.$refs.map_5.offsetHeight
       $("#map").css("height", mainHeight + "px");
       this.$nextTick(() => {
         this.chinaConfigure();
       })
     }, 100)
-    clearTimeout(timer)
   },
   watch: {
     projectInfo() {
@@ -48,17 +48,16 @@ export default {
     this.chart = null;
 
     window.onresize = null
+
+    clearTimeout(this.timer)
   },
   methods: {
-    returnCountry() {
-      this.$options.methods.chinaConfigure();
-    },
     chinaConfigure() {
       // let myChart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
-      this.chart = echarts.init(document.getElementById("map")); //这里是为了获得容器所在位置
+      this.chart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
       window.onresize = this.chart.resize("auto", "auto");
 
-      // initEcharts("china");
+      initEcharts("china", this.chart);
 
       const seriesList = []
       let obj = {

@@ -15,7 +15,8 @@ export default {
   props: ["userJson", "provinceInfo", "renderSign"],
   data() {
     return {
-      arr: []
+      arr: [],
+      chart: null
     }
   },
   mounted() {
@@ -39,10 +40,10 @@ export default {
     },
     chinaConfigure() {
       // let myChart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
-      let myChart = echarts.init(document.getElementById("map")); //这里是为了获得容器所在位置
-      window.onresize = myChart.resize("auto", "auto");
+      this.chart = echarts.init(document.getElementById("map")); //这里是为了获得容器所在位置
+      window.onresize = this.chart.resize("auto", "auto");
 
-      initEcharts("china");
+      initEcharts("china", this.chart);
 
       const seriesList = []
       let obj = {
@@ -76,7 +77,7 @@ export default {
         };
       });
 
-      function initEcharts(map) {
+      function initEcharts(map, myChart) {
         myChart.setOption({ // 进行相关配置
           opacity: 0,
           tooltip: {
@@ -124,13 +125,19 @@ export default {
         });
       }
 
-      initEcharts("china");
+      initEcharts("china", this.chart);
     },
   },
-  destroyed() {
+  beforeDestroy() {
     window.removeEventListener("resize", () => {
-      this.pieChart.resize();
+      this.chart.resize();
     });
+
+    if (!this.chart) {
+      return;
+    }
+    this.chart.dispose();
+    this.chart = null;
   }
 }
 </script>

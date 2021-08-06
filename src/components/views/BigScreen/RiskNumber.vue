@@ -139,6 +139,11 @@ export default {
     }
   },
   beforeDestroy() {
+    clearInterval(this.timer)
+    window.removeEventListener("resize", () => {
+      this.myChart.resize();
+    });
+
     if (!this.myChart) {
       return;
     }
@@ -146,10 +151,7 @@ export default {
     this.myChart = null;
   },
   destroyed() {
-    clearInterval(this.timer)
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
+
   }
 }
 </script>

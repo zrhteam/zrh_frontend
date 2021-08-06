@@ -64,6 +64,8 @@ exports.install = function (Vue, options) {
 
         // 总部下的项目名以及对应的经纬度
         this.$store.dispatch('get_headquarter/getHeadProjectPosition')
+
+        this.$router.push({path: `/land_headquarters`});
     };
     Vue.prototype.regionNodeClick = function (region_name) {//全局函数2,点击树形控件的区域，查询该区域的大屏信息
         let param = new URLSearchParams();
@@ -132,6 +134,8 @@ exports.install = function (Vue, options) {
 
         //红线
         // this.$store.dispatch('get_region/getRegionDangerProblem')
+
+        this.$router.push({path: `/region_department`});
     };
     Vue.prototype.prjNodeClick = function (project_name) {//全局函数3,点击树形控件的项目，查询该项目的大屏信息
         let param = new URLSearchParams();
@@ -208,7 +212,9 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_project/getProjectRiskLevelRatio')
 
         //红线
-        this.$store.dispatch('get_project/getProjectDangerProblem')
+        // this.$store.dispatch('get_project/getProjectDangerProblem')
+
+        this.$router.push({path: `/prj_data_analysis`});
     };
     Vue.prototype.checkNodeClick = function (check_code) {//全局函数4,点击树形控件的检查，查询该检查的大屏信息
         let param1 = new URLSearchParams();
@@ -296,37 +302,41 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_check/getCheckRiskLevelRatio')
 
         //红线
-        this.$store.dispatch('get_check/getCheckDangerProblem')
+        // this.$store.dispatch('get_check/getCheckDangerProblem')
+
+        // 给检查单开一个页面
+        this.$router.push({path: `/check`});
     };
     Vue.prototype.handleTreeNodeClick = function (data, node) {//全局函数5,点击树形控件，查看页面权限，决定页面展示
+        var timer = null
         if (this.$store.state.get_login.grant_data.data.user_grant === '项目') {
             if ((node.level == 1) || (node.level == 2)) {
                 alert("您没有权限")
             } else if (node.level == 3) {
                 this.prjNodeClick(data.label)
-                setTimeout(() => {
-                    document.getElementById('prj_subpart').style.display = 'block'
-                    document.getElementById('check_part').style.display = 'none'
-                    // document.getElementById('map_1').style.display = 'none'
-                    // document.getElementById('map_2').style.display = 'block'
-                    document.getElementById('prj_charts').style.display = 'block'
-                    document.getElementById('check_charts').style.display = 'none'
-                }, 200);
+                // timer = setTimeout(() => {
+                //     document.getElementById('prj_subpart').style.display = 'block'
+                //     document.getElementById('check_part').style.display = 'none'
+                //     // document.getElementById('map_1').style.display = 'none'
+                //     // document.getElementById('map_2').style.display = 'block'
+                //     document.getElementById('prj_charts').style.display = 'block'
+                //     document.getElementById('check_charts').style.display = 'none'
+                // }, 200);
             } else if (node.level == 4) {
                 this.checkNodeClick(data.label)
                 //首先要判断当前是在数据大屏页面还是在主页面
                 // if (document.getElementById("prj_small").style.display === 'none') {//在主页面
-                document.getElementById("prj_subpart").style.display = 'none'
-                document.getElementById("prj_charts").style.display = 'none'
-
-                document.getElementById("check_charts").style.display = 'block'
-                document.getElementById("check_part").style.display = 'block'
-                document.getElementById('prj_charts').style.height = "500px"
-                document.getElementById('check_charts').style.height = "500px"
-                setTimeout(function () {
-                    document.getElementById('check_charts').style.height = "99%"
-                    document.getElementById('check_part').style.height = "99%"
-                }, 100)
+                // document.getElementById("prj_subpart").style.display = 'none'
+                // document.getElementById("prj_charts").style.display = 'none'
+                //
+                // document.getElementById("check_charts").style.display = 'block'
+                // document.getElementById("check_part").style.display = 'block'
+                // document.getElementById('prj_charts').style.height = "500px"
+                // document.getElementById('check_charts').style.height = "500px"
+                // timer = setTimeout(function () {
+                //     document.getElementById('check_charts').style.height = "99%"
+                //     document.getElementById('check_part').style.height = "99%"
+                // }, 100)
 
                 // } else {
                 //     document.getElementById("prj_subpart").style.display = 'none'
@@ -337,15 +347,16 @@ exports.install = function (Vue, options) {
                 //     // document.getElementById("large2").style.display = 'none'
                 // }
             }
+            clearTimeout(timer)
         } else if (this.$store.state.get_login.grant_data.data.user_grant === '区域') {
             if (node.level == 1) {
                 alert("您没有权限")
             } else if (node.level == 2) {
                 this.regionNodeClick(data.label)
-                setTimeout(() => {
-                    document.getElementById('region').style.display = 'block'
-                    document.getElementById('prj_part').style.display = 'none'
-                }, 200);
+                // timer = setTimeout(() => {
+                //     document.getElementById('region').style.display = 'block'
+                //     document.getElementById('prj_part').style.display = 'none'
+                // }, 200);
             } else if (node.level == 3) {//区域=》项目
                 this.prjNodeClick(data.label)
                 //修改可视化系统首页标题
@@ -357,29 +368,29 @@ exports.install = function (Vue, options) {
                 document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
                 document.getElementById('prj_title3_1').innerHTML = data.label
                 //首先要判断当前是在数据大屏页面还是在主页面=》不用再判断了，大屏页面没有树形控件
-                document.getElementById('region').style.display = 'none'
-                document.getElementById('prj_part').style.display = 'block'
-                document.getElementById("prj_subpart").style.display = 'block'
-                document.getElementById("check_part").style.display = 'none'
+                // document.getElementById('region').style.display = 'none'
+                // document.getElementById('prj_part').style.display = 'block'
+                // document.getElementById("prj_subpart").style.display = 'block'
+                // document.getElementById("check_part").style.display = 'none'
             } else if (node.level == 4) {//区域=》检查
                 this.checkNodeClick(data.label)
                 //修改可视化系统首页标题与项目级共用，仅修改数据大屏页面标题
                 document.getElementById('check_title1').innerHTML = document.getElementById('region_title1').innerHTML
                 document.getElementById('check_title2').innerHTML = document.getElementById('region_title2').innerHTML
                 document.getElementById('check_title3').innerHTML = document.getElementById('prj_title3').innerHTML
-                document.getElementById('region').style.display = 'none'
-                document.getElementById('prj_part').style.display = 'block'
-                document.getElementById("prj_subpart").style.display = 'none'
-                document.getElementById("check_part").style.display = 'block'
+                // document.getElementById('region').style.display = 'none'
+                // document.getElementById('prj_part').style.display = 'block'
+                // document.getElementById("prj_subpart").style.display = 'none'
+                // document.getElementById("check_part").style.display = 'block'
             }
         } else if (this.$store.state.get_login.grant_data.data.user_grant === '总部') {
             if (node.level == 1) {//总部=》总部
                 this.headNodeClick(data.label)
-                setTimeout(() => {
+                timer = setTimeout(() => {
                     document.getElementById('head_title1').innerHTML = data.label
                     document.getElementById('head_title2').innerHTML = data.label
                     document.getElementById('head_quarter').style.display = 'block'
-                    document.getElementById('region_part').style.display = 'none'
+                    // document.getElementById('region_part').style.display = 'none'
                 }, 200);
             } else if (node.level == 2) {//总部=》区域
                 this.regionNodeClick(data.label)
@@ -390,10 +401,10 @@ exports.install = function (Vue, options) {
                 // document.getElementById('region_title1_1').innerHTML = document.getElementById('head_title1').innerHTML
                 // document.getElementById('region_title2_1').innerHTML = data.label
                 //首先要判断当前是在数据大屏页面还是在主页面=>不需要再判断了，大屏页面不要树形控件
-                document.getElementById('head_quarter').style.display = 'none'
-                document.getElementById('region_part').style.display = 'block'
-                document.getElementById('region').style.display = 'block'
-                document.getElementById('prj_part').style.display = 'none'
+                // document.getElementById('head_quarter').style.display = 'none'
+                // document.getElementById('region_part').style.display = 'block'
+                // document.getElementById('region').style.display = 'block'
+                // document.getElementById('prj_part').style.display = 'none'
 
                 //为了画出多边形，要重新封装该区域的数据
                 // let r_p = [];
@@ -425,12 +436,12 @@ exports.install = function (Vue, options) {
                 document.getElementById('prj_title1_1').innerHTML = document.getElementById('head_title1').innerHTML
                 document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
                 document.getElementById('prj_title3_1').innerHTML = data.label
-                document.getElementById("head_quarter").style.display = 'none'
-                document.getElementById('region_part').style.display = 'block'
-                document.getElementById('region').style.display = 'none'
-                document.getElementById('prj_part').style.display = 'block'
-                document.getElementById("prj_subpart").style.display = 'block'
-                document.getElementById('check_part').style.display = 'none'
+                // document.getElementById("head_quarter").style.display = 'none'
+                // document.getElementById('region_part').style.display = 'block'
+                // document.getElementById('region').style.display = 'none'
+                // document.getElementById('prj_part').style.display = 'block'
+                // document.getElementById("prj_subpart").style.display = 'block'
+                // document.getElementById('check_part').style.display = 'none'
             } else if (node.level == 4) {//总部=》检查
                 this.checkNodeClick(data.label)
                 // document.getElementById('check_title1').innerHTML = document.getElementById('head_title1').innerHTML
@@ -439,33 +450,33 @@ exports.install = function (Vue, options) {
                 document.getElementById('prj_title1_1').innerHTML = document.getElementById('head_title1').innerHTML
                 document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
                 document.getElementById('prj_title3_1').innerHTML = document.getElementById('prj_title3').innerHTML
-                document.getElementById("head_quarter").style.display = 'none'
-                document.getElementById('region_part').style.display = 'block'
-                document.getElementById('region').style.display = 'none'
-                document.getElementById('prj_part').style.display = 'block'
-                document.getElementById("prj_subpart").style.display = 'none'
-                document.getElementById('check_part').style.display = 'block'
+                // document.getElementById("head_quarter").style.display = 'none'
+                // document.getElementById('region_part').style.display = 'block'
+                // document.getElementById('region').style.display = 'none'
+                // document.getElementById('prj_part').style.display = 'block'
+                // document.getElementById("prj_subpart").style.display = 'none'
+                // document.getElementById('check_part').style.display = 'block'
             }
         } else if (this.$store.state.get_login.grant_data.data.user_grant = "超级用户") {
             if (node.level == 1) {//总部=》总部
-                this.headNodeClick(data.label)
+                timer = this.headNodeClick(data.label)
                 setTimeout(() => {
                     document.getElementById('head_title1').innerHTML = data.label
                     // document.getElementById('head_title2').innerHTML = data.label
                     document.getElementById('head_quarter').style.display = 'block'
-                    document.getElementById('region_part').style.display = 'none'
+                    // document.getElementById('region_part').style.display = 'none'
                 }, 200);
             } else if (node.level == 2) {//总部=》区域
                 this.regionNodeClick(data.label)
-                document.getElementById('region_title1').innerHTML = document.getElementById('head_title1').innerHTML
-                document.getElementById('region_title2').innerHTML = data.label
+                // document.getElementById('region_title1').innerHTML = document.getElementById('head_title1').innerHTML
+                // document.getElementById('region_title2').innerHTML = data.label
                 // console.log("检查", data)
                 // console.log(node)
                 //首先要判断当前是在数据大屏页面还是在主页面=>不需要再判断了，大屏页面不要树形控件
-                document.getElementById('head_quarter').style.display = 'none'
-                document.getElementById('region_part').style.display = 'block'
-                document.getElementById('region').style.display = 'block'
-                document.getElementById('prj_part').style.display = 'none'
+                // document.getElementById('head_quarter').style.display = 'none'
+                // document.getElementById('region_part').style.display = 'block'
+                // document.getElementById('region').style.display = 'block'
+                // document.getElementById('prj_part').style.display = 'none'
 
                 //为了画出多边形，要重新封装该区域的数据
                 // let r_p = [];
@@ -492,21 +503,22 @@ exports.install = function (Vue, options) {
                 document.getElementById('prj_title1').innerHTML = document.getElementById('head_title1').innerHTML
                 document.getElementById('prj_title2').innerHTML = document.getElementById('region_title2').innerHTML
                 document.getElementById('prj_title3').innerHTML = data.label
-                document.getElementById("head_quarter").style.display = 'none'
-                document.getElementById('region_part').style.display = 'block'
-                document.getElementById('region').style.display = 'none'
-                document.getElementById('prj_part').style.display = 'block'
-                document.getElementById("prj_subpart").style.display = 'block'
-                document.getElementById('check_part').style.display = 'none'
+                // document.getElementById("head_quarter").style.display = 'none'
+                // document.getElementById('region_part').style.display = 'block'
+                // document.getElementById('region').style.display = 'none'
+                // document.getElementById('prj_part').style.display = 'block'
+                // document.getElementById("prj_subpart").style.display = 'block'
+                // document.getElementById('check_part').style.display = 'none'
             } else if (node.level == 4) {//总部=》检查
                 this.checkNodeClick(data.label)
-                document.getElementById("head_quarter").style.display = 'none'
-                document.getElementById('region_part').style.display = 'block'
-                document.getElementById('region').style.display = 'none'
-                document.getElementById('prj_part').style.display = 'block'
-                document.getElementById("prj_subpart").style.display = 'none'
-                document.getElementById('check_part').style.display = 'block'
+                // document.getElementById("head_quarter").style.display = 'none'
+                // document.getElementById('region_part').style.display = 'block'
+                // document.getElementById('region').style.display = 'none'
+                // document.getElementById('prj_part').style.display = 'block'
+                // document.getElementById("prj_subpart").style.display = 'none'
+                // document.getElementById('check_part').style.display = 'block'
             }
         }
+        clearTimeout(timer)
     };
 };

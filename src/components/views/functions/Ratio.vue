@@ -47,6 +47,7 @@ export default {
       value: '全部专业',
       option: '',
       myChart: null,
+      doResize: null
     }
   },
   props: ['context'],
@@ -98,12 +99,12 @@ export default {
           }
 
           this.myChart.resize();
-          window.addEventListener("resize", () => {
-            // this.myChart = echarts.getInstanceByDom(document.getElementById(this.context.id))
+          this.doResize = () => {
             if (this.myChart != null) { // 如果不存在，就进行初始化
               this.myChart.resize();
             }
-          });
+          }
+          window.addEventListener("resize", this.doResize);
         } else if (this.context.id) {
           this.$nextTick(() => {
             const dom = document.getElementById(this.context.id)
@@ -246,9 +247,7 @@ export default {
     this.drawBarChart();
   },
   beforeDestroy() {
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
+    window.removeEventListener("resize", this.doResize);
 
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁

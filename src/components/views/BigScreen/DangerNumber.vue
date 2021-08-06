@@ -175,16 +175,15 @@ export default {
     }
   },
   beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      this.myChart.resize();
+    });
+
     if (!this.myChart) {
       return;
     }
     this.myChart.dispose();
     this.myChart = null;
-  },
-  destroyed() {
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
   }
 }
 </script>

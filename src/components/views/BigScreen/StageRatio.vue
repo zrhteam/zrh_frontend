@@ -142,18 +142,17 @@ export default {
     }
   },
   beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      this.myChart.resize();
+    });
+    clearInterval(this.timer)
+
     if (!this.myChart) {
       return;
     }
     this.myChart.dispose();
     this.myChart = null;
   },
-  destroyed() {
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
-    clearInterval(this.timer)
-  }
 }
 </script>
 

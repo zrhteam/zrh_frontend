@@ -202,7 +202,7 @@ export default {
     }
   },
   mounted() {
-    if(this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁
     }
     this.rankBar = this.$refs.rankBar;
@@ -215,16 +215,15 @@ export default {
     }
   },
   beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      this.myChart.resize();
+    });
+
     if (!this.myChart) {
       return;
     }
     this.myChart.dispose();
     this.myChart = null;
-  },
-  destroyed() {
-     window.removeEventListener("resize", () => {
-        this.myChart.resize();
-      });
   }
 }
 </script>

@@ -102,46 +102,29 @@
 </template>
 
 <script>
-import Region3_1 from "@/components/views/Region/Region3_1.vue";
 import RegionOverview from "@/components/views/Region/RegionOverview.vue";
 
 export default {
   name: "RegionDepartment",
   components: {
     RegionOverview,
-    Region3_1,
   },
   data() {
     return {
       region_name: '',
+      doBack: null,
+      doStorage: null
     }
-  },
-  methods: {
-    selfAdaption() {
-      let _this = this;
-      let timer = setTimeout(() => {
-        window.addEventListener('resize', function () {
-          _this.$refs.echarts.resize();
-        })
-      }, 10)
-      clearTimeout(timer)
-    },
-    goBack() {
-      this.$router.replace({path: '/'});
-      // this.$router.push({path: '/'});
-      // this.$router.go(-1)
-      //replace替换原路由，作用是避免回退死循环
-    }
-  },
-  computed: {
   },
   mounted() {
-    this.selfAdaption();
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
-      window.addEventListener('popstate', this.goBack, false);
+      this.doBack = () => {
+        this.$router.replace({path: '/'});
+      }
+      window.addEventListener('popstate', this.doBack, false);
     }
-     $(document).ready(function () {
+    $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
       $(window).resize(function () {
@@ -151,7 +134,10 @@ export default {
     });
   },
   destroyed() {
-    window.removeEventListener('popstate', this.goBack, false);
+    window.removeEventListener('popstate', this.doBack, false);
+    window.removeEventListener("beforeunload", this.doStorage)
+
+    this.$destroy(true);
   },
   created() {
     // if (!sessionStorage.getItem("regionMsg")) {
@@ -226,9 +212,10 @@ export default {
     //在页面加载时读取sessionStorage里的状态信息
     sessionStorage.getItem("regionMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("regionMsg"))));
     //在页面刷新时将vuex里的信息保存到sessionStorage里
-    window.addEventListener("beforeunload", () => {
+    this.doStorage = () => {
       sessionStorage.setItem("regionMsg", JSON.stringify(this.$store.state))
-    })
+    }
+    window.addEventListener("beforeunload", this.doStorage)
   }
 }
 </script>

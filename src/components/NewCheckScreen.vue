@@ -506,7 +506,8 @@ export default {
       this.nowTime = hou + ":" + min + ":" + sec;
     },
     quitCheckScreen() {
-      this.$router.push({path: '/prj_data_analysis'});
+      // this.$router.push({path: '/check'});
+      this.$router.go(-1);
     },
     intoFireScreen() {
       var check_code = this.check_code
@@ -564,9 +565,13 @@ export default {
     // this.$store.dispatch('get_screen/getCheckScreenPictureNote')
     // this.$store.dispatch('get_screen/getCheckScreenTable')
   },
-  destroyed() {
-    clearInterval(this.timer)
-  }
+  // destroyed() {
+  //   clearInterval(this.timer)
+  //
+  //   if (this.$el)
+  //     delete this.$el.__vue__;
+  //   window.location.reload();
+  // }
 }
 </script>
 

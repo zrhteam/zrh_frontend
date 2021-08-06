@@ -10,11 +10,11 @@ import Overview from '../components/Overview.vue'
 import LandHeadquartersEHSDataScreen from "../components/LandHeadquartersEHSDataScreen.vue";
 import RegionDepartment from "@/components/RegionDepartment.vue";
 import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
+import Check from "@c/Check.vue";
 import Analyze from "@/components/Analyze.vue"//对应数据洞察
 import NotFound from '../components/NotFound.vue'
 import SuperOverview from "@/components/SuperOverview.vue";//对应超级用户登录系统后都独有的首页
 import DataCompare from "@/components/DataCompare.vue";//对应数据分析那一块
-import DataInsight from "@/components/DataInsight.vue";
 //由于数据大屏拷贝链接直接展示的功能，为每个数据大屏各开一个链接
 import NewHeadScreen from "@/components/NewHeadScreen.vue";
 import NewRegionScreen from "@/components/NewRegionScreen.vue";
@@ -59,8 +59,9 @@ const routerOptions = [
     {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
     {path: '/region_department', component: 'RegionDepartment', meta: {keepAlive: false}},
     {path: '/prj_data_analysis', component: 'PrjEHSDataAnalysis', meta: {keepAlive: false}},
+    {path: '/check', component: 'Check', meta: {keepAlive: false}},
     // {path: '/analyze', component: 'Analyze', meta: {keepAlive: false}},
-    {path: '/analyze', component: 'DataInsight', meta: {keepAlive: false}},
+    // {path: '/analyze', component: 'DataInsight', meta: {keepAlive: false}},
     {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive: false}},
     {path: '/data_compare', component: 'DataCompare', meta: {keepAlive: false}},
     {path: '/new_head_screen/:id', component: 'NewHeadScreen'},
@@ -75,7 +76,6 @@ const routerOptions = [
     {path: '/check_lift_screen', component: 'CheckLiftScreen'},
     {path: '/check_electric_screen', component: 'CheckElectricScreen'},
     {path: '/check_fuel_screen', component: 'CheckFuelScreen'},
-    // {path: '/red_line_data', component: 'DataInsight'},
     {path: '*', component: 'NotFound'}
 ]
 const routes = routerOptions.map(route => {

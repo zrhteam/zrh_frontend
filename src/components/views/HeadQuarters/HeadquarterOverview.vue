@@ -1,7 +1,6 @@
 <template>
   <el-row style="height: 100%;">
     <el-row style="height: 100%;" id="head_quarter">
-<!--      <headquarterDataScreen id="head_small" style="display: none"></headquarterDataScreen>-->
       <el-row id="head_large1" class="" style="height: 1.25rem;">
         <!--        <el-col :span="4" style="height: 100%">-->
         <!--          <el-card class="title-box-card" shadow="never"-->
@@ -65,7 +64,6 @@
                      style="width: 110%; z-index: 9; left: 12%; background-color: #2070dd; color: #ffffff; font-size: 0.26rem; font-weight: bold; float: left; letter-spacing:20px; text-indent: 20px;"
                      @click="intoHeadDataScreen">展开
           </el-button>
-          <!--            <headquarterDataScreen id="head_small1"></headquarterDataScreen>-->
 
           <!--          <label>数据大屏缩略图</label>-->
           <!--          </el-card>-->
@@ -124,14 +122,11 @@
       </el-row>
 
     </el-row>
-    <RegionOverview id="region_part" style=""></RegionOverview>
   </el-row>
 </template>
 
 <script>
 import HighProjectRisk from "@/components/views/HeadQuarters/HighProjectRisk.vue";
-import headquarterDataScreen from "@/components/views/HeadQuarters/headquarterDataScreen.vue";
-import RegionOverview from "@/components/views/Region/RegionOverview.vue";
 import Tree from "@/components/views/functions/Tree.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
@@ -149,9 +144,7 @@ export default {
     HeadquarterMap,
     RiskLevelYear,
     TopRisk,
-    RegionOverview,
     HighProjectRisk,
-    headquarterDataScreen,
     Tree
   },
   methods: {
@@ -165,7 +158,6 @@ export default {
       // head_small.style.width = "500px"
       // head_small.style.width = "99%"
       this.$router.push({path: `/new_head_screen/${this.$store.state.get_headquarter.head_name}`});
-      document.getElementById('region_part').style.display = 'none'
     },
     intoDataAnalysis() {
       var href = 'http://10.20.39.102:12001/test#/'
@@ -219,6 +211,8 @@ export default {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
+    document.getElementById('head_quarter').style.display = 'block'
+    // document.getElementById('region_part').style.display = 'none'
   },
   computed: {
     getRiskSum() {
@@ -291,7 +285,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timer)
-  }
+  },
 }
 </script>
 

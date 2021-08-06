@@ -441,9 +441,47 @@ export default {
     // this.$store.dispatch('get_screen/getHeadScreenAreaNumber')
     // this.$store.dispatch('get_screen/getHeadScreenTable')
   },
-  destroyed() {
+  beforeDestroy() {
     clearInterval(this.timer)
-  }
+    if (this.$el)
+      delete this.$el.__vue__;
+  },
+  destroyed() {
+    const cleanVnode = vnode => {
+      if (vnode) {
+        vnode.elm = null;
+        vnode._renderChildren = null;
+        vnode.children = null;
+        // vnode.context=null;
+        vnode.componentOptions = null;
+      }
+    }
+    //为了内存，清空所有内容
+    this.$children = [];
+    this.$parent = null;
+    this._watchers = [];
+    this.$refs = {};
+    this.$root = null;
+    this.$slots = [];
+    this.$store = null;
+    cleanVnode(this._vnode);
+    cleanVnode(this.$vnode)
+    this._vnode = null;
+    this.$vnode = null;
+    if (this.$el)
+      delete this.$el.__ro__;
+    this.$el = null;
+    // this.$el=null;
+    this._watcher = null;
+    this._computedWatchers = {};
+    //ab-aui的内存溢出问题
+    this.popperElm = null;
+    if (this.$options) {
+      this.$options.parent = null;
+      this._parentVnode = null;
+      this.$options = null;
+    }
+  },
 }
 </script>
 

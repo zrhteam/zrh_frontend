@@ -16,44 +16,41 @@ export default {
   data() {
     return {
       head_name: '',
+      doResize: null,
+      doBack: null,
+      doStorage: null
     }
   },
   computed: {},
   methods: {
     selfAdaption() {
-      let _this = this;
       let timer = setTimeout(() => {
+        this.doResize = this.$refs.echarts.resize();
         window.addEventListener('resize', this.doResize, true)
       }, 10)
       clearTimeout(timer)
-    },
-    doResize(){
-      this.$refs.echarts.resize();
-    },
-    goBack() {
-      if (this.$store.state.get_login.grant_data.data.user_grant === '总部') {
-        this.$router.replace({path: '/'});
-      } else this.$router.replace({path: '/super_overview'});
-      // this.$router.push({path: '/'});
-      // this.$router.go(-1)
-      //replace替换原路由，作用是避免回退死循环
     },
   },
   mounted() {
     this.selfAdaption();
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
-      window.addEventListener('popstate', this.goBack, false);
+      this.doBack = () => {
+        if (this.$store.state.get_login.grant_data.data.user_grant === '总部') {
+          this.$router.replace({path: '/'});
+        } else this.$router.replace({path: '/super_overview'});
+      }
+      window.addEventListener('popstate', this.doBack, false);
     }
     // alert(1)
     // //在页面刷新时将vuex里的信息保存到sessionStorage里
     // window.addEventListener("onbeforeunload", () => {
     //   sessionStorage.setItem("headMsg", JSON.stringify(this.$store.state))
     //   alert(1)
-      var timer = setTimeout(() => {
-        document.getElementById('head_quarter').style.display = 'block'
-        document.getElementById('region_part').style.display = 'none'
-      }, 200);
+    var timer = setTimeout(() => {
+      document.getElementById('head_quarter').style.display = 'block'
+      document.getElementById('region_part').style.display = 'none'
+    }, 200);
     // })
     clearTimeout(timer)
 
@@ -68,11 +65,12 @@ export default {
     });
   },
   beforeDestroy() {
-    window.removeEventListener('popstate', this.goBack, false);
+    window.removeEventListener('popstate', this.doBack, false);
     window.removeEventListener('resize', this.doResize, true)
-    window.removeEventListener("beforeunload", () => {
-      sessionStorage.setItem("headMsg", JSON.stringify(this.$store.state))
-    })
+    window.removeEventListener("beforeunload", this.doStorage)
+  },
+  destroyed() {
+    this.$destroy(true);
   },
   created() {
     // if (!sessionStorage.getItem("headMsg")) {
@@ -144,12 +142,13 @@ export default {
     // param5.append('user_name', this.$store.state.get_login.user_name);
     // this.$store.commit('get_login/changeNameParam', {params: param5})
     // this.$store.dispatch('get_login/getGrantInfo')
-    //在页面加载时读取sessionStorage里的状态信息
+    // 在页面加载时读取sessionStorage里的状态信息
     sessionStorage.getItem("headMsg") && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("headMsg"))));
     // 在页面刷新时将vuex里的信息保存到sessionStorage里
-    window.addEventListener("beforeunload", () => {
+    this.doStorage = () => {
       sessionStorage.setItem("headMsg", JSON.stringify(this.$store.state))
-    })
+    }
+    window.addEventListener("beforeunload", this.doStorage)
     $(document).ready(function () {
       var whei = $(window).width()
       $("html").css({fontSize: whei / 24});
