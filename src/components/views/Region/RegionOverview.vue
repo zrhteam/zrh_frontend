@@ -257,6 +257,9 @@ export default {
   },
   updated() {
     this.filter_major = this.$store.state.get_region.filter_major
+
+    this.title1 = this.$store.state.get_headquarter.head_name
+    this.title2 = this.$store.state.get_region.region_name
   },
   data() {
     return {

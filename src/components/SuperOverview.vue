@@ -102,7 +102,7 @@ export default {
       let node = {
         level: 1
       }
-      this.$router.push({path: '/land_headquarters'});
+      this.$router.push({path: '/land_headquarters', query: {head_name: head_name}});
       this.handleTreeNodeClick(data, node)
     },
     handleCommand(command) {

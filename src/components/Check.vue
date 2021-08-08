@@ -13,15 +13,15 @@
           </el-col>
           <el-col :span="16" style="height: 100%;">
             <h4>
-            <span id="prj_title1"
+            <span class="prj_title"
                   style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
                 title1
               }}</span>
-              <span id="prj_title2"
+              <span class="prj_title"
                     style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
                   title2
                 }}</span>
-              <span id="prj_title3"
+              <span class="prj_title"
                     style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
                   title3
                 }}</span>
@@ -264,7 +264,7 @@ export default {
   border: none !important;
 }
 
-#prj_title1, #prj_title2, #prj_title3 {
+.prj_title {
   background-image: -webkit-linear-gradient(bottom, #04aaff, #45c3ff, #87dcfe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
