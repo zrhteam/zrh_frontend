@@ -360,9 +360,10 @@ exports.install = function (Vue, options) {
             } else if (node.level == 3) {//区域=》项目
                 this.prjNodeClick(data.label)
                 //修改可视化系统首页标题
+                document.getElementById('prj_title3').innerHTML = data.label
                 document.getElementById('prj_title1').innerHTML = document.getElementById('region_title1').innerHTML
                 document.getElementById('prj_title2').innerHTML = document.getElementById('region_title2').innerHTML
-                document.getElementById('prj_title3').innerHTML = data.label
+
                 //修改数据大屏页面标题
                 // document.getElementById('prj_title1_1').innerHTML = document.getElementById('region_title1').innerHTML
                 // document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
