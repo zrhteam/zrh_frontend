@@ -126,6 +126,7 @@ module.exports = {
         // hotOnly: false,
         hot: true,
         headers: {'X-Requested-With': 'XMLHttpRequest'},
+        hotOnly: false,
         disableHostCheck: true,
         // proxy: {
         //     '/api': {

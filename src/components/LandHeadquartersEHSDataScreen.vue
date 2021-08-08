@@ -35,10 +35,14 @@ export default {
     this.selfAdaption();
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
+
       this.doBack = () => {
-        if (this.$store.state.get_login.grant_data.data.user_grant === '总部') {
-          this.$router.replace({path: '/'});
-        } else this.$router.replace({path: '/super_overview'});
+        // if (this.$store.state.get_login.grant_data.data.user_grant === '总部') {
+        //   this.$router.replace({path: '/'});
+        // } else this.$router.replace({path: '/super_overview'});
+        // this.$router.go(-1);
+        window.location.href = document.referrer;
+        window.history.back(-1);
       }
       window.addEventListener('popstate', this.doBack, false);
     }
@@ -47,12 +51,12 @@ export default {
     // window.addEventListener("onbeforeunload", () => {
     //   sessionStorage.setItem("headMsg", JSON.stringify(this.$store.state))
     //   alert(1)
-    var timer = setTimeout(() => {
-      document.getElementById('head_quarter').style.display = 'block'
-      document.getElementById('region_part').style.display = 'none'
-    }, 200);
-    // })
-    clearTimeout(timer)
+    // var timer = setTimeout(() => {
+    //   document.getElementById('head_quarter').style.display = 'block'
+    //   document.getElementById('region_part').style.display = 'none'
+    // }, 200);
+    // // })
+    // clearTimeout(timer)
 
 
     $(document).ready(function () {
@@ -70,7 +74,7 @@ export default {
     window.removeEventListener("beforeunload", this.doStorage)
   },
   destroyed() {
-    this.$destroy(true);
+    // this.$destroy(true);
   },
   created() {
     // if (!sessionStorage.getItem("headMsg")) {

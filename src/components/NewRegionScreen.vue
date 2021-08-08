@@ -149,7 +149,12 @@ export default {
       // 复制命令会将当前选中的内容复制到剪切板中（这里就是创建的input标签）
       // Input要在正常的编辑状态下原生复制方法才会生效
       document.execCommand('Copy')
-      this.$massage('success', '复制成功') // antd框架封装的通知,如使用别的UI框架，换掉这句
+      this.$notify({
+          title: '成功',
+          message: '复制成功',
+          type: 'success',
+          duration: 1000
+        });
       /// 复制成功后再将构造的标签 移除
       cInput.remove()
     },
@@ -178,7 +183,9 @@ export default {
       this.nowTime = hou + ":" + min + ":" + sec;
     },
     quitRegionScreen() {
-      this.$router.push({path: '/region_department'});
+      // this.$router.push({path: '/region_department'});
+      window.location.href = document.referrer;
+        window.history.back(-1);
     },
     provinceInfo() {
       let data = this.$store.state.get_screen.province_info
@@ -513,8 +520,8 @@ export default {
   destroyed() {
     clearInterval(this.timer)
 
-    if (this.$el)
-      delete this.$el.__vue__;
+    // if (this.$el)
+    //   delete this.$el.__vue__;
     // window.location.reload();
   }
 }

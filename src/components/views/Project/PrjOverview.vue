@@ -281,6 +281,10 @@ export default {
     // console.log('grant', this.$store.state.get_login.grant_data)
     //得到树形控件的内容 还负责封装了地理位置信息
     this.treeObj = this.$store.state.get_login.grant_data.data.value
+
+    this.title1 = this.$store.state.get_headquarter.head_name
+    this.title2 = this.$store.state.get_region.region_name
+    this.title3 = this.$store.state.get_project.prj_name
   },
   beforeDestroy() {
     clearInterval(this.timer)

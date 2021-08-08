@@ -120,7 +120,9 @@ export default {
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
       this.doBack = () => {
-        this.$router.replace({path: '/'});
+        // this.$router.replace({path: '/'});
+        window.location.href = document.referrer;
+        window.history.back(-1);
       }
       window.addEventListener('popstate', this.doBack, false);
     }
@@ -137,7 +139,7 @@ export default {
     window.removeEventListener('popstate', this.doBack, false);
     window.removeEventListener("beforeunload", this.doStorage)
 
-    this.$destroy(true);
+    // this.$destroy(true);
   },
   created() {
     // if (!sessionStorage.getItem("regionMsg")) {

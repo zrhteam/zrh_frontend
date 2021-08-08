@@ -3,7 +3,7 @@
     <el-row class="boundary-A" style="height: 10%">
       <div
           style="position: absolute !important; width: 8.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
-        <div class="title" style="width: 8.75rem;">{{ check_code }}{{major}}</div>
+        <div class="title" style="width: 8.75rem;">{{ check_code }}{{ major }}</div>
       </div>
       <div
           style="position: absolute !important; width: 3.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem;">
@@ -346,7 +346,7 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
-        if(route.query.id != undefined & route.query.id == 1) {
+        if (route.query.id != undefined & route.query.id == 1) {
           this.show = false
         }
         this.check_code = route.query.check_code
@@ -394,7 +394,12 @@ export default {
       // 复制命令会将当前选中的内容复制到剪切板中（这里就是创建的input标签）
       // Input要在正常的编辑状态下原生复制方法才会生效
       document.execCommand('Copy')
-      this.$massage('success', '复制成功') // antd框架封装的通知,如使用别的UI框架，换掉这句
+      this.$notify({
+          title: '成功',
+          message: '复制成功',
+          type: 'success',
+          duration: 1000
+        });
       /// 复制成功后再将构造的标签 移除
       cInput.remove()
     },
@@ -424,7 +429,7 @@ export default {
     },
     quitProjectFireScreen() {
       // this.$router.push({path: `/new_project_screen/${this.project_name}`});
-      this.$router.go(-1);
+      this.$router.back(-1);
     },
     rowClassName(row) {
       if (row.rowIndex % 2 == 0) {

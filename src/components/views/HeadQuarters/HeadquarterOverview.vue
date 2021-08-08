@@ -167,9 +167,6 @@ export default {
     handleTrNodeClick(data, node) {
       this.handleTreeNodeClick(data, node)
     },
-    back() {
-      window.history.back()
-    },
     setNowTimes() {
       let myDate = new Date();
       // console.log(myDate)
@@ -211,7 +208,7 @@ export default {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
-    document.getElementById('head_quarter').style.display = 'block'
+    // document.getElementById('head_quarter').style.display = 'block'
     // document.getElementById('region_part').style.display = 'none'
   },
   computed: {

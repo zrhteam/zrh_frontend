@@ -364,9 +364,9 @@ exports.install = function (Vue, options) {
                 document.getElementById('prj_title2').innerHTML = document.getElementById('region_title2').innerHTML
                 document.getElementById('prj_title3').innerHTML = data.label
                 //修改数据大屏页面标题
-                document.getElementById('prj_title1_1').innerHTML = document.getElementById('region_title1').innerHTML
-                document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
-                document.getElementById('prj_title3_1').innerHTML = data.label
+                // document.getElementById('prj_title1_1').innerHTML = document.getElementById('region_title1').innerHTML
+                // document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
+                // document.getElementById('prj_title3_1').innerHTML = data.label
                 //首先要判断当前是在数据大屏页面还是在主页面=》不用再判断了，大屏页面没有树形控件
                 // document.getElementById('region').style.display = 'none'
                 // document.getElementById('prj_part').style.display = 'block'
@@ -433,9 +433,9 @@ exports.install = function (Vue, options) {
                 document.getElementById('prj_title2').innerHTML = document.getElementById('region_title2').innerHTML
                 document.getElementById('prj_title3').innerHTML = data.label
                 //修改数据大屏页面标题
-                document.getElementById('prj_title1_1').innerHTML = document.getElementById('head_title1').innerHTML
-                document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
-                document.getElementById('prj_title3_1').innerHTML = data.label
+                // document.getElementById('prj_title1_1').innerHTML = document.getElementById('head_title1').innerHTML
+                // document.getElementById('prj_title2_1').innerHTML = document.getElementById('region_title2').innerHTML
+                // document.getElementById('prj_title3_1').innerHTML = data.label
                 // document.getElementById("head_quarter").style.display = 'none'
                 // document.getElementById('region_part').style.display = 'block'
                 // document.getElementById('region').style.display = 'none'
@@ -463,13 +463,13 @@ exports.install = function (Vue, options) {
                 setTimeout(() => {
                     document.getElementById('head_title1').innerHTML = data.label
                     // document.getElementById('head_title2').innerHTML = data.label
-                    document.getElementById('head_quarter').style.display = 'block'
+                    // document.getElementById('head_quarter').style.display = 'block'
                     // document.getElementById('region_part').style.display = 'none'
                 }, 200);
             } else if (node.level == 2) {//总部=》区域
                 this.regionNodeClick(data.label)
-                // document.getElementById('region_title1').innerHTML = document.getElementById('head_title1').innerHTML
-                // document.getElementById('region_title2').innerHTML = data.label
+                document.getElementById('region_title1').innerHTML = document.getElementById('head_title1').innerHTML
+                document.getElementById('region_title2').innerHTML = data.label
                 // console.log("检查", data)
                 // console.log(node)
                 //首先要判断当前是在数据大屏页面还是在主页面=>不需要再判断了，大屏页面不要树形控件
@@ -500,9 +500,10 @@ exports.install = function (Vue, options) {
                 // this.map.panTo(data.pos[0], data.pos[1])
             } else if (node.level == 3) {//总部=》项目
                 this.prjNodeClick(data.label)
+                document.getElementById('prj_title3').innerHTML = data.label
                 document.getElementById('prj_title1').innerHTML = document.getElementById('head_title1').innerHTML
                 document.getElementById('prj_title2').innerHTML = document.getElementById('region_title2').innerHTML
-                document.getElementById('prj_title3').innerHTML = data.label
+
                 // document.getElementById("head_quarter").style.display = 'none'
                 // document.getElementById('region_part').style.display = 'block'
                 // document.getElementById('region').style.display = 'none'

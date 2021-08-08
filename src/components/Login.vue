@@ -282,7 +282,6 @@ export default {
   width: 6.2rem;
   height: 6.2rem;
   /*border: 1px solid red;*/
-  /*background: url("../assets/login_aaa.png") no-repeat;*/
   background-size: 100% 100%;
   padding: 0.4rem 0;
   box-sizing: border-box;
@@ -312,7 +311,6 @@ export default {
 .content .content-right {
   width: 6.8rem;
   height: 5.8rem;
-  /*background: url("../assets/login_e.png") no-repeat;*/
   background-size: 100% 100%;
   float: right;
   position: relative;

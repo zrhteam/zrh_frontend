@@ -11,11 +11,13 @@
 <script>
 import echarts from "echarts";
 import {ModelFbx} from "vue-3d-model"
+import {ModelObj} from "vue-3d-model"
 
 export default {
   name: "PrjIndex",
   components: {
-    ModelFbx
+    ModelFbx,
+    ModelObj
   },
   props: ["userJson"],
   data() {

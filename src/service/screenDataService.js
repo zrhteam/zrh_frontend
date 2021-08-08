@@ -5,8 +5,9 @@ import axios from 'axios'
 Vue.prototype.axios = axios
 
 const dataServerUrl
-    = "http://localhost:5000/api";
-    // = "http://10.20.39.102:5000/api";
+    // = "http://localhost:5000/api";
+    = "http://124.71.45.84:5000/api";
+// = "http://10.20.39.102:5000/api";
 // const dataServerUrl = "/sv-analysis";
 // const dataServerUrl = Config.serverLink == ""? "" : Config.serverLink.substring(0,  Config.serverLink.length - 1);
 const $http = Vue.http;

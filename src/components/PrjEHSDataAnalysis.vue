@@ -153,7 +153,9 @@ export default {
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
       this.doBack = () => {
-        this.$router.go(-1)
+        // this.$router.go(-1)
+        window.location.href = document.referrer;
+        window.history.back(-1);
       }
       window.addEventListener('popstate', this.doBack, false);
     }
@@ -174,7 +176,7 @@ export default {
     window.removeEventListener('popstate', this.doBack, false);
     window.removeEventListener('beforeunload', this.doStorage, false);
 
-    this.$destroy(true);
+    // this.$destroy(true);
   },
   created() {
     // if (!sessionStorage.getItem("prjMsg")) {

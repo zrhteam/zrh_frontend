@@ -174,12 +174,19 @@ export default {
       // 复制命令会将当前选中的内容复制到剪切板中（这里就是创建的input标签）
       // Input要在正常的编辑状态下原生复制方法才会生效
       document.execCommand('Copy')
-      this.$massage('success', '复制成功') // antd框架封装的通知,如使用别的UI框架，换掉这句
+      this.$notify({
+          title: '成功',
+          message: '复制成功',
+          type: 'success',
+          duration: 1000
+        });
       /// 复制成功后再将构造的标签 移除
       cInput.remove()
     },
     quitHeadScreen() {
-      this.$router.push({path: '/land_headquarters'});
+      // this.$router.push({path: '/land_headquarters'});
+      window.location.href = document.referrer;
+        window.history.back(-1);
     }
   },
   computed: {
@@ -464,44 +471,44 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timer)
-    if (this.$el)
-      delete this.$el.__vue__;
+    // if (this.$el)
+    //   delete this.$el.__vue__;
   },
   destroyed() {
-    const cleanVnode = vnode => {
-      if (vnode) {
-        vnode.elm = null;
-        vnode._renderChildren = null;
-        vnode.children = null;
-        // vnode.context=null;
-        vnode.componentOptions = null;
-      }
-    }
-    //为了内存，清空所有内容
-    this.$children = [];
-    this.$parent = null;
-    this._watchers = [];
-    this.$refs = {};
-    this.$root = null;
-    this.$slots = [];
-    this.$store = null;
-    cleanVnode(this._vnode);
-    cleanVnode(this.$vnode)
-    this._vnode = null;
-    this.$vnode = null;
-    if (this.$el)
-      delete this.$el.__ro__;
-    this.$el = null;
-    // this.$el=null;
-    this._watcher = null;
-    this._computedWatchers = {};
-    //ab-aui的内存溢出问题
-    this.popperElm = null;
-    if (this.$options) {
-      this.$options.parent = null;
-      this._parentVnode = null;
-      this.$options = null;
-    }
+    // const cleanVnode = vnode => {
+    //   if (vnode) {
+    //     vnode.elm = null;
+    //     vnode._renderChildren = null;
+    //     vnode.children = null;
+    //     // vnode.context=null;
+    //     vnode.componentOptions = null;
+    //   }
+    // }
+    // //为了内存，清空所有内容
+    // this.$children = [];
+    // this.$parent = null;
+    // this._watchers = [];
+    // this.$refs = {};
+    // this.$root = null;
+    // this.$slots = [];
+    // this.$store = null;
+    // cleanVnode(this._vnode);
+    // cleanVnode(this.$vnode)
+    // this._vnode = null;
+    // this.$vnode = null;
+    // if (this.$el)
+    //   delete this.$el.__ro__;
+    // this.$el = null;
+    // // this.$el=null;
+    // this._watcher = null;
+    // this._computedWatchers = {};
+    // //ab-aui的内存溢出问题
+    // this.popperElm = null;
+    // if (this.$options) {
+    //   this.$options.parent = null;
+    //   this._parentVnode = null;
+    //   this.$options = null;
+    // }
   },
 }
 </script>
