@@ -54,6 +54,7 @@ export default {
       rankBar: null,
       myChart: null,
       // renderSign: false,
+      doResize: null
     }
   },
   methods: {
@@ -187,11 +188,12 @@ export default {
       };
       this.myChart.setOption(option);
 
-      window.addEventListener("resize", () => {
-        if (this.myChart != null) { // 如果不存在，就进行初始化
+      this.doResize = () => {
+        if (this.myChart) {
           this.myChart.resize();
         }
-      });
+      }
+      window.addEventListener("resize", this.doResize);
     },
     fontSize(res) {
       let docEl = document.documentElement,
@@ -215,9 +217,7 @@ export default {
     }
   },
   beforeDestroy() {
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
+    window.removeEventListener("resize", this.doResize);
 
     if (!this.myChart) {
       return;

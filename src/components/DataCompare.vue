@@ -1,185 +1,185 @@
 <template>
-  <el-row style="height: 100%">
-    <el-col :span="8" style="height: 100%">
-      <el-row style="height: 15%">
-        <!--        <div class="grid-content bg-purple">-->
-        <el-col :span="6" style="height: 100%">
-          <label style="font-size: 0.2em; vertical-align: middle; display: inline-block">请先选择粒度</label>
-        </el-col>
-        <el-col :span="12" style="height: 100%">
-          <el-radio-group v-model="radio" @change="ClickRadio">
-            <el-radio v-model="radio" label="1">总部</el-radio>
-            <el-radio v-model="radio" label="2">区域</el-radio>
-            <el-radio v-model="radio" label="3">项目</el-radio>
-            <el-radio v-model="radio" label="4">检查</el-radio>
-          </el-radio-group>
-        </el-col>
-        <el-col :span="6" style="height: 100%; vertical-align: middle;padding-top: 8%">
-          <el-button size="mini" round
-                     style="z-index: 9; right: 10%; background-color: transparent; color: #ffffff; position: absolute"
-                     @click="submit">提交
-          </el-button>
-        </el-col>
-        <!--        </div>-->
-      </el-row>
-      <el-row style="height: 85%">
-        <el-col :span="12" style="height: 100%">
-          <el-row style="height: 100%">
-            <Tree
-                ref="tree1"
-                :treeObj="treeObj"
-                :show-checkbox="true"
-                @handleNodeClick="handleTrNodeClick"
-                @handleCheck="handleTrCheck1"
-                style="height: 100%"></Tree>
-          </el-row>
-        </el-col>
-        <el-col :span="12" style="height: 100%">
-          <el-row style="height: 100%">
-            <Tree
-                ref="tree2"
-                :treeObj="treeObj"
-                :show-checkbox="true"
-                @handleNodeClick="handleTrNodeClick"
-                @handleCheck="handleTrCheck2"
-                style="height: 100%"></Tree>
-          </el-row>
-        </el-col>
-      </el-row>
-    </el-col>
-    <el-col :span="16" style="height: 100%; flex-direction: row; overflow-x: scroll">
-      <el-col :span="24" class="level4" style="height: 15%; vertical-align: middle; padding-top: 4%" v-if="isShow">
-        <!--        <div class="level4" style="; padding-left: 10px">-->
-        <el-popover
-            placement="top-start"
-            title="object1"
-            width="400"
-            trigger="hover">
-          <span style="color: #ffffff">{{ obj1 }}</span>
-          <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">object1
-          </el-button>
-        </el-popover>
-        <el-popover
-            placement="top-start"
-            title="object2"
-            width="400"
-            trigger="hover"
-            style="color: #ffffff">
-          <span style="color: #ffffff">{{ obj2 }}</span>
-          <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">object2
-          </el-button>
-        </el-popover>
+<!--  <el-row style="height: 100%">-->
+<!--    <el-col :span="8" style="height: 100%">-->
+<!--      <el-row style="height: 15%">-->
+<!--        &lt;!&ndash;        <div class="grid-content bg-purple">&ndash;&gt;-->
+<!--        <el-col :span="6" style="height: 100%">-->
+<!--          <label style="font-size: 0.2em; vertical-align: middle; display: inline-block">请先选择粒度</label>-->
+<!--        </el-col>-->
+<!--        <el-col :span="12" style="height: 100%">-->
+<!--          <el-radio-group v-model="radio" @change="ClickRadio">-->
+<!--            <el-radio v-model="radio" label="1">总部</el-radio>-->
+<!--            <el-radio v-model="radio" label="2">区域</el-radio>-->
+<!--            <el-radio v-model="radio" label="3">项目</el-radio>-->
+<!--            <el-radio v-model="radio" label="4">检查</el-radio>-->
+<!--          </el-radio-group>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6" style="height: 100%; vertical-align: middle;padding-top: 8%">-->
+<!--          <el-button size="mini" round-->
+<!--                     style="z-index: 9; right: 10%; background-color: transparent; color: #ffffff; position: absolute"-->
+<!--                     @click="submit">提交-->
+<!--          </el-button>-->
+<!--        </el-col>-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </el-row>-->
+<!--      <el-row style="height: 85%">-->
+<!--        <el-col :span="12" style="height: 100%">-->
+<!--          <el-row style="height: 100%">-->
+<!--            <Tree-->
+<!--                ref="tree1"-->
+<!--                :treeObj="treeObj"-->
+<!--                :show-checkbox="true"-->
+<!--                @handleNodeClick="handleTrNodeClick"-->
+<!--                @handleCheck="handleTrCheck1"-->
+<!--                style="height: 100%"></Tree>-->
+<!--          </el-row>-->
+<!--        </el-col>-->
+<!--        <el-col :span="12" style="height: 100%">-->
+<!--          <el-row style="height: 100%">-->
+<!--            <Tree-->
+<!--                ref="tree2"-->
+<!--                :treeObj="treeObj"-->
+<!--                :show-checkbox="true"-->
+<!--                @handleNodeClick="handleTrNodeClick"-->
+<!--                @handleCheck="handleTrCheck2"-->
+<!--                style="height: 100%"></Tree>-->
+<!--          </el-row>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--    </el-col>-->
+<!--    <el-col :span="16" style="height: 100%; flex-direction: row; overflow-x: scroll">-->
+<!--      <el-col :span="24" class="level4" style="height: 15%; vertical-align: middle; padding-top: 4%" v-if="isShow">-->
+<!--        &lt;!&ndash;        <div class="level4" style="; padding-left: 10px">&ndash;&gt;-->
+<!--        <el-popover-->
+<!--            placement="top-start"-->
+<!--            title="object1"-->
+<!--            width="400"-->
+<!--            trigger="hover">-->
+<!--          <span style="color: #ffffff">{{ obj1 }}</span>-->
+<!--          <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">object1-->
+<!--          </el-button>-->
+<!--        </el-popover>-->
+<!--        <el-popover-->
+<!--            placement="top-start"-->
+<!--            title="object2"-->
+<!--            width="400"-->
+<!--            trigger="hover"-->
+<!--            style="color: #ffffff">-->
+<!--          <span style="color: #ffffff">{{ obj2 }}</span>-->
+<!--          <el-button slot="reference" size="mini" round style="background-color: transparent; color: #ffffff">object2-->
+<!--          </el-button>-->
+<!--        </el-popover>-->
 
-        <!--        </div>-->
-      </el-col>
-      <el-col :span="8" style="height: 25%">
-        <DoughnutChart
-            v-if="isShow"
-            :context="{
-                    title:'检查次数对比',
-                    id:'id_by_check',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></DoughnutChart>
-      </el-col>
-      <el-col :span="8" style="height: 25%">
-        <DoughnutChart
-            v-if="isShow"
-            :context="{
-                    title:'项目数量对比',
-                    id:'id_by_prj',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></DoughnutChart>
-      </el-col>
-      <el-col :span="8" style="height: 25%">
-        <RiskLevelYear
-            v-if="isShow"
-            :context="{
-                    title:'各风险等级隐患数量对比',
-                    id:'id_risk_level',
-                    level: this.level,
-                    flag: 'origin'}"></RiskLevelYear>
-      </el-col>
-      <el-col :span="8" style="height: 50%">
-        <TopCompare
-            v-if="isShow"
-            :context="{
-                    title:'前top分布区域隐患数量对比',
-                    id1:'id_area_o1',
-                    id2:'id_area_o2',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></TopCompare>
-      </el-col>
-      <el-col :span="8" style="height: 50%">
-        <TopCompare
-            v-if="isShow"
-            :context="{
-                    title:'前top致因阶段隐患数量对比',
-                    id1:'id_stage_o1',
-                    id2:'id_stage_o2',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></TopCompare>
-      </el-col>
-      <el-col :span="8" style="height: 50%">
-        <TopCompare
-            v-if="isShow"
-            :context="{
-                    title:'前top隐患数量对比',
-                    id1:'id_risk_o1',
-                    id2:'id_risk_o2',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></TopCompare>
-      </el-col>
-      <el-col :span="8" style="height: 50%">
-        <TopCompare
-            v-if="isShow"
-            :context="{
-                    title:'隐患数量前top组件对比',
-                    id1:'id_module_top1',
-                    id2:'id_module_top2',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></TopCompare>
-      </el-col>
-      <el-col :span="8" style="height: 50%">
-        <TopCompare
-            v-if="isShow"
-            :context="{
-                    title:'隐患数量前top设备对比',
-                    id1:'id_equip_top1',
-                    id2:'id_equip_top2',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></TopCompare>
-      </el-col>
-      <el-col :span="8" style="height: 50%">
-        <TopCompare
-            v-if="isShow"
-            :context="{
-                    title:'隐患数量前top系统对比',
-                    id1:'id_system_top1',
-                    id2:'id_system_top2',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></TopCompare>
-      </el-col>
-      <el-col :span="24" style="height: 50%">
-        <DrillDown
-            v-if="isShow"
-            :context="{
-                    title:'前top专业隐患数量对比',
-                    id1:'id_major_o1',
-                    id2:'id_major_o2',
-                    level: this.level,
-                    flag: 'origin'}"
-        ></DrillDown>
-      </el-col>
-    </el-col>
-  </el-row>
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 25%">-->
+<!--        <DoughnutChart-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'检查次数对比',-->
+<!--                    id:'id_by_check',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></DoughnutChart>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 25%">-->
+<!--        <DoughnutChart-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'项目数量对比',-->
+<!--                    id:'id_by_prj',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></DoughnutChart>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 25%">-->
+<!--        <RiskLevelYear-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'各风险等级隐患数量对比',-->
+<!--                    id:'id_risk_level',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"></RiskLevelYear>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 50%">-->
+<!--        <TopCompare-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'前top分布区域隐患数量对比',-->
+<!--                    id1:'id_area_o1',-->
+<!--                    id2:'id_area_o2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></TopCompare>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 50%">-->
+<!--        <TopCompare-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'前top致因阶段隐患数量对比',-->
+<!--                    id1:'id_stage_o1',-->
+<!--                    id2:'id_stage_o2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></TopCompare>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 50%">-->
+<!--        <TopCompare-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'前top隐患数量对比',-->
+<!--                    id1:'id_risk_o1',-->
+<!--                    id2:'id_risk_o2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></TopCompare>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 50%">-->
+<!--        <TopCompare-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'隐患数量前top组件对比',-->
+<!--                    id1:'id_module_top1',-->
+<!--                    id2:'id_module_top2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></TopCompare>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 50%">-->
+<!--        <TopCompare-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'隐患数量前top设备对比',-->
+<!--                    id1:'id_equip_top1',-->
+<!--                    id2:'id_equip_top2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></TopCompare>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8" style="height: 50%">-->
+<!--        <TopCompare-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'隐患数量前top系统对比',-->
+<!--                    id1:'id_system_top1',-->
+<!--                    id2:'id_system_top2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></TopCompare>-->
+<!--      </el-col>-->
+<!--      <el-col :span="24" style="height: 50%">-->
+<!--        <DrillDown-->
+<!--            v-if="isShow"-->
+<!--            :context="{-->
+<!--                    title:'前top专业隐患数量对比',-->
+<!--                    id1:'id_major_o1',-->
+<!--                    id2:'id_major_o2',-->
+<!--                    level: this.level,-->
+<!--                    flag: 'origin'}"-->
+<!--        ></DrillDown>-->
+<!--      </el-col>-->
+<!--    </el-col>-->
+<!--  </el-row>-->
 </template>
 
 <script>

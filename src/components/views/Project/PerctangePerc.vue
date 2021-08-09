@@ -53,7 +53,8 @@ export default {
       echartContainer: null,
       myChart: null,
       renderSign: false,
-      pie_data: []
+      pie_data: [],
+      doResize: null
     }
   },
   methods: {
@@ -66,44 +67,45 @@ export default {
       // bar_option["xAxis"]["axisLabel"]["rotate"] = 45
       // myChart.setOption(bar_option);
       // console.log("arr", arr)
-      // if (arr.length != 0) {
       let arr = this.pie_data
-      pie_option['series'][0]['data'] = this.pie_data
-      pie_option["legend"]["formatter"] = function (params) {
-        var legendIndex = 0;
-        arr.forEach(function (v, i) {
-          if (v.name == params) {
-            legendIndex = i;
-          }
-        });
-        return params + " " + arr[legendIndex].value;
-      }
-      this.myChart.setOption(pie_option);
-      // this.myChart.resize();
+      if (arr.length != 0) {
+        pie_option['series'][0]['data'] = this.pie_data
+        pie_option["legend"]["formatter"] = function (params) {
+          var legendIndex = 0;
+          arr.forEach(function (v, i) {
+            if (v.name == params) {
+              legendIndex = i;
+            }
+          });
+          return params + " " + arr[legendIndex].value;
+        }
+        this.myChart.setOption(pie_option);
+        // this.myChart.resize();
 
-      window.addEventListener("resize", () => {
-         if(this.myChart){
-           this.myChart.resize();
-         }
-      });
-      // const _this = this;
-      // const erd = elementResizeDetectorMaker();
-      // erd.listenTo(document.getElementById(this.context.id), element => {
-      //   _this.$nextTick(() => {
-      //     //监听到事件后执行的业务逻辑
-      //     myChart.resize();
-      //   });
-      // });
-      // } else if (this.context.id) {
+        this.doResize = () => {
+          if (this.myChart) {
+            this.myChart.resize();
+          }
+        }
+        window.addEventListener("resize", this.doResize);
+      // } else if (arr.length == 0) {
       //   this.$nextTick(() => {
-      //     const dom = document.getElementById(this.context.id)
+      //     this.echartContainer.innerHTML = '暂无数据'
+      //     this.echartContainer.style.color = '#ffffff'
+      //     this.echartContainer.style.fontSize = '14px'
+      //     this.echartContainer.removeAttribute("_echarts_instance_")
+      //   })
+      }
+      // })
+      // if (this.pie_data.length == 0) {
+      //   this.$nextTick(() => {
+      //     const dom = this.echartContainer
       //     dom.innerHTML = '暂无数据'
       //     dom.style.color = '#ffffff'
       //     dom.style.fontSize = '14px'
       //     dom.removeAttribute("_echarts_instance_")
       //   })
       // }
-      // })
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
@@ -337,6 +339,7 @@ export default {
         new_arr.push(obj)
       }
       this.renderSign = !this.renderSign
+
       // return new_arr
     },
   },
@@ -351,10 +354,12 @@ export default {
   mounted() {
     // this.drawBarChart();
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
-          this.myChart.dispose() // 销毁
-        }
+      this.myChart.dispose() // 销毁
+    }
     this.echartContainer = this.$refs.echartContainer;
     this.myChart = this.$echarts.init(this.echartContainer)
+
+    this.drawBarChart()
   },
   created() {
     this.value = '全部专业'
@@ -367,9 +372,7 @@ export default {
     this.myChart = null;
   },
   destroyed() {
-    window.removeEventListener("resize", () => {
-        this.myChart.resize();
-      });
+    window.removeEventListener("resize", this.doResize);
   }
 }
 </script>

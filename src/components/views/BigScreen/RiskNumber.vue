@@ -46,7 +46,8 @@ export default {
       riskNumberPie: null,
       myChart: null,
       // renderSign: false,
-      timer: null
+      timer: null,
+      doResize: null
     }
   },
   methods: {
@@ -102,11 +103,12 @@ export default {
       }
       this.myChart.setOption(pie_option2);
 
-      window.addEventListener("resize", () => {
-        if (this.myChart != null) { // 如果不存在，就进行初始化
+      this.doResize = () => {
+        if (this.myChart) {
           this.myChart.resize();
         }
-      });
+      }
+      window.addEventListener("resize", this.doResize);
     }
   },
   mounted() {
@@ -140,9 +142,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timer)
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
+    window.removeEventListener("resize", this.doResize);
 
     if (!this.myChart) {
       return;

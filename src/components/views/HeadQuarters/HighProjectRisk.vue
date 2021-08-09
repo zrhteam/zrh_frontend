@@ -27,7 +27,8 @@ export default {
   name: "HighProjectRisk",
   data() {
     return {
-      myChart: null
+      myChart: null,
+      doResize: null
     }
   },
   computed: {
@@ -94,11 +95,13 @@ export default {
           // 使用刚指定的配置项和数据显示图表。
           this.myChart.setOption(bar_option3);
           this.myChart.resize();
-          window.addEventListener('resize', () => {
-            if (this.myChart != null) { // 如果不存在，就进行初始化
+
+          this.doResize = () => {
+            if (this.myChart) {
               this.myChart.resize();
             }
-          })
+          }
+          window.addEventListener("resize", this.doResize);
           const _this = this;
         } else if ('number_histogram') {
           this.$nextTick(() => {
@@ -206,9 +209,7 @@ export default {
     }
   },
   beforeDestroy() {
-    window.removeEventListener('resize', function () {
-      this.myChart.resize();
-    })
+    window.removeEventListener('resize', this.doResize)
     if (this.myChart) {
       this.myChart.dispose();
       this.myChart = null;

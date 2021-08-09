@@ -59,39 +59,24 @@ export default {
   },
   methods: {
     drawBarChart() {
-      let arr = this.level_year
-
-      // bar_option2['dataset']['source'] = arr
-
-
-      // line_option["xAxis"]["data"] = this.xdata
-      // line_option["series"] = this.series
-      // line_option["legend"]["data"] = this.legend
-      // this.myChart.setOption(line_option);
-      bar_option["dataset"][0]["source"] = this.bar_data
-      this.myChart.setOption(bar_option);
-      this.doResize = () => {
-        if (this.myChart) {
-          this.myChart.resize();
-        }
-      }
       window.addEventListener("resize", this.doResize);
-      // if (arr.length != 0) {
-      //   myChart.setOption(bar_option2);
-      //   myChart.resize();
-      //   window.addEventListener('resize', function () {
-      //     this.myChart.resize();
-      //   })
-
-      // } else if (this.context.id) {
-      //   this.$nextTick(() => {
-      //     const dom = document.getElementById(this.context.id)
-      //     dom.innerHTML = '暂无数据'
-      //     dom.style.color = '#ffffff'
-      //     dom.style.fontSize = '14px'
-      //     dom.removeAttribute("_echarts_instance_")
-      //   })
-      // }
+      if (this.bar_data.length != 0) {
+        bar_option["dataset"][0]["source"] = this.bar_data
+        this.myChart.setOption(bar_option);
+        this.doResize = () => {
+          if (this.myChart) {
+            this.myChart.resize();
+          }
+        }
+      } else if (this.bar_data.length == 0) {
+        this.$nextTick(() => {
+          const dom = document.getElementById(this.context.id)
+          dom.innerHTML = '暂无数据'
+          dom.style.color = '#ffffff'
+          dom.style.fontSize = '14px'
+          dom.removeAttribute("_echarts_instance_")
+        })
+      }
     },
     grantChart() {
       let params = new URLSearchParams();

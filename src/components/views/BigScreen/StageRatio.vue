@@ -18,7 +18,8 @@ export default {
       myChart: null,
       renderSign: false,
       pie_data: [],
-      timer: null
+      timer: null,
+      doResize: null
     }
   },
   computed: {
@@ -101,11 +102,12 @@ export default {
       }
       this.myChart.setOption(pie_option);
 
-      window.addEventListener('resize', () => {
-        if (this.myChart != null) {
+      this.doResize = () => {
+        if (this.myChart) {
           this.myChart.resize();
         }
-      })
+      }
+      window.addEventListener("resize", this.doResize);
     },
     fontSize(res) {
       let docEl = document.documentElement,
@@ -142,9 +144,7 @@ export default {
     }
   },
   beforeDestroy() {
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
+    window.removeEventListener("resize", this.doResize);
     clearInterval(this.timer)
 
     if (!this.myChart) {

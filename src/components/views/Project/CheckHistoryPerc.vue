@@ -20,7 +20,8 @@ export default {
   name: "CheckHistoryPerc",
   data() {
     return {
-      myChart: null
+      myChart: null,
+      doResize: null
     }
   },
   computed: {
@@ -102,11 +103,12 @@ export default {
         }
 
         this.myChart.resize();
-        window.addEventListener('resize', () => {
-          if (this.myChart != null) { // 如果不存在，就进行初始化
+        this.doResize = () => {
+          if (this.myChart) {
             this.myChart.resize();
           }
-        })
+        }
+        window.addEventListener("resize", this.doResize);
       } else if (document.getElementById("pie2")) {
         this.$nextTick(() => {
           const dom = document.getElementById("pie2")
@@ -126,9 +128,7 @@ export default {
     this.myChart = null;
   },
   destroyed() {
-    window.removeEventListener("resize", () => {
-      this.myChart.resize();
-    });
+    window.removeEventListener("resize", this.doResize);
   }
 }
 </script>
