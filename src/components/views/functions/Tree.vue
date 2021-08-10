@@ -242,6 +242,14 @@ export default {
   max-height: 2000px;
   overflow: scroll;
   background-color: transparent;
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* firefox */
+}
+
+
+/deep/ .el-scrollbar__wrap {
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* firefox */
 }
 
 .el-tree > .el-tree-node {
@@ -250,7 +258,7 @@ export default {
 }
 
 .span-ellipsis {
-  font-size: 0.1em;
+  font-size: 0.15rem;
   text-align: left;
   width: 100%;
   overflow: hidden;
@@ -275,12 +283,43 @@ export default {
   color: #1bcff2 !important;
   border-color: #1bcff2 !important;
   border: 2px solid;
-  font-size: 0.1rem !important;
+  font-size: 0.15rem !important;
 }
 
+/*google*/
 el-input::-webkit-input-placeholder {
-  font-size: 0.1rem;
+  font-size: 0.15rem;
   color: #1bcff2 !important;
+}
+
+/*firefox*/
+el-input::-moz-placeholder {
+  font-size: 0.15rem;
+  color: #1bcff2 !important;
+}
+
+/*IE*/
+el-input::-ms-input-placeholder {
+  font-size: 0.15rem;
+  color: #1bcff2 !important;
+}
+
+/*google*/
+/deep/ input::-webkit-input-placeholder {
+  color: #1bcff2 !important;
+  -webkit-text-fill-color: #1bcff2 !important;
+}
+
+/*firebox*/
+/deep/ input::-moz-placeholder {
+  color: #1bcff2 !important;
+  -webkit-text-fill-color: #1bcff2 !important;
+}
+
+/*IE*/
+/deep/ input::-ms-input-placeholder {
+  color: #1bcff2 !important;
+  -webkit-text-fill-color: #1bcff2 !important;
 }
 
 /deep/ input::-webkit-input-placeholder {

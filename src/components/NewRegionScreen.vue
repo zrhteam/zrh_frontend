@@ -31,7 +31,7 @@
         <el-button class="title" v-if="show" round size="mini" @click="quitRegionScreen" style="z-index: 999;top: 40%">退出</el-button>
       </div>
       <div style="position: absolute !important; width: 6.8rem; height: 0.3rem; left: 23.15rem; top: 10%;">
-        <a class="title" v-if="show" style="font-size: 0.1rem" @click="copyUrl()">复制链接</a>
+        <a class="title" v-if="show" style="font-size: 0.15rem" @click="copyUrl()">复制链接</a>
       </div>
     </el-row>
     <el-col :span="5" class="boundary-A" style="height: 90%">
@@ -183,9 +183,28 @@ export default {
       this.nowTime = hou + ":" + min + ":" + sec;
     },
     quitRegionScreen() {
-      // this.$router.push({path: '/region_department'});
-      window.location.href = document.referrer;
+      var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+      var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+      var isIE = userAgent.indexOf("compatible") > -1
+          && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+      var isEdge = userAgent.indexOf("Edge") > -1; //判断是否IE的Edge浏览器
+      var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+      var isSafari = userAgent.indexOf("Safari") > -1
+          && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
+      var isChrome = userAgent.indexOf("Chrome") > -1
+          && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
+      if(isIE) {
+
+      }else if(isEdge) {
         window.history.back(-1);
+      }else if(isFF) {
+        history.back()
+        return false
+      }else if(isChrome) {
+        window.history.back(-1);
+      }else if(isSafari) {
+        window.history.back(-1);
+      }
     },
     provinceInfo() {
       let data = this.$store.state.get_screen.province_info

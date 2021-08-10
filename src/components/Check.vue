@@ -12,30 +12,28 @@
             </el-col>
           </el-col>
           <el-col :span="16" style="height: 100%;">
-            <h4>
+<!--            <h4>-->
             <span class="prj_title"
-                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
-                title1
-              }}</span>
-              <span class="prj_title"
-                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
-                  title2
-                }}</span>
-              <span class="prj_title"
-                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{
-                  title3
-                }}</span>
-            </h4>
+                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; font-weight: bold; height: 100%; display: inline-block; vertical-align: 0.27rem">{{title1}}{{title2}}{{title3}}</span>
+<!--              <span class="prj_title"-->
+<!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+<!--                  title2-->
+<!--                }}</span>-->
+<!--              <span class="prj_title"-->
+<!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+<!--                  title3-->
+<!--                }}</span>-->
+<!--            </h4>-->
           </el-col>
           <el-col :span="4" style="height: 1.25rem; position: relative; float:right">
             <el-col :span="12" :offset="3" style="height: 100%; ">
               <div style="height: 100%;">
-                  <span style="font-size: 0.4rem; color: #18bff0; bottom:0.35rem; position: relative;">
+                  <span style="font-size: 0.4rem; color: #18bff0; top:30%; right:1.6rem; position: absolute; font-family: 'Microsoft YaHei'">
                     {{ nowTime }}
                   </span>
               </div>
             </el-col>
-            <el-col :span="9" style="height: 100%; color: #1072b5; font-size: 0.12rem;">
+            <el-col :span="9" style="height: 100%; color: #1072b5; font-size: 0.15rem; font-family: 'Microsoft YaHei'">
               <el-row style="top: 35%; position: relative;">
                 <span>{{ nowWeek }}</span>
               </el-row>
@@ -151,9 +149,28 @@ export default {
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
       this.doBack = () => {
-        // this.$router.go(-1)
-        window.location.href = document.referrer;
-        window.history.back(-1);
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+        var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+        var isIE = userAgent.indexOf("compatible") > -1
+            && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+        var isEdge = userAgent.indexOf("Edge") > -1; //判断是否IE的Edge浏览器
+        var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+        var isSafari = userAgent.indexOf("Safari") > -1
+            && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
+        var isChrome = userAgent.indexOf("Chrome") > -1
+            && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
+        if (isIE) {
+
+        } else if (isEdge) {
+          window.history.back(-1);
+        } else if (isFF) {
+          history.back()
+          return false
+        } else if (isChrome) {
+          window.history.back(-1);
+        } else if (isSafari) {
+          window.history.back(-1);
+        }
       }
       window.addEventListener('popstate', this.doBack, false);
     }

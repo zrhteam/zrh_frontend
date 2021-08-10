@@ -28,30 +28,29 @@
                style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
             <el-col :span="4" style="height: 100%; ">
               <el-col :span="6" :offset="14" style="height: 100%;">
-                <div style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.36rem; position: relative">{{ getRiskSum }}</div>
+                <div style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.41rem; position: relative; font-family: 'Microsoft YaHei'">{{ getRiskSum }}</div>
               </el-col>
             </el-col>
             <el-col :span="16" style="height: 100%;">
-              <h4>
+<!--              <h4>-->
                 <span id="region_title1"
-                      style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold;vertical-align: 45%; height: 100%; width: 100% ;text-align: center">{{
-                    title1
-                  }}</span>
-                <span id="region_title2"
-                      style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold;vertical-align: 45%; height: 100%; width: 100% ;text-align: center">{{
-                    title2
-                  }}</span>
-              </h4>
+                      style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; height: 100%; display: inline-block; vertical-align: middle">{{
+                    title1}}{{title2}}</span>
+<!--                <span id="region_title2"-->
+<!--                      style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; display: inline-block; position: absolute; left: 10.7rem; top: 0.2rem">{{-->
+<!--                    title2-->
+<!--                  }}</span>-->
+<!--              </h4>-->
             </el-col>
             <el-col :span="4" style="height: 1.25rem; position: relative; float:right">
               <el-col :span="12" :offset="3" style="height: 100%; ">
                 <div style="height: 100%;">
-                  <span style="font-size: 0.4rem; color: #18bff0; bottom:0.35rem; position: relative;">
+                  <span style="font-size: 0.4rem; color: #18bff0; top:30%; right:1.6rem; position: absolute; font-family: 'Microsoft YaHei'">
                     {{ nowTime }}
                   </span>
                 </div>
               </el-col>
-              <el-col :span="9" style="height: 100%; color: #1072b5; font-size: 0.12rem;">
+              <el-col :span="9" style="height: 100%; color: #1072b5; font-size: 0.15rem; font-family: 'Microsoft YaHei'">
                 <el-row style="top: 35%; position: relative;">
                   <span>{{ nowWeek }}</span>
                 </el-row>

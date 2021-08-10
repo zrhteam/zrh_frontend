@@ -8,12 +8,12 @@
       <el-col :span="4" style="height: 1.25rem; ">
         <el-col :span="14" style="height: 100%; ">
           <div style="height: 100%;">
-           <span style="font-size: 0.4rem; color: #18bff0; bottom:0.35rem; position: relative;">
+           <span style="font-size: 0.4rem; color: #18bff0; top:30%; right:2rem; position: absolute; font-family: 'Microsoft YaHei'">
               {{ nowTime }}
            </span>
           </div>
         </el-col>
-        <el-col :span="10" style="height: 100%; color: #1072b5; font-size: 0.12rem;">
+        <el-col :span="10" style="height: 100%; color: #1072b5; font-size: 0.15rem; font-family: 'Microsoft YaHei'">
           <el-row style="top: 35%; right: 0.6rem">
             <span>{{ nowWeek }}</span>
           </el-row>

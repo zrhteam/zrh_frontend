@@ -61,7 +61,7 @@ export default {
       for (let i = 0; i < arr.length; i++) {
         max_arr.push(max)
       }
-      if (data.length != 0) {
+      // if (data.length != 0) {
         // this.renderSign = true
         let bar_option3 = {
           tooltip: {
@@ -146,14 +146,14 @@ export default {
           }
         }
         window.addEventListener("resize", this.doResize);
-      } else if (data.length == 0) {
-        this.$nextTick(_ => {
-          this.rankBar.innerHTML = '暂无数据'
-          this.rankBar.style.color = '#ffffff'
-          this.rankBar.style.fontSize = '14px'
-          this.rankBar.removeAttribute("_echarts_instance_")
-        })
-      }
+      // } else if (data.length == 0) {
+      //   this.$nextTick(_ => {
+      //     this.rankBar.innerHTML = '暂无数据'
+      //     this.rankBar.style.color = '#ffffff'
+      //     this.rankBar.style.fontSize = '14px'
+      //     this.rankBar.removeAttribute("_echarts_instance_")
+      //   })
+      // }
     },
     fontSize(res) {
       let docEl = document.documentElement,

@@ -16,26 +16,32 @@
                style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
             <el-col :span="4" style="height: 100%; ">
               <el-col :span="6" :offset="14" style="height: 100%;">
-                <div style="font-size: 0.4rem; color: #1fedfc; top:0.46rem; position: relative">{{ getRiskSum }}</div>
+                <div
+                    style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.46rem; position: relative; font-family: 'Microsoft YaHei'">
+                  {{ getRiskSum }}
+                </div>
               </el-col>
             </el-col>
-            <el-col :span="16" style="height: 100%;">
-              <h4>
+            <el-col :span="16" style="height: 1.25rem">
+              <!--              <h4>-->
               <span id="head_title1"
-                    style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold;vertical-align: 45%; height: 100%; width: 100% ;text-align: center">{{
+                    style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; height: 100%; display: inline-block; vertical-align: middle">{{
                   title1
                 }}</span>
-              </h4>
+
+              <!--              </h4>-->
             </el-col>
             <el-col :span="4" style="height: 1.25rem; position: relative; float:right">
               <el-col :span="12" :offset="3" style="height: 100%; ">
                 <div style="height: 100%;">
-                  <span style="font-size: 0.4rem; color: #18bff0; bottom:0.35rem; position: relative;">
-                    {{ nowTime }}
-                  </span>
+                  <span
+                      style="font-size: 0.4rem; color: #18bff0; top:30%; right:1.6rem; position: absolute; font-family: 'Microsoft YaHei'">
+              {{ nowTime }}
+           </span>
                 </div>
               </el-col>
-              <el-col :span="9" style="height: 100%; color: #1072b5; font-size: 0.12rem;">
+              <el-col :span="9"
+                      style="height: 100%; color: #1072b5; font-size: 0.15rem; font-family: 'Microsoft YaHei'">
                 <el-row style="top: 35%; position: relative;">
                   <span>{{ nowWeek }}</span>
                 </el-row>
@@ -157,7 +163,10 @@ export default {
       // head_small.style.display = 'block'
       // head_small.style.width = "500px"
       // head_small.style.width = "99%"
-      this.$router.push({path: `/new_head_screen`, query: {headquarter_name: this.$store.state.get_headquarter.head_name}});
+      this.$router.push({
+        path: `/new_head_screen`,
+        query: {headquarter_name: this.$store.state.get_headquarter.head_name}
+      });
     },
     intoDataAnalysis() {
       var href = 'http://10.20.39.102:12001/test#/'
@@ -304,4 +313,5 @@ export default {
   -webkit-text-fill-color: transparent;
   letter-spacing: 8px;
 }
+
 </style>
