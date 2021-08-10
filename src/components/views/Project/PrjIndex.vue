@@ -1,13 +1,17 @@
 <template>
   <div style="height: 100%; width: 100%; z-index:1; background-color: transparent">
-  <div style="height: 6rem; width: 11rem; z-index:1; background-color: transparent">
-<!--    <model-fbx :backgroundAlpha="0" :rotation="rotation"-->
-<!--               src='img/xitongpiantou_new.fbx' :lights="[-0.1, 0.1, 1]"-->
-<!--               :position="{ x: -80, y: 0, z: 0 }"-->
-<!--               :scale="{ x: 1.2, y: 1.2, z: 1.2 }"></model-fbx>-->
-    <model-obj :backgroundAlpha="0" src="img/xitongpiantou_new.obj"
-        mtl="img/xitongpiantou_new.mtl"></model-obj>
-  </div>
+    <div style="height: 6rem; width: 11rem; z-index:1; background-color: transparent">
+      <!--    <model-fbx :backgroundAlpha="0" :rotation="rotation"-->
+      <!--               src='img/xitongpiantou_new.fbx' :lights="[-0.1, 0.1, 1]"-->
+      <!--               :position="{ x: -80, y: 0, z: 0 }"-->
+      <!--               :scale="{ x: 1.2, y: 1.2, z: 1.2 }"></model-fbx>-->
+      <model-obj :backgroundAlpha="0"
+                 src="img/xitongpiantou_new.obj"
+                 mtl="img/xitongpiantou_new.mtl"
+                 :position="{ x: -100, y: 0, z: 20 }"
+                 :rotation="{ x: Math.PI / 14, y: Math.PI / 10, z: 0 }"
+                 :scale="{ x: 1.32, y: 1.32, z: 1.32}"></model-obj>
+    </div>
   </div>
 </template>
 
