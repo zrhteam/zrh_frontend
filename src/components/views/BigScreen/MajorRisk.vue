@@ -34,7 +34,7 @@
             style="width: 1.15rem; height: 0.54rem; left: 0.9375rem; top: 0.325rem;">
           <div
               style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">
+                  <span class="numbers" style="font-size: 0.32rem; font-family: 'Microsoft YaHei'">
                     <NumCounter :value=this.fire_num class="text-color-blue nums"></NumCounter>
                   </span>
             <span class="suffix" style="font-size: 0.2rem">例</span>
@@ -62,7 +62,7 @@
             style="width: 1.15rem; height: 0.54rem; left: 0.9375rem; top: 0.325rem;">
           <div
               style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">
+                  <span class="numbers" style="font-size: 0.32rem; font-family: 'Microsoft YaHei'">
                     <NumCounter :value=this.lift_num class="text-color-blue nums"></NumCounter>
                   </span>
             <span class="suffix" style="font-size: 0.2rem">例</span>
@@ -90,7 +90,7 @@
             style="width: 1.15rem; height: 0.54rem; left: 0.9375rem; top: 0.325rem;">
           <div
               style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">
+                  <span class="numbers" style="font-size: 0.32rem; font-family: 'Microsoft YaHei'">
                     <NumCounter :value=this.electric_num class="text-color-blue nums"></NumCounter>
                   </span>
             <span class="suffix" style="font-size: 0.2rem">例</span>
@@ -118,7 +118,7 @@
             style="width: 1.15rem; height: 0.54rem; left: 0.9375rem; top: 0.325rem;">
           <div
               style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">
+                  <span class="numbers" style="font-size: 0.32rem; font-family: 'Microsoft YaHei'">
                     <NumCounter :value=this.fuel_num class="text-color-blue nums"></NumCounter>
                   </span>
             <span class="suffix" style="font-size: 0.2rem">例</span>

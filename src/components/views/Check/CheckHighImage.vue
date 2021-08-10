@@ -15,7 +15,7 @@
           <div style="height: 85%">
             <el-image :src='item.url' alt style="height: 100%; width: 90%" :fit="fit"/>
           </div>
-          <div style="height: 0.6rem;font-size: 8px; color: #058ddb; padding: 0">{{ item.note }}</div>
+          <div style="height: 0.6rem;font-size: 0.15rem; color: #058ddb; padding: 0">{{ item.note }}</div>
         </el-carousel-item>
       </el-carousel>
     </div>

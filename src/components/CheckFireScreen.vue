@@ -20,7 +20,7 @@
         </el-button>
       </div>
       <div style="position: absolute !important; width: 6.8rem; height: 0.3rem; left: 23.15rem; top: 10%;">
-        <a class="title" v-if="show" style="font-size: 0.1rem" @click="copyUrl()">复制链接</a>
+        <a class="title" v-if="show" style="font-size: 0.15rem" @click="copyUrl()">复制链接</a>
       </div>
     </el-row>
     <el-row class="boundary-A" style="height: 65%">
@@ -580,14 +580,15 @@ export default {
 /deep/ .el-table th {
   background-color: transparent;
   border-color: transparent;
+  font-size: 0.15rem;
 }
 
 /* 表格内背景颜色 */
 /deep/ .el-table tr,
 /deep/ .el-table td {
-
   background-color: transparent;
   color: #ffffff;
+  font-size: 0.15rem;
 }
 
 /deep/ .el-table--striped .el-table__body tr.el-table__row.even-stripe td {
@@ -604,6 +605,8 @@ export default {
   font-size: 12px;
   -webkit-transform-origin-x: 0; /*缩小后文字居左 */
   -webkit-transform: scale(0.80); /* 关键*/
+  -moz-transform-origin-x: 0;
+  -moz-transform: scale(0.80);
   margin-right: 0;
   padding-right: 0;
 }

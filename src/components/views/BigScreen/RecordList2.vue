@@ -104,5 +104,8 @@ export default {
 </script>
 
 <style scoped>
-
+/deep/ .el-table__body-wrapper {
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* firefox */
+}
 </style>

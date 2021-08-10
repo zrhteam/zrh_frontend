@@ -20,7 +20,7 @@
         </el-button>
       </div>
       <div style="position: absolute !important; width: 6.8rem; height: 0.3rem; left: 23.15rem; top: 10%;">
-        <a class="title" v-if="show" style="font-size: 0.1rem" @click="copyUrl()">复制链接</a>
+        <a class="title" v-if="show" style="font-size: 0.15rem" @click="copyUrl()">复制链接</a>
       </div>
       <!--      </el-col>-->
     </el-row>
@@ -100,7 +100,7 @@
                   style="position: absolute !important; width: 1.15rem; height: 0.54rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.9375rem; top: 0.325rem;">
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 43px; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">
+                  <span class="numbers" style="font-size: 0.32rem; font-family: 'Microsoft YaHei'">
                     <NumCounter :value=this.fire_num class="text-color-blue nums">{{ getMajor }}</NumCounter>
                   </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
@@ -130,7 +130,7 @@
                   style="position: absolute !important; width: 1.15rem; height: 0.54rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.9375rem; top: 0.325rem;">
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">
+                  <span class="numbers" style="font-size: 0.32rem; font-family: 'Microsoft YaHei'">
                     <NumCounter :value=this.lift_num class="text-color-blue nums"></NumCounter>
                   </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
@@ -160,7 +160,7 @@
                   style="position: absolute !important; width: 1.15rem; height: 0.54rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.9375rem; top: 0.325rem;">
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">
+                  <span class="numbers" style="font-size: 0.32rem; font-family: 'Microsoft YaHei'">
                     <NumCounter :value=this.electric_num class="text-color-blue nums"></NumCounter>
                   </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
@@ -190,7 +190,7 @@
                   style="position: absolute !important; width: 1.15rem; height: 0.54rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.9375rem; top: 0.325rem;">
                 <div
                     style="display: flex; align-items: baseline; color: rgb(255, 255, 255); text-align: center; white-space: nowrap; justify-content: flex-end; width: 1.15rem; height: 0.5375rem; background-color: rgba(0, 0, 0, 0);">
-                  <span class="numbers" style="font-size: 0.32rem">
+                  <span class="numbers" style="font-size: 0.32rem; font-family: 'Microsoft YaHei'">
                     <NumCounter :value=this.fuel_num class="text-color-blue nums"></NumCounter>
                   </span>
                   <span class="suffix" style="font-size: 0.2rem">例</span>
@@ -800,6 +800,7 @@ export default {
 
   background-color: rgba(255, 99, 0, 0.5);
   border-color: rgba(255, 99, 0, 0.5);
+  font-size: 0.15rem;
 
 }
 
@@ -809,6 +810,7 @@ export default {
 
   background-color: transparent;
   color: #ffffff;
+  font-size: 0.15rem;
 }
 
 /*!*自定义斑马线颜色*!*/
@@ -830,6 +832,8 @@ export default {
   font-size: 12px;
   -webkit-transform-origin-x: 0; /*缩小后文字居左 */
   -webkit-transform: scale(0.80); /* 关键*/
+  -moz-transform-origin-x: 0;
+  -moz-transform: scale(0.80);
   margin-right: 0;
   padding-right: 0;
 }

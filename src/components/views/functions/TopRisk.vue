@@ -455,6 +455,11 @@ export default {
 </script>
 
 <style scoped>
+/deep/ .el-table__body-wrapper {
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* firefox */
+}
+
 /*最外层透明*/
 /deep/ .el-table, /deep/ .el-table__expanded-cell {
 
@@ -467,6 +472,7 @@ export default {
 /deep/ .el-table td {
 
   background-color: transparent;
+  font-size: 0.15rem;
 }
 
 /deep/ .el-cascader--mini {

@@ -92,6 +92,12 @@ export default {
   border-bottom: 0.1px solid rgba(255, 255, 255, 0.3);
 }
 
+/*滚动条*/
+/deep/ .el-table__body-wrapper {
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* firefox */
+}
+
 /*/deep/ .el-table__row > td .el-table_1_column_1 .is-left {*/
 /*  border-left: 0.1px solid rgba(255, 255, 255, 0.3);*/
 /*  border-right: none;*/

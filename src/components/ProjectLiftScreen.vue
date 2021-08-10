@@ -20,7 +20,7 @@
         </el-button>
       </div>
       <div style="position: absolute !important; width: 6.8rem; height: 0.3rem; left: 23.15rem; top: 10%;">
-        <a class="title" v-if="show" style="font-size: 0.1rem" @click="copyUrl()">复制链接</a>
+        <a class="title" v-if="show" style="font-size: 0.15rem" @click="copyUrl()">复制链接</a>
       </div>
     </el-row>
     <el-row class="boundary-A" style="height: 65%">
@@ -606,6 +606,8 @@ export default {
   font-size: 12px;
   -webkit-transform-origin-x: 0; /*缩小后文字居左 */
   -webkit-transform: scale(0.80); /* 关键*/
+  -moz-transform-origin-x: 0;
+  -moz-transform: scale(1.0);
   margin-right: 0;
   padding-right: 0;
 }
@@ -616,6 +618,7 @@ export default {
   z-index: 2;
   margin-right: 0;
   padding-right: 0;
+  font-size: 0.15rem;
 }
 
 .risk-wrapper {

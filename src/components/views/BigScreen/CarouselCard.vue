@@ -3,7 +3,7 @@
   <!--               style="width: 98%; height: 100%; left: 0.2rem; top: 0px">-->
   <!--    <el-carousel-item v-for="(item, index) in CarouselCardData" :key="index">-->
   <div style="height: 100%; width: 100%">
-    <div class="absolute" style="width: 100%; height: 100%; overflow-x: hidden">
+    <div class="absolute" style="width: 100%; height: 100%; overflow: hidden">
       <div id="element1">
         <div
             style="width: 100%; height: 8%; margin-left: 0.25rem;">
