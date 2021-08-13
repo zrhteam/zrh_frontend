@@ -439,7 +439,7 @@ export default {
       var isChrome = userAgent.indexOf("Chrome") > -1
           && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
       if(isIE) {
-
+        window.history.back(-1);
       }else if(isEdge) {
         window.history.back(-1);
       }else if(isFF) {
