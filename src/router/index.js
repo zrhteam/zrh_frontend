@@ -14,7 +14,6 @@ import Check from "@c/Check.vue";
 import Analyze from "@/components/Analyze.vue"//对应数据洞察
 import NotFound from '../components/NotFound.vue'
 import SuperOverview from "@/components/SuperOverview.vue";//对应超级用户登录系统后都独有的首页
-import DataCompare from "@/components/DataCompare.vue";//对应数据分析那一块
 //由于数据大屏拷贝链接直接展示的功能，为每个数据大屏各开一个链接
 import NewHeadScreen from "@/components/NewHeadScreen.vue";
 import NewRegionScreen from "@/components/NewRegionScreen.vue";
@@ -41,7 +40,6 @@ import CheckElectricScreen from "@c/CheckElectricScreen.vue";
 // const Analyze = ()=>import("@/components/Analyze.vue")//对应数据洞察
 // const NotFound = ()=>import('../components/NotFound.vue')
 // const SuperOverview = ()=>import("@/components/SuperOverview.vue")//对应超级用户登录系统后都独有的首页
-// const DataCompare = ()=>import("@/components/DataCompare.vue")//对应数据分析那一块
 // //由于数据大屏拷贝链接直接展示的功能，为每个数据大屏各开一个链接
 // const NewHeadScreen = ()=>import('@/components/NewHeadScreen.vue')
 // const NewRegionScreen = ()=>import("@/components/NewRegionScreen.vue")
@@ -63,7 +61,6 @@ const routerOptions = [
     // {path: '/analyze', component: 'Analyze', meta: {keepAlive: false}},
     // {path: '/analyze', component: 'DataInsight', meta: {keepAlive: false}},
     {path: '/super_overview', component: 'SuperOverview', meta: {keepAlive: false}},
-    {path: '/data_compare', component: 'DataCompare', meta: {keepAlive: false}},
     {path: '/new_head_screen', component: 'NewHeadScreen'},
     {path: '/new_region_screen', component: 'NewRegionScreen'},
     {path: '/new_project_screen', component: 'NewProjectScreen'},

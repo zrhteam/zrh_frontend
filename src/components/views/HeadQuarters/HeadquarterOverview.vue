@@ -25,7 +25,7 @@
             <el-col :span="16" style="height: 1.25rem">
               <!--              <h4>-->
               <span id="head_title1"
-                    style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; height: 100%; display: inline-block; vertical-align: middle">{{
+                    style="color: #04aaff; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; height: 100%; display: inline-block; vertical-align: middle">{{
                   title1
                 }}</span>
 
@@ -308,10 +308,13 @@ export default {
 }
 
 #head_title1 {
+
   background-image: -webkit-linear-gradient(bottom, #04aaff, #45c3ff, #87dcfe);
+  /*background-image: -moz-linear-gradient(bottom, #04aaff, #45c3ff, #87dcfe);*/
+  /*background-image: -o-linear-gradient(bottom, #04aaff, #45c3ff, #87dcfe);*/
+  /*background-image: -ms-linear-gradient(bottom, #04aaff, #45c3ff, #87dcfe);*/
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 8px;
 }
 
 </style>

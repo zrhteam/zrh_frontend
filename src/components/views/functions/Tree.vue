@@ -88,10 +88,12 @@ export default {
           id: 0,
           label: '',
           level: 1,
-          children: []
+          children: [],
+          value: ''
         };
         parent1['id'] = count++
         parent1['label'] = i
+        parent1['value'] = i
         arr.push(parent1)
         if (this.user_grant === '总部') {
           let temp_arr = this.expandedKeys
@@ -106,10 +108,12 @@ export default {
             id: 0,
             label: '',
             level: 2,
-            children: []
+            children: [],
+            value: ''
           };
           parent2['id'] = count++
           parent2['label'] = j
+          parent2['value'] = j
           if (this.user_grant === '区域') {
             let temp_arr = this.expandedKeys
             temp_arr.push(parent2.id)
@@ -121,19 +125,23 @@ export default {
               id: 0,
               label: '',
               level: 3,
-              children: []
+              children: [],
+              value: ''
             };
             child1['id'] = count++
             child1['label'] = k
+            child1['value'] = k
             for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
               for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
                 let child2 = {
                   id: 0,
                   label: '',
-                  level: 4
+                  level: 4,
+                  value: ''
                 };
                 child2['id'] = count++
                 child2['label'] = m
+                child2['value'] = m
                 child1['children'].push(child2)
                 if (this.user_grant === '项目') {
                   let temp_arr = this.expandedKeys

@@ -14,7 +14,7 @@
           <el-col :span="16" style="height: 100%;">
 <!--            <h4>-->
             <span class="prj_title"
-                  style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; font-weight: bold; height: 100%; display: inline-block; vertical-align: 0.27rem">{{title1}}{{title2}}{{title3}}</span>
+                  style="color: #04aaff; font-family:'Microsoft YaHei'; font-size: 0.4em; font-weight: bold; height: 100%; display: inline-block; vertical-align: 0.27rem">{{title1}}{{title2}}{{title3}}</span>
 <!--              <span class="prj_title"-->
 <!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
 <!--                  title2-->

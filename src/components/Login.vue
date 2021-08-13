@@ -12,8 +12,6 @@
       <!--      <div class="header-title" v-show="!isShow">-->
       <!--        注册界面-->
       <!--      </div>-->
-      <div class="header-img"></div>
-      <div class="header-bottom fl"></div>
 
     </div>
 
@@ -23,7 +21,7 @@
       <div class="content-right">
         <div class="right-infp">
           <div class="right-infp-name">
-            <span style="float: left; font-size: 24px; color: #05e2ec">登录</span>
+            <span style="float: left; font-size: 24px; color: #05e2ec; font-family: 'Microsoft YaHei'">登录</span>
           </div>
           <div class="right-infp-name">
             <el-input prefix-icon="el-icon-my-user" class="username" type="text" name="username" v-model="username"
@@ -260,15 +258,6 @@ export default {
   text-shadow: 0 0 .3rem #00d8ff;
   line-height: 2.25rem;
 }
-
-/*.header .header-img {*/
-/*  background: url("../assets/login_head.gif") no-repeat center center;*/
-/*  background-size: 100%;*/
-/*  height: 100%;*/
-/*  width: 100%;*/
-/*  position: absolute;*/
-/*  top: .8rem;*/
-/*}*/
 
 .content {
   width: 14rem;

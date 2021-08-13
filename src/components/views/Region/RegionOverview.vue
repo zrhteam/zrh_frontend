@@ -34,7 +34,7 @@
             <el-col :span="16" style="height: 100%;">
 <!--              <h4>-->
                 <span id="region_title1"
-                      style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; height: 100%; display: inline-block; vertical-align: middle">{{
+                      style="color: #04aaff; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; height: 100%; display: inline-block; vertical-align: middle">{{
                     title1}}{{title2}}</span>
 <!--                <span id="region_title2"-->
 <!--                      style="color: #c4bcbc; font-family:Microsoft YaHei; font-size: 0.6em; font-weight: bold; display: inline-block; position: absolute; left: 10.7rem; top: 0.2rem">{{-->
