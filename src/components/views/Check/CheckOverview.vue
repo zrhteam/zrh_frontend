@@ -8,7 +8,8 @@
         <RiskLevelYear :context="{title:'隐患总量', id:'check_level_year'}"></RiskLevelYear>
       </el-col>
       <el-col :span="6" class="">
-        <CheckRiskRatio></CheckRiskRatio>
+        <CheckRiskRatio
+        ></CheckRiskRatio>
       </el-col>
       <el-col :span="6" class="">
         <PerctangePerc
@@ -19,7 +20,9 @@
                  }"></PerctangePerc>
       </el-col>
       <el-col :span="6" class="">
-        <CheckHighImage></CheckHighImage>
+        <CheckHighImage
+            :HighImageData="highImageData"
+        ></CheckHighImage>
       </el-col>
     </el-row>
     <el-row class="el-row" :gutter="10" type="flex" style="height: 32%; margin-top: 0.1rem; padding-left: 0.3rem">
@@ -193,7 +196,30 @@ export default {
         obj['appear_time'] = data[i].appear_time
         this.unit_name.push(obj)
       }
-    }
+    },
+    highImageData() {
+      let data = this.$store.state.get_check.check_image;
+      let img_list = []
+      for (let i in data) {
+        let obj = {
+          url: '',
+          note: ''
+        }
+        obj['url'] = 'http://' + data[i]['image_url']
+        obj['note'] = data[i]['check_name'] + ": " + data[i]['note']
+        img_list.push(obj)
+      }
+
+      if (img_list.length == 0) {
+        let obj = {
+          url: '',
+          note: ''
+        }
+        obj['note'] = '暂无数据'
+        img_list.push(obj)
+      }
+      return img_list
+    },
   },
   updated() {
     this.filter_major = this.$store.state.get_check.filter_major
@@ -202,5 +228,7 @@ export default {
 </script>
 
 <style scoped>
-
+/deep/ .el-image__error {
+  background-color: transparent;
+}
 </style>

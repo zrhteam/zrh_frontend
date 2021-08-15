@@ -249,9 +249,9 @@ export default {
     //得到树形控件的内容 还负责封装了地理位置信息
     this.treeObj = this.$store.state.get_login.grant_data.data.value
 
-    this.title1 = this.$store.state.get_headquarter.head_name
-    this.title2 = this.$store.state.get_region.region_name
-    this.title3 = this.$store.state.get_project.prj_name
+    this.title1 = this.$store.state.get_headquarter.head_name.label
+    this.title2 = this.$store.state.get_region.region_name.label
+    this.title3 = this.$store.state.get_project.prj_name.label
   },
   beforeDestroy() {
     clearInterval(this.timer)

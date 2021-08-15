@@ -4,7 +4,7 @@
       <!--      <el-col :span="24">-->
       <div
           style="position: absolute !important; width: 8.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
-        <div class="title" style="width: 8.75rem; height: 100%;">{{ project_name }}实时隐患监控大屏</div>
+        <div class="title" style="width: 8.75rem; height: 100%;">{{ project_title }}实时隐患监控大屏</div>
       </div>
       <div
           style="position: absolute !important; width: 3.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem;">
@@ -298,6 +298,7 @@ export default {
   data() {
     return {
       show: true,
+      project_title: "",
       project_name: "",
       timer: null,
       nowDate: "",
@@ -558,26 +559,38 @@ export default {
     intoFireScreen() {
       var project_name = this.project_name
       var major = "消防专业"
-      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
-      this.$router.push({path: '/project_fire_screen', query: {project_name: project_name, major: major}})
+      let queryJson = JSON.stringify({project_name: project_name, major: major})
+      this.$router.push({
+        path: `/project_fire_screen`,
+        query: {queryJson: queryJson}
+      });
     },
     intoLiftScreen() {
       var project_name = this.project_name
       var major = "电梯专业"
-      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
-      this.$router.push({path: '/project_lift_screen', query: {project_name: project_name, major: major}})
+      let queryJson = JSON.stringify({project_name: project_name, major: major})
+      this.$router.push({
+        path: `/project_lift_screen`,
+        query: {queryJson: queryJson}
+      });
     },
     intoElectricScreen() {
       var project_name = this.project_name
       var major = "电气专业"
-      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
-      this.$router.push({path: '/project_electric_screen', query: {project_name: project_name, major: major}})
+      let queryJson = JSON.stringify({project_name: project_name, major: major})
+      this.$router.push({
+        path: `/project_electric_screen`,
+        query: {queryJson: queryJson}
+      });
     },
     intoFuelScreen() {
       var project_name = this.project_name
       var major = "燃气专业"
-      // this.$router.push({name: `/project_fire_screen/${this.$store.state.get_project.prj_name}/${major}`});
-      this.$router.push({path: '/project_fuel_screen', query: {project_name: project_name, major: major}})
+      let queryJson = JSON.stringify({project_name: project_name, major: major})
+      this.$router.push({
+        path: `/project_fuel_screen`,
+        query: {queryJson: queryJson}
+      });
     },
   },
   watch: {
@@ -586,9 +599,11 @@ export default {
         if(route.query.id != undefined & route.query.id == 1) {
           this.show = false
         }
-        this.project_name = route.query.project_name
+        let queryJson = JSON.parse(route.query.queryJson)
+        this.project_title = queryJson.label
+        this.project_name = queryJson
         let param = new URLSearchParams();
-        param.append('project_name', route.query.project_name);
+        param.append('project_name', queryJson.value);
         this.$store.commit('get_screen/changeParams', {params: param})
         this.$store.dispatch('get_screen/getProjectScreenRiskNumber')
         this.$store.dispatch('get_screen/getProjectScreenRNRank')

@@ -2,7 +2,7 @@
 exports.install = function (Vue, options) {
     Vue.prototype.headNodeClick = function (headquarter_name) {//全局函数1,点击树形控件的总部，查询该总部的大屏信息
         let param = new URLSearchParams();
-        param.append('headquarter_name', headquarter_name);
+        param.append('headquarter_name', headquarter_name.value);
         this.$store.commit('get_headquarter/changeParams', {params: param})
         //总部名称也需要封装
         this.$store.commit('get_headquarter/changeHeadName', {head_name: headquarter_name})
@@ -17,7 +17,7 @@ exports.install = function (Vue, options) {
 
         //筛选，默认发condition: major, top: 10
         let param3 = new URLSearchParams();
-        param3.append('headquarter_name', headquarter_name);
+        param3.append('headquarter_name', headquarter_name.value);
         param3.append('condition', 'major');
         param3.append('top', 10);
         this.$store.commit('get_headquarter/changeParam3', {params: param3})
@@ -28,7 +28,7 @@ exports.install = function (Vue, options) {
 
         //筛选，默认发condition: stage,all top: 10
         let param4 = new URLSearchParams();
-        param4.append('headquarter_name', headquarter_name);
+        param4.append('headquarter_name', headquarter_name.value);
         // param4.append('condition', 'risk_level');
         // param4.append('level', 'all');
         // param4.append('top', 10);
@@ -46,7 +46,7 @@ exports.install = function (Vue, options) {
         this.$store.dispatch('get_headquarter/getHeadStageRatio')
         // 各分布区域的隐患数量占比情况
         let param2 = new URLSearchParams();
-        param2.append('headquarter_name', headquarter_name);
+        param2.append('headquarter_name', headquarter_name.value);
         param2.append('major', 'all');
         //该检查中在不同专业下属于不同隐患子系统的隐患数量
         this.$store.commit('get_headquarter/changeParam2', {params: param2})
@@ -65,11 +65,12 @@ exports.install = function (Vue, options) {
         // 总部下的项目名以及对应的经纬度
         this.$store.dispatch('get_headquarter/getHeadProjectPosition')
 
-        this.$router.push({path: `/land_headquarters`, query: {head_name: headquarter_name}});
+        this.$router.push({path: `/land_headquarters`, query: {head_name: headquarter_name.value}});
     };
     Vue.prototype.regionNodeClick = function (region_name) {//全局函数2,点击树形控件的区域，查询该区域的大屏信息
+        console.log(region_name)
         let param = new URLSearchParams();
-        param.append('region_name', region_name);
+        param.append('region_name', region_name.value);
         this.$store.commit('get_region/changeParams', {params: param})
         //区域名称也需要封装
         this.$store.commit('get_region/changeRegionName', {region_name: region_name})
@@ -84,7 +85,7 @@ exports.install = function (Vue, options) {
 
         //筛选，默认发condition: major, top: 10
         let param3 = new URLSearchParams();
-        param3.append('region_name', region_name);
+        param3.append('region_name', region_name.value);
         param3.append('condition', 'major');
         param3.append('top', 10);
         this.$store.commit('get_region/changeParam3', {params: param3})
@@ -93,7 +94,7 @@ exports.install = function (Vue, options) {
 
         //筛选，默认发condition: stage,all top: 10
         let param4 = new URLSearchParams();
-        param4.append('region_name', region_name);
+        param4.append('region_name', region_name.value);
         param4.append('flag', 1);
         param4.append('top', 10);
         param4.append('stage', '施工');
@@ -114,7 +115,7 @@ exports.install = function (Vue, options) {
 
         //以下三项筛选专业，默认发全部传all
         let param2 = new URLSearchParams();
-        param2.append('region_name', region_name);
+        param2.append('region_name', region_name.value);
         param2.append('major', 'all');
         //该检查中在不同专业下属于不同隐患子系统的隐患数量
         this.$store.commit('get_region/changeParam2', {params: param2})
@@ -139,7 +140,7 @@ exports.install = function (Vue, options) {
     };
     Vue.prototype.prjNodeClick = function (project_name) {//全局函数3,点击树形控件的项目，查询该项目的大屏信息
         let param = new URLSearchParams();
-        param.append('project_name', project_name);
+        param.append('project_name', project_name.value);
         this.$store.commit('get_project/changeParams', {params: param})
 
 
@@ -154,7 +155,7 @@ exports.install = function (Vue, options) {
 
         //筛选，默认发top: 5
         let param5 = new URLSearchParams();
-        param5.append('project_name', project_name);
+        param5.append('project_name', project_name.value);
         param5.append('top', 5);
         this.$store.commit('get_project/changeParam5', {params: param5})
         //基于项目级展示当前项目中最近一次检查top张高风险隐患图片
@@ -162,7 +163,7 @@ exports.install = function (Vue, options) {
 
         //以下三项筛选专业，默认发全部传all
         let param2 = new URLSearchParams();
-        param2.append('project_name', project_name);
+        param2.append('project_name', project_name.value);
         param2.append('major', 'all');
         //封装查询的专业，是初始的全部专业还是某专业
         this.$store.commit('get_project/changeFilterMajor', {data: "全部专业"})
@@ -176,7 +177,7 @@ exports.install = function (Vue, options) {
 
         //筛选，默认发condition: major, top: 10
         let param3 = new URLSearchParams();
-        param3.append('project_name', project_name);
+        param3.append('project_name', project_name.value);
         param3.append('condition', 'major');
         param3.append('top', 10);
         this.$store.commit('get_project/changeParam3', {params: param3})
@@ -185,7 +186,7 @@ exports.install = function (Vue, options) {
 
         //筛选，默认发condition: stage,all top: 10
         let param4 = new URLSearchParams();
-        param4.append('project_name', project_name);
+        param4.append('project_name', project_name.value);
         param4.append('flag', 1);
         param4.append('top', 10);
         param4.append('stage', '施工');
@@ -310,42 +311,42 @@ exports.install = function (Vue, options) {
     Vue.prototype.handleTreeNodeClick = function (data, node) {//全局函数5,点击树形控件，查看页面权限，决定页面展示
         var timer = null
         if (this.$store.state.get_login.grant_data.data.user_grant === '项目') {
-            if ((node.level == 1) || (node.level == 2)) {
+            if ((data.level == 1) || (data.level == 2)) {
                 alert("您没有权限")
-            } else if (node.level == 3) {
-                this.prjNodeClick(data.label)
-            } else if (node.level == 4) {
+            } else if (data.level == 3) {
+                this.prjNodeClick(data)
+            } else if (data.level == 4) {
                 this.checkNodeClick(data.label)
             }
             clearTimeout(timer)
         } else if (this.$store.state.get_login.grant_data.data.user_grant === '区域') {
-            if (node.level == 1) {
+            if (data.level == 1) {
                 alert("您没有权限")
-            } else if (node.level == 2) {
-                this.regionNodeClick(data.label)
-            } else if (node.level == 3) {//区域=》项目
-                this.prjNodeClick(data.label)
-            } else if (node.level == 4) {//区域=》检查
+            } else if (data.level == 2) {
+                this.regionNodeClick(data)
+            } else if (data.level == 3) {//区域=》项目
+                this.prjNodeClick(data)
+            } else if (data.level == 4) {//区域=》检查
                 this.checkNodeClick(data.label)
             }
         } else if (this.$store.state.get_login.grant_data.data.user_grant === '总部') {
-            if (node.level == 1) {//总部=》总部
-                this.headNodeClick(data.label)
-            } else if (node.level == 2) {//总部=》区域
-                this.regionNodeClick(data.label)
-            } else if (node.level == 3) {//总部=》项目
-                this.prjNodeClick(data.label)
-            } else if (node.level == 4) {//总部=》检查
+            if (data.level == 1) {//总部=》总部
+                this.headNodeClick(data)
+            } else if (data.level == 2) {//总部=》区域
+                this.regionNodeClick(data)
+            } else if (data.level == 3) {//总部=》项目
+                this.prjNodeClick(data)
+            } else if (data.level == 4) {//总部=》检查
                 this.checkNodeClick(data.label)
             }
         } else if (this.$store.state.get_login.grant_data.data.user_grant = "超级用户") {
-            if (node.level == 1) {//总部=》总部
-                this.headNodeClick(data.label)
-            } else if (node.level == 2) {//总部=》区域
-                this.regionNodeClick(data.label)
-            } else if (node.level == 3) {//总部=》项目
-                this.prjNodeClick(data.label)
-            } else if (node.level == 4) {//总部=》检查
+            if (data.level == 1) {//总部=》总部
+                this.headNodeClick(data)
+            } else if (data.level == 2) {//总部=》区域
+                this.regionNodeClick(data)
+            } else if (data.level == 3) {//总部=》项目
+                this.prjNodeClick(data)
+            } else if (data.level == 4) {//总部=》检查
                 this.checkNodeClick(data.label)
             }
         }

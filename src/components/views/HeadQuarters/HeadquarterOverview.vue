@@ -155,17 +155,10 @@ export default {
   },
   methods: {
     intoHeadDataScreen() {
-      // let head_large1 = document.getElementById('head_large1');
-      // head_large1.style.display = 'none'
-      // let head_large2 = document.getElementById('head_large2');
-      // head_large2.style.display = 'none'
-      // let head_small = document.getElementById('head_small');
-      // head_small.style.display = 'block'
-      // head_small.style.width = "500px"
-      // head_small.style.width = "99%"
+      let queryJson = JSON.stringify(this.$store.state.get_headquarter.head_name)
       this.$router.push({
         path: `/new_head_screen`,
-        query: {headquarter_name: this.$store.state.get_headquarter.head_name}
+        query: {queryJson: queryJson}
       });
     },
     intoDataAnalysis() {
@@ -217,8 +210,6 @@ export default {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
-    // document.getElementById('head_quarter').style.display = 'block'
-    // document.getElementById('region_part').style.display = 'none'
   },
   computed: {
     getRiskSum() {
@@ -253,7 +244,7 @@ export default {
   updated() {
     this.filter_major = this.$store.state.get_headquarter.filter_major
 
-    this.title1 = this.$store.state.get_headquarter.head_name
+    this.title1 = this.$store.state.get_headquarter.head_name.label
   },
   data() {
     return {
@@ -280,7 +271,7 @@ export default {
         label: 'label'
       },
       // title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
-      title1: this.$store.state.get_headquarter.head_name,
+      title1: this.$store.state.get_headquarter.head_name.label,
       timer: null,
       nowWeek: "",
       nowDate: "",

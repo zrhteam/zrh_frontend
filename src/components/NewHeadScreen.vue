@@ -463,9 +463,10 @@ export default {
         if (route.query.id != undefined & route.query.id == 1) {
           this.show = false
         }
-        this.head_name = route.query.headquarter_name
+        let queryJson = JSON.parse(route.query.queryJson)
+        this.head_name = queryJson.label
         let param = new URLSearchParams();
-        param.append('headquarter_name', route.query.headquarter_name);
+        param.append('headquarter_name', queryJson.value);
         this.$store.commit('get_screen/changeParams', {params: param})
         this.$store.dispatch('get_screen/getHeadScreenRiskNumber')
         this.$store.dispatch('get_screen/getHeadScreenRiskNumberRank')

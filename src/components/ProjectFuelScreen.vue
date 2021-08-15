@@ -3,7 +3,7 @@
     <el-row class="boundary-A" style="height: 10%">
       <div
           style="position: absolute !important; width: 8.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 2px;">
-        <div class="title" style="width: 8.75rem;">{{ project_name }}{{major}}</div>
+        <div class="title" style="width: 8.75rem;">{{ project_title }}{{major}}</div>
       </div>
       <div
           style="position: absolute !important; width: 3.75rem; height: 50%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.613rem;">
@@ -108,6 +108,7 @@ export default {
   data() {
     return {
       show: true,
+      project_title: '',
       project_name: '',
       major: '',
       timer: null,
@@ -345,12 +346,14 @@ export default {
   },
   watch: {
     $route: {
-      handler: function (route) {
+      handler: function (route) {debugger
         if(route.query.id != undefined & route.query.id == 1) {
           this.show = false
         }
-        this.project_name = route.query.project_name
-        this.major = route.query.major
+        let queryJson = JSON.parse(route.query.queryJson)
+        this.project_title = queryJson.project_name.label
+        this.project_name = queryJson.project_name.value
+        this.major = queryJson.major
         // let param = new URLSearchParams();
         // param.append('project_name', route.params.id);
         // this.$store.commit('get_screen/changeParams', {params: param})

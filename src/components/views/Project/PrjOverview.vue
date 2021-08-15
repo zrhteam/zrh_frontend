@@ -161,7 +161,12 @@ export default {
       large1.style.display = 'none'
       var large2 = document.getElementById('large2');
       large2.style.display = 'none'
-      this.$router.push({path: `/new_project_screen`, query: {project_name: this.$store.state.get_project.prj_name}});
+
+      let queryJson = JSON.stringify(this.$store.state.get_project.prj_name)
+      this.$router.push({
+        path: `/new_project_screen`,
+        query: {queryJson: queryJson}
+      });
     },
     handleTrNodeClick(data, node) {
       // console.log(data)
@@ -220,9 +225,9 @@ export default {
   },
   updated() {
     this.filter_major = this.$store.state.get_project.filter_major
-    this.title1 = this.$store.state.get_headquarter.head_name
-    this.title2 = this.$store.state.get_region.region_name
-    this.title3 = this.$store.state.get_project.prj_name
+    this.title1 = this.$store.state.get_headquarter.head_name.label
+    this.title2 = this.$store.state.get_region.region_name.label
+    this.title3 = this.$store.state.get_project.prj_name.label
   },
   computed: {
     getName() {
@@ -268,9 +273,9 @@ export default {
       map_height: 0,
       timer: null,
       input: 'test',
-      title1: this.$store.state.get_headquarter.head_name,
-      title2: this.$store.state.get_region.region_name,
-      title3: this.$store.state.get_project.prj_name,
+      title1: this.$store.state.get_headquarter.head_name.label,
+      title2: this.$store.state.get_region.region_name.label,
+      title3: this.$store.state.get_project.prj_name.label,
       prj_sys_name: [],
       nowWeek: "",
       nowDate: "",

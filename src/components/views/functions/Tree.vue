@@ -9,7 +9,30 @@
              style="background-color: transparent; height: 96%">
 
       <div style="height: 80%; margin-top: 0.15rem">
-        <el-scrollbar style="height: 100%">
+        <el-scrollbar v-if="show" style="height: 100%">
+          <el-tree
+              class="filter-tree"
+              node-key="id"
+              ref="modelTree"
+              accordion
+              :data="data"
+              :props="defaultProps"
+              :default-expanded-keys="expandedKeys"
+              :show-checkbox="showCheckbox"
+              highlight-current
+              :expand-on-click-node="false"
+              :current-node-key="currentNodeKey"
+              :filter-node-method="filterNode"
+              @node-click="nodeClick"
+              @check="handleCheck"
+
+          >
+                                <span class="span-ellipsis" slot-scope="{ node, data }">
+                                  <span :title="node.label">{{ node.label }}</span>
+                                </span>
+          </el-tree>
+        </el-scrollbar>
+        <el-scrollbar v-if="!show" style="height: 100%">
           <el-tree
               class="filter-tree"
               node-key="id"
@@ -67,7 +90,8 @@ export default {
       user_grant: this.$store.state.get_login.grant_data.data.user_grant,//当前用户的权限
       expandedKeys: this.$store.state.get_login.expandedKeys,
       keys: this.$store.state.get_login.expandedKeys,
-      currentNodeKey: ''
+      currentNodeKey: '',
+      show: true // true表示未脱敏，false表示已脱敏
     };
   },
   watch: {
@@ -81,82 +105,120 @@ export default {
   methods: {
     getTreeData(tree_data) {
       // this.expandedKeys = this.keys
-      let arr = []//树形控件
-      let count = 1;
-      for (let i in tree_data['headquarter_tag']) {
-        let parent1 = {
-          id: 0,
-          label: '',
-          level: 1,
-          children: [],
-          value: ''
-        };
-        parent1['id'] = count++
-        parent1['label'] = i
-        parent1['value'] = i
-        arr.push(parent1)
-        if (this.user_grant === '总部') {
-          let temp_arr = this.expandedKeys
-          if (!temp_arr.includes(parent1.id)) {
-            temp_arr.push(parent1.id)
-          }
-          this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
-          this.expandedKeys = this.$store.state.get_login.expandedKeys
-        }
-        for (let j in tree_data['headquarter_tag'][i]['region_tag']) {
-          let parent2 = {
+      if ((this.user_grant != "超级用户") || (this.$store.state.get_login.masking == false)) {
+        let arr = []//树形控件
+        let count = 1;
+        for (let i in tree_data['headquarter_tag']) {
+          let parent1 = {
             id: 0,
             label: '',
-            level: 2,
+            level: 1,
             children: [],
             value: ''
           };
-          parent2['id'] = count++
-          parent2['label'] = j
-          parent2['value'] = j
-          if (this.user_grant === '区域') {
+          parent1['id'] = count++
+          parent1['label'] = i
+          parent1['value'] = i
+          arr.push(parent1)
+          if (this.user_grant === '总部') {
             let temp_arr = this.expandedKeys
-            temp_arr.push(parent2.id)
+            if (!temp_arr.includes(parent1.id)) {
+              temp_arr.push(parent1.id)
+            }
             this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
             this.expandedKeys = this.$store.state.get_login.expandedKeys
           }
-          for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
-            let child1 = {
+          for (var j in tree_data['headquarter_tag'][i]['region_tag']) {
+            let parent2 = {
+              id: 0,
+              label: '',
+              level: 2,
+              children: [],
+              value: ''
+            };
+            parent2['id'] = count++
+            parent2['label'] = j
+            parent2['value'] = j
+            if (this.user_grant === '区域') {
+              let temp_arr = this.expandedKeys
+              temp_arr.push(parent2.id)
+              this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
+              this.expandedKeys = this.$store.state.get_login.expandedKeys
+            }
+            for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
+              let child1 = {
+                id: 0,
+                label: '',
+                level: 3,
+                children: [],
+                value: ''
+              };
+              child1['id'] = count++
+              child1['label'] = k
+              child1['value'] = k
+              for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
+                for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
+                  let child2 = {
+                    id: 0,
+                    label: '',
+                    level: 4,
+                    value: ''
+                  };
+                  child2['id'] = count++
+                  child2['label'] = m
+                  child2['value'] = m
+                  child1['children'].push(child2)
+                  if (this.user_grant === '项目') {
+                    let temp_arr = this.expandedKeys
+                    temp_arr.push(child2.id)
+                    this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
+                    this.expandedKeys = this.$store.state.get_login.expandedKeys
+                  }
+                }
+              }
+              parent2['children'].push(child1)
+            }
+            parent1['children'].push(parent2)
+          }
+          for (var j in tree_data['headquarter_tag'][i]['project_tag']) {
+            var parent2 = {
               id: 0,
               label: '',
               level: 3,
               children: [],
               value: ''
             };
-            child1['id'] = count++
-            child1['label'] = k
-            child1['value'] = k
-            for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
-              for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
-                let child2 = {
+            parent2['id'] = count++
+            parent2['label'] = j
+            parent2['value'] = j
+            if (this.user_grant === '项目') {
+              var temp_arr = this.expandedKeys
+              temp_arr.push(parent2.id)
+              this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
+              this.expandedKeys = this.$store.state.get_login.expandedKeys
+            }
+            for (var k in tree_data['headquarter_tag'][i]['project_tag'][j]) {
+              for (var l in tree_data['headquarter_tag'][i]['project_tag'][j][k]) {
+                var child2 = {
                   id: 0,
                   label: '',
                   level: 4,
                   value: ''
                 };
                 child2['id'] = count++
-                child2['label'] = m
-                child2['value'] = m
-                child1['children'].push(child2)
-                if (this.user_grant === '项目') {
-                  let temp_arr = this.expandedKeys
-                  temp_arr.push(child2.id)
-                  this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
-                  this.expandedKeys = this.$store.state.get_login.expandedKeys
-                }
+                child2['label'] = l
+                child2['value'] = l
+                parent2['children'].push(child2)
               }
             }
-            parent2['children'].push(child1)
+            parent1['children'].push(parent2)
           }
-          parent1['children'].push(parent2)
         }
+        this.data = arr
+      } else if(this.$store.state.get_login.masking == true) {
+        // 需要脱敏的情况
+        this.data = this.$store.state.get_login.hide_tag
       }
-      this.data = arr
     },
     filterNode(value, data) {
       if (!value) return true;
@@ -240,6 +302,12 @@ export default {
     // console.log("区域", this.$store.state.get_login.grant_data.data)
     this.getTreeData(this.treeObj1)
     this.currentNodeKey = this.$store.state.get_login.now_node
+    // 检查脱敏状态
+    if (this.$store.state.get_login.masking == true) {
+      this.show = false
+    } else if (this.$store.state.get_login.masking == false) {
+      this.show = true
+    }
   },
 }
 </script>

@@ -86,6 +86,8 @@ export default {
       this.$store.commit('get_login/changeNameParam', {params: _this.username})
       //  得到隐患描述的筛选条件
       this.$store.dispatch('get_login/getDangerSelection')
+      // 拿脱敏数据
+      this.$store.dispatch('get_login/getHideTag')
       //判断复选框是否被勾选 勾选则调用配置cookie方法
       if (_this.checked == true) {
         //传入账号名，密码，和保存天数3个参数
@@ -147,7 +149,9 @@ export default {
           this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
           this.$router.push({path: '/prj_data_analysis'});
           let data = {
-            label: this.$store.state.get_login.grant_data.data.project_tag
+            label: this.$store.state.get_login.grant_data.data.project_tag,
+            value: this.$store.state.get_login.grant_data.data.project_tag,
+            level: 3
           }
           let node = {
             level: 3
@@ -160,7 +164,9 @@ export default {
           this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
           this.$router.push({path: '/region_department'});
           let data = {
-            label: this.$store.state.get_login.grant_data.data.region_tag
+            label: this.$store.state.get_login.grant_data.data.region_tag,
+            value: this.$store.state.get_login.grant_data.data.region_tag,
+            level: 2
           }
           let node = {
             level: 2
@@ -171,7 +177,9 @@ export default {
           this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
           this.$router.push({path: '/land_headquarters'});
           let data = {
-            label: this.$store.state.get_login.grant_data.data.headquarter_tag
+            label: this.$store.state.get_login.grant_data.data.headquarter_tag,
+            value: this.$store.state.get_login.grant_data.data.headquarter_tag,
+            level: 1
           }
           let node = {
             level: 1

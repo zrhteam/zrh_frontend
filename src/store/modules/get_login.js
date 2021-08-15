@@ -25,7 +25,9 @@ const state = {
     param_name: {},
 
     //四个层级都有的隐患描述的查询条件
-    danger_selection: []
+    danger_selection: [],
+    masking: false, // 脱敏标记，脱敏表示true
+    hide_tag: []
 }
 
 //getters
@@ -61,6 +63,12 @@ const actions = {
     getDangerSelection(context) {
         dataService.getDangerSelection(state.param_name, function (response) {
             context.commit('changeDangerSelection', response)
+        })
+    },
+    // 得到脱敏数据
+    getHideTag(context) {
+        dataService.getHideTag(state.param_name, function (response) {
+            context.commit('changeHideTag', response)
         })
     },
 }
@@ -170,6 +178,14 @@ const mutations = {
         }
         state.danger_selection = arr
     },
+    // 更改脱敏状态
+    changeMasking(state, data) {
+        state.masking = data.param
+    },
+    // 脱敏数据
+    changeHideTag(state, data) {
+        state.hide_tag = data
+    }
 }
 
 

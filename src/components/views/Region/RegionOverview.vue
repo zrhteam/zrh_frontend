@@ -179,17 +179,11 @@ export default {
   },
   methods: {
     intoRegionDataScreen() {
-      // let region_large1 = document.getElementById('region_large1');
-      // region_large1.style.display = 'none'
-      // let region_large2 = document.getElementById('region_large2');
-      // region_large2.style.display = 'none'
-      // let region_small = document.getElementById('region_small');
-      // region_small.style.display = 'block'
-      // region_small.style.width = "500px"
-      // region_small.style.width = "99%"
-
-      // this.showDataScreen = true
-      this.$router.push({path: `/new_region_screen`, query: {region_name: this.$store.state.get_region.region_name}});
+      let queryJson = JSON.stringify(this.$store.state.get_region.region_name)
+      this.$router.push({
+        path: `/new_region_screen`,
+        query: {queryJson: queryJson}
+      });
     },
     outRegionDataScreen() {
       this.showDataScreen = false
@@ -257,8 +251,8 @@ export default {
   updated() {
     this.filter_major = this.$store.state.get_region.filter_major
 
-    this.title1 = this.$store.state.get_headquarter.head_name
-    this.title2 = this.$store.state.get_region.region_name
+    this.title1 = this.$store.state.get_headquarter.head_name.label
+    this.title2 = this.$store.state.get_region.region_name.label
   },
   data() {
     return {
@@ -289,10 +283,8 @@ export default {
         children: 'children',
         label: 'label'
       },
-      // title1: this.$store.state.get_login.grant_data.data.headquarter_tag,
-      // title2: this.$store.state.get_login.grant_data.data.region_tag,
-      title1: this.$store.state.get_headquarter.head_name,
-      title2: this.$store.state.get_region.region_name,
+      title1: this.$store.state.get_headquarter.head_name.label,
+      title2: this.$store.state.get_region.region_name.label,
       risk_option: [{
         value: '专业',
         key: 'major'
