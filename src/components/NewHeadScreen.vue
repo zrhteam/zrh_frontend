@@ -281,7 +281,6 @@ export default {
       for (let i in data) {
         len++
       }
-      debugger
       // 判断数据是否需要脱敏
       if (this.masking == true) {
         var range = this.$store.state.get_login.hide_tag
@@ -311,7 +310,7 @@ export default {
                 }
               })
               obj.name = aa.label;
-            }else if (masking == false) {
+            }else if (this.masking == false) {
               obj.name = j
             }
             obj.count = data[j].appear_time

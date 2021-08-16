@@ -19,32 +19,9 @@
     </div>
     <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
-      <!--      <el-select v-if="show" v-model="value" placeholder="请选择" size="mini" style="max-width: 8em;"-->
-      <!--                 @change="filterMajor">-->
-      <!--        <el-option-->
-      <!--            v-for="item in option"-->
-      <!--            :key="item.value"-->
-      <!--            :label="item.label"-->
-      <!--            :value="item.value">-->
-      <!--        </el-option>-->
-      <!--      </el-select>-->
     </div>
     <div class="title-line" style=""></div>
     <div ref='barEchartContainer' style="height: 80%; width: 100%;"/>
-    <!--    <div id="id_head_rank1" style="height: 90%; width: 100%" v-if="context.id==='id_head_rank1'">-->
-    <!--    </div>-->
-    <!--    <div id="id_head_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_head_rank2'">-->
-    <!--    </div>-->
-    <!--    <div id="id_region_rank1" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank1'">-->
-    <!--    </div>-->
-    <!--    <div id="id_region_rank2" style="height: 80%; width: 100%" v-if="context.id==='id_region_rank2'">-->
-    <!--    </div>-->
-    <!--    <div id="id_region_system" style="height: 80%; width: 100%" v-if="context.id==='id_region_system'">-->
-    <!--    </div>-->
-    <!--    <div id="id_project_system" style="height: 80%; width: 100%" v-if="context.id==='id_project_system'">-->
-    <!--    </div>-->
-    <!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
-    <!--    </div>-->
   </el-card>
 </template>
 
@@ -60,7 +37,7 @@ export default {
       option: '',
       barEchartContainer: null,
       myChart: null,
-      doResize: null
+      doResize: null,
     }
   },
   methods: {
@@ -72,44 +49,42 @@ export default {
       return res * fontSize;
     },
     drawBarChart() {
-      this.$nextTick(_ => {
-        let arr = this.getData
-        if (arr.length != 0) {
-          arr.sort(this.sortNumber('count', true))
-          if (this.context.id == 'id_head_rank1' || this.context.id == 'id_project_system' || this.context.id == 'id_check_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
-            if (this.context.id == 'id_project_system' || this.context.id == 'id_check_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
-              bar_option3["grid"]["bottom"] = this.fontSize(0.35)
-              bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8 / arr.length)
-              // }else if(this.context.id == 'id_region_rank2') {
-              //   bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8/arr.length)
-            }
-            bar_option3["dataset"]["source"] = arr
-            this.myChart.setOption(bar_option3);
-          } else {
-            bar_option["dataset"][0]["source"] = arr
-            bar_option["xAxis"]["axisLabel"]["rotate"] = 0
-            bar_option["grid"]["y2"] = '30%'
-            bar_option["series"][0]["barCategoryGap"] = String(this.fontSize(2.6 / arr.length))
-            // bar_option["series"][0]["barCategoryGap"] = '50'
-            this.myChart.setOption(bar_option);
+      let arr = this.getData
+      arr.sort(this.sortNumber('count', true))
+      if (this.myChart == null || this.myChart == "" || this.myChart == undefined) {
+        this.barEchartContainer = this.$refs.barEchartContainer;
+        this.myChart = this.$echarts.init(this.barEchartContainer)
+      }
+      if (this.context.id == 'id_head_rank1' || this.context.id == 'id_project_system' || this.context.id == 'id_check_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
+        if (this.context.id == 'id_project_system' || this.context.id == 'id_check_system' || this.context.id == 'id_region_rank1' || this.context.id == 'id_region_rank2' || this.context.id == 'id_region_system') {
+          bar_option3["grid"]["bottom"] = this.fontSize(0.35)
+          if (arr.length != 0) {
+            bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8 / arr.length)
           }
-          this.myChart.resize();
-          this.doResize = () => {
-            if (this.myChart != null) { // 如果不存在，就进行初始化
-              this.myChart.resize();
-            }
-          }
-          window.addEventListener("resize", this.doResize);
-          // } else if (this.context.id) {
-          //   this.$nextTick(() => {
-          //     const dom = document.getElementById(this.context.id)
-          //     dom.innerHTML = '暂无数据'
-          //     dom.style.color = '#ffffff'
-          //     dom.style.fontSize = '14px'
-          //     dom.removeAttribute("_echarts_instance_")
-          //   })
+          // }else if(this.context.id == 'id_region_rank2') {
+          //   bar_option3["series"][0]["barCategoryGap"] = this.fontSize(0.8/arr.length)
         }
-      })
+        let showed = arr.length ? false : true
+        bar_option3["title"]["show"] = showed
+        bar_option3["dataset"]["source"] = arr
+        this.myChart.setOption(bar_option3);
+      } else {
+        let showed = arr.length ? false : true
+        bar_option["title"]["show"] = showed
+        bar_option["dataset"][0]["source"] = arr
+        bar_option["xAxis"]["axisLabel"]["rotate"] = 0
+        bar_option["grid"]["y2"] = '30%'
+        bar_option["series"][0]["barCategoryGap"] = String(this.fontSize(2.6 / arr.length))
+        // bar_option["series"][0]["barCategoryGap"] = '50'
+        this.myChart.setOption(bar_option);
+      }
+      this.myChart.resize();
+      this.doResize = () => {
+        if (this.myChart != null) { // 如果不存在，就进行初始化
+          this.myChart.resize();
+        }
+      }
+      window.addEventListener("resize", this.doResize);
     },
     // filterMajor(value) {
     //   let param2 = new URLSearchParams();
@@ -170,14 +145,43 @@ export default {
         } else if (this.context.id == 'id_head_rank2') {
           data = this.$store.state.get_headquarter.rank_by_prj
         }
-        for (let i in data) {
-          let obj = {
-            name: '',
-            count: 0
+        // 判断是否需要脱敏
+        if (this.$store.state.get_login.masking == true) {
+          var range = this.$store.state.get_login.hide_tag
+          var value = this.$store.state.get_headquarter.head_name.value
+          var sub_range = {}
+          range.forEach(function (item) {
+            if (item.value == value) {
+              sub_range = item
+              return
+            }
+          })
+          for (var i in data) {
+            var obj = {
+              name: '',
+              count: 0
+            }
+            var aa = {}
+            sub_range['children'].forEach(function (item) {
+              if (item.value == i) {
+                aa = item
+                return
+              }
+            })
+            obj['name'] = aa.label
+            obj['count'] = data[i]
+            arr.push(obj)
           }
-          obj['name'] = i
-          obj['count'] = data[i]
-          arr.push(obj)
+        } else if (this.$store.state.get_login.masking == false) {
+          for (var i in data) {
+            var obj = {
+              name: '',
+              count: 0
+            }
+            obj['name'] = i
+            obj['count'] = data[i]
+            arr.push(obj)
+          }
         }
       } else if ((this.context.id == 'id_region_rank1') || (this.context.id == 'id_region_rank2')) {
         if (this.context.id == 'id_region_rank1') {
@@ -185,17 +189,49 @@ export default {
         } else if (this.context.id === 'id_region_rank2') {
           data = this.$store.state.get_region.rank_by_check
         }
-        for (let i in data) {
-          let obj = {
-            name: '',
-            count: 0
+        // 判断是否需要脱敏
+        if (this.$store.state.get_login.masking == true) {
+          var range = this.$store.state.get_login.hide_tag
+          var value = this.$store.state.get_region.region_name.value
+          var sub_range = {}
+          range.forEach(function (item) {
+            item['children'].forEach(function (sub_item) {
+              if (sub_item.value == value) {
+                sub_range = sub_item
+                return
+              }
+            })
+            return
+          })
+          for (var i in data) {
+            var obj = {
+              name: '',
+              count: 0
+            }
+            var aa = {}
+            sub_range['children'].forEach(function (item) {
+              if (item.value == i) {
+                aa = item
+                return
+              }
+            })
+            debugger
+            obj['name'] = aa.label
+            obj['count'] = data[i].count
+            arr.push(obj)
           }
-          obj['name'] = i
-          obj['count'] = data[i].count
-          arr.push(obj)
+        } else if (this.$store.state.get_login.masking == false) {
+          for (var i in data) {
+            var obj = {
+              name: '',
+              count: 0
+            }
+            obj['name'] = i
+            obj['count'] = data[i].count
+            arr.push(obj)
+          }
         }
       } else if ((this.context.id == 'id_region_system') || (this.context.id == 'id_project_system') || (this.context.id == 'id_check_system')) {
-        this.show = true
         if (this.context.id == 'id_region_system')
           data = this.$store.state.get_region.region_sys_ratio
         else if (this.context.id == 'id_project_system')
@@ -250,9 +286,9 @@ export default {
     this.drawBarChart()
   },
   mounted() {
-    this.drawBarChart()
     this.barEchartContainer = this.$refs.barEchartContainer;
     this.myChart = this.$echarts.init(this.barEchartContainer)
+    // this.drawBarChart()
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.doResize);

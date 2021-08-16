@@ -8,7 +8,7 @@
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 0px; top: 25%;">
         <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.4rem;">
-          {{ region_name }}隐患大屏
+          {{ region_title }}隐患大屏
         </div>
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 19.5rem; top: 25%;">
@@ -28,7 +28,9 @@
         </div>
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.3rem; left: 23.1rem; top: 40%;">
-        <el-button class="title" v-if="show" round size="mini" @click="quitRegionScreen" style="z-index: 999;top: 40%">退出</el-button>
+        <el-button class="title" v-if="show" round size="mini" @click="quitRegionScreen" style="z-index: 999;top: 40%">
+          退出
+        </el-button>
       </div>
       <div style="position: absolute !important; width: 6.8rem; height: 0.3rem; left: 23.15rem; top: 10%;">
         <a class="title" v-if="show" style="font-size: 0.15rem" @click="copyUrl()">复制链接</a>
@@ -130,7 +132,9 @@ export default {
       renderSign6: false,
       stageLegend: [],
       stageyAxis: [],
-      region_name: ""
+      region_name: "",
+      region_title: "",
+      masking: false
     }
   },
   methods: {
@@ -150,11 +154,11 @@ export default {
       // Input要在正常的编辑状态下原生复制方法才会生效
       document.execCommand('Copy')
       this.$notify({
-          title: '成功',
-          message: '复制成功',
-          type: 'success',
-          duration: 1000
-        });
+        title: '成功',
+        message: '复制成功',
+        type: 'success',
+        duration: 1000
+      });
       /// 复制成功后再将构造的标签 移除
       cInput.remove()
     },
@@ -193,16 +197,16 @@ export default {
           && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
       var isChrome = userAgent.indexOf("Chrome") > -1
           && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
-      if(isIE) {
+      if (isIE) {
         window.history.back(-1);
-      }else if(isEdge) {
+      } else if (isEdge) {
         window.history.back(-1);
-      }else if(isFF) {
+      } else if (isFF) {
         history.back()
         return false
-      }else if(isChrome) {
+      } else if (isChrome) {
         window.history.back(-1);
-      }else if(isSafari) {
+      } else if (isSafari) {
         window.history.back(-1);
       }
     },
@@ -326,6 +330,20 @@ export default {
       for (let i in data) {
         len++
       }
+      if (this.masking == true) {
+        var range = this.$store.state.get_login.hide_tag
+        var value = this.region_name.value
+        var sub_range = {}
+        range.forEach(function (item) {
+          item['children'].forEach(function (sub_item) {
+            if (sub_item.value == value) {
+              sub_range = sub_item
+              return
+            }
+          })
+          return
+        })
+      }
       for (let i = 0; i < len; i++) {
         for (let j in data) {
           let obj = {
@@ -333,8 +351,20 @@ export default {
             name: "",
           }
           if (i == data[j].rank) {
+            // 判断是否需要脱敏
+            if (this.masking == true) {
+              var aa = {}
+              sub_range['children'].forEach(function (item) {
+                if (item.value == j) {
+                  aa = item
+                  return
+                }
+              })
+              obj.name = aa.label;
+            } else if (this.masking == false) {
+              obj.name = j
+            }
             obj.count = data[j].appear_time
-            obj.name = j
             arr.push(obj)
           }
         }
@@ -504,11 +534,15 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
-        if(route.query.id != undefined & route.query.id == 1) {
+        if (route.query.id != undefined & route.query.id == 1) {
           this.show = false
         }
         let queryJson = JSON.parse(route.query.queryJson)
-        this.region_name = queryJson.label
+        this.region_name = queryJson
+        this.region_title = queryJson.label
+        if (queryJson.value != queryJson.label) {
+          this.masking = true
+        }
         let param = new URLSearchParams();
         param.append('region_name', queryJson.value);
         this.$store.commit('get_screen/changeParams', {params: param})
@@ -520,6 +554,7 @@ export default {
         this.$store.dispatch('get_screen/getRegionScreenAreaNumber')
         this.$store.dispatch('get_screen/getRegionScreenTable')
         this.$store.dispatch('get_screen/getProvinceInfo')
+        this.$store.dispatch('get_login/getHideTag')
       },
       immediate: true
     }
@@ -713,7 +748,7 @@ export default {
   background-image: url("../assets/screen_card.png");
 }
 
-/deep/ .el-button{
+/deep/ .el-button {
   background: transparent !important;
   color: #ffffff;
   height: 0.3rem;
