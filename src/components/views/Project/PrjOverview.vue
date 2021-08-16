@@ -226,7 +226,11 @@ export default {
   updated() {
     this.filter_major = this.$store.state.get_project.filter_major
     this.title1 = this.$store.state.get_headquarter.head_name.label
-    this.title2 = this.$store.state.get_region.region_name.label
+    if(this.$store.state.get_headquarter.head_name['children'][0].level == 3) {
+      this.title2 = ""
+    }else {
+      this.title2 = this.$store.state.get_region.region_name.label
+    }
     this.title3 = this.$store.state.get_project.prj_name.label
   },
   computed: {
