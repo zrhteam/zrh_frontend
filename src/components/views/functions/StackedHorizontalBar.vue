@@ -103,7 +103,8 @@ export default {
         }
         data.push(obj)
       }
-      // if (data.length != 0) {
+      if (data.length != 0) {
+        this.myChart = this.$echarts.init(document.getElementById(this.context.id))
         let option = {
           tooltip: {
             trigger: 'axis',
@@ -179,15 +180,15 @@ export default {
           }
         }
         window.addEventListener("resize", this.doResize);
-      // } else if (data.length == 0) {
-      //   this.$nextTick(() => {
-      //     const dom = document.getElementById(this.context.id)
-      //     dom.innerHTML = '暂无数据'
-      //     dom.style.color = '#ffffff'
-      //     dom.style.fontSize = '14px'
-      //     dom.removeAttribute("_echarts_instance_")
-      //   })
-      // }
+      } else if (data.length == 0) {
+        this.$nextTick(() => {
+          const dom = document.getElementById(this.context.id)
+          dom.innerHTML = '暂无数据'
+          dom.style.color = '#ffffff'
+          dom.style.fontSize = '14px'
+          dom.removeAttribute("_echarts_instance_")
+        })
+      }
     },
     fontSize(res) {
       let docEl = document.documentElement,
@@ -198,9 +199,6 @@ export default {
     }
   },
   watch: {
-    // s_data() {
-    //   this.drawBarChart()
-    // },
     renderSign() {
       this.drawBarChart()
     }

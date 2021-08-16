@@ -61,6 +61,9 @@ export default {
     drawBarChart() {
       window.addEventListener("resize", this.doResize);
       if (this.bar_data.length != 0) {
+        this.echartContainer = this.$refs.echartContainer;
+        this.echartContainer.style.top = '0%'
+        this.myChart = this.$echarts.init(this.echartContainer)
         bar_option["dataset"][0]["source"] = this.bar_data
         this.myChart.setOption(bar_option);
         this.doResize = () => {
@@ -70,27 +73,16 @@ export default {
         }
       } else if (this.bar_data.length == 0) {
         this.$nextTick(() => {
-          const dom = document.getElementById(this.context.id)
+          const dom = this.$refs.echartContainer
           dom.innerHTML = '暂无数据'
-          dom.style.color = '#ffffff'
+          dom.style.color = '#ABA9B6'
           dom.style.fontSize = '14px'
+          dom.style.display = 'block'
+          dom.style.top = '36%'
+          dom.style.position = 'relative'
           dom.removeAttribute("_echarts_instance_")
         })
       }
-    },
-    grantChart() {
-      let params = new URLSearchParams();
-      params.append('level', this.context.level);
-      params.append('title', this.context.title);
-      params.append('object1', this.$store.state.get_comparison.object1);
-      params.append('object2', this.$store.state.get_comparison.object2);
-      params.append('user_name', this.value);
-      this.$store.commit('get_comparison/changeGrantParam', {params: params})
-      this.$store.dispatch('get_comparison/postGrantInfo')
-      // this.isShow = !this.isShow
-    },
-    dropGrantChart() {
-      // this.isShow = !this.isShow
     },
     filterYear(value) {
       this.year_copy = value
@@ -104,7 +96,6 @@ export default {
   computed: {
     getRiskLevelYear() {
       let data;
-
       this.level_year = []
       if (this.context.id == 'check_level_year') {
         data = this.$store.state.get_check.check_level_year
@@ -166,9 +157,6 @@ export default {
       this.renderSign = !this.renderSign
     },
   },
-  // updated() {
-  //   this.drawBarChart()
-  // },
   mounted() {
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁

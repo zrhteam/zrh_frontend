@@ -51,7 +51,7 @@ export default {
             name: '',
             count: 0
           }
-          var aa = {}
+          var aa = {label: i}
           sub_range['children'].forEach(function (item) {
             if(item.value == i) {
               aa = item

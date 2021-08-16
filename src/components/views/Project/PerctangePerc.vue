@@ -59,16 +59,10 @@ export default {
   },
   methods: {
     drawBarChart() {
-      // this.$nextTick(_ => {
-      // let myChart;
-      // myChart = this.$echarts.init(document.getElementById(this.context.id))
-      // let arr = this.getData
-      // bar_option['dataset']['source'] = arr
-      // bar_option["xAxis"]["axisLabel"]["rotate"] = 45
-      // myChart.setOption(bar_option);
-      // console.log("arr", arr)
       let arr = this.pie_data
       if (arr.length != 0) {
+        this.echartContainer = this.$refs.echartContainer;
+        this.myChart = this.$echarts.init(this.echartContainer)
         pie_option['series'][0]['data'] = this.pie_data
         pie_option["legend"]["formatter"] = function (params) {
           var legendIndex = 0;
@@ -88,24 +82,14 @@ export default {
           }
         }
         window.addEventListener("resize", this.doResize);
-      // } else if (arr.length == 0) {
-      //   this.$nextTick(() => {
-      //     this.echartContainer.innerHTML = '暂无数据'
-      //     this.echartContainer.style.color = '#ffffff'
-      //     this.echartContainer.style.fontSize = '14px'
-      //     this.echartContainer.removeAttribute("_echarts_instance_")
-      //   })
+      } else if (arr.length == 0) {
+        this.$nextTick(() => {
+          this.echartContainer.innerHTML = '暂无数据'
+          this.echartContainer.style.color = '#ffffff'
+          this.echartContainer.style.fontSize = '14px'
+          this.echartContainer.removeAttribute("_echarts_instance_")
+        })
       }
-      // })
-      // if (this.pie_data.length == 0) {
-      //   this.$nextTick(() => {
-      //     const dom = this.echartContainer
-      //     dom.innerHTML = '暂无数据'
-      //     dom.style.color = '#ffffff'
-      //     dom.style.fontSize = '14px'
-      //     dom.removeAttribute("_echarts_instance_")
-      //   })
-      // }
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
@@ -348,18 +332,12 @@ export default {
       this.drawBarChart()
     }
   },
-  // updated() {
-  //   this.drawBarChart()
-  // },
   mounted() {
-    // this.drawBarChart();
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁
     }
     this.echartContainer = this.$refs.echartContainer;
     this.myChart = this.$echarts.init(this.echartContainer)
-
-    this.drawBarChart()
   },
   created() {
     this.value = '全部专业'

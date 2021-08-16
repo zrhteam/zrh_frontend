@@ -5,8 +5,8 @@ import axios from 'axios'
 Vue.prototype.axios = axios
 
 const dataServerUrl
-    = "http://localhost:5000/api";
-    // = "http://10.20.39.102:5000/api";
+    // = "http://localhost:5000/api";
+    = "http://124.71.45.84:5000/api";
 // const dataServerUrl = "/sv-analysis";
 // const dataServerUrl = Config.serverLink == ""? "" : Config.serverLink.substring(0,  Config.serverLink.length - 1);
 const $http = Vue.http;
@@ -1495,6 +1495,18 @@ function getAnalyzeRefChartMeta(param, callback) {
         })
 }
 
+// 拿到脱敏数据
+function getHideTag(param, callback) {
+    const url = `${dataServerUrl}/analyze/insight_func/get_hide_tag`
+    axios.post(url, param)
+        .then(response => {
+            callback(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 export default {
     getLoginGrant,
     getLocation,
@@ -1579,4 +1591,5 @@ export default {
     getGrantInfo,
     getAnalyzeInsightList,
     getAnalyzeRefChartMeta,
+    getHideTag
 }

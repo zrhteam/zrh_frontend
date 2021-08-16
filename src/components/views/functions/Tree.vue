@@ -228,7 +228,6 @@ export default {
       this.$store.commit('get_login/changeNowNode', {params: data.id})
       // this.expandedKeys.push(data.id)
       // this.getTreeData(this.treeObj1)
-
       // 点击了一个节点，
       let temp_arr = this.keys
       // console.log("start", this.keys)

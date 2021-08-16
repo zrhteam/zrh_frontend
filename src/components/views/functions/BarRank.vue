@@ -137,8 +137,8 @@ export default {
   },
   computed: {
     getData() {
-      let data;
-      let arr = [];
+      var data;
+      var arr = [];
       if ((this.context.id == 'id_head_rank1') || (this.context.id == 'id_head_rank2')) {
         if (this.context.id == 'id_head_rank1') {
           data = this.$store.state.get_headquarter.rank_by_check
@@ -161,7 +161,7 @@ export default {
               name: '',
               count: 0
             }
-            var aa = {}
+            var aa = {label: i}
             sub_range['children'].forEach(function (item) {
               if (item.value == i) {
                 aa = item
@@ -215,7 +215,6 @@ export default {
                 return
               }
             })
-            debugger
             obj['name'] = aa.label
             obj['count'] = data[i].count
             arr.push(obj)

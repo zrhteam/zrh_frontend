@@ -12,6 +12,17 @@ function fontSize(res) {
 //此处存放所有全局变量
 //针对 bar chart 的 option
 export const bar_option = {
+    title: {
+        show: false, // 是否显示title
+        text: '暂无数据',
+        left: 'center',
+        top: 'center',
+        textStyle: {
+            color: '#ABA9B6',
+            fontSize: 14,
+            fontWeight: 150
+        }
+    },
     tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -117,6 +128,17 @@ export const bar_option = {
 };
 //对于一个x量对应三个bar
 export const bar_option2 = {
+    title: {
+        show: false, // 是否显示title
+        text: '暂无数据',
+        left: 'center',
+        top: 'center',
+        textStyle: {
+            color: '#ABA9B6',
+            fontSize: 14,
+            fontWeight: 150
+        }
+    },
     legend: {
         textStyle: {
             // color: '#058ddb',
@@ -213,6 +235,17 @@ export const bar_option2 = {
 };
 //针对纵向bar
 export const bar_option3 = {
+    title: {
+        show: false, // 是否显示title
+        text: '暂无数据',
+        left: 'center',
+        top: 'center',
+        textStyle: {
+            color: '#ABA9B6',
+            fontSize: 14,
+            fontWeight: 150
+        }
+    },
     dataset: {
         dimensions: ['name', 'count'],
         source: []
@@ -311,6 +344,17 @@ export const bar_option3 = {
 
 //针对 pie chart 的 option
 export const pie_option = {
+    title: {
+        show: false, // 是否显示title
+        text: '暂无数据',
+        left: 'center',
+        top: 'center',
+        textStyle: {
+            color: '#ABA9B6',
+            fontSize: 14,
+            fontWeight: 150
+        }
+    },
     tooltip: {
         formatter: '{b}:{c} ({d}%)'
     },
@@ -411,6 +455,17 @@ export const pie_option = {
 
 //针对 pie chart 的 环形图option
 export const pie_option2 = {
+    title: {
+        show: false, // 是否显示title
+        text: '暂无数据',
+        left: 'center',
+        top: 'center',
+        textStyle: {
+            color: '#ABA9B6',
+            fontSize: 14,
+            fontWeight: 150
+        }
+    },
     series: [
         {
             type: 'pie',
@@ -450,6 +505,17 @@ export const pie_option2 = {
 
 //折线图
 export const line_option = {
+    title: {
+        show: false, // 是否显示title
+        text: '暂无数据',
+        left: 'center',
+        top: 'center',
+        textStyle: {
+            color: '#ABA9B6',
+            fontSize: 14,
+            fontWeight: 150
+        }
+    },
     tooltip: {
         trigger: 'axis'
     },
@@ -520,6 +586,17 @@ export const line_option = {
 }
 
 export const pie_option_data_insight = {
+    title: {
+        show: false, // 是否显示title
+        text: '暂无数据',
+        left: 'center',
+        top: 'center',
+        textStyle: {
+            color: '#ABA9B6',
+            fontSize: 14,
+            fontWeight: 150
+        }
+    },
     tooltip: {
         formatter: '{b}:{c} ({d}%)'
     },
