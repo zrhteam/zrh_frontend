@@ -26,40 +26,40 @@
     </el-row>
     <img id="img1_bg" :src="imgSrc1" @click="enterDB" alt=""
          style="width: 17.1%; left: 12.7%; top: 41.4%; z-index: 99; position: absolute;"/>
-    <img id="img2_bg" :src="imgSrc2" alt=""
+    <img id="img2_bg" :src="imgSrc2" @click="enterHead" alt=""
          style="width: 17.1%; left: 31.3%; top: 44%; z-index: 1; position: absolute;"/>
     <!--    <el-button round size="mini" @click="doMasking" style="position: absolute; z-index: 999;top: 72%; left: 44.5%">脱敏</el-button>-->
     <el-radio-group v-model="radio" style="position: absolute; z-index: 999;top: 70.5%; left: 35.8%; color: #000000">
       <el-radio :label="1">脱敏</el-radio>
-      <el-radio :label="2">取消脱敏</el-radio>
+      <el-radio :label="2">正常</el-radio>
     </el-radio-group>
-    <el-dropdown @command="handleCommand" v-if="show" style="z-index: 2">
-      <el-button style="background-image: url(../assets/data_vis.png);
-left:-4.5rem; top:2.8rem;
-width: 330px;height: 353px;background-repeat:no-repeat ;
-background-size:330px 353px; border: 0;
-background-color: transparent;
-position: absolute">
-      </el-button>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for="(item, i) in mask_arr
-" :command="item" @click="enterHead">{{ item.value }}
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-    <el-dropdown @command="handleCommand" v-if="!show" style="z-index: 2">
-      <el-button style="background-image: url(../assets/data_vis.png);
-left:-4.5rem; top:2.8rem;
-width: 330px;height: 353px;background-repeat:no-repeat ;
-background-size:330px 353px; border: 0;
-background-color: transparent;
-position: absolute">
-      </el-button>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for="(item, i) in mask_arr" :command="item" @click="enterHead">{{ item.label }}
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+<!--    <el-dropdown @command="handleCommand" v-if="show" style="z-index: 2">-->
+<!--      <el-button style="background-image: url(../assets/data_vis.png);-->
+<!--left:-4.5rem; top:2.8rem;-->
+<!--width: 330px;height: 353px;background-repeat:no-repeat ;-->
+<!--background-size:330px 353px; border: 0;-->
+<!--background-color: transparent;-->
+<!--position: absolute">-->
+<!--      </el-button>-->
+<!--      <el-dropdown-menu slot="dropdown">-->
+<!--        <el-dropdown-item v-for="(item, i) in mask_arr-->
+<!--" :command="item" @click="enterHead">{{ item.value }}-->
+<!--        </el-dropdown-item>-->
+<!--      </el-dropdown-menu>-->
+<!--    </el-dropdown>-->
+<!--    <el-dropdown @command="handleCommand" v-if="!show" style="z-index: 2">-->
+<!--      <el-button style="background-image: url(../assets/data_vis.png);-->
+<!--left:-4.5rem; top:2.8rem;-->
+<!--width: 330px;height: 353px;background-repeat:no-repeat ;-->
+<!--background-size:330px 353px; border: 0;-->
+<!--background-color: transparent;-->
+<!--position: absolute">-->
+<!--      </el-button>-->
+<!--      <el-dropdown-menu slot="dropdown">-->
+<!--        <el-dropdown-item v-for="(item, i) in mask_arr" :command="item" @click="enterHead">{{ item.label }}-->
+<!--        </el-dropdown-item>-->
+<!--      </el-dropdown-menu>-->
+<!--    </el-dropdown>-->
     <img :src="imgSrc3" @click="enterDataAnalysis" alt=""
          style="width: 17.1%; left: 50%; top: 43.5%; z-index: 99; position: absolute;"/>
     <img :src="imgSrc4" @click="enterDataInsight" alt=""
@@ -126,19 +126,21 @@ export default {
     enterDB() {
       window.location.href = 'http://124.71.45.84:8085';//数据库可视化系统的
     },
-    enterHead(head_name) {
+    enterHead() {
       // 根据radio判断是否需要脱敏，radio为1-》需要脱敏，radio为2-》取消脱敏
       let data = {
-        label: head_name.value,
-        value: head_name.value,
+        label: "华润置地",
+        value: "华润置地",
         level: 1
       }
       let node = {
         level: 1
       }
       if(this.radio == 1) {
-        data.label = head_name.label
+        data.label = "HR"
       }
+      //总部名称也需要封装
+      this.$store.commit('get_headquarter/changeHeadName', {head_name: data})
       this.$router.push({path: '/land_headquarters', query: {head_name: data}});
       this.handleTreeNodeClick(data, node)
     },
