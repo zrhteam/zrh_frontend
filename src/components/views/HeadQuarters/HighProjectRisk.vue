@@ -21,7 +21,7 @@
 <script>
 // import * as d3 from "d3/dist/d3";
 import echarts from "echarts";
-import {bar_option3} from "@/utils/constants";
+import {bar_option3, pie_option} from "@/utils/constants";
 
 export default {
   name: "HighProjectRisk",
@@ -33,16 +33,45 @@ export default {
   },
   computed: {
     getNumberHistogram() {
-      let data = this.$store.state.get_headquarter.risk_number_rank
-      let arr = []
-      for (let i in data) {
-        let obj = {
-          name: '',
-          count: 0
+      var data = this.$store.state.get_headquarter.risk_number_rank
+      var arr = []
+      // 判断是否需要脱敏
+      if (this.$store.state.get_login.masking == true) {
+        var range = this.$store.state.get_login.hide_tag
+        var value = this.$store.state.get_headquarter.head_name.value
+        var sub_range = {}
+        range.forEach(function (item) {
+          if (item.value == value) {
+            sub_range = item
+            return
+          }
+        })
+        for (var i in data) {
+          var obj = {
+            name: '',
+            count: 0
+          }
+          var aa = {}
+          sub_range['children'].forEach(function (item) {
+            if(item.value == i) {
+              aa = item
+              return
+            }
+          })
+          obj.name = aa.label;
+          obj.count = data[i]['high_risk_count'];
+          arr.push(obj)
         }
-        obj.name = i;
-        obj.count = data[i]['high_risk_count'];
-        arr.push(obj)
+      } else if (this.$store.state.get_login.masking == false) {
+        for (var i in data) {
+          let obj = {
+            name: '',
+            count: 0
+          }
+          obj.name = i;
+          obj.count = data[i]['high_risk_count'];
+          arr.push(obj)
+        }
       }
       arr.sort(this.sortNumber('count', true))
       bar_option3["dataset"]["source"] = arr
@@ -53,65 +82,24 @@ export default {
     this.drawBarChart()
   },
   mounted() {
-    // document.getElementById('map_2').style.display = 'none'
-    // document.getElementById('map_5').style.display = 'block'
-    // this.map = this.loadMap();//加载地图
-    // let m = document.getElementById("map_5")
-    // this.map_width = window.getComputedStyle(m).width
-    // this.map_height = window.getComputedStyle(m).height
-    //
-    // this.svg = d3.select(this.$el).select('svg');
-    // // this.svg = d3.select(this.map.getPanes().overlayPane).append("svg");
-    //
-    // let _this = this;
-    // this.map.on('drag', (e) => {
-    //   let center_position = this.map.latLngToContainerPoint([22, 107]);
-    //
-    //   if (this.locContainers) {
-    //     this.locContainers.each(function (d) {
-    //       let loc = _this.map.latLngToContainerPoint(d.locs)
-    //       d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
-    //     })
-    //   }
-    // });
-    //
-    // this.map.on('move', (e) => {
-    //   let center_position = this.map.latLngToContainerPoint([22, 107]);
-    //   if (this.locContainers) {
-    //     this.locContainers.each(function (d) {
-    //       let loc = _this.map.latLngToContainerPoint(d.locs)
-    //       d3.select(this).attr('transform', 'translate(' + [loc.x, loc.y] + ')');
-    //     })
-    //   }
-    // });
-
     this.drawBarChart();
   },
   methods: {
     drawBarChart() {
       this.$nextTick(_ => {
-        if (this.getNumberHistogram.length != 0) {
-          this.myChart = this.$echarts.init(document.getElementById('number_histogram'))
-          // 使用刚指定的配置项和数据显示图表。
-          this.myChart.setOption(bar_option3);
-          this.myChart.resize();
-
-          this.doResize = () => {
-            if (this.myChart) {
-              this.myChart.resize();
-            }
+        let showed = this.getNumberHistogram.length ? false : true
+        bar_option3["title"]["show"] = showed
+        // if (this.getNumberHistogram.length != 0) {
+        this.myChart = this.$echarts.init(document.getElementById('number_histogram'))
+        // 使用刚指定的配置项和数据显示图表。
+        this.myChart.setOption(bar_option3);
+        this.myChart.resize();
+        this.doResize = () => {
+          if (this.myChart) {
+            this.myChart.resize();
           }
-          window.addEventListener("resize", this.doResize);
-          const _this = this;
-        } else if ('number_histogram') {
-          this.$nextTick(() => {
-            this.myChart = document.getElementById('number_histogram')
-            this.myChart.innerHTML = '暂无数据'
-            this.myChart.style.color = '#ffffff'
-            this.myChart.style.fontSize = '14px'
-            this.myChart.removeAttribute("_echarts_instance_")
-          })
         }
+        window.addEventListener("resize", this.doResize);
       })
     },
     fontSize(res) {
@@ -121,73 +109,6 @@ export default {
       let fontSize = 100 * (clientWidth / 1920);
       return res * fontSize;
     },
-    // loadMap() {//加载地图
-    //   this.map = L.map("map_5", {
-    //     center: [34, 107], // 地图中心
-    //     zoom: 4, //缩放比列
-    //     zoomControl: false, //禁用 + - 按钮
-    //     // doubleClickZoom: false, // 禁用双击放大
-    //     attributionControl: false // 移除右下角leaflet标识
-    //   });
-    //   let name = L.tileLayer(
-    //       // 'https://api.mapbox.com/styles/v1/zhaiyzh/ckes4nsma2yls19op279otef9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhhaXl6aCIsImEiOiJja2VyeWYzNTYwbHB1MnhzYTV0Z3didG1hIn0.forlrmKVYKXTsyP7voWu9Q'
-    //       "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",//初始化一个 openlayers 地图
-    //       // 天地图影像图层
-    //   ).addTo(this.map);
-    //   let p_data = this.$store.state.get_login.position
-    //   // add a polygon
-    //   // console.log("检查",p_data)
-    //   let color = ['green', 'yellow', 'red', 'white','black']
-    //   // for (let i = 0; i < p_data.length; i++) {
-    //   //   var polygon = L.polygon(p_data[i], {
-    //   //     color: color[i%5],
-    //   //     fillColor: '#f03',
-    //   //     fillOpacity: 0.5
-    //   //   }).addTo(this.map);
-    //   // }
-    //   for (let i = 0; i < p_data.length; i++) {
-    //     for (let j = 0; j < p_data[i].length; j++) {
-    //       L.marker([p_data[i][j][0], p_data[i][j][1]]).addTo(this.map);
-    //     }
-    //   }
-    //   // for (let i = 0; i < this.arr.length; i++) {
-    //   //   L.marker([this.arr[i].lat, this.arr[i].lng]).addTo(this.map);
-    //   //
-    //   // }
-    //   // this.map.panTo(new L.LatLng(40.737, -73.923));
-    //   let myChart = this.$echarts.init(document.getElementById('index_chart'))
-    //   let _this = this
-    //   myChart.on('click', function (params) {
-    //     // console.log(params.data)
-    //     let param1 = new URLSearchParams();
-    //     param1.append('check_code', (params.data.name))
-    //     _this.$store.state.get_check.params = param1
-    //     _this.$store.dispatch('get_headquarter/getInitRectification')
-    //     _this.$store.dispatch('get_headquarter/getInitRiskLevelData')
-    //     _this.$store.dispatch('get_headquarter/getInitRiskNumberRank')
-    //     _this.$store.dispatch('get_headquarter/getInitImage')
-    //     _this.$store.dispatch('get_headquarter/getInitNumberTop')
-    //     _this.$store.dispatch('get_headquarter/getInitRiskList')
-    //     _this.$store.dispatch('get_headquarter/getInitRiskIndexData')
-    //     let head = document.getElementById('head_part');
-    //     head.style.display = 'none'
-    //     let region = document.getElementById('region_part');
-    //     let prj = document.getElementById('prj_part');
-    //     prj.style.display = 'block'
-    //     let check = document.getElementById('check_part');
-    //     check.style.display = 'block'
-    //     // check.style.width = "500px"
-    //     // check.style.width = "99%"
-    //     document.getElementById('map_2').style.display = 'none'
-    //     document.getElementById('map_1').style.display = 'block'
-    //     _this.map.setZoom(12)
-    //     setTimeout(function () {
-    //       _this.map.panTo(new L.LatLng(params.data.lat, params.data.lng));
-    //     }, 300)
-    //   })
-    //
-    //   return this.map
-    // },
     sortNumber(attr, rev) {
       if (rev == undefined) {
         rev = 1;

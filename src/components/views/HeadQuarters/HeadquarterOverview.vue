@@ -155,7 +155,7 @@ export default {
   },
   methods: {
     intoHeadDataScreen() {
-      let queryJson = JSON.stringify(this.$store.state.get_headquarter.head_name)
+      let queryJson = JSON.stringify({head_name: this.$store.state.get_headquarter.head_name, masking: this.$store.state.get_login.masking})
       this.$router.push({
         path: `/new_head_screen`,
         query: {queryJson: queryJson}

@@ -8,7 +8,7 @@
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 0px; top: 25%;">
         <div class="title" style="width: 6.8rem; height: 0.7rem; font-size: 0.4rem;">
-          {{ head_name }}总部隐患大屏
+          {{ head_title }}总部隐患大屏
         </div>
       </div>
       <div class="absolute-layer" style="width: 6.8rem; height: 0.7rem; left: 19.5rem; top: 25%;">
@@ -133,7 +133,9 @@ export default {
       renderSign6: false,
       stageLegend: [],
       stageyAxis: [],
-      head_name: ""
+      head_name: "",
+      head_title: "",
+      masking: false
     }
   },
   methods: {
@@ -198,16 +200,16 @@ export default {
           && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
       var isChrome = userAgent.indexOf("Chrome") > -1
           && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
-      if(isIE) {
+      if (isIE) {
         window.history.back(-1);
-      }else if(isEdge) {
+      } else if (isEdge) {
         window.history.back(-1);
-      }else if(isFF) {
+      } else if (isFF) {
         history.back()
         return false
-      }else if(isChrome) {
+      } else if (isChrome) {
         window.history.back(-1);
-      }else if(isSafari) {
+      } else if (isSafari) {
         window.history.back(-1);
       }
     }
@@ -279,15 +281,40 @@ export default {
       for (let i in data) {
         len++
       }
-      for (let i = 0; i < len; i++) {
-        for (let j in data) {
-          let obj = {
+      debugger
+      // 判断数据是否需要脱敏
+      if (this.masking == true) {
+        var range = this.$store.state.get_login.hide_tag
+        var value = this.head_name.value
+        var sub_range = {}
+        range.forEach(function (item) {
+          if (item.value == value) {
+            sub_range = item
+            return
+          }
+        })
+      }
+      for (var i = 0; i < len; i++) {
+        for (var j in data) {
+          var obj = {
             count: 0,
             name: "",
           }
           if (i == data[j].rank) {
+            // 判断是否需要脱敏
+            if (this.masking == true) {
+              var aa = {}
+              sub_range['children'].forEach(function (item) {
+                if (item.value == j) {
+                  aa = item
+                  return
+                }
+              })
+              obj.name = aa.label;
+            }else if (masking == false) {
+              obj.name = j
+            }
             obj.count = data[j].appear_time
-            obj.name = j
             arr.push(obj)
           }
         }
@@ -464,9 +491,11 @@ export default {
           this.show = false
         }
         let queryJson = JSON.parse(route.query.queryJson)
-        this.head_name = queryJson.label
+        this.masking = queryJson.masking
+        this.head_title = queryJson.head_name.label
+        this.head_name = queryJson.head_name
         let param = new URLSearchParams();
-        param.append('headquarter_name', queryJson.value);
+        param.append('headquarter_name', queryJson.head_name.value);
         this.$store.commit('get_screen/changeParams', {params: param})
         this.$store.dispatch('get_screen/getHeadScreenRiskNumber')
         this.$store.dispatch('get_screen/getHeadScreenRiskNumberRank')
@@ -476,22 +505,10 @@ export default {
         this.$store.dispatch('get_screen/getHeadScreenAreaNumber')
         this.$store.dispatch('get_screen/getHeadScreenTable')
         this.$store.dispatch('get_screen/getProvinceInfo')
+        this.$store.dispatch('get_login/getHideTag')
       },
       immediate: true
     }
-  },
-  created() {
-    // let param = new URLSearchParams();
-    // param.append('headquarter_name', this.$store.state.get_headquarter.head_name);
-    // // param.append('headquarter_name', "华润置地");
-    // this.$store.commit('get_screen/changeParams', {params: param})
-    // this.$store.dispatch('get_screen/getHeadScreenRiskNumber')
-    // this.$store.dispatch('get_screen/getHeadScreenRiskNumberRank')
-    // this.$store.dispatch('get_screen/getHeadScreenMajorNumber')
-    // this.$store.dispatch('get_screen/getHeadScreenCheckNumberRank')
-    // this.$store.dispatch('get_screen/getHeadScreenMajorStageInfo')
-    // this.$store.dispatch('get_screen/getHeadScreenAreaNumber')
-    // this.$store.dispatch('get_screen/getHeadScreenTable')
   },
   beforeDestroy() {
     clearInterval(this.timer)
