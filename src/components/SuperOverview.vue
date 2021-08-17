@@ -10,7 +10,7 @@
           <div style="height: 100%;">
            <span
                style="font-size: 0.4rem; color: #18bff0; top:30%; right:2rem; position: absolute; font-family: 'Microsoft YaHei'">
-              {{ nowTime }} {{maskData}}
+              {{ nowTime }}
            </span>
           </div>
         </el-col>
@@ -28,25 +28,24 @@
          style="width: 17.1%; left: 12.7%; top: 41.4%; z-index: 99; position: absolute;"/>
     <img id="img2_bg" :src="imgSrc2" @click="enterHead" alt=""
          style="width: 17.1%; left: 31.3%; top: 44%; z-index: 1; position: absolute;"/>
-    <!--    <el-button round size="mini" @click="doMasking" style="position: absolute; z-index: 999;top: 72%; left: 44.5%">脱敏</el-button>-->
-    <el-radio-group v-model="radio" style="position: absolute; z-index: 999;top: 70.5%; left: 35.8%; color: #000000">
-      <el-radio :label="1">脱敏</el-radio>
-      <el-radio :label="2">正常</el-radio>
-    </el-radio-group>
-<!--    <el-dropdown @command="handleCommand" v-if="show" style="z-index: 2">-->
-<!--      <el-button style="background-image: url(../assets/data_vis.png);-->
-<!--left:-4.5rem; top:2.8rem;-->
-<!--width: 330px;height: 353px;background-repeat:no-repeat ;-->
-<!--background-size:330px 353px; border: 0;-->
-<!--background-color: transparent;-->
-<!--position: absolute">-->
-<!--      </el-button>-->
-<!--      <el-dropdown-menu slot="dropdown">-->
-<!--        <el-dropdown-item v-for="(item, i) in mask_arr-->
-<!--" :command="item" @click="enterHead">{{ item.value }}-->
-<!--        </el-dropdown-item>-->
-<!--      </el-dropdown-menu>-->
-<!--    </el-dropdown>-->
+<!--    <el-radio-group v-model="radio" style="position: absolute; z-index: 999;top: 70.5%; left: 35.8%; color: #000000">-->
+<!--      <el-radio :label="1">脱敏</el-radio>-->
+<!--      <el-radio :label="2">正常</el-radio>-->
+<!--    </el-radio-group>-->
+    <el-dropdown @command="handleCommand" v-if="show" style="position: absolute; left:11.5rem; top:5.3rem; z-index: 2">
+      <el-button style="background-image: url(../assets/data_vis.png);
+       left: -4.5rem;
+width: 330px;height: 353px;background-repeat:no-repeat;
+background-size:330px 353px; border: 0;
+background-color: transparent;
+position: absolute">
+      </el-button>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item v-for="(item, i) in mask_arr
+" :command="item" @click="enterHead">{{ item }}
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
 <!--    <el-dropdown @command="handleCommand" v-if="!show" style="z-index: 2">-->
 <!--      <el-button style="background-image: url(../assets/data_vis.png);-->
 <!--left:-4.5rem; top:2.8rem;-->
@@ -85,7 +84,7 @@ export default {
       doStorage: null,
       radio: 2,
       show: true,
-      mask_arr: [],
+      mask_arr: ["脱敏", "正常"],
     }
   },
   mounted() {
@@ -99,15 +98,6 @@ export default {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
-  },
-  computed: {
-    maskData() {
-      this.mask_arr = []
-      let data = this.$store.state.get_login.hide_tag
-      for(var i in data) {
-        this.mask_arr.push(data[i])
-      }
-    }
   },
   watch: {
     radio(value) {
@@ -126,8 +116,7 @@ export default {
     enterDB() {
       window.location.href = 'http://124.71.45.84:8085';//数据库可视化系统的
     },
-    enterHead() {
-      // 根据radio判断是否需要脱敏，radio为1-》需要脱敏，radio为2-》取消脱敏
+    enterHead(value){
       let data = {
         label: "华润置地",
         value: "华润置地",
@@ -136,8 +125,12 @@ export default {
       let node = {
         level: 1
       }
-      if(this.radio == 1) {
+      // 根据radio判断是否需要脱敏，radio为1-》需要脱敏，radio为2-》取消脱敏
+      if(value == "脱敏") {
         data.label = "HR"
+        this.$store.commit('get_login/changeMasking', {param: true})
+      } else if(value == "正常") {
+        this.$store.commit('get_login/changeMasking', {param: false})
       }
       //总部名称也需要封装
       this.$store.commit('get_headquarter/changeHeadName', {head_name: data})
