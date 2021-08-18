@@ -45,6 +45,11 @@ export default {
     }
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       let arr = this.pie_data
       let pie_option = {
@@ -102,11 +107,6 @@ export default {
       }
       this.myChart.setOption(pie_option);
 
-      this.doResize = () => {
-        if (this.myChart) {
-          this.myChart.resize();
-        }
-      }
       window.addEventListener("resize", this.doResize);
     },
     fontSize(res) {
@@ -124,7 +124,7 @@ export default {
     this.rosePie = this.$refs.rosePie;
     this.myChart = this.$echarts.init(this.rosePie)
 
-    this.drawBarChart()
+    // this.drawBarChart()
 
     this.timer = setInterval(() => {
       var option1 = this.myChart.getOption();

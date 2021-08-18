@@ -47,14 +47,20 @@ export default {
       value: '全部专业',
       option: '',
       myChart: null,
-      doResize: null
+      arr: [],
+      renderSign: false,
     }
   },
   props: ['context'],
   methods: {
+    doResize() {
+      if (this.myChart != null) { // 如果不存在，就进行初始化
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       this.$nextTick(_ => {
-        let arr = this.getData
+        let arr = this.arr
         let _this = this
         pie_option["series"][0]["data"] = arr
         pie_option["legend"]["formatter"] = function (params) {
@@ -98,12 +104,6 @@ export default {
             }
           }
 
-          this.myChart.resize();
-          this.doResize = () => {
-            if (this.myChart != null) { // 如果不存在，就进行初始化
-              this.myChart.resize();
-            }
-          }
           window.addEventListener("resize", this.doResize);
         } else if (this.context.id) {
           this.$nextTick(() => {
@@ -237,14 +237,17 @@ export default {
       if (obj.value > 0) {
         new_arr.push(obj)
       }
-      return new_arr
+      this.arr = new_arr
+      this.renderSign = !this.renderSign
     },
   },
-  updated() {
-    this.drawBarChart()
+  watch: {
+    renderSign() {
+      this.drawBarChart()
+    }
   },
   mounted() {
-    this.drawBarChart();
+    this.myChart = this.$echarts.init(document.getElementById(this.context.id))
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.doResize);

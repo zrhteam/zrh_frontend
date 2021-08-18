@@ -47,10 +47,14 @@ export default {
       myChart: null,
       // renderSign: false,
       timer: null,
-      doResize: null
     }
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       let arr = this.riskNumber
       // this.renderSign = true
@@ -103,11 +107,6 @@ export default {
       }
       this.myChart.setOption(pie_option2);
 
-      this.doResize = () => {
-        if (this.myChart) {
-          this.myChart.resize();
-        }
-      }
       window.addEventListener("resize", this.doResize);
     }
   },

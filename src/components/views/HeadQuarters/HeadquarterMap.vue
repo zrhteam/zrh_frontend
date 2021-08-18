@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       chart: null,
-      timer: null
+      timer: null,
     }
   },
   mounted() {
@@ -37,9 +37,7 @@ export default {
     }
   },
   beforeDestroy() {
-    window.removeEventListener("resize", () => {
-      this.chart.resize();
-    });
+    window.removeEventListener("resize", this.doResizeChart);
 
     if (!this.chart) {
       return;
@@ -52,10 +50,20 @@ export default {
     clearTimeout(this.timer)
   },
   methods: {
+    doResizeChart() {
+      if(this.chart != null) {
+        this.chart.resize("auto", "auto")
+      }
+    },
+    // doResizeMyChart(myChart) {
+    //   if(myChart != null) {
+    //     myChart.resize("auto", "auto")
+    //   }
+    // },
     chinaConfigure() {
       // let myChart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
       this.chart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
-      window.onresize = this.chart.resize("auto", "auto");
+      window.addEventListener("resize", this.doResizeChart);
 
       initEcharts("china", this.chart);
 
@@ -117,9 +125,7 @@ export default {
           },
           series,
         })
-        window.addEventListener("resize", () => {
-          myChart.resize();
-        }, {passive: false});
+        // window.addEventListener("resize", this.doResizeMyChart(myChart),{passive: false});
       }
 
       initEcharts("china", this.chart);
@@ -140,7 +146,7 @@ export default {
         }
       });
     },
-  }
+  },
 }
 </script>
 

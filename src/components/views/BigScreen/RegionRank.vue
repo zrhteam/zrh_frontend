@@ -41,10 +41,14 @@ export default {
     return {
       rankBar: null,
       myChart: null,
-      doResize: null
     }
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       let arr = this.regionData
       let data = []
@@ -62,90 +66,85 @@ export default {
         max_arr.push(max)
       }
       // if (data.length != 0) {
-        // this.renderSign = true
-        let bar_option3 = {
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'shadow'
+      // this.renderSign = true
+      let bar_option3 = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          },
+          formatter(param) {
+            return param[0].name + ":" + param[0].data
+          }
+        },
+        grid: {
+          left: this.fontSize(0.25),
+          top: this.fontSize(0.25),
+          right: this.fontSize(0.25),
+          bottom: 0,
+          containLabel: true
+        },
+        xAxis: {
+          show: false
+        },
+        yAxis: {
+          data: titlename,
+          axisLine: {
+            lineStyle: {
+              color: '#058ddb',
+              fontSize: this.fontSize(0.08)
             },
-            formatter(param) {
-              return param[0].name + ":" + param[0].data
-            }
-          },
-          grid: {
-            left: this.fontSize(0.25),
-            top: this.fontSize(0.25),
-            right: this.fontSize(0.25),
-            bottom: 0,
-            containLabel: true
-          },
-          xAxis: {
             show: false
           },
-          yAxis: {
-            data: titlename,
-            axisLine: {
-              lineStyle: {
-                color: '#058ddb',
-                fontSize: this.fontSize(0.08)
-              },
-              show: false
-            },
-            axisLabel: {
-              textStyle: {
-                fontSize: this.fontSize(0.10),
-                color: '#ffffff'
-              }
-            },
-            axisTick: {
-              show: false
-            },
-            splitLine: {
-              show: false
+          axisLabel: {
+            textStyle: {
+              fontSize: this.fontSize(0.10),
+              color: '#ffffff'
             }
           },
-
-          series: [{
-            type: 'bar',
-            barMaxWidth: 8,
-            // barMaxWidth: this.fontSize(0.08),
-            itemStyle: {
-              barBorderRadius: 10,
-              color: '#0a73ff'
-            },
-            label: {
-              show: true,
-              formatter: (a) => {
-                return a.count
-              },
-              fontSize: this.fontSize(0.10)
-            },
-            data: data
-          }, {
-            type: 'bar',
-            barGap: '-100%',
-            barMaxWidth: 8,
-            // barMaxWidth: this.fontSize(0.08),
-            itemStyle: {
-              color: 'none',
-              borderColor: '#272020',
-              capacity: 0.1,
-              barBorderRadius: 10,
-            },
-            z: -12,
-            data: max_arr
-          }]
-        };
-
-        this.myChart.setOption(bar_option3);
-
-        this.doResize = () => {
-          if (this.myChart) {
-            this.myChart.resize();
+          axisTick: {
+            show: false
+          },
+          splitLine: {
+            show: false
           }
-        }
-        window.addEventListener("resize", this.doResize);
+        },
+
+        series: [{
+          type: 'bar',
+          barMaxWidth: 8,
+          // barMaxWidth: this.fontSize(0.08),
+          itemStyle: {
+            barBorderRadius: 10,
+            color: '#0a73ff'
+          },
+          label: {
+            show: true,
+            formatter: (a) => {
+              return a.count
+            },
+            fontSize: this.fontSize(0.10)
+          },
+          data: data
+        }, {
+          type: 'bar',
+          barGap: '-100%',
+          barMaxWidth: 8,
+          // barMaxWidth: this.fontSize(0.08),
+          itemStyle: {
+            color: 'none',
+            borderColor: '#272020',
+            capacity: 0.1,
+            barBorderRadius: 10,
+          },
+          z: -12,
+          data: max_arr
+        }]
+      };
+
+      this.myChart.setOption(bar_option3);
+
+      window.addEventListener("resize", this.doResize);
       // } else if (data.length == 0) {
       //   this.$nextTick(_ => {
       //     this.rankBar.innerHTML = '暂无数据'
@@ -169,7 +168,7 @@ export default {
     }
     this.rankBar = this.$refs.rankBar;
     this.myChart = this.$echarts.init(this.rankBar)
-    this.drawBarChart()
+    // this.drawBarChart()
   },
   watch: {
     regionData() {

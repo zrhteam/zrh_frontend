@@ -35,13 +35,19 @@ export default {
     }
   },
   methods: {
+    doResizeChart() {
+      if(this.chart != null) {
+        this.chart.resize("auto", "auto")
+      }
+    },
     returnCountry() {
       this.$options.methods.chinaConfigure();
     },
     chinaConfigure() {
       // let myChart = echarts.init(this.$refs.map_5); //这里是为了获得容器所在位置
       this.chart = echarts.init(document.getElementById("map")); //这里是为了获得容器所在位置
-      window.onresize = this.chart.resize("auto", "auto");
+
+      window.addEventListener("resize", this.doResizeChart);
 
       initEcharts("china", this.chart);
 
@@ -120,18 +126,13 @@ export default {
           },
           series,
         })
-        window.addEventListener("resize", () => {
-          myChart.resize();
-        });
       }
 
       initEcharts("china", this.chart);
     },
   },
   beforeDestroy() {
-    window.removeEventListener("resize", () => {
-      this.chart.resize();
-    });
+    window.removeEventListener("resize", this.doResizeChart);
 
     if (!this.chart) {
       return;

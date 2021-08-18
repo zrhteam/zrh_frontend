@@ -53,11 +53,14 @@ export default {
     return {
       rankBar: null,
       myChart: null,
-      // renderSign: false,
-      doResize: null
     }
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       let r_data = []
       let data = []
@@ -188,11 +191,6 @@ export default {
       };
       this.myChart.setOption(option);
 
-      this.doResize = () => {
-        if (this.myChart) {
-          this.myChart.resize();
-        }
-      }
       window.addEventListener("resize", this.doResize);
     },
     fontSize(res) {
@@ -209,7 +207,7 @@ export default {
     }
     this.rankBar = this.$refs.rankBar;
     this.myChart = this.$echarts.init(this.rankBar)
-    this.drawBarChart()
+    // this.drawBarChart()
   },
   watch: {
     stageSdata() {

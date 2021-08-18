@@ -59,7 +59,7 @@ export default {
       pieChart: null,
       timer1: null,
       timer2: null,
-      timer3: null
+      timer3: null,
     }
   },
   watch: {
@@ -117,6 +117,16 @@ export default {
     }
   },
   methods: {
+    resizeBarChart() {
+      if(this.barChart != null) {
+        this.barChart.resize();
+      }
+    },
+    resizePieChart() {
+      if(this.pieChart != null) {
+        this.pieChart.resize();
+      }
+    },
     drawChart(arr) {
       // let arr = this.CarouselCardData[0]
       let series = []
@@ -197,9 +207,7 @@ export default {
       //   },
       // }
       this.barChart.setOption(bar_option);
-      window.addEventListener("resize", () => {
-        this.barChart.resize();
-      });
+      window.addEventListener("resize", this.resizeBarChart);
 
       let pie_option = {
         legend: {
@@ -261,9 +269,7 @@ export default {
       //   },
       // }
       this.pieChart.setOption(pie_option);
-      window.addEventListener("resize", () => {
-        this.pieChart.resize();
-      });
+      window.addEventListener("resize", this.resizePieChart);
 
     },
     fontSize(res) {
@@ -386,13 +392,9 @@ export default {
     clearInterval(this.timer1)
     clearInterval(this.timer2)
     clearTimeout(this.timer3)
-    window.removeEventListener("resize", () => {
-      this.barChart.resize();
-    });
+    window.removeEventListener("resize", this.resizeBarChart);
 
-    window.removeEventListener("resize", () => {
-      this.pieChart.resize();
-    });
+    window.removeEventListener("resize", this.resizePieChart);
 
     if (!this.barChart) {
       return;

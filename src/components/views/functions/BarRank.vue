@@ -37,7 +37,8 @@ export default {
       option: '',
       barEchartContainer: null,
       myChart: null,
-      doResize: null,
+      arr: [],
+      renderSign: false
     }
   },
   methods: {
@@ -48,8 +49,13 @@ export default {
       let fontSize = 100 * (clientWidth / 1920);
       return res * fontSize;
     },
+    doResize() {
+      if (this.myChart != null) { // 如果不存在，就进行初始化
+          this.myChart.resize();
+        }
+    },
     drawBarChart() {
-      let arr = this.getData
+      let arr = this.arr
       arr.sort(this.sortNumber('count', true))
       if (this.myChart == null || this.myChart == "" || this.myChart == undefined) {
         this.barEchartContainer = this.$refs.barEchartContainer;
@@ -79,11 +85,6 @@ export default {
         this.myChart.setOption(bar_option);
       }
       this.myChart.resize();
-      this.doResize = () => {
-        if (this.myChart != null) { // 如果不存在，就进行初始化
-          this.myChart.resize();
-        }
-      }
       window.addEventListener("resize", this.doResize);
     },
     // filterMajor(value) {
@@ -278,16 +279,22 @@ export default {
           this.option = this.$store.state.get_region.all_majors
         }
       }
-      return arr
+      this.renderSign = !this.renderSign
+      this.arr = arr
     },
   },
-  updated() {
-    this.drawBarChart()
-  },
+  // updated() {
+  //   this.drawBarChart()
+  // },
   mounted() {
     this.barEchartContainer = this.$refs.barEchartContainer;
     this.myChart = this.$echarts.init(this.barEchartContainer)
     // this.drawBarChart()
+  },
+  watch: {
+    renderSign() {
+      this.drawBarChart()
+    }
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.doResize);

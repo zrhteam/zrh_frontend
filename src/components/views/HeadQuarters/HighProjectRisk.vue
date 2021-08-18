@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       myChart: null,
-      doResize: null
     }
   },
   computed: {
@@ -53,7 +52,7 @@ export default {
           }
           var aa = {label: i}
           sub_range['children'].forEach(function (item) {
-            if(item.value == i) {
+            if (item.value == i) {
               aa = item
               return
             }
@@ -85,6 +84,11 @@ export default {
     this.drawBarChart();
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       this.$nextTick(_ => {
         let showed = this.getNumberHistogram.length ? false : true
@@ -94,11 +98,6 @@ export default {
         // 使用刚指定的配置项和数据显示图表。
         this.myChart.setOption(bar_option3);
         this.myChart.resize();
-        this.doResize = () => {
-          if (this.myChart) {
-            this.myChart.resize();
-          }
-        }
         window.addEventListener("resize", this.doResize);
       })
     },

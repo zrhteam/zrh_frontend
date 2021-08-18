@@ -46,11 +46,15 @@ export default {
       s_data: [],
       myChart: null,
       renderSign: false,
-      doResize: null
     }
   },
   props: ['context'],
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       let data = []
       let r_data = []
@@ -175,11 +179,6 @@ export default {
         };
         // if (arr.length != 0) {
         this.myChart.setOption(option);
-        this.doResize = () => {
-          if (this.myChart) {
-            this.myChart.resize();
-          }
-        }
         window.addEventListener("resize", this.doResize);
       } else if (data.length == 0) {
         this.$nextTick(() => {
@@ -364,9 +363,6 @@ export default {
       this.renderSign = !this.renderSign
     },
   },
-  // updated() {
-  //   this.drawBarChart()
-  // },
   mounted() {
     if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
       this.myChart.dispose() // 销毁

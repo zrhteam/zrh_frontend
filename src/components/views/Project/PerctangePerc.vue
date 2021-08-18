@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {bar_option, bar_option3, pie_option} from "@/utils/constants.js";
+import {pie_option} from "@/utils/constants.js";
 
 export default {
   name: "ProjPercentage",
@@ -54,36 +54,34 @@ export default {
       myChart: null,
       renderSign: false,
       pie_data: [],
-      doResize: null
     }
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       let arr = this.pie_data
       // if (arr.length != 0) {
-        this.echartContainer = this.$refs.echartContainer;
-        this.myChart = this.$echarts.init(this.echartContainer)
-        let showed = arr.length ? false : true
-        pie_option["title"]["show"] = showed
-        pie_option['series'][0]['data'] = this.pie_data
-        pie_option["legend"]["formatter"] = function (params) {
-          var legendIndex = 0;
-          arr.forEach(function (v, i) {
-            if (v.name == params) {
-              legendIndex = i;
-            }
-          });
-          return params + " " + arr[legendIndex].value;
-        }
-        this.myChart.setOption(pie_option);
-        // this.myChart.resize();
-
-        this.doResize = () => {
-          if (this.myChart) {
-            this.myChart.resize();
+      this.echartContainer = this.$refs.echartContainer;
+      this.myChart = this.$echarts.init(this.echartContainer)
+      let showed = arr.length ? false : true
+      pie_option["title"]["show"] = showed
+      pie_option['series'][0]['data'] = this.pie_data
+      pie_option["legend"]["formatter"] = function (params) {
+        var legendIndex = 0;
+        arr.forEach(function (v, i) {
+          if (v.name == params) {
+            legendIndex = i;
           }
-        }
-        window.addEventListener("resize", this.doResize);
+        });
+        return params + " " + arr[legendIndex].value;
+      }
+      this.myChart.setOption(pie_option);
+      // this.myChart.resize();
+      window.addEventListener("resize", this.doResize);
       // } else if (arr.length == 0) {
       //   this.$nextTick(() => {
       //     this.echartContainer.innerHTML = '暂无数据'

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import {line_option, bar_option2, bar_option} from "@/utils/constants";
+import {bar_option} from "@/utils/constants";
 
 export default {
   name: "RiskLevelYear",
@@ -54,10 +54,14 @@ export default {
       year: '',
       year_option: [],
       year_copy: '',
-      doResize: null
     }
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       window.addEventListener("resize", this.doResize);
       if (this.bar_data.length != 0) {
@@ -66,11 +70,6 @@ export default {
         this.myChart = this.$echarts.init(this.echartContainer)
         bar_option["dataset"][0]["source"] = this.bar_data
         this.myChart.setOption(bar_option);
-        this.doResize = () => {
-          if (this.myChart) {
-            this.myChart.resize();
-          }
-        }
       } else if (this.bar_data.length == 0) {
         this.$nextTick(() => {
           const dom = this.$refs.echartContainer

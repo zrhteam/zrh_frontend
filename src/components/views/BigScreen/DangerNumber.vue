@@ -49,10 +49,14 @@ export default {
       myChart: null,
       // renderSign: false,
       risk_num: 0,
-      doResize: null
     }
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
       let arr = this.dangerData.arr_num
       this.risk_num = this.dangerData.sum
@@ -148,11 +152,6 @@ export default {
 
       this.myChart.setOption(bar_option);
 
-      this.doResize = () => {
-        if (this.myChart) {
-          this.myChart.resize();
-        }
-      }
       window.addEventListener("resize", this.doResize);
     },
     fontSize(res) {
@@ -169,7 +168,7 @@ export default {
     }
     this.dangerNumBar = this.$refs.dangerNumBar;
     this.myChart = this.$echarts.init(this.dangerNumBar)
-    this.drawBarChart()
+    // this.drawBarChart()
   },
   watch: {
     dangerData() {
