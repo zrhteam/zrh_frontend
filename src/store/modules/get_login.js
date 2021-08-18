@@ -98,7 +98,7 @@ const mutations = {
         state.now_node = data.params
     },
     changeExpandedKeys(state, data) {
-        state.expandedKeys = data.params
+        state.expandedKeys = data.param
     },
 //    查询该用户下的授权数据
     changeGrantInfo(state, data) {

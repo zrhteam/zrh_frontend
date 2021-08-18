@@ -102,8 +102,10 @@ export default {
       if(value == "A") {
         data.label = "HR"
         this.$store.commit('get_login/changeMasking', {param: true})
+        this.$store.commit('get_login/changeExpandedKeys', {param: []})
       } else if(value == "B") {
         this.$store.commit('get_login/changeMasking', {param: false})
+        this.$store.commit('get_login/changeExpandedKeys', {param: []})
       }
       //总部名称也需要封装
       this.$store.commit('get_headquarter/changeHeadName', {head_name: data})

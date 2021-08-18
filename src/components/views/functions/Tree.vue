@@ -91,7 +91,9 @@ export default {
       expandedKeys: this.$store.state.get_login.expandedKeys,
       keys: this.$store.state.get_login.expandedKeys,
       currentNodeKey: '',
-      show: true // true表示未脱敏，false表示已脱敏
+      show: true, // true表示未脱敏，false表示已脱敏
+      count: 0,
+      first_id: 1
     };
   },
   watch: {
@@ -100,6 +102,48 @@ export default {
     },
     currentNodeKey(id) {
       this.$refs.modelTree.setCurrentKey(id);
+    },
+    data: {
+      handler() {
+        if (this.$store.state.get_login.grant_data.data.user_grant == "超级用户") {
+          if (this.$store.state.get_login.expandedKeys.length == 0) {
+            if (this.count == 0) {
+              if (this.$store.state.get_login.masking == false) {
+                this.expandedKeys.push(34)
+                this.$refs.modelTree.setCurrentKey(34);
+              } else if (this.$store.state.get_login.masking == true) {
+                this.expandedKeys.push(708)
+                this.$refs.modelTree.setCurrentKey(708);
+              }
+              this.count = 1
+            }
+          }
+        } else if (this.$store.state.get_login.grant_data.data.user_grant == "总部") {
+          if (this.$store.state.get_login.expandedKeys == undefined || this.$store.state.get_login.expandedKeys.length == 0) {
+            if (this.count == 0) {
+              this.expandedKeys.push(this.first_id)
+              this.$refs.modelTree.setCurrentKey(this.first_id);
+              this.count = 1
+            }
+          }
+        } else if (this.$store.state.get_login.grant_data.data.user_grant == "区域") {
+          if (this.$store.state.get_login.expandedKeys == undefined || this.$store.state.get_login.expandedKeys.length == 0) {
+            if (this.count == 0) {
+              this.expandedKeys.push(this.first_id)
+              this.$refs.modelTree.setCurrentKey(this.first_id);
+              this.count = 1
+            }
+          }
+        } else if (this.$store.state.get_login.grant_data.data.user_grant == "项目") {
+          if (this.$store.state.get_login.expandedKeys == undefined || this.$store.state.get_login.expandedKeys.length == 0) {
+            if (this.count == 0) {
+              this.expandedKeys.push(this.first_id)
+              this.$refs.modelTree.setCurrentKey(this.first_id);
+              this.count = 1
+            }
+          }
+        }
+      }
     }
   },
   methods: {
@@ -121,12 +165,7 @@ export default {
           parent1['value'] = i
           arr.push(parent1)
           if (this.user_grant === '总部') {
-            let temp_arr = this.expandedKeys
-            if (!temp_arr.includes(parent1.id)) {
-              temp_arr.push(parent1.id)
-            }
-            this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
-            this.expandedKeys = this.$store.state.get_login.expandedKeys
+            this.first_id = parent1.id
           }
           for (var j in tree_data['headquarter_tag'][i]['region_tag']) {
             let parent2 = {
@@ -140,10 +179,7 @@ export default {
             parent2['label'] = j
             parent2['value'] = j
             if (this.user_grant === '区域') {
-              let temp_arr = this.expandedKeys
-              temp_arr.push(parent2.id)
-              this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
-              this.expandedKeys = this.$store.state.get_login.expandedKeys
+              this.first_id = parent2.id
             }
             for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
               let child1 = {
@@ -156,6 +192,9 @@ export default {
               child1['id'] = count++
               child1['label'] = k
               child1['value'] = k
+              if (this.user_grant === '项目') {
+                this.first_id = child1.id
+              }
               for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
                 for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
                   let child2 = {
@@ -168,12 +207,6 @@ export default {
                   child2['label'] = m
                   child2['value'] = m
                   child1['children'].push(child2)
-                  if (this.user_grant === '项目') {
-                    let temp_arr = this.expandedKeys
-                    temp_arr.push(child2.id)
-                    this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
-                    this.expandedKeys = this.$store.state.get_login.expandedKeys
-                  }
                 }
               }
               parent2['children'].push(child1)
@@ -192,10 +225,7 @@ export default {
             parent2['label'] = j
             parent2['value'] = j
             if (this.user_grant === '项目') {
-              var temp_arr = this.expandedKeys
-              temp_arr.push(parent2.id)
-              this.$store.commit('get_login/changeExpandedKeys', {params: temp_arr})
-              this.expandedKeys = this.$store.state.get_login.expandedKeys
+              this.first_id = parent2.id
             }
             for (var k in tree_data['headquarter_tag'][i]['project_tag'][j]) {
               for (var l in tree_data['headquarter_tag'][i]['project_tag'][j][k]) {
@@ -215,7 +245,7 @@ export default {
           }
         }
         this.data = arr
-      } else if(this.$store.state.get_login.masking == true) {
+      } else if (this.$store.state.get_login.masking == true) {
         // 需要脱敏的情况
         this.data = this.$store.state.get_login.hide_tag
       }
@@ -230,7 +260,6 @@ export default {
       // this.getTreeData(this.treeObj1)
       // 点击了一个节点，
       let temp_arr = this.keys
-      // console.log("start", this.keys)
       let last_node = 0
       // 第一次点击节点
       if (temp_arr.length == 0) {
@@ -263,8 +292,6 @@ export default {
           this.$refs.modelTree.store.nodesMap[node.parent.data.id].expanded = true;
         }
       }
-      // this.expandedKeys = temp_arr
-      // this.$store.commit('get_login/changeExpandedKeys', {params: this.expandedKeys})
       for (let i in temp_arr) {
         this.$refs.modelTree.store.nodesMap[temp_arr[i]].expanded = true;
       }
@@ -276,10 +303,7 @@ export default {
       for (let i in child_node) {
         this.$refs.modelTree.store.nodesMap[child_node[i]].expanded = false;
       }
-      // this.$refs.modelTree.getCurrentKey()
-      // this.$refs.modelTree.getCurrentNode()
       this.keys = temp_arr
-      // console.log("end", this.keys)
 
       this.$nextTick(function () {
         this.$refs.modelTree.setCurrentKey(null);
@@ -290,15 +314,11 @@ export default {
     handleCheck(a, b) {
       this.$emit('handleCheck', a, b, this.$refs.modelTree.getNode(a.id).level)
     },
-    // treeExpand(data, node, self) {
-    //   this.nodeClick(data, node)
-    // }
   },
   updated() {
     this.currentNodeKey = this.$store.state.get_login.now_node
   },
   created() {
-    // console.log("区域", this.$store.state.get_login.grant_data.data)
     this.getTreeData(this.treeObj1)
     this.currentNodeKey = this.$store.state.get_login.now_node
     // 检查脱敏状态
@@ -421,7 +441,7 @@ el-input::-ms-input-placeholder {
 }
 
 /deep/ .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
-  color: #000;
+  /*color: #000;*/
   background-color: #969696 !important;
 }
 
