@@ -104,6 +104,7 @@ export default {
         data.push(obj)
       }
       if (data.length != 0) {
+        document.getElementById(this.context.id).style.top = '0%'
         this.myChart = this.$echarts.init(document.getElementById(this.context.id))
         let option = {
           tooltip: {
@@ -184,8 +185,12 @@ export default {
         this.$nextTick(() => {
           const dom = document.getElementById(this.context.id)
           dom.innerHTML = '暂无数据'
-          dom.style.color = '#ffffff'
+          dom.style.color = '#999baf'
           dom.style.fontSize = '14px'
+          dom.style.fontSize = '14px'
+          dom.style.display = 'block'
+          dom.style.top = '36%'
+          dom.style.position = 'relative'
           dom.removeAttribute("_echarts_instance_")
         })
       }

@@ -74,57 +74,59 @@
           <!--          <label>数据大屏缩略图</label>-->
           <!--          </el-card>-->
         </el-col>
-        <el-row class="el-row" :gutter="10" type="flex" style="height: 60%; margin-top: 0.6rem; padding-left: 0.3rem">
-          <el-col :span="12" class="">
-            <HeadquarterMap :projectInfo="projectInfo"></HeadquarterMap>
-          </el-col>
-          <el-col :span="12" class="">
-            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
-              <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>
+        <el-col :span="22" style="height: 100%">
+          <el-row class="el-row" :gutter="4" type="flex" style="height: 60%; margin-top: 0.6rem; margin-left: 0.3rem">
+            <el-col :span="12" class="">
+              <HeadquarterMap style="padding-left: -10px" :projectInfo="projectInfo"></HeadquarterMap>
             </el-col>
-            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
-              <HighProjectRisk></HighProjectRisk>
-            </el-col>
-            <el-col :span="12" class="" style="height: 50%; padding-top: 0.05rem">
-              <BarRank
-                  :context="{
+            <el-col :span="12" class="">
+              <el-col :span="12" :gutter="4" class="" style="height: 50%; padding-bottom: 0.05rem">
+                <RiskLevelYear :context="{title:'年度隐患数量', id:'head_level_year'}"></RiskLevelYear>
+              </el-col>
+              <el-col :span="12" :gutter="4" class="" style="height: 50%; padding-bottom: 0.05rem">
+                <HighProjectRisk></HighProjectRisk>
+              </el-col>
+              <el-col :span="12" :gutter="4" class="" style="height: 50%; padding-top: 0.05rem">
+                <BarRank
+                    :context="{
           title:'各区域检查次数',
           id: 'id_head_rank1'}"
-              ></BarRank>
-            </el-col>
-            <el-col :span="12" class="" style="height: 50%; padding-top: 0.05rem">
-              <BarRank
-                  :context="{
+                ></BarRank>
+              </el-col>
+              <el-col :span="12" :gutter="4" class="" style="height: 50%; padding-top: 0.05rem">
+                <BarRank
+                    :context="{
           title:'各区域在管项目数量',
           id: 'id_head_rank2'}"
-              ></BarRank>
+                ></BarRank>
+              </el-col>
             </el-col>
-          </el-col>
-          <!--          <HighProjectRisk></HighProjectRisk>-->
-        </el-row>
-        <el-row class="el-row" :gutter="10" type="flex" style="height: 35%; margin-top: 0.2rem; padding-left: 0.3rem">
-          <el-col :span="6" style="height: 100%;">
-            <Ratio
-                :context="{
+            <!--          <HighProjectRisk></HighProjectRisk>-->
+          </el-row>
+          <el-row class="el-row" :gutter="10" type="flex" style="height: 35%; margin-top: 0.2rem; margin-left: 0.3rem">
+            <el-col :span="6" style="height: 100%; padding-left: 10px">
+              <Ratio
+                  :context="{
           title:'不同专业隐患数量',
           id: 'id_head_major',
         }"></Ratio>
-          </el-col>
-          <el-col :span="12" style="height: 100%;">
-            <StackedHorizontalBar
-                :context="{
+            </el-col>
+            <el-col :span="12" style="height: 100%; padding-top: 0.025rem">
+              <StackedHorizontalBar
+                  :context="{
           title:'不同致因阶段隐患数量',
           id: 'id_head_reason'
         }"></StackedHorizontalBar>
-          </el-col>
-          <el-col :span="6" style="height: 100%;">
-            <Ratio
-                :context="{
+            </el-col>
+            <el-col :span="6" style="height: 100%;">
+              <Ratio
+                  :context="{
           title:'不同分布区域隐患数量'+'-'+filter_major,
           id: 'id_head_region'
         }"></Ratio>
-          </el-col>
-        </el-row>
+            </el-col>
+          </el-row>
+        </el-col>
       </el-row>
 
     </el-row>
@@ -155,7 +157,10 @@ export default {
   },
   methods: {
     intoHeadDataScreen() {
-      let queryJson = JSON.stringify({head_name: this.$store.state.get_headquarter.head_name, masking: this.$store.state.get_login.masking})
+      let queryJson = JSON.stringify({
+        head_name: this.$store.state.get_headquarter.head_name,
+        masking: this.$store.state.get_login.masking
+      })
       this.$router.push({
         path: `/new_head_screen`,
         query: {queryJson: queryJson}

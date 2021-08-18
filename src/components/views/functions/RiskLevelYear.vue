@@ -75,7 +75,7 @@ export default {
         this.$nextTick(() => {
           const dom = this.$refs.echartContainer
           dom.innerHTML = '暂无数据'
-          dom.style.color = '#ABA9B6'
+          dom.style.color = '#999baf'
           dom.style.fontSize = '14px'
           dom.style.display = 'block'
           dom.style.top = '36%'

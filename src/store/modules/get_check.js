@@ -277,12 +277,12 @@ const mutations = {
     },
      //一次检查不同专业隐患占比情况
     changeCheckRiskRatio(state, data) {
-        if (data.code === 10000) {
+        // if (data.code === 10000) {
             // console.log('check_不同专业隐患占比', data.data)
             state.check_risk_ratio = data.data
-        } else {
-            alert("出错了")
-        }
+        // } else {
+        //     alert("出错了")
+        // }
     },
     // 考虑基于项目级展示当前未整改高风险隐患图片
     changeCheckHighImage(state, data) {

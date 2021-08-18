@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {bar_option, pie_option} from "@/utils/constants.js";
+import {bar_option, bar_option3, pie_option} from "@/utils/constants.js";
 
 export default {
   name: "ProjPercentage",
@@ -60,9 +60,11 @@ export default {
   methods: {
     drawBarChart() {
       let arr = this.pie_data
-      if (arr.length != 0) {
+      // if (arr.length != 0) {
         this.echartContainer = this.$refs.echartContainer;
         this.myChart = this.$echarts.init(this.echartContainer)
+        let showed = arr.length ? false : true
+        pie_option["title"]["show"] = showed
         pie_option['series'][0]['data'] = this.pie_data
         pie_option["legend"]["formatter"] = function (params) {
           var legendIndex = 0;
@@ -82,14 +84,14 @@ export default {
           }
         }
         window.addEventListener("resize", this.doResize);
-      } else if (arr.length == 0) {
-        this.$nextTick(() => {
-          this.echartContainer.innerHTML = '暂无数据'
-          this.echartContainer.style.color = '#ffffff'
-          this.echartContainer.style.fontSize = '14px'
-          this.echartContainer.removeAttribute("_echarts_instance_")
-        })
-      }
+      // } else if (arr.length == 0) {
+      //   this.$nextTick(() => {
+      //     this.echartContainer.innerHTML = '暂无数据'
+      //     this.echartContainer.style.color = '#ffffff'
+      //     this.echartContainer.style.fontSize = '14px'
+      //     this.echartContainer.removeAttribute("_echarts_instance_")
+      //   })
+      // }
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
