@@ -68,7 +68,6 @@ exports.install = function (Vue, options) {
         this.$router.push({path: `/land_headquarters`, query: {head_name: headquarter_name.value}});
     };
     Vue.prototype.regionNodeClick = function (region_name) {//全局函数2,点击树形控件的区域，查询该区域的大屏信息
-        console.log(region_name)
         let param = new URLSearchParams();
         param.append('region_name', region_name.value);
         this.$store.commit('get_region/changeParams', {params: param})

@@ -143,6 +143,7 @@ export default {
             }
           }
         }
+        // this.$store.commit('get_login/changeExpandedKeys', {param: this.expandedKeys})
       }
     }
   },
@@ -259,11 +260,13 @@ export default {
       // this.expandedKeys.push(data.id)
       // this.getTreeData(this.treeObj1)
       // 点击了一个节点，
-      let temp_arr = this.keys
+      // var temp_arr = this.keys
+      var temp_arr = this.expandedKeys
       let last_node = 0
       // 第一次点击节点
       if (temp_arr.length == 0) {
         temp_arr.push(data.id)
+        // this.$store.commit('get_login/changeExpandedKeys', {param: temp_arr})
         this.$refs.modelTree.store.nodesMap[data.id].expanded = true;
       } else {
         // 如果是重复点击了自身、或是上一节点的父亲/祖父，这些节点已经存在于this.expandedKeys，将数组中该点之后的点全部删除
@@ -286,11 +289,18 @@ export default {
         if (t == temp_arr.length && temp_arr[temp_arr.length - 2] == node.parent.data.id) {
           temp_arr.pop()
           temp_arr.push(data.id)
+          // this.$store.commit('get_login/changeExpandedKeys', {param: temp_arr})
           this.$refs.modelTree.store.nodesMap[last_node].expanded = false;
         } else if (t == temp_arr.length && temp_arr[temp_arr.length - 2] != node.parent.data.id) {// 如果是上一点击节点的孩子，就在[]加入该节点
           temp_arr.push(data.id)
+          // this.$store.commit('get_login/changeExpandedKeys', {param: temp_arr})
           this.$refs.modelTree.store.nodesMap[node.parent.data.id].expanded = true;
         }
+      }
+      //如果用户权限是超级用户，点击的level是1，把数组清空重新赋
+      if(this.$store.state.get_login.grant_data.data.user_grant == "超级用户" && data.level==1) {
+        temp_arr = []
+        temp_arr.push(data.id)
       }
       for (let i in temp_arr) {
         this.$refs.modelTree.store.nodesMap[temp_arr[i]].expanded = true;
@@ -303,11 +313,15 @@ export default {
       for (let i in child_node) {
         this.$refs.modelTree.store.nodesMap[child_node[i]].expanded = false;
       }
-      this.keys = temp_arr
+      // this.keys = temp_arr
+      this.expandedKeys = temp_arr
+      // this.$store.commit('get_login/changeExpandedKeys', {param: temp_arr})
 
       this.$nextTick(function () {
-        this.$refs.modelTree.setCurrentKey(null);
-        this.$refs.modelTree.setCurrentKey(data.id);
+        if (this.$refs.modelTree != undefined) {
+          this.$refs.modelTree.setCurrentKey(null);
+          this.$refs.modelTree.setCurrentKey(data.id);
+        }
       })
       this.$emit('handleNodeClick', data, node)
     },

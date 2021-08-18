@@ -18,8 +18,7 @@ export default {
       myChart: null,
       renderSign: false,
       pie_data: [],
-      timer: null,
-      doResize: null
+      timer: null
     }
   },
   computed: {

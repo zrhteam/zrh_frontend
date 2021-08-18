@@ -16,6 +16,12 @@ import store from './store'
 // import Navigation from 'vue-navigation' 看到一个前进刷新，后退不刷新依赖可以考虑
 import base from './base'//引用
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.config.productionTip = false
 // Vue.L = Vue.prototype.$L = L;
 Vue.prototype.$echarts = echarts;

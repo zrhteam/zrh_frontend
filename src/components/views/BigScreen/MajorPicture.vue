@@ -17,7 +17,7 @@
                   style="position: absolute; width: 100%; min-height: 20px; top:0px;font-size: 0.15rem; color: #ffffff; padding: 0; overflow: hidden; z-index: 3; background-color: rgba(33, 32, 30, 0.5);">
                 {{ item.note }}
               </div>
-              <el-image :src='item.url' alt style="height: 100%; width: 100%" :fit="fit"/>
+              <el-image :src='item.url' alt style="height: 100%; width: 100%"/>
             </div>
           </el-carousel-item>
         </el-carousel>

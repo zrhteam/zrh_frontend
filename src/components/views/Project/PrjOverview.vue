@@ -6,29 +6,31 @@
              style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
           <el-col :span="4" style="height: 100%; ">
             <el-col :span="6" :offset="14" style="height: 100%;">
-              <div style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.41rem; position: relative; font-family: 'Microsoft YaHei'">
+              <div
+                  style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.41rem; position: relative; font-family: 'Microsoft YaHei'">
                 {{ getRiskSum }}
               </div>
             </el-col>
           </el-col>
           <el-col :span="16" style="height: 100%;">
-<!--            <h4>-->
+            <!--            <h4>-->
             <span id="prj_title1"
-                  style="color: #04aaff; font-family:'Microsoft YaHei'; font-size: 0.4em; font-weight: bold; height: 100%; display: inline-block; vertical-align: 0.27rem">{{title1}}{{title2}}{{title3}}</span>
-<!--              <span id="prj_title2"-->
-<!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
-<!--                  title2-->
-<!--                }}</span>-->
-<!--              <span id="prj_title3"-->
-<!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
-<!--                  title3-->
-<!--                }}</span>-->
-<!--            </h4>-->
+                  style="color: #04aaff; font-family:'Microsoft YaHei'; font-size: 0.4em; font-weight: bold; height: 100%; display: inline-block; vertical-align: 0.27rem">{{ title1 }}{{ title2 }}{{ title3 }}</span>
+            <!--              <span id="prj_title2"-->
+            <!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+            <!--                  title2-->
+            <!--                }}</span>-->
+            <!--              <span id="prj_title3"-->
+            <!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+            <!--                  title3-->
+            <!--                }}</span>-->
+            <!--            </h4>-->
           </el-col>
           <el-col :span="4" style="height: 1.25rem; position: relative; float:right">
             <el-col :span="12" :offset="3" style="height: 100%; ">
               <div style="height: 100%;">
-                  <span style="font-size: 0.4rem; color: #18bff0; top:30%; right:1.6rem; position: absolute; font-family: 'Microsoft YaHei'">
+                  <span
+                      style="font-size: 0.4rem; color: #18bff0; top:30%; right:1.6rem; position: absolute; font-family: 'Microsoft YaHei'">
                     {{ nowTime }}
                   </span>
               </div>
@@ -226,12 +228,15 @@ export default {
   updated() {
     this.filter_major = this.$store.state.get_project.filter_major
     this.title1 = this.$store.state.get_headquarter.head_name.label
-    if(this.$store.state.get_headquarter.head_name['children'][0].level == 3) {
-      this.title2 = ""
-    }else {
-      this.title2 = this.$store.state.get_region.region_name.label
+    if (this.$store.state.get_headquarter.head_name['children'] != undefined) {
+      if (this.$store.state.get_headquarter.head_name['children'][0].level == 3) {
+        this.title2 = ""
+      } else {
+        this.title2 = this.$store.state.get_region.region_name.label
+      }
+      this.title3 = this.$store.state.get_project.prj_name.label
     }
-    this.title3 = this.$store.state.get_project.prj_name.label
+
   },
   computed: {
     getName() {
