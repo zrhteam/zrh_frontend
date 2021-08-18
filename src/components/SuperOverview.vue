@@ -32,9 +32,9 @@
 <!--      <el-radio :label="1">脱敏</el-radio>-->
 <!--      <el-radio :label="2">正常</el-radio>-->
 <!--    </el-radio-group>-->
-    <el-dropdown @command="handleCommand" v-if="show" style="position: absolute; left:11.5rem; top:5.3rem; z-index: 2">
+    <el-dropdown @command="handleCommand" placement="right-start" style="position: absolute; left:10.6rem; top:5.5rem; z-index: 2">
       <el-button style="background-image: url(../assets/data_vis.png);
-       left: -4.5rem;
+       left: -3.5rem;
 width: 330px;height: 353px;background-repeat:no-repeat;
 background-size:330px 353px; border: 0;
 background-color: transparent;
@@ -46,19 +46,6 @@ position: absolute">
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-<!--    <el-dropdown @command="handleCommand" v-if="!show" style="z-index: 2">-->
-<!--      <el-button style="background-image: url(../assets/data_vis.png);-->
-<!--left:-4.5rem; top:2.8rem;-->
-<!--width: 330px;height: 353px;background-repeat:no-repeat ;-->
-<!--background-size:330px 353px; border: 0;-->
-<!--background-color: transparent;-->
-<!--position: absolute">-->
-<!--      </el-button>-->
-<!--      <el-dropdown-menu slot="dropdown">-->
-<!--        <el-dropdown-item v-for="(item, i) in mask_arr" :command="item" @click="enterHead">{{ item.label }}-->
-<!--        </el-dropdown-item>-->
-<!--      </el-dropdown-menu>-->
-<!--    </el-dropdown>-->
     <img :src="imgSrc3" @click="enterDataAnalysis" alt=""
          style="width: 17.1%; left: 50%; top: 43.5%; z-index: 99; position: absolute;"/>
     <img :src="imgSrc4" @click="enterDataInsight" alt=""
@@ -83,8 +70,7 @@ export default {
       doBack: null,
       doStorage: null,
       radio: 2,
-      show: true,
-      mask_arr: ["脱敏", "正常"],
+      mask_arr: ["A", "B"],
     }
   },
   mounted() {
@@ -98,19 +84,6 @@ export default {
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
-  },
-  watch: {
-    radio(value) {
-      if (value == 1) {
-        //  脱敏
-        this.show = false
-        this.$store.commit('get_login/changeMasking', {param: true})
-      } else if (value == 2) {
-        //  取消脱敏
-        this.show = true
-        this.$store.commit('get_login/changeMasking', {param: false})
-      }
-    }
   },
   methods: {
     enterDB() {
@@ -126,10 +99,10 @@ export default {
         level: 1
       }
       // 根据radio判断是否需要脱敏，radio为1-》需要脱敏，radio为2-》取消脱敏
-      if(value == "脱敏") {
+      if(value == "A") {
         data.label = "HR"
         this.$store.commit('get_login/changeMasking', {param: true})
-      } else if(value == "正常") {
+      } else if(value == "B") {
         this.$store.commit('get_login/changeMasking', {param: false})
       }
       //总部名称也需要封装
