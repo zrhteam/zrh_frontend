@@ -1,12 +1,6 @@
 // import Vue from 'vue'
 // import VueRouter from 'vue-router'
 
-// const Overview = resolve => {
-//     require.ensure(['../component/Overview.vue'], () => {
-//         resolve(require('../components/Overview.vue'))
-//     })
-// }
-import Overview from '../components/Overview.vue'
 import LandHeadquartersEHSDataScreen from "../components/LandHeadquartersEHSDataScreen.vue";
 import RegionDepartment from "@/components/RegionDepartment.vue";
 import PrjEHSDataAnalysis from "@/components/PrjEHSDataAnalysis.vue";
@@ -31,8 +25,6 @@ import CheckElectricScreen from "@c/CheckElectricScreen.vue";
 
 // const Login = ()=>import('@/components/Login.vue')
 // // import Login from '@/components/Login.vue'
-// const Overview = ()=>import('@/components/Overview.vue')
-// const Register = ()=>import('@/components/Register.vue')
 //
 // const LandHeadquartersEHSDataScreen = ()=>import("../components/LandHeadquartersEHSDataScreen.vue")
 // const RegionDepartment = ()=>import("@/components/RegionDepartment.vue")
@@ -51,8 +43,6 @@ import CheckElectricScreen from "@c/CheckElectricScreen.vue";
 const routerOptions = [
     {path: '/', component: 'Login', meta: {keepAlive: false}},
     {path: '/login', component: 'Login'},
-    {path: '/register', component: 'Register'},
-    {path: '/overview', component: 'Overview'},
     // {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen', meta: {keepAlive: false}},
     {path: '/land_headquarters', component: 'LandHeadquartersEHSDataScreen'},
     {path: '/region_department', component: 'RegionDepartment', meta: {keepAlive: false}},

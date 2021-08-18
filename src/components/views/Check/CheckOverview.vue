@@ -92,7 +92,6 @@
   <!--    <el-col :span="12" style="height: 100%">-->
   <!--      <el-row style="height: 30%; margin-bottom: 2%">-->
   <!--        <el-col style="height: 100%">-->
-  <!--          <CheckRiskLevel :context="{title:'隐患数量', id:'check_risk_level'}"></CheckRiskLevel>-->
   <!--        </el-col>-->
   <!--      </el-row>-->
   <!--      <el-row style="height: 30%">-->
@@ -117,7 +116,6 @@ import CheckRiskRatio from "@/components/views/Check/CheckRiskRatio.vue";
 import PerctangePerc from '@/components/views/Project/PerctangePerc.vue'
 import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
 import TopName from "@/components/views/functions/TopName.vue";
-import CheckRiskLevel from "@/components/views/Check/CheckRiskLevel.vue";
 import TopRisk from "@/components/views/functions/TopRisk.vue";
 import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 import BarRank from "@/components/views/functions/BarRank.vue";
@@ -130,7 +128,7 @@ export default {
     BarRank,
     StackedHorizontalBar,
     TopRisk,
-    CheckRiskLevel, TopName, RiskLevelYear, CheckRiskRatio, PerctangePerc
+    TopName, RiskLevelYear, CheckRiskRatio, PerctangePerc
   },
   data() {
     return {

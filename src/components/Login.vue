@@ -326,7 +326,6 @@ export default {
 }
 
 .right-infp-name {
-  /*background: url("../assets/login_b.png") no-repeat;*/
   width: 100%;
   /*height: 0.5rem;*/
   /*background-size: 100% 100%;*/
