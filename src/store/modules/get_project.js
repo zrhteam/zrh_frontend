@@ -341,11 +341,11 @@ const mutations = {
     },
     //基于项目级展示不同专业隐患占比情况
     changePrjHistoryPerception(state, data) {
-        if (data.code === 10000) {
+        // if (data.code === 10000) {
             state.prj_history_prec = data.data
-        } else {
-            alert("出错了")
-        }
+        // } else {
+        //     alert("出错了")
+        // }
     },
 
     //筛选前top

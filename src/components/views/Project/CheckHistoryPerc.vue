@@ -59,6 +59,8 @@ export default {
     drawPieChart() {
       pie_option['series'][0]['data'] = this.getPrjHistoryPerception
       let arr = this.getPrjHistoryPerception
+      let showed = arr.length ? false : true
+      pie_option["title"]["show"] = showed
       pie_option["legend"]["formatter"] = function (params) {
         var legendIndex = 0;
         arr.forEach(function (v, i) {
@@ -68,56 +70,46 @@ export default {
         });
         return params + " " + arr[legendIndex].value;
       }
-      if (pie_option["series"][0]["data"].length != 0) {
-        let _this = this
-        if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
-          this.myChart.dispose() // 销毁
-        }
-        this.myChart = this.$echarts.init(document.getElementById('pie2'))
-        // 使用刚指定的配置项和数据显示图表。
-        this.myChart.setOption(pie_option);
-
-        this.myChart.on("click", pieConsole);
-
-        function pieConsole(param) {
-          //     获取data长度
-          // console.log(pie_option.series[0].data.length);
-          //      获取地N个data的值
-          // 　　alert(option.series[0].data[i]);
-          //     获取series中param.dataIndex事件对应的值
-          // console.log(param.value);
-          // console.log(param.name);
-          let param2 = new URLSearchParams();
-          param2.append('project_name', _this.$store.state.get_project.prj_name);
-          param2.append('major', param.name);
-          _this.$store.commit('get_project/changeParam2', {params: param2})
-          _this.$store.commit('get_project/changeFilterMajor', {data: param.name})
-          //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
-          _this.$store.dispatch('get_project/getInitProjectSystem')
-          //基于项目级显示在不同专业情况下，隐患区域分布的情况
-          _this.$store.dispatch('get_project/getInitProjectRegionDistribution')
-          // console.log(pie_option.series[param.seriesIndex].data[param.dataIndex].value);
-          // console.log(pie_option.series[param.seriesIndex].data[param.dataIndex].name);
-          // 　　clickFunc(param.dataIndex);//执行点击效果,触发相应js函数
-          //param具体包含的方法见 https://blog.csdn.net/allenjay11/article/details/76033232
-        }
-
-        this.myChart.resize();
-        this.doResize = () => {
-          if (this.myChart) {
-            this.myChart.resize();
-          }
-        }
-        window.addEventListener("resize", this.doResize);
-      } else if (document.getElementById("pie2")) {
-        this.$nextTick(() => {
-          const dom = document.getElementById("pie2")
-          dom.innerHTML = '暂无数据'
-          dom.style.color = '#ffffff'
-          dom.style.fontSize = '14px'
-          dom.removeAttribute("_echarts_instance_")
-        })
+      let _this = this
+      if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+        this.myChart.dispose() // 销毁
       }
+      this.myChart = this.$echarts.init(document.getElementById('pie2'))
+      // 使用刚指定的配置项和数据显示图表。
+      this.myChart.setOption(pie_option);
+
+      this.myChart.on("click", pieConsole);
+
+      function pieConsole(param) {
+        //     获取data长度
+        // console.log(pie_option.series[0].data.length);
+        //      获取地N个data的值
+        // 　　alert(option.series[0].data[i]);
+        //     获取series中param.dataIndex事件对应的值
+        // console.log(param.value);
+        // console.log(param.name);
+        let param2 = new URLSearchParams();
+        param2.append('project_name', _this.$store.state.get_project.prj_name);
+        param2.append('major', param.name);
+        _this.$store.commit('get_project/changeParam2', {params: param2})
+        _this.$store.commit('get_project/changeFilterMajor', {data: param.name})
+        //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
+        _this.$store.dispatch('get_project/getInitProjectSystem')
+        //基于项目级显示在不同专业情况下，隐患区域分布的情况
+        _this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+        // console.log(pie_option.series[param.seriesIndex].data[param.dataIndex].value);
+        // console.log(pie_option.series[param.seriesIndex].data[param.dataIndex].name);
+        // 　　clickFunc(param.dataIndex);//执行点击效果,触发相应js函数
+        //param具体包含的方法见 https://blog.csdn.net/allenjay11/article/details/76033232
+      }
+
+      this.myChart.resize();
+      this.doResize = () => {
+        if (this.myChart) {
+          this.myChart.resize();
+        }
+      }
+      window.addEventListener("resize", this.doResize);
     }
   },
   beforeDestroy() {
