@@ -74,7 +74,7 @@
           <div
               class="risk-wrapper" style="height: 0.35rem; left: 0.15rem; top: 0.1rem;">
             <div
-                style="width: 0.31rem; height: 0.31rem; pointer-events: auto; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b7df2458e43133e6310d7302df79b2dc.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+                style="width: 0.31rem; height: 0.31rem; pointer-events: auto; background-image: url(require('../../../assets/major_card7')); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
           </div>
           <div
               class="risk-wrapper" style="height: 0.35rem; left: 0.6rem; top: 0.1rem;">

@@ -16,7 +16,7 @@ module.exports = {
     outputDir: 'dist',
     //outputDir: '../dist',
     // eslint-loader 是否在保存的时候检查
-    //assetsDir: 'assets',//静态资源目录
+    //静态资源目录
     assetsDir: 'dist',
     lintOnSave: false,//是否开启eslint
     runtimeCompiler: false,
@@ -28,6 +28,16 @@ module.exports = {
     // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
     //chainWebpack: () => {},
     chainWebpack: config => {
+        // 移除 prefetch 插件
+        config.plugins.delete('prefetch');
+        // 移除 preload 插件，避免加载多余的资源
+        config.plugins.delete('preload');
+
+        config.optimization.minimize(true);
+
+        config.optimization.splitChunks({
+            chunks: 'all'
+        })
         //发布模式
         config.when(process.env.NODE_ENV === 'production', config => {
             //entry找到默认的打包入口，调用clear则是删除默认的打包入口,add添加新的打包入口
@@ -80,7 +90,6 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html
     //vueLoader: {},
     // 生产环境是否生成 sourceMap 文件
-    //productionSourceMap: true,
     productionSourceMap: false,//update
     // css相关配置
     css: {
@@ -123,26 +132,14 @@ module.exports = {
             warning: true,
             errors: true
         },
-        // hotOnly: false,
         hot: true,
         headers: {'X-Requested-With': 'XMLHttpRequest'},
         hotOnly: false,
         disableHostCheck: true,
-        // proxy: {
-        //     '/api': {
-        //         target: 'http://localhost:5000',
-        //         changeOrigin: true,
-        //         ws: true,
-        //         pathRewrite: {
-        //             '^/api': ''
-        //         }
-        //     }
-        // }, // 设置代理
-        //proxy: null,
         proxy: {
             '/api': {
                 target: 'http://124.71.45.84:5000/',
-                // target: 'http://10.20.39.102:5000/',
+                // target: 'http://localhost:5000',
                 changeOrigin: true, // 允许websockets跨域
                 ws: true,
                 pathRewrite: {

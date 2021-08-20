@@ -185,7 +185,6 @@ export default {
 
 <style scoped>
 .background {
-  /*background: url("../assets/home_page.png") no-repeat;*/
   background: url("../assets/system_select.png") no-repeat;
   background-size: cover;
   margin: 0 auto;

@@ -47,6 +47,15 @@
             <!--            <el-button class="register_btn" type="text" v-show="!isShow" @click="jumpToLogin">登录</el-button>-->
 
           </div>
+          <el-dialog
+              title="提示"
+              :visible.sync="dialogVisible"
+              width="24%">
+            <span>尊敬的用户您好，由于IE浏览器不支持3D模型依赖，为避免影响您的体验，请使用Microsoft Edge或其它浏览器！</span>
+            <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+          </el-dialog>
         </div>
       </div>
     </div>
@@ -64,7 +73,8 @@ export default {
       username: '',
       password: '',
       checked: false,
-      clearSession: null
+      clearSession: null,
+      dialogVisible: false
     }
   },
   methods: {
@@ -203,6 +213,12 @@ export default {
     this.getCookie();
   },
   created() {
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1
+    var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1
+    if (isIE || isIE11) {
+      this.dialogVisible = true
+    }
     // this.username = 'headquarter1';
     // this.username = 'region1';
     // this.username = 'project1';

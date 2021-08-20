@@ -93,7 +93,7 @@
               ></BarRank>
             </el-col>
             <el-col :span="7" style="height: 100%; width: 100%;">
-              <BarRank :context="{title:'累积高风险数量区域排名', id: 'id_region_rank1'}"></BarRank>
+              <BarRank :context="{title:'累积高风险数量项目排名', id: 'id_region_rank1'}"></BarRank>
             </el-col>
           </el-row>
 

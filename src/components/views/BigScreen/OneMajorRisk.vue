@@ -51,7 +51,7 @@
     </div>
     <div class="absolute" style="width: 97%; height: 69%; left: 0.12rem; top: 2.2rem;">
       <div
-          style="width: 100%; height: 100%; pointer-events: auto; z-index: -1;; background-image: url('//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/1f15644ff8715c4013e43755c22e2abe.png'); border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+          style="width: 100%; height: 100%; pointer-events: auto; z-index: -1; background-image: url(require('../../../assets/major_card4.png'))'; border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
       <div class="slide">
         <div class="slide-wrapper" ref="major">
           <el-carousel indicator-position="none" :interval="200000" :height="dataHeight">

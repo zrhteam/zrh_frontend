@@ -9,7 +9,7 @@ exports.install = function (Vue, options) {
         //显示整个总部检查后的总体危险指数以及各专业对应的危险指数
         // this.$store.dispatch('get_headquarter/getInitRiskIndexData')
         //展示总部各风险等级及其对应的隐患数量
-        this.$store.dispatch('get_headquarter/getInitRiskLevelData')
+        // this.$store.dispatch('get_headquarter/getInitRiskLevelData')
         //根据风险指数对区域进行排序
         // this.$store.dispatch('get_headquarter/getInitRiskIndexData')
         //显示每个区域的高风险数量
@@ -76,7 +76,7 @@ exports.install = function (Vue, options) {
         //显示该区域整体安全指数以及各专业安全指数，已删除
         // this.$store.dispatch('get_region/getRegionInitIndex')
         //显示该区域各风险等级对应的隐患数量
-        this.$store.dispatch('get_region/getInitRegionRiskLevel')
+        // this.$store.dispatch('get_region/getInitRegionRiskLevel')
         //按照年份显示该区域各等级风险对应的隐患数量
         this.$store.dispatch('get_region/getRegionRiskLevelYear')
         //显示该区域最新出现的10张未整改高风险隐患图片及该图片对应的检查名称和隐患描述
@@ -146,7 +146,7 @@ exports.install = function (Vue, options) {
         //项目名称也需要封装
         this.$store.commit('get_project/changePrjName', {prj_name: project_name})
         //显示项目中各风险等级及其对应的隐患数量
-        this.$store.dispatch('get_project/getInitProjectRiskLevel')
+        // this.$store.dispatch('get_project/getInitProjectRiskLevel')
         //显示项目中各风险等级及其对应的隐患数量,按年份
         this.$store.dispatch('get_project/getProjectRiskLevelYear')
         //基于项目级展示不同专业隐患占比情况
@@ -226,7 +226,7 @@ exports.install = function (Vue, options) {
         // this.$store.dispatch('get_check/getCheckHighRisk')
 
         //展示不同风险等级的隐患数量
-        this.$store.dispatch('get_check/getCheckRiskLevel')
+        // this.$store.dispatch('get_check/getCheckRiskLevel')
         //按年份展示不同风险等级的隐患数量
         this.$store.dispatch('get_check/getCheckLevelYear')
         //该检查中不同专业隐患占比情况
