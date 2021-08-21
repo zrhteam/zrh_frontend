@@ -271,7 +271,6 @@ export default {
         obj.value.push(data[i].lat)
         arr.push(obj)
       }
-
       return arr
     }
   },

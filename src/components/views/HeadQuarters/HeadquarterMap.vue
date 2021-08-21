@@ -133,6 +133,7 @@ export default {
 
       // 点击触发
       this.chart.on("click", param => {
+        debugger
         if (typeof (param.data) != "undefined") {
           var project_name = param.data.name[1];
           this.$router.push({path: '/prj_data_analysis'});
@@ -142,23 +143,8 @@ export default {
             value: project_name,
             level: 3
           }
-          for (var i in arr) {
-            for (var j in arr[i]['children']) {
-              if (arr[i]['children'][j]['level'] == 2) {
-                for (var k in arr[i]['children'][j]['children']) {
-                  if (arr[i]['children'][j]['children'][k]['value'] == project_name) {
-                    data['label'] = arr[i]['children'][j]['label']
-                    break
-                  }
-                }
-              } else if (arr[i]['children'][j]['level'] == 3) {
-                if (arr[i]['children'][j]['value'] == project_name) {
-                  data['label'] = arr[i]['children'][j]['label']
-                  break
-                }
-              }
-            }
-
+          if (this.$store.state.get_login.masking == true) {
+            data['label'] = param.data.name[0]
           }
           let node = {
             level: 3
