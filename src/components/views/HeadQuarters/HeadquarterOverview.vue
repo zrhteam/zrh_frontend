@@ -232,17 +232,46 @@ export default {
     },
     projectInfo() {
       let data = this.$store.state.get_headquarter.head_project_position
-      let arr = []
-      for (let i in data) {
-        let obj = {
-          name: '',
+      var arr = []
+      var tag = this.$store.state.get_login.hide_tag
+      for (var i in tag) {
+        if (tag[i].value == this.$store.state.get_headquarter.head_name.value) {
+          tag = tag[i]['children']
+          break
+        }
+      }
+      for (var i in data) {
+        var obj = {
+          name: [],
           value: [],
         }
-        obj.name = i
+        if (this.$store.state.get_login.masking == true) {
+          for (var j in tag) {
+            if (tag[j]['level'] == 2) {
+              for (var k in tag[j]['children']) {
+                if (tag[j]['children'][k]['value'] == i) {
+                  obj.name.push(tag[j]['children'][k]['label'])
+                  obj.name.push(tag[j]['children'][k]['value'])
+                  break
+                }
+              }
+            } else if (tag[j]['level'] == 3) {
+              if (tag[j]['value'] == i) {
+                obj.name.push(tag[j]['label'])
+                obj.name.push(tag[j]['value'])
+                break
+              }
+            }
+          }
+        } else if (this.$store.state.get_login.masking == false) {
+          obj.name.push(i)
+          obj.name.push(i)
+        }
         obj.value.push(data[i].lng)
         obj.value.push(data[i].lat)
         arr.push(obj)
       }
+
       return arr
     }
   },

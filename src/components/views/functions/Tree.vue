@@ -278,9 +278,10 @@ export default {
           }
         }
         if (t < temp_arr.length) {
-          this.$refs.modelTree.store.nodesMap[last_node].expanded = false;
+          this.$refs.modelTree.store.nodesMap[data.id].expanded = false;
         }
         for (let i = t + 1; i < temp_arr.length; i++) {
+          // this.$refs.modelTree.store.nodesMap[t-1-i].expanded = false;
           temp_arr.pop()
         }
         // 上一节点父亲的兄弟，则他们有相同的父节点
@@ -294,28 +295,33 @@ export default {
         } else if (t == temp_arr.length && temp_arr[temp_arr.length - 2] != node.parent.data.id) {// 如果是上一点击节点的孩子，就在[]加入该节点
           temp_arr.push(data.id)
           // this.$store.commit('get_login/changeExpandedKeys', {param: temp_arr})
-          this.$refs.modelTree.store.nodesMap[node.parent.data.id].expanded = true;
+          // this.$refs.modelTree.store.nodesMap[node.parent.data.id].expanded = true;
+          this.$refs.modelTree.store.nodesMap[data.id].expanded = true;
         }
       }
       //如果用户权限是超级用户，点击的level是1，把数组清空重新赋
       if(this.$store.state.get_login.grant_data.data.user_grant == "超级用户" && data.level==1) {
+        for (var i = 0; i < temp_arr.length; i++) {
+          this.$refs.modelTree.store.nodesMap[temp_arr[i]].expanded = false
+        }
         temp_arr = []
         temp_arr.push(data.id)
+        this.$refs.modelTree.store.nodesMap[data.id].expanded = true;
       }
-      for (let i in temp_arr) {
-        this.$refs.modelTree.store.nodesMap[temp_arr[i]].expanded = true;
-      }
+      // for (let i in temp_arr) {
+      //   this.$refs.modelTree.store.nodesMap[temp_arr[i]].expanded = true;
+      // }
       // 找到点击节点的所有孩子节点
-      let child_node = []
-      for (let i in data['children']) {
-        child_node.push(data['children'][i].id)
-      }
-      for (let i in child_node) {
-        this.$refs.modelTree.store.nodesMap[child_node[i]].expanded = false;
-      }
+      // let child_node = []
+      // for (let i in data['children']) {
+      //   child_node.push(data['children'][i].id)
+      // }
+      // for (let i in child_node) {
+      //   this.$refs.modelTree.store.nodesMap[child_node[i]].expanded = false;
+      // }
       // this.keys = temp_arr
       this.expandedKeys = temp_arr
-      // this.$store.commit('get_login/changeExpandedKeys', {param: temp_arr})
+      this.$store.commit('get_login/changeExpandedKeys', {param: temp_arr})
 
       this.$nextTick(function () {
         if (this.$refs.modelTree != undefined) {

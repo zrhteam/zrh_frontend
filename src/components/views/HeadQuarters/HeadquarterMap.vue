@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     doResizeChart() {
-      if(this.chart != null) {
+      if (this.chart != null) {
         this.chart.resize("auto", "auto")
       }
     },
@@ -89,7 +89,8 @@ export default {
           tooltip: {
             trigger: "item",
             formatter: function (params) {
-              const name = params.data.name;
+              console.log(params)
+              const name = params.data.name[0];
               return `<div>${name}</div>`
             }
           }, // 鼠标移到图里面的浮动提示框
@@ -133,16 +134,37 @@ export default {
       // 点击触发
       this.chart.on("click", param => {
         if (typeof (param.data) != "undefined") {
-          var project_name = param.data.name;
+          var project_name = param.data.name[1];
           this.$router.push({path: '/prj_data_analysis'});
-          let data = {
-            label: project_name
+          var arr = this.$store.state.get_login.hide_tag
+          var data = {
+            label: project_name,
+            value: project_name,
+            level: 3
+          }
+          for (var i in arr) {
+            for (var j in arr[i]['children']) {
+              if (arr[i]['children'][j]['level'] == 2) {
+                for (var k in arr[i]['children'][j]['children']) {
+                  if (arr[i]['children'][j]['children'][k]['value'] == project_name) {
+                    data['label'] = arr[i]['children'][j]['label']
+                    break
+                  }
+                }
+              } else if (arr[i]['children'][j]['level'] == 3) {
+                if (arr[i]['children'][j]['value'] == project_name) {
+                  data['label'] = arr[i]['children'][j]['label']
+                  break
+                }
+              }
+            }
+
           }
           let node = {
             level: 3
           }
           this.handleTreeNodeClick(data, node)
-          this.$store.commit('get_project/changePrjName', {prj_name: project_name})
+          this.$store.commit('get_project/changePrjName', {prj_name: data})
         }
       });
     },
