@@ -28,11 +28,12 @@
          style="width: 17.1%; left: 12.7%; top: 41.4%; z-index: 99; position: absolute;"/>
     <img id="img2_bg" :src="imgSrc2" @click="enterHead" alt=""
          style="width: 17.1%; left: 31.3%; top: 44%; z-index: 1; position: absolute;"/>
-<!--    <el-radio-group v-model="radio" style="position: absolute; z-index: 999;top: 70.5%; left: 35.8%; color: #000000">-->
-<!--      <el-radio :label="1">脱敏</el-radio>-->
-<!--      <el-radio :label="2">正常</el-radio>-->
-<!--    </el-radio-group>-->
-    <el-dropdown @command="handleCommand" placement="right-start" style="position: absolute; left:10.6rem; top:5.5rem; z-index: 2">
+    <!--    <el-radio-group v-model="radio" style="position: absolute; z-index: 999;top: 70.5%; left: 35.8%; color: #000000">-->
+    <!--      <el-radio :label="1">脱敏</el-radio>-->
+    <!--      <el-radio :label="2">正常</el-radio>-->
+    <!--    </el-radio-group>-->
+    <el-dropdown @command="handleCommand" placement="right-start"
+                 style="position: absolute; left:10.6rem; top:5.5rem; z-index: 2">
       <el-button style="background-image: url(../assets/data_vis.png);
        left: -3.5rem;
 width: 330px;height: 353px;background-repeat:no-repeat;
@@ -89,7 +90,7 @@ export default {
     enterDB() {
       window.location.href = 'http://124.71.45.84:8085';//数据库可视化系统的
     },
-    enterHead(value){
+    enterHead(value) {
       let data = {
         label: "华润置地",
         value: "华润置地",
@@ -99,11 +100,11 @@ export default {
         level: 1
       }
       // 根据radio判断是否需要脱敏，radio为1-》需要脱敏，radio为2-》取消脱敏
-      if(value == "A") {
+      if (value == "A") {
         data.label = "HR"
         this.$store.commit('get_login/changeMasking', {param: true})
         this.$store.commit('get_login/changeExpandedKeys', {param: []})
-      } else if(value == "B") {
+      } else if (value == "B") {
         this.$store.commit('get_login/changeMasking', {param: false})
         this.$store.commit('get_login/changeExpandedKeys', {param: []})
       }
@@ -116,7 +117,23 @@ export default {
       this.enterHead(command)
     },
     enterDataAnalysis() {
-      this.$router.push({path: '/data_compare'});
+      var userType = this.$store.state.get_login.grant_data.data.user_grant //取值:boss，总部，区域，项目
+      var headquarter_tag = null
+      if (this.$store.state.get_login.grant_data.data.headquarter_tag != undefined) {
+        headquarter_tag = this.$store.state.get_login.grant_data.data.headquarter_tag
+      }
+      var region_tag = null
+      if (this.$store.state.get_login.grant_data.data.region_tag != undefined) {
+        headquarter_tag = this.$store.state.get_login.grant_data.data.region_tag
+      }
+      var project_tag = null
+      if (this.$store.state.get_login.grant_data.data.project_tag != undefined) {
+        headquarter_tag = this.$store.state.get_login.grant_data.data.project_tag
+      }
+
+      window.location.href = 'http://localhost:8090/#/red_line?' +
+          window.btoa(window.encodeURIComponent("userType=超级用户&headquarter=华润置地&region=华南大区&project=上海万象城"))
+      window.btoa(window.encodeURIComponent("userType=" + userType + "&headquarter=" + headquarter_tag + "&region=" + region_tag + "&project" + project_tag))
     },
     enterDataInsight() {
       this.$router.push({path: '/analyze'});
