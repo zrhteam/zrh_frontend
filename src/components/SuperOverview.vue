@@ -132,8 +132,7 @@ export default {
       }
 
       window.location.href = 'http://localhost:8090/#/red_line?' +
-          window.btoa(window.encodeURIComponent("userType=超级用户&headquarter=华润置地&region=华南大区&project=上海万象城"))
-      window.btoa(window.encodeURIComponent("userType=" + userType + "&headquarter=" + headquarter_tag + "&region=" + region_tag + "&project" + project_tag))
+          window.btoa(window.encodeURIComponent("userType=" + userType + "&headquarter=" + headquarter_tag + "&region=" + region_tag + "&project" + project_tag))
     },
     enterDataInsight() {
       this.$router.push({path: '/analyze'});
