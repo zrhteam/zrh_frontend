@@ -1,27 +1,29 @@
 <template>
-  <el-card class="box-card boundary-C" shadow="never"
-           style="background-color: transparent; height: 80%; left: 10%; top: 10%">
-    <div style="display: none">
+  <el-card class="box-card-t" shadow="never"
+           style="background-color: transparent; height: 100%;">
+    <div style="display: none;">
       {{ getPrjHistoryPerception }}
     </div>
-    <div class="level4">
-      <span>历次检查隐患专业占比</span>
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
+      <span class="level4">不同专业隐患数量</span>
     </div>
-    <div id="pie2" style="height: 100%; width: 100%"></div>
+    <div class="title-line" style=""></div>
+    <div id="pie2" style="height: 80%; width: 100%"></div>
     <!--          历次检查累计隐患专业占比 饼图-->
   </el-card>
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
+import {pie_option} from "@/utils/constants";
 
 export default {
   name: "CheckHistoryPerc",
-  // data() {
-  //   return {
-  //     screenWidth: document.body.clientWidth,
-  //   }
-  // },
+  data() {
+    return {
+      myChart: null,
+      doResize: null
+    }
+  },
   computed: {
     getPrjHistoryPerception() {
       let data = this.$store.state.get_project.prj_history_prec;
@@ -36,106 +38,7 @@ export default {
         obj.value = data[i]
         arr_major.push(obj)
       }
-      // console.log(arr_major)
-      let option = {
-        tooltip: {
-          formatter: '{b}:{c} ({d}%)'
-        },
-        // color: ['#5182e4', '#3fb27e', '#9bcc66', '#f7cb4a', '#00b9ff', '#03a1ea'],
-        // color: function (params) {
-        //           let colorList = [
-        //             {
-        //               c1: '#fce5ca',
-        //               c2: '#ff9d62'
-        //             },
-        //             {
-        //               c1: '#508dff',
-        //               c2: '#26c5fe'
-        //             },
-        //             {
-        //               c1: '#63e587',
-        //               c2: '#5fe2e4'
-        //             },
-        //             {
-        //               c1: '#e8e87e',
-        //               c2: '#a1a170'
-        //             }]
-        //           return new echarts.graphic.LinearGradient(1, 0, 0, 0.[{
-        //             offset: 0,
-        //             color: colorList[params.dataIndex].c1
-        //           },{
-        //             offset: 1,
-        //             color: colorList[params.dataIndex].c2
-        //           }])
-        //         },
-
-        series: [
-          {
-            type: 'pie',
-            radius: '60%',
-            center: ['50%', '50%'],
-            label: {
-              normal: {
-                show: true,
-                formatter: '{b}: {c}' //自定义显示格式(b:name, c:value, d:百分比)
-              }
-            },
-            data: arr_major,
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                // shadowColor: 'rgba(0, 0, 0, 0.5)'
-              },
-              normal: {
-                color: function (params) {
-                  var colorList = [
-                    {
-                      c1: '#fce5ca',
-                      c2: '#ff9d62'
-                    },
-                    {
-                      c1: '#63e587',
-                      c2: '#5fe2e4'
-                    },
-                    {
-                      c1: '#db6400',
-                      c2: '#ceb895'
-                    },
-                    {
-                      c1: '#e8e87e',
-                      c2: '#a1a170'
-                    },
-                    {
-                      c1: '#007965',
-                      c2: '#b1e2da'
-                    },
-                    {
-                      c1: '#7c9473',
-                      c2: '#d6efc7'
-                    }];
-                  return new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
-                    offset: 0,
-                    color: colorList[params.dataIndex].c1
-                  }, {
-                    offset: 1,
-                    color: colorList[params.dataIndex].c2
-                  }])
-                }
-              }
-            },
-
-            // emphasis: {
-            //   itemStyle: {
-            //     shadowBlur: 10,
-            //     shadowOffsetX: 0,
-            //     shadowColor: 'rgba(0, 0, 0, 0.5)'
-            //   },
-            // }
-          }
-        ]
-      };
-      return option
+      return arr_major
     }
   },
   updated() {
@@ -154,22 +57,70 @@ export default {
   },
   methods: {
     drawPieChart() {
-      let myChart = this.$echarts.init(document.getElementById('pie2'))
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(this.getPrjHistoryPerception);
-      myChart.resize();
-      window.addEventListener('resize', function () {
-        myChart.resize();
-      })
-      const _this = this;
-      const erd = elementResizeDetectorMaker();
-      erd.listenTo(document.getElementById("pie2"), element => {
-        _this.$nextTick(() => {
-          //监听到事件后执行的业务逻辑
-          myChart.resize();
+      pie_option['series'][0]['data'] = this.getPrjHistoryPerception
+      let arr = this.getPrjHistoryPerception
+      let showed = arr.length ? false : true
+      pie_option["title"]["show"] = showed
+      pie_option["legend"]["formatter"] = function (params) {
+        var legendIndex = 0;
+        arr.forEach(function (v, i) {
+          if (v.name == params) {
+            legendIndex = i;
+          }
         });
-      });
+        return params + " " + arr[legendIndex].value;
+      }
+      let _this = this
+      if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+        this.myChart.dispose() // 销毁
+      }
+      this.myChart = this.$echarts.init(document.getElementById('pie2'))
+      // 使用刚指定的配置项和数据显示图表。
+      this.myChart.setOption(pie_option);
+
+      this.myChart.on("click", pieConsole);
+
+      function pieConsole(param) {
+        //     获取data长度
+        // console.log(pie_option.series[0].data.length);
+        //      获取地N个data的值
+        // 　　alert(option.series[0].data[i]);
+        //     获取series中param.dataIndex事件对应的值
+        // console.log(param.value);
+        // console.log(param.name);
+        let param2 = new URLSearchParams();
+        param2.append('project_name', _this.$store.state.get_project.prj_name);
+        param2.append('major', param.name);
+        _this.$store.commit('get_project/changeParam2', {params: param2})
+        _this.$store.commit('get_project/changeFilterMajor', {data: param.name})
+        //基于项目级展示在不同专业下属于不同隐患子系统的隐患数量
+        _this.$store.dispatch('get_project/getInitProjectSystem')
+        //基于项目级显示在不同专业情况下，隐患区域分布的情况
+        _this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+        // console.log(pie_option.series[param.seriesIndex].data[param.dataIndex].value);
+        // console.log(pie_option.series[param.seriesIndex].data[param.dataIndex].name);
+        // 　　clickFunc(param.dataIndex);//执行点击效果,触发相应js函数
+        //param具体包含的方法见 https://blog.csdn.net/allenjay11/article/details/76033232
+      }
+
+      this.myChart.resize();
+      this.doResize = () => {
+        if (this.myChart) {
+          this.myChart.resize();
+        }
+      }
+      window.addEventListener("resize", this.doResize);
     }
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.doResize);
   }
 }
 </script>

@@ -1,20 +1,23 @@
-const path = require('path')
 const express = require('express')
-const app = express()
+var compression = require('compression')
+var app = express()
+app.use(compression())
+const path = require('path')
+const webpack = require('webpack')
 var apiRoutes = express.Router()
 app.use('/api', apiRoutes)
 
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
 
 module.exports = {
-    publicPath: '/',//new
+    publicPath: './',//new
     // 输出文件目录
     outputDir: 'dist',
     //outputDir: '../dist',
     // eslint-loader 是否在保存的时候检查
-    //assetsDir: 'assets',//静态资源目录
+    //静态资源目录
     assetsDir: 'dist',
-    assetsDir: 'dist',
-    //assetsDir: './dist',
     lintOnSave: false,//是否开启eslint
     runtimeCompiler: false,
 
@@ -24,11 +27,50 @@ module.exports = {
     // webpack配置
     // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
     //chainWebpack: () => {},
-    chainWebpack: (config) => {},//update
+    chainWebpack: config => {
+        // 移除 prefetch 插件
+        config.plugins.delete('prefetch');
+        // 移除 preload 插件，避免加载多余的资源
+        config.plugins.delete('preload');
+
+        config.optimization.minimize(true);
+
+        config.optimization.splitChunks({
+            chunks: 'all'
+        })
+        //发布模式
+        config.when(process.env.NODE_ENV === 'production', config => {
+            //entry找到默认的打包入口，调用clear则是删除默认的打包入口,add添加新的打包入口
+            config.entry('app').clear().add('./src/main.js')
+            //使用externals设置排除项
+            config.set('externals', {
+                vue: 'Vue',
+                vuex: 'Vuex',
+                echarts: 'echarts',
+                'element-ui': 'ElementUI',
+                'vue-cookies': 'VueCookies',
+                axios: 'axios',
+                'vue-router': 'VueRouter',
+            })
+        })
+        //开发模式
+        config.when(process.env.NODE_ENV === 'development', config => {
+            config.entry('app').clear().add('./src/main.js')
+        })
+    },
     //configureWebpack: () => {},
     configureWebpack: (config) => {
-        if(process.env.NODE_ENV === 'production'){
+        if (process.env.NODE_ENV === 'production') {
             config.mode = 'production'
+            config.plugins.push(
+                new CompressionWebpackPlugin({
+                    asset: '[path].gz[query]', // 提示示compression-webpack-plugin@3.0.0的话asset改为filename
+                    algorithm: 'gzip',
+                    test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+                    threshold: 10240,
+                    minRatio: 0.8
+                })
+            );
         } else {
             config.mode = 'development'
         }
@@ -36,17 +78,18 @@ module.exports = {
             resolve: {
                 alias: {
                     '@': path.resolve(__dirname, './src'),
-                    '@c': path.resolve(__dirname, './src/component'),
-                    '@v': path.resolve(__dirname, './src/views')
+                    '@c': path.resolve(__dirname, './src/components'),
+                    '@v': path.resolve(__dirname, './src/components/views')
                 }
-            }
+            },
+            // plugins: getPlugins()
         })
+
     },//update
     // vue-loader 配置项
     // https://vue-loader.vuejs.org/en/options.html
     //vueLoader: {},
     // 生产环境是否生成 sourceMap 文件
-    //productionSourceMap: true,
     productionSourceMap: false,//update
     // css相关配置
     css: {
@@ -78,36 +121,25 @@ module.exports = {
     devServer: {
         //open: true,//自动弹出浏览器页面
         open: process.platform === 'darwin',
+        compress: true,
         // host: 'localhost',
-        // public:'10.20.39.102:8080',
-        public:'localhost:8080',
+        // public:'localhost:8080',
+        public: 'http://124.71.45.84:8080',
         host: '0.0.0.0',
         port: 8080,
-        //port: 8022,
         https: false,
         overlay: {//new 错误、警告在页面弹出
             warning: true,
             errors: true
         },
-        // hotOnly: false,
         hot: true,
         headers: {'X-Requested-With': 'XMLHttpRequest'},
+        hotOnly: false,
         disableHostCheck: true,
-        // proxy: {
-        //     '/api': {
-        //         target: 'http://localhost:5000',
-        //         changeOrigin: true,
-        //         ws: true,
-        //         pathRewrite: {
-        //             '^/api': ''
-        //         }
-        //     }
-        // }, // 设置代理
-        //proxy: null,
         proxy: {
             '/api': {
-                target: 'http://localhost:5000/',
-                // target: 'http://10.20.39.102:5000/',
+                target: 'http://124.71.45.84:5000/',
+                // target: 'http://localhost:5000',
                 changeOrigin: true, // 允许websockets跨域
                 ws: true,
                 pathRewrite: {
@@ -117,22 +149,14 @@ module.exports = {
         } // 代理转发配置，用于调试环境
     },
 
-    // plugins: {//new
-    //     'autoprefixer': {browsers: 'last 5 version'}
-    // },
-    // before(app) {
-    //         //app.get('/test', (req, res) => {
-    //         //     res.json({
-    //         //         errno: 0,
-    //         //         data: test
-    //         //     })
-    //         // })
-    //     }
-    // },
     // 第三方插件配置
     pluginOptions: {
         // ...
     },
-
-
+    // build: {
+    //     index: path.resolve(__dirname, '../dist/index.html'),
+    //     assetsRoot: path.resolve(__dirname, '../dist'),
+    //     assetsSubDirectory: 'static',
+    //     assetsPublicPathL: './',
+    // }
 }

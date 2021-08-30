@@ -1,258 +1,277 @@
 <template>
-  <!--  <div></div>-->
   <el-row style="height: 100%;">
-    <PrjDataScreen id="small" style="display: none"></PrjDataScreen>
-    <el-row id="large1" class="" style="height: 10%;">
-      <el-col :span="4" style="height: 100%">
-        <el-card class="title-box-card" shadow="never"
-                 style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label>Logo</label>
-        </el-card>
-      </el-col>
-      <el-col :span="20" style="height: 100%">
-        <el-card class="title-box-card " shadow="never"
-                 style="background-color: transparent; height: 99%; margin: 0px 5px 5px 5px">
-          <label>中瑞恒可视化系统</label>
-        </el-card>
+    <el-row id="large1" class="" style="height: 1.25rem;">
+      <el-col :span="24" style="height: 100%">
+        <div class="title-box-card " shadow="never"
+             style="background-color: transparent; height: 99%; width: 99%; margin: 0px 5px 0 5px">
+          <el-col :span="4" style="height: 100%; ">
+            <el-col :span="6" :offset="14" style="height: 100%;">
+              <div
+                  style="font-size: 0.4rem; font-weight: bold; color: #1fedfc; top:0.41rem; position: relative; font-family: 'Microsoft YaHei'">
+                {{ getRiskSum }}
+              </div>
+            </el-col>
+          </el-col>
+          <el-col :span="16" style="height: 100%;">
+            <!--            <h4>-->
+            <span id="prj_title1"
+                  style="color: #04aaff; font-family:'Microsoft YaHei'; font-size: 0.4em; font-weight: bold; height: 100%; display: inline-block; vertical-align: 0.27rem">{{ title1 }}{{ title2 }}{{ title3 }}</span>
+            <!--              <span id="prj_title2"-->
+            <!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+            <!--                  title2-->
+            <!--                }}</span>-->
+            <!--              <span id="prj_title3"-->
+            <!--                    style="color: #c4bcbc; font-family:'Microsoft YaHei'; font-size: 0.4em; vertical-align: 85%; height: 100%">{{-->
+            <!--                  title3-->
+            <!--                }}</span>-->
+            <!--            </h4>-->
+          </el-col>
+          <el-col :span="4" style="height: 1.25rem; position: relative; float:right">
+            <el-col :span="12" :offset="3" style="height: 100%; ">
+              <div style="height: 100%;">
+                  <span
+                      style="font-size: 0.4rem; color: #18bff0; top:30%; right:1.6rem; position: absolute; font-family: 'Microsoft YaHei'">
+                    {{ nowTime }}
+                  </span>
+              </div>
+            </el-col>
+            <el-col :span="9" style="height: 100%; color: #1072b5; font-size: 0.15rem;font-family: 'Microsoft YaHei' ">
+              <el-row style="top: 35%; position: relative;">
+                <span>{{ nowWeek }}</span>
+              </el-row>
+              <el-row style="top: 35%; position: relative;">
+                <span>{{ nowDate }}</span>
+              </el-row>
+            </el-col>
+          </el-col>
+        </div>
       </el-col>
     </el-row>
-    <el-row id="large2" class="" style="height: 90%;">
-      <el-col :span="4" class="" style="height: 100%">
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height:74%; margin: 0px 5px 5px 5px">
-          <el-input
-              placeholder="输入关键字进行过滤"
-              v-model="filterText"
-              size="mini">
-          </el-input>
-          <div style="height: 80%">
-            <el-scrollbar>
-              <el-tree
-                  class="filter-tree"
-                  :data="data"
-                  :props="defaultProps"
-                  @node-click="handleNodeClick"
-                  default-expand-all
-                  :filter-node-method="filterNode"
-                  ref="tree">
-                <!--                <span class="span-ellipsis" slot-scope="{ node, data }">-->
-                <!--                  <span :title="node.label">{{ node.label }}</span>-->
-                <!--                </span>-->
-              </el-tree>
-            </el-scrollbar>
-          </div>
-        </el-card>
-        <el-card class="box-card " shadow="never"
-                 style="background-color: transparent; height: 24%; margin: 0px 5px 5px 5px">
-          <el-button size="mini" round
-                     style="z-index: 9; left: 12%; background-color: transparent; color: #ffffff; position: absolute"
-                     @click="intoPrjDataScreen">展开
-          </el-button>
-          <PrjDataScreen id="small1"></PrjDataScreen>
-
-          <!--          <label>数据大屏缩略图</label>-->
-        </el-card>
+    <el-row id="large2" class="" style="height: 86%;">
+      <el-col :span="2" class="" style="height: 100%;">
+        <Tree
+            :treeObj="treeObj"
+            :highlightCurrent="highlightCurrent"
+            :expandOnClickNode="expandOnClickNode"
+            :currentNodeKey="currentNodeKey"
+            @handleNodeClick="handleTrNodeClick"
+            style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
+        ></Tree>
+        <el-button size="small" round
+                   style="width: 110%; z-index: 9; left: 12%; background-color: #2070dd; color: #ffffff; font-size: 0.26rem; font-weight: bold; float: left; letter-spacing:20px; text-indent: 20px;"
+                   @click="intoPrjDataScreen">展开
+        </el-button>
       </el-col>
-      <!--地图+历次检查指数-->
-      <PrjIndex></PrjIndex>
-      <!--      </el-col>-->
-      <el-col :span="10" id="prj_part" style="height: 100%">
-        <!--      <el-card class="boundary-B" shadow="never" style="background-color: transparent; height: 100%">-->
-        <el-row style="height: 100%">
-          <el-card class="statistics-box-card " shadow="never"
-                   style="background-color: transparent; height: 5%; margin: 0px 5px 5px 5px">
-            <label>chart</label>
-          </el-card>
-          <!--          <el-row style="height: 42%">-->
-          <el-col :span="12" style="height: 42%">
-            <CheckHistoryPerc></CheckHistoryPerc>
+      <el-col :span="22" style="height: 100%;">
+        <el-row class="el-row" :gutter="10" type="flex" style="height: 60%; margin-top: 0.6rem; padding-left: 0.3rem">
+          <el-col :span="12" class="">
+            <PrjIndex></PrjIndex>
           </el-col>
-          <el-col :span="12" style="height: 42%">
-            <el-card class="box-card " shadow="never"
-                     style="background-color: transparent; height: 80%; left: 10%; top: 10%">
-              <!--          当前未整改高风险隐患列表-->
-              <UnsolvedList></UnsolvedList>
-            </el-card>
+          <el-col :span="12" class="">
+            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
+              <RiskLevelYear :context="{title:'年度隐患数量', id:'prj_level_year'}"></RiskLevelYear>
+            </el-col>
+            <el-col :span="12" class="" style="height: 50%; padding-bottom: 0.05rem">
+              <!--              <HighProjectRisk></HighProjectRisk>-->
+              <CheckHistoryPerc></CheckHistoryPerc>
+            </el-col>
+            <el-col :span="12" class="" style="height: 50%; padding-top: 0.05rem">
+              <!--              <BarRank-->
+              <!--                  :context="{-->
+              <!--          title:'各区域检查次数',-->
+              <!--          id: 'id_head_rank1'}"-->
+              <!--              ></BarRank>-->
+              <PerctangePerc
+                  :context="{
+                    title:'不同分布区域隐患数量'+'-'+filter_major,
+                    id:'id_region',
+                   }"></PerctangePerc>
+            </el-col>
+            <el-col :span="12" class="" style="height: 50%; padding-top: 0.05rem">
+              <!--              <BarRank-->
+              <!--                  :context="{-->
+              <!--          title:'各区域在管项目数量',-->
+              <!--          id: 'id_head_rank2'}"-->
+              <!--              ></BarRank>-->
+              <BarRank
+                  :context="{
+              title:'不同子系统隐患数量'+'-'+filter_major,
+              id: 'id_project_system'
+          }"></BarRank>
+            </el-col>
           </el-col>
-          <!--          </el-row>-->
-          <!--          <el-row style="height: 42%">-->
-          <el-col :span="12" style="height: 42%">
-            <!--当前整改率-->
-            <PrjCurrentCorrectionRate></PrjCurrentCorrectionRate>
+          <!--          <HighProjectRisk></HighProjectRisk>-->
+        </el-row>
+        <el-row class="el-row" :gutter="10" type="flex" style="height: 35%; margin-top: 0.2rem; padding-left: 0.3rem">
+          <el-col :span="12" style="height: 100%;">
+            <!--            <Ratio-->
+            <!--                :context="{-->
+            <!--          title:'不同专业隐患数量',-->
+            <!--          id: 'id_head_major',-->
+            <!--        }"></Ratio>-->
+            <StackedHorizontalBar
+                :context="{
+              title:'不同致因阶段隐患数量',
+              type:'reason',
+              id:'id_project_reason',
+            }"></StackedHorizontalBar>
           </el-col>
-          <el-col :span="12" style="height: 42%">
-            <CheckedHistory></CheckedHistory>
-            <!--历次检查隐患数量变化-->
-          </el-col>
-          <!--          </el-row>-->
-          <el-col :span="24" style="height: 9%">
-            <el-card class="statistics-box-card" shadow="never"
-                     style="background-color: transparent; height: 100%; margin: 0px 5px 5px 5px">
-              <label>more</label>
-            </el-card>
+          <el-col :span="12" style="height: 100%;">
+            <!--            <StackedHorizontalBar-->
+            <!--                :context="{-->
+            <!--          title:'不同致因阶段隐患数量',-->
+            <!--          id: 'id_head_reason'-->
+            <!--        }"></StackedHorizontalBar>-->
+            <StackedHorizontalBar
+                :context="{
+                    title:'不同风险等级隐患数量',
+                    id: 'id_project_risk'
+                  }"></StackedHorizontalBar>
           </el-col>
         </el-row>
-        <!--      </el-card>-->
       </el-col>
-      <CheckOverview id="check_part"></CheckOverview>
     </el-row>
   </el-row>
-  <!--  <PrjDataScreen></PrjDataScreen>-->
 </template>
 
 <script>
-import CheckedHistory from "@/components/views/Project/CheckedHistory.vue";
-import Granularity from "@/components/views/Project/Granularity.vue";
-import HistoryTopRisk from "@/components/views/Project/HistoryTopRisk.vue";
 import PerctangePerc from "@/components/views/Project/PerctangePerc.vue";
-import LastCheckPerc from "@/components/views/Project/LastCheckPerc.vue";
 import CheckHistoryPerc from "@/components/views/Project/CheckHistoryPerc.vue";
-import UnsolvedList from "@/components/views/Project/UnsolvedList.vue";
-import UnsolvedImageList from "@/components/views/Project/UnsolvedImageList.vue";
-import CheckedProject from "@/components/views/Project/CheckedProject.vue";
-import IndexView from "@/components/views/HeadQuarters/IndexView.vue";
-import PrjCurrentCorrectionRate from "@/components/views/Project/PrjCurrentCorrectionRate.vue";
 import PrjIndex from "@/components/views/Project/PrjIndex.vue";
-import PrjDataScreen from '@/components/views/Project/PrjDataScreen.vue'
-import * as d3 from "d3/dist/d3";
 import CheckOverview from "@/components/views/Check/CheckOverview.vue";
+import Tree from "@/components/views/functions/Tree.vue";
+import RiskLevelYear from "@/components/views/functions/RiskLevelYear.vue";
+import BarRank from "@/components/views/functions/BarRank.vue";
+import StackedHorizontalBar from "@/components/views/functions/StackedHorizontalBar.vue";
 
 export default {
   name: "PrjOverview",
   components: {
+    RiskLevelYear,
     CheckOverview,
-    Granularity,
-    HistoryTopRisk,
     PerctangePerc,
-    LastCheckPerc,
     CheckHistoryPerc,
-    UnsolvedList,
-    UnsolvedImageList,
-    CheckedHistory,
-    CheckedProject,
-    IndexView,
-    PrjCurrentCorrectionRate,
     // PrjEHSDataAnalysis3,
     PrjIndex,
-    PrjDataScreen,
-
-  },
-  watch: {
-    filterText(val) {
-      this.$refs.tree.filter(val);
-    }
-  },
-  mounted: function () {
-  },
-  computed: {
-    // getTreeData() {
-    //   return this.$store.state.get_login.grant_data.data.value
-    //   // console.log(this.dataset)
-    // },
-    //得到每次检查地理位置的所有信息
-    //将各个点找到并显示
+    Tree,
+    BarRank,
+    StackedHorizontalBar,
   },
   methods: {
-    filterNode(value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
-    },//对于总部
-    getTreeData(tree_data) {
-      let arr = []//树形控件
-      let p_arr = []//包含每个检查经纬度坐标的一个数组
-      let count = 1;
-      let obj = {
-        lat: 0,
-        lng: 0
-      }
-      for (let i in tree_data['headquarter_tag']) {
-        // let parent1 = [];
-        let parent1 = {
-          id: 0,
-          label: '',
-          children: []
-        };
-        parent1['id'] = count++
-        parent1['label'] = i
-        arr.push(parent1)
-        for (let j in tree_data['headquarter_tag'][i]['region_tag']) {
-          let parent2 = {
-            id: 0,
-            label: '',
-            children: []
-          };
-          parent2['id'] = count++
-          parent2['label'] = j
-          parent1['children'].push(parent2)
-          for (let k in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag']) {
-            let child1 = {
-              id: 0,
-              label: '',
-              children: []
-            };
-            child1['id'] = count++
-            child1['label'] = k
-            parent2['children'].push(child1)
-            for (let l in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k]) {
-              for (let m in tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l]) {
-                let child2 = {
-                  id: 0,
-                  label: ''
-                };
-                child2['id'] = count++
-                child2['label'] = m
-                child1['children'].push(child2)
-                obj['lat'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lat
-                obj['lng'] = tree_data['headquarter_tag'][i]['region_tag'][j]['project_tag'][k][l][m].lng
-                p_arr.push(obj)
-              }
-            }
-          }
-        }
-      }
-      console.log("arr", arr)
-      this.data = arr
-      this.$store.state.get_login.tree_data = arr
-      this.p_data = p_arr
-    },
     intoPrjDataScreen() {
       var large1 = document.getElementById('large1');
       large1.style.display = 'none'
       var large2 = document.getElementById('large2');
       large2.style.display = 'none'
-      var small = document.getElementById('small');
-      small.style.display = 'block'
-      small.style.width = "500px"
-      small.style.width = "99%"
+
+      let queryJson = JSON.stringify(this.$store.state.get_project.prj_name)
+      this.$router.push({
+        path: `/new_project_screen`,
+        query: {queryJson: queryJson}
+      });
     },
-    handleNodeClick(data, node) {
-      // console.log(data);
-      // console.log(node);
-      if (node.level == 4) {
-        let param1 = new URLSearchParams();
-        param1.append('check_code', data.label);
-        this.$store.state.get_check.params = param1
-        this.$store.dispatch('get_check/getCheckRectification')
-        this.$store.dispatch('get_check/getCheckRiskLevel')
-        this.$store.dispatch('get_check/getCheckRiskRatio')
-        this.$store.dispatch('get_check/getCheckHighRisk')
-        this.$store.dispatch('get_check/getCheckHighImage')
-        this.$store.dispatch('get_check/getCheckMajorSystem')
-        this.$store.dispatch('get_check/getCheckMajorArea')
-        this.$store.dispatch('get_check/getCheckMajorStage')
-        this.$store.dispatch('get_check/getCheckRiskTop')
-        var prj = document.getElementById('prj_part');
-        prj.style.display = 'none'
-        var check = document.getElementById('check');
-        check.style.display = 'block'
+    handleTrNodeClick(data, node) {
+      // console.log(data)
+      // console.log(node)
+      this.handleTreeNodeClick(data, node)
+      // this.$nextTick(() => {
+      //   // if ((document.getElementById("large2").style.display === 'block') && (document.getElementById("prj_subpart").style.display === 'none')) {
+      //   document.getElementById("check_part").style.display = 'block'
+      //   // }
+      // })
+    },
+    setNowTimes() {
+      let myDate = new Date();
+      // console.log(myDate)
+      let wk = myDate.getDay();
+      let yy = String(myDate.getFullYear());
+      let mm = myDate.getMonth() + 1;
+      let dd = String(
+          myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate()
+      );
+      let hou = String(
+          myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours()
+      );
+      let min = String(
+          myDate.getMinutes() < 10
+              ? "0" + myDate.getMinutes()
+              : myDate.getMinutes()
+      );
+      let sec = String(
+          myDate.getSeconds() < 10
+              ? "0" + myDate.getSeconds()
+              : myDate.getSeconds()
+      );
+      let weeks = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let week = weeks[wk];
+      this.nowDate = yy + "." + mm + "." + dd
+      this.nowTime = hou + ":" + min + ":" + sec;
+      this.nowWeek = week;
+    },
+  },
+  mounted() {
+    this.timer = setInterval(() => {
+      this.setNowTimes();
+    }, 1000);
+
+    //得到树形控件的内容 还负责封装了地理位置信息
+    this.treeObj = this.$store.state.get_login.grant_data.data.value
+  },
+  updated() {
+    this.filter_major = this.$store.state.get_project.filter_major
+    this.title1 = this.$store.state.get_headquarter.head_name.label
+    if (this.$store.state.get_headquarter.head_name['children'] != undefined) {
+      if (this.$store.state.get_headquarter.head_name['children'][0].level == 3) {
+        this.title2 = ""
+      } else {
+        this.title2 = this.$store.state.get_region.region_name.label
       }
+      this.title3 = this.$store.state.get_project.prj_name.label
+    }
+
+  },
+  computed: {
+    getName() {
+      let data = this.$store.state.get_project.prj_sys_name
+      for (let i in data) {
+        let obj = {
+          name: '',
+          appear_time: 0
+        }
+        obj['name'] = i
+        obj['appear_time'] = data[i].appear_time
+        this.prj_sys_name.push(obj)
+      }
+    },
+    getRiskSum() {
+      let data = this.$store.state.get_project.prj_level_year
+      let risk_num = 0;
+      for (let i in data) {
+        for (let j in data[i]) {
+          risk_num += data[i][j]
+        }
+      }
+      return risk_num
     }
   },
   data() {
     return {
+      // fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      fit: 'fill',
+      url: 'http://www.zhongrh.com/Upfiles/Base/2020111937459.png',
       filterText: '',
-      data: [],
-      p_data: [],
+      treeObj: this.$store.state.get_login.grant_data.data.value,
+      highlightCurrent: true,
+      expandOnClickNode: false,
+      currentNodeKey: 0,
       map: "",
       mapInfo: {},
       dataset: {},
@@ -261,48 +280,47 @@ export default {
       },
       map_width: 0,
       map_height: 0,
-      timer: '',
+      timer: null,
       input: 'test',
-      defaultProps: {
-        children: 'children',
-        label: 'label'
-      }
+      title1: this.$store.state.get_headquarter.head_name.label,
+      title2: this.$store.state.get_region.region_name.label,
+      title3: this.$store.state.get_project.prj_name.label,
+      prj_sys_name: [],
+      nowWeek: "",
+      nowDate: "",
+      nowTime: "",
+      filter_major: ''
     };
   },
   created() {
-    console.log('grant', this.$store.state.get_login.grant_data)
+    // console.log('grant', this.$store.state.get_login.grant_data)
     //得到树形控件的内容 还负责封装了地理位置信息
-    this.getTreeData(this.$store.state.get_login.grant_data.data.value)
+    this.treeObj = this.$store.state.get_login.grant_data.data.value
+
+    // this.title1 = this.$store.state.get_headquarter.head_name
+    // this.title2 = this.$store.state.get_region.region_name
+    // this.title3 = this.$store.state.get_project.prj_name
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
 }
 </script>
 
 <style scoped>
-
-.filter-tree {
-  max-width: 500px;
-  max-height: 2000px;
-  overflow: scroll;
-  background-color: transparent;
-}
-
-.el-tree > .el-tree-node {
-  min-width: 100%;
-  display: inline-block;
-}
-
-.span-ellipsis {
-  font-size: 0.1em;
-  text-align: left;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: block;
-}
-
 #map {
   width: 100%;
   height: calc(100vh);
+}
+
+.el-button {
+  border: none !important;
+}
+
+#prj_title1, #prj_title2, #prj_title3 {
+  background-image: -webkit-linear-gradient(bottom, #04aaff, #45c3ff, #87dcfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 8px;
 }
 </style>

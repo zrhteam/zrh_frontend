@@ -1,153 +1,95 @@
 <template>
-  <el-card class="box-card " shadow="never"
-           style="background-color: transparent; height: 49%; margin: 0px 5px 5px 5px">
+  <el-card class="box-card-t " shadow="never"
+           style="background-color: transparent; height: 100%;">
     <div style="display: none">
       {{ getData }}
     </div>
-    <div class="level4" style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px">
+    <div class="level4" style="padding-bottom: 5px; padding-left: 10px">
       <span class="level4">{{ context.title }}</span>
+      <!--      <el-select v-model="value" placeholder="请选择" size="mini" style="max-width: 25%;" @change="filterMajor">-->
+      <!--        <el-option-->
+      <!--            v-for="item in option"-->
+      <!--            :key="item.value"-->
+      <!--            :label="item.label"-->
+      <!--            :value="item.value">-->
+      <!--        </el-option>-->
+      <!--      </el-select>-->
     </div>
-    <div id="bar_chart" style="height: 80%; width: 100%">
-      <!--        占比（可筛选专业）柱状图-->
-
-    </div>
+    <div class="title-line" style=""></div>
+    <!--    项目-->
+    <!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
+    <!--    筛选专业条件下属于不同分布区域的隐患数量-->
+    <!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
+    <!--    检查-->
+    <!--    筛选专业条件下属于不同致因阶段的隐患数量     改用堆叠条形图-->
+    <!--    筛选专业条件下属于不同分布区域的隐患数量-->
+    <!--    筛选专业条件下属于不同隐患子系统的隐患数量   改用柱形图-->
+    <!--        <div id="id_system" style="height: 80%; width: 100%" v-if="context.id==='id_system'">-->
+    <!--        </div>-->
+    <!--        <div id="id_reason" style="height: 80%; width: 100%" v-if="context.id==='id_reason'">-->
+    <!--        </div>-->
+    <!--    <div id="id_region" style="height: 80%; width: 100%" v-if="context.id==='id_region'">-->
+    <!--    </div>-->
+    <!--    <div id="id_check_system" style="height: 80%; width: 100%" v-if="context.id==='id_check_system'">-->
+    <!--    </div>-->
+    <!--    <div id="id_check_reason" style="height: 80%; width: 100%" v-if="context.id==='id_check_reason'">-->
+    <!--    </div>-->
+    <!--    <div id="id_check_region" style="height: 80%; width: 100%" v-if="context.id==='id_check_region'">-->
+    <!--    </div>-->
+    <div ref='echartContainer' style="height: 80%; width: 100%;"/>
   </el-card>
 </template>
 
 <script>
-import elementResizeDetectorMaker from "element-resize-detector";
+import {pie_option} from "@/utils/constants.js";
+
 export default {
-  name: "RiskProjPercentage",
+  name: "ProjPercentage",
   props: ['context'],
   data() {
     return {
-      // type: '',
-      // bar_chart: 'xx'
+      value: '',
+      option: '',
+      echartContainer: null,
+      myChart: null,
+      renderSign: false,
+      pie_data: [],
     }
   },
   methods: {
+    doResize() {
+      if (this.myChart) {
+        this.myChart.resize();
+      }
+    },
     drawBarChart() {
-      this.$nextTick(_ => {
-        let myChart;
-        if (this.type == 'system') {
-          if (document.getElementById('bar_chart')) {
-            document.getElementById('bar_chart').id = 'id_system'
+      let arr = this.pie_data
+      // if (arr.length != 0) {
+      this.echartContainer = this.$refs.echartContainer;
+      this.myChart = this.$echarts.init(this.echartContainer)
+      let showed = arr.length ? false : true
+      pie_option["title"]["show"] = showed
+      pie_option['series'][0]['data'] = this.pie_data
+      pie_option["legend"]["formatter"] = function (params) {
+        var legendIndex = 0;
+        arr.forEach(function (v, i) {
+          if (v.name == params) {
+            legendIndex = i;
           }
-          myChart = this.$echarts.init(document.getElementById('id_system'))
-        } else if (this.type == 'reason') {
-          if (document.getElementById('bar_chart')) {
-            document.getElementById('bar_chart').id = 'id_reason'
-          }
-          myChart = this.$echarts.init(document.getElementById('id_reason'))
-        } else if (this.type == 'region') {
-          if (document.getElementById('bar_chart')) {
-            document.getElementById('bar_chart').id = 'id_region'
-          }
-          myChart = this.$echarts.init(document.getElementById('id_region'))
-        }
-        // 使用刚指定的配置项和数据显示图表。
-        let arr = this.getData
-        console.log("bar_arr", arr)
-        if (arr.length) {
-          let option = {
-            tooltip: {},
-            dataset: {
-              dimensions: ['name', 'count'],
-              source: arr
-            },
-            xAxis: {
-              type: 'category',
-              axisLabel: {
-                interval: 0,
-                rotate: 45,
-                textStyle: {
-                  fontSize: 10
-                }
-              },
-              axisLine: {
-                lineStyle: {
-                  color: '#ffffff',
-                  fontSize: 8
-                }
-              }
-            },
-            yAxis: {
-              axisLine: {
-                lineStyle: {
-                  color: '#ffffff'
-                }
-              },
-              axisLabel: {
-                // textStyle: {
-                //   fontSize: 10
-                // }
-              }
-            },
-            series: [
-              {
-                type: 'bar',
-                itemStyle: {
-                  normal: {
-                    //柱形图圆角，初始化效果
-                    barBorderRadius: [10, 10, 0, 0],
-                    color: new echarts.graphic.LinearGradient(
-                        0, 0, 0, 1,
-                        [
-                          {offset: 0, color: '#77b5b8'},
-                          // {offset: 0.5, color: '#1f77a0'},
-                          {offset: 1, color: '#107480'}
-                        ]
-                    )
-                  }
-                },
-                emphasis: {
-                  itemStyle: {
-                    color: '#40abc4'
-                    //     new echarts.graphic.LinearGradient(
-                    //     0, 0, 0, 1,
-                    //     [
-                    //       {offset: 0, color: '#2378f7'},
-                    //       {offset: 0.7, color: '#2378f7'},
-                    //       {offset: 1, color: '#83bff6'}
-                    //     ]
-                    // )
-                  }
-                },
-                barMaxWidth: 40
-              }
-            ]
-          };
-          myChart.setOption(option);
-        }
-        myChart.resize();
-        window.addEventListener('resize', function () {
-          myChart.resize();
-        })
-        const _this = this;
-        const erd = elementResizeDetectorMaker();
-        if (this.type == 'system') {
-          erd.listenTo(document.getElementById("id_system"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-        } else if (this.type == 'reason') {
-          erd.listenTo(document.getElementById("id_reason"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-        } else if (this.type == 'region') {
-          erd.listenTo(document.getElementById("id_region"), element => {
-            _this.$nextTick(() => {
-              //监听到事件后执行的业务逻辑
-              myChart.resize();
-            });
-          });
-        }
-      })
+        });
+        return params + " " + arr[legendIndex].value;
+      }
+      this.myChart.setOption(pie_option);
+      // this.myChart.resize();
+      window.addEventListener("resize", this.doResize);
+      // } else if (arr.length == 0) {
+      //   this.$nextTick(() => {
+      //     this.echartContainer.innerHTML = '暂无数据'
+      //     this.echartContainer.style.color = '#ffffff'
+      //     this.echartContainer.style.fontSize = '14px'
+      //     this.echartContainer.removeAttribute("_echarts_instance_")
+      //   })
+      // }
     },
     sortNumber(attr, rev) {
       if (rev == undefined) {
@@ -160,111 +102,255 @@ export default {
         a = a[attr];
         b = b[attr];
         if (a < b) {
-          return rev * -1;
+          return rev * 1;
         }
         if (a > b) {
-          return rev * 1;
+          return rev * -1;
         }
         return 0;
       }
+    },
+    filterMajor(value) {
+      let param2 = new URLSearchParams();
+      var obj = {};
+      //使用find()方法在下拉数据中根据value绑定的数据查找对象
+      obj = this.option.find(function (item) {
+        return item.value === value;
+      })
+      if (obj.label === '全部专业') {
+        param2.append('major', 'all');
+      } else {
+        param2.append('major', obj.label);
+      }
+      // if (this.context.id == 'id_check_reason') {
+      //   //该检查中在筛选专业条件下属于不同致因阶段的隐患数量
+      //   param2.append('check_code', this.$store.state.get_check.check_code);
+      //   this.$store.commit('get_check/changeParam2', {params: param2})
+      //   this.$store.dispatch('get_check/getCheckMajorStage')
+      // } else
+      if (this.context.id == 'id_check_region') {
+        //该检查中在筛选专业条件下属于不同分布区域的隐患数量
+        param2.append('check_code', this.$store.state.get_check.check_code);
+        this.$store.commit('get_check/changeParam2', {params: param2})
+        this.$store.dispatch('get_check/getCheckMajorArea')
+        //} else if (this.context.id == 'id_check_system') {
+        //该检查中在筛选专业条件下属于不同隐患子系统的隐患数量
+        //   param2.append('check_code', this.$store.state.get_check.check_code);
+        //   this.$store.commit('get_check/changeParam2', {params: param2})
+        //   this.$store.dispatch('get_check/getCheckMajorSystem')
+        // } else if (this.context.id == 'id_reason') {
+        //   //该项目中在筛选专业条件下属于不同致因阶段的隐患数量
+        //   param2.append('project_name', this.$store.state.get_project.prj_name);
+        //   this.$store.commit('get_project/changeParam2', {params: param2})
+        //   this.$store.dispatch('get_project/getInitProjectReason')
+      } else if (this.context.id == 'id_region') {
+        //该项目中在筛选专业条件下属于不同分布区域的隐患数量
+        param2.append('project_name', this.$store.state.get_project.prj_name);
+        this.$store.commit('get_project/changeParam2', {params: param2})
+        this.$store.dispatch('get_project/getInitProjectRegionDistribution')
+      }// else if (this.context.id == 'id_system') {
+      //   //该项目中在筛选专业条件下属于不同隐患子系统的隐患数量
+      //   param2.append('project_name', this.$store.state.get_project.prj_name);
+      //   this.$store.commit('get_project/changeParam2', {params: param2})
+      //   this.$store.dispatch('get_project/getInitProjectSystem')
+      // }
     }
   },
   computed: {
     getData() {
-      console.log('this.context', this.context);
       let data;
       let arr = [];
-      if (this.context.type == 'system') {
-        data = this.$store.state.get_project.prj_system
+      if ((this.context.id == 'id_system') || (this.context.id == 'id_check_system')) {
+        if (this.context.id == 'id_system') {
+          data = this.$store.state.get_project.prj_system
+        } else data = this.$store.state.get_check.check_system
+        // console.log("隐患子系统",data)
         for (let i in data) {
           for (let j in data[i]) {
             let obj = {
               name: '',
-              count: 0
+              // count: 0
+              value: 0
             }
-            obj.name = j;
-            obj.count = data[i][j];
-            arr.push(obj)
+            //查询所有专业时可能会需要数据合并
+            let flag = false
+            arr.find(function (item) {
+              if (j === item.name) {
+                flag = true
+                item[j] = item[j] + data[i][j]
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              // obj.count = data[i][j];
+              obj.value = data[i][j];
+              arr.push(obj)
+            }
           }
         }
-        console.log(arr)
-      } else if (this.context.type == 'reason') {
-        data = this.$store.state.get_project.prj_reason
-        console.log(data)
-        let obj1 = {
-          name: '(空白)',
-          count: 0
-        }
-        let obj2 = {
-          name: '施工',
-          count: 0
-        }
-        let obj3 = {
-          name: '运营',
-          count: 0
-        }
+      } else if ((this.context.id == 'id_reason') || (this.context.id == 'id_check_reason')) {
+        if (this.context.id == 'id_reason')
+          data = this.$store.state.get_project.prj_reason
+        else data = this.$store.state.get_check.check_reason
         for (let i in data) {
           for (let j in data[i]) {
-            if (j == '施工') {
-              obj2.count += data[i][j];
-            } else if (j == '运营') {
-              obj3.count += data[i][j];
-            } else {
-              obj1.count += data[i][j]
+            let obj = {
+              name: '',
+              // count: 0
+              value: 0
+            }
+            //查询所有专业时可能会需要数据合并
+            let flag = false
+            arr.forEach(item => {
+              if (item.name === j) {
+                item.value = item.value + data[i][j]
+                flag = true
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              obj.value = data[i][j];
+              arr.push(obj)
             }
           }
         }
-        arr.push(obj1)
-        arr.push(obj2)
-        arr.push(obj3)
-        console.log(arr)
-      } else if (this.context.type == 'region') {
-        data = this.$store.state.get_project.prj_region
-        console.log(data)
-        let obj1 = {
-          name: '(空白)',
-          count: 0
-        }
-        let obj2 = {
-          name: '公共区域',
-          count: 0
-        }
-        let obj3 = {
-          name: '租户区域',
-          count: 0
-        }
+      } else if ((this.context.id == 'id_region') || (this.context.id == 'id_check_region')) {
+        if (this.context.id == 'id_region')
+          data = this.$store.state.get_project.prj_region
+        else data = this.$store.state.get_check.check_region
         for (let i in data) {
           for (let j in data[i]) {
-            if (j == '公共区域') {
-              obj2.count += data[i][j];
-            } else if (j == '租户区域') {
-              obj3.count += data[i][j];
-            } else {
-              obj1.count += data[i][j]
+            let obj = {
+              name: '',
+              value: 0
+              // count: 0
+            }
+            //查询所有专业时可能会需要数据合并
+            let flag = false
+            arr.forEach(item => {
+              if (item.name === j) {
+                item.value = item.value + data[i][j]
+                flag = true
+              }
+            })
+            if (flag === false) {
+              obj.name = j;
+              obj.value = data[i][j];
+              arr.push(obj)
             }
           }
         }
-        arr.push(obj1)
-        arr.push(obj2)
-        arr.push(obj3)
-        console.log(arr)
       }
-      console.log(arr)
-      arr.sort(this.sortNumber('count', true))
-      return arr
+      if ((this.context.id == 'id_check_system') || (this.context.id == 'id_check_reason') || (this.context.id == 'id_check_region')) {
+        // if (this.value === '全部专业') {
+        let major = []
+        let filter = []
+        let count = 0
+        for (let i in data) {
+          if (filter.indexOf(i) === -1) {
+            filter.push(i)
+            let obj = {
+              value: '',
+              label: ''
+            }
+            obj['value'] = count++;
+            obj['label'] = i
+            major.push(obj)
+          }
+        }
+        let obj = {
+          value: '',
+          label: ''
+        }
+        obj['value'] = '全部专业';
+        obj['label'] = '全部专业'
+        major.push(obj)
+        let old_major = this.$store.state.get_check.all_majors
+        if (old_major.length < major.length) {
+          this.$store.commit('get_check/changeAllMajors', {all_majors: major})
+          this.option = major
+        } else {
+          this.option = this.$store.state.get_check.all_majors
+        }
+      } else if ((this.context.id == 'id_system') || (this.context.id == 'id_reason') || (this.context.id == 'id_region')) {
+        let major = []
+        let filter = []
+        let count = 0
+        for (let i in data) {
+          if (filter.indexOf(i) === -1) {
+            filter.push(i)
+            let obj = {
+              value: '',
+              label: ''
+            }
+            obj['value'] = count++;
+            obj['label'] = i
+            major.push(obj)
+          }
+        }
+        let obj = {
+          value: '',
+          label: ''
+        }
+        obj['value'] = '全部专业';
+        obj['label'] = '全部专业'
+        major.push(obj)
+        let old_major = this.$store.state.get_project.all_majors
+        if (old_major.length < major.length) {
+          this.$store.commit('get_project/changeAllMajors', {all_majors: major})
+          this.option = major
+        } else {
+          this.option = this.$store.state.get_project.all_majors
+        }
+      }
+      arr.sort(this.sortNumber('value', true))
+      let new_arr = []
+      this.pie_data = []
+      let obj = {
+        value: 0,
+        name: '其它'
+      }
+      for (let ii = 0; ii < arr.length; ii++) {
+        if (ii < 5) {
+          this.pie_data.push(arr[ii])
+          new_arr.push(arr[ii])
+        } else {
+          obj.value += arr[ii].value
+        }
+      }
+      if (obj.value > 0) {
+        this.pie_data.push(obj)
+        new_arr.push(obj)
+      }
+      this.renderSign = !this.renderSign
+
+      // return new_arr
     },
   },
-  updated() {
-    this.drawBarChart()
+  watch: {
+    renderSign() {
+      this.drawBarChart()
+    }
   },
   mounted() {
-    console.log('this.context', this.context.type);
-    this.type = this.context.type
-    // if (this.context.type == system) {
-    //   document.getElementById('bar_chart').id = 'id_system'
-    //   let id = 'id_system'
-    this.drawBarChart();
-    // }
+    if (this.myChart != null && this.myChart != "" && this.myChart != undefined) {
+      this.myChart.dispose() // 销毁
+    }
+    this.echartContainer = this.$refs.echartContainer;
+    this.myChart = this.$echarts.init(this.echartContainer)
+  },
+  created() {
+    this.value = '全部专业'
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.doResize);
   }
 }
 </script>
