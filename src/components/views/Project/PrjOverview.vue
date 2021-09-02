@@ -55,11 +55,15 @@
             :expandOnClickNode="expandOnClickNode"
             :currentNodeKey="currentNodeKey"
             @handleNodeClick="handleTrNodeClick"
-            style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
+            style="height:88%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
         ></Tree>
         <el-button size="small" round
                    style="width: 110%; z-index: 9; left: 12%; background-color: #2070dd; color: #ffffff; font-size: 0.26rem; font-weight: bold; float: left; letter-spacing:20px; text-indent: 20px;"
                    @click="intoPrjDataScreen">展开
+        </el-button>
+        <el-button size="small" round
+                     style="width: 110%; z-index: 9; left: 12%;margin-left: 0; background-color: #2070dd; color: #ffffff; font-size: 0.26rem; font-weight: bold; float: left; margin-top: 10px"
+                     @click="intoRegionDataAnalyse">数据分析
         </el-button>
       </el-col>
       <el-col :span="22" style="height: 100%;">
@@ -158,6 +162,25 @@ export default {
     StackedHorizontalBar,
   },
   methods: {
+    intoRegionDataAnalyse(){
+      let userType = this.$store.state.get_login.grant_data.data.user_grant //取值:boss，总部，区域，项目
+      let headquarter_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.headquarter_tag !== undefined) {
+        headquarter_tag = this.$store.state.get_login.grant_data.data.headquarter_tag
+      }
+      let region_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.region_tag !== undefined) {
+        region_tag = this.$store.state.get_login.grant_data.data.region_tag
+      }
+      let project_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.project_tag !== undefined) {
+        project_tag = this.$store.state.get_login.grant_data.data.project_tag
+      }
+
+      window.location.href = 'http://124.71.45.84:8090/#/red_line?' +
+          window.btoa(window.encodeURIComponent("userType=" + userType + "&headquarter=" + headquarter_tag
+              + "&region=" + region_tag + "&project=" + project_tag + "&url=" + window.location.href))
+    },
     intoPrjDataScreen() {
       var large1 = document.getElementById('large1');
       large1.style.display = 'none'

@@ -61,7 +61,7 @@
               :expandOnClickNode="expandOnClickNode"
               :currentNodeKey="currentNodeKey"
               @handleNodeClick="handleTrNodeClick"
-              style="height:94%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
+              style="height:88%; width: 120%; margin-top: 5px; margin-bottom: 0.2rem;"
           >{{ getTreeData }}
           </Tree>
           <!--          <el-card class="box-card " shadow="never"-->
@@ -70,7 +70,10 @@
                      style="width: 110%; z-index: 9; left: 12%; background-color: #2070dd; color: #ffffff; font-size: 0.26rem; font-weight: bold; float: left; letter-spacing:20px; text-indent: 20px;"
                      @click="intoHeadDataScreen">展开
           </el-button>
-
+          <el-button size="small" round
+                     style="width: 110%; z-index: 9; left: 12%;margin-left: 0; background-color: #2070dd; color: #ffffff; font-size: 0.26rem; font-weight: bold; float: left; margin-top: 10px"
+                     @click="intoRegionDataAnalyse">数据分析
+          </el-button>
           <!--          <label>数据大屏缩略图</label>-->
           <!--          </el-card>-->
         </el-col>
@@ -156,6 +159,24 @@ export default {
     Tree
   },
   methods: {
+    intoRegionDataAnalyse(){
+      let userType = this.$store.state.get_login.grant_data.data.user_grant //取值:boss，总部，区域，项目
+      let headquarter_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.headquarter_tag !== undefined) {
+        headquarter_tag = this.$store.state.get_login.grant_data.data.headquarter_tag
+      }
+      let region_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.region_tag !== undefined) {
+        region_tag = this.$store.state.get_login.grant_data.data.region_tag
+      }
+      let project_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.project_tag !== undefined) {
+        project_tag = this.$store.state.get_login.grant_data.data.project_tag
+      }
+      window.location.href = 'http://124.71.45.84:8090/#/red_line?' +
+          window.btoa(window.encodeURIComponent("userType=" + userType + "&headquarter=" + headquarter_tag
+              + "&region=" + region_tag + "&project=" + project_tag + "&goBack=" + window.location.href))
+    },
     intoHeadDataScreen() {
       let queryJson = JSON.stringify({
         head_name: this.$store.state.get_headquarter.head_name,
