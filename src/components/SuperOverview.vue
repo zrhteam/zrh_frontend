@@ -88,7 +88,23 @@ export default {
   },
   methods: {
     enterDB() {
-      window.location.href = 'http://124.71.45.84:8085';//数据库可视化系统的
+      let userType = this.$store.state.get_login.grant_data.data.user_grant //取值:boss，总部，区域，项目
+      let headquarter_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.headquarter_tag !== undefined) {
+        headquarter_tag = this.$store.state.get_login.grant_data.data.headquarter_tag
+      }
+      let region_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.region_tag !== undefined) {
+        region_tag = this.$store.state.get_login.grant_data.data.region_tag
+      }
+      let project_tag = 'null'
+      if (this.$store.state.get_login.grant_data.data.project_tag !== undefined) {
+        project_tag = this.$store.state.get_login.grant_data.data.project_tag
+      }
+
+      window.location.href = 'http://124.71.45.84:8085/#/?' +
+          window.btoa(window.encodeURIComponent("userType=" + userType + "&headquarter=" + headquarter_tag
+              + "&region=" + region_tag + "&project=" + project_tag + "&url=" + window.location.href))
     },
     enterHead(value) {
       let data = {

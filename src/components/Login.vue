@@ -151,9 +151,9 @@ export default {
   watch: {
     grantData(data) {
       // console.log('grantData', data)
-      if (data.code == 10000) {
+      if (data.code === 10000) {
         //项目级权限
-        if (data.data.user_grant == '项目') {
+        if (data.data.user_grant === '项目') {
           this.$store.commit('get_project/changePrjName', {prj_name: this.$store.state.get_login.grant_data.data.project_tag})
           this.$store.commit('get_region/changeRegionName', {region_name: this.$store.state.get_login.grant_data.data.region_tag})
           this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
@@ -169,7 +169,7 @@ export default {
           this.handleTreeNodeClick(data, node)
           // this.$router.push({path: '/register'});
         }// 区域级权限
-        else if (data.data.user_grant == '区域') {
+        else if (data.data.user_grant === '区域') {
           this.$store.commit('get_region/changeRegionName', {region_name: this.$store.state.get_login.grant_data.data.region_tag})
           this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
           this.$router.push({path: '/region_department'});
@@ -183,7 +183,7 @@ export default {
           }
           this.handleTreeNodeClick(data, node)
         }// 总部级权限
-        else if (data.data.user_grant == '总部') {
+        else if (data.data.user_grant === '总部') {
           this.$store.commit('get_headquarter/changeHeadName', {head_name: this.$store.state.get_login.grant_data.data.headquarter_tag})
           this.$router.push({path: '/land_headquarters'});
           let data = {
@@ -198,7 +198,7 @@ export default {
           this.handleTreeNodeClick(data, node)
           // this.$router.push({path: '/register'});
         }// 超级用户权限
-        else if (data.data.user_grant == '超级用户') {
+        else if (data.data.user_grant === '超级用户'||data.data.user_grant === '系统用户' ) {
           this.$router.push({path: '/super_overview'});
           // this.$router.push({path: '/data_compare'});
           // this.$router.push({path: '/analyze'});
