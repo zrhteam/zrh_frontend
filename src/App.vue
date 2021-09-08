@@ -63,6 +63,10 @@ export default {
   color: #42b983;
 }
 
+body .el-table::before {
+    z-index: inherit;
+}
+
 .boundary {
   border: 1px dashed #00ffc4;
 }

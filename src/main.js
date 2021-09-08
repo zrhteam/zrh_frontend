@@ -15,7 +15,7 @@ import store from './store'
 // import 'element-ui/lib/theme-chalk/index.css'
 // import Navigation from 'vue-navigation' 看到一个前进刷新，后退不刷新依赖可以考虑
 import base from './base'//引用
-
+import scroll from 'vue-seamless-scroll'
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
 
@@ -27,7 +27,7 @@ Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts;
 // Vue.prototype.$echartsGL = echartsGL;
 Vue.use(base);//将全局函数当做插件来进行注册
-
+Vue.use(scroll)
 // Vue.use(VueCookies)
 // Vue.use(ElementUI)
 // Vue.use(echarts)
