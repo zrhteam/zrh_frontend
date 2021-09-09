@@ -5,12 +5,12 @@
           style="width: 4.75rem; height: 100%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.375rem; top: 0.2rem;">
         <div class="level2">截止目前已发现隐患</div>
         <div class="counter-container">
-          <span class="prefix" style="font-size: 0.30rem">累计</span>
+          <span class="prefix" style="font-size: 0.25rem">累计</span>
           <!--            写一个循环的number-->
-          <div id="real-number" style="font-size: 0.45rem">
+          <div id="real-number" style="font-size: 0.32rem">
             {{ getNumber }}
           </div>
-          <span class="suffix" style="font-size: 0.30rem">例</span>
+          <span class="suffix" style="font-size: 0.25rem">例</span>
         </div>
       </div>
     </div>
@@ -239,7 +239,7 @@ export default {
   padding-bottom: 10px;
   text-align: left;
   color: #ffffff;
-  font-size: 0.30rem;
+  font-size: 0.25rem;
   display: flex;
   align-items: center;
   font-weight: normal;

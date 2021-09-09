@@ -6,9 +6,9 @@
         <div class="level2">{{ majorName }}发现隐患</div>
         <div class="counter-container">
           <!--            写一个循环的number-->
-          <div id="number" style="font-size: 0.45rem">
+          <div id="number" style="font-size: 0.35rem">
           </div>
-          <span class="suffix" style="font-size: 0.30rem">例</span>
+          <span class="suffix" style="font-size: 0.25rem">例</span>
         </div>
       </div>
     </div>
@@ -190,7 +190,7 @@ export default {
   padding-bottom: 10px;
   text-align: left;
   color: #ffffff;
-  font-size: 0.30rem;
+  font-size: 0.25rem;
   display: flex;
   align-items: center;
   font-weight: normal;

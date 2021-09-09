@@ -55,17 +55,17 @@
         </el-row>
       </el-col>
     </el-row>
-    <el-row class="boundary-A" style="height: 25%;">
+    <el-row class="boundary-A" style="height: 24%; margin-top: 5px">
       <el-col class="boundary-A" :span="19" style="height: 100%">
-      <el-col style="height: 17%; width: 100%">
+      <el-col style="height: 15%; width: 100%">
         <div class="wrapper" id="list" style="height: 100%;">
           <RecordList2 :tableHeader="tableHeader" showRank="true"></RecordList2>
         </div>
       </el-col>
-      <el-col style="height: 80%; width: 100%">
+      <el-col style="height: 81%; width: 100%">
         <template>
           <vue-seamless-scroll :data="recordList" class="seamless-warp" :class-option="optionSingleHeight">
-            <el-table :data="recordList" :show-header="false" stripe>
+            <el-table :data="recordList" :show-header="false" stripe style="font-weight: lighter">
               <el-table-column type="index"
                                :width="45"
                                align="left" style="overflow: hidden">
