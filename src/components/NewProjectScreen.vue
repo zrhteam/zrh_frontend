@@ -225,22 +225,55 @@
               实时高风险隐患警告
             </div>
           </div>
-          <div
-              style="position: absolute; width: 4.7rem; height: 2.2rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
-            <HighRiskNote :noteList="noteList" :tableHeight="tableHeight" :noteHeader="noteHeader">
-            </HighRiskNote>
+          <div class="box2" style="position: absolute; width: 4.7rem; height: 2.3rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
+            <vue-seamless-scroll :data="noteList" class="seamless-warp" :class-option="optionSingleHeight">
+              <el-table
+                :data="noteList"
+                :show-header="false"
+                stripe
+              >
+              <el-table-column type="index"
+                     :width="35"
+                     align="left" style="overflow: hidden">
+              </el-table-column>
+              <el-table-column v-for="(th, key) in noteHeader"
+                     :key="key"
+                     :prop="th.prop"
+                     :label="th.label"
+                     :fixed="th.fixed"
+                     :width="th.width"
+                     :min-width="th.minWidth" align="left">
+              </el-table-column>
+            </el-table>
+            </vue-seamless-scroll>
           </div>
-
         </el-row>
       </el-col>
-      <el-col :span="24" class="boundary-A" style="height: 25%">
-        <div class="record">
+      <el-col :span="24" class="boundary-A" style="height: 5%">
+        <div class="record" style="height: 100%">
           <div class="record-wrapper">
-            <RecordList2 ref="rl" :recordList="recordList" :tableHeight="tableHeight"
-                         :tableHeader="tableHeader" :cellClassName="cellClassName" :rowClassName="rowClassName"
-                         showRank="true"></RecordList2>
+            <RecordList2 ref="rl" :tableHeader="tableHeader" showRank="true"></RecordList2>
           </div>
         </div>
+      </el-col>
+      <el-col style="height: 20%" class="boundary-A">
+        <template>
+          <vue-seamless-scroll :data="recordList" class="seamless-warp" :class-option="optionSingleHeight">
+            <el-table :data="recordList" :show-header="false" stripe>
+              <el-table-column type="index"
+                               :width="45"
+                               align="left" style="overflow: hidden">
+              </el-table-column>
+              <el-table-column v-for="(th, key) in tableHeader"
+                               :key="key"
+                               :prop="th.prop"
+                               :label="th.label"
+                               :width="th.width"
+                               :min-width="th.minWidth" align="left" style="overflow: hidden">
+              </el-table-column>
+            </el-table>
+          </vue-seamless-scroll>
+        </template>
       </el-col>
     </el-col>
     <el-col :span="5" class="boundary-A" style="height: 90%">
@@ -332,6 +365,11 @@ export default {
     }
   },
   computed: {
+    optionSingleHeight () {
+        return {
+          step:0.5,
+        }
+    },
     recordList() {
       let data = this.$store.state.get_screen.projects_table
       return data['record_list']
@@ -642,6 +680,10 @@ export default {
 </script>
 
 <style scoped>
+.seamless-warp {
+  height: 100%;
+  overflow: hidden;
+}
 .boundary-A {
   /*border: 1px dashed #fff*/
 }
@@ -739,7 +781,14 @@ export default {
   margin-right: 0em;
   border-radius: 0px;
 }
-
+.box2 {
+  pointer-events: auto;
+  border-radius: 0px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("../assets/screen_card.png");
+}
 .major-card {
   width: 2.25rem;
   height: 100%;

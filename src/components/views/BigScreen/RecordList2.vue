@@ -43,7 +43,7 @@ export default {
     },
     tableHeight: {
       type: String,
-      default: '100%'
+      default: '90%'
     },
     cellClassName: {
       type: Function,

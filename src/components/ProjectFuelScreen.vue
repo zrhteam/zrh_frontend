@@ -57,11 +57,30 @@
     </el-row>
     <el-row class="boundary-A" style="height: 25%;">
       <el-col class="boundary-A" :span="19" style="height: 100%">
-        <div class="wrapper" id="list">
-          <RecordList2 :recordList="recordList" :tableHeight="tableHeight"
-                       :tableHeader="tableHeader" :cellClassName="cellClassName" :rowClassName="rowClassName"
-                       showRank="true"></RecordList2>
+      <el-col style="height: 17%; width: 100%">
+        <div class="wrapper" id="list" style="height: 100%;">
+          <RecordList2 :tableHeader="tableHeader" showRank="true"></RecordList2>
         </div>
+      </el-col>
+      <el-col style="height: 80%; width: 100%">
+        <template>
+          <vue-seamless-scroll :data="recordList" class="seamless-warp" :class-option="optionSingleHeight">
+            <el-table :data="recordList" :show-header="false" stripe>
+              <el-table-column type="index"
+                               :width="45"
+                               align="left" style="overflow: hidden">
+              </el-table-column>
+              <el-table-column v-for="(th, key) in tableHeader"
+                               :key="key"
+                               :prop="th.prop"
+                               :label="th.label"
+                               :width="th.width"
+                               :min-width="th.minWidth" align="left" style="overflow: hidden">
+              </el-table-column>
+            </el-table>
+          </vue-seamless-scroll>
+        </template>
+      </el-col>
       </el-col>
       <el-col class="boundary-A" :span="5" style="height: 100%">
         <el-row style="width: 100%">
@@ -83,10 +102,26 @@
               实时高风险隐患警告
             </div>
           </div>
-          <div
-              style="position: absolute; width: 4.7rem; height: 2.56rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
-            <HighRiskNote :noteList="noteList" :tableHeight="tableHeight" :noteHeader="noteHeader">
-            </HighRiskNote>
+          <div class="box2" style="position: absolute; width: 4.7rem; height: 2.45rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
+            <vue-seamless-scroll :data="noteList" class="seamless-warp" :class-option="optionSingleHeight" style="margin-top: 5px; height: 95%;width: 98%;margin-left: 2px">
+              <el-table
+                :data="noteList"
+                :show-header="false"
+              >
+              <el-table-column type="index"
+                     :width="35"
+                     align="left" style="overflow: hidden">
+              </el-table-column>
+              <el-table-column v-for="(th, key) in noteHeader"
+                     :key="key"
+                     :prop="th.prop"
+                     :label="th.label"
+                     :fixed="th.fixed"
+                     :width="th.width"
+                     :min-width="th.minWidth" align="left">
+              </el-table-column>
+            </el-table>
+            </vue-seamless-scroll>
           </div>
         </el-row>
       </el-col>
@@ -148,6 +183,11 @@ export default {
     });
   },
   computed: {
+    optionSingleHeight () {
+        return {
+          step:0.5,
+        }
+    },
     majorRiskData() {
       let data = this.$store.state.get_screen.projectm_major_ratio
       return data
@@ -497,6 +537,19 @@ export default {
 </script>
 
 <style scoped>
+.box2 {
+  pointer-events: auto;
+  border-radius: 0px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("../assets/screen_card.png");
+}
+.seamless-warp {
+  height: 100%;
+  overflow: hidden;
+}
+
 .boundary-A {
   /*border: 1px dashed #fff*/
 }

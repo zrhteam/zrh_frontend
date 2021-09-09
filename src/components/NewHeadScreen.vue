@@ -92,10 +92,10 @@
         </div>
         <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
           <div class="box2" style="width: 100%; height: 100%;">
-            <el-row style="height: 18%">
+            <el-row style="height: 17%">
               <RecordList2 ref="rl2" style="margin-top: 5px;margin-left: 5px; width: 96%;" :tableHeader="tableHeader2" showRank="false"></RecordList2>
             </el-row>
-            <el-row style="height: 80%">
+            <el-row style="height: 79%; margin-top: 5px;">
               <template>
               <vue-seamless-scroll :data="recordRank" class="seamless-warp" :class-option="optionSingleHeight">
                 <el-table style="margin-top: 5px;margin-left: 5px; width: 96%;" :data="recordRank" :show-header="false" stripe>

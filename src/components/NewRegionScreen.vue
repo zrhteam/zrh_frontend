@@ -51,13 +51,31 @@
       <el-row style="height: 75%" class="boundary-A">
         <HeadMap :provinceInfo="provinceInfo" :renderSign="renderSign6"></HeadMap>
       </el-row>
-      <el-row style="height: 25%" class="boundary-A">
+      <el-row style="height: 4%" class="boundary-A">
         <div class="record">
           <div class="record-wrapper">
-            <RecordList2 ref="rl" :recordList="recordList" :tableHeight="tableHeight"
-                         :tableHeader="tableHeader" :cellClassName="cellClassName" showRank="true"></RecordList2>
+            <RecordList2 ref="rl" :tableHeader="tableHeader" showRank="true"></RecordList2>
           </div>
         </div>
+      </el-row>
+      <el-row style="height: 21%" class="boundary-A">
+        <template>
+          <vue-seamless-scroll :data="recordList" class="seamless-warp" :class-option="optionSingleHeight">
+            <el-table :data="recordList" :show-header="false" stripe>
+              <el-table-column type="index"
+                               :width="45"
+                               align="left" style="overflow: hidden">
+              </el-table-column>
+              <el-table-column v-for="(th, key) in tableHeader"
+                               :key="key"
+                               :prop="th.prop"
+                               :label="th.label"
+                               :width="th.width"
+                               :min-width="th.minWidth" align="left" style="overflow: hidden">
+              </el-table-column>
+            </el-table>
+          </vue-seamless-scroll>
+        </template>
       </el-row>
     </el-col>
     <el-col :span="5" class="boundary-A" style="height: 90%">
@@ -73,8 +91,24 @@
         </div>
         <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
           <div class="box2" style="width: 100%; height: 100%;">
-            <RecordList2 ref="rl2" :recordList="recordRank" :tableHeight="tableHeight"
-                         :tableHeader="tableHeader2" showRank="false"></RecordList2>
+            <el-row style="height: 17%">
+              <RecordList2 ref="rl2" style="margin-top: 5px;margin-left: 5px; width: 96%;" :tableHeader="tableHeader2" showRank="false"></RecordList2>
+            </el-row>
+            <el-row style="height: 79%; margin-top: 5px;">
+              <template>
+              <vue-seamless-scroll :data="recordRank" class="seamless-warp" :class-option="optionSingleHeight">
+                <el-table style="margin-top: 5px;margin-left: 5px; width: 96%;" :data="recordRank" :show-header="false" stripe>
+                  <el-table-column v-for="(th, key) in tableHeader2"
+                                  :key="key"
+                                  :prop="th.prop"
+                                  :label="th.label"
+                                  :width="th.width"
+                                  :min-width="th.minWidth" align="left" style="overflow: hidden">
+                  </el-table-column>
+                </el-table>
+              </vue-seamless-scroll>
+              </template>
+            </el-row>
           </div>
         </div>
       </el-row>
@@ -264,6 +298,11 @@ export default {
     }
   },
   computed: {
+    optionSingleHeight () {
+        return {
+          step:0.5,
+        }
+    },
     recordList() {
       let data = this.$store.state.get_screen.regions_table
       return data['record_list']
@@ -583,6 +622,10 @@ export default {
 </script>
 
 <style scoped>
+.seamless-warp {
+  height: 100%;
+  overflow: hidden;
+}
 .absolute-layer {
   position: absolute !important;
   z-index: 0;
