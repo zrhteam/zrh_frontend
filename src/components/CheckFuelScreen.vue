@@ -55,7 +55,7 @@
         </el-row>
       </el-col>
     </el-row>
-    <el-row class="boundary-A" style="height: 24%; margin-top: 5px">
+    <el-row class="boundary-A" style="height: 24%; ">
       <el-col class="boundary-A" :span="19" style="height: 100%">
       <el-col style="height: 15%; width: 100%">
         <div class="wrapper" id="list" style="height: 100%;">
@@ -103,7 +103,7 @@
             </div>
           </div>
           <div class="box2" style="position: absolute; width: 4.7rem; height: 2.45rem; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0px; top: 0.45rem;">
-            <vue-seamless-scroll :data="noteList" class="seamless-warp" :class-option="optionSingleHeight" style="margin-top: 5px; height: 95%;width: 98%;margin-left: 2px">
+            <vue-seamless-scroll :data="noteList" class="seamless-warp" :class-option="optionSingleHeight" style=" height: 95%;width: 98%;margin-left: 2px">
               <el-table
                 :data="noteList"
                 :show-header="false"

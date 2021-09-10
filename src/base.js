@@ -338,7 +338,7 @@ exports.install = function (Vue, options) {
             } else if (data.level == 4) {//总部=》检查
                 this.checkNodeClick(data.label)
             }
-        } else if (this.$store.state.get_login.grant_data.data.user_grant = "超级用户") {
+        } else if ((this.$store.state.get_login.grant_data.data.user_grant == "超级用户") || (this.$store.state.get_login.grant_data.data.user_grant == "系统用户")) {
             if (data.level == 1) {//总部=》总部
                 this.headNodeClick(data)
             } else if (data.level == 2) {//总部=》区域

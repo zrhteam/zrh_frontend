@@ -14,13 +14,14 @@ import NewRegionScreen from "@/components/NewRegionScreen.vue";
 import NewProjectScreen from "@/components/NewProjectScreen.vue";
 import NewCheckScreen from "@/components/NewCheckScreen.vue";
 import ProjectFireScreen from "@/components/ProjectFireScreen.vue";
+//暂时隐藏
 import ProjectLiftScreen from "@/components/ProjectLiftScreen.vue";
 import ProjectElectricScreen from "@/components/ProjectElectricScreen.vue";
 import ProjectFuelScreen from "@/components/ProjectFuelScreen.vue";
 import CheckFireScreen from "@/components/CheckFireScreen.vue";
-import CheckLiftScreen from "@c/CheckLiftScreen.vue";
-import CheckFuelScreen from "@c/CheckFuelScreen.vue";
-import CheckElectricScreen from "@c/CheckElectricScreen.vue";
+import CheckLiftScreen from "@/components/CheckLiftScreen.vue";
+import CheckFuelScreen from "@/components/CheckFuelScreen.vue";
+import CheckElectricScreen from "@/components/CheckElectricScreen.vue";
 
 
 // const Login = ()=>import('@/components/Login.vue')

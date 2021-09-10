@@ -132,6 +132,7 @@ export default {
       let series = []
       let obj = {
         type: 'bar',
+        center: ['50%', '40%'],
         label: {
           show: true,
           formatter: (a) => {
@@ -226,7 +227,7 @@ export default {
           {
             type: 'pie',
             radius: ['50%', '62%'],
-            center: ['50%', '50%'],
+            center: ['50%', '40%'],
             label: {
               color: '#fff',
               formatter: '{d}% \n {b} ',

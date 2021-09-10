@@ -150,7 +150,7 @@ export default {
   },
   watch: {
     grantData(data) {
-      // console.log('grantData', data)
+      console.log('grantData', data)
       if (data.code === 10000) {
         //项目级权限
         if (data.data.user_grant === '项目') {
@@ -238,9 +238,19 @@ export default {
     this.clearSession = () => {
       sessionStorage.clear();
     }
+    // if (this.$store.state.get_login.grant_data!=undefined && this.$store.state.get_login.grant_data.data != undefined) {
+    //   this.$store.state.get_login.grant_data.data.headquarter_tag = undefined
+    //   this.$store.state.get_login.grant_data.data.region_tag = undefined
+    //   this.$store.state.get_login.grant_data.data.project_tag = undefined
+    // }
     window.addEventListener("beforeunload", this.clearSession)
   },
   destroyed() {
+    // if (this.$store.state.get_login.grant_data!=undefined && this.$store.state.get_login.grant_data.data != undefined) {
+    //   this.$store.state.get_login.grant_data.data.headquarter_tag = undefined
+    //   this.$store.state.get_login.grant_data.data.region_tag = undefined
+    //   this.$store.state.get_login.grant_data.data.project_tag = undefined
+    // }
     window.removeEventListener("beforeunload", this.clearSession)
   }
 }
