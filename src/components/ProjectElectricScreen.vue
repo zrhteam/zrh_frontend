@@ -65,7 +65,7 @@
       <el-col style="height: 81%; width: 100%">
         <template>
           <vue-seamless-scroll :data="recordList" class="seamless-warp" :class-option="optionSingleHeight">
-            <el-table :data="recordList" :show-header="false" stripe style="font-weight: lighter">
+            <el-table :data="recordList" :show-header="false" :row-class-name="rowClassName" stripe style="font-weight: lighter">
               <el-table-column type="index"
                                :width="45"
                                align="left" style="overflow: hidden">
@@ -107,6 +107,8 @@
               <el-table
                 :data="noteList"
                 :show-header="false"
+                :row-class-name="rowClassName"
+                stripe
               >
               <el-table-column type="index"
                      :width="35"

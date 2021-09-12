@@ -230,6 +230,7 @@
               <el-table
                 :data="noteList"
                 :show-header="false"
+                :row-class-name="rowClassName"
                 stripe
               >
               <el-table-column type="index"
@@ -259,7 +260,7 @@
       <el-col style="height: 20%" class="boundary-A">
         <template>
           <vue-seamless-scroll :data="recordList" class="seamless-warp" :class-option="optionSingleHeight">
-            <el-table :data="recordList" :show-header="false" stripe>
+            <el-table :data="recordList" :show-header="false" :row-class-name="rowClassName" stripe>
               <el-table-column type="index"
                                :width="45"
                                align="left" style="overflow: hidden">
