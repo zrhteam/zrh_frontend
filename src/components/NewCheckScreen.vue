@@ -250,7 +250,7 @@
           </div>
         </el-row>
       </el-col>
-      <el-col :span="24" class="boundary-A" style="height: 5%">
+      <el-col :span="24" class="boundary-A" style="height: 4%">
         <div class="record" style="height: 100%">
           <div class="record-wrapper">
             <RecordList2 ref="rl" :tableHeader="tableHeader" showRank="true"></RecordList2>

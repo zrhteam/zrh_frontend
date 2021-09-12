@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     doResizeChart() {
-      if(this.chart != null) {
+      if (this.chart != null) {
         this.chart.resize("auto", "auto")
       }
     },
@@ -57,29 +57,31 @@ export default {
       }
       obj.data = this.provinceInfo[0]
       seriesList.push(obj)
-
-      obj = {
-        data: []
-      }
-      obj.data = this.provinceInfo[1]
-      seriesList.push(obj)
+      //
+      // obj = {
+      //   data: []
+      // }
+      // obj.data = this.provinceInfo[1]
+      // seriesList.push(obj)
       // 图标
       const series = seriesList.map(v => {
-        if (v.data[0].name == '隐患数量') {
-          return {
-            type: "scatter", //配置显示方式为用户自定义
-            coordinateSystem: "geo",
-            data: v.data,
-            color: '#f79646',
-            // symbol: 'pin',
-            // symbolSize: 35,
-          };
-        }
+        // if (v.data[0].name == '隐患数量') {
+        //   return {
+        //     type: "scatter", //配置显示方式为用户自定义
+        //     coordinateSystem: "geo",
+        //     data: v.data,
+        //     color: '#f79646',
+        //     // symbol: 'pin',
+        //     // symbolSize: 35,
+        //   };
+        // }
         return {
           type: "scatter", //配置显示方式为用户自定义
           coordinateSystem: "geo",
           data: v.data,
-          color: '#ff0000'
+          color: '#ff0000',
+          symbolSize: 20,
+          textSize: 15
         };
       });
 

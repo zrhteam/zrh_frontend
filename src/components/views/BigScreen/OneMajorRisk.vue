@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="absolute"
-         style="width: 1.15rem; height: 40%; left: 0.5rem; top: 1.3rem">
+         style="width: 1.15rem; height: 40%; left: 0.5rem; top: 1.5rem">
       <div class="risk-title">
         高风险
       </div>

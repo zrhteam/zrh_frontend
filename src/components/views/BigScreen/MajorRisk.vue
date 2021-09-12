@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="absolute" style="width: 4.75rem; height: 60%; left: 1.3rem; top: 0px;">
+    <div class="absolute" style="width: 4.75rem; height: 50%; left: 1.3rem; top: 0px;">
       <div
           style="width: 4.75rem; height: 100%; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 0.375rem; top: 0.2rem;">
         <div class="level2">截止目前已发现隐患</div>
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="absolute" style="width: 2.5rem; height: 1.0rem; left: 1.3rem; top: 1.2rem;">
+    <div class="absolute" style="width: 2.5rem; height: 1.0rem; left: 1.3rem; top: 1.4rem;">
       <div class="major-card" id="fire-major">
         <div class="absolute"
             style="width: 0.9rem; height: 50%; left: 0.1rem; top: 0.1rem;">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="absolute" style="width: 2.5rem; height: 1.0rem; left: 4.1rem; top: 1.2rem;">
+    <div class="absolute" style="width: 2.5rem; height: 1.0rem; left: 4.1rem; top: 1.4rem;">
       <div class="major-card" id="lift-major">
         <div class="absolute"
             style="width: 0.9rem; height: 50%; left: 0.1rem; top: 0.1rem;">
@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-    <div class="absolute" style="width: 2.5rem; height: 1.0rem; left: 1.3rem; top: 2.4rem;">
+    <div class="absolute" style="width: 2.5rem; height: 1.0rem; left: 1.3rem; top: 2.55rem;">
       <div class="major-card" id="electric-major">
         <div class="absolute"
             style="width: 0.9rem; height: 50%; left: 0.1rem; top: 0.1rem;">
@@ -98,7 +98,7 @@
         </div>
       </div>
     </div>
-    <div class="absolute" style="width: 2.5rem; height: 1.0rem; left: 4.1rem; top: 2.4rem;">
+    <div class="absolute" style="width: 2.5rem; height: 1.0rem; left: 4.1rem; top: 2.55rem;">
       <div class="major-card" id="fuel-major">
         <div class="absolute"
             style="width: 0.9rem; height: 50%; left: 0.1rem; top: 0.1rem;">

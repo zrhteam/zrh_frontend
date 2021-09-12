@@ -19,9 +19,9 @@
             style="width: 100%; height: 8%; margin-left: 0.25rem;">
           <div class="title-wrapper" style="width: 100%; height: 100%; "> 实时风险所处区域分析</div>
         </div>
-        <div ref="myBarChart2" style="width: 100%; height: 50%">
+        <div ref="myBarChart2" style="width: 100%; height: 41%">
         </div>
-        <div ref="myPieChart2" style="width: 100%; height: 50%">
+        <div ref="myPieChart2" style="width: 100%; height: 41%">
         </div>
       </div>
       <div id="element3">
@@ -29,9 +29,9 @@
             style="width: 100%; height: 8%; margin-left: 0.25rem;">
           <div class="title-wrapper" style="width: 100%; height: 100%; "> 实时风险致因阶段分析</div>
         </div>
-        <div ref="myBarChart3" style="width: 100%; height: 50%">
+        <div ref="myBarChart3" style="width: 100%; height: 41%">
         </div>
-        <div ref="myPieChart3" style="width: 100%; height: 50%">
+        <div ref="myPieChart3" style="width: 100%; height: 41%">
         </div>
       </div>
     </div>
@@ -383,7 +383,7 @@ export default {
         $("#element1").css("left", "-100%")
       }
       count = (count + 1) % 3
-    }, 4000)
+    }, 8000)
     // $("#element2").css("transform", "translateX(100%)")
     //   setTimeout(() => {
     //     $("#element1").css("transform", "translateX(100%)")
