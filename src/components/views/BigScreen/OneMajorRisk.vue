@@ -51,17 +51,20 @@
     </div>
     <div class="absolute" style="width: 97%; height: 69%; left: 0.12rem; top: 2.2rem;">
       <div
-          style="width: 100%; height: 100%; pointer-events: auto; z-index: -1; background-image: url(require('../../../assets/major_card4.png'))'; border-radius: 0px; cursor: pointer; background-repeat: no-repeat; background-size: 100% 100%;"></div>
+          style="width: 100%; height: 100%; pointer-events: auto; z-index: -1;
+          background-image: url(require('../../../assets/major_card4.png'))';
+          border-radius: 0px; cursor: pointer; background-repeat: no-repeat;
+          background-size: 100% 100%;"></div>
       <div class="slide">
         <div class="slide-wrapper" ref="major">
-          <el-carousel indicator-position="none" :interval="200000" :height="dataHeight">
+          <el-carousel indicator-position="none" :interval="200000" style="height: 90%">
             <el-carousel-item v-for='item in image_list' :key="item.url">
               <div style="height: 100%">
                 <div
                     style="position: absolute; width: 100%; min-height: 20px; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3; background-color: rgba(33, 32, 30, 0.5);">
                   {{ item.note }}
                 </div>
-                <el-image :src='item.url' alt style="height: 100%"/>
+                <el-image :src='item.url' alt style="height: 100%" fit="contain"/>
               </div>
             </el-carousel-item>
           </el-carousel>
