@@ -54,6 +54,8 @@ position: absolute">
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "SuperOverview",
   data() {
@@ -199,7 +201,26 @@ export default {
     clearInterval(this.timer)
   },
   created() {
-    console.log(this.$store.state.get_login.grant_data.data.user_grant)
+    if(window.location.href.split("?")[1]!==undefined) {
+      // console.log(window.decodeURIComponent(window.atob(window.location.href.split("?")[1])));
+      let temp = window.decodeURIComponent(window.atob(window.location.href.split("?")[1])).split("&");
+      let params = {};
+      for (let i = 0; i < temp.length; i++) {
+        params[temp[i].split("=")[0]] = temp[i].split("=")[1];
+      }
+      axios.get('http://124.71.45.84:5000/api/login/get_grant',{
+          params: {
+            username: '',
+            password: '',
+            user_grant: params.userType
+          }
+        }).then((resp) => {
+          this.$store.state.get_login.grant_data = {"data":resp.data.data}
+          this.userType = this.$store.state.get_login.grant_data.data.user_grant
+          // this.$store.state.get_login.grant_data["data"] = resp.data.data;
+        })
+    }
+    console.log(this.$store.state.get_login.grant_data)
     this.userType = this.$store.state.get_login.grant_data.data.user_grant!==undefined?this.$store.state.get_login.grant_data.data.user_grant:'';
     if (this.$store.state.get_login.grant_data.data.headquarter_tag !== undefined) {
       this.headquarter_tag = this.$store.state.get_login.grant_data.data.headquarter_tag
