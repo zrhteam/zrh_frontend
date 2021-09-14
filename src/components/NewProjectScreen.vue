@@ -250,7 +250,7 @@
           </div>
         </el-row>
       </el-col>
-      <el-col :span="24" class="boundary-A" style="height: 4%">
+      <el-col :span="24" class="boundary-A" style="height: 31px">
         <div class="record" style="height: 100%">
           <div class="record-wrapper">
             <RecordList2 ref="rl" :tableHeader="tableHeader" showRank="true"></RecordList2>
@@ -342,16 +342,29 @@ export default {
       low_risk: 0,
       tableHeight: '100%',
       tableHeader: [
-        {prop: 'note', label: '问题描述', width: "260"},
-        {prop: 'risk_level', label: '风险等级', width: "80"},
-        {prop: 'position', label: '隐患位置', width: "90"},
-        {prop: 'major_name', label: '专业', width: "90"},
-        {prop: 'stage', label: '致因阶段', width: "80"},
-        {prop: 'area', label: '分布区域', width: "80"},
-        {prop: 'rule_name', label: '法规名称', width: "260"},
-        {prop: 'clause', label: '相关条款', width: "80"},
+          // 表格宽度过大
+        // {prop: 'note', label: '问题描述', width: "260"},
+        // {prop: 'risk_level', label: '风险等级', width: "80"},
+        // {prop: 'position', label: '隐患位置', width: "90"},
+        // {prop: 'major_name', label: '专业', width: "90"},
+        // {prop: 'stage', label: '致因阶段', width: "80"},
+        // {prop: 'area', label: '分布区域', width: "80"},
+        // {prop: 'rule_name', label: '法规名称', width: "260"},
+        // {prop: 'clause', label: '相关条款', width: "80"},
+        // // {prop: 'clause_contact', label: '条款内容'},
+        // {prop: 'create_time', label: '录入时间', width: "150"},
+        // {prop: 'recorder', label: '录入人员'},
+          // 表格宽度自适应
+        {prop: 'note', label: '问题描述'},
+        {prop: 'risk_level', label: '风险等级'},
+        {prop: 'position', label: '隐患位置'},
+        {prop: 'major_name', label: '专业'},
+        {prop: 'stage', label: '致因阶段'},
+        {prop: 'area', label: '分布区域'},
+        {prop: 'rule_name', label: '法规名称'},
+        {prop: 'clause', label: '相关条款'},
         // {prop: 'clause_contact', label: '条款内容'},
-        {prop: 'create_time', label: '录入时间', width: "150"},
+        {prop: 'create_time', label: '录入时间'},
         {prop: 'recorder', label: '录入人员'},
       ],
       fire_num: 0,

@@ -52,7 +52,7 @@
       <el-row style="height: 75%" class="boundary-A">
         <HeadMap :provinceInfo="provinceInfo" :renderSign="renderSign6"></HeadMap>
       </el-row>
-      <el-row style="height: 4%" class="boundary-A">
+      <el-row style="height: 30px" class="boundary-A">
         <div class="record">
           <div class="record-wrapper">
             <RecordList2 ref="rl" :tableHeader="tableHeader" showRank="true"></RecordList2>
@@ -92,7 +92,7 @@
         </div>
         <div class="absolute-layer" style="width: 93%; height: 80%; left: 0.06rem; top: 0.61rem;">
           <div class="box2" style="width: 100%; height: 100%;">
-            <el-row style="height: 17%">
+            <el-row style="height: 30px">
               <RecordList2 ref="rl2" style="margin-top: 5px;margin-left: 5px; width: 96%;" :tableHeader="tableHeader2" showRank="false"></RecordList2>
             </el-row>
             <el-row style="height: 79%; margin-top: 5px;">

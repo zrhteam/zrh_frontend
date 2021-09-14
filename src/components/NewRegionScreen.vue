@@ -51,7 +51,7 @@
       <el-row style="height: 75%" class="boundary-A">
         <HeadMap :provinceInfo="provinceInfo" :renderSign="renderSign6"></HeadMap>
       </el-row>
-      <el-row style="height: 4%" class="boundary-A">
+      <el-row style="height: 31px" class="boundary-A">
         <div class="record">
           <div class="record-wrapper">
             <RecordList2 ref="rl" :tableHeader="tableHeader" showRank="true"></RecordList2>

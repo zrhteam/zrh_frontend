@@ -57,14 +57,14 @@
           background-size: 100% 100%;"></div>
       <div class="slide">
         <div class="slide-wrapper" ref="major">
-          <el-carousel indicator-position="none" :interval="200000" style="height: 90%">
+          <el-carousel indicator-position="none" :interval="10000" style="height: 95%">
             <el-carousel-item v-for='item in image_list' :key="item.url">
               <div style="height: 100%">
                 <div
                     style="position: absolute; width: 100%; min-height: 20px; top:0px;font-size: 8px; color: #ffffff; padding: 0; overflow: hidden; z-index: 3; background-color: rgba(33, 32, 30, 0.5);">
                   {{ item.note }}
                 </div>
-                <el-image :src='item.url' alt style="height: 100%" fit="contain"/>
+                <el-image :src='item.url' alt style="height: 100%"/>
               </div>
             </el-carousel-item>
           </el-carousel>
