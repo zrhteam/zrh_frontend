@@ -156,7 +156,9 @@ export default {
               + "&region=" + this.region_tag + "&project=" + this.project_tag + "&url=" + window.location.href))
     },
     enterDataInsight() {
-      this.$router.push({path: '/analyze'});
+      window.location.href = 'http://124.71.45.84:8090/#/kpi_analyze?' +
+          window.btoa(window.encodeURIComponent("userType=" + this.userType + "&headquarter=" + this.headquarter_tag
+              + "&region=" + this.region_tag + "&project=" + this.project_tag + "&url=" + window.location.href))
     },
     setNowTimes() {
       let myDate = new Date();
